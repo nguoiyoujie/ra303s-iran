@@ -10,3 +10,7 @@ Colour=
 8           - White (not fully done)
 9           - Black (not folly done)
 10          - Flaming blue
+
+;added by lovalmidas
+11          - True Gray (not Germany 'Gray')
+12          - Dirty Green

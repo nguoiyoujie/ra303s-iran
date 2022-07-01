@@ -120,11 +120,13 @@ CCINIClass_spawnini2 TIMES 64 db 0
 FileClass_spawnini2    TIMES 128 db 0
 str_spawnini2 db"SPAWN.INI",0
 
-extraremaptable TIMES 2400 db 0
+extraremaptable TIMES 3600 db 0
 
 %define colorwhiteoffset    0
 %define colorblackoffset    282
 %define colourflamingblueoffset 564
+%define colourtruegreyoffset 846
+%define colourdirtygreenoffset 1128
 
 SetProcessAffinityMask dd 0
 
@@ -909,6 +911,87 @@ _Init_Game_Hook_Load:
     MOV  BYTE [extraremaptable+colourflamingblueoffset+95], 0xAE
     MOV  BYTE [extraremaptable+colourflamingblueoffset+96], 0xAF
     MOV  BYTE [extraremaptable+colourflamingblueoffset+97], 0xAF
+
+    ; added by lovalmidas
+    ; EXTRA COLOUR REMAP TRUE GREY
+    Initialize_Remap_Table colourtruegreyoffset
+
+    ; Remap colours for name in the name list on the radar
+    mov  BYTE [extraremaptable+colourtruegreyoffset+268], 0x84
+    mov  BYTE [extraremaptable+colourtruegreyoffset+269], 0x85
+    mov  BYTE [extraremaptable+colourtruegreyoffset+270], 0x86
+    mov  BYTE [extraremaptable+colourtruegreyoffset+271], 0x87
+    mov  BYTE [extraremaptable+colourtruegreyoffset+272], 0x88
+    mov  BYTE [extraremaptable+colourtruegreyoffset+273], 0x89
+    mov  BYTE [extraremaptable+colourtruegreyoffset+274], 0x8B
+    mov  BYTE [extraremaptable+colourtruegreyoffset+275], 0x8A
+    mov  BYTE [extraremaptable+colourtruegreyoffset+276], 0x88
+    mov  BYTE [extraremaptable+colourtruegreyoffset+277], 0x86
+    mov  BYTE [extraremaptable+colourtruegreyoffset+278], 0x86
+    mov  BYTE [extraremaptable+colourtruegreyoffset+279], 0x84
+
+    ; Remap colour on radar map
+    mov  BYTE [extraremaptable+colourtruegreyoffset+280], 0x86
+    mov  BYTE [extraremaptable+colourtruegreyoffset+281], 0x89
+
+    ; Remap colours on units, from lighest shade to darkest
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+82], 0x84
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+83], 0x85
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+84], 0x86
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+85], 0x87
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+86], 0x88
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+87], 0x89
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+88], 0x8A
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+89], 0x8A
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+90], 0x8B
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+91], 0x8C
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+92], 0x8D
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+93], 0x8D
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+94], 0x8E
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+95], 0x8E
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+96], 0x8F
+    MOV  BYTE [extraremaptable+colourtruegreyoffset+97], 0x8F
+
+    ; EXTRA COLOUR REMAP DIRTY GREEN
+    Initialize_Remap_Table colourdirtygreenoffset
+
+    ; Remap colours for name in the name list on the radar
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+268], 0xFE
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+269], 0xFD
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+270], 0xFC
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+271], 0xFB
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+272], 0xFA
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+273], 0xF9
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+274], 0xF7
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+275], 0xF8
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+276], 0xFA
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+277], 0xFB
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+278], 0xFC
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+279], 0xFE
+
+    ; Remap colour on radar map
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+280], 0xFB
+    mov  BYTE [extraremaptable+colourdirtygreenoffset+281], 0xFE
+
+    ; Remap colours on units, from lighest shade to darkest
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+82], 0xFE
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+83], 0xFD
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+84], 0xFE
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+85], 0xFD
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+86], 0xFC
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+87], 0xFB
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+88], 0xFA
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+89], 0xF9
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+90], 0xF8
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+91], 0xF7
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+92], 0xF6
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+93], 0xF5
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+94], 0xF4
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+95], 0xF3
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+96], 0xF2
+    MOV  BYTE [extraremaptable+colourdirtygreenoffset+97], 0xF1
+
+
 
 ;    mov        BYTE [extraremaptable+colourbrightyellowoffset+0x0], 0x0F
 ;    mov        BYTE [extraremaptable+colourbrightyellowoffset+0x1], 0x12 ; Name in radar logo color bits, this is for a yellow name
