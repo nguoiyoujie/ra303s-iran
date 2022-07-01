@@ -79,6 +79,9 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/ext/vesseltypeclass_unhardcode.asm"
 %include "src/ext/aircrafttypeclass_unhardcode.asm"
 
+; AI for unhardcoded
+%include "src/ai_can_build.asm" ; added by lovalmidas
+
 ; generic
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
 %include "src/attract.asm"
