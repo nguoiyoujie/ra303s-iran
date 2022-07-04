@@ -55,6 +55,7 @@ str_HardAIGoldValue db "HardAIGoldValue",0
 str_HardAIGemValue db "HardAIGemValue",0
 
 str_ReenableAITechUpCheck db "ReenableAITechUpCheck",0
+str_SingleplayerAIObeyPrerequisites db "SingleplayerAIObeyPrerequisites",0
 str_kernel32dll db "Kernel32.dll",0
 str_SetProcessAffinityMask db "SetProcessAffinityMask",0
 str_forcesinglecpu db"ForceSingleCPU",0
@@ -139,6 +140,7 @@ HardAIGemValue dd -1
 
 fixnavalexploits db 0
 ReenableAITechUpCheck db 0
+SingleplayerAIObeyPrerequisites db 0
 forcesinglecpu db 0
 fastambuildspeed db 0
 enablewol db 0
@@ -527,6 +529,7 @@ _Map_Load_Before_Hook:
     mov  DWORD [HardAIOreValue], -1
     mov  DWORD [HardAIGemValue], -1
     mov  DWORD [ReenableAITechUpCheck], 0
+    mov  DWORD [SingleplayerAIObeyPrerequisites], 0
 
     ; Set current credit count to be displayed on the credits tab to 0
     mov  DWORD [0x0066984E], 0
@@ -1059,6 +1062,9 @@ _RulesClass__AI_Load:
 
     call_INIClass__Get_Bool esi, 0x005EFC29, str_ReenableAITechUpCheck, [ReenableAITechUpCheck]
     mov  [ReenableAITechUpCheck], eax
+
+    call_INIClass__Get_Bool esi, 0x005EFC29, str_SingleplayerAIObeyPrerequisites, [SingleplayerAIObeyPrerequisites]
+    mov  [SingleplayerAIObeyPrerequisites], eax
 
 .Ret:
     Restore_Registers
