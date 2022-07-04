@@ -4,4 +4,4 @@
 
 ; Fix will desync online with 3.03 most likely in the very rare occasion that this situation occurs. That's because Hind and Transport Helicopter will spawn for players with this fix but without those two helicopters won't spawn because both the Helipad and Airfield aren't considered valid factories for those two helicopters in this situation.
 
-;@CLEAR 0x0051EBBD 0x90 0x0051EBC2
+@CLEAR 0x0051EBBD 0x90 0x0051EBC2
