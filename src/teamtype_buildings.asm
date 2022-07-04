@@ -1,6 +1,6 @@
 @HOOK 0x0056069C _TeamTypeClass__Read_Add_BuildingTypes_Reading
 
-_TeamTypeClass__Read_Add_BuildingTypes_Reading
+_TeamTypeClass__Read_Add_BuildingTypes_Reading:
 	mov     eax, ebx
 	call    0x004537B4   ;  StructType BuildingTypeClass::From_Name(char *)
 	cmp     al, 0FFh

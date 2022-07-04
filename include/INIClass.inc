@@ -91,4 +91,3 @@
     mov  ecx, %4
     call INIClass__Put_Fixed
 %endmacro
-x

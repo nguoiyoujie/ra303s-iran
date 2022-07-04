@@ -8,7 +8,7 @@ VesselAIHouseClassPointer dd 0
 _HouseClass__AI_Vessel_Remove_Multiplayer_AI_Disable_Jump:
     jmp  0x004DBD43
 
-_HouseClass__AI_Vessel_Can_Build_Force_True
+_HouseClass__AI_Vessel_Can_Build_Force_True:
     mov  eax, 1
     jmp  0x004DBD9A
 
