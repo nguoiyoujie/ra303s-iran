@@ -5,19 +5,18 @@
 @HOOK 0x00459850 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
 
 str_AircraftTypes db"AircraftTypes",0
-AircraftTypesTypesExtCount    db    0
-%define        OriginalAircraftTypesHeapCount    7
+NewAircraftTypeHeapCount      dd    0
+AircraftTypesTypesExtCount    dd    0
+%define        OriginalAircraftTypeHeapCount    7
 
 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
-    mov  al, [AircraftTypesTypesExtCount]
-    add  al, OriginalAircraftTypesHeapCount
+    mov  al, [NewAircraftTypeHeapCount]
     cmp  ah, al
     jl   0x0045980F
     jmp  0x00459855
 
 _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes:
-    mov  al, [AircraftTypesTypesExtCount]
-    add  al, OriginalAircraftTypesHeapCount
+    mov  al, [NewAircraftTypeHeapCount]
     cmp  dl, al
     jl   0x00403F55
     jmp  0x00403FFC
@@ -36,7 +35,7 @@ Init_AircraftTypeClass:
 
     pop  eax
     mov  edx, ebx
-    add  edx, OriginalAircraftTypesHeapCount ; AircraftType
+    add  edx, OriginalAircraftTypeHeapCount ; AircraftType
 
     push 0Eh
     push 20h
@@ -75,17 +74,14 @@ _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
 
 _Init_Game_Set_AircraftTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
-
     mov  BYTE [AircraftTypesTypesExtCount], al
     mov  edx, eax
-
-    add  edx, OriginalAircraftTypesHeapCount
+    add  edx, OriginalAircraftTypeHeapCount
+    mov  BYTE [NewAircraftTypeHeapCount], dl
     jmp  0x004F40BB
 
 _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes:
-    mov  al, [AircraftTypesTypesExtCount]
-    add  al, OriginalAircraftTypesHeapCount
-
+    mov  BYTE al, [NewAircraftTypeHeapCount]
     cmp  dl, al
     jl   0x00403F14
     jmp  0x00403F0D

@@ -56,8 +56,12 @@ _str_version: db "3.03p-iB1v1",0
 ;extended classses
 %include "src/ext/savegame_support.asm" ; this needs to go first before other extended classes
 
+%include "src/ext/TechnoTypeClass/extended_technotypeclass_loading.asm"
 %include "src/ext/UnitTypeClass/extended_unittypeclass_loading.asm"
 %include "src/ext/UnitTypeClass/extended_unittypeclass_additions.asm"
+%include "src/ext/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
+%include "src/ext/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
+%include "src/ext/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
 %include "src/ext/extended_houseclass.asm"
 %include "src/ext/extended_buildingclass.asm"
 %include "src/ext/extended_technoclass.asm"
@@ -81,6 +85,9 @@ _str_version: db "3.03p-iB1v1",0
 
 ; AI for unhardcoded
 %include "src/ai_can_build.asm" ; added by lovalmidas
+%include "src/ai_vessels.asm" ;probably desyncs online with 3.03
+%include "src/ai_units.asm" 
+%include "src/ai_infantry.asm" 
 
 ; generic
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
@@ -105,7 +112,6 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/short_game.asm"
 %include "src/no_screenshake.asm"
 %include "src/shorter_multiplayer_reconnect_timer.asm"
-;%include "src/ai_vessels.asm" probably desyncs online with 3.03
 ;%include "src/harvester_harvest_closest_ore.asm" ; same thing what pressing S on harvesters does, desyncs online and keeps mining new ore spawned by ore mines
 %include "src/building_crew_impassable_terrain_fix.asm"
 %include "src/predetermined_alliances.asm"
