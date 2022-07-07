@@ -155,6 +155,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/sidebar_cameo_icons_remap_colours.asm"
 %include "src/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
 %include "src/map_sight_no_incremental.asm" ; added by lovalmidas
+%include "src/building_mission_repair.asm" ; added by lovalmidas
 
 %ifdef USE_NOCD
 %include "src/nocd.asm"
