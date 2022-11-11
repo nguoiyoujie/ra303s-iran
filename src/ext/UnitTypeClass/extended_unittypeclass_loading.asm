@@ -17,19 +17,9 @@
 %define        UnitTypeExt_Crusher            0x19F    ; BYTE
 %define        UnitTypeExt_FirstLoadDone      0x200    ; BYTE
 
-%define        Offset_Crusher                 0x192
-%define        Offset_IsGigundo               0x192
-%define        Offset_IsJammer                0x193
-%define        Offset_IsGapper                0x193
-
-str_Crusher db"Crusher",0
-str_IsGigundo db"IsLarge",0
-str_IsJammer db"IsJammer",0
-str_IsGapper db"IsGapGenerator",0
-
 UnitTypeClass_First_Load:
     ; Set UnitTypeExt_Crusher
-    Get_Bit BYTE [esi+Offset_Crusher], 2 ; Crusher, hooked by extend unit type class code
+    Get_Bit BYTE [esi+UnitTypeClass.Offset.Crusher], 2 ; Crusher, hooked by extend unit type class code
     mov  BYTE [esi+UnitTypeExt_Crusher], al
 
 .Ret:
@@ -39,7 +29,7 @@ UnitTypeClass_First_Load:
 UnitTypeClass_Clear_Extended_Memory:
 
     ; Use original 'can crush' bit flag
-    Set_Bit_Byte [esi+Offset_Crusher], 2, [esi+UnitTypeExt_Crusher]
+    Set_Bit_Byte [esi+UnitTypeClass.Offset.Crusher], 2, [esi+UnitTypeExt_Crusher]
 
 .Ret:
     retn
@@ -62,33 +52,23 @@ _UnitTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
 
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_Crusher], 2
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_Crusher, ecx
-    Set_Bit_Byte [esi+Offset_Crusher], 2, al
+    UnitTypeClass.IsCrateGoodie.Read(esi,edi)
+    UnitTypeClass.Crusher.Read(esi,edi)
+    UnitTypeClass.IsToHarvest.Read(esi,edi)
+    UnitTypeClass.IsRotatingTurret.Read(esi,edi)
+    UnitTypeClass.IsFireAnim.Read(esi,edi)
+    UnitTypeClass.IsLockTurret.Read(esi,edi)
+    UnitTypeClass.IsGigundo.Read(esi,edi)
+    UnitTypeClass.IsAnimating.Read(esi,edi)
+    UnitTypeClass.IsJammer.Read(esi,edi)
+    UnitTypeClass.IsGapper.Read(esi,edi)
+    ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_IsGigundo], 7
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_IsGigundo, ecx
-    Set_Bit_Byte [esi+Offset_IsGigundo], 7, al
-
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_IsJammer], 1
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_IsJammer, ecx
-    Set_Bit_Byte [esi+Offset_IsJammer], 1, al
-
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_IsGapper], 2
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_IsGapper, ecx
-    Set_Bit_Byte [esi+Offset_IsGapper], 2, al
+    ;UnitTypeClass.Type.Read(esi,edi)
+    ;UnitTypeClass.TurretOffset.Read(esi,edi)
+    ;UnitTypeClass.DefaultMission.Read(esi,edi)
+    ;UnitTypeClass.Explosion.Read(esi,edi)
+    ;UnitTypeClass.MaxSize.Read(esi,edi)
 
     pop  esi
 

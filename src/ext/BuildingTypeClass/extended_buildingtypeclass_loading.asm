@@ -1,63 +1,6 @@
 ;Read INI settings
 @HOOK 0x00453FFB _BuildingTypeClass__Read_INI_Extended
 
-%define        Offset_IsSimpleDamage            0x192
-%define        Offset_IsRegulated               0x192
-%define        Offset_FactoryType               0x19B    ; BYTE, AIRCRAFT_TYPE=2, BUILDING_TYPE=6, INFANTRY_TYPE=14, UNIT_TYPE=29, VESSEL_TYPE=31
-%define        Offset_ExitCoordX                0x19C    ; WORD
-%define        Offset_ExitCoordY                0x19E    ; WORD
-%define        Offset_ExitList                  0x1A0    ; INT
-%define        Offset_BSize                     0x1B2    ; BYTE, 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55 
-%define        Offset_Anim_Construct_Start      0x1B3    ; INT
-%define        Offset_Anim_Construct_Count      0x1B7    ; INT
-%define        Offset_Anim_Construct_Rate       0x1BB    ; INT
-%define        Offset_Anim_Idle_Start           0x1BF    ; INT
-%define        Offset_Anim_Idle_Count           0x1C3    ; INT
-%define        Offset_Anim_Idle_Rate            0x1C7    ; INT
-%define        Offset_Anim_Active_Start         0x1CB    ; INT
-%define        Offset_Anim_Active_Count         0x1CF    ; INT
-%define        Offset_Anim_Active_Rate          0x1D3    ; INT
-%define        Offset_Anim_Full_Start           0x1D7    ; INT
-%define        Offset_Anim_Full_Count           0x1DB    ; INT
-%define        Offset_Anim_Full_Rate            0x1DF    ; INT
-%define        Offset_Anim_Aux1_Start           0x1E3    ; INT
-%define        Offset_Anim_Aux1_Count           0x1E7    ; INT
-%define        Offset_Anim_Aux1_Rate            0x1EB    ; INT
-%define        Offset_Anim_Aux2_Start           0x1EF    ; INT
-%define        Offset_Anim_Aux2_Count           0x1F3    ; INT
-%define        Offset_Anim_Aux2_Rate            0x1F7    ; INT
-%define        Offset_OccupyList                0x1FB    ; INT
-%define        Offset_OverlapList               0x1FF    ; INT
-
-
-str_IsSimpleDamage            db"IsSimpleDamage",0
-str_IsRegulated               db"ConstantAnimation",0
-str_FactoryType               db"FactoryType",0
-str_ExitCoordX                db"ExitCoordX",0
-str_ExitCoordY                db"ExitCoordY",0
-str_ExitList                  db"ExitList",0
-str_BSize                     db"BSize",0
-str_Anim_Construct_Start      db"Anim_Construct_Start",0
-str_Anim_Construct_Count      db"Anim_Construct_Count",0
-str_Anim_Construct_Rate       db"Anim_Construct_Rate",0
-str_Anim_Idle_Start           db"Anim_Idle_Start",0
-str_Anim_Idle_Count           db"Anim_Idle_Count",0
-str_Anim_Idle_Rate            db"Anim_Idle_Rate",0
-str_Anim_Active_Start         db"Anim_Active_Start",0
-str_Anim_Active_Count         db"Anim_Active_Count",0
-str_Anim_Active_Rate          db"Anim_Active_Rate",0
-str_Anim_Full_Start           db"Anim_Full_Start",0
-str_Anim_Full_Count           db"Anim_Full_Count",0
-str_Anim_Full_Rate            db"Anim_Full_Rate",0
-str_Anim_Aux1_Start           db"Anim_Aux1_Start",0
-str_Anim_Aux1_Count           db"Anim_Aux1_Count",0
-str_Anim_Aux1_Rate            db"Anim_Aux1_Rate",0
-str_Anim_Aux2_Start           db"Anim_Aux2_Start",0
-str_Anim_Aux2_Count           db"Anim_Aux2_Count",0
-str_Anim_Aux2_Rate            db"Anim_Aux2_Rate",0
-str_OccupyList                db"OccupyList",0
-str_OverlapList               db"OverlapList",0
-
 ; OccupyList, OverlapList
 d_Occupy_1                    dw 0,0x7FFF                                                 ;00, GUN,SILO
 d_Occupy_0_1                  dw 0x80,0x7FFF                                              ;01, GAP,TESLA
@@ -86,6 +29,116 @@ d_Occupy_S111                 dw 0xFF80,0xFF81,0xFF82,0x7FFF                    
 d_Occupy_S11_00_00_11         dw 0xFF80,0xFF81,0x100,0x101,0x7FFF                         ;24, C&C HAND Overlap special (2 cells above, and 2 cells on 3rd row)
 d_Occupy_S111_000_000_111     dw 0xFF80,0xFF81,0xFF82,0x100,0x101,0x102,0x7FFF            ;25, Overlap special (3 cells above, and 3 cells on 3rd row)
 
+%define d_ExitPyle            0x005FEA5C      ;01
+%define d_ExitSub             0x005FEA78      ;02
+%define d_ExitWeap            0x005FEA82      ;03
+
+_BuildingTypeClass__Read_INI_Extended:
+    push esi
+    push edi
+    push eax
+
+    BuildingTypeClass.IsSimpleDamage.Read(esi,edi)
+    BuildingTypeClass.IsRegulated.Read(esi,edi)
+    BuildingTypeClass.FactoryType.Read(esi,edi,_SelectFactoryType)
+    BuildingTypeClass.ExitCoordX.Read(esi,edi)
+    BuildingTypeClass.ExitCoordY.Read(esi,edi)
+    BuildingTypeClass.ExitList.Read(esi,edi,_SelectExitList)
+    BuildingTypeClass.BSize.Read(esi,edi)
+    BuildingTypeClass.Anim_Construct_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Construct_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Construct_Rate.Read(esi,edi)
+    BuildingTypeClass.Anim_Idle_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Idle_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Idle_Rate.Read(esi,edi)
+    BuildingTypeClass.Anim_Active_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Active_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Active_Rate.Read(esi,edi)
+    BuildingTypeClass.Anim_Full_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Full_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Full_Rate.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux1_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux1_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux1_Rate.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux2_Start.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux2_Count.Read(esi,edi)
+    BuildingTypeClass.Anim_Aux2_Rate.Read(esi,edi)
+    BuildingTypeClass.OccupyList.Read(esi,edi,_SelectOccupyList)
+    BuildingTypeClass.OverlapList.Read(esi,edi,_SelectOccupyList)
+
+    pop eax
+    pop  edi
+    pop  esi
+
+.Ret:
+    lea  esp, [ebp-10h]
+    pop  edi
+    pop  esi
+    pop  ecx
+    jmp  0x00454001
+
+
+
+_SelectFactoryType:
+    ;select FactoryType by performing string compare on eax
+    push edx
+    push ebx ; hold eax value for multiple checks
+
+.CheckNotAString:
+    cmp  eax, 0xFF ; hack to evade residual RTTI values, since they are invalid strings
+    jle  .Retn ; just return 0
+    mov  ebx,eax
+
+.CheckAircraftType:
+    mov  edx,str.RTTIType.AircraftType
+    call _strcmpi
+    test eax, eax
+    jnz  .CheckBuildingType
+    mov  al, RTTIType.AircraftType
+    jmp  .Retn
+
+.CheckBuildingType:
+    mov  edx, str.RTTIType.BuildingType
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .CheckInfantryType
+    mov  al, RTTIType.BuildingType
+    jmp  .Retn
+
+.CheckInfantryType:
+    mov  edx, str.RTTIType.InfantryType
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .CheckUnitType
+    mov  al, RTTIType.InfantryType
+    jmp  .Retn
+
+.CheckUnitType:
+    mov  edx, str.RTTIType.UnitType
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .CheckVesselType
+    mov  al, RTTIType.UnitType
+    jmp  .Retn
+
+.CheckVesselType:
+    mov  edx, str.RTTIType.VesselType
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .DefaultNull
+    mov  al, RTTIType.VesselType
+    jmp  .Retn
+
+.DefaultNull:
+    xor  eax,eax  ; RTTIType.None
+
+.Retn:
+    pop ebx
+    pop edx
+    retn
+
+
+
 _SelectExitList:
     ;select exitlist based on eax
     cmp  eax,-1
@@ -100,19 +153,19 @@ _SelectExitList:
 .Check_ExitPyle:
     cmp  eax,0
     jnz .Check_ExitSub
-    mov  eax,0x005FEA5C ;ExitPyle
+    mov  eax,d_ExitPyle
     jmp .Retn
 
 .Check_ExitSub:
     cmp  eax,1
     jnz .Check_ExitWeap
-    mov  eax,0x005FEA78 ;ExitSub
+    mov  eax,d_ExitSub
     jmp .Retn
 
 .Check_ExitWeap:
     cmp  eax,2
     jnz .DefaultNull
-    mov  eax,0x005FEA82 ;ExitWeap
+    mov  eax,d_ExitWeap
     jmp .Retn
 
 .DefaultNull:
@@ -296,193 +349,3 @@ _SelectOccupyList:
 .Retn:
     retn
 
-_BuildingTypeClass__Read_INI_Extended:
-    push esi
-    push edi
-    push eax
-    ;mov esi, edi
-    ;mov edi, RulesINI
-
-    BuildingTypeClass.ID 
-
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_IsSimpleDamage], 5
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_IsSimpleDamage, ecx
-    Set_Bit_Byte [esi+Offset_IsSimpleDamage], 5, al
-
-    lea  edx, [esi+5]
-    Get_Bit BYTE [esi+Offset_IsRegulated], 7
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool edi, edx, str_IsRegulated, ecx
-    Set_Bit_Byte [esi+Offset_IsRegulated], 7, al
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  BYTE cl, [esi+Offset_FactoryType]
-    call_INIClass__Get_Int edi, edx, str_FactoryType, ecx
-    mov  BYTE  [esi+Offset_FactoryType], al
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  WORD cx, [esi+Offset_ExitCoordX]
-    call_INIClass__Get_Int edi, edx, str_ExitCoordX, ecx
-    mov  WORD [esi+Offset_ExitCoordX], ax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  WORD cx, [esi+Offset_ExitCoordY]
-    call_INIClass__Get_Int edi, edx, str_ExitCoordY, ecx
-    mov  WORD [esi+Offset_ExitCoordY], ax
-
-    ; Select ExitList
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_ExitList]
-    call_INIClass__Get_Int edi, edx, str_ExitList, ecx
-    call _SelectExitList
-    mov  [esi+Offset_ExitList], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  BYTE cl, [esi+Offset_BSize]
-    call_INIClass__Get_Int edi, edx, str_BSize, ecx
-    mov  BYTE  [esi+Offset_BSize], al
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Construct_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Construct_Start, ecx
-    mov  [esi+Offset_Anim_Construct_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Construct_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Construct_Count, ecx
-    mov  [esi+Offset_Anim_Construct_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Construct_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Construct_Rate, ecx
-    mov  [esi+Offset_Anim_Construct_Rate], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Idle_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Idle_Start, ecx
-    mov  [esi+Offset_Anim_Idle_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Idle_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Idle_Count, ecx
-    mov  [esi+Offset_Anim_Idle_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Idle_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Idle_Rate, ecx
-    mov  [esi+Offset_Anim_Idle_Rate], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Active_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Active_Start, ecx
-    mov  [esi+Offset_Anim_Active_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Active_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Active_Count, ecx
-    mov  [esi+Offset_Anim_Active_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Active_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Active_Rate, ecx
-    mov  [esi+Offset_Anim_Active_Rate], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Full_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Full_Start, ecx
-    mov  [esi+Offset_Anim_Full_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Full_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Full_Count, ecx
-    mov  [esi+Offset_Anim_Full_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Full_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Full_Rate, ecx
-    mov  [esi+Offset_Anim_Full_Rate], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux1_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux1_Start, ecx
-    mov  [esi+Offset_Anim_Aux1_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux1_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux1_Count, ecx
-    mov  [esi+Offset_Anim_Aux1_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux1_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux1_Rate, ecx
-    mov  [esi+Offset_Anim_Aux1_Rate], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux2_Start]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux2_Start, ecx
-    mov  [esi+Offset_Anim_Aux2_Start], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux2_Count]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux2_Count, ecx
-    mov  [esi+Offset_Anim_Aux2_Count], eax
-
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_Anim_Aux2_Rate]
-    call_INIClass__Get_Int edi, edx, str_Anim_Aux2_Rate, ecx
-    mov  [esi+Offset_Anim_Aux2_Rate], eax
-
-    ; Select OccupyList
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_OccupyList]
-    call_INIClass__Get_Int edi, edx, str_OccupyList, ecx
-    call _SelectOccupyList
-    mov  [esi+Offset_OccupyList], eax
-
-    ; Select OverLapList
-    lea  edx, [esi+5]
-    xor  ecx, ecx
-    mov  ecx, [esi+Offset_OverlapList]
-    call_INIClass__Get_Int edi, edx, str_OverlapList, ecx
-    call _SelectOccupyList
-    mov  [esi+Offset_OverlapList], eax
-
-    pop eax
-    pop  edi
-    pop  esi
-
-
-.Ret:
-    lea  esp, [ebp-10h]
-    pop  edi
-    pop  esi
-    pop  ecx
-    jmp  0x00454001
