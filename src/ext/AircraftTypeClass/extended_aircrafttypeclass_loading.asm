@@ -6,6 +6,8 @@
 ;Read INI settings
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HOOK 0x005374C5 _RulesClass_Objects_Replace_AircraftTypes_Read_INI
+@HOOK 0x004DE09E _HouseClass_Is_No_YakMig_UseFixedWing
+@HOOK 0x004DE15C _HouseClass_Is_Hack_Prevented_UseFixedWing
 
 %define        TechnoTypeClass_Read_INI             0x00569914
 
@@ -73,3 +75,74 @@ AircraftTypes_Read_INI:
     Restore_Registers
     pop  ebp
     retn
+
+
+_HouseClass_Is_No_YakMig_UseFixedWing:
+    xor  edi, edi ;begin from ID 0
+    xor  ebx, ebx 
+	xor  ecx, ecx
+    mov  dword [AircraftFixedWingSelectableCount], 0 ;initial count 0
+
+.Check:
+    cmp  edi, [NewAircraftTypeHeapCount]
+    jge  .Done
+.Loop:
+    push eax
+    push edi
+    AircraftTypeClass.FromIndex(edi, ebx)
+    AircraftTypeClass.IsFixedWing.Get(ebx, cl) ; check if aircraft is fixed wing
+    pop  edi
+    pop  eax
+    test cl, cl
+    jz   .NoAddCount
+    push eax
+    ObjectTypeClass.IsSelectable.Get(ebx, cl) ; exclude unselectable aircrafts such as the spy plane and badger bomber, as those do not return to the airfield
+    pop  eax
+    test cl, cl
+    jz   .NoAddCount
+.AddCount:
+    ; AQuantity[<aircraftTypeID>] = eax + 0x4ee + 4 * <aircraftTypeID>
+    mov  edx, edi
+    shl  edx, 2
+    add  edx, 0x4ee
+    add  edx, eax
+    mov  ebx, dword [AircraftFixedWingSelectableCount]
+    add  ebx, dword [edx]
+    mov  dword [AircraftFixedWingSelectableCount], ebx
+.NoAddCount:
+    inc  edi
+	jmp  .Check
+.Done:
+    mov  ecx, dword [AircraftFixedWingSelectableCount]
+    mov  ebx, eax
+    jmp  0x004DE0AC
+
+
+
+_HouseClass_Is_Hack_Prevented_UseFixedWing:
+    push eax
+    push ecx
+    push edx
+    push esi
+    push ebx
+    AircraftTypeClass.FromIndex(ebx, ecx)
+	pop  ebx
+    AircraftTypeClass.IsFixedWing.Get(ecx, dl) ; check if aircraft is fixed wing
+    test dl, dl
+    jz   .NoHack
+    ObjectTypeClass.IsSelectable.Get(ecx, dl) ; exclude unselectable aircrafts such as the spy plane and badger bomber, as those do not return to the airfield
+    test dl, dl
+    jnz  .ApplyHack
+.NoHack:
+    pop  esi
+    pop  edx
+    pop  ecx
+    pop  eax
+    jmp  0x004DE16F
+.ApplyHack:
+    pop  esi
+    pop  edx
+    pop  ecx
+    pop  eax
+    call 0x004DE094 ;HouseClass::Is_No_YakMig
+    jmp  0x004DE16B
