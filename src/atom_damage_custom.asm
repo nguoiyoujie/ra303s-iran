@@ -1,3 +1,4 @@
+@HOOK 0x00425BA8 _AnimClass__Override_Atom_Range
 @HOOK 0x00425BC9 _AnimClass__Do_Atom_Damage
 @HOOK 0x00425C26 _AnimClass__Do_Atom_Damage2
 
@@ -11,6 +12,17 @@ _AnimClass__Do_Atom_Damage2:
 .Jump_Past:
     jmp  0x00425C2F
 
+_AnimClass__Override_Atom_Range:
+    cmp  DWORD [AtomRange], 0
+    jge   .Override_Range
+    mov  ecx, 4
+    jmp  .After_Override_Range
+.Override_Range:
+    mov  ecx, [AtomRange]
+.After_Override_Range:
+    jmp  0x00425BAD
+
+
 _AnimClass__Do_Atom_Damage:
     cmp  DWORD [UseAtomWhiteScreenEffectInMP], 0
     jz   .No_Whiten_Screen_Effect
@@ -22,8 +34,14 @@ _AnimClass__Do_Atom_Damage:
     call 0x005BCF44 ; const PaletteClass::Set(int,(*)(void))
 
 .No_Whiten_Screen_Effect:
+    cmp  DWORD [AtomRange], 0
+    jge   .Override_Range
+    mov  ecx, 3
+    jmp  .After_Override_Range
+.Override_Range:
+    mov  ecx, [AtomRange]
+.After_Override_Range:
     cmp  DWORD [UseSinglePlayerAtomDamage], 1
-    mov  ecx, 4
     mov  esi, [0x006667EB] ; ds:int RulesClass.AtomDamage
     jz   0x00425BE1
 

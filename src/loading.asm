@@ -33,6 +33,7 @@ MapSelectCBuf TIMES 128 db 0
 ChronoReinforceTanks dd 0
 UseAtomWhiteScreenEffectInMP dd 0
 UseSinglePlayerAtomDamage dd 0
+AtomRange dd 0
 
 str_custommissions db "Custom Missions",0
 str_expansionissions db "Expansions Missions",0
@@ -46,6 +47,7 @@ str_MapSelectC db "MapSelectC",0
 str_ChronoReinforceTanks db"ChronoReinforceTanks",0
 str_UseAtomWhiteScreenEffectInMP db"UseAtomWhiteScreenEffectInMP",0
 str_UseSinglePlayerAtomDamage db"UseSinglePlayerAtomDamage",0
+str_AtomRange db"AtomRange",0
 
 str_EasyAIGoldValue db "EasyAIGoldValue",0
 str_EasyAIGemValue db "EasyAIGemValue",0
@@ -325,6 +327,9 @@ Read_Map_Specific_Tutorial_Text:
     call_INIClass__Get_Bool eax, 0x005EFFA5, str_UseSinglePlayerAtomDamage, 0
     mov  DWORD [UseSinglePlayerAtomDamage], eax
 
+    mov  DWORD eax, [TutorialINIPointer]
+    call_INIClass__Get_Int eax, 0x005EFFA5, str_AtomRange, -1
+    mov  DWORD [AtomRange], eax
 
     mov  DWORD eax, [TutorialINIPointer]
     call_INIClass__Get_Bool eax, 0x005EFFA5, str_UseCustomTutorialText, 0
