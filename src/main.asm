@@ -73,12 +73,14 @@ _str_version: db "3.03p-iB1v1",0
 ;extended classses
 %include "src/ext/savegame_support.asm" ; this needs to go first before other extended classes
 
+%include "src/ext/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/ext/TechnoTypeClass/extended_technotypeclass_loading.asm"
 %include "src/ext/UnitTypeClass/extended_unittypeclass_loading.asm"
 %include "src/ext/UnitTypeClass/extended_unittypeclass_additions.asm"
 %include "src/ext/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
 %include "src/ext/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
 %include "src/ext/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
+%include "src/ext/VesselTypeClass/extended_vesseltypeclass_loading.asm"
 %include "src/ext/extended_houseclass.asm"
 %include "src/ext/extended_buildingclass.asm"
 %include "src/ext/extended_technoclass.asm"
