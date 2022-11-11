@@ -7,7 +7,7 @@
 str_InfantryTypes db"InfantryTypes",0
 InfantryTypesExtCount    dd    0
 NewInfantryTypeHeapCount    dd    0
-%define        OriginalInfantryTypeHeapCount    0x1A
+%define        OriginalInfantryTypeHeapCount       0x1A
 
 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
     mov  al, [NewInfantryTypeHeapCount]
@@ -49,7 +49,7 @@ Init_InfantryTypeClass:
     push 1        ; __int32
     push 0               ; __int32
     push 10h             ; __int32
-    add  ebx, 640 ; refer to new REDALERT.mix/local.mix/Conquer.eng
+    add  ebx, dword [stringtableoffset_newinfantrytypes]
     push 35h             ; __int32
     mov  DWORD [0x006019C4], 1
     call 0x004DF5E0 ; InfantryTypeClass::InfantryTypeClass(InfantryType,int,char *,int,int,int,int,int,int,int,int,PipEnum,DoInfoStruct *,int,int,char *)
@@ -69,6 +69,8 @@ Loop_Over_RULES_INI_Section_Entries str_InfantryTypes, Init_InfantryTypeClass
 
 
 _Init_Game_Set_InfantryTypes_Heap_Count:
+    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newinfantrytypes, [stringtableoffset_newinfantrytypes]
+    mov  [stringtableoffset_newinfantrytypes], eax
     Get_RULES_INI_Section_Entry_Count str_InfantryTypes
     mov  BYTE [InfantryTypesExtCount], al
     mov  edx, eax

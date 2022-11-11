@@ -52,8 +52,8 @@ Init_AircraftTypeClass:
     push 0
     push 0
     push 40h
-    mov  ebx, 4Ch
     push 0
+    add  ebx, dword [stringtableoffset_newaircrafttypes]
     mov  DWORD [0x005FDF74], 5
     call 0x00401210 ; AircraftTypeClass::AircraftTypeClass(AircraftType,int,char *,int,int,int,int,int,int,int,int,int,int,int,int,StructType,int,int,MissionType)
 
@@ -73,6 +73,8 @@ _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
     jmp  0x00403EE9
 
 _Init_Game_Set_AircraftTypes_Heap_Count:
+    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newaircrafttypes, [stringtableoffset_newaircrafttypes]
+    mov  [stringtableoffset_newaircrafttypes], eax
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
     mov  BYTE [AircraftTypesTypesExtCount], al
     mov  edx, eax

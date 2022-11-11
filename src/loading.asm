@@ -116,6 +116,14 @@ str_colorremapsidebarcameoicons db "ColorRemapSidebarIcons",0
 str_usedosinterfacemod db "UseDOSInterfaceMod",0
 str_computerparanoidforcedisabledskirmish db "ComputerParanoidForceDisabledSkirmish",0
 
+str_stringtableoffsets db "StringTableOffsets",0
+str_stringtableoffset_newinfantrytypes db "Infantry",0
+str_stringtableoffset_newunittypes     db "Units",0
+str_stringtableoffset_newaircrafttypes db "Aircrafts",0
+str_stringtableoffset_newvesseltypes   db "Vessels",0
+str_stringtableoffset_newbuildingtypes db "Buildings",0
+
+
 CCINIClass_redalertini5 TIMES 64 db 0
 FileClass_redalertini5    TIMES 128 db 0
 
@@ -198,6 +206,12 @@ fixaisendingtankstopleft db 0
 generatememorydump    db 0
 usedosinterfacemod db 0
 spawner_is_active  dd 0
+
+stringtableoffset_newinfantrytypes  dd 0
+stringtableoffset_newunittypes      dd 0
+stringtableoffset_newaircrafttypes  dd 0
+stringtableoffset_newvesseltypes    dd 0
+stringtableoffset_newbuildingtypes  dd 0
 
 %macro Initialize_Remap_Table 1
     xor  eax, eax
@@ -735,7 +749,6 @@ _OptionsClass__Load_Settings:
     call_INIClass__Get_Bool eax, str_options5, str_fastambuildspeed, 0
     mov  [fastambuildspeed], al
 
-
     Restore_Registers
     jmp  0x00525AA4
 
@@ -787,7 +800,6 @@ _Init_Game_Hook_Load:
 
     call_INIClass__Get_Bool 0x00666688, str_ai, str_computerparanoidforcedisabledskirmish, 1
     mov  [computerparanoidforcedisabledskirmish], al
-
 
 ;  EXTRA COLOUR REMAP WHITE
     Initialize_Remap_Table colorwhiteoffset

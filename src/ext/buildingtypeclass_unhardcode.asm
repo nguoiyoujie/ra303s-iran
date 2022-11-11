@@ -74,7 +74,7 @@ Init_BuildingTypeClass:
     push 0
     push 2
     push 0
-    add  ebx, 700 ; refer to new REDALERT.mix/local.mix/Conquer.eng
+    add  ebx, dword [stringtableoffset_newvesseltypes]
     mov  DWORD [0x005FE83C], 6
     push 0FFFFFFFFh
     call 0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
@@ -93,6 +93,8 @@ _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
     jmp  0x004535A1
 
 _Init_Game_Set_BuildingTypes_Heap_Count:
+    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newbuildingtypes, [stringtableoffset_newbuildingtypes]
+    mov  [stringtableoffset_newbuildingtypes], eax
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
     mov  BYTE [BuildingTypesExtCount], al
     mov  edx, eax

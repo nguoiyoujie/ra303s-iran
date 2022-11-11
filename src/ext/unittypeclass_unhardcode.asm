@@ -7,7 +7,7 @@
 str_UnitTypes db"UnitTypes",0
 UnitTypesExtCount       dd    0
 NewUnitTypeHeapCount    dd    0
-%define        OriginalUnitTypeHeapCount    0x16
+%define        OriginalUnitTypeHeapCount       0x16
 
 _UnitTypeClass__One_Time_UnhardCode_UnitTypes:
     mov  al, [NewUnitTypeHeapCount]
@@ -59,7 +59,7 @@ Init_UnitTypeClass:
     push 0
     push 030h ;primaryoffset, was 0C0h
     push 30h ;verticaloffset
-    add  ebx, 600 ; refer to new REDALERT.mix/local.mix/Conquer.eng
+    add  ebx, dword [stringtableoffset_newunittypes]
     push 1
     mov  DWORD [0x006057E4], 3 ; Turret Dir adjust
     push 2
@@ -80,6 +80,8 @@ _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes:
 
 
 _Init_Game_Set_UnitTypes_Heap_Count:
+    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newunittypes, [stringtableoffset_newunittypes]
+    mov  [stringtableoffset_newunittypes], eax
     Get_RULES_INI_Section_Entry_Count str_UnitTypes
     mov  BYTE [UnitTypesExtCount], al
     mov  edx, eax
