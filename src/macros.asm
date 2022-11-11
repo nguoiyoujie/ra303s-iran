@@ -1,27 +1,17 @@
-%define    RulesINI                                    0x00666688
-%define    RuleINI                                        0x00666688
-%define FileClass__FileClass                        0x004627D4
-%define FileClass__Is_Available                     0x00462A30
-%define SessionClass__Session                        0x0067F2B4
-%define ScenarioNumber                                0x006679D3
+%define RulesINI                           0x00666688
+%define RuleINI                            0x00666688
+%define FileClass__FileClass               0x004627D4
+%define FileClass__Is_Available            0x00462A30
+%define SessionClass__Session              0x0067F2B4
+%define ScenarioNumber                     0x006679D3
 
-%define Array_WarheadTypeClass             0x00691634
+
 %define Array_BulletTypeClass              0x0065DE88
-%define Array_WeaponTypeClass              0x00691680
-%define Array_UnitTypeClass                0x0065DF20
-%define Array_InfantryTypeClass            0x0065DE3C
-%define Array_VesselTypeClass              0x0065DF6C
-%define Array_AircraftTypeClass            0x0065DDF0
-%define Array_BuildingTypeClass            0x0065DDA4
-
-%define Count_WarheadTypeClass             0x0069160C
 %define Count_BulletTypeClass              0x0065DE60
-%define Count_WeaponTypeClass              0x00691658
-%define Count_UnitTypeClass                0x0065DEF8
-%define Count_InfantryTypeClass            0x0065DE14
-%define Count_VesselTypeClass              0x0065DF44
-%define Count_AircraftTypeClass            0x0065DDC8
-%define Count_BuildingTypeClass            0x0065DD7C
+
+
+; %define Array_Aircrafts              0x0065DDBC
+
 
 %macro Save_Registers 0
     push eax
@@ -145,25 +135,6 @@ Loop_Over_RULES_INI_Section_Entries_:
 %endmacro
 
 
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_WarheadTypeClass    1
-    push edx
-    mov  edx, [Count_WarheadTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
-
-    mov  edx, [Array_WarheadTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
-
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
 
 ; args <Internal ID of type class>
 ; returns the type class pointer as EAX
@@ -182,128 +153,14 @@ Loop_Over_RULES_INI_Section_Entries_:
   %%invalid_type:
     mov  eax, 0
   %%done:
-    pop edx
+    pop  edx
 %endmacro
 
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_WeaponTypeClass    1
-    push edx
-    mov  edx, [Count_WeaponTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
 
-    mov  edx, [Array_WeaponTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
 
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
 
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_UnitTypeClass    1
-    push edx
-    mov  edx, [Count_UnitTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
 
-    mov  edx, [Array_UnitTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
 
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
-
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_InfantryTypeClass    1
-    push edx
-    mov  edx, [Count_InfantryTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
-
-    mov  edx, [Array_InfantryTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
-
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
-
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_VesselTypeClass    1
-    push edx
-    mov  edx, [Count_VesselTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
-
-    mov  edx, [Array_VesselTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
-
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
-
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_AircraftTypeClass    1
-    push edx
-    mov  edx, [Count_AircraftTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
-
-    mov  edx, [Array_AircraftTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
-
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
-
-; args <Internal ID of type class>
-; returns the type class pointer as EAX
-%macro Get_BuildingTypeClass    1
-    push edx
-    mov  edx, [Count_BuildingTypeClass] 
-    cmp  %1, edx
-    jge  %%invalid_type
-
-    mov  edx, [Array_BuildingTypeClass] 
-    shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
-    jmp  %%done
-
-  %%invalid_type:
-    mov  eax, 0
-  %%done:
-    pop edx
-%endmacro
 
 
 

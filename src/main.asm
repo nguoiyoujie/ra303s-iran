@@ -39,8 +39,25 @@ _str_version: db "3.03p-iB1v1",0
 ; Version
 %include "src/version.asm"
 
+; definitions
+%include "src/defines.asm"
+%include "src/defines_armortypes.asm"
+
 ; macros
 %include "src/macros.asm"
+%include "src/macros_generic.asm"
+
+; typeclass_macros
+%include "src/macros_abstracttype.asm"
+%include "src/macros_objecttype.asm"
+%include "src/macros_technotype.asm"
+%include "src/macros_aircrafttype.asm"
+%include "src/macros_buildingtype.asm"
+%include "src/macros_infantrytype.asm"
+%include "src/macros_unittype.asm"
+%include "src/macros_vesseltype.asm"
+%include "src/macros_warheadtype.asm"
+%include "src/macros_weapontype.asm"
 
 ; loading code
 %include "src/loading.asm"
