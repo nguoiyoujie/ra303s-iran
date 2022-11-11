@@ -179,6 +179,8 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/building_unlimbo_owners.asm" ; added by lovalmidas
 %include "src/battlecontrolterminated_delayblackscreen.asm" ; added by lovalmidas
 
+;%include "src/refinery_experiment.asm" ; added by lovalmidas
+
 %ifdef USE_NOCD
 %include "src/nocd.asm"
 %endif
