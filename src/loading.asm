@@ -1059,28 +1059,28 @@ Set_Single_CPU_Affinity:
 _RulesClass__AI_Load:
     Save_Registers
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_EasyAIGoldValue, [EasyAIOreValue]
+    call_INIClass__Get_Int esi, str_ai, str_EasyAIGoldValue, [EasyAIOreValue]
     mov  [EasyAIOreValue], eax
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_EasyAIGemValue, [EasyAIGemValue]
+    call_INIClass__Get_Int esi, str_ai, str_EasyAIGemValue, [EasyAIGemValue]
     mov  [EasyAIGemValue], eax
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_NormalAIGoldValue, [NormalAIOreValue]
+    call_INIClass__Get_Int esi, str_ai, str_NormalAIGoldValue, [NormalAIOreValue]
     mov  [NormalAIOreValue], eax
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_NormalAIGemValue, [NormalAIGemValue]
+    call_INIClass__Get_Int esi, str_ai, str_NormalAIGemValue, [NormalAIGemValue]
     mov  [NormalAIGemValue], eax
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_HardAIGoldValue, [HardAIOreValue]
+    call_INIClass__Get_Int esi, str_ai, str_HardAIGoldValue, [HardAIOreValue]
     mov  [HardAIOreValue], eax
 
-    call_INIClass__Get_Int esi, 0x005EFC29, str_HardAIGemValue, [HardAIGemValue]
+    call_INIClass__Get_Int esi, str_ai, str_HardAIGemValue, [HardAIGemValue]
     mov  [HardAIGemValue], eax
 
-    call_INIClass__Get_Bool esi, 0x005EFC29, str_ReenableAITechUpCheck, [ReenableAITechUpCheck]
+    call_INIClass__Get_Bool esi, str_ai, str_ReenableAITechUpCheck, [ReenableAITechUpCheck]
     mov  [ReenableAITechUpCheck], eax
 
-    call_INIClass__Get_Bool esi, 0x005EFC29, str_SingleplayerAIObeyPrerequisites, [SingleplayerAIObeyPrerequisites]
+    call_INIClass__Get_Bool esi, str_ai, str_SingleplayerAIObeyPrerequisites, [SingleplayerAIObeyPrerequisites]
     mov  [SingleplayerAIObeyPrerequisites], eax
 
 .Ret:

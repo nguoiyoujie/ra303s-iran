@@ -23,7 +23,7 @@ _WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath:
     jmp  0x0058FBA3
 
 _WarheadTypeClass__Read_INI_Expand_Modifier_5_to_9:
-    ; the reading code can handle strings with will less elements than expected, defaulting them to 0%
+    ; the reading code can handle strings with less elements than expected, defaulting them to 0%
     cmp  dl, 9
     jl   0x0058FBDC
     jmp  0x0058FC09
