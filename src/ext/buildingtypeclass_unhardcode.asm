@@ -74,7 +74,7 @@ Init_BuildingTypeClass:
     push 0
     push 2
     push 0
-    add  ebx, dword [stringtableoffset_newvesseltypes]
+    add  ebx, dword [stringtableoffset_newbuildingtypes]
     mov  DWORD [0x005FE83C], 6
     push 0FFFFFFFFh
     call 0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
