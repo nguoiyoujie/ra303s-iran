@@ -1,16 +1,4 @@
-Red Alert 3.03 "s" series
-================================================================================
-
-This is an extension of the "p"/"r" series by Iran, whose project this is forked
-from. This extension contains several features made to extend the functions 
-available to a modder or mission writer.
-
-Of note, addition of new technotypes are possible with decent functionality, as 
-well as customization of properties in rules.ini normally locked behind code.
-
-Below is the original Readme from the "p" series, which better explains what the
-project was about.
-
+Red Alert 3.03 "p" series
 ================================================================================
 
 This represents the culmination of many years work at modding and patching the
