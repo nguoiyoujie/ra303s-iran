@@ -342,10 +342,6 @@ Read_Map_Specific_Tutorial_Text:
     mov  DWORD [UseSinglePlayerAtomDamage], eax
 
     mov  DWORD eax, [TutorialINIPointer]
-    call_INIClass__Get_Int eax, 0x005EFFA5, str_AtomRange, -1
-    mov  DWORD [AtomRange], eax
-
-    mov  DWORD eax, [TutorialINIPointer]
     call_INIClass__Get_Bool eax, 0x005EFFA5, str_UseCustomTutorialText, 0
 
 
@@ -801,6 +797,8 @@ _Init_Game_Hook_Load:
     call_INIClass__Get_Bool 0x00666688, str_ai, str_computerparanoidforcedisabledskirmish, 1
     mov  [computerparanoidforcedisabledskirmish], al
 
+
+
 ;  EXTRA COLOUR REMAP WHITE
     Initialize_Remap_Table colorwhiteoffset
 
@@ -1082,6 +1080,9 @@ _RulesClass__AI_Load:
 
     call_INIClass__Get_Bool esi, str_ai, str_SingleplayerAIObeyPrerequisites, [SingleplayerAIObeyPrerequisites]
     mov  [SingleplayerAIObeyPrerequisites], eax
+
+    call_INIClass__Get_Int esi, str_general, str_AtomRange, -1
+    mov  dword [AtomRange], eax
 
 .Ret:
     Restore_Registers
