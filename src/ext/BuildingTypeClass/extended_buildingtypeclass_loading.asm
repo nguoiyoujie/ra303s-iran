@@ -40,6 +40,8 @@ _BuildingTypeClass__Read_INI_Extended:
 
     BuildingTypeClass.IsSimpleDamage.Read(esi,edi)
     BuildingTypeClass.IsRegulated.Read(esi,edi)
+    BuildingTypeClass.IsJammable.Read(esi,edi)
+    BuildingTypeClass.IsRadar.Read(esi,edi)
     BuildingTypeClass.FactoryType.Read(esi,edi,_SelectFactoryType)
     BuildingTypeClass.ExitCoordX.Read(esi,edi)
     BuildingTypeClass.ExitCoordY.Read(esi,edi)

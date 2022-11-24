@@ -26,13 +26,22 @@
 %define UnitTypeClass.Bit.IsGapper                         2    
 %define UnitTypeClass.Offset.IsNoFireWhileMoving           0x193    ; BOOL // Already supported by game INI
 %define UnitTypeClass.Bit.IsNoFireWhileMoving              3    
-; 0x194 and 0x195 are empty... 
+%define UnitTypeClass.Offset.IsNoSmoke                     0x193    ; BOOL
+%define UnitTypeClass.Bit.IsNoSmoke                        4    
+;%define UnitTypeClass.Offset.IsAmmoLauncher                0x193    ; BOOL
+;%define UnitTypeClass.Bit.IsAmmoLauncher                   5    
+; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; BYTE
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; BYTE
 %define UnitTypeClass.Offset.DefaultMission                0x198    ; BYTE
 %define UnitTypeClass.Offset.Explosion                     0x199    ; BYTE
 %define UnitTypeClass.Offset.MaxSize                       0x19A    ; INT
 
+; new
+%define UnitTypeClass.Offset.TurretAdjustX                 0x19F    ; INT
+%define UnitTypeClass.Offset.TurretAdjustY                 0x203    ; INT
+%define UnitTypeClass.Offset.TurretFrameStart              0x207    ; WORD
+%define UnitTypeClass.Offset.TurretFrameCount              0x209    ; WORD
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -45,11 +54,17 @@ str.UnitTypeClass.IsGigundo                     db"Large",0                     
 str.UnitTypeClass.IsAnimating                   db"IsAnimating",0                 ;new ini feature (C&C viceroid)
 str.UnitTypeClass.IsJammer                      db"IsJammer",0                    ;new ini feature
 str.UnitTypeClass.IsGapper                      db"IsGapGenerator",0              ;new ini feature
+str.UnitTypeClass.IsNoFireWhileMoving           db"IsNoFireWhileMoving",0         ;new ini feature
+str.UnitTypeClass.IsNoSmoke                     db"IsNoSmoke",0                   ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
 str.UnitTypeClass.Explosion                     db"ExplosionAnim",0               ;internal feature
 str.UnitTypeClass.MaxSize                       db"MaxSize",0                     ;internal feature
+str.UnitTypeClass.TurretAdjustX                 db"TurretAdjustX",0               ;new ini feature
+str.UnitTypeClass.TurretAdjustY                 db"TurretAdjustY",0               ;new ini feature
+str.UnitTypeClass.TurretFrameStart              db"TurretFrameStart",0            ;new ini feature
+str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0            ;new ini feature
 
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_UnitTypeClass, Array_UnitTypeClass, reg_output
@@ -101,6 +116,11 @@ str.UnitTypeClass.MaxSize                       db"MaxSize",0                   
 %define UnitTypeClass.IsNoFireWhileMoving.Set(ptr_type,value)              ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoFireWhileMoving, UnitTypeClass.Bit.IsNoFireWhileMoving, value
 %define UnitTypeClass.IsNoFireWhileMoving.Read(ptr_type,ptr_rules)         ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoFireWhileMoving, UnitTypeClass.Bit.IsNoFireWhileMoving, str.UnitTypeClass.IsNoFireWhileMoving
 
+%define UnitTypeClass.IsNoSmoke.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, reg_output
+%define UnitTypeClass.IsNoSmoke.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, value
+%define UnitTypeClass.IsNoSmoke.Read(ptr_type,ptr_rules)                    ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, str.UnitTypeClass.IsNoSmoke
+
+
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.Type, value
 %define UnitTypeClass.Type.Read(ptr_type,ptr_rules)                        ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.Type, str.UnitTypeClass.Type
@@ -120,5 +140,22 @@ str.UnitTypeClass.MaxSize                       db"MaxSize",0                   
 %define UnitTypeClass.MaxSize.Get(ptr_type,reg_output)                     ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.MaxSize, reg_output
 %define UnitTypeClass.MaxSize.Set(ptr_type,value)                          ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.MaxSize, value
 %define UnitTypeClass.MaxSize.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.MaxSize, str.UnitTypeClass.MaxSize
+
+%define UnitTypeClass.TurretAdjustX.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.TurretAdjustX, reg_output
+%define UnitTypeClass.TurretAdjustX.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.TurretAdjustX, value
+%define UnitTypeClass.TurretAdjustX.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.TurretAdjustX, str.UnitTypeClass.TurretAdjustX
+
+%define UnitTypeClass.TurretAdjustY.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.TurretAdjustY, reg_output
+%define UnitTypeClass.TurretAdjustY.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.TurretAdjustY, value
+%define UnitTypeClass.TurretAdjustY.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.TurretAdjustY, str.UnitTypeClass.TurretAdjustY
+
+%define UnitTypeClass.TurretFrameStart.Get(ptr_type,reg_output)            ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.TurretFrameStart, reg_output
+%define UnitTypeClass.TurretFrameStart.Set(ptr_type,value)                 ObjectTypeClass.SetWord                ptr_type, UnitTypeClass.Offset.TurretFrameStart, value
+%define UnitTypeClass.TurretFrameStart.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadWord               ptr_type, ptr_rules, UnitTypeClass.Offset.TurretFrameStart, str.UnitTypeClass.TurretFrameStart
+
+%define UnitTypeClass.TurretFrameCount.Get(ptr_type,reg_output)            ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.TurretFrameCount, reg_output
+%define UnitTypeClass.TurretFrameCount.Set(ptr_type,value)                 ObjectTypeClass.SetWord                ptr_type, UnitTypeClass.Offset.TurretFrameCount, value
+%define UnitTypeClass.TurretFrameCount.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadWord               ptr_type, ptr_rules, UnitTypeClass.Offset.TurretFrameCount, str.UnitTypeClass.TurretFrameCount
+
 
 

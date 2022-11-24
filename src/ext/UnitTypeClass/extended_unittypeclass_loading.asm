@@ -14,40 +14,7 @@
 %define        Old_UnitTypeClass_Size        0x19E
 %define        New_UnitTypeClass_Size        0x39E
 
-%define        UnitTypeExt_Crusher            0x19F    ; BYTE
-%define        UnitTypeExt_FirstLoadDone      0x200    ; BYTE
-
-UnitTypeClass_First_Load:
-    ; Set UnitTypeExt_Crusher
-    Get_Bit BYTE [esi+UnitTypeClass.Offset.Crusher], 2 ; Crusher, hooked by extend unit type class code
-    mov  BYTE [esi+UnitTypeExt_Crusher], al
-
-.Ret:
-    mov  BYTE [esi+UnitTypeExt_FirstLoadDone], 1
-    retn
-
-UnitTypeClass_Clear_Extended_Memory:
-
-    ; Use original 'can crush' bit flag
-    Set_Bit_Byte [esi+UnitTypeClass.Offset.Crusher], 2, [esi+UnitTypeExt_Crusher]
-
-.Ret:
-    retn
-
 _UnitTypeClass__Read_INI_Extended:
-    cmp  BYTE [esi+UnitTypeExt_FirstLoadDone], 1
-    jz   .Dont_Do_First_Load
-
-    call UnitTypeClass_First_Load
-
-.Dont_Do_First_Load:
-
-    cmp  edi, RulesINI
-    jnz  .Dont_Clear_Extended_Memory
-
-    call UnitTypeClass_Clear_Extended_Memory
-
-.Dont_Clear_Extended_Memory:
 
 ;========= start loading from INI ==============
     push esi
@@ -62,6 +29,7 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.IsAnimating.Read(esi,edi)
     UnitTypeClass.IsJammer.Read(esi,edi)
     UnitTypeClass.IsGapper.Read(esi,edi)
+    UnitTypeClass.IsNoSmoke.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     ;UnitTypeClass.Type.Read(esi,edi)
@@ -70,9 +38,13 @@ _UnitTypeClass__Read_INI_Extended:
     ;UnitTypeClass.Explosion.Read(esi,edi)
     ;UnitTypeClass.MaxSize.Read(esi,edi)
 
+    UnitTypeClass.TurretAdjustX.Read(esi,edi)
+    UnitTypeClass.TurretAdjustY.Read(esi,edi)
+    UnitTypeClass.TurretFrameStart.Read(esi,edi)
+    UnitTypeClass.TurretFrameCount.Read(esi,edi)
+
+
     pop  esi
-
-
 .Ret:
     lea  esp, [ebp-10h]
     pop  edi
@@ -82,8 +54,6 @@ _UnitTypeClass__Read_INI_Extended:
 
 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory:
     Clear_Extended_Class_Memory_For_Old_Saves ecx, New_UnitTypeClass_Size, Old_UnitTypeClass_Size
-
-    mov  BYTE [UnitTypeExt_FirstLoadDone], 1
 .Ret:
     lea  edx, [ebp-0x14]
     mov  eax, ecx

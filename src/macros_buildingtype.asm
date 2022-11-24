@@ -23,6 +23,12 @@
 %define BuildingTypeClass.Offset.IsUnsellable              0x193    ; BOOL // Already supported by game INI
 %define BuildingTypeClass.Bit.IsUnsellable                 1    
 ; 0x194 and 0x195 are empty... 
+
+;added
+%define BuildingTypeClass.Offset.IsJammable                0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsJammable                   2
+%define BuildingTypeClass.Offset.IsRadar                   0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsRadar                      3
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; BYTE, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
 %define BuildingTypeClass.Offset.FactoryType               0x19B    ; BYTE, AIRCRAFT_TYPE=2, BUILDING_TYPE=6, INFANTRY_TYPE=14, UNIT_TYPE=29, VESSEL_TYPE=31
@@ -68,6 +74,8 @@ str.BuildingTypeClass.IsCaptureable             db"Capturable",0                
 str.BuildingTypeClass.IsRegulated               db"ConstantAnimation",0           ;new ini feature
 str.BuildingTypeClass.IsPowered                 db"Powered",0                     ;existing feature
 str.BuildingTypeClass.IsUnsellable              db"Unsellable",0                  ;existing feature
+str.BuildingTypeClass.IsJammable                db"IsJammable",0                  ;new feature
+str.BuildingTypeClass.IsRadar                   db"IsRadar",0                     ;new feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
 str.BuildingTypeClass.FactoryType               db"FactoryType",0                 ;new ini feature
@@ -138,6 +146,14 @@ str.BuildingTypeClass.BuildupData               db"BuildupData",0               
 %define BuildingTypeClass.IsPowered.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsPowered, BuildingTypeClass.Bit.IsPowered, reg_output
 %define BuildingTypeClass.IsPowered.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsPowered, BuildingTypeClass.Bit.IsPowered, value
 %define BuildingTypeClass.IsPowered.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsPowered, BuildingTypeClass.Bit.IsPowered, str.BuildingTypeClass.IsPowered
+
+%define BuildingTypeClass.IsJammable.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, reg_output
+%define BuildingTypeClass.IsJammable.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, value
+%define BuildingTypeClass.IsJammable.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, str.BuildingTypeClass.IsJammable
+
+%define BuildingTypeClass.IsRadar.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, reg_output
+%define BuildingTypeClass.IsRadar.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, value
+%define BuildingTypeClass.IsRadar.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, str.BuildingTypeClass.IsRadar
 
 ; read and translate to value, AircraftType=2, BuildingType=6, InfantryType=14, UnitType=29, VesselType=31
 %define BuildingTypeClass.FactoryType.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.FactoryType, reg_output
