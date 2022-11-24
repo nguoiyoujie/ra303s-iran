@@ -186,7 +186,7 @@ TechnoType settings are also available to AircraftTypes, BuildingTypes, Infantry
 
 **`{Rules/Map} ► [<TechnoType>] ► Armor (string)`**
 
-The number of supported types have been increased to 11, matching the armortypes used in Red Alert 2.
+The number of supported types have been increased to 9, matching the first nine armortypes used in Red Alert 2. For compatibility, the original armor types are not changed.
 
 
 
@@ -210,9 +210,7 @@ You are expected to modify the existing Warhead entries to make use of them
 
  > 8 = Steel
 
- > 9 = Special_1
-
- > 10 = Special_2
+Special_1 and Special_2 are not yet supported in this version, but may be in the future.
 
 
 
@@ -267,6 +265,14 @@ Determines the forward offset of the firing animation relative to the unit's lin
 **`{Rules/Map} ► [<TechnoType>] ► SecondaryLateral (integer)`**
 
 Determines the offset of the firing animation perpendicular to the unit's line of fire. Units with `Burst=2` will shoot their second bullet at the opposite offset. This is used for the secondary weapon.
+
+
+
+**`{Rules/Map} ► [<TechnoType>] ► DeathWeapon (string)`**
+
+Determines the damage and warhead that is released on this technotype's death. Setting this entry overrides the original behavior of using the technotype's Primary weapon and the technotype's MaxStrength. 
+
+Note that the spread of the damage is still determined by the damage value, though this is now tied to the weapon's damage.
 
 
 

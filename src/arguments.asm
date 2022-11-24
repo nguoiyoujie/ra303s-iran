@@ -33,51 +33,47 @@ arg_internet: db "-INTERNET",0
 arg_skirmish: db "-SKIRMISH",0
 arg_newmissions: db "-NEWMISSIONS",0
 arg_antmissions: db "-ANTMISSIONS",0
+arg_mission: db "-M:",0
 arg_record: db "-RECORD",0
 arg_playback: db "-PLAYBACK",0
 
 ; Syntax: ra95.exe -ONETIME <difficulty> <map>
 ; e.g. ra95.exe -ONETIME -EASY SCG01EA.ini
+arg_skiptitle: db "-NOTITLE",0 
 arg_onetime: db "-ONETIME",0 
 arg_easy: db "-EASY",0 
-arg_easyf: db "-FINE.EASY",0 
+arg_easyf: db "-EASY.FINE",0 
 arg_norm: db "-NORMAL",0 
-arg_hardf: db "-FINE.HARD",0 
+arg_hardf: db "-HARD.FINE",0 
 arg_hard: db "-HARD",0 
-
-; SCGxxEx.ini, SCUxxEx.ini, SCAxxEx.ini, CMUxxEx.ini
-arg_missioncheck1g: db "SCG",0 
-arg_missioncheck1u: db "SCU",0 
-arg_missioncheck1a: db "SCA",0 
-arg_missioncheck1c: db "CMU",0 
-arg_missioncheck2: db "INI",0
 
 antmissionsenabled db 0
 newmissionsenabled db 0
+skiptitle db 0
 onetimeenabled db 0
 closegamestate db 0 ; 0=do not close, 1=play scenario first, 0xFF=close
-onetimedifficulty db 0
+presetdifficulty db 0
 presetdifficultyenabled db 0
+presetscenarioenabled db 0
 presetscenarioname times 128 db 0
 
 
 _Select_Game_AntMissions_Check:
 
-    cmp  BYTE [onetimeenabled], 1
-    jne  .Check_AntMission
+    cmp  byte [presetscenarioenabled], 1
+    jnz  .Check_AntMission
 	
-    mov  BYTE [onetimeenabled], 0
-    mov  DWORD [ebp-30h], 2
-    ;xor  edi, edi
+    mov  byte [presetscenarioenabled], 0
+    mov  dword [ebp-30h], 2
     jmp  0x005025D4
 
 .Check_AntMission:
-    cmp  BYTE [antmissionsenabled], 1
-    jne  .Jump_Back
+    cmp  byte [antmissionsenabled], 1
+    jne  .Jump_Back	
 
-    mov  BYTE [antmissionsenabled], 0
-    mov  BYTE [AntsEnabled], 1
-    mov  DWORD [ebp-30h], 2
+    mov  byte [antmissionsenabled], 0
+    mov  byte [AntsEnabled], 1
+    mov  dword [ebp-30h], 2
     xor  edi, edi
 
 .Jump_Back:
@@ -86,200 +82,195 @@ _Select_Game_AntMissions_Check:
     jmp  0x005025D4
 
 _arguments:
+.mission:
+    push ecx
+    mov  edx, arg_mission
+    mov  eax,esi
+	mov  ecx,eax
+    call _stristr
+    cmp  eax,ecx ; check if match is found at the start of the string
+    pop  ecx
+    jne  .lan    
+	lea  eax,[eax + 3] ; -M:
+    mov  byte [presetscenarioenabled], 1
+    push eax
+    push presetscenarioname
+	call _strcpy
+    jmp  .Ret
+
 .lan:
-    MOV  EDX, arg_lan
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .skirmish
-    MOV  BYTE [0x0067F2B4], 3
-    JMP  .ret
+    mov  edx, arg_lan
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .skirmish
+    mov  byte [0x0067F2B4], 3
+    jmp  .Ret
 
 .skirmish:
-    MOV  EDX, arg_skirmish
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .antmissions
-    MOV  BYTE [0x0067F2B4], 5
-    JMP  .ret
+    mov  edx, arg_skirmish
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .antmissions
+    mov  byte [0x0067F2B4], 5
+    jmp  .Ret
 
 .antmissions:
-    MOV  EDX, arg_antmissions
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .onetime
-    MOV  BYTE [antmissionsenabled], 1
-    JMP  .ret
+    mov  edx, arg_antmissions
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .skiptitle
+    mov  byte [antmissionsenabled], 1
+    jmp  .Ret
+
+.skiptitle:
+    mov  edx, arg_skiptitle
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .onetime    
+    mov  byte [skiptitle], 1
+    jmp  .Ret
 	
 .onetime:
-    MOV  EDX, arg_onetime
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .deasy    
-;    MOV  BYTE [0x0067F2B4], 0
-    MOV  BYTE [onetimeenabled], 1
-    MOV  BYTE [closegamestate], 1
-    JMP  .ret
+    mov  edx, arg_onetime
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .deasy    
+    mov  byte [onetimeenabled], 1
+    mov  byte [closegamestate], 1
+    jmp  .Ret
 	
 .deasy:
-    MOV  EDX, arg_easy
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .deasyf
-    MOV  BYTE [onetimedifficulty], 0
-    MOV  BYTE [presetdifficultyenabled], 1
-    JMP  .ret
+    mov  edx, arg_easy
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .deasyf
+    mov  byte [presetdifficulty], 0
+    mov  byte [presetdifficultyenabled], 1
+    jmp  .Ret
 
 .deasyf:
-    MOV  EDX, arg_easyf
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .dnorm
-    MOV  BYTE [onetimedifficulty], 1
-    MOV  BYTE [presetdifficultyenabled], 1
-    JMP  .ret
+    mov  edx, arg_easyf
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .dnorm
+    mov  byte [presetdifficulty], 1
+    mov  byte [presetdifficultyenabled], 1
+    jmp  .Ret
 
 .dnorm:
-    MOV  EDX, arg_norm
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .dhardf
-    MOV  BYTE [onetimedifficulty], 2
-    MOV  BYTE [presetdifficultyenabled], 1
-    JMP  .ret
+    mov  edx, arg_norm
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .dhardf
+    mov  byte [presetdifficulty], 2
+    mov  byte [presetdifficultyenabled], 1
+    jmp  .Ret
 
 .dhardf:
-    MOV  EDX, arg_hardf
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .dhard
-    MOV  BYTE [onetimedifficulty], 3
-    MOV  BYTE [presetdifficultyenabled], 1
-    JMP  .ret
+    mov  edx, arg_hardf
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .dhard
+    mov  byte [presetdifficulty], 3
+    mov  byte [presetdifficultyenabled], 1
+    jmp  .Ret
 
 .dhard:
-    MOV  EDX, arg_hard
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .newmissions
-    MOV  BYTE [onetimedifficulty], 4
-    MOV  BYTE [presetdifficultyenabled], 1
-    JMP  .ret
+    mov  edx, arg_hard
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .newmissions
+    mov  byte [presetdifficulty], 4
+    mov  byte [presetdifficultyenabled], 1
+    jmp  .Ret
 
 .newmissions:
-    MOV  EDX, arg_newmissions
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .internet
-    MOV  BYTE [newmissionsenabled], 1
-    JMP  .ret
+    mov  edx, arg_newmissions
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .internet
+    mov  byte [newmissionsenabled], 1
+    jmp  .Ret
 
 .internet:
-    MOV  EDX, arg_internet
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .record
-    MOV  BYTE [0x0067F2B4], 4
+    mov  edx, arg_internet
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .record
+    mov  byte [0x0067F2B4], 4
 
 .record:
-    MOV  EDX, arg_record
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .playback
-    or   BYTE [recording_mode], 5
+    mov  edx, arg_record
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .playback
+    or   byte [recording_mode], 5
 
 .playback:
-    MOV  EDX, arg_playback
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .missioncheck
-    or   BYTE [recording_mode], 6
+    mov  edx, arg_playback
+    mov  eax,esi
+    call _stristr
+    test eax,eax
+    je   .Ret
+    or   byte [recording_mode], 6
 
-.missioncheck:
-    MOV  EDX, arg_missioncheck1g
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JNE  .missioncheck2
-    MOV  EDX, arg_missioncheck1u
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JNE  .missioncheck2
-    MOV  EDX, arg_missioncheck1a
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JNE  .missioncheck2
-    MOV  EDX, arg_missioncheck1c
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE  .ret
-.missioncheck2:
-    MOV  EDX, arg_missioncheck2
-    MOV  EAX,ESI
-    CALL _stristr
-    TEST EAX,EAX
-    JE   .ret
-    MOV  EAX,ESI
-    push EAX
-    push presetscenarioname
-    call _strcpy
-
-.ret:
-    mov  EDX, arg_attract
-    JMP  0x004F5B3D
+.Ret:
+    mov  edx, arg_attract
+    jmp  0x004F5B3D
 
 
 _Select_Game_SkipDifficulty:
-    xor  EAX, EAX
-    mov  AL, byte [presetdifficultyenabled]
-    test AL, AL
+    xor  eax, eax
+    mov  al, byte [presetdifficultyenabled]
+    test al, al
     jnz  .SkipDialog
-    xor  EAX, EAX
-    mov  AL, byte [EBP - 0x18]
+    mov  byte [presetdifficultyenabled], 0
+    xor  eax, eax
+    mov  al, byte [ebp - 0x18]
     call 0x00551728
     jmp  .Ret
 .SkipDialog:
-    mov  AL, byte [onetimedifficulty]
+    mov  al, byte [presetdifficulty]
 .Ret:
     jmp  0x004F4976
 
 _Select_Game_SkipDifficulty2:
-    xor  EAX, EAX
-    mov  AL, byte [presetdifficultyenabled]
-    test AL, AL
+    xor  eax, eax
+    mov  al, byte [presetdifficultyenabled]
+    test al, al
+    mov  byte [presetdifficultyenabled], 0
     jnz  .SkipDialog
-    xor  EAX, EAX
+    xor  eax, eax
     call 0x00551728
     jmp  .Ret
 .SkipDialog:
-    mov  AL, byte [onetimedifficulty]
+    mov  al, byte [presetdifficulty]
 .Ret:
     jmp  0x004F4A2A
 
 
 _Select_Game_SetScenarioName:
-    mov  AL, byte [presetscenarioname]
-    test AL, AL
+    mov  al, byte [presetscenarioname]
+    test al, al
     jz   .Ret
 .SetName:
-    mov  EDX, presetscenarioname
-    mov  EAX, 0x006678E8
+    mov  edx, presetscenarioname
+    mov  eax, 0x006678E8
     call 0x0053CFB0    ; ScenarioClass::Set_Scenario_Name
+    mov  byte [presetscenarioname], 0 ;invalidate the preset scenario name
 	jmp  0x004F4ADC
 .Ret:
     cmp  dword [AntsEnabled],0x0
@@ -287,7 +278,7 @@ _Select_Game_SetScenarioName:
 
 
 _Init_Game_SkipIntro:
-    cmp  byte [onetimeenabled], 1
+    cmp  byte [skiptitle], 1
     jz   0x004F4377
     test byte [0x00669908], 0x4 
     jmp  0x004F42A6
@@ -304,7 +295,7 @@ _Main_Game_AutoExit:
     mov  byte [closegamestate], 0xff
 .SelectGame:
     mov  eax, [0x005FEDBC] 
-    call 0x004f44dc ; Select_Game
+    call 0X004F44DC ; Select_Game
 .Ret:
     jmp  0x004A5389
 
