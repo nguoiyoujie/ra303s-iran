@@ -2,6 +2,11 @@
 @HOOK 0x004D6542 _HouseClass__Remap_Table_Use_RemapType_Arg
 @HOOK 0x004D6538 _HouseClass__Remap_Table_Use_RemapType_Arg2
 @HOOK 0x005671D1 _Patch_Unit_Drawing
+@HOOK 0x00568596 _TechnoClass_Risk_UsePoints
+@HOOK 0x00567632 _TechnoClass_Value_UsePointsInsteadOfReward
+@HOOK 0x0046078A _BuildingClass_Value_UsePointsInsteadOfRiskOrReward
+
+temp.fakes.fakeof db 2,11,27,28,6
 
 _Patch_Unit_Drawing:
     mov  eax, [0x00669958]
@@ -66,3 +71,31 @@ _HouseClass__Remap_Table_Use_RemapType_Arg:
 
 _HouseClass__Remap_Table_Use_RemapType_Arg2:
     jmp  0x004D6542
+
+; use Points instead of Risk
+_TechnoClass_Risk_UsePoints:
+    mov  eax, dword [eax + TechnoTypeClass.Offset.Points]
+    jmp  0x0056859C
+
+; use Points instead of Reward
+_TechnoClass_Value_UsePointsInsteadOfReward:
+    mov  eax, dword [eax + TechnoTypeClass.Offset.Points]
+    jmp  0x00567638
+
+; use Points instead of Risk/Reward
+_BuildingClass_Value_UsePointsInsteadOfRiskOrReward:
+; Fake structures are from 0x20 to 0x24
+    cmp  dl, 0x20
+    jl   0x00460880
+    cmp  dl, 0x24
+    jg   0x00460880
+; Fake structure code
+    sub  dl, 0x20
+	xor  eax, eax
+	mov  al, dl
+	add  eax, temp.fakes.fakeof
+	mov  eax, [eax]
+    call 0x00453A6C
+    mov  eax, dword [eax + TechnoTypeClass.Offset.Points]
+    jmp  0x00460885
+
