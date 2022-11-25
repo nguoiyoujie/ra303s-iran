@@ -17,6 +17,10 @@
 %define WarheadTypeClass.Bit.IsOrganic                    4    
 ; 0x00d, 0x00e and 0x00f are empty
 
+;%define WarheadTypeClass.Offset.ExplosionAnim             0x00D    ; new, animation override, byte
+%define WarheadTypeClass.Offset.ExplosionSet              0x00E    ; moved, and use BYTE // was INT, 0x01A // Already supported by game INI
+%define WarheadTypeClass.Offset.InfantryDeath             0x00F    ; moved, and use BYTE // was INT, 0x01E // Already supported by game INI
+
 %define WarheadTypeClass.Offset.Modifier                  0x010    ; fixed[5] // fixed is WORD, in units of 1/256
 %define WarheadTypeClass.Offset.Modifier0                 0x010    ; WORD
 %define WarheadTypeClass.Offset.Modifier1                 0x012    ; WORD
@@ -31,9 +35,6 @@
 ;%define WarheadTypeClass.Offset.Modifier10                0x024    ; WORD
 ; 000 - 021
 
-%define WarheadTypeClass.Offset.ExplosionSet              0x00E    ; moved, and use BYTE // was INT, 0x01A // Already supported by game INI
-%define WarheadTypeClass.Offset.InfantryDeath             0x00F    ; moved, and use BYTE // was INT, 0x01E // Already supported by game INI
-
 
 ; INI String controls
 str.WarheadTypeClass.SpreadFactor              db"Spread",0                 ;existing ini
@@ -42,6 +43,7 @@ str.WarheadTypeClass.IsWoodDestroyer           db"Wood",0                   ;exi
 str.WarheadTypeClass.IsTiberiumDestroyer       db"Ore",0                    ;existing ini
 str.WarheadTypeClass.IsOrganic                 db"Organic",0                ;existing ini (not actually read by INI key, but derived from Verses)
 str.WarheadTypeClass.Modifier                  db"Verses",0                 ;existing ini
+;str.WarheadTypeClass.ExplosionAnim             db"Anim",0                   ;new ini
 str.WarheadTypeClass.ExplosionSet              db"Explosion",0              ;existing ini
 str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;existing ini
 
@@ -66,6 +68,10 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 %define WarheadTypeClass.IsOrganic.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, reg_output
 %define WarheadTypeClass.IsOrganic.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, value
 %define WarheadTypeClass.IsOrganic.Read(ptr_type,ptr_rules)                   WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, str.WarheadTypeClass.IsOrganic
+
+;%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               ObjectTypeClass.GetByte                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
+;%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    ObjectTypeClass.SetByte                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
+;%define WarheadTypeClass.ExplosionAnim.Read(ptr_type,ptr_rules,function)       WarheadTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, WarheadTypeClass.Offset.ExplosionAnim, str.WarheadTypeClass.ExplosionAnim, function
 
 %define WarheadTypeClass.ExplosionSet.Get(ptr_type,reg_output)                ObjectTypeClass.GetByte                ptr_type, WarheadTypeClass.Offset.ExplosionSet, reg_output
 %define WarheadTypeClass.ExplosionSet.Set(ptr_type,value)                     ObjectTypeClass.SetByte                ptr_type, WarheadTypeClass.Offset.ExplosionSet, value

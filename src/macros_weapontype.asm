@@ -17,7 +17,7 @@
 ; 0x009, 0x00a and 0x00b are empty
 %define WeaponTypeClass.Offset.Burst                     0x00c    ; INT (0,1)
 %define WeaponTypeClass.Offset.Bullet                    0x010    ; INT PTR
-%define WeaponTypeClass.Offset.Attack                    0x014    ; INT
+%define WeaponTypeClass.Offset.Damage                    0x014    ; INT
 %define WeaponTypeClass.Offset.MaxSpeed                  0x018    ; BYTE
 %define WeaponTypeClass.Offset.WarheadPtr                0x019    ; INT PTR
 %define WeaponTypeClass.Offset.ROF                       0x01d    ; INT
@@ -32,7 +32,7 @@ str.WeaponTypeClass.IsCamera                  db"Camera",0              ;existin
 str.WeaponTypeClass.IsSupressed               db"Supress",0             ;existing ini
 str.WeaponTypeClass.Burst                     db"Burst",0               ;existing ini
 str.WeaponTypeClass.Bullet                    db"Projectile",0          ;existing ini
-str.WeaponTypeClass.Attack                    db"Damage",0              ;existing ini
+str.WeaponTypeClass.Damage                    db"Damage",0              ;existing ini
 str.WeaponTypeClass.MaxSpeed                  db"Speed",0               ;existing ini
 str.WeaponTypeClass.WarheadPtr                db"Warhead",0             ;existing ini
 str.WeaponTypeClass.ROF                       db"ROF",0                 ;existing ini
@@ -42,7 +42,51 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
 
 
 %define WeaponTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
-%define WeaponTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
+%define WeaponTypeClass.FromID(d_index,reg_output)                           WeaponTypeClass.FromIDInner            d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
+
+; WeaponType class is NOT derived from ObjectTypeClass!
+; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
+; %2 must not be ESI or EDX
+; return <output>: the type class pointer, or 0 / NULL if invalid
+%macro WeaponTypeClass.FromIDInner    4
+    push esi
+    push edi
+    push eax
+    push edx
+
+    mov  edx, 0
+    mov  eax, %1
+
+  %%loop:
+    push edx
+    TechnoTypeClass.FromIndex  edx, %2, %3, edi
+    push eax
+	mov  edx, [edi+WeaponTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WeaponTypeClass is a pointer instead of a buffer
+    call _strcmpi
+    test eax, eax
+    pop  eax
+    pop  edx
+    jnz  %%next
+
+    mov  %4, edi
+    jmp  %%done
+
+  %%next:
+    inc  edx
+    cmp  edx, [%2] 
+    jge  %%done_no_match
+    jmp  %%loop
+
+  %%done_no_match:
+    mov  %4, 0
+
+  %%done:
+    pop  edx
+    pop  eax
+    pop  edi
+    pop  esi
+%endmacro
+
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -70,9 +114,9 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
 %define WeaponTypeClass.Bullet.Set(ptr_type,value)                           ObjectTypeClass.SetInt                 ptr_type, WeaponTypeClass.Offset.Bullet, value
 %define WeaponTypeClass.Bullet.Read(ptr_type,ptr_rules)                      WeaponTypeClass.ReadInt                ptr_type, ptr_rules, WeaponTypeClass.Offset.Bullet, str.WeaponTypeClass.Bullet
 
-%define WeaponTypeClass.Attack.Get(ptr_type,reg_output)                      ObjectTypeClass.GetInt                 ptr_type, WeaponTypeClass.Offset.Attack, reg_output
-%define WeaponTypeClass.Attack.Set(ptr_type,value)                           ObjectTypeClass.SetInt                 ptr_type, WeaponTypeClass.Offset.Attack, value
-%define WeaponTypeClass.Attack.Read(ptr_type,ptr_rules)                      WeaponTypeClass.ReadInt                ptr_type, ptr_rules, WeaponTypeClass.Offset.Attack, str.WeaponTypeClass.Attack
+%define WeaponTypeClass.Damage.Get(ptr_type,reg_output)                      ObjectTypeClass.GetInt                 ptr_type, WeaponTypeClass.Offset.Damage, reg_output
+%define WeaponTypeClass.Damage.Set(ptr_type,value)                           ObjectTypeClass.SetInt                 ptr_type, WeaponTypeClass.Offset.Damage, value
+%define WeaponTypeClass.Damage.Read(ptr_type,ptr_rules)                      WeaponTypeClass.ReadInt                ptr_type, ptr_rules, WeaponTypeClass.Offset.Damage, str.WeaponTypeClass.Damage
 
 %define WeaponTypeClass.MaxSpeed.Get(ptr_type,reg_output)                    ObjectTypeClass.GetByte                ptr_type, WeaponTypeClass.Offset.MaxSpeed, reg_output
 %define WeaponTypeClass.MaxSpeed.Set(ptr_type,value)                         ObjectTypeClass.SetByte                ptr_type, WeaponTypeClass.Offset.MaxSpeed, value

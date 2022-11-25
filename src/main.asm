@@ -178,6 +178,10 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/aircraft_isdropping_act_like_parabombs.asm" ; added by lovalmidas
 %include "src/building_unlimbo_owners.asm" ; added by lovalmidas
 %include "src/battlecontrolterminated_delayblackscreen.asm" ; added by lovalmidas
+%include "src/explosion_no_anim_crash_fix.asm" ; added by lovalmidas
+%include "src/building_jammable_override.asm" ; added by lovalmidas
+%include "src/building_power_fix.asm" ; added by lovalmidas
+%include "src/unit_turret_draw.asm" ; added by lovalmidas
 
 ;%include "src/refinery_experiment.asm" ; added by lovalmidas
 
