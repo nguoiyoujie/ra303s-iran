@@ -40,7 +40,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/version.asm"
 
 ; definitions
-%include "src/defines.asm"
+%include "src/defines_rttitypes.asm"
 %include "src/defines_armortypes.asm"
 
 ; macros

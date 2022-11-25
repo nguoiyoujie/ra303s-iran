@@ -1,4 +1,7 @@
 
+arg_comma  db ",",0
+
+
 ; RTTITypes
 %define RTTIType.None                        0
 %define RTTIType.Aircraft                    1
