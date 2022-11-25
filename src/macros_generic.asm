@@ -213,10 +213,22 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, [%1+%3]
+    mov  WORD [ObjectTypeClass.ValueBuffer], cx
+    xor  ecx, ecx
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    mov  BYTE al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al, al
+    jz   %%null_string
+  %%valid_string:
     mov  eax, ObjectTypeClass.StringBuffer
     call %5
     mov  WORD [%1+%3], ax
+    jmp  %%done
+  %%null_string:
+    mov  WORD ax, [ObjectTypeClass.ValueBuffer]
+    mov  WORD [%1+%3], ax
+  %%done:
+    mov  DWORD [ObjectTypeClass.ValueBuffer], 0
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
@@ -228,8 +240,20 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, [%1+%3]
+    mov  DWORD [ObjectTypeClass.ValueBuffer], ecx
+    xor  ecx, ecx
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    mov  BYTE al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al, al
+    jz   %%null_string
+  %%valid_string:
     mov  eax, ObjectTypeClass.StringBuffer
     call %5
-    mov  [%1+%3], eax
+    mov  DWORD [%1+%3], eax
+    jmp  %%done
+  %%null_string:
+    mov  DWORD eax, [ObjectTypeClass.ValueBuffer]
+    mov  DWORD [%1+%3], eax
+  %%done:
+    mov  DWORD [ObjectTypeClass.ValueBuffer], 0
 %endmacro
