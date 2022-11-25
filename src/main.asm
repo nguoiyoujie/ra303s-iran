@@ -42,6 +42,8 @@ _str_version: db "3.03p-iB1v1",0
 ; definitions
 %include "src/defines_rttitypes.asm"
 %include "src/defines_armortypes.asm"
+%include "src/defines_prereqtypes.asm"
+%include "src/defines_specialtypes.asm"
 
 ; macros
 %include "src/macros.asm"
@@ -107,6 +109,9 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/ai_vessels.asm" ;probably desyncs online with 3.03
 %include "src/ai_units.asm" 
 %include "src/ai_infantry.asm" 
+
+; new prerequisite system
+%include "src/new_prerequisite_system.asm" 
 
 ; generic
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING

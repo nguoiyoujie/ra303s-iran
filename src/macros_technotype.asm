@@ -28,7 +28,9 @@
 %define TechnoTypeClass.Bit.IsSelfHealing             4    
 %define TechnoTypeClass.Offset.IsExploding            0x13A    ; BOOL // Already supported by game INI
 %define TechnoTypeClass.Bit.IsExploding               5    
+
 ; (to check) 0x13B and 0x13C are empty... 
+%define TechnoTypeClass.Offset.PrereqType             0x13B    ; BYTE, new variable, occupying unused location
 
 ;Risk/0x154, Reward/0x158 and Points/0x18E are assigned the same values. Collapse them to the same variable to free up 2 INTs worth of memory
 %define TechnoTypeClass.Offset.MZone                  0x13D    ; BYTE
@@ -76,6 +78,8 @@ str.TechnoTypeClass.IsRemappable              db"IsRemappable",0                
 str.TechnoTypeClass.IsCloakable               db"Cloakable",0                   ;existing feature
 str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 ;existing feature
 str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
+
+str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0                  ;new feature
 
 str.TechnoTypeClass.MZone                     db"MovementZone",0                ;internal feature
 str.TechnoTypeClass.ThreatRange               db"GuardRange",0                  ;existing feature
@@ -221,6 +225,13 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.IsExploding.Set(ptr_type,value)                      ObjectTypeClass.SetBool                ptr_type, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, value
 %define TechnoTypeClass.IsExploding.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadBool               ptr_type, ptr_rules, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, str.TechnoTypeClass.IsExploding
 
+%define TechnoTypeClass.PrereqType.Get(ptr_type,reg_output)                  ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.PrereqType, reg_output
+%define TechnoTypeClass.PrereqType.Set(ptr_type,value)                       ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.PrereqType, value
+%define TechnoTypeClass.PrereqType.Read(ptr_type,ptr_rules,function)         ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, TechnoTypeClass.Offset.PrereqType, str.TechnoTypeClass.PrereqType, function
+
+%define TechnoTypeClass.Prerequisite.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                ptr_type, TechnoTypeClass.Offset.Prerequisite, reg_output
+%define TechnoTypeClass.Prerequisite.Set(ptr_type,value)                     ObjectTypeClass.SetInt                ptr_type, TechnoTypeClass.Offset.Prerequisite, value
+%define TechnoTypeClass.Prerequisite.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.Prerequisite, str.TechnoTypeClass.Prerequisite, function
 
 %define TechnoTypeClass.DeathWeapon.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, reg_output
 %define TechnoTypeClass.DeathWeapon.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, value

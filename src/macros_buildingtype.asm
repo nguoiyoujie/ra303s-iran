@@ -21,14 +21,15 @@
 %define BuildingTypeClass.Offset.IsPowered                 0x192    ; BOOL // Already supported by game INI
 %define BuildingTypeClass.Bit.IsPowered                    8    
 %define BuildingTypeClass.Offset.IsUnsellable              0x193    ; BOOL // Already supported by game INI
-%define BuildingTypeClass.Bit.IsUnsellable                 1    
-; 0x194 and 0x195 are empty... 
+%define BuildingTypeClass.Bit.IsUnsellable                 1
 
 ;added
 %define BuildingTypeClass.Offset.IsJammable                0x193    ; BOOL // 
 %define BuildingTypeClass.Bit.IsJammable                   2
 %define BuildingTypeClass.Offset.IsRadar                   0x193    ; BOOL // 
 %define BuildingTypeClass.Bit.IsRadar                      3
+%define BuildingTypeClass.Offset.SpecialWeapons            0x194    ; WORD, SpecialType flags, up to 16 values
+
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; BYTE, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
 %define BuildingTypeClass.Offset.FactoryType               0x19B    ; BYTE, AIRCRAFT_TYPE=2, BUILDING_TYPE=6, INFANTRY_TYPE=14, UNIT_TYPE=29, VESSEL_TYPE=31
@@ -78,6 +79,7 @@ str.BuildingTypeClass.IsJammable                db"IsJammable",0                
 str.BuildingTypeClass.IsRadar                   db"IsRadar",0                     ;new feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
+str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0                ;new ini feature
 str.BuildingTypeClass.FactoryType               db"FactoryType",0                 ;new ini feature
 str.BuildingTypeClass.ExitCoordX                db"ExitCoordX",0                  ;new ini feature
 str.BuildingTypeClass.ExitCoordY                db"ExitCoordY",0                  ;new ini feature
@@ -154,6 +156,11 @@ str.BuildingTypeClass.BuildupData               db"BuildupData",0               
 %define BuildingTypeClass.IsRadar.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, reg_output
 %define BuildingTypeClass.IsRadar.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, value
 %define BuildingTypeClass.IsRadar.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, str.BuildingTypeClass.IsRadar
+
+%define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              ObjectTypeClass.GetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
+%define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   ObjectTypeClass.SetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
+%define BuildingTypeClass.SpecialWeapons.Read(ptr_type,ptr_rules,function)     ObjectTypeClass.ReadStringToWordExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.SpecialWeapons, str.BuildingTypeClass.SpecialWeapons, function
+
 
 ; read and translate to value, AircraftType=2, BuildingType=6, InfantryType=14, UnitType=29, VesselType=31
 %define BuildingTypeClass.FactoryType.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.FactoryType, reg_output

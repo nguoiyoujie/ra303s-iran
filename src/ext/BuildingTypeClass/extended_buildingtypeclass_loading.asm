@@ -1,6 +1,7 @@
 ;Read INI settings
 @HOOK 0x00453FFB _BuildingTypeClass__Read_INI_Extended
 
+
 ; OccupyList, OverlapList
 d_Occupy_1                    dw 0,0x7FFF                                                 ;00, GUN,SILO
 d_Occupy_0_1                  dw 0x80,0x7FFF                                              ;01, GAP,TESLA
@@ -67,8 +68,9 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.Anim_Aux2_Rate.Read(esi,edi)
     BuildingTypeClass.OccupyList.Read(esi,edi,_SelectOccupyList)
     BuildingTypeClass.OverlapList.Read(esi,edi,_SelectOccupyList)
+    BuildingTypeClass.SpecialWeapons.Read(esi,edi,_GetSpecialsFromString)
 
-    pop eax
+    pop  eax
     pop  edi
     pop  esi
 
@@ -91,39 +93,39 @@ _SelectFactoryType:
     jle  .Retn ; just return 0
     mov  ebx,eax
 
-.CheckAircraftType:
+.Check.AircraftType:
     mov  edx,str.RTTIType.AircraftType
     call _strcmpi
     test eax, eax
-    jnz  .CheckBuildingType
+    jnz  .Check.BuildingType
     mov  al, RTTIType.AircraftType
     jmp  .Retn
 
-.CheckBuildingType:
+.Check.BuildingType:
     mov  edx, str.RTTIType.BuildingType
     mov  eax, ebx
     call _strcmpi
-    jnz  .CheckInfantryType
+    jnz  .Check.InfantryType
     mov  al, RTTIType.BuildingType
     jmp  .Retn
 
-.CheckInfantryType:
+.Check.InfantryType:
     mov  edx, str.RTTIType.InfantryType
     mov  eax, ebx
     call _strcmpi
-    jnz  .CheckUnitType
+    jnz  .Check.UnitType
     mov  al, RTTIType.InfantryType
     jmp  .Retn
 
-.CheckUnitType:
+.Check.UnitType:
     mov  edx, str.RTTIType.UnitType
     mov  eax, ebx
     call _strcmpi
-    jnz  .CheckVesselType
+    jnz  .Check.VesselType
     mov  al, RTTIType.UnitType
     jmp  .Retn
 
-.CheckVesselType:
+.Check.VesselType:
     mov  edx, str.RTTIType.VesselType
     mov  eax, ebx
     call _strcmpi
@@ -351,3 +353,135 @@ _SelectOccupyList:
 .Retn:
     retn
 
+
+_GetSpecialsFromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+ 	xor  edi,edi
+    cmp  eax, 0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,arg_comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax], 0
+	lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+	call _SelectSpecialTypeFromString
+    test eax,eax
+    je   .Retn
+    mov  cl,al
+ 	xor  eax,eax
+	mov  eax, 1   
+	shl  eax,cl
+    or   edi,eax
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+	call _SelectSpecialTypeFromString
+    test eax,eax
+    je   .Retn
+    mov  cl,al
+ 	xor  eax,eax
+	mov  eax, 1   
+	shl  eax,cl
+    or   edi,eax
+	
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+	
+
+_SelectSpecialTypeFromString:
+    ;select SpecialType by performing string compare on eax
+    push edx
+    push ebx ; hold eax value for multiple checks
+    cmp  eax, 0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Check.SONAR_PULSE:
+    mov  edx,str.SpecialType.SONAR_PULSE
+    call _strcmpi
+    test eax, eax
+    jnz  .Check.NUCLEAR_BOMB
+    mov  al, SpecialType.SONAR_PULSE
+    jmp  .Retn
+
+.Check.NUCLEAR_BOMB:
+    mov  edx, str.SpecialType.NUCLEAR_BOMB
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.CHRONOSPHERE
+    mov  al, SpecialType.NUCLEAR_BOMB
+    jmp  .Retn
+
+.Check.CHRONOSPHERE:
+    mov  edx, str.SpecialType.CHRONOSPHERE
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.PARA_BOMB
+    mov  al, SpecialType.CHRONOSPHERE
+    jmp  .Retn
+
+.Check.PARA_BOMB:
+    mov  edx, str.SpecialType.PARA_BOMB
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.PARA_INFANTRY
+    mov  al, SpecialType.PARA_BOMB
+    jmp  .Retn
+
+.Check.PARA_INFANTRY:
+    mov  edx, str.SpecialType.PARA_INFANTRY
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.SPY_MISSION
+    mov  al, SpecialType.PARA_INFANTRY
+    jmp  .Retn
+
+.Check.SPY_MISSION:
+    mov  edx, str.SpecialType.SPY_MISSION
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.IRON_CURTAIN
+    mov  al, SpecialType.SPY_MISSION
+    jmp  .Retn
+
+.Check.IRON_CURTAIN:
+    mov  edx, str.SpecialType.IRON_CURTAIN
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .Check.GPS
+    mov  al, SpecialType.IRON_CURTAIN
+    jmp  .Retn
+
+.Check.GPS:
+    mov  edx, str.SpecialType.GPS
+    mov  eax, ebx
+    call _strcmpi
+    jnz  .DefaultNull
+    mov  al, SpecialType.GPS
+    jmp  .Retn
+
+.DefaultNull:
+    xor  eax,eax
+
+.Retn:
+    pop ebx
+    pop edx
+    retn
