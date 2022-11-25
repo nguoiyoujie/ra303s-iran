@@ -1,8 +1,11 @@
+; Using [SoundEffects] has an effect of changing the in-game music while one of the new sounds is played. Suspect to be a cause of crash as well.
+; Should investigate
+
 @HOOK 0x00425CB9 _Voc_From_Name_Add_Unhardcoded_Sound_Effects
 @HOOK 0x00425D0E _Voc_Name_Add_Unhardcoded_Sound_Effects
 @HOOK 0x004260AB _Sound_Effect_Call_Voc_Name
 
-SoundEffectsList    TIMES 1024 dd    0 ; Pointer to C-strings
+SoundEffectsList    TIMES 2304 dd    0 ; 9 * 256
 SoundEffectsCount    dd    0
 
 str_SoundEffects db"SoundEffects",0
@@ -61,7 +64,7 @@ _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
     cmp  dx, cx
     je   .Ret_False
 
-    lea  edx, [SoundEffectsList+ecx*4]
+    lea  edx, [SoundEffectsList+ecx*9]
     mov  edx, [edx]
     mov  eax, ebx
     call _strcmpi
@@ -83,8 +86,12 @@ Init_SoundEffect:
     mov  eax, edx
     call 0x005C3900 ; strdup()
 
-    lea  ebx, [ebx*4]
-    mov  [SoundEffectsList+ebx], eax
+    ; follow SoundEffectNameStruct 9-byte structure, using a 4-byte structure could be a cause of the audio-bug and crash
+    lea  ebx, [ebx*9]
+    lea  ebx, [SoundEffectsList + ebx]
+    mov  [ebx], eax  ; name
+	mov  dword [ebx+4], 10 ; priority, fixed to 10 as are most sounds
+	mov  byte [ebx+9], 0 ; ContextType, fixed to IN_NOVAR (0) 
 .Ret:
     retn
 
