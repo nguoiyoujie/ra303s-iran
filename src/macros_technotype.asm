@@ -30,6 +30,7 @@
 %define TechnoTypeClass.Bit.IsExploding               5    
 ; (to check) 0x13B and 0x13C are empty... 
 
+;Risk/0x154, Reward/0x158 and Points/0x18E are assigned the same values. Collapse them to the same variable to free up 2 INTs worth of memory
 %define TechnoTypeClass.Offset.MZone                  0x13D    ; BYTE
 %define TechnoTypeClass.Offset.ThreatRange            0x13E    ; WORD?
 %define TechnoTypeClass.Offset.MaxPassengers          0x140    ; INT
@@ -37,8 +38,12 @@
 %define TechnoTypeClass.Offset.Cost                   0x148    ; INT
 %define TechnoTypeClass.Offset.Level                  0x14C    ; WORD
 %define TechnoTypeClass.Offset.Prerequisite           0x150    ; INT
-%define TechnoTypeClass.Offset.Risk                   0x154    ; INT
-%define TechnoTypeClass.Offset.Reward                 0x158    ; INT 
+
+; Replace Risk, Reward with other data
+;%define TechnoTypeClass.Offset.Risk                   0x154    ; INT 
+;%define TechnoTypeClass.Offset.Reward                 0x158    ; INT
+%define TechnoTypeClass.Offset.DeathWeapon            0x154    ; INT 
+ 
 %define TechnoTypeClass.Offset.MaxSpeed               0x15C    ; BYTE
 %define TechnoTypeClass.Offset.Speed                  0x15D    ; BYTE
 %define TechnoTypeClass.Offset.MaxAmmo                0x15E    ; INT
@@ -97,14 +102,11 @@ str.TechnoTypeClass.SecondaryOffset           db"SecondaryOffset",0             
 str.TechnoTypeClass.SecondaryLateral          db"SecondaryLateral",0            ;new ini feature
 str.TechnoTypeClass.Points                    db"Points",0                      ;existing feature
 
-%define TechnoTypeClass.HasTurret.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, TechnoTypeClass.Offset.HasTurret, TechnoTypeClass.Bit.HasTurret, reg_output
-%define TechnoTypeClass.HasTurret.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, TechnoTypeClass.Offset.HasTurret, TechnoTypeClass.Bit.HasTurret, value
-%define TechnoTypeClass.HasTurret.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, TechnoTypeClass.Offset.HasTurret, TechnoTypeClass.Bit.HasTurret, str.TechnoTypeClass.HasTurret
-
+str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                     ;existing feature
 
 
 ; args <Numerical index of type class>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %2 must not be ESI
+; %4 must not be ESI
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro TechnoTypeClass.FromIndex    4
     push esi
@@ -125,10 +127,11 @@ str.TechnoTypeClass.Points                    db"Points",0                      
 %endmacro
 
 ; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %2 must not be ESI or EDX
+; %4 must not be ESI, EDI or EDX
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro TechnoTypeClass.FromID    4
     push esi
+    push edi
     push eax
     push edx
 
@@ -136,15 +139,17 @@ str.TechnoTypeClass.Points                    db"Points",0                      
     mov  eax, %1
 
   %%loop:
-    TechnoTypeClass.FromIndex  edx,%2,%3,esi
+    TechnoTypeClass.FromIndex  edx,%2,%3,edi
+    push eax
     push edx
-    ObjectTypeClass.ID  esi,edx
+    ObjectTypeClass.ID  edi,edx
     call _strcmpi
     pop  edx
     test eax, eax
-    jnz  .%%next
+    pop  eax
+    jnz  %%next
 
-    mov  %4, esi
+    mov  %4, edi
     jmp  %%done
 
   %%next:
@@ -159,6 +164,7 @@ str.TechnoTypeClass.Points                    db"Points",0                      
   %%done:
     pop  edx
     pop  eax
+    pop  edi
     pop  esi
 %endmacro
 
@@ -216,6 +222,10 @@ str.TechnoTypeClass.Points                    db"Points",0                      
 %define TechnoTypeClass.IsExploding.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadBool               ptr_type, ptr_rules, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, str.TechnoTypeClass.IsExploding
 
 
+%define TechnoTypeClass.DeathWeapon.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, reg_output
+%define TechnoTypeClass.DeathWeapon.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, value
+;%define TechnoTypeClass.DeathWeapon.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.DeathWeapon, str.TechnoTypeClass.DeathWeapon
+%define TechnoTypeClass.DeathWeapon.Read(ptr_type,ptr_rules,function)        ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.DeathWeapon, str.TechnoTypeClass.DeathWeapon, function
 
 %define TechnoTypeClass.Facings.Get(ptr_type,reg_output)                     ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.Facings, reg_output
 %define TechnoTypeClass.Facings.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.Facings, value
@@ -223,11 +233,13 @@ str.TechnoTypeClass.Points                    db"Points",0                      
 
 %define TechnoTypeClass.PrimaryWeapon.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.PrimaryWeapon, reg_output
 %define TechnoTypeClass.PrimaryWeapon.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.PrimaryWeapon, value
-%define TechnoTypeClass.PrimaryWeapon.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.PrimaryWeapon, str.TechnoTypeClass.PrimaryWeapon
+;%define TechnoTypeClass.PrimaryWeapon.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.PrimaryWeapon, str.TechnoTypeClass.PrimaryWeapon
+%define TechnoTypeClass.PrimaryWeapon.Read(ptr_type,ptr_rules,function)      ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.PrimaryWeapon, str.TechnoTypeClass.PrimaryWeapon, function
 
 %define TechnoTypeClass.SecondaryWeapon.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.SecondaryWeapon, reg_output
 %define TechnoTypeClass.SecondaryWeapon.Set(ptr_type,value)                  ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.SecondaryWeapon, value
-%define TechnoTypeClass.SecondaryWeapon.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.SecondaryWeapon, str.TechnoTypeClass.SecondaryWeapon
+;%define TechnoTypeClass.SecondaryWeapon.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.SecondaryWeapon, str.TechnoTypeClass.SecondaryWeapon
+%define TechnoTypeClass.SecondaryWeapon.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.SecondaryWeapon, str.TechnoTypeClass.SecondaryWeapon, function
 
 
 %define TechnoTypeClass.VerticalOffset.Get(ptr_type,reg_output)              ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.VerticalOffset, reg_output

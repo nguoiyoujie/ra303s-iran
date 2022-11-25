@@ -8,6 +8,14 @@ _TechnoTypeClass__Read_INI_Extended:
     push edi
     mov edi, RulesINI
 
+    ; Clear the fields of Risk and Reward, as they are replaced with other functions
+    push eax
+    xor  eax, eax
+    TechnoTypeClass.DeathWeapon.Set(esi,eax)
+    xor  eax, eax
+    TechnoTypeClass.Prerequisite.Set(esi,eax)
+    pop eax
+
     ;TechnoTypeClass.IsScanner.Read(esi,edi) ;already existing
     TechnoTypeClass.IsNominal.Read(esi,edi)
     TechnoTypeClass.IsTheater.Read(esi,edi)
@@ -18,6 +26,7 @@ _TechnoTypeClass__Read_INI_Extended:
     TechnoTypeClass.PrimaryLateral.Read(esi,edi)
     TechnoTypeClass.SecondaryOffset.Read(esi,edi)
     TechnoTypeClass.SecondaryLateral.Read(esi,edi)
+	TechnoTypeClass.DeathWeapon.Read(esi,edi,_GetWeaponTypeFromString)
 
     pop  edi
     pop  esi
