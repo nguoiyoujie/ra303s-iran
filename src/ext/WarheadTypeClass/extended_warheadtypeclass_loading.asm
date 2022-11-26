@@ -56,7 +56,7 @@ _ArmorType_NameFrom_Expand_Array:
     jmp  0x005900E9
 
 _ArmorType_NameFrom_Expand_Array2:
-    mov  DWORD eax,[EAX*0x4 + strlist.ArmorTypes]
+    mov  dword eax,[eax*0x4 + strlist.ArmorTypes]
     jmp  0x005900DB
 
 
