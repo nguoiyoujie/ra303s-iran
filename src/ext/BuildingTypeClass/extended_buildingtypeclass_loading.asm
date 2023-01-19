@@ -19,7 +19,7 @@ d_Occupy_00_11                dw 0x80,0x81,0x7FFF                               
 d_Occupy_01_01                dw 1,0x81,0x7FFF                                            ;07, 
 d_Occupy_01_11                dw 1,0x80,0x81,0x7FFF                                       ;08, 
 d_Occupy_10_11                dw 0,0x80,0x81,0x7FFF                                       ;09, C&C NUKE
-d_Occupy_11_01                dw 0,1,0x81,0x7FFF                                          ;10, C&C HAND
+d_Occupy_11_01                dw 0x80,0x81,0x101,0x7FFF                                   ;10, C&C HAND
 d_Occupy_11_11                dw 0,1,0x80,0x81,0x7FFF                                     ;11, POWR
 d_Occupy_111_111              dw 0,1,2,0x80,0x81,0x82,0x7FFF                              ;12, AFLD
 d_Occupy_1111_1111            dw 0,1,2,3,0x80,0x81,0x82,0x83,0x7FFF                       ;13, C&C AFLD
@@ -33,12 +33,21 @@ d_Occupy_101_000_101          dw 0,2,0x100,0x102,0x7FFF                         
 d_Occupy_111_111_111          dw 0,1,2,0x80,0x81,0x82,0x100,0x101,0x102,0x7FFF            ;21, YARD
 d_Occupy_S11                  dw 0xFF80,0xFF81,0x7FFF                                     ;22, SAM Overlap special (2 cells above)
 d_Occupy_S111                 dw 0xFF80,0xFF81,0xFF82,0x7FFF                              ;23, Overlap special (3 cells above)
-d_Occupy_S11_00_00_11         dw 0xFF80,0xFF81,0x100,0x101,0x7FFF                         ;24, C&C HAND Overlap special (2 cells above, and 2 cells on 3rd row)
+d_Occupy_S11_00_00_11         dw 0,1,0x100,0x180,0x181,0x7FFF                             ;24, C&C HAND Overlap special (2 cells above, and 2 cells on 3rd row)
 d_Occupy_S111_000_000_111     dw 0xFF80,0xFF81,0xFF82,0x100,0x101,0x102,0x7FFF            ;25, Overlap special (3 cells above, and 3 cells on 3rd row)
+d_Occupy_000_111_011          dw 0x80,0x81,0x82,0x101,0x102,0x7FFF                        ;26, Special (C&C WEAP)
+d_Occupy_111_000_100          dw 0,1,2,0x100,0x7FFF                                       ;27, Overlap special (C&C WEAP)
 
-%define d_ExitPyle            0x005FEA5C      ;01
-%define d_ExitSub             0x005FEA78      ;02
-%define d_ExitWeap            0x005FEA82      ;03
+%define d_ExitPyle            0x005FEA5C      ;0
+%define d_ExitSub             0x005FEA78      ;1
+%define d_ExitWeap            0x005FEA82      ;2
+
+d_ExitCCHand                  dw 0x182,0x181,0x180,0x102,0x17F,0xFF,0,1,0xFFFF,2,0x82,0x7F,0x7FFF     ;3
+d_ExitCCWeap                  dw 0x17F,0x180,0xFF,0x181,0x7F,0x83,0x103,0x183,0x182,0x7FFF            ;4
+d_ExitCCAirstrip              dw 0xFF7F,0xFFFF,0x7F,0xFF,0xFF80,0x100,0xFF81,0x101,0xFF82,0x102,0xFF83,0x103,0xFF84,4,0x84,0x104,0x7FFF      ;5
+
+Buffer_BuildingType           times 512 db 0 
+
 
 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:
     Clear_Extended_Class_Memory_For_Old_Saves ecx, New_BuildingTypeClass_Size, Old_BuildingTypeClass_Size
@@ -193,8 +202,26 @@ _SelectExitList:
 
 .Check_ExitWeap:
     cmp  eax,2
-    jnz .DefaultNull
+    jnz .Check_ExitCCHand
     mov  eax,d_ExitWeap
+    jmp .Retn
+	
+.Check_ExitCCHand:
+    cmp  eax,3
+    jnz .Check_ExitCCWeap
+    mov  eax,d_ExitCCHand
+    jmp .Retn
+
+.Check_ExitCCWeap:
+    cmp  eax,4
+    jnz .Check_ExitCCAirstrip
+    mov  eax,d_ExitCCWeap
+    jmp .Retn
+
+.Check_ExitCCAirstrip:
+    cmp  eax,5
+    jnz .DefaultNull
+    mov  eax,d_ExitCCAirstrip
     jmp .Retn
 
 .DefaultNull:
@@ -368,9 +395,22 @@ _SelectOccupyList:
 
 .Check_Occupy_S111_000_000_111:
     cmp  eax,25
-    jnz .DefaultNull
+    jnz .Check_Occupy_000_111_011
     mov  eax,d_Occupy_S111_000_000_111
     jmp .Retn
+
+.Check_Occupy_000_111_011:
+    cmp  eax,26
+    jnz .Check_Occupy_111_000_100
+    mov  eax,d_Occupy_000_111_011
+    jmp .Retn
+
+.Check_Occupy_111_000_100:
+    cmp  eax,27
+    jnz .DefaultNull
+    mov  eax,d_Occupy_111_000_100
+    jmp .Retn
+
 
 .DefaultNull:
     xor  eax,eax             ;Occupy_NULL
