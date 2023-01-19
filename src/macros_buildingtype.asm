@@ -65,6 +65,7 @@
 %define BuildingTypeClass.Offset.BuildupData               0x203    ; INT PTR to FUNC
 
 ; Extended space (>= 0x207)
+%define BuildingTypeClass.Offset.ExtendedPrerequisite      0x207    ; INTx8
 %define BuildingTypeClass.Offset.WarFactoryOverlayAnim     0x227    ; INT PTR
 %define BuildingTypeClass.Offset.WarFactoryOverlayFrames   0x22B    ; INT
 %define BuildingTypeClass.Offset.WarFactoryOverlayRate     0x22F    ; INT

@@ -1,4 +1,8 @@
+; The new prerequisite system that replaces former prerequisites with groups fare poorly when dealing withs in the old format.
+; A solution is needed to support both
+
 @HOOK 0x004D40AD _HouseClass__Can_Build_DontCombineFlags
+@HOOK 0x004D40DF _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
 @HOOK 0x004DD5BF _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1
 @HOOK 0x004DD61D _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType2
 @HOOK 0x004DD6CA _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3
@@ -53,9 +57,69 @@
 _HouseClass__Can_Build_DontCombineFlags:
     jmp  0x004D40CE
 
+_HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck:
+    ; edx is the technotype pointer 
+    ; esi is the houseclass pointer 
+	xor  eax,eax
+	TechnoTypeClass.ExtPrerequisiteOffset.Get(edx,ax)
+	cmp  ax,0
+	jz   .Fulfilled
+    lea  eax, [edx + eax] ; eax is now pointer to start of the prerequisite fields
+	mov  ebx, dword [esi + 1] ; HouseClass->ID 	
+	; AND over 256-bit BScan
+	lea  ecx, [Houses.BScan]
+	shl  ebx,5
+    lea  ecx, [ecx + ebx] ; ecx is now pointer to start of the house's new BScan fields
+	mov  edx,8
+.RepeatIter:
+    mov  ebx,dword [eax]
+    and  ebx,dword [ecx]
+    cmp  ebx,dword [eax]
+	jne  .NotFulfilled
+	dec  edx
+	add  eax,4
+	add  ecx,4
+	cmp  edx,0
+	jg   .RepeatIter
+	
+.Fulfilled:
+	mov  eax,1 ; prerequisite is met
+	jmp  0x004D40E4
+.NotFulfilled:
+	mov  eax,0 ; prerequisite is not met
+	jmp  0x004D40E4
+	
 ; The type location offset is 1A4h, but the game code extracts from 1A1h, then performs a bit shift by 18 places to emulate masking.
 ; Our new location is 13Bh (ActiveBScan), so we replace 1A1h with 138h.
 _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1:
+    push esi
+    push ecx
+    push ebx
+    push eax
+    mov  ecx,dword [ecx + 1a1h]
+    sar  ecx,0x18
+	; ecx is now the building type ID
+	; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
+	mov  esi,[eax + 0x93]
+	; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
+	; Turn_On_Bit <Byte> <Bit>
+	;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
+	;   <Bit>  = <buildingtypeID> & 0x7
+	lea  ebx,[Houses.BScan]
+	shl  esi,5
+    add  ebx,esi
+	mov  esi,ecx
+	sar  esi,3
+	add  ebx,esi
+	and  ecx,0xf
+    mov  al, 1
+    shl  al, cl
+    or   BYTE [ebx], al
+
+    pop  eax
+    pop  ebx
+    pop  ecx
+    pop  esi
     mov  ecx,dword [ecx + 138h]
     jmp  0x004DD5C5
 
@@ -110,12 +174,27 @@ _HouseClass__Recalc_Attributes_SetSpecialTypes:
     mov  dword [eax + 0x15f],ecx
     mov  dword [eax + 0x167],ecx
     mov  dword [eax + 0x16b],ecx
+	; zero out 32-bit SpecialScan
     lea  eax, [Houses.SpecialScan]
     lea  eax, [eax + edx*4]
     mov  dword [eax],ecx
+	; zero out 8-bit Radar
     lea  eax, [Houses.Radar]
     lea  eax, [eax + edx]
     mov  byte [eax],cl
+	; zero out 256-bit BScan
+	lea  eax, [Houses.BScan]
+	push edx
+	shl  edx,5
+    lea  eax, [eax + edx]
+	mov  edx,8
+.RepeatZero:
+    mov  dword [eax],ecx
+	dec  edx
+	add  eax,4
+	cmp  edx,0
+	jg   .RepeatZero
+	pop  edx
     jmp  0x004DD144
 
 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1:

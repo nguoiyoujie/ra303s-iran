@@ -73,6 +73,9 @@ _BuildingTypeClass__Read_INI_Extended:
     push edi
     push eax
 
+	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,BuildingTypeClass.Offset.ExtendedPrerequisite)
+	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
+
     BuildingTypeClass.IsSimpleDamage.Read(esi,edi)
     BuildingTypeClass.IsRegulated.Read(esi,edi)
     BuildingTypeClass.IsJammable.Read(esi,edi)

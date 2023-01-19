@@ -45,12 +45,14 @@
 ;%define TechnoTypeClass.Offset.Risk                   0x154    ; INT 
 ;%define TechnoTypeClass.Offset.Reward                 0x158    ; INT
 %define TechnoTypeClass.Offset.DeathWeapon            0x154    ; INT 
- 
+; expanding the prereq system to cover 256 values will required space for 8 INTs
+%define TechnoTypeClass.Offset.ExtPrerequisiteOffset  0x158    ; WORD 
+
 %define TechnoTypeClass.Offset.MaxSpeed               0x15C    ; BYTE
 %define TechnoTypeClass.Offset.Speed                  0x15D    ; BYTE
 %define TechnoTypeClass.Offset.MaxAmmo                0x15E    ; INT
-%define TechnoTypeClass.Offset.Ownable                0x162    ; LONG? / 8
-;%define TechnoTypeClass.Offset.CameoData              0x172    ; INT
+%define TechnoTypeClass.Offset.Ownable                0x162    ; LONG? / 4
+;%define TechnoTypeClass.Offset.CameoData              0x166    ; INT
 %define TechnoTypeClass.Offset.Facings                0x16A    ; INT
 %define TechnoTypeClass.Offset.ROT                    0x16E    ; INT
 %define TechnoTypeClass.Offset.PrimaryWeapon          0x172    ; INT
@@ -237,6 +239,9 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.DeathWeapon.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, value
 ;%define TechnoTypeClass.DeathWeapon.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.DeathWeapon, str.TechnoTypeClass.DeathWeapon
 %define TechnoTypeClass.DeathWeapon.Read(ptr_type,ptr_rules,function)        ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.DeathWeapon, str.TechnoTypeClass.DeathWeapon, function
+
+%define TechnoTypeClass.ExtPrerequisiteOffset.Get(ptr_type,reg_output)       ObjectTypeClass.GetWord                ptr_type, TechnoTypeClass.Offset.ExtPrerequisiteOffset, reg_output
+%define TechnoTypeClass.ExtPrerequisiteOffset.Set(ptr_type,value)            ObjectTypeClass.SetWord                ptr_type, TechnoTypeClass.Offset.ExtPrerequisiteOffset, value
 
 %define TechnoTypeClass.Facings.Get(ptr_type,reg_output)                     ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.Facings, reg_output
 %define TechnoTypeClass.Facings.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.Facings, value

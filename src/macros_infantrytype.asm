@@ -28,6 +28,9 @@
 %define InfantryTypeClass.Offset.ProneFireFrame            0x19D    ; BYTE
 %define InfantryTypeClass.Offset.OverrideRemap             0x19E    ; INT PTR to BYTE*
 
+; Extended space (>= 0x1A2)
+%define InfantryTypeClass.Offset.ExtendedPrerequisite              0x1A2    ; INTx8
+
 ; INI String controls
 str.InfantryTypeClass.IsFemale                  db"IsFemale",0                    ;new ini feature
 str.InfantryTypeClass.IsCrawling                db"IsCrawling",0                  ;new ini feature

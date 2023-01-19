@@ -55,8 +55,9 @@ VesselTypes_Read_INI:
 .BeginRead:
     push esi
     push edi
-    ;mov esi, edi
-    ;mov edi, RulesINI
+
+	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,VesselTypeClass.Offset.ExtendedPrerequisite)
+	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
 
     VesselTypeClass.IsPieceOfEight.Read(esi,edi)             
     ;VesselTypeClass.Type.Read(esi,edi)                       

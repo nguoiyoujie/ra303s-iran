@@ -4,19 +4,22 @@
 %define Count_AircraftTypeClass            0x0065DDC8
 
 ; define aircraft type field definitions
-%define AircraftTypeClass.Offset.IsFixedWing               0x192    ; BOOL, BIT 1
-%define AircraftTypeClass.Bit.IsFixedWing                  1    
-%define AircraftTypeClass.Offset.IsLandable                0x192    ; BOOL, BIT 2
-%define AircraftTypeClass.Bit.IsLandable                   2    
-%define AircraftTypeClass.Offset.IsRotorEquipped           0x192    ; BOOL, BIT 3
-%define AircraftTypeClass.Bit.IsRotorEquipped              3    
-%define AircraftTypeClass.Offset.IsRotorCustom             0x192    ; BOOL, BIT 4
-%define AircraftTypeClass.Bit.IsRotorCustom                4    
-; 0x193, 0x194 and 0x195 are empty... 
-%define AircraftTypeClass.Offset.Type                      0x196    ; BYTE
-%define AircraftTypeClass.Offset.DefaultMission            0x197    ; BYTE
-%define AircraftTypeClass.Offset.PreferredBuilding         0x198    ; BYTE ; hardcode to 0E (Helipad) or 10 (Airstrip) depending on IsFixedWing for now
-%define AircraftTypeClass.Offset.LandingSpeed              0x199    ; INT
+%define AircraftTypeClass.Offset.IsFixedWing                 0x192    ; BOOL, BIT 1
+%define AircraftTypeClass.Bit.IsFixedWing                    1    
+%define AircraftTypeClass.Offset.IsLandable                  0x192    ; BOOL, BIT 2
+%define AircraftTypeClass.Bit.IsLandable                     2    
+%define AircraftTypeClass.Offset.IsRotorEquipped             0x192    ; BOOL, BIT 3
+%define AircraftTypeClass.Bit.IsRotorEquipped                3    
+%define AircraftTypeClass.Offset.IsRotorCustom               0x192    ; BOOL, BIT 4
+%define AircraftTypeClass.Bit.IsRotorCustom                  4    
+; 0x193, 0x194 and 0x195 are empty...                        
+%define AircraftTypeClass.Offset.Type                        0x196    ; BYTE
+%define AircraftTypeClass.Offset.DefaultMission              0x197    ; BYTE
+%define AircraftTypeClass.Offset.PreferredBuilding           0x198    ; BYTE ; hardcode to 0E (Helipad) or 10 (Airstrip) depending on IsFixedWing for now
+%define AircraftTypeClass.Offset.LandingSpeed                0x199    ; INT
+
+; Extended space (>= 0x19D)
+%define AircraftTypeClass.Offset.ExtendedPrerequisite        0x19D    ; INTx8
 
 ; INI String controls
 str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0                 ;new ini feature

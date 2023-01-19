@@ -6,7 +6,6 @@
 _TechnoTypeClass__SkipReading_Prerequisite:
     jmp  0x00569B72
 
-
 _TechnoTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
@@ -88,7 +87,7 @@ _GetPrerequisiteFromString:
     pop  eax
 	call _SelectPrereqTypeFromString
     test eax,eax
-    je   .Retn
+    je   .Read_Next
     mov  cl,al
  	xor  eax,eax
 	mov  eax, 1   
@@ -116,12 +115,95 @@ _GetPrerequisiteFromString:
     retn
 	
 
+_GetPrerequisiteExtendedFromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+ 	xor  edi,edi
+	TechnoTypeClass.ExtPrerequisiteOffset.Get(esi,di)
+    cmp  di, 0
+    je  .Retn ; just return 0
+; clear 32-bit field
+    lea  ecx, [esi + edi]
+	mov  edx,8
+.RepeatZero:
+    mov  dword [ecx],0
+	dec  edx
+	add  ecx,4
+	cmp  edx,0
+	jg   .RepeatZero
+	
+    cmp  eax, 0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,arg_comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax], 0
+	lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
+    cmp  al,0xff ; STRUCT_NONE
+    jz   .Read_Next
+	; al is any value from 00 to FE
+	; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
+	; esi is the pointer to the type
+	lea  edx, [esi + edi]
+	xor  ecx, ecx
+	mov  cl, al
+    sar  cl, 3
+	add  edx, ecx
+	mov  cl, al
+    and  cl, 0xf
+    mov  al, 1
+    shl  al, cl
+    or   BYTE [edx], al
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
+    cmp  al,0xff ; STRUCT_NONE
+    jz   .Retn
+	; al is any value from 00 to FE
+	; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
+	; esi is the pointer to the type
+	lea  edx, [esi + edi]
+	xor  ecx, ecx
+	mov  cl, al
+    sar  cl, 3
+	add  edx, ecx
+	mov  cl, al
+    and  cl, 0xf
+    mov  al, 1
+    shl  al, cl
+    or   BYTE [edx], al
+	
+.Retn:
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+	TechnoTypeClass.Prerequisite.Get(esi,eax)
+    retn
+
+
 _SelectPrereqTypeFromString:
     ;select PrereqType by performing string compare on eax
     push edx
     push ebx ; hold eax value for multiple checks
     cmp  eax, 0
     je  .Retn ; just return 0
+    cmp  eax, 0
+    je  .DefaultNull ; just return 0
     mov  ebx,eax
 
 .Check.NONE:
@@ -379,6 +461,11 @@ _SelectPrereqTypeFromString:
     jnz  .DefaultNull
     mov  al, PrereqType.CIVBUILDING
     jmp  .Retn
+
+;.CheckBuilding:
+;    call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
+;    cmp  al,0xff ; STRUCT_NONE
+;    jz   .DefaultNull
 
 .DefaultNull:
     xor  eax,eax  ; PrereqType.NONE

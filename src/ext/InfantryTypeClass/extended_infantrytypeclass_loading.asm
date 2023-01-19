@@ -39,6 +39,9 @@ _InfantryTypeClass__Read_INI_Extended:
     mov esi, edi
     mov edi, [esp+0xC] ;RulesINI
 
+	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,InfantryTypeClass.Offset.ExtendedPrerequisite)
+	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
+
     InfantryTypeClass.IsFemale.Read(esi,edi)
     InfantryTypeClass.IsCrawling.Read(esi,edi)
     InfantryTypeClass.IsCivilian.Read(esi,edi)

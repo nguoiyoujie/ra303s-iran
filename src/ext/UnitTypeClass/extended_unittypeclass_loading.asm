@@ -17,6 +17,9 @@ _UnitTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
 
+	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,UnitTypeClass.Offset.ExtendedPrerequisite)
+	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
+
     UnitTypeClass.IsCrateGoodie.Read(esi,edi)
     UnitTypeClass.Crusher.Read(esi,edi)
     UnitTypeClass.IsToHarvest.Read(esi,edi)

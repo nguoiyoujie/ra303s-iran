@@ -37,11 +37,12 @@
 %define UnitTypeClass.Offset.Explosion                     0x199    ; BYTE
 %define UnitTypeClass.Offset.MaxSize                       0x19A    ; INT
 
-; new
-%define UnitTypeClass.Offset.TurretAdjustX                 0x19F    ; INT
-%define UnitTypeClass.Offset.TurretAdjustY                 0x203    ; INT
-%define UnitTypeClass.Offset.TurretFrameStart              0x207    ; WORD
-%define UnitTypeClass.Offset.TurretFrameCount              0x209    ; WORD
+; Extended space (>= 0x19E)
+%define UnitTypeClass.Offset.ExtendedPrerequisite          0x19E    ; INTx8
+%define UnitTypeClass.Offset.TurretAdjustX                 0x21E    ; INT
+%define UnitTypeClass.Offset.TurretAdjustY                 0x223    ; INT
+%define UnitTypeClass.Offset.TurretFrameStart              0x227    ; WORD
+%define UnitTypeClass.Offset.TurretFrameCount              0x229    ; WORD
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature

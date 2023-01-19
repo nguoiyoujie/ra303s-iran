@@ -74,6 +74,9 @@ AircraftTypes_Read_INI:
     ;mov esi, edi
     ;mov edi, RulesINI
 
+	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,AircraftTypeClass.Offset.ExtendedPrerequisite)
+	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
+
     ;AircraftTypeClass.IsFixedWing.Read(esi,edi)
     AircraftTypeClass.IsLandable.Read(esi,edi)
     AircraftTypeClass.IsRotorEquipped.Read(esi,edi)
