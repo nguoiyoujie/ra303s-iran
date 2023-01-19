@@ -103,6 +103,9 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.OccupyList.Read(esi,edi,_SelectOccupyList)
     BuildingTypeClass.OverlapList.Read(esi,edi,_SelectOccupyList)
     BuildingTypeClass.SpecialWeapons.Read(esi,edi,_GetSpecialsFromString)
+    BuildingTypeClass.WarFactoryOverlayAnim.Read(esi,edi,_GetOverlayFromString)
+    BuildingTypeClass.WarFactoryOverlayFrames.Read(esi,edi)
+    BuildingTypeClass.WarFactoryOverlayRate.Read(esi,edi)
 
     pop  eax
     pop  edi
@@ -549,4 +552,31 @@ _SelectSpecialTypeFromString:
 .Retn:
     pop ebx
     pop edx
+    retn
+	
+	
+_GetOverlayFromString:
+   ;create overlay animation with string from eax
+    push ebx
+    push ecx
+    push edx 
+    push esi 
+    push edi 
+    cmp  eax, 0
+    je   .Retn
+	push 0x005E8EDE ; ".SHP"
+    mov  ecx,eax
+    lea  eax,[Buffer_BuildingType]
+    xor  ebx,ebx
+    xor  edx,edx
+    call 0x005B8BEE    ; _makepath
+    lea  eax,[Buffer_BuildingType]
+    call 0x005B9330    ; MFCD::Retrieve
+
+.Retn:
+    pop edi
+    pop esi
+    pop edx
+    pop ecx
+    pop ebx
     retn

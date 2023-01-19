@@ -64,6 +64,11 @@
 %define BuildingTypeClass.Offset.OverlapList               0x1FF    ; INT PTR to WORD*
 %define BuildingTypeClass.Offset.BuildupData               0x203    ; INT PTR to FUNC
 
+; Extended space (>= 0x207)
+%define BuildingTypeClass.Offset.WarFactoryOverlayAnim     0x227    ; INT PTR
+%define BuildingTypeClass.Offset.WarFactoryOverlayFrames   0x22B    ; INT
+%define BuildingTypeClass.Offset.WarFactoryOverlayRate     0x22F    ; INT
+; 0x233
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -111,6 +116,10 @@ str.BuildingTypeClass.Anim_Aux2_Rate            db"Anim_Aux2_Rate",0            
 str.BuildingTypeClass.OccupyList                db"OccupyList",0                  ;new ini feature
 str.BuildingTypeClass.OverlapList               db"OverlapList",0                 ;new ini feature
 str.BuildingTypeClass.BuildupData               db"BuildupData",0                 ;?
+str.BuildingTypeClass.WarFactoryOverlayAnim     db"WarFactoryOverlayAnim",0       ;new ini feature
+str.BuildingTypeClass.WarFactoryOverlayFrames   db"WarFactoryOverlayFrames",0     ;new ini feature
+str.BuildingTypeClass.WarFactoryOverlayRate     db"WarFactoryOverlayRate",0       ;new ini feature
+
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
 %define BuildingTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
@@ -267,8 +276,16 @@ str.BuildingTypeClass.BuildupData               db"BuildupData",0               
 %define BuildingTypeClass.OverlapList.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.OverlapList, value
 %define BuildingTypeClass.OverlapList.Read(ptr_type,ptr_rules,function)        ObjectTypeClass.ReadIntExt             ptr_type, ptr_rules, BuildingTypeClass.Offset.OverlapList, str.BuildingTypeClass.OverlapList, function
 
+%define BuildingTypeClass.WarFactoryOverlayAnim.Get(ptr_type,reg_output)       ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayAnim, reg_output
+%define BuildingTypeClass.WarFactoryOverlayAnim.Set(ptr_type,value)            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayAnim, value
+%define BuildingTypeClass.WarFactoryOverlayAnim.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayAnim, str.BuildingTypeClass.WarFactoryOverlayAnim, function
+																			   
+%define BuildingTypeClass.WarFactoryOverlayFrames.Get(ptr_type,reg_output)     ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayFrames, reg_output
+%define BuildingTypeClass.WarFactoryOverlayFrames.Set(ptr_type,value)          ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayFrames, value
+%define BuildingTypeClass.WarFactoryOverlayFrames.Read(ptr_type,ptr_rules)     ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayFrames, str.BuildingTypeClass.WarFactoryOverlayFrames
 
-
-
+%define BuildingTypeClass.WarFactoryOverlayRate.Get(ptr_type,reg_output)       ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayRate, reg_output
+%define BuildingTypeClass.WarFactoryOverlayRate.Set(ptr_type,value)            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayRate, value
+%define BuildingTypeClass.WarFactoryOverlayRate.Read(ptr_type,ptr_rules)       ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayRate, str.BuildingTypeClass.WarFactoryOverlayRate
 
 
