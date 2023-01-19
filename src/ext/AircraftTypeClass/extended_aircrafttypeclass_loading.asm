@@ -1,3 +1,33 @@
+
+;Read INI settings
+@HOOK 0x004C7427 _TFixedIHeapClass__fn_init_New_AircraftTypes_Heap_Size
+@HOOK 0x004D0B53 _TFixedIHeapClass__AircraftTypeClass__Save_New_Size
+@HOOK 0x004D0C36 _TFixedIHeapClass__AircraftTypeClass__Load_New_Size
+@HOOK 0x004D0C51 _TFixedIHeapClass__AircraftTypeClass__Load_Clear_Memory
+
+%define        Old_AircraftTypeClass_Size        0x19D
+%define        New_AircraftTypeClass_Size        0x240
+
+_TFixedIHeapClass__AircraftTypeClass__Load_Clear_Memory:
+    Clear_Extended_Class_Memory_For_Old_Saves ecx, New_AircraftTypeClass_Size, Old_AircraftTypeClass_Size
+.Ret:
+    lea  edx, [ebp-0x14]
+    mov  eax, ecx
+    jmp  0x004D0C56
+
+_TFixedIHeapClass__fn_init_New_AircraftTypes_Heap_Size:
+    mov  edx, New_AircraftTypeClass_Size
+    jmp  0x004C742C
+
+_TFixedIHeapClass__AircraftTypeClass__Load_New_Size:
+    mov  ebx, New_AircraftTypeClass_Size
+    jmp  0x004D0C3B
+
+_TFixedIHeapClass__AircraftTypeClass__Save_New_Size:
+    mov  ebx, New_AircraftTypeClass_Size
+    jmp  0x004D0B58
+
+
 ; Note: IsFixedWing=yes is not fully functional, as there are several locations to decouple YAK/MIG checks and replace with IsFixedWing=yes
 ; // HouseClass::Is_No_YakMig
 ; // HouseClass::Is_Hack_Prevented

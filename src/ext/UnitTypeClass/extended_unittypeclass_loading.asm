@@ -3,16 +3,14 @@
 @HOOK 0x004C9685 _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size
 @HOOK 0x004D1333 _TFixedIHeapClass__UnitTypeClass__Save_New_Size
 @HOOK 0x004D1416 _TFixedIHeapClass__UnitTypeClass__Load_New_Size
-@HOOK 0x004C74D2 _TFixedIHeapClass__fn_init_New_UnitTypes_Heap_Size
-
-; Clear memory
 @HOOK 0x004D1431 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory
+@HOOK 0x004C74D2 _TFixedIHeapClass__fn_init_New_UnitTypes_Heap_Size
 
 ;Read INI settings
 @HOOK 0x00578DCE _UnitTypeClass__Read_INI_Extended
 
 %define        Old_UnitTypeClass_Size        0x19E
-%define        New_UnitTypeClass_Size        0x39E
+%define        New_UnitTypeClass_Size        0x240
 
 _UnitTypeClass__Read_INI_Extended:
 
