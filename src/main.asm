@@ -187,6 +187,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/building_jammable_override.asm" ; added by lovalmidas
 %include "src/building_power_fix.asm" ; added by lovalmidas
 %include "src/unit_turret_draw.asm" ; added by lovalmidas
+%include "src/building_mission_unload.asm" ; added by lovalmidas
 
 ;%include "src/refinery_experiment.asm" ; added by lovalmidas
 
