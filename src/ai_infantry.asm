@@ -9,7 +9,7 @@
 
 @HOOK 0x004DC516 _HouseClass__AI_Infantry_Expand
 ;@HOOK 0x004DC62B _HouseClass__AI_Infantry_Expand_Choice
-@HOOK 0x004DC346 _HouseClass__AI_Infantry_Extend_CounterList_test
+;@HOOK 0x004DC346 _HouseClass__AI_Infantry_Extend_CounterList_test
 
 @HOOK 0x004DC160 _HouseClass__AI_Infantry_Extend_Stackframe
 @HOOK 0x004DC19A _HouseClass__AI_Infantry_Extend_CounterList_1
