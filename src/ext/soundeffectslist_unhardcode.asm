@@ -32,7 +32,7 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
 
     xor  edx, edx
     mov  dx, ax
-    lea  edx, [SoundEffectsList+edx*4]
+    lea  edx, [SoundEffectsList+edx*9]
     mov  eax, [edx]
     jmp  0x00425D15
 
