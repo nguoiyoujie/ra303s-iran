@@ -39,17 +39,18 @@ _str_version: db "3.03p-iB1v1",0
 ; Version
 %include "src/version.asm"
 
-; definitions
+; definitions ; added by lovalmidas
 %include "src/defines_rttitypes.asm"
 %include "src/defines_armortypes.asm"
 %include "src/defines_prereqtypes.asm"
 %include "src/defines_specialtypes.asm"
+%include "src/defines_tracktypes.asm"
 
-; macros
+; macros ; added by lovalmidas
 %include "src/macros.asm"
 %include "src/macros_generic.asm"
 
-; typeclass_macros
+; typeclass_macros ; added by lovalmidas
 %include "src/macros_abstracttype.asm"
 %include "src/macros_objecttype.asm"
 %include "src/macros_technotype.asm"
@@ -179,19 +180,21 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/skirmish_savegames.asm"
 %include "src/sidebar_cameo_icons_remap_colours.asm"
 %include "src/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
-%include "src/map_sight_no_incremental.asm" ; added by lovalmidas
-%include "src/building_mission_repair.asm" ; added by lovalmidas
-%include "src/aircraft_isdropping_act_like_parabombs.asm" ; added by lovalmidas
-%include "src/building_unlimbo_owners.asm" ; added by lovalmidas
-%include "src/battlecontrolterminated_delayblackscreen.asm" ; added by lovalmidas
-%include "src/explosion_no_anim_crash_fix.asm" ; added by lovalmidas
-%include "src/building_jammable_override.asm" ; added by lovalmidas
-%include "src/building_power_fix.asm" ; added by lovalmidas
-%include "src/unit_turret_draw.asm" ; added by lovalmidas
-%include "src/building_mission_unload.asm" ; added by lovalmidas
-%include "src/tesla_charging_unhardcode.asm" ; added by lovalmidas
+; code extensions, added by lovalmidas
+%include "src/map_sight_no_incremental.asm" 
+%include "src/building_mission_repair.asm" 
+%include "src/aircraft_isdropping_act_like_parabombs.asm" 
+%include "src/building_unlimbo_owners.asm" 
+%include "src/battlecontrolterminated_delayblackscreen.asm" 
+%include "src/explosion_no_anim_crash_fix.asm" 
+%include "src/building_jammable_override.asm" 
+%include "src/building_power_fix.asm" 
+%include "src/unit_turret_draw.asm" 
+%include "src/building_mission_unload.asm" 
+%include "src/tesla_charging_unhardcode.asm" 
+%include "src/new_tracktypes.asm"
 
-;%include "src/refinery_experiment.asm" ; added by lovalmidas
+;%include "src/refinery_experiment.asm" 
 
 %ifdef USE_NOCD
 %include "src/nocd.asm"

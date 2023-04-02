@@ -69,7 +69,9 @@
 %define BuildingTypeClass.Offset.WarFactoryOverlayAnim     0x227    ; INT PTR
 %define BuildingTypeClass.Offset.WarFactoryOverlayFrames   0x22B    ; INT
 %define BuildingTypeClass.Offset.WarFactoryOverlayRate     0x22F    ; INT
-; 0x233
+%define BuildingTypeClass.Offset.WarFactoryExitFacing       0x233    ; BYTE
+%define BuildingTypeClass.Offset.WarFactoryExitTrack       0x234    ; BYTE
+; 0x235
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -120,6 +122,8 @@ str.BuildingTypeClass.BuildupData               db"BuildupData",0               
 str.BuildingTypeClass.WarFactoryOverlayAnim     db"WarFactoryOverlayAnim",0       ;new ini feature
 str.BuildingTypeClass.WarFactoryOverlayFrames   db"WarFactoryOverlayFrames",0     ;new ini feature
 str.BuildingTypeClass.WarFactoryOverlayRate     db"WarFactoryOverlayRate",0       ;new ini feature
+str.BuildingTypeClass.WarFactoryExitFacing      db"WarFactoryExitFacing",0        ;new ini feature
+str.BuildingTypeClass.WarFactoryExitTrack       db"WarFactoryExitTrack",0         ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
@@ -289,4 +293,10 @@ str.BuildingTypeClass.WarFactoryOverlayRate     db"WarFactoryOverlayRate",0     
 %define BuildingTypeClass.WarFactoryOverlayRate.Set(ptr_type,value)            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayRate, value
 %define BuildingTypeClass.WarFactoryOverlayRate.Read(ptr_type,ptr_rules)       ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayRate, str.BuildingTypeClass.WarFactoryOverlayRate
 
+%define BuildingTypeClass.WarFactoryExitFacing.Get(ptr_type,reg_output)        ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.WarFactoryExitFacing, reg_output
+%define BuildingTypeClass.WarFactoryExitFacing.Set(ptr_type,value)             ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.WarFactoryExitFacing, value
+%define BuildingTypeClass.WarFactoryExitFacing.Read(ptr_type,ptr_rules)        ObjectTypeClass.ReadByte               ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryExitFacing, str.BuildingTypeClass.WarFactoryExitFacing
 
+%define BuildingTypeClass.WarFactoryExitTrack.Get(ptr_type,reg_output)         ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.WarFactoryExitTrack, reg_output
+%define BuildingTypeClass.WarFactoryExitTrack.Set(ptr_type,value)              ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.WarFactoryExitTrack, value
+%define BuildingTypeClass.WarFactoryExitTrack.Read(ptr_type,ptr_rules)         ObjectTypeClass.ReadByte               ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryExitTrack, str.BuildingTypeClass.WarFactoryExitTrack

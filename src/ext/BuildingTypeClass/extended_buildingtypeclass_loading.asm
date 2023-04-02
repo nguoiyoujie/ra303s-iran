@@ -110,6 +110,8 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.WarFactoryOverlayAnim.Read(esi,edi,_GetOverlayFromString)
     BuildingTypeClass.WarFactoryOverlayFrames.Read(esi,edi)
     BuildingTypeClass.WarFactoryOverlayRate.Read(esi,edi)
+    BuildingTypeClass.WarFactoryExitFacing.Read(esi,edi)
+    BuildingTypeClass.WarFactoryExitTrack.Read(esi,edi)
 
     pop  eax
     pop  edi
