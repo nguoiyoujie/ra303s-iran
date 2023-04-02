@@ -15,6 +15,8 @@
 %define WeaponTypeClass.Offset.IsElectric                0x008    ; BOOL // Already supported by game INI
 %define WeaponTypeClass.Bit.IsElectric                   4    
 ; 0x009, 0x00a and 0x00b are empty
+%define WeaponTypeClass.Offset.ChargeSound               0x00a    ; WORD
+
 %define WeaponTypeClass.Offset.Burst                     0x00c    ; INT (0,1)
 %define WeaponTypeClass.Offset.Bullet                    0x010    ; INT PTR
 %define WeaponTypeClass.Offset.Damage                    0x014    ; INT
@@ -39,6 +41,7 @@ str.WeaponTypeClass.ROF                       db"ROF",0                 ;existin
 str.WeaponTypeClass.Range                     db"Range",0               ;existing ini
 str.WeaponTypeClass.Sound                     db"Report",0              ;existing ini
 str.WeaponTypeClass.Anim                      db"Anim",0                ;existing ini
+str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 
 %define WeaponTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
@@ -136,11 +139,15 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
 
 %define WeaponTypeClass.Sound.Get(ptr_type,reg_output)                       ObjectTypeClass.GetWord                ptr_type, WeaponTypeClass.Offset.Sound, reg_output
 %define WeaponTypeClass.Sound.Set(ptr_type,value)                            ObjectTypeClass.SetWord                ptr_type, WeaponTypeClass.Offset.Sound, value
-%define WeaponTypeClass.Sound.Read(ptr_type,ptr_rules)                       WeaponTypeClass.ReadWord               ptr_type, ptr_rules, WeaponTypeClass.Offset.Sound, str.WeaponTypeClass.Sound
+%define WeaponTypeClass.Sound.Read(ptr_type,ptr_rules)                       WeaponTypeClass.ReadStringToWordExt    ptr_type, ptr_rules, WeaponTypeClass.Offset.Sound, str.WeaponTypeClass.Sound, function
   
 %define WeaponTypeClass.Anim.Get(ptr_type,reg_output)                        ObjectTypeClass.GetByte                ptr_type, WeaponTypeClass.Offset.Anim, reg_output
 %define WeaponTypeClass.Anim.Set(ptr_type,value)                             ObjectTypeClass.SetByte                ptr_type, WeaponTypeClass.Offset.Anim, value
 %define WeaponTypeClass.Anim.Read(ptr_type,ptr_rules)                        WeaponTypeClass.ReadByte               ptr_type, ptr_rules, WeaponTypeClass.Offset.Anim, str.WeaponTypeClass.Anim
+
+%define WeaponTypeClass.ChargeSound.Get(ptr_type,reg_output)                 ObjectTypeClass.GetWord                ptr_type, WeaponTypeClass.Offset.ChargeSound, reg_output
+%define WeaponTypeClass.ChargeSound.Set(ptr_type,value)                      ObjectTypeClass.SetWord                ptr_type, WeaponTypeClass.Offset.ChargeSound, value
+%define WeaponTypeClass.ChargeSound.Read(ptr_type,ptr_rules,function)        WeaponTypeClass.ReadStringToWordExt    ptr_type, ptr_rules, WeaponTypeClass.Offset.ChargeSound, str.WeaponTypeClass.ChargeSound, function
 
 ;  method of getting ID differs from ObjectTypeClass
 %macro WeaponTypeClass.ID    2
@@ -163,6 +170,43 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
     call_INIClass__Get_Int %2, edx, %4, ecx
     mov  BYTE [%1+%3], al
 %endmacro
+
+%macro WeaponTypeClass.ReadWord    4
+    WeaponTypeClass.ID %1,edx
+    xor  ecx, ecx
+    mov  WORD cx, [%1+%3]
+    call_INIClass__Get_Int %2, edx, %4, ecx
+    mov  WORD [%1+%3], ax
+%endmacro
+
+%macro WeaponTypeClass.ReadInt    4
+    WeaponTypeClass.ID %1,edx
+    xor  ecx, ecx
+    mov  ecx, [%1+%3]
+    call_INIClass__Get_Int %2, edx, %4, ecx
+    mov  [%1+%3], eax
+%endmacro
+
+%macro WeaponTypeClass.ReadStringToWordExt    5
+    WeaponTypeClass.ID %1,edx
+    xor  ecx, ecx
+    mov  ecx, [%1+%3]
+    mov  WORD [ObjectTypeClass.ValueBuffer], cx
+    xor  ecx, ecx
+    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    mov  BYTE al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al, al
+    jz   %%null_string
+  %%valid_string:
+    mov  eax, ObjectTypeClass.StringBuffer
+    call %5
+    mov  WORD [%1+%3], ax
+    jmp  %%done
+  %%null_string:
+  %%done:
+    mov  DWORD [ObjectTypeClass.ValueBuffer], 0
+%endmacro
+
 
 ; args <Internal ID of type class>
 ; returns the type class pointer as EAX

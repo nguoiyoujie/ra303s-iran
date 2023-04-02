@@ -83,6 +83,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/ext/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
 %include "src/ext/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
 %include "src/ext/VesselTypeClass/extended_vesseltypeclass_loading.asm"
+%include "src/ext/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 %include "src/ext/extended_houseclass.asm"
 %include "src/ext/extended_buildingclass.asm"
 %include "src/ext/extended_technoclass.asm"
@@ -188,6 +189,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/building_power_fix.asm" ; added by lovalmidas
 %include "src/unit_turret_draw.asm" ; added by lovalmidas
 %include "src/building_mission_unload.asm" ; added by lovalmidas
+%include "src/tesla_charging_unhardcode.asm" ; added by lovalmidas
 
 ;%include "src/refinery_experiment.asm" ; added by lovalmidas
 
