@@ -6,6 +6,7 @@
 ;@HOOK 0x0045E20D _BuildingClass_Mission_Unload_WeaponsFactory_ForceTrack
 
 @HOOK 0x00455412 _BuildingClass_Draw_It_WeaponsFactoryDoor
+@HOOK 0x00455442 _BuildingClass_Draw_It_WeaponsFactoryDoorFake
 @HOOK 0x00455477 _BuildingClass_Draw_It_WeaponsFactoryDoor2
 @HOOK 0x00455491 _BuildingClass_Draw_It_WeaponsFactoryDoor3
 @HOOK 0x00458DCD _BuildingClass_ExitObject_Factories
@@ -95,24 +96,50 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor:
     jmp  0x0045541A
 
 .IsWarFactory:
-	push edx
-	mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
+    push edx
+    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
     mov  DWORD [Cache_WarFactory_DoorAnim], edx
-	mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
+    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
     mov  DWORD [Cache_WarFactory_DoorFrames], edx
-	;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
+    ;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
     ;mov  DWORD [Cache_WarFactory_DoorRate], edx
-	pop  edx
+    pop  edx
     jmp  0x0045544A
 
+_BuildingClass_Draw_It_WeaponsFactoryDoorFake:
+    movsx eax,al
+; future code for custom fakes
+    ;BuildingTypeClass.FromIndex(eax,eax)
+    ;push ebx
+    ;xor ebx,ebx
+    ;BuildingTypeClass.IsFake.Get(eax,bl)
+    ;cmp  bl,0
+    ;pop  ebx
+    ;je  0x0045549E ; not a fake
+; check for Fake War Factory
+    cmp  eax,0x20
+    jnz  0x0045549E
+    jmp  .IsWarFactory
+
+.IsWarFactory:
+    push edx
+    BuildingTypeClass.FromIndex(eax,eax)
+    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
+    mov  DWORD [Cache_WarFactory_DoorAnim], edx
+    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
+    mov  DWORD [Cache_WarFactory_DoorFrames], edx
+    ;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
+    ;mov  DWORD [Cache_WarFactory_DoorRate], edx
+    pop  edx
+    jmp  0x0045544A
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor2:
     jz   0x0045547C
     cmp  DWORD [Cache_WarFactory_DoorFrames],0
-	je   .Default
+    je   .Default
     add  ebx,DWORD [Cache_WarFactory_DoorFrames]
-	jmp  .Ret
-	
+    jmp  .Ret
+
 .Default:
     add  ebx,4
 
@@ -122,10 +149,10 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor2:
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor3:
     cmp  DWORD [Cache_WarFactory_DoorAnim],0
-	je   .Default
+    je   .Default
     mov  edx ,DWORD [Cache_WarFactory_DoorAnim]
-	jmp  .Ret
-	
+    jmp  .Ret
+
 .Default:
     mov  edx ,DWORD [0x00635BA8] ; location for WEAP2 shape object
 
