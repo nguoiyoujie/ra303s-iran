@@ -60,58 +60,66 @@ _HouseClass__Can_Build_DontCombineFlags:
 _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck:
     ; edx is the technotype pointer 
     ; esi is the houseclass pointer 
-	xor  eax,eax
-	TechnoTypeClass.ExtPrerequisiteOffset.Get(edx,ax)
-	cmp  ax,0
-	jz   .Fulfilled
+    xor  eax,eax
+    TechnoTypeClass.ExtPrerequisiteOffset.Get(edx,ax)
+    cmp  ax,0
+    jz   .Fulfilled
     lea  eax, [edx + eax] ; eax is now pointer to start of the prerequisite fields
-	mov  ebx, dword [esi + 1] ; HouseClass->ID 	
-	; AND over 256-bit BScan
-	lea  ecx, [Houses.BScan]
-	shl  ebx,5
+    mov  ebx, dword [esi + 1] ; HouseClass->ID     
+    ; AND over 256-bit BScan
+    lea  ecx, [Houses.BScan]
+    shl  ebx,5
     lea  ecx, [ecx + ebx] ; ecx is now pointer to start of the house's new BScan fields
-	mov  edx,8
+    mov  edx,8
 .RepeatIter:
     mov  ebx,dword [eax]
     and  ebx,dword [ecx]
     cmp  ebx,dword [eax]
-	jne  .NotFulfilled
-	dec  edx
-	add  eax,4
-	add  ecx,4
-	cmp  edx,0
-	jg   .RepeatIter
-	
+    jne  .NotFulfilled
+    dec  edx
+    add  eax,4
+    add  ecx,4
+    cmp  edx,0
+    jg   .RepeatIter
+    
 .Fulfilled:
-	mov  eax,1 ; prerequisite is met
-	jmp  0x004D40E4
+    mov  eax,1 ; prerequisite is met
+    jmp  0x004D40E4
 .NotFulfilled:
-	mov  eax,0 ; prerequisite is not met
-	jmp  0x004D40E4
-	
+    mov  eax,0 ; prerequisite is not met
+    jmp  0x004D40E4
+    
 ; The type location offset is 1A4h, but the game code extracts from 1A1h, then performs a bit shift by 18 places to emulate masking.
 ; Our new location is 13Bh (ActiveBScan), so we replace 1A1h with 138h.
 _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1:
+    ;mov  ecx,dword [ecx + 138h]
+    jmp  0x004DD5D1 ; skip the 32 check
+
+_HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType2:
+    mov  ecx,dword [ecx + 138h]
+    jmp  0x004DD623
+    
+_HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3:
     push esi
     push ecx
     push ebx
     push eax
     mov  ecx,dword [ecx + 1a1h]
     sar  ecx,0x18
-	; ecx is now the building type ID
-	; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
-	mov  esi,[eax + 0x93]
-	; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
-	; Turn_On_Bit <Byte> <Bit>
-	;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
-	;   <Bit>  = <buildingtypeID> & 0x7
-	lea  ebx,[Houses.BScan]
-	shl  esi,5
+    ; ecx is now the building type ID
+    ; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
+    mov  esi,[eax + 0x93]
+    ; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
+    ; Turn_On_Bit <Byte> <Bit>
+    ;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
+    ;   <Bit>  = <buildingtypeID> & 0x7
+    lea  ebx,[Houses.BScan]
+    shl  esi,5
     add  ebx,esi
-	mov  esi,ecx
-	sar  esi,3
-	add  ebx,esi
-	and  ecx,0xf
+    mov  esi,ecx
+    sar  esi,3
+    add  ebx,esi
+    and  ecx,7
     mov  al, 1
     shl  al, cl
     or   BYTE [ebx], al
@@ -121,16 +129,8 @@ _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1:
     pop  ecx
     pop  esi
     mov  ecx,dword [ecx + 138h]
-    jmp  0x004DD5C5
-
-_HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType2:
-    mov  ecx,dword [ecx + 138h]
-    jmp  0x004DD623
-	
-_HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3:
-    mov  ecx,dword [ecx + 138h]
     jmp  0x004DD6D0
-	
+    
 _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType4:
     push eax
     push ecx
@@ -140,8 +140,8 @@ _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType4:
     shl  esi,cl
     mov  ecx,esi
     or   dword [eax],ecx
-	pop  ecx
-	pop  eax
+    pop  ecx
+    pop  eax
 ; Set special types
     push ebx
     xor  ebx, ebx
@@ -174,43 +174,72 @@ _HouseClass__Recalc_Attributes_SetSpecialTypes:
     mov  dword [eax + 0x15f],ecx
     mov  dword [eax + 0x167],ecx
     mov  dword [eax + 0x16b],ecx
-	; zero out 32-bit SpecialScan
+    ; zero out 32-bit SpecialScan
     lea  eax, [Houses.SpecialScan]
     lea  eax, [eax + edx*4]
     mov  dword [eax],ecx
-	; zero out 8-bit Radar
+    ; zero out 8-bit Radar
     lea  eax, [Houses.Radar]
     lea  eax, [eax + edx]
     mov  byte [eax],cl
-	; zero out 256-bit BScan
-	lea  eax, [Houses.BScan]
-	push edx
-	shl  edx,5
+    ; zero out 256-bit BScan
+    lea  eax, [Houses.BScan]
+    push edx
+    shl  edx,5
     lea  eax, [eax + edx]
-	mov  edx,8
+    mov  edx,8
 .RepeatZero:
     mov  dword [eax],ecx
-	dec  edx
-	add  eax,4
-	cmp  edx,0
-	jg   .RepeatZero
-	pop  edx
+    dec  edx
+    add  eax,4
+    cmp  edx,0
+    jg   .RepeatZero
+    pop  edx
     jmp  0x004DD144
 
 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1:
     mov  ecx,dword [eax + 138h]
     jmp  0x00456AAB
-		
+        
 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2:
+    push esi
+    push ecx
+    push ebx
+    push eax
+    mov  ecx,dword [eax + 1a1h]
+    sar  ecx,0x18
+    ; ecx is now the building type ID
+    ; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
+    mov  esi,[eax + 0x93]
+    ; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
+    ; Turn_On_Bit <Byte> <Bit>
+    ;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
+    ;   <Bit>  = <buildingtypeID> & 0x7
+    lea  ebx,[Houses.BScan]
+    shl  esi,5
+    add  ebx,esi
+    mov  esi,ecx
+    sar  esi,3
+    add  ebx,esi
+    and  ecx,0xf
+    mov  al, 1
+    shl  al, cl
+    or   BYTE [ebx], al
+
+    pop  eax
+    pop  ebx
+    pop  ecx
+    pop  esi
+
     mov  ecx,dword [eax + 138h]
     jmp  0x00456B07
 
 ; Does_Enemy_Building_Exist is not used by the game, but we could use it~
 _BuildingClass__Does_Enemy_Building_Exist_UsePrereqType:
     BuildingTypeClass.FromIndex(edx,ecx)
-	TechnoTypeClass.PrereqType.Get(ecx,al)
+    TechnoTypeClass.PrereqType.Get(ecx,al)
     jmp  0x004D7E35
-	
+    
 _BuildingClass__Check_Raise_Money_UseNewRefineryPrereqType:
     test dword [edx + 137h], 0x10 ; 1 << 4
     jmp  0x004D9D0D
@@ -448,7 +477,7 @@ _HouseClass__AI_SpeakLowPower_Check:
 
 ; For now we use the new Prerequisite system to check for radar. In the future different variables can be introduced to _HouseClass__Recalc_Attributes_SetSpecialTypes to activate them
 _HouseClass__AI_RadarMap_Check1:
-;	test dword [eax + 13bh],0x100 ; 1 << 8
+;    test dword [eax + 13bh],0x100 ; 1 << 8
     push eax
     push ecx
     lea  ecx, [Houses.Radar]

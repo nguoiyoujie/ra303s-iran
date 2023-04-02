@@ -198,8 +198,8 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  BYTE [%1+%3], al
     jmp  %%done
   %%null_string:
-    mov  BYTE al, [ObjectTypeClass.ValueBuffer]
-    mov  BYTE [%1+%3], al
+    ;mov  BYTE al, [ObjectTypeClass.ValueBuffer]
+    ;mov  BYTE [%1+%3], al
   %%done:
     mov  DWORD [ObjectTypeClass.ValueBuffer], 0
 %endmacro
@@ -225,8 +225,8 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  WORD [%1+%3], ax
     jmp  %%done
   %%null_string:
-    mov  WORD ax, [ObjectTypeClass.ValueBuffer]
-    mov  WORD [%1+%3], ax
+    ;mov  WORD ax, [ObjectTypeClass.ValueBuffer]
+    ;mov  WORD [%1+%3], ax
   %%done:
     mov  DWORD [ObjectTypeClass.ValueBuffer], 0
 %endmacro
@@ -252,8 +252,8 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  DWORD [%1+%3], eax
     jmp  %%done
   %%null_string:
-    mov  DWORD eax, [ObjectTypeClass.ValueBuffer]
-    mov  DWORD [%1+%3], eax
+    ;mov  DWORD eax, [ObjectTypeClass.ValueBuffer]
+    ;mov  DWORD [%1+%3], eax
   %%done:
     mov  DWORD [ObjectTypeClass.ValueBuffer], 0
 %endmacro

@@ -16,8 +16,8 @@ _TechnoTypeClass__Read_INI_Extended:
     push eax
     xor  eax, eax
     TechnoTypeClass.DeathWeapon.Set(esi,eax)
-    xor  eax, eax
-    TechnoTypeClass.Prerequisite.Set(esi,eax)
+    ;xor  eax, eax
+    ;TechnoTypeClass.Prerequisite.Set(esi,eax)
     pop eax
 
     ;TechnoTypeClass.IsScanner.Read(esi,edi) ;already existing
@@ -31,11 +31,11 @@ _TechnoTypeClass__Read_INI_Extended:
     TechnoTypeClass.SecondaryOffset.Read(esi,edi)
     TechnoTypeClass.SecondaryLateral.Read(esi,edi)
 ; somehow setting primary and secondary weapons remove Aftermath weapons.
-	;TechnoTypeClass.PrimaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
-	;TechnoTypeClass.SecondaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
-	TechnoTypeClass.DeathWeapon.Read(esi,edi,_GetWeaponTypeFromString)
-	TechnoTypeClass.PrereqType.Read(esi,edi,_SelectPrereqTypeFromString)
-	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteFromString)
+    TechnoTypeClass.PrimaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
+    TechnoTypeClass.SecondaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
+    TechnoTypeClass.DeathWeapon.Read(esi,edi,_GetWeaponTypeFromString)
+    TechnoTypeClass.PrereqType.Read(esi,edi,_SelectPrereqTypeFromString)
+    TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteFromString)
 
 
     pop  edi
@@ -62,13 +62,13 @@ _GetWeaponTypeFromString:
     pop ebx
     retn
 
-	
+    
 _GetPrerequisiteFromString:
     push edi
     push edx
     push ecx
     push ebx
- 	xor  edi,edi
+     xor  edi,edi
     cmp  eax, 0
     je  .Retn ; just return 0
     mov  ebx,eax
@@ -82,30 +82,30 @@ _GetPrerequisiteFromString:
     test eax,eax
     je  .Read_Last    
     mov  byte [eax], 0
-	lea  eax,[eax + 1]
+    lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
-	call _SelectPrereqTypeFromString
+    call _SelectPrereqTypeFromString
     test eax,eax
     je   .Read_Next
     mov  cl,al
- 	xor  eax,eax
-	mov  eax, 1   
-	shl  eax,cl
+     xor  eax,eax
+    mov  eax, 1   
+    shl  eax,cl
     or   edi,eax
     jmp  .Read_Next
 
 .Read_Last:
     pop  eax
-	call _SelectPrereqTypeFromString
+    call _SelectPrereqTypeFromString
     test eax,eax
     je   .Retn
     mov  cl,al
- 	xor  eax,eax
-	mov  eax, 1   
-	shl  eax,cl
+     xor  eax,eax
+    mov  eax, 1   
+    shl  eax,cl
     or   edi,eax
-	
+    
 .Retn:
     mov eax,edi
     pop ebx
@@ -113,27 +113,27 @@ _GetPrerequisiteFromString:
     pop edx
     pop edi
     retn
-	
+    
 
 _GetPrerequisiteExtendedFromString:
     push edi
     push edx
     push ecx
     push ebx
- 	xor  edi,edi
-	TechnoTypeClass.ExtPrerequisiteOffset.Get(esi,di)
+     xor  edi,edi
+    TechnoTypeClass.ExtPrerequisiteOffset.Get(esi,di)
     cmp  di, 0
     je  .Retn ; just return 0
 ; clear 32-bit field
     lea  ecx, [esi + edi]
-	mov  edx,8
+    mov  edx,8
 .RepeatZero:
     mov  dword [ecx],0
-	dec  edx
-	add  ecx,4
-	cmp  edx,0
-	jg   .RepeatZero
-	
+    dec  edx
+    add  ecx,4
+    cmp  edx,0
+    jg   .RepeatZero
+    
     cmp  eax, 0
     je  .Retn ; just return 0
     mov  ebx,eax
@@ -147,22 +147,22 @@ _GetPrerequisiteExtendedFromString:
     test eax,eax
     je  .Read_Last    
     mov  byte [eax], 0
-	lea  eax,[eax + 1]
+    lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
     call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
     cmp  al,0xff ; STRUCT_NONE
     jz   .Read_Next
-	; al is any value from 00 to FE
-	; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
-	; esi is the pointer to the type
-	lea  edx, [esi + edi]
-	xor  ecx, ecx
-	mov  cl, al
+    ; al is any value from 00 to FE
+    ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
+    ; esi is the pointer to the type
+    lea  edx, [esi + edi]
+    xor  ecx, ecx
+    mov  cl, al
     sar  cl, 3
-	add  edx, ecx
-	mov  cl, al
-    and  cl, 0xf
+    add  edx, ecx
+    mov  cl, al
+    and  cl, 7
     mov  al, 1
     shl  al, cl
     or   BYTE [edx], al
@@ -173,26 +173,27 @@ _GetPrerequisiteExtendedFromString:
     call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
     cmp  al,0xff ; STRUCT_NONE
     jz   .Retn
-	; al is any value from 00 to FE
-	; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
-	; esi is the pointer to the type
-	lea  edx, [esi + edi]
-	xor  ecx, ecx
-	mov  cl, al
+    ; al is any value from 00 to FE
+    ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
+    ; esi is the pointer to the type
+    lea  edx, [esi + edi]
+    xor  ecx, ecx
+    mov  cl, al
     sar  cl, 3
-	add  edx, ecx
-	mov  cl, al
-    and  cl, 0xf
+    add  edx, ecx
+    mov  cl, al
+    and  cl, 7
     mov  al, 1
     shl  al, cl
     or   BYTE [edx], al
-	
+    
 .Retn:
+    ;mov eax,edi
     pop ebx
     pop ecx
     pop edx
     pop edi
-	TechnoTypeClass.Prerequisite.Get(esi,eax)
+    TechnoTypeClass.Prerequisite.Get(esi,eax)
     retn
 
 

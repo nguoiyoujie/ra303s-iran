@@ -73,8 +73,8 @@ _BuildingTypeClass__Read_INI_Extended:
     push edi
     push eax
 
-	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,BuildingTypeClass.Offset.ExtendedPrerequisite)
-	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
+    TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,BuildingTypeClass.Offset.ExtendedPrerequisite)
+    TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
 
     BuildingTypeClass.IsSimpleDamage.Read(esi,edi)
     BuildingTypeClass.IsRegulated.Read(esi,edi)
@@ -430,7 +430,7 @@ _GetSpecialsFromString:
     push edx
     push ecx
     push ebx
- 	xor  edi,edi
+     xor  edi,edi
     cmp  eax, 0
     je  .Retn ; just return 0
     mov  ebx,eax
@@ -444,30 +444,30 @@ _GetSpecialsFromString:
     test eax,eax
     je  .Read_Last    
     mov  byte [eax], 0
-	lea  eax,[eax + 1]
+    lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
-	call _SelectSpecialTypeFromString
+    call _SelectSpecialTypeFromString
     test eax,eax
     je   .Retn
     mov  cl,al
- 	xor  eax,eax
-	mov  eax, 1   
-	shl  eax,cl
+     xor  eax,eax
+    mov  eax, 1   
+    shl  eax,cl
     or   edi,eax
     jmp  .Read_Next
 
 .Read_Last:
     pop  eax
-	call _SelectSpecialTypeFromString
+    call _SelectSpecialTypeFromString
     test eax,eax
     je   .Retn
     mov  cl,al
- 	xor  eax,eax
-	mov  eax, 1   
-	shl  eax,cl
+     xor  eax,eax
+    mov  eax, 1   
+    shl  eax,cl
     or   edi,eax
-	
+    
 .Retn:
     mov eax,edi
     pop ebx
@@ -475,7 +475,7 @@ _GetSpecialsFromString:
     pop edx
     pop edi
     retn
-	
+    
 
 _SelectSpecialTypeFromString:
     ;select SpecialType by performing string compare on eax
@@ -556,8 +556,8 @@ _SelectSpecialTypeFromString:
     pop ebx
     pop edx
     retn
-	
-	
+
+
 _GetOverlayFromString:
    ;create overlay animation with string from eax
     push ebx
@@ -567,7 +567,7 @@ _GetOverlayFromString:
     push edi 
     cmp  eax, 0
     je   .Retn
-	push 0x005E8EDE ; ".SHP"
+    push 0x005E8EDE ; ".SHP"
     mov  ecx,eax
     lea  eax,[Buffer_BuildingType]
     xor  ebx,ebx
