@@ -3,12 +3,68 @@
 
 @HOOK 0x00425CB9 _Voc_From_Name_Add_Unhardcoded_Sound_Effects
 @HOOK 0x00425D0E _Voc_Name_Add_Unhardcoded_Sound_Effects
+@HOOK 0x00425FDF _Sound_Effect_Call_Where
 @HOOK 0x004260AB _Sound_Effect_Call_Voc_Name
+@HOOK 0x004260F5 _Sound_Effect_Call_Priority
 
 SoundEffectsList    TIMES 2304 dd    0 ; 9 * 256
 SoundEffectsCount    dd    0
+%define        OriginalSoundEffectsCount       165 ; Remastered list lies, there is no BEACON
+;%define        SoundEffectName                 0x005FE08F
 
 str_SoundEffects db"SoundEffects",0
+
+_Sound_Effect_Call_Where:
+; eax is the voc id
+    cmp  ax, OriginalSoundEffectsCount
+    jge  .Check_Unhardcoded_Sound_Effects
+
+.Normal_Code:
+    shl  eax,0x3
+    add  eax,ecx
+    mov  cl,BYTE [eax + 0x005FE098]
+    jmp  0x00425FEA
+
+.Check_Unhardcoded_Sound_Effects:
+    sub  ax, OriginalSoundEffectsCount
+    cmp  WORD ax, [SoundEffectsCount]
+    jge  .Return_False
+
+    push edx
+    lea  edx,[SoundEffectsList+eax*9]
+    add  edx,8
+    mov  cl, BYTE [edx]
+    pop  edx
+    jmp  0x00425FEA
+
+.Return_False:
+    mov  cl, 0
+    jmp  0x00425FEA
+
+
+_Sound_Effect_Call_Priority:
+; edx is the voc id
+    cmp  dx, OriginalSoundEffectsCount
+    jge  .Check_Unhardcoded_Sound_Effects
+
+.Normal_Code:
+    mov  edx,DWORD [esi + edx*0x8 + 0x005FE094]
+    jmp  0x004260FC
+
+.Check_Unhardcoded_Sound_Effects:
+    sub  dx, OriginalSoundEffectsCount
+    cmp  WORD dx, [SoundEffectsCount]
+    jge  .Return_False
+
+    lea  edx,[SoundEffectsList+edx*9]
+    add  edx,4
+    mov  edx, DWORD [edx]
+    jmp  0x004260FC
+
+.Return_False:
+    mov  dl, 1
+    jmp  0x004260FC
+
 
 _Sound_Effect_Call_Voc_Name:
     call 0x00425CF8  ;    char * Voc_Name(VocType)
@@ -17,7 +73,7 @@ _Sound_Effect_Call_Voc_Name:
     jmp  0x004260B4
 
 _Voc_Name_Add_Unhardcoded_Sound_Effects:
-    cmp  ax, 165
+    cmp  ax, OriginalSoundEffectsCount
     jge  .Check_Unhardcoded_Sound_Effects
 
 .Normal_Code:
@@ -26,7 +82,7 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
     jmp  0x00425D15
 
 .Check_Unhardcoded_Sound_Effects:
-    sub  ax, 165
+    sub  ax, OriginalSoundEffectsCount
     cmp  WORD ax, [SoundEffectsCount]
     jge  .Return_False
 
@@ -41,7 +97,7 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
     jmp  0x00425D15
 
 _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
-    cmp  cx, 165
+    cmp  cx, OriginalSoundEffectsCount
     jl   0x00425CC8
 
 .Check_Unharded_Sound_Effects:
@@ -78,7 +134,7 @@ _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
 .Return_VocType:
     xor  eax, eax
     mov  ax, cx
-    add  ax, 165
+    add  ax, OriginalSoundEffectsCount
     jmp  0x00425CED
 
 Init_SoundEffect:
