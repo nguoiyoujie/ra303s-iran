@@ -19,7 +19,7 @@ d_Occupy_00_11                dw 0x80,0x81,0x7FFF                               
 d_Occupy_01_01                dw 1,0x81,0x7FFF                                            ;07, 
 d_Occupy_01_11                dw 1,0x80,0x81,0x7FFF                                       ;08, 
 d_Occupy_10_11                dw 0,0x80,0x81,0x7FFF                                       ;09, C&C NUKE
-d_Occupy_11_01                dw 0x80,0x81,0x101,0x7FFF                                   ;10, C&C HAND
+d_Occupy_11_01                dw 0,1,0x81,0x7FFF                                          ;10,
 d_Occupy_11_11                dw 0,1,0x80,0x81,0x7FFF                                     ;11, POWR
 d_Occupy_111_111              dw 0,1,2,0x80,0x81,0x82,0x7FFF                              ;12, AFLD
 d_Occupy_1111_1111            dw 0,1,2,3,0x80,0x81,0x82,0x83,0x7FFF                       ;13, C&C AFLD
@@ -37,6 +37,7 @@ d_Occupy_S11_00_00_11         dw 0,1,0x100,0x180,0x181,0x7FFF                   
 d_Occupy_S111_000_000_111     dw 0xFF80,0xFF81,0xFF82,0x100,0x101,0x102,0x7FFF            ;25, Overlap special (3 cells above, and 3 cells on 3rd row)
 d_Occupy_000_111_011          dw 0x80,0x81,0x82,0x101,0x102,0x7FFF                        ;26, Special (C&C WEAP)
 d_Occupy_111_000_100          dw 0,1,2,0x100,0x7FFF                                       ;27, Overlap special (C&C WEAP)
+d_Occupy_00_11_01             dw 0x80,0x81,0x101,0x7FFF                                   ;28, C&C HAND
 
 %define d_ExitPyle            0x005FEA5C      ;0
 %define d_ExitSub             0x005FEA78      ;1
@@ -211,7 +212,7 @@ _SelectExitList:
     jnz .Check_ExitCCHand
     mov  eax,d_ExitWeap
     jmp .Retn
-	
+    
 .Check_ExitCCHand:
     cmp  eax,3
     jnz .Check_ExitCCWeap
@@ -413,11 +414,16 @@ _SelectOccupyList:
 
 .Check_Occupy_111_000_100:
     cmp  eax,27
-    jnz .DefaultNull
+    jnz .Check.Occupy_00_11_01
     mov  eax,d_Occupy_111_000_100
     jmp .Retn
 
-
+.Check.Occupy_00_11_01:
+    cmp  eax,28
+    jnz .DefaultNull
+    mov  eax,d_Occupy_00_11_01
+    jmp .Retn
+    
 .DefaultNull:
     xor  eax,eax             ;Occupy_NULL
 
