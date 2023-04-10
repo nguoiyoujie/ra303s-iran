@@ -194,6 +194,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/tesla_charging_unhardcode.asm" 
 %include "src/new_tracktypes.asm"
 %include "src/bullet_scatter.asm"
+%include "src/aircraft_transports_face_north.asm"
 
 ;%include "src/refinery_experiment.asm" 
 
