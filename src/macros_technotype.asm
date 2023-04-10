@@ -116,17 +116,21 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro TechnoTypeClass.FromIndex    4
     push esi
+    push edi
     mov  esi, [%2] 
-    cmp  %1, esi
+    mov  edi, %1
+    cmp  edi, esi
     jge  %%invalid_type
 
     mov  esi, [%3] 
-    shl  %1, 2
-    add  esi, %1
+    shl  edi, 2
+    add  esi, edi
+    pop  edi
     mov  %4, [esi] 
     jmp  %%done
 
   %%invalid_type:
+    pop  edi
     mov  %4, 0
   %%done:
     pop  esi
