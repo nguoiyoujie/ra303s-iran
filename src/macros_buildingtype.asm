@@ -284,7 +284,7 @@ str.BuildingTypeClass.WarFactoryExitTrack       db"WarFactoryExitTrack",0       
 %define BuildingTypeClass.WarFactoryOverlayAnim.Get(ptr_type,reg_output)       ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayAnim, reg_output
 %define BuildingTypeClass.WarFactoryOverlayAnim.Set(ptr_type,value)            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayAnim, value
 %define BuildingTypeClass.WarFactoryOverlayAnim.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayAnim, str.BuildingTypeClass.WarFactoryOverlayAnim, function
-																			   
+
 %define BuildingTypeClass.WarFactoryOverlayFrames.Get(ptr_type,reg_output)     ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayFrames, reg_output
 %define BuildingTypeClass.WarFactoryOverlayFrames.Set(ptr_type,value)          ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.WarFactoryOverlayFrames, value
 %define BuildingTypeClass.WarFactoryOverlayFrames.Read(ptr_type,ptr_rules)     ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.WarFactoryOverlayFrames, str.BuildingTypeClass.WarFactoryOverlayFrames
