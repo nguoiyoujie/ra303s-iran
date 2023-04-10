@@ -27,15 +27,18 @@ str_DirectionalAnimTypes  db    "DirectionalAnimTypes",0
 AnimTypesTypesExtCount    db    0
 NewAnimTypeHeapCount      dd    0
 
+temp_AnimID               db    0
 temp_AnimStr              dd    0
 temp_AnimDirection        dd    0
 temp_AnimDirFrameStart    dd    0
 temp_AnimDirFrameBiggest  dd    0
 
 %define        OriginalAnimTypesHeapCount    0x50
-%define        AnimDirStageFrames            18 ; use SAMFIRE
+%define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
 
 temp_animtypeclass_constructor_arg dd 0
+
+; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
 
 _Anim_From_Name_Unhardcode_AnimTypes:
     mov  al, [NewAnimTypeHeapCount]
@@ -64,6 +67,7 @@ _TechnoClass_FireAt_ApplyDirectionalAnim:
     jmp  0x005655CF
 
 .DirectionalAnim:
+    push edx
     mov  edx,eax
     mov  eax,DWORD [ebp-0x18]
     add  eax,0xba
@@ -71,7 +75,8 @@ _TechnoClass_FireAt_ApplyDirectionalAnim:
     add  al,0x10
     and  eax,0xff
     sar  eax,0x5
-    add  al,0x19 
+    add  al,dl 
+    pop  edx
     mov  BYTE [ebp-0x10], al
     jmp  0x005655D7
 
@@ -143,21 +148,28 @@ Init_DirectionalAnimTypeClass:
     mov  dword [temp_AnimDirFrameStart],0
     mov  dword [temp_AnimDirFrameBiggest],4 ; ANIM_SAM_N
     mov  dword [temp_AnimStr], edx
+    mov  byte [temp_AnimID], bl
     ; edx should have the name of the INI section already
     jmp  .Create
 
 .Next:
     push eax
     mov  eax, dword [temp_AnimDirection]
-    cmp  eax, 0x8
-    jge  .Ret
+    cmp  eax, 0
+    jnz  .Next2
+    add  dword [temp_AnimDirFrameStart], AnimDirStageFrames * 8
+    add  dword [temp_AnimDirFrameBiggest], AnimDirStageFrames * 8
+
+.Next2:
     inc  eax
+    cmp  eax, 0x8
+    jge  .RetPop
     mov  dword [temp_AnimDirection],eax
     mov  eax, dword [temp_AnimDirFrameStart]
-    add  eax, AnimDirStageFrames
+    sub  eax, AnimDirStageFrames
     mov  dword [temp_AnimDirFrameStart],eax
     mov  eax, dword [temp_AnimDirFrameBiggest]
-    add  eax, AnimDirStageFrames
+    sub  eax, AnimDirStageFrames
     mov  dword [temp_AnimDirFrameBiggest],eax
     pop  eax
 
@@ -173,8 +185,11 @@ Init_DirectionalAnimTypeClass:
     mov  ecx, eax
     pop  eax
 
-    mov  edx, ebx
-    add  edx, OriginalAnimTypesHeapCount ; AnimType
+    xor  edx, edx
+    mov  dl, byte [temp_AnimID]
+    shl  dl, 3 ; multiply by 8
+    add  dl, byte [FirstDirectionalAnim] ; AnimType
+    add  edx, dword [temp_AnimDirection]
     mov  ebx, ecx ; Name/ID
 
     ; these settings were derived from ANIM_SAM_N / SAMFIRE
@@ -201,6 +216,9 @@ Init_DirectionalAnimTypeClass:
     call 0x00407388 ; AnimTypeClass::AnimTypeClass(AnimType,char                *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
 
     jmp .Next
+
+.RetPop:
+    pop  eax
 
 .Ret:
     retn
