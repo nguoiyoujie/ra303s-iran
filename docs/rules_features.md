@@ -495,11 +495,11 @@ A new unit exit track (ID 67) has been created to emulate the exit track used by
 Determines the size occupied by this building, not inclusive of the bib. This affects the placement of the image. The following values are supported:
 
 > 0 = 1x1 (most base defenses)\
-> 1 = 2x1 (Tesla Coil, Gap Generator)\
-> 2 = 1x2 (SAM Site)\
+> 1 = 2x1 (SAM Site)\
+> 2 = 1x2 (Tesla Coil, Gap Generator)\
 > 3 = 2x2 (Power Plant, Chronosphere)\
-> 4 = 2x3 (War Factory, Airfield)\
-> 5 = 3x2 \
+> 4 = 2x3 (C&C Hand of Nod)\
+> 5 = 3x2 (War Factory, Airfield)\
 > 6 = 3x3 (Adv. Power Plant, Refinery)\
 > 7 = 4x2 (C&C Airfield)\
 > 8 = 5x5 
