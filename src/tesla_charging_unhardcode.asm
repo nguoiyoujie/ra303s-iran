@@ -1,5 +1,6 @@
 @HOOK 0x0045571B _BuildingClass_ShapeNumber_RemoveTeslaIDCheck
 @HOOK 0x00460414 _BuildingClass_AnimationAI_IncludeAllChargingBuildings
+@HOOK 0x0045FCC7 _BuildingClass_ChargingAI_Jammed_PreventsCharge
 @HOOK 0x0045FCF1 _BuildingClass_ChargingAI_UseActiveAnimCount
 @HOOK 0x0045FDA7 _BuildingClass_ChargingAI_UnhardcodeRate
 @HOOK 0x0045FDAE _BuildingClass_ChargingAI_UseWeaponChargeVoice
@@ -14,7 +15,6 @@ _BuildingClass_ShapeNumber_RemoveTeslaIDCheck:
     jmp  0x00455729
 
 ; unsure why shape number for charged state is 3 (and not the start or end of the animation, but let's keep it for now 
-
 _BuildingClass_AnimationAI_IncludeAllChargingBuildings:
     TechnoTypeClass.PrimaryWeapon.Get(eax,eax)
     cmp  eax,0x0
@@ -22,6 +22,12 @@ _BuildingClass_AnimationAI_IncludeAllChargingBuildings:
     test BYTE [eax + 0x8],0x8 ; Charges
     jnz  0x00460422
     jmp  0x00460433
+
+_BuildingClass_ChargingAI_Jammed_PreventsCharge:
+    jz   0x0045FDCA
+    test byte [ebx + 0xd7],0x10
+    jnz  0x0045FDCA
+    jmp  0x0045FCCD
 
 _BuildingClass_ChargingAI_UseActiveAnimCount:
 ; original check uses (Fetch_Stage() >= 9) to set IsCharged state. This means buildings with Active anim frame count below 9 will not be able to meet this condition

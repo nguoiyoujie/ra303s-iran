@@ -196,6 +196,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/bullet_scatter.asm"
 %include "src/aircraft_transports_face_north.asm"
 
+%include "src/experiment_remap.asm" 
 ;%include "src/refinery_experiment.asm" 
 
 %ifdef USE_NOCD

@@ -115,6 +115,7 @@ str_usebetagunboat db "UseBetaGunboat",0
 str_colorremapsidebarcameoicons db "ColorRemapSidebarIcons",0
 str_usedosinterfacemod db "UseDOSInterfaceMod",0
 str_computerparanoidforcedisabledskirmish db "ComputerParanoidForceDisabledSkirmish",0
+str_remapjammedbuildings db "RemapJammedBuildings",0
 
 str_stringtableoffsets db "StringTableOffsets",0
 str_stringtableoffset_newinfantrytypes db "Infantry",0
@@ -206,6 +207,8 @@ fixaisendingtankstopleft db 0
 generatememorydump    db 0
 usedosinterfacemod db 0
 spawner_is_active  dd 0
+
+remapjammedbuildings db 0
 
 stringtableoffset_newinfantrytypes  dd 0
 stringtableoffset_newunittypes      dd 0
@@ -796,6 +799,9 @@ _Init_Game_Hook_Load:
 
     call_INIClass__Get_Bool 0x00666688, str_ai, str_computerparanoidforcedisabledskirmish, 1
     mov  [computerparanoidforcedisabledskirmish], al
+
+    call_INIClass__Get_Bool 0x00666688, str_general, str_remapjammedbuildings, 0
+    mov  [remapjammedbuildings], al
 
 
 
