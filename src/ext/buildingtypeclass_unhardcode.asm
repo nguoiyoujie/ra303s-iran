@@ -145,6 +145,8 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
 
     BuildingTypeClass.FromIndex(BuildingType.WEAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.WARFACTORY)
+    ;BuildingTypeClass.WarFactoryOverlayFrames.Set(edi, 5)
+    ;BuildingTypeClass.WarFactoryOverlayRate.Set(edi, 8)
 
     BuildingTypeClass.FromIndex(BuildingType.PDOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
