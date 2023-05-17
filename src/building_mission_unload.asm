@@ -159,16 +159,21 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor2:
 
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor3:
-    cmp  DWORD [Cache_WarFactory_DoorAnim],0
+    cmp  DWORD [Cache_WarFactory_DoorAnim],-1
     je   .Default
+    cmp  DWORD [Cache_WarFactory_DoorAnim],0
+    je   .None
     mov  edx ,DWORD [Cache_WarFactory_DoorAnim]
     jmp  .Ret
 
 .Default:
     mov  edx ,DWORD [0x00635BA8] ; location for WEAP2 shape object
-
 .Ret:
     jmp  0x00455497
+.None:
+    jmp  0x0045549E
+
+
 
 
 _BuildingClass_ExitObject_Factories:

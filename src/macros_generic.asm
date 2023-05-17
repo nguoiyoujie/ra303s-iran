@@ -124,13 +124,13 @@
 ; %3 should be dword register (e.g. eax, ebx)
 ; return <output>: the int value
 %macro ObjectTypeClass.GetInt   3
-    mov  %3, [%1+%2]
+    mov  DWORD %3, [%1+%2]
 %endmacro
 
 ; args <Pointer to type class>,<offset of data>,<new value>
 ; %3 should be dword register (e.g. eax, ebx)
 %macro ObjectTypeClass.SetInt    3
-    mov  [%1+%2], %3
+    mov  DWORD [%1+%2], %3
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
@@ -140,9 +140,9 @@
 %macro ObjectTypeClass.ReadInt    4
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  ecx, [%1+%3]
+    mov  ecx, DWORD [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  [%1+%3], eax
+    mov  DWORD [%1+%3], eax
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
@@ -153,10 +153,10 @@
 %macro ObjectTypeClass.ReadIntExt    5
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  ecx, [%1+%3]
+    mov  ecx, DWORD [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     call %5
-    mov  [%1+%3], eax
+    mov  DWORD [%1+%3], eax
 %endmacro
 
 ;;;;;;;;;;;;;;; STRING ;;;;;;;;;;;;;;;
@@ -172,9 +172,9 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
 %macro ObjectTypeClass.ReadString    4
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  ecx, [%1+%3]
+    mov  ecx, DWORD [%1+%3]
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
-    mov  [%1+%3], ObjectTypeClass.StringBuffer
+    mov  DWORD [%1+%3], ObjectTypeClass.StringBuffer
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
@@ -239,7 +239,7 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
 %macro ObjectTypeClass.ReadStringExt    5
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  ecx, [%1+%3]
+    mov  DWORD ecx, [%1+%3]
     mov  DWORD [ObjectTypeClass.ValueBuffer], ecx
     xor  ecx, ecx
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
