@@ -6,6 +6,9 @@ spawn.bat
 # patched executables
 /*.exe
 
+# custom build scripts
+/build_*.cmd
+
 # Misc Junk
 #*#
 *~
