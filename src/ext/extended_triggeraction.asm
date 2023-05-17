@@ -19,6 +19,8 @@
 @HOOK 0x0055E396 _TeamClass__Coordinate_Attack_Chrono_Tank_Check
 @HOOK 0x0055E1EE _TeamClass__Coordinate_Attack_Chrono_Tank_Check2
 @HOOK 0x0055F9E3 _TeamClass__TMission_Spy_Chrono_Tank_Check
+@HOOK 0x00554171 _TActionClass__operator__TAction_Text_Trigger_Override_Color
+
 
 temp_unk8 dd 0
 temp_unkC dd 0
@@ -994,6 +996,134 @@ Iron_Curtain_Trigger_Object:
 .Ret:
     retn
 
+; Requires remake_shroud_mapedges.asm and resizable_map.asm to work seamlessly
+Set_Map_Dimensions:
+    Save_Registers
+    mov  eax, [ebp+TActionClass_This]
+    mov  ecx, dword [eax+9] ; Parameter 3, Height
+    and  ecx, 127
+    push ecx
+    mov  ecx, dword [eax+5] ; Parameter 2, Width
+    and  ecx, 127
+    mov  edx, dword [eax+1] ; Paramater 1, Top left Cell (X + 128 * Y)
+    mov  ebx, edx
+    sar  ebx, 7
+    and  edx, 127
+    and  ebx, 127
+
+    mov  eax, 0x00668250 ; global MouseClass
+    mov  edi, dword [eax + 4]
+    call dword [edi + 0x5c]
+	
+	; iterate over all buildings to update IsLocked. Buildings that are within the play field have IsLocked set
+    mov  DWORD [What_Heap1], 0x0065D8BC
+    mov  DWORD [What_Heap2], 0x0065D8E4
+    call Loop_Over_Object_Heap_And_Update_IsLocked
+	
+    ; force radar refresh. Use a trick by toggling zoom mode twice.
+    mov  eax, dword [0x00668250 + 0xc4a] ; TacticalCoord
+    call 0x004AC3C0 ; Coord_Cell
+    mov  edx, eax
+	mov  eax, 0x00668250 ; global RadarClass
+    call 0x0052F294 ; RadarClass::Zoom_Mode
+    mov  eax, dword [0x00668250 + 0xc4a] ; TacticalCoord
+    call 0x004AC3C0 ; Coord_Cell
+    mov  edx, eax
+	mov  eax, 0x00668250 ; global RadarClass
+    call 0x0052F294 ; RadarClass::Zoom_Mode
+	
+    ; force template refresh
+    mov  edx, 1
+    mov  eax, 0x00668250 ; MouseClass Map
+    call 0x004CAFF4 ; GScreenClass::Flag_To_Redraw(int)
+
+    ; force zone refresh
+    mov  edx, 0xFF
+    mov  eax, 0x00668250 ; MouseClass Map
+    call 0x004FF690 ; MapClass::Zone_Reset
+
+    ; the old map bounds may have IsVisible set, that needs to be reverted to redraw the shroud creep at the map edge during DisplayClass::Redraw_Shadow
+    ; Explicitly clear IsVisible on all cells to force recalculation
+    mov  edx, -1
+.Next_Iter:
+    inc  edx
+    cmp  edx, 0x4000
+    jge  .Done_Iter
+
+    mov  ebx,edx
+    lea  ecx, [ebx*8+0]
+    sub  ecx, ebx
+    shl  ecx, 2
+    add  ecx, ebx
+    mov  eax, dword [0x0066826C]
+    add  ecx, ecx
+    add  eax, ecx ; 0x0066826C + 0x3a * cell
+    xor  ecx, ecx
+    mov  cl, byte [eax+2h]
+    and  cl, ~0x8 ; clear IsVisible
+    mov  byte [eax+2h], cl 
+    jmp  .Next_Iter
+
+.Done_Iter:
+    ; force full refresh (includes shroud refresh)
+    mov  edx, 1
+    mov  eax, 0x00668250 ; MouseClass Map
+    call 0x0052DA14 ; RadarClass::Draw_It
+
+    
+.Ret:
+    Restore_Registers
+    retn
+
+Loop_Over_Object_Heap_And_Update_IsLocked:
+.Setup_Buildings_Loop:
+    xor  ecx, ecx
+    mov  [Capture_Attached_unk6C], ecx
+    mov  [Capture_Attached_unk68], ecx
+    jmp  .Buildings_Loop
+
+.Next_Loop_Iteration:
+    mov  ebx, [Capture_Attached_unk68]
+    mov  ecx, [Capture_Attached_unk6C]
+    add  ebx, 4
+    inc  ecx
+    mov  [Capture_Attached_unk68], ebx
+    mov  [Capture_Attached_unk6C], ecx
+
+    .Buildings_Loop:
+    mov  edi, [Capture_Attached_unk6C]
+    mov  edx, [What_Heap1]
+    mov  edx, [edx]
+    cmp  edi, edx
+    jge  .Ret ; RETURN
+    mov  edx, [Capture_Attached_unk68]
+    mov  eax, [What_Heap2]
+    mov  eax, [eax]
+    add  eax, edx
+    mov  edi, [eax]
+    test edi, edi
+    jz   .Next_Loop_Iteration
+    mov  eax, [edi+5h]
+    call 0x004AC3C0 ; Coord_Cell
+    mov  edx, eax
+	mov  eax, 0x00668250 ; global RadarClass
+    call 0x004FE8AC ; MapClass::In_Radar
+    test eax, eax
+    jnz  .Set_IsLocked
+.Reset_IsLocked:
+    xor  eax, eax
+    mov  al, byte [edi+71h]
+    and  al, 0xFF - 0x20
+    mov  byte [edi+71h], al 
+    jmp  .Next_Loop_Iteration
+.Set_IsLocked:
+    xor  eax, eax
+    mov  al, byte [edi+71h]
+    or   al, 0x20
+    mov  byte [edi+71h], al   
+    jmp  .Next_Loop_Iteration
+.Ret:
+    retn
 
 _TActionClass__operator__New_Trigger_Actions:
 
@@ -1045,6 +1175,9 @@ _TActionClass__operator__New_Trigger_Actions:
     jz   .New_Chrono_Shift_Trigger_Object
     cmp  al, 67
     jz   .New_Iron_Curtain_Trigger_Object
+    ; Lovalmidas add-ons
+    cmp  al, 68
+    jz   .New_Set_Map_Dimensions
 
     cmp  al, 24h         ; Check to see if action ID is less than 37
     ja   0x0055418A ; NO_ACTION
@@ -1150,3 +1283,19 @@ _TActionClass__operator__New_Trigger_Actions:
     mov  edx, 0x1F ; RTTIType == VESSELTYPE
     call Add_To_Sidebar_Action
     TAction__Operator__Epilogue
+
+.New_Set_Map_Dimensions:
+    call Set_Map_Dimensions
+    TAction__Operator__Epilogue
+
+
+_TActionClass__operator__TAction_Text_Trigger_Override_Color:
+    mov  eax, [ebp+TActionClass_This]
+    mov  eax, dword [eax+5] ; Parameter 2, Color 
+    cmp  al, 0xFF  ; PCOLOR_NONE
+    je	 .Default
+    cmp  al, 13 ; with added colors ; was 11  ; PCOLOR_COUNT
+    jl   0x00554176
+.Default:
+    mov  eax,3 ; default: PCOLOR_GREEN
+    jmp  0x00554176

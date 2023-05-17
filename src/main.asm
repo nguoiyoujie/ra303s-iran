@@ -198,6 +198,8 @@ _str_version: db "3.03p-iB1v1",0
 
 %include "src/experiment_remap.asm" 
 %include "src/building_autobase_base_housecheck.asm" 
+%include "src/remake_shroud_mapedges.asm" 
+%include "src/resizable_map.asm" 
 ;%include "src/refinery_experiment.asm" 
 
 %ifdef USE_NOCD
