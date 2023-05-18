@@ -152,8 +152,10 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
     TechnoTypeClass.FromIndex  edx,%2,%3,edi
     push eax
     push edx
+    push edi
     ObjectTypeClass.ID  edi,edx
     call _strcmpi
+    pop  edi
     pop  edx
     test eax, eax
     pop  eax
