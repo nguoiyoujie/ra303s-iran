@@ -44,6 +44,8 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.TurretFrameStart.Read(esi,edi)
     UnitTypeClass.TurretFrameCount.Read(esi,edi)
 
+    UnitTypeClass.DeploysInto.Read(esi,edi,_GetBuildingTypeIDFromString)
+
 
     pop  esi
 .Ret:
@@ -75,3 +77,16 @@ _TFixedIHeapClass__UnitTypeClass__Save_New_Size:
 _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size:
     mov  edx, New_UnitTypeClass_Size
     jmp  0x004C968A
+
+_GetBuildingTypeIDFromString:
+    ;select BuildingType by performing string compare on eax
+    push ebx
+    cmp  eax, 0
+    jle  .Retn ; just return 0
+    BuildingTypeClass.FromID(eax,ebx)
+    mov  ebx, dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax, ebx
+.Retn:
+    pop ebx
+    retn

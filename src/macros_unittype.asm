@@ -3,6 +3,30 @@
 %define Array_UnitTypeClass                0x0065DF20
 %define Count_UnitTypeClass                0x0065DEF8
 
+%define        UnitType.4TNK    0
+%define        UnitType.3TNK    1
+%define        UnitType.2TNK    2
+%define        UnitType.1TNK    3
+%define        UnitType.APC     4
+%define        UnitType.MNLY    5
+%define        UnitType.JEEP    6
+%define        UnitType.HARV    7
+%define        UnitType.ARTY    8
+%define        UnitType.MRJ     9
+%define        UnitType.MGG     10
+%define        UnitType.MCV     11
+%define        UnitType.V2RL    12
+%define        UnitType.TRUK    13
+%define        UnitType.ANT1    14
+%define        UnitType.ANT2    15
+%define        UnitType.ANT3    16
+%define        UnitType.CTNK    17
+%define        UnitType.TTNK    18
+%define        UnitType.QTNK    19
+%define        UnitType.DTRK    20
+%define        UnitType.STNK    21
+
+
 ; define building type field definitions
 %define UnitTypeClass.Offset.IsCrateGoodie                 0x192    ; BOOL
 %define UnitTypeClass.Bit.IsCrateGoodie                    1    
@@ -43,6 +67,7 @@
 %define UnitTypeClass.Offset.TurretAdjustY                 0x223    ; INT
 %define UnitTypeClass.Offset.TurretFrameStart              0x227    ; WORD
 %define UnitTypeClass.Offset.TurretFrameCount              0x229    ; WORD
+%define UnitTypeClass.Offset.DeploysInto                   0x22B    ; BYTE
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -66,6 +91,7 @@ str.UnitTypeClass.TurretAdjustX                 db"TurretAdjustX",0             
 str.UnitTypeClass.TurretAdjustY                 db"TurretAdjustY",0               ;new ini feature
 str.UnitTypeClass.TurretFrameStart              db"TurretFrameStart",0            ;new ini feature
 str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0            ;new ini feature
+str.UnitTypeClass.DeploysInto                   db"DeploysInto",0                 ;new ini feature
 
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_UnitTypeClass, Array_UnitTypeClass, reg_output
@@ -158,5 +184,7 @@ str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0          
 %define UnitTypeClass.TurretFrameCount.Set(ptr_type,value)                 ObjectTypeClass.SetWord                ptr_type, UnitTypeClass.Offset.TurretFrameCount, value
 %define UnitTypeClass.TurretFrameCount.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadWord               ptr_type, ptr_rules, UnitTypeClass.Offset.TurretFrameCount, str.UnitTypeClass.TurretFrameCount
 
-
+%define UnitTypeClass.DeploysInto.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, UnitTypeClass.Offset.DeploysInto, reg_output
+%define UnitTypeClass.DeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.DeploysInto, value
+%define UnitTypeClass.DeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, UnitTypeClass.Offset.DeploysInto, str.UnitTypeClass.DeploysInto, function
 

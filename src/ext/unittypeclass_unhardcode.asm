@@ -70,6 +70,7 @@ Init_UnitTypeClass:
 _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes:
 
     Loop_Over_RULES_INI_Section_Entries str_UnitTypes, Init_UnitTypeClass
+    call _UnitTypeClass__Init_Heap_OverrideExistingUnitTypes
 
 .Ret:
     lea  esp, [ebp-14h]
@@ -94,3 +95,11 @@ _UnitTypeClass__From_Name_Unhardcode_UnitTypes_Count:
     cmp  dl, al
     jl   0x00578980
     jmp  0x0057899E
+
+_UnitTypeClass__Init_Heap_OverrideExistingUnitTypes:
+    ; explicit set default PrereqType values for compatibility
+
+    UnitTypeClass.FromIndex(UnitType.MCV,edi)
+    UnitTypeClass.DeploysInto.Set(edi, BuildingType.FACT)
+
+	retn
