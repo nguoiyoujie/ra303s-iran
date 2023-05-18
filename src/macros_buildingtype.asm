@@ -3,6 +3,54 @@
 %define Array_BuildingTypeClass            0x0065DDA4
 %define Count_BuildingTypeClass            0x0065DD7C
 
+%define        BSIZE_11    0
+%define        BSIZE_21    1
+%define        BSIZE_12    2
+%define        BSIZE_22    3
+%define        BSIZE_23    4
+%define        BSIZE_32    5
+%define        BSIZE_33    6
+%define        BSIZE_42    7
+%define        BSIZE_55    8
+
+%define        BuildingType.ATEK    0
+%define        BuildingType.IRON    1
+%define        BuildingType.WEAP    2
+%define        BuildingType.PDOX    3
+%define        BuildingType.PBOX    4
+%define        BuildingType.HBOX    5
+%define        BuildingType.DOME    6
+%define        BuildingType.GAP     7
+%define        BuildingType.GUN     8
+%define        BuildingType.AGUN    9
+%define        BuildingType.FTUR    10
+%define        BuildingType.FACT    11
+%define        BuildingType.PROC    12
+%define        BuildingType.SILO    13
+%define        BuildingType.HPAD    14
+%define        BuildingType.SAM     15
+%define        BuildingType.AFLD    16
+%define        BuildingType.POWR    17
+%define        BuildingType.APWR    18
+%define        BuildingType.STEK    19
+%define        BuildingType.HOSP    20
+%define        BuildingType.BARR    21
+%define        BuildingType.TENT    22
+%define        BuildingType.KENN    23
+%define        BuildingType.FIX     24
+%define        BuildingType.BIO     25
+%define        BuildingType.MISS    26
+%define        BuildingType.SYRD    27
+%define        BuildingType.SPEN    28
+%define        BuildingType.MSLO    29
+%define        BuildingType.FCOM    30
+%define        BuildingType.TSLA    31
+%define        BuildingType.WEAF    32
+%define        BuildingType.FACF    33
+%define        BuildingType.SYRF    34
+%define        BuildingType.SPEF    35
+%define        BuildingType.DOMF    36
+
 ; define building type field definitions
 %define BuildingTypeClass.Offset.IsBase                    0x192    ; BOOL // Already supported by game INI
 %define BuildingTypeClass.Bit.IsBase                       1    
