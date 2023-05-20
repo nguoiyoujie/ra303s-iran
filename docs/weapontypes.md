@@ -1,0 +1,56 @@
+[Return to Features](./features.md)
+
+## WeaponTypes
+
+WeaponTypes represent the logical aspects of a damage-dealing object. It includes visual and audio references to provide immersive feedback to the player.
+
+-------
+
+ - [Feature Availability](#feature-availability)
+ - [Modification References](#modification-references) 
+ - [General Settings](#general-settings) 
+
+-------
+
+### Feature Availability
+
+Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
+
+However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
+
+`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
+
+-------
+
+### Modification References
+
+Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
+
+The following desciptions can be used as a reference point to its relationship with Remastered source code.
+
+ - ```Exposed <Reference>```
+   
+   The variable, usually defined in an internal class, is now exposed via this INI key.
+
+ - ```Modified <Reference>```
+   
+   Modifications have been applied to the meaning or use of this variable.
+
+ - ```New logic```
+
+   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
+
+Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
+
+-------
+
+### General Settings
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;WeaponType&gt;] ► ChargeSound (string)</code></b></summary>
+
+```New logic```
+
+If used on a weapon with Charges=true, overrides the charging sound. This string must be already defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+
+</details>

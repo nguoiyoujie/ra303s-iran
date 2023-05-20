@@ -1,5 +1,15 @@
-Red Alert 3.03 "s" series
-================================================================================
+# Red Alert 3.03 "s" series
+
+-------
+
+ - [About the Project](#about-the-project)
+ - [Building the Project](#building-the-project)
+ - [Features Documentation](#features-documentation) 
+ - [Credits](#credits) 
+
+-------
+
+### About the Project
 
 This is an extension of the "p"/"r" series by Iran, whose project this is forked
 from. This extension contains several features made to extend the functions 
@@ -8,32 +18,11 @@ available to a modder or mission writer.
 Of note, addition of new technotypes are possible with decent functionality, as 
 well as customization of properties in rules.ini normally locked behind code.
 
-Below is the original Readme from the "p" series, which better explains what the
-project was about.
+[Link](./README_p.md) is the original Readme from the "p" series, for historicity.
 
-================================================================================
+-------
 
-This represents the culmination of many years work at modding and patching the
-Windows 95 edition of Command & Conquer: Red Alert. See `features.txt` for a
-list of added features. The complete feature list also includes the following
-separate software:
-
- - http://cncnet.org/ (Online multiplayer service used by the RA1 community)
- - https://github.com/Iran/cnc-ddraw (hifi's cnc-ddraw patched with fixed videos,
-   score screen and map selection screen patching and better frame limiter.
- - https://github.com/Iran/RedAlertConfig
- - https://github.com/Iran/RedAlertLauncher
- - https://github.com/Iran/RAED-Standalone (Old map editors with patches and
-   working stand-alone, including hacked support for desert and winter theaters
-   added by this patch)
-
-The complete patch also includes game data files fixes and additions. These aren't
-included in this repository yet but will be added in the future once a command
-line tool to build MIX files is finished. (MIX files are files archives loaded
-by the game.)
-
-Building
---------------------------------------------------------------------------------
+### Building the Project
 
 Windows binaries of the tools to modify `ra95.dat` are in `tools/`. Users of
 other OSes can find the tools' source at in the
@@ -41,18 +30,24 @@ other OSes can find the tools' source at in the
 patches are in `src/`. Just run `build.cmd` from the root directory with
 `ra95.dat` present to compile the tools and apply the patches.
 
-### Instructions
+**Instructions**
 
-1. `git clone git@github.com:cnc-patch/ra303p.git`
-2. `cd ra303p`
-3. `build.cmd`
+1. Clone or pull this repository
+2. Ensure `ra95.dat` exists on the local repository space
+3. Run `build.cmd` or `build_pause.cmd`
+4. Copy the generated `ra95.exe` file to a RA game directory of your choice.
 
-The PE section insert tool, "extpe" might not be production quality for anything
-else than Red Alert. I hope it can be perfected to add a section to any image
-without causing problems for the running program.
+-------
 
-Authors
---------------------------------------------------------------------------------
+### Features Documentation
+
+You may find the features documentation [here](./docs/features.md).
+
+-------
+
+### Credits
+
+** Authors of the original patch **
 
 *In alphabetical order*
 
@@ -60,10 +55,7 @@ Authors
  - iran
  - sonarpulse
 
-Acknowledgments
---------------------------------------------------------------------------------
-
-This patch couldn't have been made without the help of the following persons:
+** Helpers of the original patch **
 
  - *CCHyper*: Sharing his vast analysed Red Alert engine database with me and
    code contributions.  Also extended the excutable with a game icon.
@@ -85,17 +77,3 @@ This patch couldn't have been made without the help of the following persons:
  - *Plotkite_Wolf*: RedAlertLauncher background image.
  - *djohe*: Making useful test maps and reporting game bugs, testing too.
 
-If your work is used by this patch and you're not listed here, our apologies in
-advance. Please send one of the authors a message and we'll rectify the issue.
-
-Issues
---------------------------------------------------------------------------------
-
-The following known issues exist:
-
- - The 'credits slideshow' screen has slight visual glitching and doesn't show or
-   rotate background images anymore. This was needed to prevent multiple crashes
-   when this screen is shown.
- - When playing windowed on Windows Vista and later Windows operating systems, if
-   Windows Aero is enabled the game might be laggy sometimes. To prevent this enable
-   the 'Disable desktop composition' compatibility option on ra95.exe.

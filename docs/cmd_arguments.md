@@ -1,15 +1,10 @@
-### Executable Argument Features ###
+## Executable Argument Features ##
+
+The patched Red Alert executable supports an extension of command-line arguments, allowing external programs to control the game's initial state.
 
 -------
 
-*The list of features added by Iran's work is not yet added here. This will be done in the future*
-
-
-
--------
-
-##### Arguments #####
-
+### Arguments ###
 
 
 **`-NOTITLE`**
@@ -46,17 +41,11 @@ Presets the difficulty of the first mission that is loaded. Usually used with th
 
 
 
-**`-NEWMISSIONS`**
-
-Automatically closes the game after returning to the menu screen from an active game. Usually used with the -M:<mission> argument to emulate spawn behaviour. If used without the -M:<mission> argument, closes the game after leaving the first loaded game.
-
-
-
 **`-LAN`**
 **`-INTERNET`**
 **`-SKIRMISH`**
 
-Automatically opens the relevant dialog upon entering the main menu
+Automatically opens the relevant dialog upon entering the main menu screen.
 
 
 
