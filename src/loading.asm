@@ -33,7 +33,7 @@ MapSelectCBuf TIMES 128 db 0
 ChronoReinforceTanks dd 0
 UseAtomWhiteScreenEffectInMP dd 0
 UseSinglePlayerAtomDamage dd 0
-AtomRange dd 0
+AtomRadius dd 0
 
 str_custommissions db "Custom Missions",0
 str_expansionissions db "Expansions Missions",0
@@ -47,7 +47,7 @@ str_MapSelectC db "MapSelectC",0
 str_ChronoReinforceTanks db"ChronoReinforceTanks",0
 str_UseAtomWhiteScreenEffectInMP db"UseAtomWhiteScreenEffectInMP",0
 str_UseSinglePlayerAtomDamage db"UseSinglePlayerAtomDamage",0
-str_AtomRange db"AtomRange",0
+str_AtomRadius db"AtomRadius",0
 
 str_EasyAIGoldValue db "EasyAIGoldValue",0
 str_EasyAIGemValue db "EasyAIGemValue",0
@@ -1087,8 +1087,8 @@ _RulesClass__AI_Load:
     call_INIClass__Get_Bool esi, str_ai, str_SingleplayerAIObeyPrerequisites, [SingleplayerAIObeyPrerequisites]
     mov  [SingleplayerAIObeyPrerequisites], eax
 
-    call_INIClass__Get_Int esi, str_general, str_AtomRange, -1
-    mov  dword [AtomRange], eax
+    call_INIClass__Get_Int esi, str_general, str_AtomRadius, -1
+    mov  dword [AtomRadius], eax
 
 .Ret:
     Restore_Registers
