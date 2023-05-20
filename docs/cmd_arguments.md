@@ -1,3 +1,5 @@
+[Return to Features](./features.md)
+
 ## Executable Argument Features ##
 
 The patched Red Alert executable supports an extension of command-line arguments, allowing external programs to control the game's initial state.

@@ -15,11 +15,6 @@ Preload options can be customized on redalert.ini, which may improve the quality
  - [Video Interlacing](#video-interlacing) 
  - [Sound Overrides](#sound-overrides) 
  - [Visual Overrides](#visual-overrides) 
- - [TechnoTypes](#technotypes) 
- - [TechnoTypes](#technotypes) 
- - [TechnoTypes](#technotypes) 
- - [TechnoTypes](#technotypes) 
- - [TechnoTypes](#technotypes) 
 
 -------
 
