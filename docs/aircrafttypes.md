@@ -1,3 +1,5 @@
+[Return to Features](./features.md)
+
 ## AircraftTypes
 
 AircraftTypes represent things that... fly. They include fixed-wing and rotor-wing aircrafts. These units are generally not bound by terrain during movement.
@@ -61,9 +63,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[AircraftTypes]**\
-0=ORCA\
+```ini
+[AircraftTypes]
+0=ORCA
 1=A10
+```
 
 </details>
 

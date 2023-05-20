@@ -64,9 +64,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[VesselTypes]**\
-0=BSHIP\
+```ini
+[VesselTypes]
+0=BSHIP
 1=CARR
+```
 
 </details>
 

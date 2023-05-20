@@ -70,9 +70,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[BuildingTypes]**\
-0=COMM\
+```ini
+[BuildingTypes]
+0=COMM
 1=EYE
+```
 
 </details>
 

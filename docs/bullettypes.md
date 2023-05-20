@@ -59,8 +59,10 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[BulletTypes]**\
+```ini
+[BulletTypes]
 0=HeatSeekerAA
+```
 
 </details>
 

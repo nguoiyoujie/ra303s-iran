@@ -63,9 +63,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[InfantryTypes]**\
-0=COMMANDO\
+```ini
+[InfantryTypes]
+0=COMMANDO
 1=E5
+```
 
 </details>
 
@@ -123,9 +125,9 @@ Acts as override switch to `IsFraidyCat`. An infantry that has `IsFraidyCat` set
 
 Determines if this infantry is a civilian, applying the following changes:
 
- - Civilian voices (combine with `IsFemale` for a second set of voices)\
- - Name description is changed to `Civilian`, unless overriden by the rules / map.\
- - Score counting\
+ - Civilian voices (combine with `IsFemale` for a second set of voices)
+ - Name description is changed to `Civilian`, unless overriden by the rules / map.
+ - Score counting
   - If combined with `Cloakable`, does not uncloak to fire.
 
 </details>
@@ -151,7 +153,7 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
     <b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► ProneFireFrame (byte)</code></b>
   </summary>
 
-```Exposed InfantryTypeClass->FireFrame```
+```Exposed InfantryTypeClass->FireFrame```\
 ```Exposed InfantryTypeClass->ProneFireFrame```
 
 Determines the frame offset from the begining of the firing sequence when the weapon actually fires. This allows for certain frames of animations to pass before the actual weapon is fired. Examples of infantry with this feature is, the Grenadier, the Medic and the Mechanic.

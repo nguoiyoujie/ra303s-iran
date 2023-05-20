@@ -65,9 +65,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[UnitTypes]**\
-0=5TNK\
+```ini
+[UnitTypes]
+0=5TNK
 1=SAPC
+```
 
 </details>
 
@@ -202,8 +204,6 @@ Determines if this unit acts like the Mobile Gap Generator and produces shroud a
 
 ```New logic```
 
-**`{Rules/Map} ► [<UnitType>] ► TurretAdjustX (integer)`**
-
 Determines the horizontal turret offset
 
 </details>
@@ -212,8 +212,6 @@ Determines the horizontal turret offset
   <summary><b><code>{Rules/Map} ► [&lt;UnitType&gt;] ► TurretAdjustY (integer)</code></b></summary>
 
 ```New logic```
-
-**`{Rules/Map} ► [<UnitType>] ► TurretAdjustY (integer)`**
 
 Determines the vertical turret offset
 
@@ -224,7 +222,7 @@ Determines the vertical turret offset
 
 ```New logic```
 
-Determines the frame of the image used for the start of the turret animation. Useful in conjunction with IsRotatingTurret for objects that sport a custom turret.
+Determines the frame of the image used for the start of the turret animation. Useful in conjunction with `IsRotatingTurret` for objects that sport a custom turret.
 
 </details>
 
@@ -233,7 +231,7 @@ Determines the frame of the image used for the start of the turret animation. Us
 
 ```New logic```
 
-Determines the number of frames used for the turret animation. Useful in conjunction with IsRotatingTurret for objects that sport a custom turret.
+Determines the number of frames used for the turret animation. Useful in conjunction with `IsRotatingTurret` for objects that sport a custom turret.
 
 </details>
 

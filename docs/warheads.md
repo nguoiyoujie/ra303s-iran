@@ -1,3 +1,5 @@
+[Return to Features](./features.md)
+
 ## Warheads
 
 -------
@@ -59,9 +61,11 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[Warheads]**\
-0=SA_BIG_SPREAD\
+```ini
+[Warheads]
+0=SA_BIG_SPREAD
 1=HE_BIG_SPREAD
+```
 
 </details>
 
@@ -99,7 +103,7 @@ Defaults to 100% for all armor types.
 <details>
   <summary><b><code>{Rules/Map} ► [General] ► UseAtomWhiteScreenEffectInMP (boolean)</code></b></summary>
 
-```New logic (inherited from 'p' patch)```
+```Inherited from iran's r-series)```
 
 Normally, detonating a nuke flashes a white screen in single-player maps. This is suppressed in multiplayer. Toggling this option re-enables it.
 
@@ -108,7 +112,7 @@ Normally, detonating a nuke flashes a white screen in single-player maps. This i
 <details>
   <summary><b><code>{Rules/Map} ► [General] ► UseSinglePlayerAtomDamage (boolean)</code></b></summary>
 
-```New logic (inherited from 'p' patch)```
+```Inherited from iran's r-series)```
 
 Atom damage is generally reduced in multiplayer battles. Toggle this on to use singleplayer values.
 

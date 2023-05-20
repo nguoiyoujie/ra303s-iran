@@ -1,3 +1,5 @@
+[Return to Features](./features.md)
+
 ## Sounds
 
 -------
@@ -57,8 +59,10 @@ Care must be taken that the list keys follow the zero-based index exactly. Dupli
 
 Example as follows:
 
-**[SoundEffects]**\
-0=BAZOOK1\
+```ini
+[SoundEffects]
+0=BAZOOK1
 1=GUN13
+```
 
 </details>

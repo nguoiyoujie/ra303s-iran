@@ -189,9 +189,9 @@ Extended behavior: The list of valid prerequisite strings now include any of the
 Like the original, the game checks for at least one item fulfilling each of the listed prerequisites. 
 
 Example: If a unit has Prerequisite=POWER,BARRACKS,FIX,STEK. The prerequisite requirements are:
- - At least one building with PrerequisiteType=POWER (by default this is POWR or APWR)\
- - At least one building with PrerequisiteType=BARRACKS (by default this is BARR or TENT)\
- - At least one [FIX] (Service Depot)\
+ - At least one building with PrerequisiteType=POWER (by default this is POWR or APWR)
+ - At least one building with PrerequisiteType=BARRACKS (by default this is BARR or TENT)
+ - At least one [FIX] (Service Depot)
  - At least one [STEK] (Soviet Tech Center)
 
 </details>
