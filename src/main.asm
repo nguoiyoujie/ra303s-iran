@@ -76,35 +76,34 @@ _str_version: db "3.03p-iB1v1",0
 ;extended classses
 %include "src/ext/savegame_support.asm" ; this needs to go first before other extended classes
 
-%include "src/ext/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
-%include "src/ext/TechnoTypeClass/extended_technotypeclass_loading.asm"
-%include "src/ext/UnitTypeClass/extended_unittypeclass_loading.asm"
-%include "src/ext/UnitTypeClass/extended_unittypeclass_additions.asm"
-%include "src/ext/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
 %include "src/ext/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
 %include "src/ext/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
-%include "src/ext/VesselTypeClass/extended_vesseltypeclass_loading.asm"
+%include "src/ext/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
+%include "src/ext/TechnoTypeClass/extended_technotypeclass_loading.asm"
+%include "src/ext/UnitTypeClass/extended_unittypeclass_loading.asm"
+%include "src/ext/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/ext/WeaponTypeClass/extended_weapontypeclass_loading.asm"
+%include "src/ext/VesselTypeClass/extended_vesseltypeclass_loading.asm"
+
+%include "src/ext/AircraftTypeClass/extended_aircrafttypeclass.asm"
 %include "src/ext/extended_houseclass.asm"
 %include "src/ext/extended_buildingclass.asm"
 %include "src/ext/extended_technoclass.asm"
-%include "src/ext/extended_aircrafttypeclass.asm"
 %include "src/ext/extended_footclass.asm"
 %include "src/ext/extended_triggeraction.asm"
 
 ; Unhardcode
 %include "src/ext/early_rules_ini_load.asm"
-
-%include "src/ext/warheadtypeclass_unhardcode.asm"
-%include "src/ext/bullettypeclass_unhardcode.asm"
-%include "src/ext/weapontypeclass_unhardcode.asm"
+%include "src/ext/AircraftTypeClass/aircrafttypeclass_unhardcode.asm"
+%include "src/ext/AnimTypeClass/animtypeclass_unhardcode.asm"
+%include "src/ext/BuildingTypeClass/buildingtypeclass_unhardcode.asm"
+%include "src/ext/BulletTypeClass/bullettypeclass_unhardcode.asm"
+%include "src/ext/InfantryTypeClass/infantrytypeclass_unhardcode.asm"
+%include "src/ext/UnitTypeClass/unittypeclass_unhardcode.asm"
+%include "src/ext/VesselTypeClass/vesseltypeclass_unhardcode.asm"
+%include "src/ext/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
+%include "src/ext/WeaponTypeClass/weapontypeclass_unhardcode.asm"
 %include "src/ext/soundeffectslist_unhardcode.asm"
-%include "src/ext/animtypeclass_unhardcode.asm"
-%include "src/ext/unittypeclass_unhardcode.asm"
-%include "src/ext/infantrytypeclass_unhardcode.asm"
-%include "src/ext/buildingtypeclass_unhardcode.asm"
-%include "src/ext/vesseltypeclass_unhardcode.asm"
-%include "src/ext/aircrafttypeclass_unhardcode.asm"
 
 ; AI for unhardcoded
 %include "src/ai_can_build.asm" ; added by lovalmidas
