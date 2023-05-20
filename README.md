@@ -47,7 +47,7 @@ You may find the features documentation [here](./docs/features.md).
 
 ### Credits
 
-** Authors of the original patch **
+**Authors of the original patch**
 
 *In alphabetical order*
 
@@ -55,7 +55,7 @@ You may find the features documentation [here](./docs/features.md).
  - iran
  - sonarpulse
 
-** Helpers of the original patch **
+**Helpers of the original patch**
 
  - *CCHyper*: Sharing his vast analysed Red Alert engine database with me and
    code contributions.  Also extended the excutable with a game icon.

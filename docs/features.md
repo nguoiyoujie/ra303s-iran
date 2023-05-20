@@ -6,11 +6,16 @@ The feature list is still in the works, pending write-ups on the changes from th
 
 In the meantime, you may refer to the below for information. 
 
-** Command-line Arguments **
+**Command-line Arguments**
 
  - [Command-line Arguments](./cmd_arguments.md)
 
-** Game Objects **
+**Additional INI Options**
+
+ - [RedAlert INI Options](./redalert_ini.md)
+ - [Music INI Options](./music_ini.md)
+
+**Game Definition Extensions**
 
  - [TechnoTypes](./technotypes.md)
    - [BuildingTypes](./buildingtypes.md)
@@ -25,181 +30,18 @@ In the meantime, you may refer to the below for information.
  - [Warheads](./warheads.md)
  - [WeaponTypes](./weapontypes.md)
 
+ - [Trigger Actions](./trigger_actions.md)
+
  - [Other Changes](./other_changes.md)
+
 
 -------
 
+Unsorted features from previous patches are kept here.
 
 
-
-
-
-
-
-
-
-Features
+Features 
 ====================================================================================================
-
-1.   Added support for playing the game at higher resolutions. The resolution settings are read from
-     REDALERT.INI's [Options] section. The following two keywords are read:
-
-     ```ini
-     Width=
-     Height=
-     ```
-     Hires improvements over hifi's original code for this:
-      - The invisible Ant Missions stereo and Westwood Logo credits selection areas are now adjusted
-        for hi-res, meaning if you click their area on the main menu graphics they'll be activated,
-        like they should.
-      - Fixes for the border around the main menu graphics glitching after playing a game, graphical
-        glitching when showing the "restate briefing" screen and some other graphical
-        glitches. Thanks to Nyerguds for practically writing this for me!
-      - If a TITLE.PCX is found that doesn't have the same dimensions as the original TITLE.PCX
-        file, it will be displayed on the screen in the top left, this allows people to create their
-        own custom main menu title graphics and have them work with hi-res.
-      - The timer tab for maps that use them (e.g. the second Allies mission) has its width
-        adjusted.
-      - The expansion missions dialogs are now adjusted for hires, instead of appearing in the top
-        left of the screen.
-      - Screenshake should be adjusted for high res now. (Thanks to Arda.dll.inj by AlexB)
-      - The "Mission Accomplished", "Mission Failed" and "The Game is a Draw" red text now have
-        their height and width adjusted for high res (Thanks to Arda.dll.inj by AlexB)
-      - The score screen is now fully displayed in the top left, instead of showing the score
-        background in the middle
-      - Fixed the power indicator displaying glitched when there's no power and in certain other
-        scenarios
-      - Added extended sidebar (using graphics and memory addresses taken from Arda, by AlexB)
-      - 640x480 does not show black bars on the top and bottom of the screen anymore.
-      - You no longer need to scroll the map and open the options menu to fix glitching with maps
-        smaller than your resolution.
-
-     The original code for this high resolution feature was written by hifi.
-
-2.   VQA640 files are now centered, only the intro sequence with a Longbow helicopter hitting a
-     Mammoth Tank is a VQA640 file though.
-
-3.   Fixed a crash with fences placed on the northern border of the map that are destroyed. (from
-     hifi's p-series, thanks to AlexB)
-
-4.   No-CD mode can be enabled/disabled with the NoCD= (yes/no) keyword under the [Options] section
-     of REDALERT.INI. (from hifi's p-series)
-
-5.   The Counterstrike expansion can be enabled/disabled with the CounterstrikeEnabled= (yes/no)
-     keyword under the [Options] section of REDALERT.INI. Likewise there's a AftermathEnabled=
-     (yes/no) keyword to enable/disable the Aftermath expansion.
-
-6.   A crash relating to the a max limit being reached (e.g. that of airplanes) has been
-     fixed. (from hifi's p-series). When a max unit limit has been reached the game will play the
-     "unable to build more sound".
-
-7.   FunkyFr3sh's OOS-FIX.INI file will be loaded (if it's found) while still being compatible
-     online with 3.03 players not using this fix. This fix prevents desyncing after playing certain
-     (most?) modded maps online and then playing another map. It also fixes the cause of the desync
-     itself, namely that after playing certain modded maps/missions certain memory used by the game
-     for its settings (e.g. unit cost) won't be reset when playing a normal map/mission. This has to
-     do with some really terrible programming but is a bit technical to explain. Suffice to say this
-     fixes things like the Mobile Radar Jammer gaining a Tesla weapon after playing certain
-     Counterstrike expansion missions, etc.
-
-8.  Messages sent by other players during a match now appear for 15 seconds in the top left corner
-     now, instead of the previous 9 seconds.
-
-9.  Added an REDALERT.INI keyword ShowAllMusic= (yes/no) under the [Options] section to
-     enable/disable showing ALL the game's music, normally the game only shows some music depending
-     on what side you're playing as. With this option enabled it always shows all music except for
-     the score, map and main menu music.
-
-10.  Capture the flag has been enabled for skirmish. Westwood added specific checks to disable this
-     game mode for skirmish, but I don't know why. Be warned.
-
-11.  All multiplayer settings are now configurable, inside redalert.ini add:
-
-     ```ini
-     [MultiplayerDefaults]
-     Money=10000
-     ShroudRegrows=false
-     CaptureTheFlag=false
-     Crates=false
-     Bases=true
-     OreRegenerates=true
-     UnitCount=0
-     TechLevel=10
-     AIDifficulty=2 ; 0 = easy, 1 = Medium, 2 = Hard
-     AIPlayers=1
-     ```
-
-     Note the following:
-      - You can start a skirmish game with no AI players by setting AIPlayers to 0, note that after
-        playing a game like this the game will automatically set the AI players slider to 1.
-      - You can start a game with a max of 2.7 billion credits, this works online too even if other
-        players don't run my patch.
-      - If UnitCount multiplied by players is too high, the game will crash.
-      - Setting AIPlayers to higher than 7 causes the game to freeze.
-
-12.  Extra songs can be added to the game by adding them to a MUSIC.INI control file, it should look
-     like:
-
-     ```ini
-     ; music.ini file for extra music addon
-     [Fullnames]
-     1=The Second Hand (Retaliation)
-     [Filenames]
-     1=2nd_hand.AUD
-     [Tracklength]
-     1=283 ; in seconds
-     ```
-
-     Etc for every new song. Make sure there's an empty (blank) line at the end of the file or the
-     last entry won't be read properly.
-
-13.  The game now supports loading The Lost Files movies compiled by Nyerguds.
-
-14.  The game will now load and play sizzle3.vqa, sizzle4.vqa and introx.vqa in the sneak preview
-     menu if found.
-
-15.  Playing the ENGLISH.VQA intro is now optional. a new REDALERT.INI boolean option
-     PlayEnglishIntro= under the "Options" section controls this.
-
-16.  Fixed the in-game displayed name of various songs, Twin Cannon misnamed as "Twin" and most
-     Counterstrike songs.
-
-17.  Fix for a rare issue where the game would report there is barely any free disk space left when
-     there's plenty. The game now always thinks there is enough free disk space left.
-
-18.  Greece, Spain and Turkey are now all selectable in multiplayer.
-
-19.  Fix added for cnc-ddraw crash in the credits slide show screen once the first text reaches the
-     top of the screen. This fix causes slight graphical glitching sadly and as a result I removed
-     the loading of background images for the credits screen.
-
-20.  New RULES.INI AftermathFastBuildSpeed= yes/no keyword under the section [Aftermath], with this
-     enabled there won't be a cap for build speed increase when you buy additional production
-     facilities of the same type (e.g. more than two Barracks)and the Aftermath expansion is
-     installed. If you want to use this online you need to play versus other players running this
-     patch and the "Force AM fast build speed" RULES.INI file (this is also available as a
-     RedAlertConfig.exe option).
-
-21.  New command-line arguments (Thanks to CCHyper):
-      - `-ANTMISSIONS`: Starts the hidden ant missions campaign.
-      - `-SKIRMISH`:    Loads the skirmish menu.
-      - `-LAN`:         Loads the LAN menu.
-
-22.  Optional deinterlacing of videos, this is controlled by the VideoInterlaceMode= keyword in
-     REDALERT.INI under the [Options] section, if set to 2 videos are deinterlaced, if set to 0
-     they're horizontally interlaced and when set to 1 they're supposed to be vertically interlaced
-     (though the vertical interlacing doesn't seem to work). The game's previously unknown
-     deinterlacing feature was discovered by AlexB, he also wrote a fix for a bit of graphical
-     glitching at the bottom of the screen.
-
-23.  The game no longer requires mpgdll.dll. This DLL was never used and contains MPEG-2 video
-     loading code for a never released Red Alert 1 DVD with higher quality movies.
-
-24.  Added a SkipScoreScreen= (yes/no) keyword under [Options] in REDALERT.INI, when set to 'yes'
-     the single player and multiplayer score screens won't be shown.
-
-25.  It's now possible to have a random starting song start after a map is loaded, the keyword
-     RandomStartingSong= (yes/no) under [Options] in REDALERT.INI controls this.
 
 26.  More MIX files are loaded now:
 
@@ -218,50 +60,11 @@ Features
      13 `expand3.MIX` until `expand10.MIX` (in addition to expand.MIX and expand2.MIX)
      14. `movies-1.MIX` until `movies-10.MIX`
 
-27.  Fixed a bug where Skirmish menu nick name/color/side settings aren't saved when you modify
-     them, unless you also modify your nick name. (Thanks to Arda.dll.inj by AlexB)
-
-28.  Fixed a bug where LAN menu nick name/color/side settings aren't saved. You still need to create
-     a new game or join an existing one for these settings to be saved though.
-
-29.  Fixed lag when leaving the Network/LAN menu when there are many players in the menu, for
-     example while playing on CnCNet.
-
-30.  When first buying a Radar Dome the top of the sidebar will now show the zoomed out map, instead
-     of the zoomed in one. Thanks to Nyerguds for showing me how he did this for his C&C95 patch and
-     giving me pointers for Red Alert.
-
 31.  The game will now tell you if you're hosting Aftermath or not when you have the aftermath
      expansion enabled. If someone without Aftermath joins your online Aftermath game (effectively
      changing your game into a non-Aftermath game) text will appear making it clear Aftermath is
      turned "off". This doesn't apply to joining games, as the needed info is only send once the
      game is started by the host, sadly..
-
-32.  Added a new RULES.INI keyword RemoveAITechupCheck= (yes/no) under the [AI] section, when set to
-     yes the AI will tech up to Radar Dome and beyond even when there are no Helipads or Airfields
-     on the map. This fix is always enabled in skirmish.
-
-33.  Added a keyword FixAIParanoid= (yes/no) under the [AI] section of RULES.INI, when set to yes
-     the Paranoid= setting will be fixed. This Paranoid= setting controls whether all the AI should
-     ally among themselves to fight you when one player is defeated. Paranoid=yes enables this, but
-     this was broken in patch 3.03. This fix is always enabled in skirmish.
-
-34.  Added a keyword FixAIAlly= (yes/no) under the [AI] section of RULES.INI, when set to yes you
-     can ally with AI players. This fix is always enabled in skirmish.
-
-35.  Optional fix for the formation exploit, the slowest unit speed is used now as formation speed
-     when this fix is enabled. The RULES.INI keyword FixFormationSpeed= (yes/no) keyword under the
-     [General] section controls whether this fix is on or off, it's off when this keyword is
-     missing. This fix is applied by default for skirmish and single player, but not online to stay
-     compatible with 3.03 online. (Taken from Arda.dll.inj by AlexB)
-
-36.  The game will no longer delete conquer.eng if it's inside the game folder. (Thanks to
-     Arda.dll.inj by AlexB)
-
-37.  Fix for green shadow issue on units like the Phase Transport. (Taken from Arda.dll.inj by
-     AlexB)
-
-38.  Fix for projectile off map crash (code from hifi, original fix by AlexB)
 
 39.  Fix for savegame loading with high resolution, when you save a game the positioning info of a
      bunch of sidebar elements is saved and they are loaded when you load the save game. I have no
@@ -282,9 +85,6 @@ Features
 
      E.g.: `GameLanguage=6` to load a Spanish language pack.
 
-41.  The game will now try to display maps from the expansions even when the expansions aren't
-     enabled.
-
 42.  Official non-expansion, Counterstrike, and Aftermath maps display in the multiplayer menus can
      be enabled/disabled with the following boolean (yes/no) REDALERT.INI [Options] section
      keywords:
@@ -293,53 +93,10 @@ Features
      DisplayOriginalMultiplayerMaps=       ; Whether to display the original 24 multiplayer maps (Load MISSIONS.PKT or not)
      DisplayCounterstrikeMultiplayerMaps=  ; Whether to display Counterstrike multiplayer maps (Load CSTRIKE.PKT or not)
      DisplayAftermathMultiplayerMaps=      ; Whether to display Aftermath multiplayer maps (Load AFTMATH.PKT or not)
-     ```
+     ``
 
-43.  Added a new RULES.INI keyword ParabombsInMultiplayer= (yes/no) under the [General] section,
-     when enabled it will make parabombs available in multiplayer (by default after an Airfield is
-     bought).
 
-44.  It is now possible to scroll the sidebar with the mouse wheel. (code written by CCHyper)
 
-45.  The Image= keyword now works in a map file, instead of just globally in RULES.INI.
-
-46.  Added a new global RULES.INI keyword EvacInMP= (yes/no) under the [General] section , when
-     enabled GNRL and Einstein get evacuated if they enter a Chinook in multiplayer. If disabled
-     this doesn't happen. Enabled by default to stay compatible with 3.03 online.
-
-47.  Building icons/cameos are now loaded even when a building is TechLevel -1 in RULES.INI under
-     [General]. This fixes an issue where enabling building buildings like the Construction Yard
-     with a map mod still caused the icon/cameo graphics not to be loaded for the structure in the
-     sidebar. This was fixed by patching out a specific check that didn't load these graphics if
-     TechLevel was equal to -1 on the building. Other objects in the game like infantry use the same
-     loading logic, but without this extra check.
-
-48.  Added REDALERT.INI keyword AlternativeRifleSound= (yes/no) under [Options]. If enabled the
-     Rifle Infantry will use an alternative firing sound. MGUNINF1 will be used as firing
-     sound. This overwrites the M1Carbine's Report= setting in RULES.INI.
-
-49.  Added REDALERT.INI keyword UseGrenadeThrowingSound= (yes/no) under [Options]. If enabled the
-     Grenadier will have a throwing sound when throwing his grenades. This overrides the Grenade's
-     Report= setting in RULES.INI.
-
-50.  Added REDALERT.INI keyword UseBetaTeslaTank= (yes/no) under [Options]. If enabled
-     betateslatank.MIX will be loaded by the game. Likewise UseBetaDestroyer= to load
-     betadestroyer.MIX, UseBetaSubmarine= to load betasubmarine.MIX, UseBetaCruiser= to load
-     betacruiser.MIX, UseBetaGunboat= to load betagunboat.MIX. These options load recreations of
-     beta graphics, the recreation for the beta Tesla Tank was made by Nyerguds, the recreations of
-     naval units were made by Allen262.
-
-51.  Fixed a bug with loading movies2.mix. If movies1.mix is found this file wasn't loaded. Now it
-     always is loaded. This affects The First Decade where the Soviet campaign movies (stored in
-     movies2.mix) would never play because TFD Red Alert 1 comes with both MIX files.
-
-52.  The game will now try to read ARAZOID.AUD and ARAZIOD.AUD. The game originally would only load
-     ARAZOID.AUD but because the file name is misspelled as 'ARAZIOD.AUD' in the game's data files
-     it was never read and the song didn't work inside the game because of this.
-
-53.  The resign hotkey now actually works. There wasn't any code to do anything when the resign
-     hotkey was pressed, even though the game read this hotkey from REDALERT.INI and also put it
-     back in REDALERT.INI.
 
 54.  Added a new hotkey to toggle the sidebar on/off. This works like pressing the TAB keyboard key
      in C&C95. This key can be set with KeySidebarToggle= under [WinHotkeys] in REDALERT.INI.
@@ -370,9 +127,6 @@ Features
      used as TUTORIAL.INI file, meaning text strings are read from the [TUTORIAL] section of the map
      in the same format as in TUTORIAL.INI. If the keyword is missing TUTORIAL.INI tutorial text
      strings are loaded.
-
-60.  When the game crashes it will now generate a crashdump file with more possibly useful info that
-     might help determine what caused the crash. (Code by hifi)
 
 61.  The game now is forced to run under single CPU affinity set, this is to prevent freezing and
      random crashes on certain CPUs.
@@ -812,93 +566,5 @@ Features
      are destroyed you would win if destroyed all blue colored Allies units and left those two
      buildings standing. That has been fixed now. (Fix made by Echo)
 
-145. Added two map keywords related to atom bomb damage:
-
-     ```ini
-     [Basic]
-     UseAtomWhiteScreenEffectInMP=Yes
-     UseSinglePlayerAtomDamage=Yes
-     ```
-146. Added new map trigger actions which can be used in both multiplayer and singleplayer maps/missions. 
-    You'll have to manually edit the [Trigs] section of the map to use them as no map editor supports them yet. 
-    See the [Trigs] section chapter in the Red Alert Single Player Mission Creation Guide for more info. A quick 
-    summary for a trigger in the [Trigs section]:
-
-    ```ini
-    name=1,2,h,i,T1,p1,p2,T2,p1,p2,R1,p1,p2,p3,R2,p1,p2,p3
-    ```
-    
-    R1 is trigger action one and p1, p2 and p3 are its parameters. R2 is trigger action two and it also 
-    has three paramters. You need to edit those parts of the trigger line to use these new triggers. 
-
-    Here's the list of new triggers:
-
-        Give_Credits_Action: ID = 40, parameter 1 = HouseType of the house to give credits, parameter 2 = 
-        amount of credits to give (negative amounts work)
-    
-        Add_Vehicle_To_Sidebar_Action: ID = 41, parameter = Vehicle internal ID number to add to sidebar 
-        (Trigger owner is used for which house to add to sidebar for)
-    
-        Add_Infantry_To_Sidebar_Action: ID = 42, parameter = Infantry internal ID number to add to sidebar 
-        (Trigger owner is used for which house to add to sidebar for)
-    
-        Add_Building_To_Sidebar_Action: ID = 43, parameter = Building internal ID number to add to sidebar 
-        (Trigger owner is used for which house to add to sidebar for)
-    
-        Add_Aircraft_To_Sidebar_Action: ID = 44, parameter = Aircraft internal ID number to add to sidebar 
-        (Trigger owner is used for which house to add to sidebar for)
-    
-        Add_Vessel_To_Sidebar_Action: ID = 45, parameter = Vessel internal ID number to add to sidebar 
-        (Trigger owner is used for which house to add to sidebar for)
-    
-        Set_View_Port_Location: ID = 50, parameter 1 = Waypoint to center viewport around (Trigger owner is 
-        used for which house to set view port location for)
-    
-        Set_Player_Control: ID = 51, parameter 1 = HouseType to set PlayerControl, parameter 2 = turn player 
-        control on/off (1/0) (Trigger owner is used for which house to give player control)
-    
-        Set_House_Primary_Color_Scheme: ID = 52, parameter 1 = HouseType to set primary color for, 
-        parameter 2 = PlayerColorType to set to
-    
-        Set_House_Secondary_Color_Scheme: ID = 53, parameter 1 = HouseType to set secondary color for, 
-        parameter 2 = PlayerColorType to set to
-    
-        Set_House_Build_Level:  ID = 54, parameter 1 = HouseType to set tech level for, parameter 2 = 
-        desired tech level
-    
-        Set_House_lQ:  ID = 55, parameter 1 = HouseType to set IQ, parameter 2 = desired IQ level
-    
-        House_Make_Ally:  ID = 56, parameter 1 = HouseType to force make ally another house, 
-        parameter 2 = HouseType of the house that will be allied
-    
-        House_Make_Enemy:  ID = 57, parameter 1 = HouseType to force make enemy another house, 
-        parameter 2 = HouseType of the house that will be enemied  
-    
-        Create_Chronal_Vortex: ID = 58, parameter 1 = waypoint to create chrono vortex at
-    
-        Nuke_Strike_On_Waypoint: ID = 59, parameter 1 = waypoint to drop nuke on
-    
-        Capture_Attached_Objects: ID = 60, parameter 1 = HouseType that will capture the attached 
-        objects ( you need to attach the trigger to the objects to capture)
-    
-        Iron_Curtain_Attached_Objects: ID = 61, parameter 1 = Amount of frames the Iron Curtain effect 
-        will be active for or -1 to use the duration defined in RULES.INI, can be used to remove the Iron 
-        Curtain effect to by using 0 as parameter (you'll need to attach the trigger to the objects to Iron Curtain)
-    
-        Create_Building_At_Waypoint: ID = 62, parameter 1 = StructType to build, Parameter 2 = waypoint to 
-        create, Parameter 3 = HouseType that will be the owner
-    
-        Set_Mission_Attached_Objects: ID 63, parameter 1 = MissionType to set (Setting buildings to mission 
-        "Selling" will sell them, mission "Repair" DOES NOT repair buildings)
-    
-        Repair_Attached_Buildings: ID 64, no parameters
-    
-        New_Chrono_Shift_Attached_Objects: ID = 65, parameter 1 = waypoint to chronoshift attached objects to
-    
-        Chrono_Shift_Trigger_Object: ID = 66, parameter 1 = waypoint to chronoshift trigger object 
-        to (chronoshifts the object that triggered this trigger event, e.g. "Entered By..")
-    
-        Iron_Curtain_Trigger_Object: ID = 67, parameter 1 = frames duration for Iron Curtain 
-        effect (Iron Curtains the object that triggered this trigger event, e.g. "Entered by..")
     
 147.	It's now possible to use BuildingTypes in TeamTypes/taskforces. So you can for example now have buildings paradropped in.

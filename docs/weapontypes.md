@@ -8,7 +8,8 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It include
 
  - [Feature Availability](#feature-availability)
  - [Modification References](#modification-references) 
- - [General Settings](#general-settings) 
+ - [New Entries](#new-entries) 
+ - [Tesla Charge Settings](#tesla-charge-settings) 
 
 -------
 
@@ -44,13 +45,38 @@ Warning: Remastered source code is not exact with legacy Red Alert. Keep this in
 
 -------
 
-### General Settings
+### New Entries
+
+These settings enable you to define new weapon entries, expanding modding capabilities.
+
+<details>
+  <summary><b><code>{Rules} ► [Weapons]</code></b></summary>
+
+```New logic```
+
+This section carries a zero-based list of IDs to be recognized as new Weapon.
+
+You may then create a INI section to edit their behaviour, as you would do for any existing Weapons.
+
+Care must be taken that the list keys follow the zero-based index exactly. Duplicate keys (e.g. two '0='), or missing keys, may crash the game at boot. The requirement for strict ordering may change in the future.
+
+Example as follows:
+
+**[Weapons]**\
+0=HandCannon\
+1=Mortar
+
+</details>
+
+-------
+
+### Tesla Charge Settings
 
 <details>
   <summary><b><code>{Rules/Map} ► [&lt;WeaponType&gt;] ► ChargeSound (string)</code></b></summary>
 
 ```New logic```
 
-If used on a weapon with Charges=true, overrides the charging sound. This string must be already defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+If used on a weapon with `Charges`=true, overrides the charging sound. This string must be already defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
 
 </details>

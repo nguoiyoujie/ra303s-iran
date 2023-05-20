@@ -10,6 +10,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Modification References](#modification-references) 
  - [New Type Extensions](#new-type-extensions) 
  - [New Armor-types](#new-armor-types) 
+ - [QoL Changes](#gol-changes) 
  - [Prerequisite System](#prerequisite-system) 
  - [General Settings](#general-settings) 
  - [Firing Offsets](#firing-offsets) 
@@ -85,6 +86,19 @@ You are expected to modify the existing Warhead entries to make use of them. See
  > 8 = Steel
 
 Special_1 and Special_2 are not yet supported in this version, but may be in the future.
+
+</details>
+
+-------
+
+### QoL Changes
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► Image (strings)</code></b></summary>
+  
+```Inherited from iran's r-series```
+
+The Image= keyword now works in a map file, instead of just globally in RULES.INI.
 
 </details>
 

@@ -44,7 +44,7 @@ Warning: Remastered source code is not exact with legacy Red Alert. Keep this in
 
 ### New Entries
 
-These settings enable you to define new animation entries, expanding modding capabilities.
+These settings enable you to define new warhead entries, expanding modding capabilities.
 
 <details>
   <summary><b><code>{Rules} ► [Warheads]</code></b></summary>
@@ -97,8 +97,31 @@ Defaults to 100% for all armor types.
 ### Atomic Weapons
 
 <details>
-  <summary><b><code>{Rules/Map} ► [General] ► AtomRadius (integer)</code></b></summary>
+  <summary><b><code>{Rules/Map} ► [General] ► UseAtomWhiteScreenEffectInMP (boolean)</code></b></summary>
 
-The radial range of nuclear warheards in the scenario, not including the center cell. Effectively the blast covers a square area of `AtomRadius * 2 + 1`. The nuke decreases in strength closer to the center; the lack of smudges will become apparent above range 40.
+```New logic (inherited from 'p' patch)```
+
+Normally, detonating a nuke flashes a white screen in single-player maps. This is suppressed in multiplayer. Toggling this option re-enables it.
 
 </details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [General] ► UseSinglePlayerAtomDamage (boolean)</code></b></summary>
+
+```New logic (inherited from 'p' patch)```
+
+Atom damage is generally reduced in multiplayer battles. Toggle this on to use singleplayer values.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [General] ► AtomRadius (integer)</code></b></summary>
+
+```New logic```
+
+The radial range of nuclear warheards in the scenario, not including the center cell. Effectively the blast covers a square area of `AtomRadius * 2 + 1`. 
+
+Note that due to a bug in the original game, damage decreases in strength closer to the center; the lack of smudges will become apparent above range 40.
+
+</details>
+
