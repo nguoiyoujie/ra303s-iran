@@ -64,7 +64,19 @@ Init_BuildingTypeClass:
     push 0
     push 2
     push 0
+
+    ; apply offset names
+    push eax
+    cmp  dword [stringtableoffset_newbuildingtypes], -1
+    je   .Default_Name
+.Offset_Name:
     add  ebx, dword [stringtableoffset_newbuildingtypes]
+    jmp  .Continue 
+.Default_Name:
+    mov  ebx, 305 ; Civilian Building
+.Continue:
+    pop  eax
+
     mov  DWORD [0x005FE83C], 6
     push 0FFFFFFFFh
     call 0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
@@ -207,8 +219,11 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
     retn
 
 _Init_Game_Set_BuildingTypes_Heap_Count:
+    ; update the stringtableoffset, if defined in Rules
     call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newbuildingtypes, [stringtableoffset_newbuildingtypes]
     mov  [stringtableoffset_newbuildingtypes], eax
+
+    ; update heap count
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
     mov  BYTE [BuildingTypesExtCount], al
     mov  edx, eax

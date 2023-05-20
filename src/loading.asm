@@ -210,11 +210,11 @@ spawner_is_active  dd 0
 
 remapjammedbuildings db 0
 
-stringtableoffset_newinfantrytypes  dd 0
-stringtableoffset_newunittypes      dd 0
-stringtableoffset_newaircrafttypes  dd 0
-stringtableoffset_newvesseltypes    dd 0
-stringtableoffset_newbuildingtypes  dd 0
+stringtableoffset_newinfantrytypes  dd -1
+stringtableoffset_newunittypes      dd -1
+stringtableoffset_newaircrafttypes  dd -1
+stringtableoffset_newvesseltypes    dd -1
+stringtableoffset_newbuildingtypes  dd -1
 
 %macro Initialize_Remap_Table 1
     xor  eax, eax

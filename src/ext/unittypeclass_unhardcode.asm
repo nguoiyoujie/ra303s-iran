@@ -59,7 +59,19 @@ Init_UnitTypeClass:
     push 0
     push 030h ;primaryoffset, was 0C0h
     push 30h ;verticaloffset
+
+    ; apply offset names
+    push eax
+    cmp  dword [stringtableoffset_newunittypes], -1
+    je   .Default_Name
+.Offset_Name:
     add  ebx, dword [stringtableoffset_newunittypes]
+    jmp  .Continue 
+.Default_Name:
+    mov  ebx, 21 ; Civilian
+.Continue:
+    pop  eax
+	
     push 1
     mov  DWORD [0x006057E4], 3 ; Turret Dir adjust
     push 2
@@ -81,8 +93,11 @@ _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes:
 
 
 _Init_Game_Set_UnitTypes_Heap_Count:
+    ; update the stringtableoffset, if defined in Rules
     call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newunittypes, [stringtableoffset_newunittypes]
     mov  [stringtableoffset_newunittypes], eax
+
+    ; update heap count
     Get_RULES_INI_Section_Entry_Count str_UnitTypes
     mov  BYTE [UnitTypesExtCount], al
     mov  edx, eax

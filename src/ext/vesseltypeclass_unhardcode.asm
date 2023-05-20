@@ -49,7 +49,19 @@ Init_VesslTypeClass:
     push 0
     push 0
     push 0
+
+    ; apply offset names
+    push eax
+    cmp  dword [stringtableoffset_newvesseltypes], -1
+    je   .Default_Name
+.Offset_Name:
     add  ebx, dword [stringtableoffset_newvesseltypes]
+    jmp  .Continue 
+.Default_Name:
+    mov  ebx, 21 ; Civilian
+.Continue:
+    pop  eax
+
     mov  DWORD [0x00605A90], 1 ; __Vessel_Idx
     call 0x00581F0C ; VesselTypeClass::VesselTypeClass(VesselType,int,char *,AnimType,int,int,int,int,int,int,int,int,int,int)
 
@@ -68,8 +80,11 @@ _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes:
     jmp  0x00584851
 
 _Init_Game_Set_VesselTypes_Heap_Count:
+    ; update the stringtableoffset, if defined in Rules
     call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newvesseltypes, [stringtableoffset_newvesseltypes]
     mov  [stringtableoffset_newvesseltypes], eax
+
+    ; update heap count
     Get_RULES_INI_Section_Entry_Count str_VesselTypes
     mov  BYTE [VesselTypesTypesExtCount], al
     mov  edx, eax

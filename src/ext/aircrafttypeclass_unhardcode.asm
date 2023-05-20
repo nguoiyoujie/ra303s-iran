@@ -53,7 +53,19 @@ Init_AircraftTypeClass:
     push 0
     push 40h
     push 0
+
+    ; apply offset names
+    push eax
+    cmp  dword [stringtableoffset_newaircrafttypes], -1
+    je   .Default_Name
+.Offset_Name:
     add  ebx, dword [stringtableoffset_newaircrafttypes]
+    jmp  .Continue 
+.Default_Name:
+    mov  ebx, 21 ; Civilian
+.Continue:
+    pop  eax
+
     mov  DWORD [0x005FDF74], 5
     call 0x00401210 ; AircraftTypeClass::AircraftTypeClass(AircraftType,int,char *,int,int,int,int,int,int,int,int,int,int,int,int,StructType,int,int,MissionType)
 
@@ -73,8 +85,11 @@ _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
     jmp  0x00403EE9
 
 _Init_Game_Set_AircraftTypes_Heap_Count:
+    ; update the stringtableoffset, if defined in Rules
     call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newaircrafttypes, [stringtableoffset_newaircrafttypes]
     mov  [stringtableoffset_newaircrafttypes], eax
+
+    ; update heap count
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
     mov  BYTE [AircraftTypesTypesExtCount], al
     mov  edx, eax
