@@ -146,7 +146,7 @@ Determines the exit coordinates, in leptons, from the top-left corner of the bui
 
 Determines if the building is a factory for a certain techno class. If BuildingType is used, the building will also play its Active animation (if defined) when a building is constructed and this building is the primary building.
 
-Note: *The Map Trigger Event [Destroyed, All Factories] as well as the AI Fire Sale check does not check for FactoryType. But checks for the PrerequisiteType= attribute. See [TechnoTypes ► Prerequisite System](../technotypes#prerequisite-system.md).*
+Note: *The Map Trigger Event [Destroyed, All Factories] as well as the AI Fire Sale check does not check for FactoryType. But checks for the PrerequisiteType= attribute. See [TechnoTypes ► Prerequisite System](../technotypes.md#prerequisite-system).*
 
 </details>
 
