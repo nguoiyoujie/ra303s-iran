@@ -14,6 +14,10 @@
 @HOOK 0x004A32AA _Combat_Modify_Damage_NegativeDamage_Always_Count4
 @HOOK 0x004A32B1 _Combat_Modify_Damage_NegativeDamage_Always_Count5
 
+@HOOK 0x00564517 _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeWeapons
+
+
+
 _WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath:
     WarheadTypeClass.ExplosionSet.Read(esi,edi)
     WarheadTypeClass.InfantryDeath.Read(esi,edi)
@@ -113,3 +117,14 @@ _Combat_Modify_Damage_NegativeDamage_Always_Count5:
     jge  0x004A32C2
     jmp  0x004A32B6
 
+_TechnoClass__AI_AllowAIToTargetAlliesWithNegativeWeapons:
+    push ecx
+    mov  eax,ecx    ; ecx is the current unit
+    mov  edx,-1
+    call 0x00560CBC ;TechnoClass::CombatDamage
+    pop  ecx
+    test eax,eax  
+    jl   0x00564524
+    mov  ebx,dword [ecx + 0x11]
+    mov  eax,ecx
+    jmp  0x0056451c
