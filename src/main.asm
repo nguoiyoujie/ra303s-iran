@@ -201,6 +201,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/resizable_map.asm" 
 %include "src/unit_deploys_into_unhardcode.asm" 
 %include "src/footclass_path.asm" 
+%include "src/vessel_carrier_autoacquire.asm" 
 
 ;%include "src/refinery_experiment.asm" 
 
