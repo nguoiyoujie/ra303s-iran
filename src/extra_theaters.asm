@@ -20,7 +20,7 @@
 @HOOK 0x004A7AD4 _Theater_From_Name_New_Theaters_Counter_Check
 
 ; was 3 originally
-%define THEATERS_COUNT 6
+%define THEATERS_COUNT 8
 
 ;Theaters array
 Temperate       db "TEMPERATE", 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
@@ -41,6 +41,12 @@ Des             db "DES", 0 ; 4 bytes
 Jungle          db "JUNGLE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
 Jungle2         db "JUNGLE", 0, 0, 0, 0 ; 10 bytes
 Jun             db "JUN",0 ; 4 bytes
+Barren          db "BARREN", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Barren2         db "BARREN", 0, 0, 0, 0 ; 10 bytes
+Bar             db "BAR",0 ; 4 bytes
+Cave            db "CAVE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Cave2           db "CAVE", 0, 0, 0, 0, 0, 0 ; 10 bytes
+Cav             db "CAV",0 ; 4 bytes
 
 _TerrainClass__Unlimbo_Theater_Check_NOP:
     jmp  0x0056AAF1
