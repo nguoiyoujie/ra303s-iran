@@ -10,10 +10,6 @@
 %define HOUSE_MULTI7 0x12
 %define HOUSE_MULTI8 0x13
 
-str_housecolors: db"HouseColors",0
-str_housecountries: db"HouseCountries",0
-str_househandicaps: db"HouseHandicaps",0
-
 Multi1_Colour:   db 0xFF
 Multi2_Colour:   db 0xFF
 Multi3_Colour:   db 0xFF
@@ -44,7 +40,7 @@ Multi8_Handicap:   db 0xFF
 ; args <HouseType for house>, <Colour to set>
 %macro Set_House_Colour 2
     mov  eax, %1
-    call 0x004D2CB0 ; HouseClass::As_Pointer()
+    call HouseClass__As_Pointer
     xor  edx, edx
     mov  dl, %2    ; Colour
     cmp  dl, 0xFF
@@ -56,7 +52,7 @@ Multi8_Handicap:   db 0xFF
 ; args <HouseType for house>, <Country to set>
 %macro Set_House_Country 2
     mov  eax, %1
-    call 0x004D2CB0 ; HouseClass::As_Pointer()
+    call HouseClass__As_Pointer
     xor  edx, edx
     mov  dl, %2    ; Country
     cmp  dl, 0xFF
@@ -68,7 +64,7 @@ Multi8_Handicap:   db 0xFF
 ; args <HouseType for house>, <Handicap to set>
 %macro Set_House_Handicap 2
     mov  eax, %1
-    call 0x004D2CB0 ; HouseClass::As_Pointer()
+    call HouseClass__As_Pointer
     xor  edx, edx
     mov  dl, %2    ; Handicap
     cmp  dl, 0xFF

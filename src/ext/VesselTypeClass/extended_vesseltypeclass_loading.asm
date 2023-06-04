@@ -13,28 +13,28 @@
 ;%define        TechnoTypeClass_Read_INI             0x00569914 ;defined in AircraftTypes
 
 _TFixedIHeapClass__VesselTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx, New_VesselTypeClass_Size, Old_VesselTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_VesselTypeClass_Size,Old_VesselTypeClass_Size
 .Ret:
-    lea  edx, [ebp-0x14]
-    mov  eax, ecx
+    lea  edx,[ebp-0x14]
+    mov  eax,ecx
     jmp  0x004D1636
 
 _TFixedIHeapClass__fn_init_New_VesselTypes_Heap_Size:
-    mov  edx, New_VesselTypeClass_Size
+    mov  edx,New_VesselTypeClass_Size
     jmp  0x004C7511
 
 _TFixedIHeapClass__VesselTypeClass__Load_New_Size:
-    mov  ebx, New_VesselTypeClass_Size
+    mov  ebx,New_VesselTypeClass_Size
     jmp  0x004D161B
 
 _TFixedIHeapClass__VesselTypeClass__Save_New_Size:
-    mov  ebx, New_VesselTypeClass_Size
+    mov  ebx,New_VesselTypeClass_Size
     jmp  0x004D1538
 
 _RulesClass_Objects_Replace_VesselTypes_Read_INI:
-    mov  DWORD eax,[ecx+eax]
+    mov  dword eax,[ecx+eax]
     mov  edx,ebx
-    mov  DWORD edi,[eax+0x21]
+    mov  dword edi,[eax+0x21]
     add  ecx,4
     inc  esi
     call VesselTypes_Read_INI
@@ -49,7 +49,7 @@ VesselTypes_Read_INI:
     mov   esi,eax
     mov   edi,edx
     call  TechnoTypeClass_Read_INI
-    test  eax,eax ;check if TechnoTypeClass_Read_INI is successful, if not, skip all other reads
+    test  eax,eax ;check if TechnoTypeClass_Read_INI is successful, if not,skip all other reads
     jz    .Ret
     
 .BeginRead:
@@ -70,7 +70,7 @@ VesselTypes_Read_INI:
     pop  esi
 
 .Ret:
-    lea  esp, [ebp-0x18]
+    lea  esp,[ebp-0x18]
     Restore_Registers
     pop   ebp
     retn

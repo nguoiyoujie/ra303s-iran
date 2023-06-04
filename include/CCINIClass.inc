@@ -11,12 +11,12 @@
 %macro call_CCINIClass__Load 3
     mov edx, %1
     mov eax, %2
-    call FileClass__FileClass
+    call CCFileClass__CCFileClass
 
     ; check ini exists
     mov eax, %2
     xor edx, edx
-    call FileClass__Is_Available
+    call CCFileClass__Is_Available
 
     ; initialize iniclass
     mov eax, %3

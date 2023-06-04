@@ -55,19 +55,19 @@
 ;%define UnitTypeClass.Offset.IsAmmoLauncher                0x193    ; BOOL
 ;%define UnitTypeClass.Bit.IsAmmoLauncher                   5    
 ; 0x194 and 0x195 are empty...  
-%define UnitTypeClass.Offset.Type                          0x196    ; BYTE
-%define UnitTypeClass.Offset.TurretOffset                  0x197    ; BYTE
-%define UnitTypeClass.Offset.DefaultMission                0x198    ; BYTE
-%define UnitTypeClass.Offset.Explosion                     0x199    ; BYTE
+%define UnitTypeClass.Offset.Type                          0x196    ; byte
+%define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
+%define UnitTypeClass.Offset.DefaultMission                0x198    ; byte
+%define UnitTypeClass.Offset.Explosion                     0x199    ; byte
 %define UnitTypeClass.Offset.MaxSize                       0x19A    ; INT
 
 ; Extended space (>= 0x19E)
 %define UnitTypeClass.Offset.ExtendedPrerequisite          0x19E    ; INTx8
 %define UnitTypeClass.Offset.TurretAdjustX                 0x21E    ; INT
 %define UnitTypeClass.Offset.TurretAdjustY                 0x223    ; INT
-%define UnitTypeClass.Offset.TurretFrameStart              0x227    ; WORD
-%define UnitTypeClass.Offset.TurretFrameCount              0x229    ; WORD
-%define UnitTypeClass.Offset.DeploysInto                   0x22B    ; BYTE
+%define UnitTypeClass.Offset.TurretFrameStart              0x227    ; word
+%define UnitTypeClass.Offset.TurretFrameCount              0x229    ; word
+%define UnitTypeClass.Offset.DeploysInto                   0x22B    ; byte
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature

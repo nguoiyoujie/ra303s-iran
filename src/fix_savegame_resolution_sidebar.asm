@@ -14,7 +14,7 @@ _Load_Game_Init_IO:
 ;    call    SidebarClass__One_Time
 ;    mov        eax, MouseClass_Map
     call SidebarClass__Init_IO
-;    mov        DWORD [stripbariconswidthoffset], 50h
+;    mov        dword [stripbariconswidthoffset], 50h
     mov  eax, MouseClass_Map
 
     push eax
@@ -87,11 +87,11 @@ _Load_Game_Init_IO:
     add  edx, [diff_width]
 
 
-    MOV  DWORD [EBX+0x1053], 0x0B4 ; left strip offset top
-    MOV  DWORD [EBX+0x132F], 0x0B4 ; right strip offset top
+    mov  dword [ebx+0x1053], 0x0B4 ; left strip offset top
+    mov  dword [ebx+0x132F], 0x0B4 ; right strip offset top
 
-    MOV  DWORD [EBX+0x104F], ecx ; left strip offset left
-    MOV  DWORD [EBX+0x132B], edx ; right strip offset left
+    mov  dword [ebx+0x104F], ecx ; left strip offset left
+    mov  dword [ebx+0x132B], edx ; right strip offset left
 
     mov  ebx, 0
     mov  eax, 0
@@ -112,14 +112,14 @@ _Load_Game_Init_IO:
     cmp  ebx, CAMEO_ITEMS*2
     jle  .Loop2
 
-    MOV  [selectbuttons+12], ecx
-    MOV  [selectbuttons+52+12], ecx
-    MOV  [selectbuttons+104+12], ecx
-    MOV  [selectbuttons+156+12], ecx
-    MOV  [selectbuttons+208+12], edx
-    MOV  [selectbuttons+260+12], edx
-    MOV  [selectbuttons+312+12], edx
-    MOV  [selectbuttons+364+12], edx
+    mov  [selectbuttons+12], ecx
+    mov  [selectbuttons+52+12], ecx
+    mov  [selectbuttons+104+12], ecx
+    mov  [selectbuttons+156+12], ecx
+    mov  [selectbuttons+208+12], edx
+    mov  [selectbuttons+260+12], edx
+    mov  [selectbuttons+312+12], edx
+    mov  [selectbuttons+364+12], edx
 
     mov  ecx, 532
     add  ecx, [diff_width]

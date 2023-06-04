@@ -1,6 +1,11 @@
-
-arg_comma  db ",",0
-
+;----------------------------------------------------------------
+; src/defines/rttitypes.asm
+;
+; RTTIType Definitions
+;   RTTIType represents the general Run-time type information (RTTI) of an object.
+;   Describes the behavior of an ObjectType or ObjectClass
+;
+;----------------------------------------------------------------
 
 ; RTTITypes
 %define RTTIType.None                        0

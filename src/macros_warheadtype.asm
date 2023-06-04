@@ -18,21 +18,21 @@
 ; 0x00d, 0x00e and 0x00f are empty
 
 ;%define WarheadTypeClass.Offset.ExplosionAnim             0x00D    ; new, animation override, byte
-%define WarheadTypeClass.Offset.ExplosionSet              0x00E    ; moved, and use BYTE // was INT, 0x01A // Already supported by game INI
-%define WarheadTypeClass.Offset.InfantryDeath             0x00F    ; moved, and use BYTE // was INT, 0x01E // Already supported by game INI
+%define WarheadTypeClass.Offset.ExplosionSet              0x00E    ; moved, and use byte // was INT, 0x01A // Already supported by game INI
+%define WarheadTypeClass.Offset.InfantryDeath             0x00F    ; moved, and use byte // was INT, 0x01E // Already supported by game INI
 
-%define WarheadTypeClass.Offset.Modifier                  0x010    ; fixed[5] // fixed is WORD, in units of 1/256
-%define WarheadTypeClass.Offset.Modifier0                 0x010    ; WORD
-%define WarheadTypeClass.Offset.Modifier1                 0x012    ; WORD
-%define WarheadTypeClass.Offset.Modifier2                 0x014    ; WORD
-%define WarheadTypeClass.Offset.Modifier3                 0x016    ; WORD
-%define WarheadTypeClass.Offset.Modifier4                 0x018    ; WORD
-%define WarheadTypeClass.Offset.Modifier5                 0x01A    ; WORD ;added
-%define WarheadTypeClass.Offset.Modifier6                 0x01C    ; WORD ;added
-%define WarheadTypeClass.Offset.Modifier7                 0x01E    ; WORD ;added
-%define WarheadTypeClass.Offset.Modifier8                 0x020    ; WORD ;added
-;%define WarheadTypeClass.Offset.Modifier9                 0x022    ; WORD
-;%define WarheadTypeClass.Offset.Modifier10                0x024    ; WORD
+%define WarheadTypeClass.Offset.Modifier                  0x010    ; fixed[5] // fixed is word, in units of 1/256
+%define WarheadTypeClass.Offset.Modifier0                 0x010    ; word
+%define WarheadTypeClass.Offset.Modifier1                 0x012    ; word
+%define WarheadTypeClass.Offset.Modifier2                 0x014    ; word
+%define WarheadTypeClass.Offset.Modifier3                 0x016    ; word
+%define WarheadTypeClass.Offset.Modifier4                 0x018    ; word
+%define WarheadTypeClass.Offset.Modifier5                 0x01A    ; word ;added
+%define WarheadTypeClass.Offset.Modifier6                 0x01C    ; word ;added
+%define WarheadTypeClass.Offset.Modifier7                 0x01E    ; word ;added
+%define WarheadTypeClass.Offset.Modifier8                 0x020    ; word ;added
+;%define WarheadTypeClass.Offset.Modifier9                 0x022    ; word
+;%define WarheadTypeClass.Offset.Modifier10                0x024    ; word
 ; 000 - 021
 
 
@@ -88,7 +88,7 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
 %macro WarheadTypeClass.ReadBool    5
     WarheadTypeClass.ID %1,edx
-    Get_Bit BYTE [%1+%3], %4
+    Get_Bit byte [%1+%3], %4
     xor  ecx, ecx
     mov  cl, al
     call_INIClass__Get_Bool %2, edx, %5, ecx
@@ -98,13 +98,13 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 %macro WarheadTypeClass.ReadByte    4
     WarheadTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  BYTE cl, [%1+%3]
+    mov  byte cl, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  BYTE [%1+%3], al
+    mov  byte [%1+%3], al
 %endmacro
 
 ; args <Internal ID of type class>
-; returns the type class pointer as EAX
+; returns the type class pointer as eax
 %macro Get_WarheadTypeClass    1
     push edx
     mov  edx, [Count_WarheadTypeClass] 

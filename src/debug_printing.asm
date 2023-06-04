@@ -21,14 +21,14 @@
 
 %define    AssertionFailed        0x005F588C
 
-str_fopenmode db "a+",0
-str_debuglog db "DebugLog.txt",0
-str_assertlog db "Assert.txt",0
-str_formatstring db "%s",0
-str_test db "test",0
-str_test2 db "test2",0
+str_fopenmode db"a+",0
+str_debuglog db"DebugLog.txt",0
+str_assertlog db"Assert.txt",0
+str_formatstring db"%s",0
+str_test db"test",0
+str_test2 db"test2",0
 
-; args: <output file>, <format>, <vargs>
+; args: <output file>,<format>,<vargs>
 %macro Debug_Log 3
     Save_Registers
 
@@ -36,14 +36,14 @@ str_test2 db "test2",0
     push %2
     push %1
 
-    mov  edx, str_fopenmode
+    mov  edx,str_fopenmode
     pop  eax
     call fopen
-    mov  ebx, eax
+    mov  ebx,eax
     push ebx
     call fprintf
-    add  esp, 0Ch
-    mov  eax, ebx
+    add  esp,0Ch
+    mov  eax,ebx
     call fclose
 
     Restore_Registers
@@ -51,10 +51,10 @@ str_test2 db "test2",0
 
 _assert_Debug:
 
-    mov  edx, str_fopenmode
+    mov  edx,str_fopenmode
     push str_assertlog
     call fopen
-    mov  ebx, eax
+    mov  ebx,eax
 
     push eax
     push ecx
@@ -63,108 +63,108 @@ _assert_Debug:
     push AssertionFailed
     push ebx
     call fprintf
-    add  esp, 14h
+    add  esp,14h
 
-    mov  eax, ebx
+    mov  eax,ebx
     call fclose
 
     jmp  0x005CDF21
 
 _OutputDebugStringW95_Hook:
     pop  eax
-    Debug_Log str_debuglog, eax, 0
-    sub  esp, 4
+    Debug_Log str_debuglog,eax,0
+    sub  esp,4
     retn
 
 _WinsockInterfaceClass__Init_Debug2:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8234
 
 _WinsockInterfaceClass__Init_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8201
 
 _WinsockInterfaceClass__Set_Socket_Options_Debug2:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A84F8
 
 _WinsockInterfaceClass__Set_Socket_Options_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A84AF
 
 _UDPInterfaceClass__Open_Socket_Debug
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A87E2
 
 _WinModemClass__Serial_Port_Open_Debug2:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005D2A93
 
 _WinModemClass__Serial_Port_Open_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005D2A1F
 
 _WinTimerClass__WinTimerClass_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005BBE46
 
 _IPXInterfaceClass__Open_Socket_Debug5:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8F71
 
 _IPXInterfaceClass__Open_Socket_Debug4:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8F29
 
 _IPXInterfaceClass__Open_Socket_Debug3:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8EE1
 
 _IPXInterfaceClass__Open_Socket_Debug2:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8E79
 
 _IPXInterfaceClass__Open_Socket_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005A8DEA
 
 _IconCacheClass__Draw_It_Debug:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     jmp  0x005C4727
 
 _WWDebugString_Hook:
-    Debug_Log str_debuglog, eax, 0
+    Debug_Log str_debuglog,eax,0
     retn
 
 _Printf_Hook:
-    mov  edx, [esp+8]
-    Debug_Log str_debuglog, edx, edi
+    mov  edx,[esp+8]
+    Debug_Log str_debuglog,edx,edi
 .Ret:
     push ebx
     push edx
-    sub  esp, 4
+    sub  esp,4
     jmp  0x005CD980
 
 ;Mono_PrintF() 0x005C3548: arg 1 = format, arg 2 = varargs
 _Mono_Printf_Redirect:
-    mov  eax, [esp+8]
-    mov  ecx, [esp+12]
-    Debug_Log str_debuglog, ecx, ebx
-    sub  esp, 4
+    mov  eax,[esp+8]
+    mov  ecx,[esp+12]
+    Debug_Log str_debuglog,ecx,ebx
+    sub  esp,4
     retn
 
 _Print_CRCs_Debug_On_Check:
     ; do cmp
-    CMP  BYTE [debuglogging], 1
+    cmp  byte [DebugLogging],1
     jz   .Debug_On
 
     retn
 
 .Debug_On:
-    Debug_Log str_debuglog, str_test2, 0
+    Debug_Log str_debuglog,str_test2,0
 
     push ebp
-    mov  ebp, esp
+    mov  ebp,esp
     push ebx
     push ecx
     push edx

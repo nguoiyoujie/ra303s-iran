@@ -1,9 +1,9 @@
-; skipscorescreen
+; SkipScoreScreen
 @HOOK 0x00540670 _Campaign_Do_Win_Score_Screen
 @HOOK 0x00546678 _Multiplayer_Score_Presentation_Start
 
 _Campaign_Do_Win_Score_Screen:
-    cmp  BYTE [skipscorescreen], 1
+    cmp  byte [SkipScoreScreen], 1
     jnz  .No_Early_Ret
     retn
 
@@ -18,7 +18,7 @@ _Campaign_Do_Win_Score_Screen:
     jmp  0x00540678
 
 _Multiplayer_Score_Presentation_Start:
-    cmp  BYTE [skipscorescreen], 1
+    cmp  byte [SkipScoreScreen], 1
     jnz  .No_Early_Ret
     retn
 

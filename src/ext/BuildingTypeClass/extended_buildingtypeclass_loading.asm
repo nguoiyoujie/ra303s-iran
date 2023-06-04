@@ -51,22 +51,22 @@ Buffer_BuildingType           times 512 db 0
 
 
 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx, New_BuildingTypeClass_Size, Old_BuildingTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_BuildingTypeClass_Size,Old_BuildingTypeClass_Size
 .Ret:
-    lea  edx, [ebp-0x14]
-    mov  eax, ecx
+    lea  edx,[ebp-0x14]
+    mov  eax,ecx
     jmp  0x004D0A56
 
 _TFixedIHeapClass__fn_init_New_BuildingTypes_Heap_Size:
-    mov  edx, New_BuildingTypeClass_Size
+    mov  edx,New_BuildingTypeClass_Size
     jmp  0x004C73F2
 
 _TFixedIHeapClass__BuildingTypeClass__Load_New_Size:
-    mov  ebx, New_BuildingTypeClass_Size
+    mov  ebx,New_BuildingTypeClass_Size
     jmp  0x004D0A3B
 
 _TFixedIHeapClass__BuildingTypeClass__Save_New_Size:
-    mov  ebx, New_BuildingTypeClass_Size
+    mov  ebx,New_BuildingTypeClass_Size
     jmp  0x004D0958
 
 _BuildingTypeClass__Read_INI_Extended:
@@ -118,7 +118,7 @@ _BuildingTypeClass__Read_INI_Extended:
     pop  esi
 
 .Ret:
-    lea  esp, [ebp-10h]
+    lea  esp,[ebp-10h]
     pop  edi
     pop  esi
     pop  ecx
@@ -132,48 +132,48 @@ _SelectFactoryType:
     push ebx ; hold eax value for multiple checks
 
 .CheckNotAString:
-    cmp  eax, 0xFF ; hack to evade residual RTTI values, since they are invalid strings
+    cmp  eax,0xFF ; hack to evade residual RTTI values, since they are invalid strings
     jle  .Retn ; just return 0
     mov  ebx,eax
 
 .Check.AircraftType:
     mov  edx,str.RTTIType.AircraftType
     call _strcmpi
-    test eax, eax
+    test eax,eax
     jnz  .Check.BuildingType
-    mov  al, RTTIType.AircraftType
+    mov  al,RTTIType.AircraftType
     jmp  .Retn
 
 .Check.BuildingType:
-    mov  edx, str.RTTIType.BuildingType
-    mov  eax, ebx
+    mov  edx,str.RTTIType.BuildingType
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.InfantryType
-    mov  al, RTTIType.BuildingType
+    mov  al,RTTIType.BuildingType
     jmp  .Retn
 
 .Check.InfantryType:
-    mov  edx, str.RTTIType.InfantryType
-    mov  eax, ebx
+    mov  edx,str.RTTIType.InfantryType
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.UnitType
-    mov  al, RTTIType.InfantryType
+    mov  al,RTTIType.InfantryType
     jmp  .Retn
 
 .Check.UnitType:
-    mov  edx, str.RTTIType.UnitType
-    mov  eax, ebx
+    mov  edx,str.RTTIType.UnitType
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.VesselType
-    mov  al, RTTIType.UnitType
+    mov  al,RTTIType.UnitType
     jmp  .Retn
 
 .Check.VesselType:
-    mov  edx, str.RTTIType.VesselType
-    mov  eax, ebx
+    mov  edx,str.RTTIType.VesselType
+    mov  eax,ebx
     call _strcmpi
     jnz  .DefaultNull
-    mov  al, RTTIType.VesselType
+    mov  al,RTTIType.VesselType
     jmp  .Retn
 
 .DefaultNull:
@@ -439,19 +439,19 @@ _GetSpecialsFromString:
     push ecx
     push ebx
      xor  edi,edi
-    cmp  eax, 0
+    cmp  eax,0
     je  .Retn ; just return 0
     mov  ebx,eax
 
 .Read_Next:
    ; the string is a comma-delimited set
-    mov  edx,arg_comma
+    mov  edx,str_Comma
     mov  eax,ebx
     push eax
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax], 0
+    mov  byte [eax],0
     lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
@@ -460,7 +460,7 @@ _GetSpecialsFromString:
     je   .Retn
     mov  cl,al
      xor  eax,eax
-    mov  eax, 1   
+    mov  eax,1   
     shl  eax,cl
     or   edi,eax
     jmp  .Read_Next
@@ -472,7 +472,7 @@ _GetSpecialsFromString:
     je   .Retn
     mov  cl,al
      xor  eax,eax
-    mov  eax, 1   
+    mov  eax,1   
     shl  eax,cl
     or   edi,eax
     
@@ -489,72 +489,72 @@ _SelectSpecialTypeFromString:
     ;select SpecialType by performing string compare on eax
     push edx
     push ebx ; hold eax value for multiple checks
-    cmp  eax, 0
+    cmp  eax,0
     je  .Retn ; just return 0
     mov  ebx,eax
 
 .Check.SONAR_PULSE:
     mov  edx,str.SpecialType.SONAR_PULSE
     call _strcmpi
-    test eax, eax
+    test eax,eax
     jnz  .Check.NUCLEAR_BOMB
-    mov  al, SpecialType.SONAR_PULSE
+    mov  al,SpecialType.SONAR_PULSE
     jmp  .Retn
 
 .Check.NUCLEAR_BOMB:
-    mov  edx, str.SpecialType.NUCLEAR_BOMB
-    mov  eax, ebx
+    mov  edx,str.SpecialType.NUCLEAR_BOMB
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.CHRONOSPHERE
-    mov  al, SpecialType.NUCLEAR_BOMB
+    mov  al,SpecialType.NUCLEAR_BOMB
     jmp  .Retn
 
 .Check.CHRONOSPHERE:
-    mov  edx, str.SpecialType.CHRONOSPHERE
-    mov  eax, ebx
+    mov  edx,str.SpecialType.CHRONOSPHERE
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.PARA_BOMB
-    mov  al, SpecialType.CHRONOSPHERE
+    mov  al,SpecialType.CHRONOSPHERE
     jmp  .Retn
 
 .Check.PARA_BOMB:
-    mov  edx, str.SpecialType.PARA_BOMB
-    mov  eax, ebx
+    mov  edx,str.SpecialType.PARA_BOMB
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.PARA_INFANTRY
-    mov  al, SpecialType.PARA_BOMB
+    mov  al,SpecialType.PARA_BOMB
     jmp  .Retn
 
 .Check.PARA_INFANTRY:
-    mov  edx, str.SpecialType.PARA_INFANTRY
-    mov  eax, ebx
+    mov  edx,str.SpecialType.PARA_INFANTRY
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.SPY_MISSION
-    mov  al, SpecialType.PARA_INFANTRY
+    mov  al,SpecialType.PARA_INFANTRY
     jmp  .Retn
 
 .Check.SPY_MISSION:
-    mov  edx, str.SpecialType.SPY_MISSION
-    mov  eax, ebx
+    mov  edx,str.SpecialType.SPY_MISSION
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.IRON_CURTAIN
-    mov  al, SpecialType.SPY_MISSION
+    mov  al,SpecialType.SPY_MISSION
     jmp  .Retn
 
 .Check.IRON_CURTAIN:
-    mov  edx, str.SpecialType.IRON_CURTAIN
-    mov  eax, ebx
+    mov  edx,str.SpecialType.IRON_CURTAIN
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.GPS
-    mov  al, SpecialType.IRON_CURTAIN
+    mov  al,SpecialType.IRON_CURTAIN
     jmp  .Retn
 
 .Check.GPS:
-    mov  edx, str.SpecialType.GPS
-    mov  eax, ebx
+    mov  edx,str.SpecialType.GPS
+    mov  eax,ebx
     call _strcmpi
     jnz  .DefaultNull
-    mov  al, SpecialType.GPS
+    mov  al,SpecialType.GPS
     jmp  .Retn
 
 .DefaultNull:
@@ -573,7 +573,7 @@ _GetOverlayFromString:
     push edx 
     push esi 
     push edi 
-    cmp  eax, 0
+    cmp  eax,0
     je   .Retn
     push 0x005E8EDE ; ".SHP"
     mov  ecx,eax

@@ -8,23 +8,23 @@
 
 ; args <HouseType to check whose alliances will be checked>, <HouseType to check for>
 %macro Is_Ally 2
-    mov  eax, %1
-    call 0x004D2CB0 ; HouseClass::As_Pointer()
-    mov  edx, %2
-    call 0x004D5FC8 ; HouseClass::Is_Ally(HousesType)
+    mov  eax,%1
+    call HouseClass__As_Pointer
+    mov  edx,%2
+    call HouseClass__Is_Ally
 %endmacro
 
 _Build_Off_Ally_Buildings:
-    cmp  BYTE [buildoffally], 0
+    cmp  byte [BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
-    xor  ecx, ecx
-    mov  BYTE cl, [eax+25h]
-    xor  ebx, ebx
-    mov  BYTE bl, [ebp-14h]
-    Is_Ally ecx, ebx
-    cmp  eax, 1
+    xor  ecx,ecx
+    mov  byte cl,[eax+25h]
+    xor  ebx,ebx
+    mov  byte bl,[ebp-14h]
+    Is_Ally ecx,ebx
+    cmp  eax,1
     jnz  .Not_Ally
 
     Restore_Registers
@@ -35,21 +35,21 @@ _Build_Off_Ally_Buildings:
     jmp  0x004AF82E
 
 .Normal_Code:
-    cmp  dl, [eax+25h]
+    cmp  dl,[eax+25h]
     jnz  0x004AF82E
     jmp  0x004AF826
 
 _Build_Off_Ally_Buildings2:
-    cmp  BYTE [buildoffally], 0
+    cmp  byte [BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
-    xor  ecx, ecx
-    mov  BYTE cl, [eax+25h]
-    xor  ebx, ebx
-    mov  BYTE bl, [ebp-14h]
-    Is_Ally ecx, ebx
-    cmp  eax, 1
+    xor  ecx,ecx
+    mov  byte cl,[eax+25h]
+    xor  ebx,ebx
+    mov  byte bl,[ebp-14h]
+    Is_Ally ecx,ebx
+    cmp  eax,1
     jnz  .Not_Ally
 
     Restore_Registers
@@ -60,21 +60,21 @@ _Build_Off_Ally_Buildings2:
     jmp  0x004AFA12
 
 .Normal_Code:
-    cmp  bh, [eax+25h]
+    cmp  bh,[eax+25h]
     jnz  0x004AFA12
     jmp  0x004AF9D8
 
 _Build_Off_Ally_Buildings3:
-    cmp  BYTE [buildoffally], 0
+    cmp  byte [BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
-    xor  ecx, ecx
-    mov  BYTE cl, [eax+25h]
-    xor  ebx, ebx
-    mov  BYTE bl, [ebp-14h]
-    Is_Ally ecx, ebx
-    cmp  eax, 1
+    xor  ecx,ecx
+    mov  byte cl,[eax+25h]
+    xor  ebx,ebx
+    mov  byte bl,[ebp-14h]
+    Is_Ally ecx,ebx
+    cmp  eax,1
     jnz  .Not_Ally
 
     Restore_Registers
@@ -85,22 +85,22 @@ _Build_Off_Ally_Buildings3:
     jmp  0x004AFAAD
 
 .Normal_Code:
-    mov  al, [eax+25h]
-    cmp  BYTE al, [ebp-0x14]
+    mov  al,[eax+25h]
+    cmp  byte al,[ebp-0x14]
     jnz  0x004AFAAD
     jmp  0x004AFAFD
 
 _Build_Off_Ally_Buildings4:
-    cmp  BYTE [buildoffally], 0
+    cmp  byte [BuildOffAlly],0
     jz   .Normal_Code_
 
     Save_Registers
-    xor  ecx, ecx
-    mov  BYTE cl, [eax+25h]
-    xor  ebx, ebx
-    mov  BYTE bl, [ebp-14h]
-    Is_Ally ecx, ebx
-    cmp  eax, 1
+    xor  ecx,ecx
+    mov  byte cl,[eax+25h]
+    xor  ebx,ebx
+    mov  byte bl,[ebp-14h]
+    Is_Ally ecx,ebx
+    cmp  eax,1
     jnz  .Not_Ally
 
     Restore_Registers
@@ -115,21 +115,21 @@ _Build_Off_Ally_Buildings4:
     nop
     nop
     nop
-    cmp  dl, [eax+25h]
+    cmp  dl,[eax+25h]
     jnz  0x004AFB98
     jmp  0x004AFB87
 
 _Build_Off_Ally_Buildings5:
-    cmp  BYTE [buildoffally], 0
+    cmp  byte [BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
-    xor  ecx, ecx
-    mov  BYTE cl, [eax+25h]
-    xor  ebx, ebx
-    mov  BYTE bl, [ebp-14h]
-    Is_Ally ecx, ebx
-    cmp  eax, 1
+    xor  ecx,ecx
+    mov  byte cl,[eax+25h]
+    xor  ebx,ebx
+    mov  byte bl,[ebp-14h]
+    Is_Ally ecx,ebx
+    cmp  eax,1
     jnz  .Not_Ally
 
     Restore_Registers
@@ -140,6 +140,6 @@ _Build_Off_Ally_Buildings5:
     jmp  0x004AFBCF
 
 .Normal_Code:
-    cmp  ch, [eax+25h]
+    cmp  ch,[eax+25h]
     jnz  0x004AFBCF
     jmp  0x004AFC43

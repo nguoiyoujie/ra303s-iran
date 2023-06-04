@@ -25,30 +25,30 @@ Cache_WarFactory_DoorRate     dd 0
 _BuildingClass_Mission_Unload_WeaponsFactoryOpening:
     movsx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.UnitType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jnz  0x0045E2FB 
     push edx
-    ;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
-    ;mov  DWORD [Cache_WarFactory_DoorAnim], edx
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
-    cmp  edx, 0
+    ;mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
+    ;mov  dword [Cache_WarFactory_DoorAnim],edx
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
+    cmp  edx,0
     jz   .DefaultFrames
     inc  edx
-    mov  DWORD [Cache_WarFactory_DoorStages], edx
+    mov  dword [Cache_WarFactory_DoorStages],edx
     jmp  .Rate
 
 .DefaultFrames:
-    mov  DWORD [Cache_WarFactory_DoorStages], 5
+    mov  dword [Cache_WarFactory_DoorStages],5
 
 .Rate:
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
-    cmp  edx, 0
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
+    cmp  edx,0
     jz   .DefaultRate
-    mov  DWORD [Cache_WarFactory_DoorRate], edx
+    mov  dword [Cache_WarFactory_DoorRate],edx
     jmp  .Ret
 
 .DefaultRate:
-    mov  DWORD [Cache_WarFactory_DoorRate], 8
+    mov  dword [Cache_WarFactory_DoorRate],8
 
 .Ret:
     pop  edx
@@ -57,23 +57,23 @@ _BuildingClass_Mission_Unload_WeaponsFactoryOpening:
 
 
 _BuildingClass_Mission_Unload_WeaponsFactory_OpenDoor:
-    mov  ebx, DWORD [Cache_WarFactory_DoorStages]
-    mov  edx, DWORD [Cache_WarFactory_DoorRate]
+    mov  ebx,dword [Cache_WarFactory_DoorStages]
+    mov  edx,dword [Cache_WarFactory_DoorRate]
     jmp  0x0045E0CB
 
 
 
 _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor1:
-    mov  ebx, DWORD [Cache_WarFactory_DoorStages]
-    mov  edx, DWORD [Cache_WarFactory_DoorRate]
+    mov  ebx,dword [Cache_WarFactory_DoorStages]
+    mov  edx,dword [Cache_WarFactory_DoorRate]
     jmp  0x0045E241
 
 
 _BuildingClass_Mission_Unload_WeaponsFactory_CalculateSouthCell:
-    call 0x0045EB04 ;BuildingClass::Exit_Coord
-    add  eax, 0x01800000 ; +1.5 cell south
-    call 0x004AC3C0
-    ;add  eax, 0x80 ; DIR_S
+    call BuildingClass__Exit_Coord
+    add  eax,0x01800000 ; +1.5 cell south
+    call Coord___Coord_Cell
+    ;add  eax,0x80 ; DIR_S
     jmp  0x0045E040
 
 
@@ -89,31 +89,31 @@ _BuildingClass_Mission_Unload_WeaponsFactory_ForceTrack:
     je .Default_OUT_OF_WEAPON_FACTORY
     jmp  0x0045E212 
 .Default_OUT_OF_WEAPON_FACTORY:
-    mov  edx, 0x42
+    mov  edx,0x42
     jmp  0x0045E212
 
 
 _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor2:
-    mov  ebx, DWORD [Cache_WarFactory_DoorStages]
-    mov  edx, DWORD [Cache_WarFactory_DoorRate]
+    mov  ebx,dword [Cache_WarFactory_DoorStages]
+    mov  edx,dword [Cache_WarFactory_DoorRate]
     jmp  0x0045E267
 
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor:
     movsx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.UnitType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jz   .IsWarFactory ; is a war factory
     jmp  0x0045541A
 
 .IsWarFactory:
     push edx
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
-    mov  DWORD [Cache_WarFactory_DoorAnim], edx
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
-    mov  DWORD [Cache_WarFactory_DoorFrames], edx
-    ;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
-    ;mov  DWORD [Cache_WarFactory_DoorRate], edx
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
+    mov  dword [Cache_WarFactory_DoorAnim],edx
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
+    mov  dword [Cache_WarFactory_DoorFrames],edx
+    ;mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
+    ;mov  dword [Cache_WarFactory_DoorRate],edx
     pop  edx
     jmp  0x0045544A
 
@@ -135,20 +135,20 @@ _BuildingClass_Draw_It_WeaponsFactoryDoorFake:
 .IsWarFactory:
     push edx
     BuildingTypeClass.FromIndex(eax,eax)
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
-    mov  DWORD [Cache_WarFactory_DoorAnim], edx
-    mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
-    mov  DWORD [Cache_WarFactory_DoorFrames], edx
-    ;mov  edx, DWORD [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
-    ;mov  DWORD [Cache_WarFactory_DoorRate], edx
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
+    mov  dword [Cache_WarFactory_DoorAnim],edx
+    mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
+    mov  dword [Cache_WarFactory_DoorFrames],edx
+    ;mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayRate]
+    ;mov  dword [Cache_WarFactory_DoorRate],edx
     pop  edx
     jmp  0x0045544A
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor2:
     jz   0x0045547C
-    cmp  DWORD [Cache_WarFactory_DoorFrames],0
+    cmp  dword [Cache_WarFactory_DoorFrames],0
     je   .Default
-    add  ebx,DWORD [Cache_WarFactory_DoorFrames]
+    add  ebx,dword [Cache_WarFactory_DoorFrames]
     jmp  .Ret
 
 .Default:
@@ -159,15 +159,15 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor2:
 
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor3:
-    cmp  DWORD [Cache_WarFactory_DoorAnim],-1
+    cmp  dword [Cache_WarFactory_DoorAnim],-1
     je   .Default
-    cmp  DWORD [Cache_WarFactory_DoorAnim],0
+    cmp  dword [Cache_WarFactory_DoorAnim],0
     je   .None
-    mov  edx ,DWORD [Cache_WarFactory_DoorAnim]
+    mov  edx ,dword [Cache_WarFactory_DoorAnim]
     jmp  .Ret
 
 .Default:
-    mov  edx ,DWORD [0x00635BA8] ; location for WEAP2 shape object
+    mov  edx ,dword [0x00635BA8] ; location for WEAP2 shape object
 .Ret:
     jmp  0x00455497
 .None:
@@ -177,20 +177,20 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor3:
 
 
 _BuildingClass_ExitObject_Factories:
-    cmp  al, 0xC
+    cmp  al,0xC
     jz   0x00458DEC ; is a refinery
 
     push  eax
     movsx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.InfantryType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.InfantryType 
     pop  eax
     jz   0x004590B8 ; is a barracks
     
     push  eax
     movsx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.UnitType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     pop  eax
     jz   0x00458EC7 ; is a war factory
     jmp  0x004592BC
@@ -200,20 +200,20 @@ _BuildingClass_ExitObject_Factories:
 _BuildingClass_ExitObject_Factories2:
     movsx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.UnitType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jnz  0x00458ED8 
     jmp  0x00458F4A ; is a war factory
 
 
 
 _BuildingClass_ExitObject_FactoriesSetFacing:
-; set direction, defaults to 0x80 / DIR_S
+; set direction,defaults to 0x80 / DIR_S
     push ecx
     push edx
     xor  ebx,ebx
     xor  edx,edx
     lea  ecx,[esi + 0xcd]
-    mov  dl,BYTE [ecx]
+    mov  dl,byte [ecx]
     BuildingTypeClass.FromIndex(edx,edx)
     BuildingTypeClass.WarFactoryExitFacing.Get(edx,bl)
     pop  edx
@@ -222,5 +222,5 @@ _BuildingClass_ExitObject_FactoriesSetFacing:
     je .Default_DIR_S
     jmp  0x00459009 
 .Default_DIR_S:
-    mov  ebx, 0x80
+    mov  ebx,0x80
     jmp  0x00459009 

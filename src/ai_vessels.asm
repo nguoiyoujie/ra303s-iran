@@ -9,16 +9,16 @@ _HouseClass__AI_Vessel_Remove_Multiplayer_AI_Disable_Jump:
     jmp  0x004DBD43
 
 _HouseClass__AI_Vessel_Can_Build_Force_True:
-    mov  eax, 1
+    mov  eax,1
     jmp  0x004DBD9A
 
 _HouseClass__AI_Vessel_Fix_Crash:
-    mov  DWORD eax, [VesselAIHouseClassPointer]
-    test byte [eax+42h], 20h
+    mov  dword eax,[VesselAIHouseClassPointer]
+    test byte [eax+42h],20h
     jmp  0x004DC125
 
 _HouseClass__AI_Vessel_Fix_Crash2:
-    sub  esp, 44h
-    mov  [ebp-20h], eax
-    mov  DWORD [VesselAIHouseClassPointer], eax
+    sub  esp,44h
+    mov  [ebp-20h],eax
+    mov  dword [VesselAIHouseClassPointer],eax
     jmp  0x004DBD16

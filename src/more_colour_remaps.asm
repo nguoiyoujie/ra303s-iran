@@ -28,7 +28,7 @@ _RadarClass__Render_Infantry2:
     imul eax, 11Ah
     add  eax, extraremaptable
     add  eax, 119h
-    mov  BYTE cl, [eax]
+    mov  byte cl, [eax]
     jmp  0x0052EBD1
 
 _RadarClass__Render_Infantry:
@@ -46,7 +46,7 @@ _RadarClass__Render_Infantry:
     imul eax, 11Ah
     add  eax, extraremaptable
     add  eax, 119h
-    mov  BYTE cl, [eax]
+    mov  byte cl, [eax]
     jmp  0x0052EAC2
 
 _CellClass__Cell_Color:
@@ -113,7 +113,7 @@ _HouseClass__Remap_Table_Return_Custom_Remaps:
 _Assign_Houses_Colour_Remaps_NULL_Check:
     cmp  eax, 14h
     jz   0x0053E184
-    call 0x004D2CB0
+    call HouseClass__As_Pointer
 
     jmp  0x0053E15D
 
@@ -121,7 +121,7 @@ _Assign_Houses_Colour_Remaps_Cleanup:
     mov  edx, 0
 
 .Loop:
-    mov  BYTE [usedremaps+edx], 0
+    mov  byte [usedremaps+edx], 0
     inc  edx
     cmp  edx, 24
     jnz  .Loop
@@ -135,7 +135,7 @@ _Assign_Houses_Colour_Remaps_Cleanup:
     jmp  0x0053B823
 
 _Assign_Houses_Color_Remaps_Index_Check2:
-    mov  BYTE [usedremaps+edx], 1
+    mov  byte [usedremaps+edx], 1
     call 0x004D8CA8
     jmp  0x0053DFD3
 
@@ -145,9 +145,9 @@ _Assign_Houses_Color_Remaps_Indexes:
 
 _Assign_Houses_Color_Remaps_Index_Check:
 
-    cmp  BYTE cl, [usedremaps+ebx]
+    cmp  byte cl, [usedremaps+ebx]
     jnz  0x0053E059
 
-    mov  BYTE [usedremaps+ebx], 1
+    mov  byte [usedremaps+ebx], 1
 
     jmp  0x0053E06F

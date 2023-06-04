@@ -27,26 +27,26 @@
 @HOOK 0x004DBCAE _HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
 
-; hold in reserve - it is known in AI_Vessels and AI_Infantry that the house point (EAX) may be corrupted
+; hold in reserve - it is known in AI_Vessels and AI_Infantry that the house point (eax) may be corrupted
 UnitAIHouseClassPointer dd 0
 
 ; Warning: crude and arbitary extension of stackframe!
 _HouseClass__AI_Unit_Extend_Stackframe:
-    sub  esp, 0x5e8  ; was e8, add 500h to hold counter[UNIT_COUNT] (0xfffffc04) (200h) and bestlist[UNIT_COUNT] (0xfffffa04) (200h)
-    mov  [ebp-20h], eax
-    mov  DWORD [UnitAIHouseClassPointer], eax
+    sub  esp,0x5e8  ; was e8, add 500h to hold counter[UNIT_COUNT] (0xfffffc04) (200h) and bestlist[UNIT_COUNT] (0xfffffa04) (200h)
+    mov  [ebp-20h],eax
+    mov  dword [UnitAIHouseClassPointer],eax
     jmp  0x004DB7FD
 
 ; possible corruption of [ebp-20h]
 ; A crash like this has not happened yet, this is pre-emptive
 _HouseClass__AI_Unit_Fix_Crash:
-    mov  DWORD eax, [UnitAIHouseClassPointer]
-    add  eax, 5
+    mov  dword eax,[UnitAIHouseClassPointer]
+    add  eax,5
     jmp  0x004DB898
 
 _HouseClass__AI_Unit_Extend_CounterList_1:
-    mov  ebx, 558h ; was 58
-    lea  eax, [ebp + 0xfffffa04] ; was 0xffffff04, zero bytes
+    mov  ebx,558h ; was 58
+    lea  eax,[ebp + 0xfffffa04] ; was 0xffffff04, zero bytes
     jmp  0x004DB88B
 
 _HouseClass__AI_Unit_Extend_CounterList_2:
@@ -54,7 +54,7 @@ _HouseClass__AI_Unit_Extend_CounterList_2:
     jmp  0x004DB974
 
 _HouseClass__AI_Unit_Extend_CounterList_3:
-    cmp  esi, dword [ebx + ebp*0x1 + 0xfffffc04]
+    cmp  esi,dword [ebx + ebp*0x1 + 0xfffffc04]
     jmp  0x004DBA47
 
 _HouseClass__AI_Unit_Extend_CounterList_4:
@@ -74,20 +74,20 @@ _HouseClass__AI_Unit_Extend_CounterList_7:
     jmp  0x004DBB35
 
 _HouseClass__AI_Unit_Extend_CounterList_8:
-    cmp  esi, dword [ebp + eax*0x4 + 0xfffffc04]
+    cmp  esi,dword [ebp + eax*0x4 + 0xfffffc04]
     jmp  0x004DBBA4
 
 _HouseClass__AI_Unit_Extend_CounterList_9:
-    cmp  esi, dword [ebp + eax*0x4 + 0xfffffc04]
+    cmp  esi,dword [ebp + eax*0x4 + 0xfffffc04]
     jmp  0x004DBBB5
 
 _HouseClass__AI_Unit_Extend_BestList_1:
-    mov  al, byte [ebp + -0x18]
+    mov  al,byte [ebp + -0x18]
     mov  byte [ecx + ebp*0x1 + 0xfffffa03],al  ; was -0x4d
     jmp  0x004DBBBD
 
 _HouseClass__AI_Unit_Extend_BestList_2:
-    mov  al, byte [eax + ebp*0x1 + 0xfffffa04] ; was -0x4c
+    mov  al,byte [eax + ebp*0x1 + 0xfffffa04] ; was -0x4c
     mov  byte [edx + 0x536],al
     jmp  0x004DBBEE
 
@@ -110,24 +110,24 @@ _HouseClass__AI_Unit_Extend_BaseBuildingList_3:
     jmp  0x004DBC72
 
 _HouseClass__AI_Unit_Extend_BaseBuildingList_4:
-    mov  ecx, dword [ebp + eax*0x4 + 0xfffffc04]
+    mov  ecx,dword [ebp + eax*0x4 + 0xfffffc04]
     jmp  0x004DBC7F
 
 _HouseClass__AI_Unit_Extend_BaseBuildingList_5:
-    mov  esi, dword [edx + ebp*0x1 + 0xfffffc04]
+    mov  esi,dword [edx + ebp*0x1 + 0xfffffc04]
     jmp  0x004DBCE6
 
 _HouseClass__AI_Unit_Expand:
-    cmp  bl, [NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  bl,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
     jl   0x004DBB27
     jmp  0x004DBBCE
 
 _HouseClass__AI_Unit_Expand_Choice:
-    cmp  al, [NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  al,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
     jl   0x004DBC05
     jmp  0x004DBC91
 
 _HouseClass__AI_Unit_Expand_Choice_2:
-    cmp  dh, [NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  dh,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
     jl   0x004DBCD6
     jmp  0x004DBCB3

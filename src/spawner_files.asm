@@ -3,22 +3,19 @@
 @HOOK 0x0053A3E8 _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active
 @HOOK 0x004F420D _Init_Game_AFTRMATH_INI_File
 
-str_spawn_xdp: db"SPAWN.XDP",0
-str_mmm_ext: db".MMM",0
-str_spawnam.xdp: db "SPAWNAM.XDP",0
 
 _Init_Game_AFTRMATH_INI_File:
     mov  edx, 0x005EBB45 ; "AFTRMATH.INI"
     Save_Registers
 
-    CALL GetCommandLineA
-    MOV  EDX, str_spawn_arg
-    CALL _stristr
-    TEST EAX,EAX
+    call GetCommandLineA
+    mov  edx, str_arg_Spawn
+    call _stristr
+    test eax,eax
     Restore_Registers
     jz   .No_Spawner_AFTRMATH_INI_File
 
-    mov  edx, str_spawnam.xdp
+    mov  edx, str_xdp_Spawnam
 
 .No_Spawner_AFTRMATH_INI_File:
     jmp  0x004F4212
@@ -26,11 +23,11 @@ _Init_Game_AFTRMATH_INI_File:
 _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active:
     Save_Registers
 
-    CALL GetCommandLineA
+    call GetCommandLineA
 
-    MOV  EDX, str_spawn_arg
-    CALL _stristr
-    TEST EAX,EAX
+    mov  edx, str_arg_Spawn
+    call _stristr
+    test eax,eax
 
     Restore_Registers
     jne  .Dont_Load_MPlayer_INI
@@ -46,20 +43,20 @@ _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active:
 
 
 _Init_Game_RULES_File:
-    CALL 0x00547810 ; SmudgeTypeClass::Init_Heap(void)
+    call 0x00547810 ; SmudgeTypeClass::Init_Heap(void)
 
     Save_Registers
 
-    CALL GetCommandLineA
+    call GetCommandLineA
 
-    MOV  EDX, str_spawn_arg
-    CALL _stristr
-    TEST EAX,EAX
+    mov  edx, str_arg_Spawn
+    call _stristr
+    test eax,eax
 
-    JE   .Ret_RULES_INI
+    je   .Ret_RULES_INI
 
     Restore_Registers
-    mov  edx, str_spawn_xdp
+    mov  edx, str_xdp_Spawn
     jmp  0x004F41A1
 
 .Ret_RULES_INI:
@@ -68,15 +65,15 @@ _Init_Game_RULES_File:
 
 _SessionClass__Read_Scenario_Descriptions_Map_Extension:
 
-    CALL GetCommandLineA
+    call GetCommandLineA
 
-    MOV  EDX, str_spawn_arg
-    CALL _stristr
-    TEST EAX,EAX
+    mov  edx, str_arg_Spawn
+    call _stristr
+    test eax,eax
 
-    JE   .Ret_MPR_extension
+    je   .Ret_MPR_extension
 
-    push str_mmm_ext ; ".MMM"
+    push str_ext_mmm ; ".MMM"
     jmp  0x0054C018
 
 .Ret_MPR_extension:

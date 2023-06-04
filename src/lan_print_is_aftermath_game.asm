@@ -5,18 +5,16 @@
 %define    Fancy_Text_Print 0x004AE7FC
 %define bAftermathMultiplayer 0x00680538
 
-;str_aftermathgame db "Aftermath game",0
-
 startedasam: db 0
 
 _LAN_New_Dialog_Aftermath_Text:
     call Fancy_Text_Print
     add  esp, 18h
 
-    cmp  DWORD [bAftermathMultiplayer], 1
+    cmp  dword [bAftermathMultiplayer], 1
     jnz  .Ret
 
-    MOV  BYTE [startedasam], 1
+    mov  byte [startedasam], 1
     push 216h
     push 0
     mov  eax, [ebp-70h]
@@ -33,9 +31,9 @@ _LAN_New_Dialog_Aftermath_Text:
     jmp  0x0050C2B8
 
 _LAN_New_Dialog_Aftermath_Text2:
-    cmp  DWORD [bAftermathMultiplayer], 1
+    cmp  dword [bAftermathMultiplayer], 1
     jz   .Ret
-    CMP  BYTE [startedasam], 1
+    cmp  byte [startedasam], 1
     jnz  .Ret
 
     push 216h
@@ -56,5 +54,5 @@ _LAN_New_Dialog_Aftermath_Text2:
 
 _LAN_New_Dialog_Aftermath_Text3:
     mov  eax, [ebp-08Ch]
-    MOV  BYTE [startedasam], 1
+    mov  byte [startedasam], 1
     jmp  0x0050DB5B

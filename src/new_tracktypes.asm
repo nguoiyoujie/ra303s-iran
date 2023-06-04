@@ -29,14 +29,14 @@ _DriveClass_RawTracks_Route:
     cmp  eax,TrackTypes.OriginalCount
     jg  .NewTrack
     shl  eax, 0x4
-    mov  eax, DWORD [0x00600FEC + eax] ;DriveClass::RawTracks[x-1]
+    mov  eax, dword [0x00600FEC + eax] ;DriveClass::RawTracks[x-1]
     jmp  0x004B6AAD
 
 ; reroute
 .NewTrack:
     sub  eax,TrackTypes.OriginalCount ; remove 13
     shl  eax, 0x4
-    mov  eax, DWORD [TrackType.NewRawTracks - 0x10 + eax]
+    mov  eax, dword [TrackType.NewRawTracks - 0x10 + eax]
     jmp  0x004B6AAD
 
 
@@ -44,13 +44,13 @@ _DriveClass_Mark_Track_TrackControl_Route:
 ; dl is the TrackNumber. Reroute if larger or equal to the original count 67
     cmp  edx,TurnTrackTypes.OriginalCount
     jge  .NewTrack
-    mov  edx, DWORD [edx*4 + 0x006010C9] ;DriveClass::TrackControl[x].Track
+    mov  edx, dword [edx*4 + 0x006010C9] ;DriveClass::TrackControl[x].Track
     jmp  0x004B82EC
 
 ; reroute
 .NewTrack:
     sub  edx,TurnTrackTypes.OriginalCount ; remove 67
-    mov  edx, DWORD [edx*4 + TrackType.NewRawTracks - 4]
+    mov  edx, dword [edx*4 + TrackType.NewRawTracks - 4]
     jmp  0x004B82EC
 
 
@@ -59,13 +59,13 @@ _DriveClass_Mark_Track_RawTracks_Route:
     cmp  edx,TrackTypes.OriginalCount
     jg  .NewTrack
     shl  edx, 0x4
-    mov  eax, DWORD [0x00600FEC + edx] ;DriveClass::RawTracks[x-1]
+    mov  eax, dword [0x00600FEC + edx] ;DriveClass::RawTracks[x-1]
     jmp  0x004B8300
 
 ; reroute
 .NewTrack:
     sub  edx,TrackTypes.OriginalCount ; remove 13
     shl  edx, 0x4
-    mov  eax, DWORD [TrackType.NewRawTracks - 0x10 + edx]
+    mov  eax, dword [TrackType.NewRawTracks - 0x10 + edx]
     jmp  0x004B8300
 

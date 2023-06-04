@@ -3,6 +3,6 @@
 @HOOK 0x004A7DE3 _Main_Loop_Modify_Game_Speed_Based_On_Difficulty
 
 _Main_Loop_Modify_Game_Speed_Based_On_Difficulty:
-    mov  BYTE bh, 1
+    mov  byte bh, 1
     test bh, bh
     jmp  0x004A7DE8

@@ -23,20 +23,20 @@
 
 _fence_bug:
 
-    PUSH EAX
-    PUSH EBX
+    push eax
+    push ebx
 
-    SUB  EAX, DWORD [0x0066826C]
-    XOR  EDX,EDX
-    MOV  EBX,0x3A
-    IDIV EBX
-    MOV  EDX,EAX
+    SUB  eax, dword [0x0066826C]
+    xor  edx,edx
+    mov  ebx,0x3A
+    IDIV ebx
+    mov  edx,eax
 
-    POP  EBX
-    POP  EAX
+    POP  ebx
+    POP  eax
 
-    CMP  EDX,0
+    cmp  edx,0
     JL   fence_bug_bad
-    CMP  EDX,0x4000
+    cmp  edx,0x4000
     JB   fence_bug_good
-    JMP  fence_bug_bad
+    jmp  fence_bug_bad

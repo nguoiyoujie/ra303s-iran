@@ -1,14 +1,14 @@
 @HOOK 0x0054EBAC _SidebarClass__StripClass__Recalc_Can_Build_Check
 
 ; Gets a side based on a country type
-; arg: <EAX: country to get side for>
-; returns: EAX is 2 if side is Soviet, 0 if Allies
+; arg: <eax: country to get side for>
+; returns: eax is 2 if side is Soviet, 0 if Allies
 _Side_From_Country:
-    cmp  DWORD eax, 2
+    cmp  dword eax, 2
     je   .Return_Soviet
-    cmp  DWORD eax, 4
+    cmp  dword eax, 4
     je   .Return_Soviet
-    cmp  DWORD eax, 9
+    cmp  dword eax, 9
     je   .Return_Soviet
 
 .Return_Allies:
@@ -23,10 +23,10 @@ _SidebarClass__StripClass__Recalc_Can_Build_Check:
     push eax
     call dword [edi+2Ch] ; ObjectTypeClass::Who_Can_Build_Me(int, int, HousesType)
 
-    cmp  BYTE [techcenterbugfix], 0
+    cmp  byte [TechCenterBugFix], 0
     jz   .Normal_Code
 
-    cmp  DWORD eax, 0
+    cmp  dword eax, 0
     je   .Ret_Now
 
     pop  eax

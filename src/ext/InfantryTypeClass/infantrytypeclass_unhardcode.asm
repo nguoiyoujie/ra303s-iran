@@ -10,32 +10,32 @@ NewInfantryTypeHeapCount    dd    0
 %define        OriginalInfantryTypeHeapCount       0x1A
 
 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
-    mov  al, [NewInfantryTypeHeapCount]
-    cmp  dl, al
+    mov  al,[NewInfantryTypeHeapCount]
+    cmp  dl,al
     jl   0x004EB08D
     jmp  0x004EB162
 
 _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
-    mov  al, [NewInfantryTypeHeapCount]
-    cmp  dh, al
+    mov  al,[NewInfantryTypeHeapCount]
+    cmp  dh,al
     jl   0x0045972F
     jmp  0x004597FB
 
 Init_InfantryTypeClass:
-    mov  eax, 1A2h
+    mov  eax,1A2h
     call 0x004DF728 ; InfantryTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, edx
+    mov  eax,edx
     ; edx should have the name of the INI section already
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
 
     pop  eax
-    mov  edx, ebx
-    add  edx, OriginalInfantryTypeHeapCount ; InfantryType
+    mov  edx,ebx
+    add  edx,OriginalInfantryTypeHeapCount ; InfantryType
 
     push 0               ; __int32
     push 2               ; char
@@ -52,28 +52,28 @@ Init_InfantryTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newinfantrytypes], -1
+    cmp  dword [stringtableoffset_newinfantrytypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx, dword [stringtableoffset_newinfantrytypes]
+    add  ebx,dword [stringtableoffset_newinfantrytypes]
     jmp  .Continue 
 .Default_Name:
-    mov  ebx, 21 ; Civilian
+    mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
 
     push 35h             ; __int32
-    mov  DWORD [0x006019C4], 1
+    mov  dword [0x006019C4],1
     call 0x004DF5E0 ; InfantryTypeClass::InfantryTypeClass(InfantryType,int,char *,int,int,int,int,int,int,int,int,PipEnum,DoInfoStruct *,int,int,char *)
 .Ret:
     retn
 
 _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes:
 
-Loop_Over_RULES_INI_Section_Entries str_InfantryTypes, Init_InfantryTypeClass
+Loop_Over_RULES_INI_Section_Entries str_InfantryTypes,Init_InfantryTypeClass
 
 .Ret:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-14h]
     pop  edi
     pop  esi
     pop  edx
@@ -81,21 +81,21 @@ Loop_Over_RULES_INI_Section_Entries str_InfantryTypes, Init_InfantryTypeClass
 
 
 _Init_Game_Set_InfantryTypes_Heap_Count:
-    ; update the stringtableoffset, if defined in Rules
-    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newinfantrytypes, [stringtableoffset_newinfantrytypes]
-    mov  [stringtableoffset_newinfantrytypes], eax
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Infantry,[stringtableoffset_newinfantrytypes]
+    mov  [stringtableoffset_newinfantrytypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_InfantryTypes
-    mov  BYTE [InfantryTypesExtCount], al
-    mov  edx, eax
-    add  edx, OriginalInfantryTypeHeapCount
-    mov  BYTE [NewInfantryTypeHeapCount], dl
+    mov  byte [InfantryTypesExtCount],al
+    mov  edx,eax
+    add  edx,OriginalInfantryTypeHeapCount
+    mov  byte [NewInfantryTypeHeapCount],dl
     jmp  0x004F40CC
 
 
 _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count:
-    mov  al, [NewInfantryTypeHeapCount]
-    cmp  dl, al
+    mov  al,[NewInfantryTypeHeapCount]
+    cmp  dl,al
     jl   0x004EB04C
     jmp  0x004EB045

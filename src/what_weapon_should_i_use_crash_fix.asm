@@ -7,7 +7,7 @@
 _TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check:
     call 0x00555190 ; As_Object(long)
 
-    cmp  eax, DWORD 0
+    cmp  eax, dword 0
     je   0x00560C91
 
     jmp  0x00560B67

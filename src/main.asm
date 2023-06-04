@@ -17,34 +17,28 @@
 ;[org 0x006ED220]
 [org 0x00711000]
 
-;_str_version: db "3.03p4 B6 ",0
-_str_version: db "3.03p-iB1v1",0
+;_str_version: db"3.03p4 B6 ",0
+_str_version: db"3.03p-iB1v1",0
 
 %include "config.inc"
 
-%include "imports.inc"
-
+; /include
 %include "libc.inc"
-
 %include "INIClass.inc"
 %include "CCINIClass.inc"
-
-%ifdef USE_HIRES
-%include "src/hires.asm"
-%include "src/fix_savegame_resolution_sidebar.asm"
-%include "src/multiplayer_print_is_aftermath_game.asm"
-%include "src/extended_sidebar.asm"
-%endif
 
 ; Version
 %include "src/version.asm"
 
 ; definitions ; added by lovalmidas
-%include "src/defines_rttitypes.asm"
-%include "src/defines_armortypes.asm"
-%include "src/defines_prereqtypes.asm"
-%include "src/defines_specialtypes.asm"
-%include "src/defines_tracktypes.asm"
+%include "src/defines/generic.asm"
+%include "src/defines/gametypes.asm"
+%include "src/defines/rttitypes.asm"
+%include "src/defines/armortypes.asm"
+%include "src/defines/prereqtypes.asm"
+%include "src/defines/specialtypes.asm"
+%include "src/defines/tracktypes.asm"
+%include "src/defines/functions.asm"
 
 ; macros ; added by lovalmidas
 %include "src/macros.asm"
@@ -61,6 +55,13 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/macros_vesseltype.asm"
 %include "src/macros_warheadtype.asm"
 %include "src/macros_weapontype.asm"
+
+%ifdef USE_HIRES
+%include "src/hires.asm"
+%include "src/fix_savegame_resolution_sidebar.asm"
+%include "src/multiplayer_print_is_aftermath_game.asm"
+%include "src/extended_sidebar.asm"
+%endif
 
 ; loading code
 %include "src/loading.asm"
@@ -106,7 +107,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/ext/soundeffectslist_unhardcode.asm"
 
 ; AI for unhardcoded
-%include "src/ai_can_build.asm" ; added by lovalmidas
+%include "src/features/ai_obeyprereq.asm" ; added by lovalmidas
 %include "src/ai_vessels.asm" ;probably desyncs online with 3.03
 %include "src/ai_units.asm" 
 %include "src/ai_infantry.asm" 
@@ -127,7 +128,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/spectator.asm"
 %include "src/radar_spectator.asm"
 %include "src/forced_alliances.asm"
-%include "src/mcvundeploy.asm"
+%include "src/MCVUndeploy.asm"
 %include "src/teamtype_buildings.asm"
 ;%include "src/south_advantage_fix.asm" ; test fix
 %include "src/game_difficulty_speed_modifier_remove.asm"
@@ -141,7 +142,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/building_crew_impassable_terrain_fix.asm"
 %include "src/predetermined_alliances.asm"
 %include "src/build_off_ally.asm"
-%include "src/selectable_spawn_locations.asm"
+%include "src/selectable_Spawn_locations.asm"
 %include "src/tech_center_bug_fix.asm"
 %include "src/special_colourscheme.asm"
 %include "src/arguments.asm"
@@ -171,7 +172,7 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/aftermath_fast_buildspeed_option.asm"
 %include "src/optional_scorescreen.asm"
 %include "src/zoom_out_radar_by_default.asm"
-;%include "src/load_ai_ini.asm" ; Changing AI settings desyncs online...
+;%include "src/features/load_ai_ini.asm" ; Changing AI settings desyncs online...
 %include "src/ai_fixes.asm"
 %include "src/fix_formation_glitch.asm"
 %include "src/parabombs_multiplayer.asm"
@@ -202,6 +203,11 @@ _str_version: db "3.03p-iB1v1",0
 %include "src/unit_deploys_into_unhardcode.asm" 
 %include "src/footclass_path.asm" 
 %include "src/vessel_carrier_autoacquire.asm" 
+
+%include "src/features/combat_spreadfactorzero.asm" 
+%include "src/features/combat_negativedamage.asm" 
+
+
 
 ;%include "src/refinery_experiment.asm" 
 
@@ -254,5 +260,5 @@ _str_version: db "3.03p-iB1v1",0
 %endif
 
 %ifdef LOAD_FIX_OOS_INI
-%include "src/fix_rules_oos.asm"
+%include "src/fixes/rules_oos.asm"
 %endif

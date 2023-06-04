@@ -18,10 +18,10 @@ _TechnoClass__TechnoDrawObject_RemapJammedAsShade:
     jz   0x00567194
     cmp  al,RTTIType.Building
     jnz  0x00567242
-    mov  al, byte [remapjammedbuildings]
+    mov  al,byte [RemapJammedBuildings]
     cmp  al,0
     jz   0x00567242
-    mov  eax, dword [ebp - 0x10]
+    mov  eax,dword [ebp - 0x10]
     ;mov  al,byte [eax + 0x196]
     ;movsx eax,al
     test byte [eax + 0xd7],0x10 ;Jammed
@@ -48,5 +48,5 @@ _BuildingClass__Animation_AI_AlwaysUpdateJammable:
     pop  ebx
     jnz  0x004603BB
     ; existing SAM-SITE check
-    cmp  eax, 0xf
+    cmp  eax,0xf
     jmp  0x004603B5

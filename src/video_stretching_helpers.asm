@@ -11,36 +11,36 @@
 %define __processor 0x00607D78
 
 _Campaign_Do_Win_ScoreClass__Presentation:
-    mov  BYTE [__processor], 1
+    mov  byte [__processor], 1
 
     call 0x00540670    ; ScoreClass::Presentation()
-    mov  BYTE [__processor], 0
-    JMP  0x0053AF40
+    mov  byte [__processor], 0
+    jmp  0x0053AF40
 
 _Campaign_Do_Win_Map_Selection:
-    mov  BYTE [__processor], 1
+    mov  byte [__processor], 1
 
     call 0x00500A68    ; Map_Selection()
-    mov  BYTE [__processor], 0
-    JMP  0x0053B03C
+    mov  byte [__processor], 0
+    jmp  0x0053B03C
 
 _Campaign_Do_Win_Multiplayer_Score_Presentation:
-    mov  BYTE [__processor], 1
+    mov  byte [__processor], 1
 
     call 0x00546678    ; Multiplayer_Score_Presentation()
-    mov  BYTE [__processor], 0
-    JMP  0x0053ADFB
+    mov  byte [__processor], 0
+    jmp  0x0053ADFB
 
 _Do_Win_Multiplayer_Score_Presentation:
-    mov  BYTE [__processor], 1
+    mov  byte [__processor], 1
 
     call 0x00546678    ; Multiplayer_Score_Presentation()
-    mov  BYTE [__processor], 0
-    JMP  0x0053B3EB
+    mov  byte [__processor], 0
+    jmp  0x0053B3EB
 
 _Do_Lose_Multiplayer_Score_Presentation:
-    mov  BYTE [__processor], 1
+    mov  byte [__processor], 1
 
     call 0x00546678    ; Multiplayer_Score_Presentation()
-    mov  BYTE [__processor], 0
-    JMP  0x0053B6D4
+    mov  byte [__processor], 0
+    jmp  0x0053B6D4

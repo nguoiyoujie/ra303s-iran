@@ -1,17 +1,26 @@
-; supports new armortypes
+;----------------------------------------------------------------
+; src/defines/armortypes.asm
+;
+; ArmorType Definitions
+;   ArmorType represent a set of armors used to modify incoming damage based on Warhead.
+;   Used for damage calculus.
+;
+;   Red Alert originally supports 5 types. This file allows more types to be used.
+;
+;----------------------------------------------------------------
 
-; new ArmorTypes
+; Base ArmorTypes
 str.ArmorType.None            db"none",0
 str.ArmorType.Wood            db"wood",0
 str.ArmorType.Light           db"light",0
 str.ArmorType.Heavy           db"heavy",0
 str.ArmorType.Concrete        db"concrete",0
-; new armor type names, inspired from RA2. Beware that they are added after the original and the order of armor types does not match that of RA2
+; new ArmorTypes names, inspired from RA2. Beware that they are added after the original and the order of armor types does not match that of RA2
 str.ArmorType.Flak            db"flak",0
 str.ArmorType.Plate           db"plate",0
 str.ArmorType.Medium          db"medium",0
 str.ArmorType.Steel           db"steel",0
-; on implementation of expansion to the warheadtype class memory size, additional armor types can be implemented to match RA2
+; unimplemented ArmorTypes. On implementation of expansion to the warheadtype class memory size, additional armor types can be implemented to match RA2
 str.ArmorType.Special_1       db"special_1",0
 str.ArmorType.Special_2       db"special_2",0
 

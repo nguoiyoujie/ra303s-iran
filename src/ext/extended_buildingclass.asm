@@ -8,15 +8,15 @@
 _BuildingClass__Building_Crew_House_NoBuildingCrew:
     Save_Registers
 
-    mov  edx, [eax+0x11]  ; vtable
-    call DWORD [edx+8] ; HousesType const TechnoClass::Owner(void)
-    call 0x004D2CB0 ;  HouseClass * HouseClass::As_Pointer(HousesType)
-    cmp  BYTE [eax+0x1801], 1
+    mov  edx,[eax+0x11]  ; vtable
+    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call HouseClass__As_Pointer
+    cmp  byte [eax+0x1801],1
     Restore_Registers
     jz   .No_Building_Crew
 
 .Ret:
-    mov  edx, [eax+0CDh]
+    mov  edx,[eax+0CDh]
     jmp  0x0045E42F
 
 .No_Building_Crew:
@@ -26,16 +26,16 @@ _BuildingClass__Building_Crew_House_NoBuildingCrew:
 _InfantryClass__Per_Cell_Process_House_Instant_Capture:
     Save_Registers
 
-    mov  eax, edi ; make sure eax has this pointer
-    mov  edx, [eax+0x11]  ; vtable
-    call DWORD [edx+8] ; HousesType const TechnoClass::Owner(void)
-    call 0x004D2CB0 ;  HouseClass * HouseClass::As_Pointer(HousesType)
-    cmp  BYTE [eax+0x1800], 1
+    mov  eax,edi ; make sure eax has this pointer
+    mov  edx,[eax+0x11]  ; vtable
+    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call HouseClass__As_Pointer
+    cmp  byte [eax+0x1800],1
     Restore_Registers
     jz   .Capture_Building
 
 .Normal_Code:
-    and  eax, 0FFh
+    and  eax,0FFh
     jmp  0x004EC594
 
 .Capture_Building:
@@ -45,20 +45,20 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
 _InfantryClass__What_Action_House_Instant_Capture:
     Save_Registers
 
-    mov  eax, ebx ; make sure eax has this pointer
-    mov  edx, [eax+0x11]  ; vtable
-    call DWORD [edx+8] ; HousesType const TechnoClass::Owner(void)
-    call 0x004D2CB0 ;  HouseClass * HouseClass::As_Pointer(HousesType)
-    cmp  BYTE [eax+0x1800], 1
+    mov  eax,ebx ; make sure eax has this pointer
+    mov  edx,[eax+0x11]  ; vtable
+    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call HouseClass__As_Pointer
+    cmp  byte [eax+0x1800],1
     Restore_Registers
     jz   .Capture_Building
 
 .Normal_Code:
-    mov  bx, [0x00665E04] ; EngineerCaptureLevel
-    mov  ax, [eax]
-    cmp  ax, bx
+    mov  bx,[0x00665E04] ; EngineerCaptureLevel
+    mov  ax,[eax]
+    cmp  ax,bx
     setbe al
-    and  eax, 0FFh
+    and  eax,0FFh
     jmp  0x004EFCB3
 
 .Capture_Building:

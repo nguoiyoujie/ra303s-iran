@@ -5,5 +5,5 @@
 
 _Zoom_Out_Radar_By_Default:
     or   dl, 1h
-    mov  eax, DWORD [0x00668E9A]
+    mov  eax, dword [0x00668E9A]
     jmp  0x0052D759

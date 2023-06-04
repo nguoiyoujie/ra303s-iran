@@ -1,10 +1,10 @@
 @HOOK 0x005D8F79 _ASM_Set_Mouse_Cursor_Mouse_Coords_Check
 
 _ASM_Set_Mouse_Cursor_Mouse_Coords_Check:
-    CMP  DWORD eax, [ScreenWidth]
+    cmp  dword eax, [ScreenWidth]
     JG   .Exit
 
-    CMP  DWORD ebx, [ScreenHeight]
+    cmp  dword ebx, [ScreenHeight]
     JG   .Exit
 
     mov  [ebp-4h], eax ; y

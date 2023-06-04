@@ -4,41 +4,39 @@
 @HOOK 0x004F5061 _Extra_Sneak_Peaks
 @HOOK 0x004F4358 _Optional_Play_ENGLISHVQA_Intro
 
-%define FileClass__FileClass                        0x004627D4
-%define FileClass__Is_Available                     0x00462A30
 %define    _Play_Movie_                                0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
 ; TLF movies + sizzle3 and sizzle4
-derp_str db "derp",0
-ALLX1_str db "ALLX1",0
-ALLX2_str db "ALLX2",0
-ALLX3_str db "ALLX3",0
-ALLX4_str db "ALLX4",0
-ALLX1W_str db "ALLX1W",0
-ALLX2W_str db "ALLX2W",0
-ALLX3W_str db "ALLX3W",0
-ALLX4W_str db "ALLX4W",0
-ALLXEND_str db "ALLXEND",0
-ANTBRF_str db "ANTBRF",0
-CHRONTNK_str db "CHRONTNK",0
-GPSLNCH_str db "GPSLNCH",0
-INTROX_str db "INTROX",0
-NUKETRUK_str db "NUKETRUK",0
-SNOWFILD_str db "SNOWFILD_str",0
-SOVEXP1_str db "SOVEXP1",0
-SOVEXP2_str db "SOVEXP2",0
-SOVEXP3_str db "SOVEXP3",0
-SOVEXP4_str db "SOVEXP4",0
-SOVEXP1W_str db "SOVEXP1W",0
-SOVEXP2W_str db "SOVEXP2W",0
-SOVEXP3W_str db "SOVEXP3W",0
-SOVEXP4W_str db "SOVEXP4W",0
-SOVXEND_str db "SOVXEND",0
-TANESCP_str db "TANESCP",0
-TESLATNK_str db "TESLATNK",0
-SIZZLE3_str db "SIZZLE3",0
-SIZZLE4_str db "SIZZLE4",0
+derp_str db"derp",0
+ALLX1_str db"ALLX1",0
+ALLX2_str db"ALLX2",0
+ALLX3_str db"ALLX3",0
+ALLX4_str db"ALLX4",0
+ALLX1W_str db"ALLX1W",0
+ALLX2W_str db"ALLX2W",0
+ALLX3W_str db"ALLX3W",0
+ALLX4W_str db"ALLX4W",0
+ALLXEND_str db"ALLXEND",0
+ANTBRF_str db"ANTBRF",0
+CHRONTNK_str db"CHRONTNK",0
+GPSLNCH_str db"GPSLNCH",0
+INTROX_str db"INTROX",0
+NUKETRUK_str db"NUKETRUK",0
+SNOWFILD_str db"SNOWFILD_str",0
+SOVEXP1_str db"SOVEXP1",0
+SOVEXP2_str db"SOVEXP2",0
+SOVEXP3_str db"SOVEXP3",0
+SOVEXP4_str db"SOVEXP4",0
+SOVEXP1W_str db"SOVEXP1W",0
+SOVEXP2W_str db"SOVEXP2W",0
+SOVEXP3W_str db"SOVEXP3W",0
+SOVEXP4W_str db"SOVEXP4W",0
+SOVXEND_str db"SOVXEND",0
+TANESCP_str db"TANESCP",0
+TESLATNK_str db"TESLATNK",0
+SIZZLE3_str db"SIZZLE3",0
+SIZZLE4_str db"SIZZLE4",0
 
 str_playenglishintro db"PlayEnglishIntro",0
 ;str_redalert_ini db"REDALERT.INI",0
@@ -49,7 +47,7 @@ CCINIClass_redalertini2 TIMES 128 db 0
 ; args: <video name no extension>, <index to return>
 %macro Video_Name_To_Index 2
     lea  eax, [ebp-88h]
-    MOV  edx, %1
+    mov  edx, %1
     call _strcmpi
     test eax, eax
     mov  al, %2
@@ -79,25 +77,25 @@ _Optional_Play_ENGLISHVQA_Intro:
     push eax
     push ebx
 
-    MOV  EDX, str_redalert_ini
-    MOV  EAX, FileClass_redalertini2
-    CALL FileClass__FileClass
+    mov  edx, str_redalert_ini
+    mov  eax, FileClass_redalertini2
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_redalertini2
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-;    TEST EAX,EAX
-;    JE .exit_error
+    mov  eax, FileClass_redalertini2
+    xor  edx, edx
+    call CCFileClass__Is_Available
+;    test eax,eax
+;    je .exit_error
 
     ; initialize CCINIClass
-    MOV  EAX, CCINIClass_redalertini2
-    CALL CCINIClass__CCINIClass
+    mov  eax, CCINIClass_redalertini2
+    call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    MOV  EDX, FileClass_redalertini2
-    MOV  EAX, CCINIClass_redalertini2
-    CALL CCINIClass__Load
+    mov  edx, FileClass_redalertini2
+    mov  eax, CCINIClass_redalertini2
+    call CCINIClass__Load
 
     call_INIClass__Get_Bool CCINIClass_redalertini2, str_options2, str_playenglishintro, 1
     cmp  eax, 0
@@ -113,11 +111,11 @@ _Optional_Play_ENGLISHVQA_Intro:
     push ebx
 
     ; check -SPAWN exists
-    CALL GetCommandLineA
+    call GetCommandLineA
 
-    MOV  EDX, str_spawn_arg
-    CALL _stristr
-    TEST EAX,EAX
+    mov  edx, str_arg_Spawn
+    call _stristr
+    test eax,eax
 
     pop  ebx
     pop  eax

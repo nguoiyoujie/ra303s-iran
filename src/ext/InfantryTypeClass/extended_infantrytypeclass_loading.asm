@@ -10,34 +10,34 @@
 %define        New_InfantryTypeClass_Size        0x240
 
 _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx, New_InfantryTypeClass_Size, Old_InfantryTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_InfantryTypeClass_Size,Old_InfantryTypeClass_Size
 .Ret:
-    lea  edx, [ebp-0x14]
-    mov  eax, ecx
+    lea  edx,[ebp-0x14]
+    mov  eax,ecx
     jmp  0x004D0E56
 
 _TFixedIHeapClass__fn_init_New_InfantryTypes_Heap_Size:
-    mov  edx, New_InfantryTypeClass_Size
+    mov  edx,New_InfantryTypeClass_Size
     jmp  0x004C744A
 
 _TFixedIHeapClass__InfantryTypeClass__Load_New_Size:
-    mov  ebx, New_InfantryTypeClass_Size
+    mov  ebx,New_InfantryTypeClass_Size
     jmp  0x004D0E3B
 
 _TFixedIHeapClass__InfantryTypeClass__Save_New_Size:
-    mov  ebx, New_InfantryTypeClass_Size
+    mov  ebx,New_InfantryTypeClass_Size
     jmp  0x004D0D58
 
 _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size:
-    mov  edx, New_InfantryTypeClass_Size
+    mov  edx,New_InfantryTypeClass_Size
     jmp  0x004C968A
 
 
 _InfantryTypeClass__Read_INI_Extended:
     push esi
     push edi
-    mov esi, edi
-    mov edi, [esp+0xC] ;RulesINI
+    mov esi,edi
+    mov edi,[esp+0xC] ;RulesINI
 
 	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,InfantryTypeClass.Offset.ExtendedPrerequisite)
 	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
@@ -54,7 +54,7 @@ _InfantryTypeClass__Read_INI_Extended:
 
 
 .Ret:
-    lea  esp, [ebp-10h]
+    lea  esp,[ebp-10h]
     pop  edi
     pop  esi
     pop  ecx

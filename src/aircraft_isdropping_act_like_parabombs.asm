@@ -6,7 +6,7 @@
 @HOOK 0x00423385 _AircraftClass_Can_Fire_UseWeaponRangeForBombing
 
 _AircraftClass_Can_Fire_UseIsDroppingForParabomb:
-    test BYTE [edx + 0x138],0x8 ;IsDropping
+    test byte [edx + 0x138],0x8 ;IsDropping
     jmp  0x004232E3
 
 
@@ -22,23 +22,23 @@ _AircraftClass_Can_Fire_UseWeaponRangeForBombing:
     ; ebx is camera, it is used only to switch between a range of 0x200 and 0x320. 
 	; we use ebx  instead to fetch the weapon range of the primary weapon of this aircraft. If there is no primary weapon, fallback to 0x200
 	push eax
-    lea  ebx, [esi + 0x146]
-    ;CMP        EDI,-0x1
-    mov  eax, dword [0x00601820]
-    mov  ebx, dword [ebx]
-    imul ebx, dword [eax + 0x4]
-    mov  eax, dword [eax + 0x10]
-    add  ebx, eax
-    TechnoTypeClass.PrimaryWeapon.Get(ebx, eax) ; eax is now the weapon ptr
-	test eax, eax
+    lea  ebx,[esi + 0x146]
+    ;cmp        edi,-0x1
+    mov  eax,dword [0x00601820]
+    mov  ebx,dword [ebx]
+    imul ebx,dword [eax + 0x4]
+    mov  eax,dword [eax + 0x10]
+    add  ebx,eax
+    TechnoTypeClass.PrimaryWeapon.Get(ebx,eax) ; eax is now the weapon ptr
+	test eax,eax
     jz   .UseDefaultRange ; primary weapon is null
-	xor  ebx, ebx
-    WeaponTypeClass.Range.Get(eax, bx)          ; bx is now the range value
-	test ebx, ebx
+	xor  ebx,ebx
+    WeaponTypeClass.Range.Get(eax,bx)          ; bx is now the range value
+	test ebx,ebx
     jz   .UseDefaultRange ; primary weapon has 0 range
     jmp  .Ret
 .UseDefaultRange:
-    mov  ebx, 0x200
+    mov  ebx,0x200
 .Ret:
 	pop  eax
     jmp  0x00423395 ; cmp code is here

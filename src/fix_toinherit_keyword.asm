@@ -3,7 +3,7 @@
 @HOOK 0x0053D7FB _Read_Scenario_INI_Load_ToInherit
 
 _Read_Scenario_INI_Load_ToInherit:
-    cmp  BYTE [SessionClass__Session], 0
+    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jnz  .Return_False
 
     call INIClass__Get_Bool

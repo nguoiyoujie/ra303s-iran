@@ -1,8 +1,8 @@
 
 ; define abstract type field definitions
-%define AbstractTypeClass.Offset.RTTI                      0x000    ; BYTE
+%define AbstractTypeClass.Offset.RTTI                      0x000    ; byte
 %define AbstractTypeClass.Offset.Index                     0x001    ; INT
-%define AbstractTypeClass.Offset.ININame                   0x002    ; BYTE[24]
+%define AbstractTypeClass.Offset.ININame                   0x002    ; byte[24]
 %define AbstractTypeClass.Offset.StringTableName           0x01D    ; INT
 ; 0x001 - 0x020
 

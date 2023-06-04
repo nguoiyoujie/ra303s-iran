@@ -52,11 +52,6 @@
 @JMP  0x004DCE04 0x004DCE0D  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 @JMP  0x004DCE72 0x004DCE77  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
-%define CCFileClass__CCFileClass    0x004627D4
-%define CCFileClass__OpenFile       0x00462AD4
-%define CCFileClass__WriteBytes     0x00462860
-%define CCFileClass__CloseHandle    0x00462AA8
-
 ; PlanetWestwoodStartTime & PlanetWestwoodGameID are global int32 variables that probably need to be filled in by spawner code
 
 ; Use Offset +0x1803 to +0x1873 for infantry left
@@ -67,19 +62,17 @@
 
 %define Stats_PacketClass_This    -0x6C
 
-str_stats_dmp: db "stats.dmp",0
-
 Statistics_Packet_Sent: db    0
 
 _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event:
-    mov  DWORD [eax+EXT_Resigned], 1
-    call 0x004D8B40; HouseClass::Flag_To_Die(void)
+    mov  dword [eax+EXT_Resigned], 1
+    call HouseClass__Flag_To_Die
     jmp  0x004BD204
 
 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info:
     cmp  edx, 0
     jz   .Ret
-    mov  DWORD [eax+EXT_ConnectionLost], 1 ; for connection lost
+    mov  dword [eax+EXT_ConnectionLost], 1 ; for connection lost
 
 .Ret:
     test byte [eax+42h], 2
@@ -89,34 +82,34 @@ _Destroy_Connection_Add_HouseClass_Connection_Lost_Info:
 _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game:
     jmp  0x0052B916
 
-Ally_Field db "ALY"
+Ally_Field db"ALY"
 Ally_Field_Player db 0x3F
 Ally_Field_Null db 0
 
-IsDead_Field db "DED"
+IsDead_Field db"DED"
 IsDead_Field_Player db 0x3F
 IsDead_Field_Null db 0
 
-IsSpectator_Field db "SPC"
+IsSpectator_Field db"SPC"
 IsSpectator_Field_Player db 0x3F
 IsSpectator_Field_Null db 0
 
-SpawnLocation_Field db "SPA"
+SpawnLocation_Field db"SPA"
 SpawnLocation_Field_Player db 0x3F
 SpawnLocation_Field_Null db 0
 
-ConnectionLost_Field db "CON"
+ConnectionLost_Field db"CON"
 ConnectionLost_Field_Player db 0x3F
 ConnectionLost_Field_Null db 0
 
-Resigned_Field db "RSG"
+Resigned_Field db"RSG"
 Resigned_Field_Player db 0x3F
 Resigned_Field_Null db 0
 
 _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [Ally_Field_Player], al
+    mov  byte [Ally_Field_Player], al
 
     mov  eax, 10h
     mov  ebx, [esi+0x174C] ; Alliances bit field
@@ -134,7 +127,7 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 ;ConnectionLost field
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [ConnectionLost_Field_Player], al
+    mov  byte [ConnectionLost_Field_Player], al
 
     mov  eax, 10h
     mov  ebx, [esi+EXT_ConnectionLost]
@@ -152,7 +145,7 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 ;Resigned field
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [Resigned_Field_Player], al
+    mov  byte [Resigned_Field_Player], al
 
     mov  eax, 10h
     mov  ebx, [esi+EXT_Resigned]
@@ -170,7 +163,7 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 ;SpawnLocation field
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [SpawnLocation_Field_Player], al
+    mov  byte [SpawnLocation_Field_Player], al
 
     mov  eax, 10h
     mov  ebx, [esi+EXT_SpawnLocation] ; SpawnLocation
@@ -188,11 +181,11 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 ; IsDead field
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [IsDead_Field_Player], al
+    mov  byte [IsDead_Field_Player], al
 
     mov  eax, 10h
     xor  ebx, ebx
-    test BYTE [esi+0x43], 1 ; IsDead bit field
+    test byte [esi+0x43], 1 ; IsDead bit field
     setnz bl
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
@@ -208,7 +201,7 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 ; IsSpectator Field
     mov  al, byte [ebp-0x48]
     add  al, 31h
-    mov  BYTE [IsSpectator_Field_Player], al
+    mov  byte [IsSpectator_Field_Player], al
 
     mov  eax, 10h
     mov  ebx, [esi+EXT_IsSpectator] ; Alliances bit field
@@ -233,15 +226,15 @@ _TechnoClass__Record_The_Kill_Vessels_Killed_Fix:
     jmp  0x00566C0F
 
 _Send_Statistics_Packet_Send_Only_Once:
-    cmp  BYTE [SessionClass__Session], 0 ; if single player dont send statistics
+    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL ; if single player dont send statistics
     jz   .Early_Ret
 
-    cmp  DWORD [SaveGameVersion], 0 ; if we loaded from savegame dont send statistics
+    cmp  dword [SaveGameVersion], 0 ; if we loaded from savegame dont send statistics
     jnz  .Early_Ret
 
-    cmp  DWORD [spawner_is_active], 0
+    cmp  dword [spawner_is_active], 0
     jz   .Normal_Code
-    cmp  BYTE [Statistics_Packet_Sent], 0
+    cmp  byte [Statistics_Packet_Sent], 0
     jz   .First_Time
 
 .Early_Ret:
@@ -249,7 +242,7 @@ _Send_Statistics_Packet_Send_Only_Once:
     jmp  0x005B7940
 
 .First_Time:
-    mov  BYTE [Statistics_Packet_Sent], 1
+    mov  byte [Statistics_Packet_Sent], 1
     jmp  .Normal_Code
 
 .Normal_Code:
@@ -305,7 +298,7 @@ _HouseClass__Tracking_Add_New_Planes_Tracking:
 _HouseClass__Tracking_Remove_New_Vessels_Tracking:
     sar  eax, 18h
 
-    dec  DWORD [ebx+eax*4+0x1973]
+    dec  dword [ebx+eax*4+0x1973]
 
     cmp  eax, 5
     jmp  0x004DCC01
@@ -313,7 +306,7 @@ _HouseClass__Tracking_Remove_New_Vessels_Tracking:
 _HouseClass__Tracking_Add_New_Vessels_Tracking:
     movsx eax, cl
 
-    inc  DWORD [ebx+eax*4+0x1973]
+    inc  dword [ebx+eax*4+0x1973]
 
     cmp  eax, 5
     jmp  0x004DCE46
@@ -321,7 +314,7 @@ _HouseClass__Tracking_Add_New_Vessels_Tracking:
 _HouseClass__Tracking_Remove_New_Vehicle_Tracking:
     sar  eax, 18h
 
-    dec  DWORD [ebx+eax*4+0x1873]
+    dec  dword [ebx+eax*4+0x1873]
 
     cmp  eax, 11h
     jmp  0x004DCBD7
@@ -329,62 +322,62 @@ _HouseClass__Tracking_Remove_New_Vehicle_Tracking:
 _HouseClass__Tracking_Add_New_Vehicle_Tracking:
     movsx eax, cl
 
-    inc  DWORD [ebx+eax*4+0x1873]
+    inc  dword [ebx+eax*4+0x1873]
 
     cmp  eax, 11h
     jmp  0x004DCDD8
 
 _Send_Statistics_Packet_Fix_VSLx_Info:
-    lea  eax, [ESI+0x1973]
-    mov  DWORD ecx, 7
+    lea  eax, [esi+0x1973]
+    mov  dword ecx, 7
     call Dword_Swap_Memory
 
-    lea  ebx, [ESI+0x1973]
-    MOV  DWORD ECX, 0x1c
-    MOV  EAX, 0x10
+    lea  ebx, [esi+0x1973]
+    mov  dword ecx, 0x1c
+    mov  eax, 0x10
 
     jmp  0x005B7587
 
 _Send_Statistics_Packet_Fix_PLLx_Info:
-    lea  eax, [ESI+0x1903]
-    mov  DWORD ecx, 7
+    lea  eax, [esi+0x1903]
+    mov  dword ecx, 7
     call Dword_Swap_Memory
 
-    lea  ebx, [ESI+0x1903]
-    MOV  DWORD ECX, 0x1c
-    MOV  EAX, 0x10
+    lea  ebx, [esi+0x1903]
+    mov  dword ecx, 0x1c
+    mov  eax, 0x10
     jmp  0x005B7519
 
 _Send_Statistics_Packet_Fix_UNLx_Info:
-    lea  eax, [ESI+0x1873]
-    mov  DWORD ecx, 0x16
+    lea  eax, [esi+0x1873]
+    mov  dword ecx, 0x16
     call Dword_Swap_Memory
 
-    lea  ebx, [ESI+0x1873]
-    MOV  DWORD ECX, 88
-    MOV  EAX, 0x10
+    lea  ebx, [esi+0x1873]
+    mov  dword ecx, 88
+    mov  eax, 0x10
 
     jmp  0x005B74E0
 
 _Send_Statistics_Packet_Fix_INLx_Info:
 
-    lea  eax, [ESI+0x1803]
-    mov  DWORD ecx, 26
+    lea  eax, [esi+0x1803]
+    mov  dword ecx, 26
     call Dword_Swap_Memory
 
-    lea  ebx, [ESI+0x1803]
-    MOV  DWORD ECX, 0x68
-    MOV  EAX, 0x10
+    lea  ebx, [esi+0x1803]
+    mov  dword ecx, 0x68
+    mov  eax, 0x10
     jmp  0x005B74AB
 
 _Send_Statistics_Packet_FIX_BLLx_Info:
-    lea  eax, [ESI+0x1A00]
-    mov  DWORD ecx, 87
+    lea  eax, [esi+0x1A00]
+    mov  dword ecx, 87
     call Dword_Swap_Memory
 
-    LEA  EBX, [ESI+0x1A00]
-    MOV  DWORD ECX, 0x15C
-    MOV  EAX, 0x10
+    lea  ebx, [esi+0x1A00]
+    mov  dword ecx, 0x15C
+    mov  eax, 0x10
     jmp  0x005B754E
 
 ; eax = memory address to start swapping, ecx = count
@@ -412,7 +405,7 @@ Dword_Swap_Memory:
     retn
 
 _Send_Statistics_Packet_Fix_NUMP_Human_Player_Count:
-    mov  DWORD ebx, [HumanPlayers]
+    mov  dword ebx, [HumanPlayers]
     jmp  0x005B65F6
 
 _Send_Statistics_Packet_Fix_VSLx_Byte_Order:
@@ -423,20 +416,20 @@ _Send_Statistics_Packet_Fix_VSLx_Byte_Order:
     jmp  0x005B7109
 
 _Send_Statistics_Packet_Fix_Color_Info:
-    mov  BYTE dl, [eax+0x25]
+    mov  byte dl, [eax+0x25]
     xor  eax, eax
     mov  al, dl
-    call 0x004D2CB0 ; HouseClass * HouseClass::As_Pointer(HousesType)
-    mov  BYTE dl, [eax+0x178F]
+    call HouseClass__As_Pointer
+    mov  byte dl, [eax+0x178F]
     mov  eax, 0x10
     jmp  0x005B6F46
 
 ; Prevent crash when playing in singleplayer
 _UnitTrackerClass__Decrement_Unit_Total_Skip_Singleplayer:
-    cmp  BYTE [SessionClass__Session], 0
+    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Early_Return
 
-    cmp  BYTE [SessionClass__Session], 5
+    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jz   .Hack_For_Old_Skirmish_Savegames
 
 .Normal_Code:
@@ -451,20 +444,20 @@ _UnitTrackerClass__Decrement_Unit_Total_Skip_Singleplayer:
     jmp  0x00581CAF ; jmp to RETN instruction at tend of function
 
 .Hack_For_Old_Skirmish_Savegames:
-    cmp  DWORD [spawner_is_active], 0
+    cmp  dword [spawner_is_active], 0
     jz   .Early_Return
 
-    cmp  DWORD [SaveGameVersion], 0
+    cmp  dword [SaveGameVersion], 0
     jnz  .Early_Return
 
     jmp  .Normal_Code
 
 ; Prevent crash when playing in singleplayer
 _UnitTrackerClass__Increment_Unit_Total_Skip_Singleplayer:
-    cmp  BYTE [SessionClass__Session], 0
+    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Early_Return
 
-    cmp  BYTE [SessionClass__Session], 5
+    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jz   .Hack_For_Old_Skirmish_Savegames
 
 
@@ -480,10 +473,10 @@ _UnitTrackerClass__Increment_Unit_Total_Skip_Singleplayer:
     jmp  0x00581CA3 ; jmp to RETN instruction at tend of function
 
 .Hack_For_Old_Skirmish_Savegames:
-    cmp  DWORD [spawner_is_active], 0
+    cmp  dword [spawner_is_active], 0
     jz   .Early_Return
 
-    cmp  DWORD [SaveGameVersion], 0
+    cmp  dword [SaveGameVersion], 0
     jnz  .Early_Return
 
     jmp  .Normal_Code
@@ -494,9 +487,9 @@ _BuildingClass__Captured_Increment_Unit_Total:
 _Send_Statistics_Packet_Dump_Statistics:
     Save_Registers
 
-    ; char* buffer with all the statistics is in EAX
+    ; char* buffer with all the statistics is in eax
     mov  edx, 0x006ABC14 ; offset int Send_Statistics_Packet(void)::.0::packet_size
-    CALL Write_Stats_File
+    call Write_Stats_File
 
 .Ret:
     Restore_Registers
@@ -507,56 +500,56 @@ _Send_Statistics_Packet_Dump_Statistics:
 
 Write_Stats_File:
 
-    PUSH EBP
-    MOV  EBP,ESP
+    push ebp
+    mov  ebp,ESP
 
-%define stats_buf     EBP-4
-%define stats_length  EBP-4-4
-%define stats_file    EBP-4-4-100
+%define stats_buf     ebp-4
+%define stats_length  ebp-4-4
+%define stats_file    ebp-4-4-100
     SUB  ESP,4+4+100
 
-    LEA  EBX,[stats_buf]
-    MOV  [EBX],EAX
-    LEA  EBX,[stats_length]
-    MOV  [EBX],EDX
+    lea  ebx,[stats_buf]
+    mov  [ebx],eax
+    lea  ebx,[stats_length]
+    mov  [ebx],edx
 
-    LEA  EAX,[stats_file]
-    MOV  EDX,str_stats_dmp
-    CALL CCFileClass__CCFileClass
+    lea  eax,[stats_file]
+    mov  edx,str_dmp_Stats
+    call CCFileClass__CCFileClass
 
-    MOV  EDX,3
-    LEA  EAX,[stats_file]
-    CALL CCFileClass__OpenFile
-    TEST EAX,EAX
-    JE   .exit
+    mov  edx,3
+    lea  eax,[stats_file]
+    call CCFileClass__Open
+    test eax,eax
+    je   .exit
 
-    mov  EBX,[stats_length]
-    MOV  EBX,[EBX]
-    mov  EDX,[stats_buf]
+    mov  ebx,[stats_length]
+    mov  ebx,[ebx]
+    mov  edx,[stats_buf]
 
-    LEA  EAX,[stats_file]
-    CALL CCFileClass__WriteBytes
+    lea  eax,[stats_file]
+    call CCFileClass__Write
 
-    LEA  EAX,[stats_file]
-    CALL CCFileClass__CloseHandle
+    lea  eax,[stats_file]
+    call CCFileClass__Close
 
 .exit:
-    MOV  EAX,1
+    mov  eax,1
 
-    MOV  ESP,EBP
-    POP  EBP
+    mov  ESP,ebp
+    POP  ebp
     RETN
 
 _Main_Game__Main_Loop_End_Spawner:
-    cmp  DWORD [spawner_is_active], 1
+    cmp  dword [spawner_is_active], 1
     jz   0x004A55A1
 
-    cmp  DWORD [0x006ABBB8], 0 ; GameStatisticsPacketSent
+    cmp  dword [0x006ABBB8], 0 ; GameStatisticsPacketSent
     jmp  0x004A5596
 
 
 _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner:
-;;    cmp  DWORD [spawner_is_active], 1
+;;    cmp  dword [spawner_is_active], 1
 ;;    jz   .Continue
 
 ;;    cmp  ah, 4
@@ -568,16 +561,16 @@ _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner:
 _CellClass__Goodie_Check_Track_Crates_Spawner:
     jmp  0x004A0B09
 
-;;    cmp  DWORD [spawner_is_active], 1
+;;    cmp  dword [spawner_is_active], 1
 ;;    jz   0x004A0B09
 
-;;    cmp  BYTE [SessionClass__Session], 4
+;;    cmp  byte [Globals___Session_Type], GameType.GAME_INTERNET
 ;;    jmp  0x004A0B07
 
 _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner:
     jmp  0x004D3E5F
-;;    cmp  DWORD [spawner_is_active], 1
+;;    cmp  dword [spawner_is_active], 1
 ;;    jz   0x004D3E5F
 
-;;    cmp  BYTE [SessionClass__Session], 4
+;;    cmp  byte [Globals___Session_Type], GameType.GAME_INTERNET
 ;;    jmp  0x004D3E59

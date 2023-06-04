@@ -11,32 +11,32 @@ VesselTypesTypesExtCount    dd    0
 %define        OriginalVesselTypeHeapCount       7
 
 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
-    mov  BYTE al, [NewVesselTypeHeapCount]
-    cmp  dl, al
+    mov  byte al,[NewVesselTypeHeapCount]
+    cmp  dl,al
     jl   0x00459620
     jmp  0x00459666
 
 _VesselTypeClass__One_Time_Unhardcode_VesselTypes:
-    mov  BYTE al, [NewVesselTypeHeapCount]
-    cmp  dh, al
+    mov  byte al,[NewVesselTypeHeapCount]
+    cmp  dh,al
     jl   0x0058497D
     jmp  0x00584A43
 
 Init_VesslTypeClass:
-    mov  eax, 19Eh
+    mov  eax,19Eh
     call 0x00581FEC ; VesselTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, edx
+    mov  eax,edx
     ; edx should have the name of the INI section already
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
 
     pop  eax
-    mov  edx, ebx
-    add  edx, OriginalVesselTypeHeapCount ; VesselType
+    mov  edx,ebx
+    add  edx,OriginalVesselTypeHeapCount ; VesselType
 
     push 0Eh
     push 8
@@ -52,17 +52,17 @@ Init_VesslTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newvesseltypes], -1
+    cmp  dword [stringtableoffset_newvesseltypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx, dword [stringtableoffset_newvesseltypes]
+    add  ebx,dword [stringtableoffset_newvesseltypes]
     jmp  .Continue 
 .Default_Name:
-    mov  ebx, 21 ; Civilian
+    mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
 
-    mov  DWORD [0x00605A90], 1 ; __Vessel_Idx
+    mov  dword [0x00605A90],1 ; __Vessel_Idx
     call 0x00581F0C ; VesselTypeClass::VesselTypeClass(VesselType,int,char *,AnimType,int,int,int,int,int,int,int,int,int,int)
 
 .Ret:
@@ -70,31 +70,31 @@ Init_VesslTypeClass:
 
 _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes:
 
-    Loop_Over_RULES_INI_Section_Entries str_VesselTypes, Init_VesslTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_VesselTypes,Init_VesslTypeClass
 
 .Ret:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-14h]
     pop  edi
     pop  esi
     pop  edx
     jmp  0x00584851
 
 _Init_Game_Set_VesselTypes_Heap_Count:
-    ; update the stringtableoffset, if defined in Rules
-    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newvesseltypes, [stringtableoffset_newvesseltypes]
-    mov  [stringtableoffset_newvesseltypes], eax
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Vessel,[stringtableoffset_newvesseltypes]
+    mov  [stringtableoffset_newvesseltypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_VesselTypes
-    mov  BYTE [VesselTypesTypesExtCount], al
-    mov  edx, eax
-    add  edx, OriginalVesselTypeHeapCount
-    mov  BYTE [NewVesselTypeHeapCount], dl
+    mov  byte [VesselTypesTypesExtCount],al
+    mov  edx,eax
+    add  edx,OriginalVesselTypeHeapCount
+    mov  byte [NewVesselTypeHeapCount],dl
     jmp  0x004F4110
 
 _VesselTypeClass__From_Name_Unhardcode_VesselTypes:
-    mov  BYTE al, [NewVesselTypeHeapCount]
+    mov  byte al,[NewVesselTypeHeapCount]
 
-    cmp  dl, al
+    cmp  dl,al
     jl   0x00584B50
     jmp  0x00584B49

@@ -5,13 +5,13 @@ ReduceEveryOneCell dd 0
 ; NOTE THIS FILE IS ONLY FOR TESTING AND COMMENTED OUT IN MAIN.ASM
 
 _CellCass__Reduce_Tiberium_Last_Longer:
-    cmp  BYTE [SessionClass__Session], 5
+    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jnz  .Normal_Code
 
-    cmp  DWORD [ReduceEveryOneCell], 0
+    cmp  dword [ReduceEveryOneCell], 0
     jz   .Custom_Reduce
 
-    mov  DWORD [ReduceEveryOneCell], 0
+    mov  dword [ReduceEveryOneCell], 0
 
 .Normal_Code:
     inc  ebx
@@ -20,6 +20,6 @@ _CellCass__Reduce_Tiberium_Last_Longer:
     jmp  0x0049FE31
 
 .Custom_Reduce:
-    mov  DWORD [ReduceEveryOneCell], 1
+    mov  dword [ReduceEveryOneCell], 1
     mov  ebx, 1
     jmp  0x0049FE4F

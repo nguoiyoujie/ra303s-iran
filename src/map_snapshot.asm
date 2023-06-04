@@ -1,6 +1,6 @@
 str_MapSnap_MPR db"MapSnap.MPR",0
 
-%define Basic_Section 0x005EFFA5
+%define Basic_Section str_Basic
 
 ; sizes not actually verified
 MapSnapshot_CCINIClass  TIMES 256 db 0
@@ -26,22 +26,22 @@ Create_Map_Snapshot:
     call_INIClass__Put_String MapSnapshot_CCINIClass, Basic_Section, 0x005EFFB2, eax
 
     ; NewINIFormat
-    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F000E, DWORD [0x00665DE8]
+    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F000E, dword [0x00665DE8]
 
     ; Intro
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFB7, BYTE [0x00667C04]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFB7, byte [0x00667C04]
 
     ; Brief
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFBD, BYTE [0x00667C05]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFBD, byte [0x00667C05]
 
     ; Win
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC3, BYTE [0x00667C06]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC3, byte [0x00667C06]
 
     ; Lose
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC7, BYTE [0x00667C07]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC7, byte [0x00667C07]
 
     ; Action
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFCC, BYTE [0x00667C08]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFCC, byte [0x00667C08]
 
     ; ToCarryOver
     xor  ecx, ecx
@@ -50,13 +50,13 @@ Create_Map_Snapshot:
     call_INIClass__Put_Bool MapSnapshot_CCINIClass, Basic_Section, 0x005EFFD3, ecx
 
     ; Theme
-    call_CCINIClass__Put_ThemeType MapSnapshot_CCINIClass, Basic_Section, 0x005F0008, BYTE [0x00668009]
+    call_CCINIClass__Put_ThemeType MapSnapshot_CCINIClass, Basic_Section, 0x005F0008, byte [0x00668009]
 
     ; CarryOverMoney
     call_INIClass__Put_Fixed MapSnapshot_CCINIClass, Basic_Section, 0x0005F001B, 0x0066800B
 
     ; CarryOverCap
-    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F002A, DWORD [0x00668011]
+    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F002A, dword [0x00668011]
 
 ;=========================
     ; Write other stuff

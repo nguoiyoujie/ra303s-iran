@@ -9,14 +9,8 @@
 @HOOK 0x004DDE56 _HouseClass__Read_INI_Optional_House_Neutral_Ally
 @HOOK 0x004DDE80 _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
 
-str_colour: db "Colour",0
-str_color3: db "Color",0
-str_country: db "Country",0
-str_buildingsgetinstantlycaptured: db "BuildingsGetInstantlyCaptured",0
-str_nobuildingcrew db "NoBuildingCrew",0
-str_allytheneutralhouse db "AllyTheNeutralHouse",0
-str_secondarycolorscheme db "SecondaryColorScheme",0
-allyneutral: db 1
+
+allyneutral db 1
 
 %define Old_HouseClass_Size     0x17A8
 %define New_HouseClass_Size     0x27A8
@@ -36,87 +30,87 @@ allyneutral: db 1
 ; Use Offset +0x1A00 to +0x1B60 for buildings left
 
 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
-    Clear_Extended_Class_Memory_For_Old_Saves esi, New_HouseClass_Size, Old_HouseClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves esi,New_HouseClass_Size,Old_HouseClass_Size
 
-    mov  BYTE [esi+EXT_SecondaryColorScheme], 0xFF
+    mov  byte [esi+EXT_SecondaryColorScheme],0xFF
 
 .Ret:
-    mov  ebx, 0x005F6538
+    mov  ebx,0x005F6538
     jmp  0x004CEE15
 
 _TFixedHeapClass_fn_init_New_HouseClass_Size:
-    mov  edx, New_HouseClass_Size
+    mov  edx,New_HouseClass_Size
     jmp  0x004C717A
 
 _TFixedHeapClass__HouseClass__Constructor_New_HouseClass_Size:
-    mov  edx, New_HouseClass_Size
+    mov  edx,New_HouseClass_Size
     jmp  0x004C836A
 
 _HouseClass__Read_INI_New_HouseClass_Size:
-    mov  edx, New_HouseClass_Size
+    mov  edx,New_HouseClass_Size
     jmp  0x004DDD22
 
 _TFixedHeapClass__HouseClass__Save_New_HouseClass_Size:
-    mov  ebx, New_HouseClass_Size
+    mov  ebx,New_HouseClass_Size
     jmp  0x004CED18
 
 _TFixedHeapClass__HouseClass__Load_New_HouseClass_Size:
-    cmp  DWORD [SaveGameVersion], New_Savegame_Version
+    cmp  dword [SaveGameVersion],New_Savegame_Version
     jnz  .Old_Savegame
 
-    mov  ebx, New_HouseClass_Size
+    mov  ebx,New_HouseClass_Size
     jmp  0x004CEDFA
 
 .Old_Savegame:
-    mov  ebx, Old_HouseClass_Size
+    mov  ebx,Old_HouseClass_Size
     jmp  0x004CEDFA
 
 _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double:
-    cmp  edx, 0x0A ; Neutral house
+    cmp  edx,0x0A ; Neutral house
     jz   .Ret
 
-    call 0x004D6060  ; HouseClass::Make_Ally(HousesType)
+    call HouseClass__Make_Ally
 
 .Ret:
     jmp  0x004DDE85
 
 _HouseClass__Read_INI_Optional_House_Neutral_Ally:
-    mov  edx, 0Ah
-    mov  eax, esi
+    mov  edx,0Ah
+    mov  eax,esi
 
-    cmp  BYTE [allyneutral], 0
+    cmp  byte [allyneutral],0
     jz   .Ret
 
-    call 0x004D6060 ; HouseClass::Make_Ally(HousesType)
+    call HouseClass__Make_Ally
 
 .Ret:
-    mov  BYTE [allyneutral], 1
+    mov  byte [allyneutral],1
     jmp  0x004DDE62
 
 _ScoreClass__Presentation_Proper_Country_Check:
 
-    mov  BYTE dl, [eax+0x41]
-    mov  edi, eax
+    mov  byte dl,[eax+0x41]
+    mov  edi,eax
     jmp  0x00540F25
 
 _HouseClass__Read_INI:
     call 0x004D33E4 ; HouseClass::HouseClass(HousesType)
-    mov  [ebp-0x24], eax
+    mov  [ebp-0x24],eax
 
     Save_Registers
 
-    mov  esi, [ebp-0x24] ; HouseClass_This
+    mov  esi,[ebp-0x24] ; HouseClass_This
 
-    mov  ecx, 0xFF   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_colour  ; key
+    mov  ecx,0xFF   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_Colour  ; key
     call INIClass__Get_Int
 
-    cmp  BYTE al, 0xFF
+    cmp  byte al,0xFF
     jz   .No_Custom_Colour
 
-    mov  [esi+0x178F], al
+    mov  [esi+0x178F],al
 
 .No_Custom_Colour:
 
@@ -124,18 +118,18 @@ _HouseClass__Read_INI:
 
     Save_Registers
 
-    mov  esi, [ebp-0x24] ; HouseClass_This
+    mov  esi,[ebp-0x24] ; HouseClass_This
 
-    mov  ecx, 0xFF   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_color3  ; key
+    mov  ecx,0xFF   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_Color  ; key
     call INIClass__Get_Int
 
-    cmp  BYTE al, 0xFF
+    cmp  byte al,0xFF
     jz   .No_Custom_Color
 
-    mov  [esi+0x178F], al
+    mov  [esi+0x178F],al
 
 .No_Custom_Color:
 
@@ -143,18 +137,18 @@ _HouseClass__Read_INI:
 
     Save_Registers
 
-    mov  esi, [ebp-0x24] ; HouseClass_This
+    mov  esi,[ebp-0x24] ; HouseClass_This
 
-    mov  ecx, 0xFF   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_country ; key
+    mov  ecx,0xFF   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_Country ; key
     call INIClass__Get_Int
 
-    cmp  BYTE al, 0xFF
+    cmp  byte al,0xFF
     jz   .No_Custom_Country
 
-    mov  [esi+0x41], al
+    mov  [esi+0x41],al
 
 
 .No_Custom_Country:
@@ -163,49 +157,49 @@ _HouseClass__Read_INI:
 
     Save_Registers
 
-    mov  ecx, 0   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_buildingsgetinstantlycaptured  ; key
+    mov  ecx,0   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_BuildingsGetInstantlyCaptured  ; key
     call INIClass__Get_Bool
-    mov  ecx, [ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1800], al
+    mov  ecx,[ebp-0x24] ; HouseClass this pointer
+    mov  [ecx+0x1800],al
 
     Restore_Registers
 
     Save_Registers
 
-    mov  ecx, 0   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_nobuildingcrew  ; key
+    mov  ecx,0   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_NoBuildingCrew  ; key
     call INIClass__Get_Bool
-    mov  ecx, [ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1801], al
+    mov  ecx,[ebp-0x24] ; HouseClass this pointer
+    mov  [ecx+0x1801],al
 
     Restore_Registers
 
     Save_Registers
 
-    mov  ecx, 0xFF   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_secondarycolorscheme ; key
+    mov  ecx,0xFF   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_SecondaryColorScheme ; key
     call INIClass__Get_Int
-    mov  ecx, [ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1802], al
+    mov  ecx,[ebp-0x24] ; HouseClass this pointer
+    mov  [ecx+0x1802],al
 
     Restore_Registers
 
     Save_Registers
 
-    mov  ecx, 1   ; default
-    mov  edx, edi    ; section
-    mov  DWORD eax, [ebp-20h] ; scenario INI
-    mov  ebx, str_allytheneutralhouse  ; key
+    mov  ecx,1   ; default
+    mov  edx,edi    ; section
+    mov  dword eax,[ebp-20h] ; scenario INI
+    mov  ebx,str_AllyTheNeutralHouse  ; key
     call INIClass__Get_Int
 
-    mov  BYTE [allyneutral], al
+    mov  byte [allyneutral],al
 
     Restore_Registers
     jmp  0x004DDD36

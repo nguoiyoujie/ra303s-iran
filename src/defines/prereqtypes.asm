@@ -1,4 +1,12 @@
-; New prerequisite check values
+;----------------------------------------------------------------
+; src/defines/prereqtypes.asm
+;
+; Prerequisite Type Definitions
+;   Prerequisite Types emulate Prerequisite Groups from Tiberian Sun, allowing OR logic to be used for Prerequisite checks
+;
+;   Up to 32 (0 to 31 inclusive) Prerequisite Types are supported.
+;
+;----------------------------------------------------------------
 
 ; PrereqTypes
 %define PrereqType.NONE                        0
@@ -35,7 +43,7 @@
 %define PrereqType.CIVBUILDING                 31
 
 
-; FactoryType_Enums
+; PrerequisiteType_Enums
 str.PrereqType.NONE                            db"NONE",0
 str.PrereqType.CONYARD                         db"CONYARD",0
 str.PrereqType.POWER                           db"POWER",0
@@ -69,4 +77,35 @@ str.PrereqType.USER.29                         db"USER.29",0
 str.PrereqType.MISC                            db"MISC",0
 str.PrereqType.CIVBUILDING                     db"CIVBUILDING",0
 
-strlist.PrereqTypes                            dd str.PrereqType.NONE,str.PrereqType.CONYARD,str.PrereqType.POWER,str.PrereqType.ADV.POWER,str.PrereqType.REFINERY,str.PrereqType.ORESILO,str.PrereqType.BARRACKS,str.PrereqType.WARFACTORY,str.PrereqType.RADAR,str.PrereqType.REPAIR,str.PrereqType.DEFENSE,str.PrereqType.ADV.DEFENSE,str.PrereqType.AA.DEFENSE,str.PrereqType.TECH,str.PrereqType.AIRSTRIP,str.PrereqType.HELIPAD,str.PrereqType.SHIPYARD,str.PrereqType.LAB,str.PrereqType.ADV.LAB,str.PrereqType.ADV.WEAPON1,str.PrereqType.ADV.WEAPON2,str.PrereqType.FAKES,str.PrereqType.USER.22,str.PrereqType.USER.23,str.PrereqType.USER.24,str.PrereqType.USER.25,str.PrereqType.USER.26,str.PrereqType.USER.27,str.PrereqType.USER.28,str.PrereqType.USER.29,str.PrereqType.MISC,str.PrereqType.CIVBUILDING,0   
+strlist.PrereqTypes                            dd str.PrereqType.NONE, \
+                                                  str.PrereqType.CONYARD, \
+                                                  str.PrereqType.POWER, \
+                                                  str.PrereqType.ADV.POWER, \
+                                                  str.PrereqType.REFINERY, \
+                                                  str.PrereqType.ORESILO, \
+                                                  str.PrereqType.BARRACKS, \
+                                                  str.PrereqType.WARFACTORY, \
+                                                  str.PrereqType.RADAR, \
+                                                  str.PrereqType.REPAIR, \
+                                                  str.PrereqType.DEFENSE, \
+                                                  str.PrereqType.ADV.DEFENSE, \
+                                                  str.PrereqType.AA.DEFENSE, \
+                                                  str.PrereqType.TECH, \
+                                                  str.PrereqType.AIRSTRIP, \
+                                                  str.PrereqType.HELIPAD, \
+                                                  str.PrereqType.SHIPYARD, \
+                                                  str.PrereqType.LAB, \
+                                                  str.PrereqType.ADV.LAB, \
+                                                  str.PrereqType.ADV.WEAPON1, \
+                                                  str.PrereqType.ADV.WEAPON2, \
+                                                  str.PrereqType.FAKES, \
+                                                  str.PrereqType.USER.22, \
+                                                  str.PrereqType.USER.23, \
+                                                  str.PrereqType.USER.24, \
+                                                  str.PrereqType.USER.25, \
+                                                  str.PrereqType.USER.26, \
+                                                  str.PrereqType.USER.27, \
+                                                  str.PrereqType.USER.28, \
+                                                  str.PrereqType.USER.29, \
+                                                  str.PrereqType.MISC, \
+                                                  str.PrereqType.CIVBUILDING,0   

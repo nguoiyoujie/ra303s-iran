@@ -1,3 +1,12 @@
+;----------------------------------------------------------------
+; src/defines/tracktypes.asm
+;
+; TrackType Definitions
+;   Unit Movement between Cells work on fixed locomotion; units stay on the fixed path until traversed.
+;   This includes movement along the 8 directions, rotation, and some special movement such as Tib Refinery docking/undocking, and War Factory eject
+;
+;----------------------------------------------------------------
+
 ; New track types
 ; RA defines up to 13 TrackTypes and 67 TurnTrackTypes. To truly implement C&C Weapons Factory, a new set should be defined as it is distinct from any other
 

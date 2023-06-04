@@ -7,10 +7,10 @@
 %define VesselTypeClass.Offset.IsPieceOfEight                0x192    ; BOOL, BIT 1
 %define VesselTypeClass.Bit.IsPieceOfEight                   1    
 ; 0x193, 0x194 and 0x195 are empty...                   
-%define VesselTypeClass.Offset.Type                          0x196    ; BYTE
-%define VesselTypeClass.Offset.TurretOffset                  0x197    ; BYTE
-%define VesselTypeClass.Offset.DefaultMission                0x198    ; BYTE
-%define VesselTypeClass.Offset.Explosion                     0x199    ; BYTE
+%define VesselTypeClass.Offset.Type                          0x196    ; byte
+%define VesselTypeClass.Offset.TurretOffset                  0x197    ; byte
+%define VesselTypeClass.Offset.DefaultMission                0x198    ; byte
+%define VesselTypeClass.Offset.Explosion                     0x199    ; byte
 %define VesselTypeClass.Offset.MaxSize                       0x19A    ; INT
 
 ; Extended space (>= 0x19E)

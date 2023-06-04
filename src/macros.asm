@@ -1,16 +1,4 @@
-%define RulesINI                           0x00666688
-%define RuleINI                            0x00666688
-%define FileClass__FileClass               0x004627D4
-%define FileClass__Is_Available            0x00462A30
-%define SessionClass__Session              0x0067F2B4
-%define ScenarioNumber                     0x006679D3
 
-
-%define Array_BulletTypeClass              0x0065DE88
-%define Count_BulletTypeClass              0x0065DE60
-
-
-; %define Array_Aircrafts              0x0065DDBC
 
 
 %macro Save_Registers 0
@@ -41,7 +29,7 @@
 %macro    Get_RULES_INI_Section_Entry_Count 1
     push edx
     mov  edx, %1
-    mov  eax, RulesINI
+    mov  eax, Globals___RuleINI
     call INIClass__Entry_Count
     pop  edx
 %endmacro
@@ -63,11 +51,11 @@ Loop_Over_RULES_INI_Section_Entries_:
 
     mov  ebx, edi
     mov  edx, [esp+4] ; Section name
-    mov  eax, RulesINI
+    mov  eax, Globals___RuleINI
     call INIClass__Get_Entry
 
     mov  edx, [esp+4] ; Section name
-    call_INIClass__Get_String RulesINI, edx , eax, 0xFF, Loop_Entry_Buffer, 256
+    call_INIClass__Get_String Globals___RuleINI, edx , eax, 0xFF, Loop_Entry_Buffer, 256
 
     ; call function pointer with the value of the entry
     mov  edx, Loop_Entry_Buffer
@@ -84,7 +72,7 @@ Loop_Over_RULES_INI_Section_Entries_:
     Restore_Registers
     retn
 
-; args <RULES.INI Section Name to loop entries over>, <function to call (with entry name in EDX)
+; args <RULES.INI Section Name to loop entries over>, <function to call (with entry name in edx)
 %macro    Loop_Over_RULES_INI_Section_Entries 2
     push edx
     push eax
@@ -98,15 +86,15 @@ Loop_Over_RULES_INI_Section_Entries_:
 ; args <What to turn bit on, <what bit to turn on>
 %macro Turn_On_Bit    2
     mov  al,    1
-    shl  al, BYTE %2-1
-    or   BYTE %1, al
+    shl  al, byte %2-1
+    or   byte %1, al
 %endmacro Set_Bit 3
 
 ; args <What to check bit on>, <what bit to check>
 %macro Get_Bit 2
     mov  al, 1
-    shl  al, BYTE %2-1
-    test BYTE %1, al
+    shl  al, byte %2-1
+    test byte %1, al
     setnz al
 %endmacro
 
@@ -114,15 +102,15 @@ Loop_Over_RULES_INI_Section_Entries_:
 ; args <What to clear bit on>, <what bit to clear>
 %macro Clear_Bit 2
     mov  al, 1
-    shl  al, BYTE %2-1
+    shl  al, byte %2-1
     add  al, 1
     neg  al
-    and  BYTE %1, al
+    and  byte %1, al
 %endmacro
 
 ; args <What to clear bit on>, <what bit>, <turn on or off>, <identifier for branch>
 %macro Set_Bit_Byte    3
-    cmp  BYTE %3, 0
+    cmp  byte %3, 0
     jz   %%turn_off
 
     Turn_On_Bit    %1, %2
@@ -137,7 +125,7 @@ Loop_Over_RULES_INI_Section_Entries_:
 
 
 ; args <Internal ID of type class>
-; returns the type class pointer as EAX
+; returns the type class pointer as eax
 %macro Get_BulletTypeClass    1
     push edx
     mov  edx, [Count_BulletTypeClass] 

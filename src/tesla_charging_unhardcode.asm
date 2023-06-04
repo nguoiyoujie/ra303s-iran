@@ -10,7 +10,7 @@ _BuildingClass_ShapeNumber_RemoveTeslaIDCheck:
     TechnoTypeClass.PrimaryWeapon.Get(eax,eax)
     cmp  eax,0x0
     jz   0x00455749
-    test BYTE [eax + 0x8],0x8 ; Charges
+    test byte [eax + 0x8],0x8 ; Charges
     jz   0x00455749
     jmp  0x00455729
 
@@ -19,7 +19,7 @@ _BuildingClass_AnimationAI_IncludeAllChargingBuildings:
     TechnoTypeClass.PrimaryWeapon.Get(eax,eax)
     cmp  eax,0x0
     jz   0x00460433
-    test BYTE [eax + 0x8],0x8 ; Charges
+    test byte [eax + 0x8],0x8 ; Charges
     jnz  0x00460422
     jmp  0x00460433
 
@@ -35,12 +35,12 @@ _BuildingClass_ChargingAI_UseActiveAnimCount:
 ; fetch ID (building class ptr + 0xcd)
     xor  edx,edx
     lea  eax,[ebx + 0xcd]
-    mov  dl,BYTE [eax]
+    mov  dl,byte [eax]
     push ecx
     BuildingTypeClass.FromIndex(edx,edx)
     BuildingTypeClass.Anim_Active_Count.Get(edx,ecx)
     lea  edx,[ebx + 0x42]
-    mov  eax,DWORD [edx]
+    mov  eax,dword [edx]
     inc  eax
     cmp  eax,ecx
     pop  ecx
@@ -52,12 +52,12 @@ _BuildingClass_ChargingAI_UnhardcodeRate:
     push eax
     xor  edx,edx
     lea  eax,[ebx + 0xcd]
-    mov  dl,BYTE [eax]
+    mov  dl,byte [eax]
     BuildingTypeClass.FromIndex(edx,edx)
     BuildingTypeClass.Anim_Active_Rate.Get(edx,ecx)
     pop  eax
     pop  edx
-    mov  DWORD [edx + 0xd],ecx
+    mov  dword [edx + 0xd],ecx
     pop  ecx
     jmp  0x0045FDAE
 
@@ -66,7 +66,7 @@ _BuildingClass_ChargingAI_UseWeaponChargeVoice:
     push edx
     xor  edx,edx
     lea  eax,[ebx + 0xcd]
-    mov  dl,BYTE [eax]
+    mov  dl,byte [eax]
     BuildingTypeClass.FromIndex(edx,edx)
     TechnoTypeClass.PrimaryWeapon.Get(edx,edx)
     xor  eax,eax

@@ -21,12 +21,12 @@
 %define InfantryTypeClass.Offset.IsRemapOverride           0x192    ; BOOL // Already supported by game INI
 %define InfantryTypeClass.Bit.IsRemapOverride              8    
 ; 0x193, 0x194 and 0x195 are empty... 
-%define InfantryTypeClass.Offset.Type                      0x196    ; BYTE
-%define InfantryTypeClass.Offset.Pip                       0x197    ; BYTE, PipEnum: 0 PIP_EMPTY, 1 PIP_FULL, 5 PIP_ENGINEER, 6 PIP_CIVILIAN, 7 PIP_COMMANDO, others for funky results, might be able to add new pips by extending pips.shp beyond 22 frames?
+%define InfantryTypeClass.Offset.Type                      0x196    ; byte
+%define InfantryTypeClass.Offset.Pip                       0x197    ; byte, PipEnum: 0 PIP_EMPTY, 1 PIP_FULL, 5 PIP_ENGINEER, 6 PIP_CIVILIAN, 7 PIP_COMMANDO, others for funky results, might be able to add new pips by extending pips.shp beyond 22 frames?
 %define InfantryTypeClass.Offset.DoControls                0x198    ; INT PTR to STRUCT
-%define InfantryTypeClass.Offset.FireFrame                 0x19C    ; BYTE
-%define InfantryTypeClass.Offset.ProneFireFrame            0x19D    ; BYTE
-%define InfantryTypeClass.Offset.OverrideRemap             0x19E    ; INT PTR to BYTE*
+%define InfantryTypeClass.Offset.FireFrame                 0x19C    ; byte
+%define InfantryTypeClass.Offset.ProneFireFrame            0x19D    ; byte
+%define InfantryTypeClass.Offset.OverrideRemap             0x19E    ; INT PTR to byte*
 
 ; Extended space (>= 0x1A2)
 %define InfantryTypeClass.Offset.ExtendedPrerequisite              0x1A2    ; INTx8

@@ -13,11 +13,11 @@ _TechnoClass_Visual_Character_Spectator_Stuff:
     cmp  cl, 5
     jnz  .Ret
 
-    mov  DWORD eax, [0x00669958] ; PlayerPtr
-    cmp  DWORD [eax+EXT_IsSpectator], 0
+    mov  dword eax, [0x00669958] ; PlayerPtr
+    cmp  dword [eax+EXT_IsSpectator], 0
     jz   .Ret
 
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Ret
 
     mov  cl, 3
@@ -29,8 +29,8 @@ _TechnoClass_Visual_Character_Spectator_Stuff:
 
 _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator:
     push eax
-    mov  DWORD eax, [0x00669958] ; PlayerPtr
-    cmp  DWORD [eax+EXT_IsSpectator], 1
+    mov  dword eax, [0x00669958] ; PlayerPtr
+    cmp  dword [eax+EXT_IsSpectator], 1
     pop  eax
     jz   .Draw_Credits_Count
 
@@ -49,9 +49,9 @@ _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator:
 _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator:
 ;    push    eax
 
-    mov  DWORD eax, [0x00669958] ; PlayerPtr
+    mov  dword eax, [0x00669958] ; PlayerPtr
 
-    cmp  DWORD [eax+EXT_IsSpectator], 1
+    cmp  dword [eax+EXT_IsSpectator], 1
     jz   .Draw_Credits_Text
 
     push 12Ah
@@ -73,8 +73,8 @@ _BuildingClass__Read_INI_Skip_Dead_Houses:
 
     Save_Registers
 
-    call 0x004D2CB0    ; HouseClass * HouseClass::As_Pointer(HousesType)
-    test BYTE [eax+0x43], 1
+    call HouseClass__As_Pointer
+    test byte [eax+0x43], 1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -92,8 +92,8 @@ _InfantryClass__Read_INI_Skip_Dead_Houses:
 
     Save_Registers
 
-    call 0x004D2CB0    ; HouseClass * HouseClass::As_Pointer(HousesType)
-    test BYTE [eax+0x43], 1
+    call HouseClass__As_Pointer
+    test byte [eax+0x43], 1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -111,8 +111,8 @@ _VesselClass__Read_INI_Skip_Dead_Houses:
 
     Save_Registers
 
-    call 0x004D2CB0    ; HouseClass * HouseClass::As_Pointer(HousesType)
-    test BYTE [eax+0x43], 1
+    call HouseClass__As_Pointer
+    test byte [eax+0x43], 1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -129,8 +129,8 @@ _UnitClass__Read_INI_Skip_Dead_Houses:
     jz   0x0058110B
     Save_Registers
 
-    call 0x004D2CB0    ; HouseClass * HouseClass::As_Pointer(HousesType)
-    test BYTE [eax+0x43], 1
+    call HouseClass__As_Pointer
+    test byte [eax+0x43], 1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -142,19 +142,19 @@ _UnitClass__Read_INI_Skip_Dead_Houses:
 
 _HouseClass__Init_Data_Spectator_Stuff:
     Save_Registers
-    mov  BYTE [eax+178Fh], dl
+    mov  byte [eax+178Fh], dl
 
-    cmp  BYTE [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Ret
 
     mov  ebx, eax
     call 0x004D2C48 ;  const HouseClass::operator HousesType(void)
-    cmp  BYTE [SpectatorsArray+eax], 0
+    cmp  byte [SpectatorsArray+eax], 0
     jz   .Ret
 
     mov  eax, ebx
-    or   BYTE [eax+0x43], 1 ; Make house dead
-    mov  DWORD [eax+EXT_IsSpectator], 1
+    or   byte [eax+0x43], 1 ; Make house dead
+    mov  dword [eax+EXT_IsSpectator], 1
 ;    mov     eax, 0x00668250
 ;    mov     edx, 1
 ;    call    0x0052D790
@@ -168,29 +168,29 @@ _HouseClass__Init_Data_Spectator_Stuff:
 
 _Create_Units_Skip_Dead_Houses:
 
-    cmp  BYTE [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Ret
 
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jnz  .Spectator
 
 .Ret:
-    cmp  DWORD [ebp-0x8C], 0
+    cmp  dword [ebp-0x8C], 0
     jmp  0x0053E502
 
 .Spectator:
     jmp  0x0053E4D6
 
 _Assign_Houses_Set_Up_Player_Pointer:
-    mov  DWORD [0x00669958], edi
+    mov  dword [0x00669958], edi
 
-    cmp  BYTE [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Ret
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Ret
 
-    mov  DWORD [0x0065D7F0], 1
-    mov  DWORD [0x0067F315], 1
+    mov  dword [0x0065D7F0], 1
+    mov  dword [0x0067F315], 1
 
 .Ret:
     jmp  0x0053DFDD

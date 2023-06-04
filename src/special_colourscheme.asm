@@ -1,10 +1,10 @@
 ;@HOOK 0x00567343 _TechnoClass__Remap_Table_Building_Check
 
 _TechnoClass__Remap_Table_Building_Check:
-    cmp  DWORD [eax+93h], 2
+    cmp  dword [eax+93h], 2
     jne  .Ret_Normal
 
-    cmp  DWORD [eax+10h], 0x5F73E000
+    cmp  dword [eax+10h], 0x5F73E000
 ;    je        .Ret_Custom_Building_Colour_Scheme
     jne  .Ret_Custom_Building_Unit_Scheme
 

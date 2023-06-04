@@ -1,5 +1,3 @@
-%define FileClass__FileClass                        0x004627D4
-%define FileClass__Is_Available                     0x00462A30
 %define BuildLevel                                    0x006016C8
 %define UnitCount                                    0x0067F2CE
 %define UnitCountNoBases                            0x00604CE0
@@ -12,19 +10,19 @@
 %define    Crates                                        0x0067F2C6
 %define Special                                        0x00669908
 
-redalert_ini   db "REDALERT.INI", 0
-multiplayer_defaults_str db "MultiplayerDefaults",0
-money_str db "Money",0
-shroudregrows_str db "ShroudRegrows",0
-capturetheflag_str db "CaptureTheFlag",0
-crates_str db "Crates",0
-bases_str db "Bases",0
-oreregenerates_str db "OreRegenerates",0
-unitcount_str db "UnitCount",0
-techlevel_str db "TechLevel",0
-aidifficulty_str db "AIDifficulty",0
-aiplayers_str db "AIPlayers",0
-mapindex_str db "MapIndex",0
+redalert_ini   db"REDALERT.INI", 0
+multiplayer_defaults_str db"MultiplayerDefaults",0
+money_str db"Money",0
+shroudregrows_str db"ShroudRegrows",0
+capturetheflag_str db"CaptureTheFlag",0
+crates_str db"Crates",0
+bases_str db"Bases",0
+oreregenerates_str db"OreRegenerates",0
+unitcount_str db"UnitCount",0
+techlevel_str db"TechLevel",0
+aidifficulty_str db"AIDifficulty",0
+aiplayers_str db"AIPlayers",0
+mapindex_str db"MapIndex",0
 
 FirstLoad:            db 1
 FirstLoad2:            db 1
@@ -99,9 +97,9 @@ _LAN_Players_Slider3:
     cmp  byte [FirstLoadPlayers2], 1
     jne  .Not_First_Load_Players
 
-    mov  DWORD [FirstLoadPlayers2], 0
+    mov  dword [FirstLoadPlayers2], 0
     this__INI_Get_Int multiplayer_defaults_str, aiplayers_str, 1
-    mov  DWORD [Players], eax
+    mov  dword [Players], eax
 
 .Not_First_Load_Players:
     pop  eax
@@ -113,7 +111,7 @@ _LAN_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoadLAN], 1
     jnz  .Jump_Over_Bases
-    mov  bl, BYTE [bases]
+    mov  bl, byte [bases]
     mov  [BasesOrNoBases], ebx
 .Jump_Over_Bases:
     mov  ebx, [BasesOrNoBases]
@@ -124,7 +122,7 @@ _LAN_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoadLAN], 1
     jnz  .Jump_Over_OreRegenerates
-    mov  bl, BYTE [oreregenerates]
+    mov  bl, byte [oreregenerates]
     mov  [OreRegenerates], ebx
 
 .Jump_Over_OreRegenerates:
@@ -136,7 +134,7 @@ _LAN_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoadLAN], 1
     jnz  .Jump_Over_Crates
-    mov  bl, BYTE [crates]
+    mov  bl, byte [crates]
     mov  [Crates], ebx
 
 .Jump_Over_Crates:
@@ -162,7 +160,7 @@ _Skirmish_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoad2], 1
     jnz  .Jump_Over_Bases
-    mov  bl, BYTE [bases]
+    mov  bl, byte [bases]
     mov  [BasesOrNoBases], ebx
 .Jump_Over_Bases:
     mov  ebx, [BasesOrNoBases]
@@ -173,7 +171,7 @@ _Skirmish_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoad2], 1
     jnz  .Jump_Over_OreRegenerates
-    mov  bl, BYTE [oreregenerates]
+    mov  bl, byte [oreregenerates]
     mov  [OreRegenerates], ebx
 
 .Jump_Over_OreRegenerates:
@@ -185,7 +183,7 @@ _Skirmish_Check_Lists:
     xor  ebx, ebx
     cmp  byte [FirstLoad2], 1
     jnz  .Jump_Over_Crates
-    mov  bl, BYTE [crates]
+    mov  bl, byte [crates]
     mov  [Crates], ebx
 
 .Jump_Over_Crates:
@@ -201,7 +199,7 @@ _Skirmish_Check_Lists:
 ;    xor        eax, eax
 ;    cmp  byte [FirstLoad2], 1
 ;    jnz        .Jump_Over_ShroudRegrows
-;    mov        al, BYTE [shroudregrows]
+;    mov        al, byte [shroudregrows]
 ;    and     eax, 1
 ;    mov     edx, [Special]
 ;    or      edx, eax
@@ -225,7 +223,7 @@ _Skirmish_Check_Lists:
 ;    and     bh, 0F7h
 ;    xor        eax, eax
 
-;    mov        al, BYTE [ctf]
+;    mov        al, byte [ctf]
 ;    and     eax, 1
 ;    mov     byte [Special], bh
 ;    shl     eax, 3
@@ -253,9 +251,9 @@ _Skirmish_Players_Slider3:
     cmp  byte [FirstLoadPlayers], 1
     jne  .Not_First_Load_Players
 
-    mov  DWORD [FirstLoadPlayers], 0
+    mov  dword [FirstLoadPlayers], 0
     this__INI_Get_Int multiplayer_defaults_str, aiplayers_str, 1
-    mov  DWORD [Players], eax
+    mov  dword [Players], eax
 
 .Not_First_Load_Players:
     mov  edx, [Players]
@@ -269,10 +267,10 @@ _Skirmish_UnitCount_Slider:
 
 _Skirmish_Selected_Map_Index:
 
-    cmp  BYTE [FirstLoad], 1
+    cmp  byte [FirstLoad], 1
     jne  Not_First_Load
 
-    MOV  BYTE [FirstLoad], 0
+    mov  byte [FirstLoad], 0
 
 Not_First_Load:
     lea  eax, [ebp-854h]
@@ -300,31 +298,31 @@ _RulesClass_Multiplayer_Defaults:
 ;        mov esi, eax
 
     ; initialize FileClass
-    MOV  EDX, redalert_ini
-    MOV  EAX, FileClass_this_
-    CALL FileClass__FileClass
+    mov  edx, redalert_ini
+    mov  eax, FileClass_this_
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_this_
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-;    TEST EAX,EAX
-;    JE .exit_error
+    mov  eax, FileClass_this_
+    xor  edx, edx
+    call CCFileClass__Is_Available
+;    test eax,eax
+;    je .exit_error
 
     ; initialize CCINIClass
-    MOV  EAX, INIClass_this_
-    CALL CCINIClass__CCINIClass
+    mov  eax, INIClass_this_
+    call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    MOV  EDX, FileClass_this_
-    MOV  EAX, INIClass_this_
-    CALL CCINIClass__Load
+    mov  edx, FileClass_this_
+    mov  eax, INIClass_this_
+    call CCINIClass__Load
 
 
     this__INI_Get_Int multiplayer_defaults_str, unitcount_str, 0
-    mov  DWORD [UnitCount], eax
+    mov  dword [UnitCount], eax
     this__INI_Get_Int multiplayer_defaults_str, techlevel_str, 10
-    mov  DWORD [BuildLevel], eax
+    mov  dword [BuildLevel], eax
 
     this__INI_Get_Int multiplayer_defaults_str, money_str, 10000
     mov  dword [esi+0B5h], eax ; Money
@@ -332,19 +330,19 @@ _RulesClass_Multiplayer_Defaults:
     ; modifying MaxMoney causes network desync
 
     this__INI_Get_Bool multiplayer_defaults_str, shroudregrows_str, 0 ; ShadowGrow
-    mov  BYTE [shroudregrows], al
+    mov  byte [shroudregrows], al
 
     this__INI_Get_Bool multiplayer_defaults_str, bases_str, 1 ; Bases
-    mov  BYTE [bases], al
+    mov  byte [bases], al
 
     this__INI_Get_Bool multiplayer_defaults_str, oreregenerates_str, 1 ; Ore Grows
-    mov  BYTE [oreregenerates], al
+    mov  byte [oreregenerates], al
 
     this__INI_Get_Bool multiplayer_defaults_str, crates_str, 0 ; Crates
-    mov  BYTE [crates], al
+    mov  byte [crates], al
 
     this__INI_Get_Bool multiplayer_defaults_str, capturetheflag_str, 0 ; CaptureTheFlag
-    mov  BYTE [ctf], al
+    mov  byte [ctf], al
 
     this__INI_Get_Bool multiplayer_defaults_str, shroudregrows_str, 0 ; ShadowGrow
 ;        mov        eax, 0

@@ -49,44 +49,44 @@ _UnitTypeClass__Read_INI_Extended:
 
     pop  esi
 .Ret:
-    lea  esp, [ebp-10h]
+    lea  esp,[ebp-10h]
     pop  edi
     pop  esi
     pop  ecx
     jmp  0x00578DD4
 
 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx, New_UnitTypeClass_Size, Old_UnitTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_UnitTypeClass_Size,Old_UnitTypeClass_Size
 .Ret:
-    lea  edx, [ebp-0x14]
-    mov  eax, ecx
+    lea  edx,[ebp-0x14]
+    mov  eax,ecx
     jmp  0x004D1436
 
 _TFixedIHeapClass__fn_init_New_UnitTypes_Heap_Size:
-    mov  edx, New_UnitTypeClass_Size
+    mov  edx,New_UnitTypeClass_Size
     jmp  0x004C74D7
 
 _TFixedIHeapClass__UnitTypeClass__Load_New_Size:
-    mov  ebx, New_UnitTypeClass_Size
+    mov  ebx,New_UnitTypeClass_Size
     jmp  0x004D141B
 
 _TFixedIHeapClass__UnitTypeClass__Save_New_Size:
-    mov  ebx, New_UnitTypeClass_Size
+    mov  ebx,New_UnitTypeClass_Size
     jmp  0x004D1338
 
 _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size:
-    mov  edx, New_UnitTypeClass_Size
+    mov  edx,New_UnitTypeClass_Size
     jmp  0x004C968A
 
 _GetBuildingTypeIDFromString:
     ;select BuildingType by performing string compare on eax
     push ebx
-    cmp  eax, 0
+    cmp  eax,0
     jle  .Retn ; just return 0
     BuildingTypeClass.FromID(eax,ebx)
-    mov  ebx, dword [ebx+1]; index
+    mov  ebx,dword [ebx+1]; index
 	;ObjectTypeClass.ID ebx,ebx
-    mov  eax, ebx
+    mov  eax,ebx
 .Retn:
     pop ebx
     retn

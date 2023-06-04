@@ -1,6 +1,6 @@
 ; define object type field definitions
 %define ObjectTypeClass.Offset.Unknown                   0x021    ; INT // 5FAAD0 for infantry
-%define ObjectTypeClass.Offset.GraphicName               0x025    ; BYTE[256] // 
+%define ObjectTypeClass.Offset.GraphicName               0x025    ; byte[256] // 
 %define ObjectTypeClass.Offset.IsCrushable               0x125    ; BOOL // Already supported by game INI
 %define ObjectTypeClass.Bit.IsCrushable                  1    
 %define ObjectTypeClass.Offset.IsStealthy                0x125    ; BOOL
@@ -18,8 +18,8 @@
 %define ObjectTypeClass.Offset.IsFootprint               0x125    ; BOOL
 %define ObjectTypeClass.Bit.IsFootprint                  8    
 ; 0x126, 0x127 and 0x128 are empty
-%define ObjectTypeClass.Offset.Armor                     0x129    ; BYTE
-%define ObjectTypeClass.Offset.MaxStrength               0x12A    ; WORD
+%define ObjectTypeClass.Offset.Armor                     0x129    ; byte
+%define ObjectTypeClass.Offset.MaxStrength               0x12A    ; word
 %define ObjectTypeClass.Offset.ImageData                 0x12C    ; INT PTR
 %define ObjectTypeClass.Offset.DimensionData             0x130    ; INT PTR
 %define ObjectTypeClass.Offset.RadarIcon                 0x134    ; INT PTR

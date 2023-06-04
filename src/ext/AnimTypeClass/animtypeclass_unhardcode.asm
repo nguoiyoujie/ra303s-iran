@@ -41,27 +41,27 @@ temp_animtypeclass_constructor_arg dd 0
 ; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
 
 _Anim_From_Name_Unhardcode_AnimTypes:
-    mov  al, [NewAnimTypeHeapCount]
-    cmp  dl, al
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  dl,al
     jl   0x00423EF4
     jmp  0x00423EED
 
 _AnimTypeClass__Init_UnhardCode_AnimTypes:
-    mov  al, [NewAnimTypeHeapCount]
-    cmp  bl, al
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  bl,al
     jl   0x0041C68E
     jmp  0x0041C6E8
 
 _AnimTypeClass__One_Time_UnhardCode_AnimTypes:
-    mov  al, [NewAnimTypeHeapCount]
-    cmp  dh, al
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  dh,al
     jl   0x0041C5F8
     jmp  0x0041C659
 
 _TechnoClass_FireAt_ApplyDirectionalAnim:
-    cmp  al, byte [FirstDirectionalAnim]
+    cmp  al,byte [FirstDirectionalAnim]
     jge  .DirectionalAnim
-    cmp  al, 0x19
+    cmp  al,0x19
     jc   0x005655D7
     jbe  0x005657D8
     jmp  0x005655CF
@@ -69,52 +69,52 @@ _TechnoClass_FireAt_ApplyDirectionalAnim:
 .DirectionalAnim:
     push edx
     mov  edx,eax
-    mov  eax,DWORD [ebp-0x18]
+    mov  eax,dword [ebp-0x18]
     add  eax,0xba
-    mov  al,BYTE [eax]
+    mov  al,byte [eax]
     add  al,0x10
     and  eax,0xff
     sar  eax,0x5
     add  al,dl 
     pop  edx
-    mov  BYTE [ebp-0x10], al
+    mov  byte [ebp-0x10],al
     jmp  0x005655D7
 
 
 _Init_Game_Set_AnimTypes_Heap_Count:
 
     Get_RULES_INI_Section_Entry_Count str_AnimTypes
-    mov  BYTE [AnimTypesTypesExtCount], al
-    mov  edx, eax
-    add  edx, OriginalAnimTypesHeapCount
-    mov  BYTE [FirstDirectionalAnim], dl
+    mov  byte [AnimTypesTypesExtCount],al
+    mov  edx,eax
+    add  edx,OriginalAnimTypesHeapCount
+    mov  byte [FirstDirectionalAnim],dl
 
     Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
-    shl  al, 3 ;x8
-    add  BYTE [AnimTypesTypesExtCount], al
-    add  edx, eax
-    mov  BYTE [NewAnimTypeHeapCount], dl
+    shl  al,3 ;x8
+    add  byte [AnimTypesTypesExtCount],al
+    add  edx,eax
+    mov  byte [NewAnimTypeHeapCount],dl
 
     jmp  0x004F40EE
 
 
 ; We preserve this for now, we can tidy this later when we want to customize
 Init_AnimTypeClass:
-    mov  eax, 162h
+    mov  eax,162h
     call 0x00407564 ; AnimTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, edx
+    mov  eax,edx
     ; edx should have the name of the INI section already
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
     pop  eax
 
-    mov  edx, ebx
-    add  edx, OriginalAnimTypesHeapCount ; AnimType
-    mov  ebx, ecx ; Name/ID
+    mov  edx,ebx
+    add  edx,OriginalAnimTypesHeapCount ; AnimType
+    mov  ebx,ecx ; Name/ID
 
     ; these settings were derived from ANIM_FBALL1 / FBALL1
     push 0FFFFFFFFh      ; chainto (AnimType)
@@ -135,9 +135,9 @@ Init_AnimTypeClass:
     push 0               ; iswhitetrans
     push 1               ; isnormal
     push 0               ; istheater 
-    mov  ecx, 43h        ; size (max of width or height, to establish refresh area)
-    push 6               ; biggest (in effect, the ground effects like scorch are applied at this frame, so this is typically the biggest stage)
-    mov  DWORD [0x005FDF98], edx ;0x15 ;????
+    mov  ecx,43h        ; size (max of width or height,to establish refresh area)
+    push 6               ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
+    mov  dword [0x005FDF98],edx ;0x15 ;????
     call 0x00407388 ; AnimTypeClass::AnimTypeClass(AnimType,char                *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
 
 .Ret:
@@ -147,50 +147,50 @@ Init_DirectionalAnimTypeClass:
     mov  dword [temp_AnimDirection],0
     mov  dword [temp_AnimDirFrameStart],0
     mov  dword [temp_AnimDirFrameBiggest],4 ; ANIM_SAM_N
-    mov  dword [temp_AnimStr], edx
-    mov  byte [temp_AnimID], bl
+    mov  dword [temp_AnimStr],edx
+    mov  byte [temp_AnimID],bl
     ; edx should have the name of the INI section already
     jmp  .Create
 
 .Next:
     push eax
-    mov  eax, dword [temp_AnimDirection]
-    cmp  eax, 0
+    mov  eax,dword [temp_AnimDirection]
+    cmp  eax,0
     jnz  .Next2
-    add  dword [temp_AnimDirFrameStart], AnimDirStageFrames * 8
-    add  dword [temp_AnimDirFrameBiggest], AnimDirStageFrames * 8
+    add  dword [temp_AnimDirFrameStart],AnimDirStageFrames * 8
+    add  dword [temp_AnimDirFrameBiggest],AnimDirStageFrames * 8
 
 .Next2:
     inc  eax
-    cmp  eax, 0x8
+    cmp  eax,0x8
     jge  .RetPop
     mov  dword [temp_AnimDirection],eax
-    mov  eax, dword [temp_AnimDirFrameStart]
-    sub  eax, AnimDirStageFrames
+    mov  eax,dword [temp_AnimDirFrameStart]
+    sub  eax,AnimDirStageFrames
     mov  dword [temp_AnimDirFrameStart],eax
-    mov  eax, dword [temp_AnimDirFrameBiggest]
-    sub  eax, AnimDirStageFrames
+    mov  eax,dword [temp_AnimDirFrameBiggest]
+    sub  eax,AnimDirStageFrames
     mov  dword [temp_AnimDirFrameBiggest],eax
     pop  eax
 
 .Create:
-    mov  eax, 162h
+    mov  eax,162h
     call 0x00407564 ; AnimTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, dword [temp_AnimStr]
+    mov  eax,dword [temp_AnimStr]
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
     pop  eax
 
-    xor  edx, edx
-    mov  dl, byte [temp_AnimID]
-    shl  dl, 3 ; multiply by 8
-    add  dl, byte [FirstDirectionalAnim] ; AnimType
-    add  edx, dword [temp_AnimDirection]
-    mov  ebx, ecx ; Name/ID
+    xor  edx,edx
+    mov  dl,byte [temp_AnimID]
+    shl  dl,3 ; multiply by 8
+    add  dl,byte [FirstDirectionalAnim] ; AnimType
+    add  edx,dword [temp_AnimDirection]
+    mov  ebx,ecx ; Name/ID
 
     ; these settings were derived from ANIM_SAM_N / SAMFIRE
     push 0FFFFFFFFh      ; chainto (AnimType)
@@ -211,8 +211,8 @@ Init_DirectionalAnimTypeClass:
     push 0               ; iswhitetrans
     push 0               ; isnormal
     push 0               ; istheater 
-    mov  ecx, 55         ; size (max of width or height, to establish refresh area)
-    push dword [temp_AnimDirFrameBiggest]               ; biggest (in effect, the ground effects like scorch are applied at this frame, so this is typically the biggest stage)
+    mov  ecx,55         ; size (max of width or height,to establish refresh area)
+    push dword [temp_AnimDirFrameBiggest]               ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
     call 0x00407388 ; AnimTypeClass::AnimTypeClass(AnimType,char                *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
 
     jmp .Next
@@ -227,11 +227,11 @@ Init_DirectionalAnimTypeClass:
 
 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
 
-    Loop_Over_RULES_INI_Section_Entries str_AnimTypes, Init_AnimTypeClass
-    Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes, Init_DirectionalAnimTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
 
 .Ret:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-14h]
     pop  edi
     pop  esi
     pop  edx

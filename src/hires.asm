@@ -332,9 +332,9 @@ _Start_Scenario_Set_Flag_To_Redraw_Screen:
     jmp  0x0053A37B
 
 _hires_Center_VQA640_Videos:
-    MOV  EAX, [diff_top]
+    mov  eax, [diff_top]
     push eax
-    MOV  EAX, [diff_left]
+    mov  eax, [diff_left]
     push eax
 
     push 0
@@ -346,13 +346,13 @@ scorebackground db 0
 
 _hires_ScoreScreenBackground:
     cmp  eax, 0x005F01EB
-    JE   .Is_Score_Screen
+    je   .Is_Score_Screen
     cmp  eax, 0x005F01F8
-    JE   .Is_Score_Screen
-    JMP  .Ret
+    je   .Is_Score_Screen
+    jmp  .Ret
 
 .Is_Score_Screen:
-    mov  BYTE [scorebackground], 1
+    mov  byte [scorebackground], 1
 
 .Ret:
     push ebp
@@ -378,17 +378,17 @@ _hires_ScoreScreenBackground:
 %define GraphicsViewPortClass_SeenBuff 0x006807A4
 
 %macro hires_Clear 0
-    PUSH 0ch
-    PUSH GraphicsViewPortClass_HidPage
-    CALL _Buffer_Clear
+    push 0ch
+    push GraphicsViewPortClass_HidPage
+    call _Buffer_Clear
     ADD  ESP,8
 %endmacro
 
 %macro hires_Clear_2 0
-    PUSH 0
-    PUSH GraphicBufferClass_VisiblePage
-;    PUSH GraphicBufferClass_SeenBuffer
-    CALL _Buffer_Clear
+    push 0
+    push GraphicBufferClass_VisiblePage
+;    push GraphicBufferClass_SeenBuffer
+    call _Buffer_Clear
     ADD  ESP,8
 %endmacro
 
@@ -416,7 +416,7 @@ _hires_Sidebar_Cameos_AI: ; No idea if this does anything..
     add  eax, CAMEO_ITEMS
     jmp  0x0054E4C4
 
-str_blackbackgroundpcx db "BLACKBACKGROUND.PCX",0
+str_blackbackgroundpcx db"BLACKBACKGROUND.PCX",0
 
 _hires_DoRestartMissionClearBackground:
     push ecx
@@ -434,7 +434,7 @@ _hires_DoRestartMissionClearBackground:
     pop  ebx
     pop  ecx
 
-    mov  eax, [0x00666904]
+    mov  eax, [Globals___Keyboard]
     jmp  0x0053B80B
 
 _hires_RestateMissionClearBackground:
@@ -540,7 +540,7 @@ _hires_Sidebar_Cameos_Init_IO:
 
 _hires_Sidebar_Cameos_Init:
     mov  edx, CAMEO_ITEMS*2 ; amount of total items to init
-    mov  DWORD [0x00604D68], eax
+    mov  dword [0x00604D68], eax
 
 ;;    mov        eax, DefaultSelectButtons
     mov  eax, ExtendedSelectButtons8
@@ -558,115 +558,115 @@ diff_height             dd 0
 diff_top                dd 0
 diff_left               dd 0
 
-str_options             db "Options",0
-str_width               db "Width",0
-str_height              db "Height",0
+str_options             db"Options",0
+str_width               db"Width",0
+str_height              db"Height",0
 
 left_strip_offset       dd 0
 right_strip_offset      dd 0
 
 %macro _hires_adjust_width 1
-    MOV  ECX, [diff_width]
-    MOV  EAX, %1
-    ADD  [EAX], ECX
+    mov  ecx, [diff_width]
+    mov  eax, %1
+    ADD  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_height 1
-    MOV  ECX, [diff_height]
-    MOV  EAX, %1
-    ADD  [EAX], ECX
+    mov  ecx, [diff_height]
+    mov  eax, %1
+    ADD  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_top    1
-    MOV  ECX, [diff_top]
-    MOV  EAX, %1
-    ADD  [EAX], ECX
+    mov  ecx, [diff_top]
+    mov  eax, %1
+    ADD  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_left    1
-    MOV  ECX, [diff_left]
-    MOV  EAX, %1
-    ADD  [EAX], ECX
+    mov  ecx, [diff_left]
+    mov  eax, %1
+    ADD  [eax], ecx
 %endmacro
 
 ; handles Width and Height redalert.ini options
 _hires_ini:
 
-    PUSH EBX
-    PUSH EDX
+    push ebx
+    push edx
 
     .width:
-    MOV  ECX, 640            ; default
-    MOV  EDX, str_options    ; section
-    MOV  EBX, str_width      ; key
-    LEA  EAX, [EBP-0x54]     ; this
-    CALL INIClass__Get_Int
-    TEST EAX,EAX
-    JE   .height
-    MOV  DWORD [ScreenWidth], EAX
+    mov  ecx, 640            ; default
+    mov  edx, str_options    ; section
+    mov  ebx, str_width      ; key
+    lea  eax, [ebp-0x54]     ; this
+    call INIClass__Get_Int
+    test eax,eax
+    je   .height
+    mov  dword [ScreenWidth], eax
 
 .height:
-    MOV  ECX, 400
-    MOV  EDX, str_options
-    MOV  EBX, str_height
-    LEA  EAX, [EBP-0x54]
-    CALL INIClass__Get_Int
-    TEST EAX,EAX
-    JE   .cleanup
-    MOV  DWORD [ScreenHeight], EAX
+    mov  ecx, 400
+    mov  edx, str_options
+    mov  ebx, str_height
+    lea  eax, [ebp-0x54]
+    call INIClass__Get_Int
+    test eax,eax
+    je   .cleanup
+    mov  dword [ScreenHeight], eax
 
 .cleanup:
 
     ; adjust width
-    MOV  EAX, [ScreenWidth]
-    SUB  EAX, 160
-    MOV  EBX, 24
-    XOR  EDX,EDX
-    DIV  EBX
+    mov  eax, [ScreenWidth]
+    SUB  eax, 160
+    mov  ebx, 24
+    xor  edx,edx
+    DIV  ebx
 
     ; width of the game area, in tiles, 1 tile = 24px
-    MOV  BYTE [0x0054DB15], AL
+    mov  byte [0x0054DB15], AL
 
-    XOR  EDX,EDX
-    MOV  EBX, 24
-    MUL  EBX
+    xor  edx,edx
+    mov  ebx, 24
+    MUL  ebx
 
-    ADD  EAX, 160
-    MOV  [AdjustedWidth], EAX
+    ADD  eax, 160
+    mov  [AdjustedWidth], eax
 
-    ; adjusted width in EAX
-    MOV  EDX, [AdjustedWidth]
-    MOV  EBX, [ScreenHeight]
+    ; adjusted width in eax
+    mov  edx, [AdjustedWidth]
+    mov  ebx, [ScreenHeight]
 
-    SUB  EDX, 640
-    SUB  EBX, 400
+    SUB  edx, 640
+    SUB  ebx, 400
 
-    MOV  [diff_width], EDX
-    MOV  [diff_height], EBX
+    mov  [diff_width], edx
+    mov  [diff_height], ebx
 
     ; adjust top and left
-    MOV  EAX, [ScreenHeight]
-    SHR  EAX, 1
-    SUB  EAX, 200
-    MOV  [diff_top], EAX
+    mov  eax, [ScreenHeight]
+    SHR  eax, 1
+    SUB  eax, 200
+    mov  [diff_top], eax
 
-    MOV  EAX, [ScreenWidth]
-    SHR  EAX, 1
-    SUB  EAX, 320
-    MOV  [diff_left], EAX
+    mov  eax, [ScreenWidth]
+    SHR  eax, 1
+    SUB  eax, 320
+    mov  [diff_left], eax
 
-    MOV  EDX, [AdjustedWidth]
-    MOV  EBX, [ScreenHeight]
+    mov  edx, [AdjustedWidth]
+    mov  ebx, [ScreenHeight]
 
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .Ret
+;    cmp dword [ScreenHeight], 480
+;    jz    .Ret
 
-    MOV  EDX, [AdjustedWidth]
-    MOV  EBX, [ScreenHeight]
+    mov  edx, [AdjustedWidth]
+    mov  ebx, [ScreenHeight]
 
-;    MOV ECX, 100
-;    MOV EAX, 0x004A8AE1
-;    ADD [EAX], ECX
+;    mov ecx, 100
+;    mov eax, 0x004A8AE1
+;    ADD [eax], ecx
 
     ; main menu please wait...
     _hires_adjust_top     0x004F43BF
@@ -1089,13 +1089,13 @@ _hires_ini:
 ;    _hires_adjust_left    0x0054D7F1
 
     ; kill original sidebar area (halp)
-    MOV  BYTE [0x0054F380], 0xC3
+    mov  byte [0x0054F380], 0xC3
 
 .Ret:
-    POP  EDX
-    POP  EBX
+    POP  edx
+    POP  ebx
 
-    JMP  0x00552979
+    jmp  0x00552979
 
 _Fill_Rect_test:
 
@@ -1119,13 +1119,13 @@ _Fill_Rect_test:
 ;    mov al, 0
 ;    push    eax
 ;    mov     word ecx, 0 ; [ebp-0ACh] top
-;    push    WORD ecx             ; __int16
+;    push    word ecx             ; __int16
 ;    mov     word eax, 0; [ebp-0B0h] ; left
-;    push    WORD eax             ; __int16
+;    push    word eax             ; __int16
 ;    mov     word edx, 1000 ; [ebp-0B4h]
-;    push    WORD edx             ; __int16
+;    push    word edx             ; __int16
 ;    mov     word ebx, 1500 ; [ebp-0B8h]
-;    push    WORD ebx             ; __int16
+;    push    word ebx             ; __int16
 ;    mov        ebx, [GraphicsViewPortClass_HidPage] ; GraphicViewPortClass LogicPage
 ;    push    ebx
 ;    call    0x005C23F0
@@ -1158,7 +1158,7 @@ _hires_Deinterlace_Videos_Always_Deinterlace:
     mov  eax, ebx
     call 0x005B2CE0 ; Read_Interpolation_Palette(char *)
 
-    cmp  DWORD [0x00691730], 0
+    cmp  dword [0x00691730], 0
     jz   .Jump_Over_Create_Table
     call 0x005B2DD0 ; Create_Palette_Interpolation_Table(void)
 
@@ -1173,7 +1173,7 @@ _hires_Deinterlace_Videos_Fix_Bottom_Line:
 
 _hires_Deinterlace_Videos:
 ;    mov     eax, 2 ; video mode, 2 = deinterlace
-    mov  eax, [videointerlacemode]
+    mov  eax, [VideoInterlaceMode]
     jmp  0x005B30D5
 
 ;_hires_Deinterlace_Videos2:
@@ -1195,8 +1195,8 @@ _hires_Videos2:
     jmp  0x004A8AD0
 
 _hires_MainMenu_Credits_Select:
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .No_Change
+;    cmp dword [ScreenHeight], 480
+;    jz    .No_Change
 
     mov  edx, 30h ; left
     add  edx, [diff_top]
@@ -1206,7 +1206,7 @@ _hires_MainMenu_Credits_Select:
     mov  ecx, 14h
     add  ecx, [diff_top]
 
-    mov  eax, [0x00666904]
+    mov  eax, [Globals___Keyboard]
 
     mov  ebx, 12h
     add  ebx, [diff_left]
@@ -1224,8 +1224,8 @@ _hires_MainMenu_Credits_Select:
     jmp  0x005024B6
 
 _hires_MainMenu_AntMissions_Select:
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .No_Change
+;    cmp dword [ScreenHeight], 480
+;    jz    .No_Change
 
     mov  eax, 64h ; left
     add  eax, [diff_top]
@@ -1235,7 +1235,7 @@ _hires_MainMenu_AntMissions_Select:
     mov  ebx, 208h
     add  ebx, [diff_left]
 
-    mov  eax, [0x00666904]
+    mov  eax, [Globals___Keyboard]
 
     xor  ecx, ecx
     add  ecx, [diff_top]
@@ -1371,42 +1371,42 @@ _hires_Network_Join_Button:
     jmp  0x00506CFA
 
 _hires_StripClass:
-    MOV  DWORD [EBX+0x104F], 0x1F0 ; left strip offset left
-    MOV  DWORD [EBX+0x1053], 0x0B4 ; left strip offset top
-    MOV  DWORD [EBX+0x132F], 0x0B4 ; right strip offset top
-    MOV  DWORD [EBX+0x132B], 0x236 ; right strip offset left
+    mov  dword [ebx+0x104F], 0x1F0 ; left strip offset left
+    mov  dword [ebx+0x1053], 0x0B4 ; left strip offset top
+    mov  dword [ebx+0x132F], 0x0B4 ; right strip offset top
+    mov  dword [ebx+0x132B], 0x236 ; right strip offset left
 
-    LEA  EAX, [EBX+0x104F]
-    MOV  [left_strip_offset], EAX
-    LEA  EAX, [EBX+0x132B]
-    MOV  [right_strip_offset], EAX
+    lea  eax, [ebx+0x104F]
+    mov  [left_strip_offset], eax
+    lea  eax, [ebx+0x132B]
+    mov  [right_strip_offset], eax
 
-    MOV  EAX,EBX
-    JMP  0x0054D033
+    mov  eax,ebx
+    jmp  0x0054D033
 
 _hires_MainMenu:
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .No_Change
+;    cmp dword [ScreenHeight], 480
+;    jz    .No_Change
 
-    MOV  EBX, [diff_top]
-    MOV  EAX, [diff_left]
-    CMP  BYTE [scorebackground], 1
+    mov  ebx, [diff_top]
+    mov  eax, [diff_left]
+    cmp  byte [scorebackground], 1
     je   .Display_Top_Left
 
-    CMP  EDX, 190h
+    cmp  edx, 190h
     je   .Jump_Background_Skip
 
 .Display_Top_Left:
-    MOV  EBX, 0
-    MOV  EAX, 0
+    mov  ebx, 0
+    mov  eax, 0
 
 .Jump_Background_Skip:
-    MOV  BYTE [scorebackground], 0
-    PUSH EBX
-    PUSH EAX
-    PUSH 0
-    PUSH 0
-    JMP  0x005B3DC7
+    mov  byte [scorebackground], 0
+    push ebx
+    push eax
+    push 0
+    push 0
+    jmp  0x005B3DC7
 
 .No_Change:
     push 0
@@ -1416,62 +1416,62 @@ _hires_MainMenu:
     jmp  0x005B3DC7
 
 _hires_Intro:
-    PUSH 0
-    PUSH 0
+    push 0
+    push 0
 
-    MOV  EAX, 100
-    ; MOV EAX, [diff_top]
-    PUSH EAX
-    MOV  EAX, 100
-;    MOV EAX, [diff_left]
-    PUSH EAX
+    mov  eax, 100
+    ; mov eax, [diff_top]
+    push eax
+    mov  eax, 100
+;    mov eax, [diff_left]
+    push eax
 
-    JMP  0x004A9EB1
+    jmp  0x004A9EB1
 
 _hires_NewGameText_top  dd 0x96
 _hires_NewGameText_left dd 0x6E
 
 _hires_NewGameText:
-    MOV  EAX, [diff_top]
-    ADD  EAX,0x96
-    PUSH EAX
+    mov  eax, [diff_top]
+    ADD  eax,0x96
+    push eax
 
-    MOV  EAX, [diff_left]
-    ADD  EAX,0x6E
-    PUSH EAX
+    mov  eax, [diff_left]
+    ADD  eax,0x6E
+    push eax
 
-    JMP  0x005518AA
+    jmp  0x005518AA
 
 _hires_SkirmishMenu:
-    MOV  ECX, [diff_left]
-    MOV  DWORD [EBP-0x1D4], ECX
-    MOV  ECX, [diff_top]
-    MOV  DWORD [EBP-0x1D0], ECX
+    mov  ecx, [diff_left]
+    mov  dword [ebp-0x1D4], ecx
+    mov  ecx, [diff_top]
+    mov  dword [ebp-0x1D0], ecx
 
-    XOR  ECX,ECX
-    JMP  0x005128E0
+    xor  ecx,ecx
+    jmp  0x005128E0
 
 .No_Change:
-    MOV  DWORD [EBP-0x1D4], ECX
-    JMP  0x005128DA
+    mov  dword [ebp-0x1D4], ecx
+    jmp  0x005128DA
 
 _hires_NetworkJoinMenu:
-    MOV  ECX, [diff_top]
-    MOV  DWORD [EBP-0x1D4], ECX
-    MOV  ECX, [diff_left]
-    MOV  DWORD [EBP-0x1D0], ECX
-    XOR  ECX,ECX
-    JMP  0x0050693D
+    mov  ecx, [diff_top]
+    mov  dword [ebp-0x1D4], ecx
+    mov  ecx, [diff_left]
+    mov  dword [ebp-0x1D0], ecx
+    xor  ecx,ecx
+    jmp  0x0050693D
 
 _hires_MainMenuClear:
     hires_Clear
-    MOV  EAX,1
-    JMP  0x004F47A0
+    mov  eax,1
+    jmp  0x004F47A0
 
 _hires_MainMenuClearPalette:
     hires_Clear
-    MOV  EAX, [0x006807E8]
-    JMP  0x004F7600
+    mov  eax, [0x006807E8]
+    jmp  0x004F7600
 
 %define Set_Logic_Page 0x005C0FE7
 
@@ -1488,8 +1488,8 @@ _Blacken_Screen_Border_Menu2:
     jmp  0x00502293
 
 _NewMissions_Handle_Hires_Buttons_A:
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .No_Change
+;    cmp dword [ScreenHeight], 480
+;    jz    .No_Change
 
     mov  edx, 13Ch
     add  edx, [diff_top]
@@ -1509,8 +1509,8 @@ _NewMissions_Handle_Hires_Buttons_A:
     jmp  0x004BE37C
 
 _NewMissions_Handle_Hires_Buttons_B:
-;    CMP DWORD [ScreenHeight], 480
-;    JZ    .No_Change
+;    cmp dword [ScreenHeight], 480
+;    jz    .No_Change
 
     mov  edx, 13Ch
     add  edx, [diff_top]
@@ -1637,10 +1637,10 @@ _hires_Net_Join_Name_Box:
 
     mov  eax, 0x5a
     add  eax, [diff_left]
-    PUSH eax
+    push eax
 
-    MOV  EAX,DWORD [0x601694]
-    XOR  DH,DH
+    mov  eax,dword [0x601694]
+    xor  DH,DH
     jmp  0x00506BE7
 
 _hires_Net_Join_Country_Box:
@@ -1798,7 +1798,7 @@ _hires_Net_Join_MessageBox:
     jmp  0x00507E00
 
 _hires_Net_Join_Unit_Count_Text_Print:
-; ECX = 0000009F, ESI = 000000B5
+; ecx = 0000009F, esi = 000000B5
     mov  ecx, 0x9F
     add  ecx, [diff_top]
     push ecx
@@ -1806,7 +1806,7 @@ _hires_Net_Join_Unit_Count_Text_Print:
     add  esi, [diff_left]
     jmp  0x00507F40
 
-; EDX= 000000AC, EBX = 000000B5
+; edx= 000000AC, ebx = 000000B5
 _hires_Net_Join_Tech_Level_Text_Print:
     mov  edx, 0xAC
     add  edx, [diff_top]
@@ -1815,7 +1815,7 @@ _hires_Net_Join_Tech_Level_Text_Print:
     add  ebx, [diff_left]
     jmp  0x00507FA4
 
-; EAX = 000000B9, EDX = B5
+; eax = 000000B9, edx = B5
 _hires_Net_Join_Credits_Text_Print:
     mov  eax, 0xB9
     add  eax, [diff_top]
@@ -1834,7 +1834,7 @@ _hires_Net_Join_AI_Players_Text_Print:
     jmp  0x00508081
 
 _hires_Net_Join_Playing_As_Text_Print:
-; EDX = 00000010, ebx = 00000140
+; edx = 00000010, ebx = 00000140
     mov  edx, 0x10
     add  edx, [diff_top]
     push edx
@@ -1853,17 +1853,17 @@ _Shake_The_Screen_Height1:
     jmp  0x004AB8AD
 
 _Set_Screen_Height_400_NOP:
-    cmp  DWORD [fake480height], 1
+    cmp  dword [fake480height], 1
     je   .No_Change
 
     jmp  0x00552628
 
 .No_Change:
-    mov  DWORD [ScreenHeight], 190h
+    mov  dword [ScreenHeight], 190h
     jmp  0x005525ED
 
 _No_Black_Bars_In_640x480:
-    cmp  DWORD [fake480height], 1
+    cmp  dword [fake480height], 1
     je   .No_Change
     jmp  0x00552628
 
@@ -1871,6 +1871,6 @@ _No_Black_Bars_In_640x480:
     jmp  0x005525ED
 
 _Set_Screen_Height_480_NOP:
-    mov  DWORD [ScreenHeight], ebx
-    mov  DWORD [fake480height], 1
+    mov  dword [ScreenHeight], ebx
+    mov  dword [fake480height], 1
     jmp  0x005523EE

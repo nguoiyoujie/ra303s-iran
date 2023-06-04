@@ -19,11 +19,11 @@
 
 SongsAvailable: dd 0
 
-bigfoot_str db "outtakes.AUD",0
-musicini_str db "MUSIC.INI",0
+bigfoot_str db"outtakes.AUD",0
+musicini_str db"MUSIC.INI",0
 music_array TIMES 400h db 0
-str_filenames db "Filenames",0
-str_fullnames db "Fullnames",0
+str_filenames db"Filenames",0
+str_fullnames db"Fullnames",0
 str_tracklength db"Tracklength",0
 str_showallmusic db"ShowAllMusic",0
 str_options2 db"Options",0
@@ -36,31 +36,27 @@ FileClass_redalertini  TIMES 128 db 0
 CCINIClass_redalertini TIMES 128 db 0
 
 FileClass_Arazoid    TIMES 128 db 0
-str_arazoidaud    db "ARAZOID.AUD",0
-str_araziodaud    db "ARAZIOD.AUD",0
+str_arazoidaud    db"ARAZOID.AUD",0
+str_araziodaud    db"ARAZIOD.AUD",0
 
-str_sprintf_format2 db "%d",0
+str_sprintf_format2 db"%d",0
 
 sprintf_buffer   TIMES 64 db 0
-;str_empty db 0
 
-str_general db "General",0
-str_sprintf_format db "%d",0
+str_sprintf_format db"%d",0
 
 sprintf_buffer2   TIMES 64 db 0
 music_filenames_buffer TIMES 8192 db 0 ; 128 * 32 bytes
 
-str_twincannonremix db "Twin Cannon (Remix)",0
-str_underlyingthoughts db "Underlying Thoughts",0
-str_voicerhythm2 db "Voice Rhythm 2",0
-str_shutit db "Shut It",0
-str_chaos db "Chaos",0
+str_twincannonremix db"Twin Cannon (Remix)",0
+str_underlyingthoughts db"Underlying Thoughts",0
+str_voicerhythm2 db"Voice Rhythm 2",0
+str_shutit db"Shut It",0
+str_chaos db"Chaos",0
 str_thesecondhand db"The Second Hand",0
-str_backstab db "Backstab",0
-str_twincannon db "Twin Cannon",0
+str_backstab db"Backstab",0
+str_twincannon db"Twin Cannon",0
 
-%define FileClass__FileClass                        0x004627D4
-%define FileClass__Is_Available                     0x00462A30
 
 ; args: <section>, <key>, <default>
 %macro this3_INI_Get_Int 3
@@ -111,7 +107,7 @@ _Load_Game_Menu_Queue_Song_Call_Patch_Out:
     jmp  0x004F4B88
 
 _Load_Game_Queue_Song:
-    cmp  Byte [randomstartingsong], 0
+    cmp  byte [RandomStartingSong], 0
     jz   .Ret
 
 .Select_Random_Song:
@@ -136,7 +132,7 @@ _Load_Game_Queue_Song:
 
 _Start_Scenario_Queue_Theme:
     xor  edx, edx
-    cmp  Byte [randomstartingsong], 0
+    cmp  byte [RandomStartingSong], 0
     jz   .Ret
     cmp  dword [SongsAvailable], 0
     jz   .Ret
@@ -189,15 +185,15 @@ _ThemeClass_Is_Allowed:
     call 0x0056C110 ; char * ThemeClass::Theme_File_Name(ThemeType)
 
     mov  edx, eax
-    MOV  EAX, FileClass_THEMEAVAILABLE
-    CALL 0x004627D4 ; FileClass__FileClass
+    mov  eax, FileClass_THEMEAVAILABLE
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_THEMEAVAILABLE
-    XOR  EDX, EDX
-    CALL 0x00462A30 ;FileClass__Is_Available
-    TEST EAX,EAX
-    JE   .Ret_False_File_Not_Available
+    mov  eax, FileClass_THEMEAVAILABLE
+    xor  edx, edx
+    call CCFileClass__Is_Available
+    test eax,eax
+    je   .Ret_False_File_Not_Available
 
     Restore_Registers
 
@@ -217,25 +213,25 @@ _ThemeClass_Is_Allowed:
     test eax, eax
     jnz  .Done_INIClass_Loading
 
-    MOV  EDX, str_redalert_ini
-    MOV  EAX, FileClass_redalertini
-    CALL FileClass__FileClass
+    mov  edx, str_redalert_ini
+    mov  eax, FileClass_redalertini
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_redalertini
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-;    TEST EAX,EAX
-;    JE .exit_error
+    mov  eax, FileClass_redalertini
+    xor  edx, edx
+    call CCFileClass__Is_Available
+;    test eax,eax
+;    je .exit_error
 
     ; initialize CCINIClass
-    MOV  EAX, CCINIClass_redalertini
-    CALL CCINIClass__CCINIClass
+    mov  eax, CCINIClass_redalertini
+    call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    MOV  EDX, FileClass_redalertini
-    MOV  EAX, CCINIClass_redalertini
-    CALL CCINIClass__Load
+    mov  edx, FileClass_redalertini
+    mov  eax, CCINIClass_redalertini
+    call CCINIClass__Load
 
 .Done_INIClass_Loading:
     call_INIClass__Get_Bool CCINIClass_redalertini, str_options2, str_showallmusic, 1
@@ -374,25 +370,25 @@ Return_Custom_Name:
     test eax, eax
     jnz  .Done_INIClass_Loading
 
-    MOV  EDX, musicini_str
-    MOV  EAX, FileClass_this3
-    CALL FileClass__FileClass
+    mov  edx, musicini_str
+    mov  eax, FileClass_this3
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_this3
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-    TEST EAX,EAX
-;    JE File_Not_Available ; on file not available
+    mov  eax, FileClass_this3
+    xor  edx, edx
+    call CCFileClass__Is_Available
+    test eax,eax
+;    je File_Not_Available ; on file not available
 
     ; initialize CCINIClass
-    MOV  EAX, INIClass_this3
-    CALL CCINIClass__CCINIClass
+    mov  eax, INIClass_this3
+    call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    MOV  EDX, FileClass_this3
-    MOV  EAX, INIClass_this3
-    CALL CCINIClass__Load
+    mov  edx, FileClass_this3
+    mov  eax, INIClass_this3
+    call CCINIClass__Load
 
 .Done_INIClass_Loading:
 ;    cmp dword [mission_index_counter], 3 ; hard-coded max to read inis
@@ -410,14 +406,14 @@ Return_Custom_Name:
     call _sprintf
     add  esp, 0Ch
 
-;    mov esi, DWORD newmissions_array
+;    mov esi, dword newmissions_array
     pop  esi ; pop saved value of index-minus 25h (index 1 into ini) into esi
     sub  esi, 1 ;need to substract 1 for 0-based indexing for the filenames_buffer
     push esi ; push again for later use
     imul esi, 32
     lea  esi, [music_filenames_buffer+esi]
 
-    this3_INI_Get_String str_fullnames, sprintf_buffer, str_empty, ESI, 32
+    this3_INI_Get_String str_fullnames, sprintf_buffer, str_EmptyString, esi, 32
 
     pop  esi ; get our 0-based indexed index
     imul esi, 32
@@ -489,22 +485,22 @@ _ThemeClass_File_Name:
     jmp  0x0056C11E
 
 .Arazoid_Fix:
-    MOV  EDX, str_arazoidaud
-    MOV  EAX, FileClass_Arazoid
-    CALL FileClass__FileClass
+    mov  edx, str_arazoidaud
+    mov  eax, FileClass_Arazoid
+    call CCFileClass__CCFileClass
 
-    MOV  EAX, FileClass_Arazoid
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-    TEST EAX,EAX
+    mov  eax, FileClass_Arazoid
+    xor  edx, edx
+    call CCFileClass__Is_Available
+    test eax,eax
     jnz  .Arazoid
 
-    MOV  EAX, str_araziodaud
-    JMP  .Ret_Arazoid_Fix
+    mov  eax, str_araziodaud
+    jmp  .Ret_Arazoid_Fix
 
 .Arazoid:
-    MOV  EAX, str_arazoidaud
-    JMP  .Ret_Arazoid_Fix
+    mov  eax, str_arazoidaud
+    jmp  .Ret_Arazoid_Fix
 
 .Ret_Arazoid_Fix:
     lea  esp, [ebp-0Ch]
@@ -522,25 +518,25 @@ Return_Custom_String:
     test eax, eax
     jnz  .Done_INIClass_Loading
 
-    MOV  EDX, musicini_str
-    MOV  EAX, FileClass_this3
-    CALL FileClass__FileClass
+    mov  edx, musicini_str
+    mov  eax, FileClass_this3
+    call CCFileClass__CCFileClass
 
     ; check ini exists
-    MOV  EAX, FileClass_this3
-    XOR  EDX, EDX
-    CALL FileClass__Is_Available
-    TEST EAX,EAX
-;    JE File_Not_Available ; on file not available
+    mov  eax, FileClass_this3
+    xor  edx, edx
+    call CCFileClass__Is_Available
+    test eax,eax
+;    je File_Not_Available ; on file not available
 
     ; initialize CCINIClass
-    MOV  EAX, INIClass_this3
-    CALL CCINIClass__CCINIClass
+    mov  eax, INIClass_this3
+    call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    MOV  EDX, FileClass_this3
-    MOV  EAX, INIClass_this3
-    CALL CCINIClass__Load
+    mov  edx, FileClass_this3
+    mov  eax, INIClass_this3
+    call CCINIClass__Load
 
 .Done_INIClass_Loading:
 ;    cmp dword [mission_index_counter], 3 ; hard-coded max to read inis
@@ -558,14 +554,14 @@ Return_Custom_String:
     call _sprintf
     add  esp, 0Ch
 
-;    mov esi, DWORD newmissions_array
+;    mov esi, dword newmissions_array
     pop  esi ; pop saved value of index-minus 25h (index 1 into ini) into esi
     sub  esi, 1 ;need to substract 1 for 0-based indexing for the filenames_buffer
     push esi
     imul esi, 32
     lea  esi, [music_filenames_buffer+esi]
 
-    this3_INI_Get_String str_filenames, sprintf_buffer, str_empty, ESI, 32
+    this3_INI_Get_String str_filenames, sprintf_buffer, str_EmptyString, esi, 32
 
     pop  esi ; get our 0-based indexed index
     imul esi, 32

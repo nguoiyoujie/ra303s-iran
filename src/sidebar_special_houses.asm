@@ -48,6 +48,6 @@ _SidebarClass__Reload_Sidebar_Special_Houses:
 
 .Dont_Change_Sidebar_House:
 
-    mov  DWORD edx, [0x604D6C+eax*4]
+    mov  dword edx, [0x604D6C+eax*4]
     jmp  0x0054D360
- ;   0054D359   > 8B1485 6C4D600>MOV EDX,DWORD PTR DS:[EAX*4+604D6C]
+ ;   0054D359   > 8B1485 6C4D600>mov edx,dword PTR DS:[eax*4+604D6C]

@@ -6,6 +6,6 @@
 ;Overrides the structure type check with a FactoryType=xx check
 _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck:
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  BYTE [eax + BuildingTypeClass.Offset.FactoryType], RTTIType.BuildingType 
+    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.BuildingType 
     jz   0x0045CF57 ; is a conyard
     jmp  0x0045CF6D

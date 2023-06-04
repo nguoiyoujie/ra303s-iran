@@ -10,13 +10,13 @@ _TechnoTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
     push edi
-    mov edi, RulesINI
+    mov edi,Globals___RuleINI
 
     ; Clear the fields of Risk and Reward, as they are replaced with other functions
     push eax
-    xor  eax, eax
+    xor  eax,eax
     TechnoTypeClass.DeathWeapon.Set(esi,eax)
-    ;xor  eax, eax
+    ;xor  eax,eax
     ;TechnoTypeClass.Prerequisite.Set(esi,eax)
     pop eax
 
@@ -42,8 +42,8 @@ _TechnoTypeClass__Read_INI_Extended:
     pop  esi
  
 .Ret:
-    mov  eax, 1 ;return 1
-    lea  esp, [ebp-10h]
+    mov  eax,1 ;return 1
+    lea  esp,[ebp-10h]
     pop  edi
     pop  esi
     pop  ecx
@@ -54,10 +54,10 @@ _TechnoTypeClass__Read_INI_Extended:
 _GetWeaponTypeFromString:
     ;select WeaponType by performing string compare on eax
     push ebx
-    cmp  eax, 0
+    cmp  eax,0
     jle  .Retn ; just return 0
     WeaponTypeClass.FromID(eax,ebx)
-    mov  eax, ebx
+    mov  eax,ebx
 .Retn:
     pop ebx
     retn
@@ -69,19 +69,19 @@ _GetPrerequisiteFromString:
     push ecx
     push ebx
      xor  edi,edi
-    cmp  eax, 0
+    cmp  eax,0
     je  .Retn ; just return 0
     mov  ebx,eax
 
 .Read_Next:
    ; the string is a comma-delimited set
-    mov  edx,arg_comma
+    mov  edx,str_Comma
     mov  eax,ebx
     push eax
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax], 0
+    mov  byte [eax],0
     lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
@@ -90,7 +90,7 @@ _GetPrerequisiteFromString:
     je   .Read_Next
     mov  cl,al
      xor  eax,eax
-    mov  eax, 1   
+    mov  eax,1   
     shl  eax,cl
     or   edi,eax
     jmp  .Read_Next
@@ -102,7 +102,7 @@ _GetPrerequisiteFromString:
     je   .Retn
     mov  cl,al
      xor  eax,eax
-    mov  eax, 1   
+    mov  eax,1   
     shl  eax,cl
     or   edi,eax
     
@@ -122,10 +122,10 @@ _GetPrerequisiteExtendedFromString:
     push ebx
      xor  edi,edi
     TechnoTypeClass.ExtPrerequisiteOffset.Get(esi,di)
-    cmp  di, 0
+    cmp  di,0
     je  .Retn ; just return 0
 ; clear 32-bit field
-    lea  ecx, [esi + edi]
+    lea  ecx,[esi + edi]
     mov  edx,8
 .RepeatZero:
     mov  dword [ecx],0
@@ -134,19 +134,19 @@ _GetPrerequisiteExtendedFromString:
     cmp  edx,0
     jg   .RepeatZero
     
-    cmp  eax, 0
+    cmp  eax,0
     je  .Retn ; just return 0
     mov  ebx,eax
 
 .Read_Next:
    ; the string is a comma-delimited set
-    mov  edx,arg_comma
+    mov  edx,str_Comma
     mov  eax,ebx
     push eax
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax], 0
+    mov  byte [eax],0
     lea  eax,[eax + 1]
     mov  ebx,eax
     pop  eax
@@ -156,16 +156,16 @@ _GetPrerequisiteExtendedFromString:
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
     ; esi is the pointer to the type
-    lea  edx, [esi + edi]
-    xor  ecx, ecx
-    mov  cl, al
-    sar  cl, 3
-    add  edx, ecx
-    mov  cl, al
-    and  cl, 7
-    mov  al, 1
-    shl  al, cl
-    or   BYTE [edx], al
+    lea  edx,[esi + edi]
+    xor  ecx,ecx
+    mov  cl,al
+    sar  cl,3
+    add  edx,ecx
+    mov  cl,al
+    and  cl,7
+    mov  al,1
+    shl  al,cl
+    or   byte [edx],al
     jmp  .Read_Next
 
 .Read_Last:
@@ -176,16 +176,16 @@ _GetPrerequisiteExtendedFromString:
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
     ; esi is the pointer to the type
-    lea  edx, [esi + edi]
-    xor  ecx, ecx
-    mov  cl, al
-    sar  cl, 3
-    add  edx, ecx
-    mov  cl, al
-    and  cl, 7
-    mov  al, 1
-    shl  al, cl
-    or   BYTE [edx], al
+    lea  edx,[esi + edi]
+    xor  ecx,ecx
+    mov  cl,al
+    sar  cl,3
+    add  edx,ecx
+    mov  cl,al
+    and  cl,7
+    mov  al,1
+    shl  al,cl
+    or   byte [edx],al
     
 .Retn:
     ;mov eax,edi
@@ -201,266 +201,266 @@ _SelectPrereqTypeFromString:
     ;select PrereqType by performing string compare on eax
     push edx
     push ebx ; hold eax value for multiple checks
-    cmp  eax, 0
+    cmp  eax,0
     je  .Retn ; just return 0
-    cmp  eax, 0
+    cmp  eax,0
     je  .DefaultNull ; just return 0
     mov  ebx,eax
 
 .Check.NONE:
     mov  edx,str.PrereqType.NONE
     call _strcmpi
-    test eax, eax
+    test eax,eax
     jnz  .Check.CONYARD
-    mov  al, PrereqType.NONE
+    mov  al,PrereqType.NONE
     jmp  .Retn
 
 .Check.CONYARD:
-    mov  edx, str.PrereqType.CONYARD
-    mov  eax, ebx
+    mov  edx,str.PrereqType.CONYARD
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.POWER
-    mov  al, PrereqType.CONYARD
+    mov  al,PrereqType.CONYARD
     jmp  .Retn
 
 .Check.POWER:
-    mov  edx, str.PrereqType.POWER
-    mov  eax, ebx
+    mov  edx,str.PrereqType.POWER
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ADV.POWER
-    mov  al, PrereqType.POWER
+    mov  al,PrereqType.POWER
     jmp  .Retn
 
 .Check.ADV.POWER:
-    mov  edx, str.PrereqType.ADV.POWER
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ADV.POWER
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.REFINERY
-    mov  al, PrereqType.ADV.POWER
+    mov  al,PrereqType.ADV.POWER
     jmp  .Retn
 
 .Check.REFINERY:
-    mov  edx, str.PrereqType.REFINERY
-    mov  eax, ebx
+    mov  edx,str.PrereqType.REFINERY
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ORESILO
-    mov  al, PrereqType.REFINERY
+    mov  al,PrereqType.REFINERY
     jmp  .Retn
 
 .Check.ORESILO:
-    mov  edx, str.PrereqType.ORESILO
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ORESILO
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.BARRACKS
-    mov  al, PrereqType.ORESILO
+    mov  al,PrereqType.ORESILO
     jmp  .Retn
 
 .Check.BARRACKS:
-    mov  edx, str.PrereqType.BARRACKS
-    mov  eax, ebx
+    mov  edx,str.PrereqType.BARRACKS
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.WARFACTORY
-    mov  al, PrereqType.BARRACKS
+    mov  al,PrereqType.BARRACKS
     jmp  .Retn
 
 .Check.WARFACTORY:
-    mov  edx, str.PrereqType.WARFACTORY
-    mov  eax, ebx
+    mov  edx,str.PrereqType.WARFACTORY
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.RADAR
-    mov  al, PrereqType.WARFACTORY
+    mov  al,PrereqType.WARFACTORY
     jmp  .Retn
 
 .Check.RADAR:
-    mov  edx, str.PrereqType.RADAR
-    mov  eax, ebx
+    mov  edx,str.PrereqType.RADAR
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.REPAIR
-    mov  al, PrereqType.RADAR
+    mov  al,PrereqType.RADAR
     jmp  .Retn
 
 .Check.REPAIR:
-    mov  edx, str.PrereqType.REPAIR
-    mov  eax, ebx
+    mov  edx,str.PrereqType.REPAIR
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.DEFENSE
-    mov  al, PrereqType.REPAIR
+    mov  al,PrereqType.REPAIR
     jmp  .Retn
 
 .Check.DEFENSE:
-    mov  edx, str.PrereqType.DEFENSE
-    mov  eax, ebx
+    mov  edx,str.PrereqType.DEFENSE
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ADV.DEFENSE
-    mov  al, PrereqType.DEFENSE
+    mov  al,PrereqType.DEFENSE
     jmp  .Retn
 
 .Check.ADV.DEFENSE:
-    mov  edx, str.PrereqType.ADV.DEFENSE
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ADV.DEFENSE
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.AA.DEFENSE
-    mov  al, PrereqType.ADV.DEFENSE
+    mov  al,PrereqType.ADV.DEFENSE
     jmp  .Retn
 
 .Check.AA.DEFENSE:
-    mov  edx, str.PrereqType.AA.DEFENSE
-    mov  eax, ebx
+    mov  edx,str.PrereqType.AA.DEFENSE
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.TECH
-    mov  al, PrereqType.AA.DEFENSE
+    mov  al,PrereqType.AA.DEFENSE
     jmp  .Retn
 
 .Check.TECH:
-    mov  edx, str.PrereqType.TECH
-    mov  eax, ebx
+    mov  edx,str.PrereqType.TECH
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.AIRSTRIP
-    mov  al, PrereqType.TECH
+    mov  al,PrereqType.TECH
     jmp  .Retn
 
 .Check.AIRSTRIP:
-    mov  edx, str.PrereqType.AIRSTRIP
-    mov  eax, ebx
+    mov  edx,str.PrereqType.AIRSTRIP
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.HELIPAD
-    mov  al, PrereqType.AIRSTRIP
+    mov  al,PrereqType.AIRSTRIP
     jmp  .Retn
 
 .Check.HELIPAD:
-    mov  edx, str.PrereqType.HELIPAD
-    mov  eax, ebx
+    mov  edx,str.PrereqType.HELIPAD
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.SHIPYARD
-    mov  al, PrereqType.HELIPAD
+    mov  al,PrereqType.HELIPAD
     jmp  .Retn
 
 .Check.SHIPYARD:
-    mov  edx, str.PrereqType.SHIPYARD
-    mov  eax, ebx
+    mov  edx,str.PrereqType.SHIPYARD
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.LAB
-    mov  al, PrereqType.SHIPYARD
+    mov  al,PrereqType.SHIPYARD
     jmp  .Retn
 
 .Check.LAB:
-    mov  edx, str.PrereqType.LAB
-    mov  eax, ebx
+    mov  edx,str.PrereqType.LAB
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ADV.LAB
-    mov  al, PrereqType.LAB
+    mov  al,PrereqType.LAB
     jmp  .Retn
 
 .Check.ADV.LAB:
-    mov  edx, str.PrereqType.ADV.LAB
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ADV.LAB
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ADV.WEAPON1
-    mov  al, PrereqType.ADV.LAB
+    mov  al,PrereqType.ADV.LAB
     jmp  .Retn
 
 .Check.ADV.WEAPON1:
-    mov  edx, str.PrereqType.ADV.WEAPON1
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ADV.WEAPON1
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.ADV.WEAPON2
-    mov  al, PrereqType.ADV.WEAPON1
+    mov  al,PrereqType.ADV.WEAPON1
     jmp  .Retn
 
 .Check.ADV.WEAPON2:
-    mov  edx, str.PrereqType.ADV.WEAPON2
-    mov  eax, ebx
+    mov  edx,str.PrereqType.ADV.WEAPON2
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.FAKES
-    mov  al, PrereqType.ADV.WEAPON2
+    mov  al,PrereqType.ADV.WEAPON2
     jmp  .Retn
 
 .Check.FAKES:
-    mov  edx, str.PrereqType.FAKES
-    mov  eax, ebx
+    mov  edx,str.PrereqType.FAKES
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.22
-    mov  al, PrereqType.FAKES
+    mov  al,PrereqType.FAKES
     jmp  .Retn
 
 .Check.USER.22:
-    mov  edx, str.PrereqType.USER.22
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.22
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.23
-    mov  al, PrereqType.USER.22
+    mov  al,PrereqType.USER.22
     jmp  .Retn
 
 .Check.USER.23:
-    mov  edx, str.PrereqType.USER.23
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.23
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.24
-    mov  al, PrereqType.USER.23
+    mov  al,PrereqType.USER.23
     jmp  .Retn
 
 .Check.USER.24:
-    mov  edx, str.PrereqType.USER.24
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.24
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.25
-    mov  al, PrereqType.USER.24
+    mov  al,PrereqType.USER.24
     jmp  .Retn
 
 .Check.USER.25:
-    mov  edx, str.PrereqType.USER.25
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.25
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.26
-    mov  al, PrereqType.USER.25
+    mov  al,PrereqType.USER.25
     jmp  .Retn
 
 .Check.USER.26:
-    mov  edx, str.PrereqType.USER.26
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.26
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.27
-    mov  al, PrereqType.USER.26
+    mov  al,PrereqType.USER.26
     jmp  .Retn
 
 .Check.USER.27:
-    mov  edx, str.PrereqType.USER.27
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.27
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.28
-    mov  al, PrereqType.USER.27
+    mov  al,PrereqType.USER.27
     jmp  .Retn
 
 .Check.USER.28:
-    mov  edx, str.PrereqType.USER.28
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.28
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.USER.29
-    mov  al, PrereqType.USER.28
+    mov  al,PrereqType.USER.28
     jmp  .Retn
 
 .Check.USER.29:
-    mov  edx, str.PrereqType.USER.29
-    mov  eax, ebx
+    mov  edx,str.PrereqType.USER.29
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.MISC
-    mov  al, PrereqType.USER.29
+    mov  al,PrereqType.USER.29
     jmp  .Retn
 
 .Check.MISC:
-    mov  edx, str.PrereqType.MISC
-    mov  eax, ebx
+    mov  edx,str.PrereqType.MISC
+    mov  eax,ebx
     call _strcmpi
     jnz  .Check.CIVBUILDING
-    mov  al, PrereqType.MISC
+    mov  al,PrereqType.MISC
     jmp  .Retn
 
 .Check.CIVBUILDING:
-    mov  edx, str.PrereqType.CIVBUILDING
-    mov  eax, ebx
+    mov  edx,str.PrereqType.CIVBUILDING
+    mov  eax,ebx
     call _strcmpi
     jnz  .DefaultNull
-    mov  al, PrereqType.CIVBUILDING
+    mov  al,PrereqType.CIVBUILDING
     jmp  .Retn
 
 ;.CheckBuilding:

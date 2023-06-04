@@ -76,20 +76,20 @@
 %define BuildingTypeClass.Bit.IsJammable                   2
 %define BuildingTypeClass.Offset.IsRadar                   0x193    ; BOOL // 
 %define BuildingTypeClass.Bit.IsRadar                      3
-%define BuildingTypeClass.Offset.SpecialWeapons            0x194    ; WORD, SpecialType flags, up to 16 values
+%define BuildingTypeClass.Offset.SpecialWeapons            0x194    ; word, SpecialType flags, up to 16 values
 
-%define BuildingTypeClass.Offset.FoundationFace            0x196    ; BYTE, FacingType (-1)-7
+%define BuildingTypeClass.Offset.FoundationFace            0x196    ; byte, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
-%define BuildingTypeClass.Offset.FactoryType               0x19B    ; BYTE, AIRCRAFT_TYPE=2, BUILDING_TYPE=6, INFANTRY_TYPE=14, UNIT_TYPE=29, VESSEL_TYPE=31
-%define BuildingTypeClass.Offset.ExitCoordX                0x19C    ; WORD
-%define BuildingTypeClass.Offset.ExitCoordY                0x19E    ; WORD
-%define BuildingTypeClass.Offset.ExitList                  0x1A0    ; INT PTR to WORD*
-%define BuildingTypeClass.Offset.Type                      0x1A4    ; BYTE
-%define BuildingTypeClass.Offset.StartFace                 0x1A5    ; BYTE, DirType 0-255
+%define BuildingTypeClass.Offset.FactoryType               0x19B    ; byte, AIRCRAFT_TYPE=2, BUILDING_TYPE=6, INFANTRY_TYPE=14, UNIT_TYPE=29, VESSEL_TYPE=31
+%define BuildingTypeClass.Offset.ExitCoordX                0x19C    ; word
+%define BuildingTypeClass.Offset.ExitCoordY                0x19E    ; word
+%define BuildingTypeClass.Offset.ExitList                  0x1A0    ; INT PTR to word*
+%define BuildingTypeClass.Offset.Type                      0x1A4    ; byte
+%define BuildingTypeClass.Offset.StartFace                 0x1A5    ; byte, DirType 0-255
 %define BuildingTypeClass.Offset.Capacity                  0x1A6    ; INT
 %define BuildingTypeClass.Offset.Power                     0x1AA    ; INT
 %define BuildingTypeClass.Offset.Drain                     0x1AE    ; INT
-%define BuildingTypeClass.Offset.BSize                     0x1B2    ; BYTE, BSizeType 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55 
+%define BuildingTypeClass.Offset.BSize                     0x1B2    ; byte, BSizeType 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55 
 %define BuildingTypeClass.Offset.Anim_Construct_Start      0x1B3    ; INT
 %define BuildingTypeClass.Offset.Anim_Construct_Count      0x1B7    ; INT
 %define BuildingTypeClass.Offset.Anim_Construct_Rate       0x1BB    ; INT
@@ -108,8 +108,8 @@
 %define BuildingTypeClass.Offset.Anim_Aux2_Start           0x1EF    ; INT
 %define BuildingTypeClass.Offset.Anim_Aux2_Count           0x1F3    ; INT
 %define BuildingTypeClass.Offset.Anim_Aux2_Rate            0x1F7    ; INT
-%define BuildingTypeClass.Offset.OccupyList                0x1FB    ; INT PTR to WORD*
-%define BuildingTypeClass.Offset.OverlapList               0x1FF    ; INT PTR to WORD*
+%define BuildingTypeClass.Offset.OccupyList                0x1FB    ; INT PTR to word*
+%define BuildingTypeClass.Offset.OverlapList               0x1FF    ; INT PTR to word*
 %define BuildingTypeClass.Offset.BuildupData               0x203    ; INT PTR to FUNC
 
 ; Extended space (>= 0x207)
@@ -117,8 +117,8 @@
 %define BuildingTypeClass.Offset.WarFactoryOverlayAnim     0x227    ; INT PTR
 %define BuildingTypeClass.Offset.WarFactoryOverlayFrames   0x22B    ; INT
 %define BuildingTypeClass.Offset.WarFactoryOverlayRate     0x22F    ; INT
-%define BuildingTypeClass.Offset.WarFactoryExitFacing       0x233    ; BYTE
-%define BuildingTypeClass.Offset.WarFactoryExitTrack       0x234    ; BYTE
+%define BuildingTypeClass.Offset.WarFactoryExitFacing       0x233    ; byte
+%define BuildingTypeClass.Offset.WarFactoryExitTrack       0x234    ; byte
 ; 0x235
 
 ; INI String controls
@@ -242,7 +242,7 @@ str.BuildingTypeClass.WarFactoryExitTrack       db"WarFactoryExitTrack",0       
 %define BuildingTypeClass.ExitList.Set(ptr_type,value)                         ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.ExitList, value
 %define BuildingTypeClass.ExitList.Read(ptr_type,ptr_rules,function)           ObjectTypeClass.ReadIntExt             ptr_type, ptr_rules, BuildingTypeClass.Offset.ExitList, str.BuildingTypeClass.ExitList, function
 
-; BYTE enum, valid values 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55
+; byte enum, valid values 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55
 %define BuildingTypeClass.BSize.Get(ptr_type,reg_output)                       ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.BSize, reg_output
 %define BuildingTypeClass.BSize.Set(ptr_type,value)                            ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.BSize, value
 %define BuildingTypeClass.BSize.Read(ptr_type,ptr_rules)                       ObjectTypeClass.ReadByte               ptr_type, ptr_rules, BuildingTypeClass.Offset.BSize, str.BuildingTypeClass.BSize  

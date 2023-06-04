@@ -10,32 +10,32 @@ AircraftTypesTypesExtCount    dd    0
 %define        OriginalAircraftTypeHeapCount    7
 
 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
-    mov  al, [NewAircraftTypeHeapCount]
-    cmp  ah, al
+    mov  al,[NewAircraftTypeHeapCount]
+    cmp  ah,al
     jl   0x0045980F
     jmp  0x00459855
 
 _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes:
-    mov  al, [NewAircraftTypeHeapCount]
-    cmp  dl, al
+    mov  al,[NewAircraftTypeHeapCount]
+    cmp  dl,al
     jl   0x00403F55
     jmp  0x00403FFC
 
 Init_AircraftTypeClass:
-    mov  eax, 19Dh
+    mov  eax,19Dh
     call 0x00401324 ; AircraftTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, edx
+    mov  eax,edx
     ; edx should have the name of the INI section already
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
 
     pop  eax
-    mov  edx, ebx
-    add  edx, OriginalAircraftTypeHeapCount ; AircraftType
+    mov  edx,ebx
+    add  edx,OriginalAircraftTypeHeapCount ; AircraftType
 
     push 0Eh
     push 20h
@@ -56,17 +56,17 @@ Init_AircraftTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newaircrafttypes], -1
+    cmp  dword [stringtableoffset_newaircrafttypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx, dword [stringtableoffset_newaircrafttypes]
+    add  ebx,dword [stringtableoffset_newaircrafttypes]
     jmp  .Continue 
 .Default_Name:
-    mov  ebx, 21 ; Civilian
+    mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
 
-    mov  DWORD [0x005FDF74], 5
+    mov  dword [0x005FDF74],5
     call 0x00401210 ; AircraftTypeClass::AircraftTypeClass(AircraftType,int,char *,int,int,int,int,int,int,int,int,int,int,int,int,StructType,int,int,MissionType)
 
 
@@ -75,30 +75,30 @@ Init_AircraftTypeClass:
 
 _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
 
-    Loop_Over_RULES_INI_Section_Entries str_AircraftTypes, Init_AircraftTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_AircraftTypes,Init_AircraftTypeClass
 
 .Ret:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-14h]
     pop  edi
     pop  esi
     pop  edx
     jmp  0x00403EE9
 
 _Init_Game_Set_AircraftTypes_Heap_Count:
-    ; update the stringtableoffset, if defined in Rules
-    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newaircrafttypes, [stringtableoffset_newaircrafttypes]
-    mov  [stringtableoffset_newaircrafttypes], eax
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Aircraft,[stringtableoffset_newaircrafttypes]
+    mov  [stringtableoffset_newaircrafttypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
-    mov  BYTE [AircraftTypesTypesExtCount], al
-    mov  edx, eax
-    add  edx, OriginalAircraftTypeHeapCount
-    mov  BYTE [NewAircraftTypeHeapCount], dl
+    mov  byte [AircraftTypesTypesExtCount],al
+    mov  edx,eax
+    add  edx,OriginalAircraftTypeHeapCount
+    mov  byte [NewAircraftTypeHeapCount],dl
     jmp  0x004F40BB
 
 _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes:
-    mov  BYTE al, [NewAircraftTypeHeapCount]
-    cmp  dl, al
+    mov  byte al,[NewAircraftTypeHeapCount]
+    cmp  dl,al
     jl   0x00403F14
     jmp  0x00403F0D

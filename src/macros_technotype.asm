@@ -1,6 +1,6 @@
 
 ; define techno type field definitions
-%define TechnoTypeClass.Offset.Remap                  0x138    ; BYTE
+%define TechnoTypeClass.Offset.Remap                  0x138    ; byte
 %define TechnoTypeClass.Offset.IsDoubleOwned          0x139    ; BOOL // Already supported by game INI
 %define TechnoTypeClass.Bit.IsDoubleOwned             1    
 %define TechnoTypeClass.Offset.IsInvisible            0x139    ; BOOL // Already supported by game INI
@@ -30,15 +30,15 @@
 %define TechnoTypeClass.Bit.IsExploding               5    
 
 ; (to check) 0x13B and 0x13C are empty... 
-%define TechnoTypeClass.Offset.PrereqType             0x13B    ; BYTE, new variable, occupying unused location
+%define TechnoTypeClass.Offset.PrereqType             0x13B    ; byte, new variable, occupying unused location
 
 ;Risk/0x154, Reward/0x158 and Points/0x18E are assigned the same values. Collapse them to the same variable to free up 2 INTs worth of memory
-%define TechnoTypeClass.Offset.MZone                  0x13D    ; BYTE
-%define TechnoTypeClass.Offset.ThreatRange            0x13E    ; WORD?
+%define TechnoTypeClass.Offset.MZone                  0x13D    ; byte
+%define TechnoTypeClass.Offset.ThreatRange            0x13E    ; word?
 %define TechnoTypeClass.Offset.MaxPassengers          0x140    ; INT
 %define TechnoTypeClass.Offset.SightRange             0x144    ; INT
 %define TechnoTypeClass.Offset.Cost                   0x148    ; INT
-%define TechnoTypeClass.Offset.Level                  0x14C    ; WORD
+%define TechnoTypeClass.Offset.Level                  0x14C    ; word
 %define TechnoTypeClass.Offset.Prerequisite           0x150    ; INT
 
 ; Replace Risk, Reward with other data
@@ -46,10 +46,10 @@
 ;%define TechnoTypeClass.Offset.Reward                 0x158    ; INT
 %define TechnoTypeClass.Offset.DeathWeapon            0x154    ; INT 
 ; expanding the prereq system to cover 256 values will required space for 8 INTs
-%define TechnoTypeClass.Offset.ExtPrerequisiteOffset  0x158    ; WORD 
+%define TechnoTypeClass.Offset.ExtPrerequisiteOffset  0x158    ; word 
 
-%define TechnoTypeClass.Offset.MaxSpeed               0x15C    ; BYTE
-%define TechnoTypeClass.Offset.Speed                  0x15D    ; BYTE
+%define TechnoTypeClass.Offset.MaxSpeed               0x15C    ; byte
+%define TechnoTypeClass.Offset.Speed                  0x15D    ; byte
 %define TechnoTypeClass.Offset.MaxAmmo                0x15E    ; INT
 %define TechnoTypeClass.Offset.Ownable                0x162    ; LONG? / 4
 ;%define TechnoTypeClass.Offset.CameoData              0x166    ; INT
@@ -112,7 +112,7 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 
 
 ; args <Numerical index of type class>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %4 must not be ESI
+; %4 must not be esi
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro TechnoTypeClass.FromIndex    4
     push esi
@@ -137,7 +137,7 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %endmacro
 
 ; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %4 must not be ESI, EDI or EDX
+; %4 must not be esi, edi or edx
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro TechnoTypeClass.FromID    4
     push esi

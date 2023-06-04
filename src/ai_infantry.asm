@@ -1,4 +1,4 @@
-; Fix crash where the house pointer is somehow displaced in the AI_Infantry function (EAX)
+; Fix crash where the house pointer is somehow displaced in the AI_Infantry function (eax)
 ;@HOOK 0x004DC455 _HouseClass__AI_Infantry_Fix_Crash
 ;@HOOK 0x004DC468 _HouseClass__AI_Infantry_Fix_Crash2
 ;@HOOK 0x004DC160 _HouseClass__AI_Infantry_Fix_CrashSet
@@ -53,84 +53,84 @@ InfantryAIHouseClassBestCounter TIMES 256 db 0
 
 ; possible corruption of [ebp-38h]
 _HouseClass__AI_Infantry_Fix_Crash:
-    mov  DWORD edi, [InfantryAIHouseClassPointer]
-    xor  dh, dh
-    xor  ecx, ecx
+    mov  dword edi,[InfantryAIHouseClassPointer]
+    xor  dh,dh
+    xor  ecx,ecx
 	; skip 004dc45c
-	add  edi, 0x5
+	add  edi,0x5
     jmp  0x004DC462
 
-; This part of the code runs only when the infantry type is Dog, but this breaks EAX (doubling as iteration index) resulting in infinite loop
+; This part of the code runs only when the infantry type is Dog, but this breaks eax (doubling as iteration index) resulting in infinite loop
 ;_HouseClass__AI_Infantry_Fix_Crash2:
-;    mov  DWORD eax, [InfantryAIHouseClassPointer]
-;    test byte [eax+150h], 4h
+;    mov  dword eax,[InfantryAIHouseClassPointer]
+;    test byte [eax+150h],4h
 ;    jmp  0x004DC472
 
 ;_HouseClass__AI_Infantry_Fix_CrashSet: ; to be replaced by _HouseClass__AI_Infantry_Extend_Stackframe when ready to introduce
-;    sub  esp, 12Ch
-;    mov  [ebp-38h], eax
-;    mov  DWORD [InfantryAIHouseClassPointer], eax
+;    sub  esp,12Ch
+;    mov  [ebp-38h],eax
+;    mov  dword [InfantryAIHouseClassPointer],eax
 ;    jmp  0x004DC169
 
 ; Warning: crude and arbitary extension of stackframe!
 _HouseClass__AI_Infantry_Extend_Stackframe:
-    sub  esp, 0x12c
-    mov  [ebp-38h], eax
-    mov  DWORD [InfantryAIHouseClassPointer], eax
-;    mov  byte [InfantryAIHouseClassIndexer], 0
+    sub  esp,0x12c
+    mov  [ebp-38h],eax
+    mov  dword [InfantryAIHouseClassPointer],eax
+;    mov  byte [InfantryAIHouseClassIndexer],0
     jmp  0x004DC169
 	
 _HouseClass__AI_Infantry_Expand:
-    cmp  al, [NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
+    cmp  al,[NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
     jl   0x004DC462
     jmp  0x004DC51E
 
 _HouseClass__AI_Infantry_Expand_Choice:
-    cmp  al, [NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
+    cmp  al,[NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
     jge  0x004DC713
     jmp  0x004DC574
 
 _HouseClass__AI_Infantry_Extend_CounterList_test:
-    mov  dword [ecx + InfantryAIHouseClassCounter], 1
+    mov  dword [ecx + InfantryAIHouseClassCounter],1
     jmp  0x004DC38F
 
 _HouseClass__AI_Infantry_Extend_CounterList_1:
-    mov  ebx, 68h
-    lea  eax, [ebp + 0xffffff44]
-    mov  edi, dword [ebp-38h]
-	xor  edx, edx
-    xor  ecx, ecx
+    mov  ebx,68h
+    lea  eax,[ebp + 0xffffff44]
+    mov  edi,dword [ebp-38h]
+	xor  edx,edx
+    xor  ecx,ecx
 	call 0x005C4E50
-    mov  ebx, 400h
-    lea  eax, [InfantryAIHouseClassCounter]
-    mov  edi, dword [ebp-38h]
-	xor  edx, edx
-    xor  ecx, ecx
+    mov  ebx,400h
+    lea  eax,[InfantryAIHouseClassCounter]
+    mov  edi,dword [ebp-38h]
+	xor  edx,edx
+    xor  ecx,ecx
 	call 0x005C4E50
-    mov  ebx, 100h
-    lea  eax, [InfantryAIHouseClassBestCounter]
-    mov  edi, dword [ebp-38h]
-	xor  edx, edx
-    xor  ecx, ecx
+    mov  ebx,100h
+    lea  eax,[InfantryAIHouseClassBestCounter]
+    mov  edi,dword [ebp-38h]
+	xor  edx,edx
+    xor  ecx,ecx
 	call 0x005C4E50
-;    xor  eax, eax
-;    mov  byte [InfantryAIHouseClassIndexer], al
+;    xor  eax,eax
+;    mov  byte [InfantryAIHouseClassIndexer],al
     jmp  0x004DC1AC ;0x004DC1A0
 
 _HouseClass__AI_Infantry_Extend_CounterList_2:
-    lea  ebx, [ebx*4 + InfantryAIHouseClassCounter] ; was 0xffffff44, zero bytes
+    lea  ebx,[ebx*4 + InfantryAIHouseClassCounter] ; was 0xffffff44, zero bytes
     jmp  0x004DC289
 
 _HouseClass__AI_Infantry_Extend_CounterList_3:
-    mov  esi, dword [edx + InfantryAIHouseClassCounter]
+    mov  esi,dword [edx + InfantryAIHouseClassCounter]
     jmp  0x004DC36A
 
 _HouseClass__AI_Infantry_Extend_CounterList_4:
-    mov  dword [edx + InfantryAIHouseClassCounter], esi
+    mov  dword [edx + InfantryAIHouseClassCounter],esi
     jmp  0x004DC386
 
 _HouseClass__AI_Infantry_Extend_CounterList_5:
-    mov  dword [ebx*4 + InfantryAIHouseClassCounter], edx
+    mov  dword [ebx*4 + InfantryAIHouseClassCounter],edx
     jmp  0x004DC3AF
 
 _HouseClass__AI_Infantry_Extend_CounterList_6:
@@ -146,31 +146,31 @@ _HouseClass__AI_Infantry_Extend_CounterList_8:
     jmp  0x004DC486
 
 _HouseClass__AI_Infantry_Extend_CounterList_9:
-    cmp  esi, dword [eax*4 + InfantryAIHouseClassCounter]
+    cmp  esi,dword [eax*4 + InfantryAIHouseClassCounter]
     jmp  0x004DC4F5
 
 _HouseClass__AI_Infantry_Extend_CounterList_10:
-    mov  esi, dword [eax*4 + InfantryAIHouseClassCounter]
+    mov  esi,dword [eax*4 + InfantryAIHouseClassCounter]
     jmp  0x004DC506
 
 _HouseClass__AI_Infantry_Extend_Remove_CanBuild_From_TeamTypeCheck:
     jmp  0x004DC4C4
 
 _HouseClass__AI_Infantry_Extend_BestList_1:
-    ;mov  al, byte [InfantryAIHouseClassIndexer]
-    mov  al, byte [ebp + 0xffffffe8]
-    mov  byte [ecx + InfantryAIHouseClassBestCounter], al
+    ;mov  al,byte [InfantryAIHouseClassIndexer]
+    mov  al,byte [ebp + 0xffffffe8]
+    mov  byte [ecx + InfantryAIHouseClassBestCounter],al
     inc  ecx ;increment after use of ecx to avoid needing to offset by 1 later
     jmp  0x004DC50E
 
 ;_HouseClass__AI_Infantry_Extend_BestList_1B:
-;    mov  al, byte [InfantryAIHouseClassIndexer]
+;    mov  al,byte [InfantryAIHouseClassIndexer]
 ;    inc  al
-;    mov  byte [InfantryAIHouseClassIndexer], al
+;    mov  byte [InfantryAIHouseClassIndexer],al
 ;    jmp  0x004DC516
 
 _HouseClass__AI_Infantry_Extend_BestList_2:
-    mov  al, byte [eax + InfantryAIHouseClassBestCounter]
+    mov  al,byte [eax + InfantryAIHouseClassBestCounter]
 	mov  byte [edx + 0x537],al
     jmp  0x004DC53E
 

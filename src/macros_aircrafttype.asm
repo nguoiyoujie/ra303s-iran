@@ -13,9 +13,9 @@
 %define AircraftTypeClass.Offset.IsRotorCustom               0x192    ; BOOL, BIT 4
 %define AircraftTypeClass.Bit.IsRotorCustom                  4    
 ; 0x193, 0x194 and 0x195 are empty...                        
-%define AircraftTypeClass.Offset.Type                        0x196    ; BYTE
-%define AircraftTypeClass.Offset.DefaultMission              0x197    ; BYTE
-%define AircraftTypeClass.Offset.PreferredBuilding           0x198    ; BYTE ; hardcode to 0E (Helipad) or 10 (Airstrip) depending on IsFixedWing for now
+%define AircraftTypeClass.Offset.Type                        0x196    ; byte
+%define AircraftTypeClass.Offset.DefaultMission              0x197    ; byte
+%define AircraftTypeClass.Offset.PreferredBuilding           0x198    ; byte ; hardcode to 0E (Helipad) or 10 (Airstrip) depending on IsFixedWing for now
 %define AircraftTypeClass.Offset.LandingSpeed                0x199    ; INT
 
 ; Extended space (>= 0x19D)

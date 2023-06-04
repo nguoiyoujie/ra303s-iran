@@ -1,7 +1,7 @@
 @HOOK 0x004D4C79 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check
 
 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check:
-    cmp  BYTE [shortgame], 1
+    cmp  byte [ShortGame], 1
     jz   .Short_Game
 
     cmp  dword [eax+13Bh], 0 ; Does player still have buildings left?

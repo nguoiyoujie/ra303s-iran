@@ -10,7 +10,7 @@ _RadarClass__Draw_It_1:
     jz   0x0052DC0A
 
     mov  eax, [0x00669958]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     mov  eax, [ebp-0x020]
     jnz  0x0052DC0A
 
@@ -19,14 +19,14 @@ _RadarClass__Draw_It_1:
 
 
 _HouseClass__AI_Radar3:
-    cmp  BYTE [deadplayersradar], 0
+    cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Normal_Code
     mov  eax, 0x00668250
-    cmp  BYTE [eax+0CB0h], 0
+    cmp  byte [eax+0CB0h], 0
     ; need to restore eax
     jnz  .Ret
 
@@ -47,11 +47,11 @@ _HouseClass__AI_Radar3:
 
 _HouseClass__AI_Radar1:
     push eax
-    cmp  BYTE [deadplayersradar], 0
+    cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Normal_Code
 
     mov  edx, 1 ; this jumps over some checks, check the original instructions
@@ -68,11 +68,11 @@ _HouseClass__AI_Radar1:
 
 _HouseClass__AI_Radar2:
     push eax
-    cmp  BYTE [deadplayersradar], 0
+    cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Normal_Code
 
  ;   test    byte [eax+44h], 8
@@ -88,11 +88,11 @@ _HouseClass__AI_Radar2:
     jmp  0x004D4ED8
 
 _RadarClass__Activate_Play_Radar_Sound1:
-    cmp  BYTE [deadplayersradar], 0
+    cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [0x00669958]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Normal_Code
 
 .No_Sound:
@@ -105,11 +105,11 @@ _RadarClass__Activate_Play_Radar_Sound1:
     jmp  0x0052D837
 
 _RadarClass__Activate_Play_Radar_Sound2:
-    cmp  BYTE [deadplayersradar], 0
+    cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [0x00669958]
-    test BYTE [eax+0x43], 1
+    test byte [eax+0x43], 1
     jz   .Normal_Code
 
 .No_Sound:

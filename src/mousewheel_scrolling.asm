@@ -8,7 +8,7 @@ ProcessingSidebar dd 0
 
 
 _Mouse_Wheel_Sidebar_Scrolling:
-    cmp  BYTE [mousewheelscrolling], 1
+    cmp  byte [MouseWheelScrolling], 1
     jnz  .out
     mov  esi, [ebp+0Ch]
     cmp  esi, 20Ah               ;WM_MOUSEHWHEEL
@@ -28,7 +28,7 @@ _Mouse_Wheel_Sidebar_Scrolling:
 ;    call    0x005BBF30 ;   WinTimerClass::Get_System_Tick_Count(void)
 ;    cdq
 ;    idiv    ebx
-;    cmp        DWORD edx, 0
+;    cmp        dword edx, 0
 ;    jnz        .out
 
     mov  byte [Scrolling], 1

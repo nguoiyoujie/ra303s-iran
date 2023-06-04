@@ -10,7 +10,7 @@ _StripClass__Draw_It_Colour_Remap_Icon:
     mov  ebx, 1
     mov  eax, 0 ; just to be sure
 
-    cmp  BYTE [colorremapsidebarcameoicons], 0
+    cmp  byte [colorremapsidebarcameoicons], 0
     jz   .No_Colour_Remap
 
     mov  eax, [0x00669958] ; HouseClass *PlayerPtr

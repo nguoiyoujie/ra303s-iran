@@ -9,12 +9,12 @@
 
 
 _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE:
-; check EAX return of Combat_Anim
+; check eax return of Combat_Anim
 
-    cmp   al, 0xFF
+    cmp   al,0xFF
 	;jz    0x005665E1  ;; AnimClass already allocated, skipping will result in crash
 	jnz   .Normal
-	mov   al, 8 ;ANIM_NAPALM2
+	mov   al,8 ;ANIM_NAPALM2
 .Normal:
     mov   ebx,dword [ebp - 0x20]
     movsx edx,al
@@ -24,18 +24,18 @@ _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE:
 
 _TechnoClass_Take_Damage_UseDeathWeapon:
     mov  edx,dword [eax + TechnoTypeClass.Offset.DeathWeapon]
-    test edx, edx
+    test edx,edx
 
     jz   .UsePrimaryWeapon
     mov  edx,dword [esi + 0x11]
-    mov  eax, esi
+    mov  eax,esi
     call dword [edx + 0x34]
     mov  eax,dword [eax + TechnoTypeClass.Offset.DeathWeapon]
 ; Use the Weapon damage
 	mov  edi,dword [eax + WeaponTypeClass.Offset.Damage]
     mov  eax,dword [eax + WeaponTypeClass.Offset.WarheadPtr]
     mov  al,byte [eax]
-    mov  byte [ebp - 0x14], al
+    mov  byte [ebp - 0x14],al
     ;jmp  0x0056656A ; use unit's MaxStrength as the blast damage
     jmp  0x0056657B
 

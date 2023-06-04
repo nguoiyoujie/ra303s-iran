@@ -13,8 +13,6 @@
 @HOOK 0x004A606E _UnhardCode_Keyboard_Key2
 @HOOK 0x004A603E _UnhardCode_Keyboard_Key1
 
-%define SessionClass__Session 0x0067F2B4
-%define KeyResign    0x006681C0
 
 ResignKeyPressed: dd 0
 
@@ -49,12 +47,12 @@ _UnhardCode_Keyboard_Key0:
     jmp  0x004A6221
 
 _Keyboard_Process_Home_Key_Overwrite:
-    cmp  WORD ax, [keysidebartoggle]
+    cmp  word ax, [KeySidebarToggle]
     jz   .Toggle_Sidebar
-    cmp  WORD ax, [keymapsnapshot]
+    cmp  word ax, [KeyMapSnapshot]
     jz   .Map_Snapshot
 
-    cmp  WORD ax, [KeyResign]
+    cmp  word ax, [Globals___Options_KeyResign]
     jz   .Resign_Key
 
 .Out:
@@ -104,7 +102,7 @@ _Keyboard_Process_Home_Key_Overwrite:
     mov  eax, [0x006807E8] ; ds:GraphicBufferClass__Something
     cmp  eax, 0x006807CC ; offset GraphicViewPortClass HidPage
     jz   .Redraw_Screen
-    cmp  DWORD [0x006807EC], 0
+    cmp  dword [0x006807EC], 0
     jz   .Redraw_Screen
     mov  ebx, [eax+24h]
     test ebx, ebx
@@ -125,9 +123,9 @@ _Keyboard_Process_Home_Key_Overwrite:
 .Resign_Key:
     push eax
 
-    cmp  BYTE [SessionClass__Session],0
+    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Out
-    mov  DWORD [ResignKeyPressed], 1
+    mov  dword [ResignKeyPressed],1
     call 0x00528DCC ; Queue_Options(void)
 
     pop  eax
@@ -141,7 +139,7 @@ _Patch_Out_Erroneous_Sidebar_Activate_CALL:
     jmp  0x0054D91B
 
 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check:
-    cmp  DWORD [ResignKeyPressed], 0
+    cmp  dword [ResignKeyPressed], 0
     jnz  0x004CA9C9
 
 .Out:
@@ -150,10 +148,10 @@ _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check:
     jmp  0x004C9F4E
 
 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2:
-    cmp  DWORD [ResignKeyPressed], 0
+    cmp  dword [ResignKeyPressed], 0
     jz   0x004CA7A5
 
-    mov  DWORD [ResignKeyPressed], 0
+    mov  dword [ResignKeyPressed], 0
     lea  esp, [ebp-14h]
     pop  edi
     pop  esi

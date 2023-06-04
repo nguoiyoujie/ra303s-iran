@@ -41,11 +41,11 @@ CurrentPowerBarDrawPosition dd 0 ; variable used for pwrbar.shp no power bar dra
 CurrentPowerBarDrawPosition2 dd 0 ; variable used for pwrbar.shp with power bar drawing height position
 PowerBarBottomPos dd 0 ; variable used for
 
-powerext_str db "POWEREXT.SHP",0
-side4na_str db "SIDE4NA.SHP",0
-side4us_str db "SIDE4US.SHP",0
-strip2na_str db "STRIP2NA.SHP",0
-strip2us_str db "STRIP2US.SHP",0
+powerext_str db"POWEREXT.SHP",0
+side4na_str db"SIDE4NA.SHP",0
+side4us_str db"SIDE4US.SHP",0
+strip2na_str db"STRIP2NA.SHP",0
+strip2us_str db"STRIP2US.SHP",0
 
 PowerTileShape dd 0
 Side4Shape dd 0
@@ -78,7 +78,7 @@ _PowerClass_Draw_it_hires11:
 
 _PowerClass_Draw_it_hires10:
     mov  eax, [0x006877B8] ; ds:void *PowerClass::PowerShape
-    cmp  DWORD [ebp-2Ch], 0
+    cmp  dword [ebp-2Ch], 0
     je   .No_Draw
 
 .Draw:
@@ -86,7 +86,7 @@ _PowerClass_Draw_it_hires10:
     jmp  0x00527C23
 
 .No_Draw:
-;    cmp        DWORD [IngameHeight], 400
+;    cmp        dword [IngameHeight], 400
 ;    jne        .Draw
     jmp  0x00527C23
 
@@ -94,7 +94,7 @@ _PowerClass_Draw_it_hires10:
 _PowerClass_Draw_it_hires9:
 ;    mov     edx, 15Fh
 ;    add        edx, [diff_height]
-    mov  DWORD edx, [PowerBarBottomPos]
+    mov  dword edx, [PowerBarBottomPos]
     jmp  0x005278A0
 
 _PowerClass_Draw_it_hires8:
@@ -103,14 +103,14 @@ _PowerClass_Draw_it_hires8:
 
     imul eax, 100
     mov  ebx, 130
-    cdq  ; sign-extend EAX into EDX
+    cdq  ; sign-extend eax into edx
     idiv ebx
-    mov  DWORD ebx, [PowerBarBottomPos]
+    mov  dword ebx, [PowerBarBottomPos]
     sub  ebx, 220
     imul eax, ebx
 
     mov  ebx, 100
-    cdq  ; sign-extend EAX into EDX
+    cdq  ; sign-extend eax into edx
     idiv ebx
 
     pop  edx
@@ -127,14 +127,14 @@ _PowerClass_Draw_it_hires7:
 
     imul eax, 100
     mov  ebx, 130
-    cdq  ; sign-extend EAX into EDX
+    cdq  ; sign-extend eax into edx
     idiv ebx
-    mov  DWORD ebx, [PowerBarBottomPos]
+    mov  dword ebx, [PowerBarBottomPos]
     sub  ebx, 220
     imul eax, ebx
 
     mov  ebx, 100
-    cdq  ; sign-extend EAX into EDX
+    cdq  ; sign-extend eax into edx
     idiv ebx
 
     pop  edx
@@ -154,7 +154,7 @@ _PowerClass_Draw_it_hires6:
 _PowerClass_Draw_it_hires5:
 ;    mov     eax, 15Fh
 ;    add        eax, [diff_height]
-    mov  DWORD eax, [PowerBarBottomPos]
+    mov  dword eax, [PowerBarBottomPos]
     jmp  0x005278BC
 
 _PowerClass_Draw_it_hires4:
@@ -167,13 +167,13 @@ _SidebarClass_Reload_Sidebar_hires: ; Load side specific graphics
     sar  eax, 18h
     push eax        ; save eax
 
-    CMP  DWORD eax, 2
+    cmp  dword eax, 2
     jz   .Load_Soviet_Sidebar
 
-    CMP  DWORD eax, 4
+    cmp  dword eax, 4
     jz   .Load_Soviet_Sidebar
 
-    CMP  DWORD eax, 9
+    cmp  dword eax, 9
     jz   .Load_Soviet_Sidebar
 
     mov  eax, side4na_str
@@ -224,7 +224,7 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     mov  edx, [ebp-28h]
     push edx             ; __int32
     push esi             ; __int32
-    mov  ecx, DWORD [CurrentPowerBarDrawPosition2]
+    mov  ecx, dword [CurrentPowerBarDrawPosition2]
     mov  ebx, 1E0h
     add  ebx, [diff_width]
     push 0               ; __int32
@@ -233,10 +233,10 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     mov  edx, 0
     call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
 
-    mov  DWORD ecx, [CurrentPowerBarDrawPosition2]
-    add  DWORD [CurrentPowerBarDrawPosition2], 48
+    mov  dword ecx, [CurrentPowerBarDrawPosition2]
+    add  dword [CurrentPowerBarDrawPosition2], 48
 
-    mov  DWORD ebx, [CameoItems]
+    mov  dword ebx, [CameoItems]
     imul ebx, 48
 ;    add        ebx, 27
     add  ebx, 181
@@ -245,7 +245,7 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     cmp  ecx, ebx
     jl   .Loop
 
-    mov  DWORD [CurrentPowerBarDrawPosition2], 0
+    mov  dword [CurrentPowerBarDrawPosition2], 0
     jmp  0x00527748
 
 _StripClass_Recalc_hires: ; Fix graphical glitching when selling conyard and other situations
@@ -271,7 +271,7 @@ _StripClass_Recalc_hires: ; Fix graphical glitching when selling conyard and oth
     retn
 
 _PowerClass_Draw_It_hires:
-    mov  DWORD ecx, [CameoItems]
+    mov  dword ecx, [CameoItems]
     imul ecx, 48
     add  ecx, 27
     add  ecx, 181
@@ -279,8 +279,8 @@ _PowerClass_Draw_It_hires:
     jmp  0x0052775B
 
 _SidebarClass_Draw_It:
-;    mov        DWORD [0], 276 ; crash
-    mov  DWORD [CurrentStripDrawPosition], 276
+;    mov        dword [0], 276 ; crash
+    mov  dword [CurrentStripDrawPosition], 276
 .Loop:
 
     push 100h            ; __int32
@@ -288,7 +288,7 @@ _SidebarClass_Draw_It:
     push 0               ; __int32
     push 0               ; __int32
     push 10h             ; __int32
-    mov  DWORD ecx, [CurrentStripDrawPosition]
+    mov  dword ecx, [CurrentStripDrawPosition]
     mov  ebx, 1E0h
     add  ebx, [diff_width]
     push 0               ; __int32
@@ -296,14 +296,14 @@ _SidebarClass_Draw_It:
     mov  edx, edi
     call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
 
-    add  DWORD [CurrentStripDrawPosition], 48
-    mov  DWORD ecx, [CurrentStripDrawPosition]
-    mov  DWORD ebx, [IngameHeight]
+    add  dword [CurrentStripDrawPosition], 48
+    mov  dword ecx, [CurrentStripDrawPosition]
+    mov  dword ebx, [IngameHeight]
     sub  ebx, 75
     cmp  ecx, ebx
     jle  .Loop
 
-    mov  DWORD [CurrentStripDrawPosition], 0
+    mov  dword [CurrentStripDrawPosition], 0
     jmp  0x0054D828
 
 _Load_Game_hires: ; Fix up button vertical position and visible icon area size when loading save games
@@ -312,9 +312,9 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
     mov  eax, [CameoItems]
     mov  edx, 48
     imul eax, edx
-    mov  DWORD [StripBarAreaVerticalSize], eax
+    mov  dword [StripBarAreaVerticalSize], eax
 
-    mov  DWORD ebx, [CameoItems]
+    mov  dword ebx, [CameoItems]
     imul ebx, 48
     add  ebx, 180
     mov  [downbuttons+16], ebx ; Up and down buttons height
@@ -334,8 +334,8 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
 
 ;    mov        ebx, [eax+35h]
 ;    sub        ebx, [CameoItems]
-;    mov        DWORD [eax+25h], ebx ; Set it to the legit max scroll
-    mov  DWORD [eax+25h], 0 ; Reset it
+;    mov        dword [eax+25h], ebx ; Set it to the legit max scroll
+    mov  dword [eax+25h], 0 ; Reset it
 
 .No_Cameo_list_Right_Strip_Reset:
 
@@ -351,8 +351,8 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
 
 ;    mov        ebx, [eax+35h]
 ;    sub        ebx, [CameoItems]
-;    mov        DWORD [eax+25h], ebx ; Set it to the legit max scroll
-    mov  DWORD [eax+25h], 0 ; Reset it
+;    mov        dword [eax+25h], ebx ; Set it to the legit max scroll
+    mov  dword [eax+25h], 0 ; Reset it
 
 .No_Cameo_list_Left_Strip_Reset:
 
@@ -380,7 +380,7 @@ _SidebarClass_Add_hires: ; Fix graphical glitching when new icons are added to s
 _StripClass_Draw_It_hires3: ; Draw strip.shp background over each cameo
     call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
 
-    mov  DWORD [CurrentStripIndex], 372
+    mov  dword [CurrentStripIndex], 372
 .Loop:
 
     push 100h
@@ -399,14 +399,14 @@ _StripClass_Draw_It_hires3: ; Draw strip.shp background over each cameo
     add  ebx, 4
     call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
 
-    add  DWORD [CurrentStripIndex], 48
-    mov  DWORD ecx, [CurrentStripIndex]
-    mov  DWORD ebx, [IngameHeight]
+    add  dword [CurrentStripIndex], 48
+    mov  dword ecx, [CurrentStripIndex]
+    mov  dword ebx, [IngameHeight]
     sub  ebx, 75
     cmp  ecx, ebx
     jle  .Loop
 
-    mov  DWORD [CurrentStripIndex], 0
+    mov  dword [CurrentStripIndex], 0
 
     jmp  0x0054E754
 
@@ -416,7 +416,7 @@ _StripClass_Scroll_hires:
     jmp  0x0054E2B2
 
 _StripClass_Init_IO_Up_Down_Buttons_hires: ; Fix up up and down buttons vertical height
-    mov  DWORD ebx, [CameoItems]
+    mov  dword ebx, [CameoItems]
     imul ebx, 48
 ;    add        ebx, 27
     add  ebx, 181
@@ -489,7 +489,7 @@ _StripClass_Draw_It_hires:
 
 _StripClass_Draw_It_hires2:
 ;    add     eax, CAMEO_ITEMS*2; items to draw
-    mov  DWORD edi, [CameoItems]
+    mov  dword edi, [CameoItems]
     imul edi, 2
     add  eax, edi ; items to draw
     cmp  eax, ecx
@@ -506,7 +506,7 @@ _SidebarClass_One_TIme_Icon_Area_Size_hires: ; Calculate CameoItems and set Stri
     mov  eax, [IngameHeight]
     sub  eax, 180
     sub  eax, 27
-    cdq  ; sign-extend EAX into EDX
+    cdq  ; sign-extend eax into edx
     mov  ebx, 48
     idiv ebx
 
@@ -519,19 +519,19 @@ _SidebarClass_One_TIme_Icon_Area_Size_hires: ; Calculate CameoItems and set Stri
 
 .Dont_Set_Max_Cameos:
 
-    mov  DWORD [CameoItems], eax
+    mov  dword [CameoItems], eax
 
     mov  eax, [CameoItems]
     mov  edx, 48
     imul eax, edx
-    mov  DWORD [StripBarAreaVerticalSize], eax
+    mov  dword [StripBarAreaVerticalSize], eax
 
-    mov  DWORD ecx, [CameoItems]
+    mov  dword ecx, [CameoItems]
     imul ecx, 48
     add  ecx, 27
     add  ecx, 181
     sub  ecx, 42
-    mov  DWORD [PowerBarBottomPos], ecx
+    mov  dword [PowerBarBottomPos], ecx
 
     pop  edi
     pop  esi

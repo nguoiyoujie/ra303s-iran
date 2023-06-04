@@ -21,10 +21,10 @@
     mov  ecx, [eax+0x11]
     call [ecx+0x0C]
     xor  ecx, ecx
-    mov  WORD cx, ebx
+    mov  word cx, ebx
     xor  edx, edx
     and  ebx, 0FFFFh     ; ebx & -1
-    mov  WORD dx, eax
+    mov  word dx, eax
     and  eax, 0FFFFh     ; eax & -1
     call 0x004BEA7C ; Desired_Facing256(int,int,int,int)
 
@@ -47,10 +47,10 @@
     mov  ebx, eax
     pop  eax ; %2
     xor  ecx, ecx
-    mov  WORD cx, bx
+    mov  word cx, bx
     xor  edx, edx
     and  ebx, 0FFFFh     ; ebx & -1
-    mov  WORD dx, ax
+    mov  word dx, ax
     and  eax, 0FFFFh     ; eax & -1
     call 0x004BEA7C ; Desired_Facing256(int,int,int,int)
 
@@ -60,14 +60,14 @@
 %endmacro
 
 ; args: <identifier for unique branch identifiers>, <dirtype to check>
-; NOTE: returns 1 or 0 in EAX, destroying its value
+; NOTE: returns 1 or 0 in eax, destroying its value
 %macro Is_Shooting_Northward 2
     mov  al, %2
-    cmp  BYTE al, 0xE0
+    cmp  byte al, 0xE0
     jz   .Return_True_%1
-    cmp  BYTE al, 0x00
+    cmp  byte al, 0x00
     jz   .Return_True_%1
-    cmp  BYTE al, 0x20
+    cmp  byte al, 0x20
     jz   .Return_True_%1
 
     mov  eax, 0
@@ -80,14 +80,14 @@
 %endmacro
 
 ; args: <identifier for unique branch identifiers>, <dirtype to check>
-; NOTE: returns 1 or 0 in EAX, destroying its value
+; NOTE: returns 1 or 0 in eax, destroying its value
 %macro Is_Shooting_Southward 2
     mov  al, %2
-    cmp  BYTE al, 0xA0
+    cmp  byte al, 0xA0
     jz   .Return_True_%1
-    cmp  BYTE al, 0x60
+    cmp  byte al, 0x60
     jz   .Return_True_%1
-    cmp  BYTE al, 0x80
+    cmp  byte al, 0x80
     jz   .Return_True_%1
 
     mov  eax, 0
@@ -114,13 +114,13 @@
     xor  ecx, ecx
     push ebx
     shr  ebx, 16
-    mov  WORD cx, bx
+    mov  word cx, bx
     pop  ebx
     xor  edx, edx
     and  ebx, 0FFFFh     ; ebx & -1
     push eax
     shr  eax, 16
-    mov  WORD dx, ax
+    mov  word dx, ax
     pop  eax
     and  eax, 0FFFFh     ; eax & -1
     call 0x004BEA20 ; Desired_Facing8(int,int,int,int)
@@ -131,7 +131,7 @@
 %endmacro
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception:
-    cmp  BYTE [southadvantagefix], 0
+    cmp  byte [SouthAdvantageFix], 0
     jz   .Normal_Code
     jmp  0x00562840
 
@@ -141,7 +141,7 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception:
     jmp  0x005627D0
 
 _TechnoClass_In_Range_Long_Int_No_Building_Exception:
-    cmp  BYTE [southadvantagefix], 0
+    cmp  byte [SouthAdvantageFix], 0
     jz   .Normal_Code
 
     jmp  0x00562762
@@ -153,7 +153,7 @@ _TechnoClass_In_Range_Long_Int_No_Building_Exception:
 
 ; 0x80 = shooting southward, 0x00 = shooting northward, 0xc0 = westward, 0x40 = eastward
 _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
-    cmp  BYTE [southadvantagefix], 0
+    cmp  byte [SouthAdvantageFix], 0
     jz   .Normal_Code
 
     mov  ebx, eax
@@ -177,10 +177,10 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
 
 .Dont_Patch_South_Range:
 
-    cmp  BYTE [ecx], 5 ; Check for building
+    cmp  byte [ecx], 5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
 
-    cmp  BYTE [ecx+0xcd], 0x1f
+    cmp  byte [ecx+0xcd], 0x1f
     push eax
     jz   .Tesla_Coil_Adjustments
 
@@ -228,7 +228,7 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
 
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
-    cmp  BYTE [southadvantagefix], 0
+    cmp  byte [SouthAdvantageFix], 0
     jz   .Normal_Code
 
     mov  ebx, eax
@@ -252,10 +252,10 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
 
 .Dont_Patch_South_Range:
 
-    cmp  BYTE [esi], 5 ; Check for building
+    cmp  byte [esi], 5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
 
-    cmp  BYTE [esi+0xcd], 0x1f
+    cmp  byte [esi+0xcd], 0x1f
     push eax
     jz   .Tesla_Coil_Adjustments
 

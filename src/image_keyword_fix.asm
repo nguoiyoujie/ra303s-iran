@@ -10,7 +10,7 @@
 ; work around this by not updating graphics if they cant be found
 
 _InfantryTypeClass__One_Time_Invisible_Infantry_Fix:
-    cmp  DWORD eax, 0
+    cmp  dword eax, 0
     jz   .Dont_Use_No_Infantry_Graphics
 
     mov  [esi+12Ch], eax
@@ -19,7 +19,7 @@ _InfantryTypeClass__One_Time_Invisible_Infantry_Fix:
     jmp  0x004EB0DD
 
 _InfantryTypeClass__One_Time_Invisible_Icon_Fix:
-    cmp  DWORD eax, 0
+    cmp  dword eax, 0
     jz   .Dont_Use_Icon_Graphics
     mov  [esi+166h], eax
 
@@ -27,7 +27,7 @@ _InfantryTypeClass__One_Time_Invisible_Icon_Fix:
     jmp  0x004EB134
 
 _BuildingTypeClass__One_Time_Missile_Silo_Buildup_Fix:
-    cmp  DWORD eax, 0
+    cmp  dword eax, 0
     je   .Dont_use_Buildup_Graphics
 
     mov  [esi+203h], eax
@@ -36,7 +36,7 @@ _BuildingTypeClass__One_Time_Missile_Silo_Buildup_Fix:
     jmp  0x0045368F
 
 _BuildingTypeClass__One_Time_Civilian_Buildings_Fix:
-    cmp  DWORD eax, 0
+    cmp  dword eax, 0
     jz   .Dont_Use_No_Graphics
 
     mov  [esi+12Ch], eax

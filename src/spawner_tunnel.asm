@@ -17,201 +17,201 @@
 %define sendto 0x005E59D0
 %define recvfrom 0x005E59D6
 
-@CALL 0x005A8B31 Tunnel_SendTo
-@CALL 0x005A89AE Tunnel_RecvFrom
+@call 0x005A8B31 Tunnel_SendTo
+@call 0x005A89AE Tunnel_RecvFrom
 
 Tunnel_SendTo:
 %push
-    PUSH EBP
-    MOV  EBP,ESP
+    push ebp
+    mov  ebp,ESP
     SUB  ESP,1024
-    PUSH ESI
-    PUSH EDI
+    push esi
+    push edi
 
-%define var_buf     (EBP-1024)
+%define var_buf     (ebp-1024)
 
-%define addrlen     EBP+28
-%define dest_addr   EBP+24
-%define flags       EBP+20
-%define len         EBP+16
-%define buf         EBP+12
-%define sockfd      EBP+8
+%define addrlen     ebp+28
+%define dest_addr   ebp+24
+%define flags       ebp+20
+%define len         ebp+16
+%define buf         ebp+12
+%define sockfd      ebp+8
 
     ; no processing if no tunnel
-    CMP  DWORD [tunnel_port],0
-    JE   .notunnel
+    cmp  dword [tunnel_port],0
+    je   .notunnel
 
     ; copy packet to our buffer
-    MOV  ESI,[buf]
-    LEA  EDI,[var_buf + 4]
-    MOV  ECX,[len]
+    mov  esi,[buf]
+    lea  edi,[var_buf + 4]
+    mov  ecx,[len]
     CLD
     REP  MOVSB
 
     ; pull dest port to header
-    LEA  EAX,[var_buf]
+    lea  eax,[var_buf]
 
-    MOV  ECX,[dest_addr]
-    LEA  ECX,[ECX + sockaddr_in.sin_port]
-    MOV  EDX,[ECX]
-    SHL  EDX,16
-    MOV  [EAX], EDX
+    mov  ecx,[dest_addr]
+    lea  ecx,[ecx + sockaddr_in.sin_port]
+    mov  edx,[ecx]
+    SHL  edx,16
+    mov  [eax], edx
 
-    MOV  EDX,[tunnel_id]
-    SHR  EDX,16
-    OR   [EAX], EDX
+    mov  edx,[tunnel_id]
+    SHR  edx,16
+    OR   [eax], edx
 
-    AND  EDX,0xFFFF
-    OR   [EAX], EDX
+    AND  edx,0xFFFF
+    OR   [eax], edx
 
     ; set dest_addr to tunnel address
-    MOV  EAX,[dest_addr]
-    LEA  EAX,[EAX + sockaddr_in.sin_port]
-    MOV  EDX,[tunnel_port]
-    SHR  EDX,16
-    MOV  WORD [EAX],DX
+    mov  eax,[dest_addr]
+    lea  eax,[eax + sockaddr_in.sin_port]
+    mov  edx,[tunnel_port]
+    SHR  edx,16
+    mov  word [eax],DX
 
-    MOV  EAX,[dest_addr]
-    LEA  EAX,[EAX + sockaddr_in.sin_addr]
-    MOV  EDX,[tunnel_ip]
-    MOV  DWORD [EAX],EDX
+    mov  eax,[dest_addr]
+    lea  eax,[eax + sockaddr_in.sin_addr]
+    mov  edx,[tunnel_ip]
+    mov  dword [eax],edx
 
-    MOV  EAX,[addrlen]
-    PUSH EAX
-    MOV  EAX,[dest_addr]
-    PUSH EAX
-    MOV  EAX,[flags]
-    PUSH EAX
-    MOV  EAX,[len]
-    ADD  EAX,4
-    PUSH EAX
-    LEA  EAX,[var_buf]
-    PUSH EAX
-    MOV  EAX,[sockfd]
-    PUSH EAX
-    CALL sendto
-    JMP  .exit
+    mov  eax,[addrlen]
+    push eax
+    mov  eax,[dest_addr]
+    push eax
+    mov  eax,[flags]
+    push eax
+    mov  eax,[len]
+    ADD  eax,4
+    push eax
+    lea  eax,[var_buf]
+    push eax
+    mov  eax,[sockfd]
+    push eax
+    call sendto
+    jmp  .exit
 
 .notunnel:
-    MOV  EAX,[addrlen]
-    PUSH EAX
-    MOV  EAX,[dest_addr]
-    PUSH EAX
-    MOV  EAX,[flags]
-    PUSH EAX
-    MOV  EAX,[len]
-    PUSH EAX
-    MOV  EAX,[buf]
-    PUSH EAX
-    MOV  EAX,[sockfd]
-    PUSH EAX
-    CALL sendto
+    mov  eax,[addrlen]
+    push eax
+    mov  eax,[dest_addr]
+    push eax
+    mov  eax,[flags]
+    push eax
+    mov  eax,[len]
+    push eax
+    mov  eax,[buf]
+    push eax
+    mov  eax,[sockfd]
+    push eax
+    call sendto
 
 .exit:
-    POP  EDI
-    POP  ESI
-    MOV  ESP,EBP
-    POP  EBP
+    POP  edi
+    POP  esi
+    mov  ESP,ebp
+    POP  ebp
     RETN 24
 %pop
 
 Tunnel_RecvFrom:
 %push
-    PUSH EBP
-    MOV  EBP,ESP
+    push ebp
+    mov  ebp,ESP
     SUB  ESP,1024
-    PUSH ESI
-    PUSH EDI
+    push esi
+    push edi
 
-%define var_buf     (EBP-1024)
+%define var_buf     (ebp-1024)
 
-%define addrlen     EBP+28
-%define src_addr    EBP+24
-%define flags       EBP+20
-%define len         EBP+16
-%define buf         EBP+12
-%define sockfd      EBP+8
+%define addrlen     ebp+28
+%define src_addr    ebp+24
+%define flags       ebp+20
+%define len         ebp+16
+%define buf         ebp+12
+%define sockfd      ebp+8
 
     ; no processing if no tunnel
-    CMP  DWORD [tunnel_port],0
-    JE   .notunnel
+    cmp  dword [tunnel_port],0
+    je   .notunnel
 
     ; call recvfrom first to get the packet
-    MOV  EAX,[addrlen]
-    PUSH EAX
-    MOV  EAX,[src_addr]
-    PUSH EAX
-    MOV  EAX,[flags]
-    PUSH EAX
-    MOV  EAX,1024        ; len
-    PUSH EAX
-    LEA  EAX,[var_buf]
-    PUSH EAX
-    MOV  EAX,[sockfd]
-    PUSH EAX
-    CALL recvfrom
+    mov  eax,[addrlen]
+    push eax
+    mov  eax,[src_addr]
+    push eax
+    mov  eax,[flags]
+    push eax
+    mov  eax,1024        ; len
+    push eax
+    lea  eax,[var_buf]
+    push eax
+    mov  eax,[sockfd]
+    push eax
+    call recvfrom
 
     ; no processing if returnng error
-    CMP  EAX,-1
-    JE   .exit
+    cmp  eax,-1
+    je   .exit
 
     ; no processing if less than 5 bytes of data
-    CMP  EAX,5
+    cmp  eax,5
     JL   .error
 
     ; remove header from return length
-    SUB  EAX,4
+    SUB  eax,4
 
     ; copy real packet after header to game buf
-    LEA  ESI,[var_buf + 4]
-    MOV  EDI,[buf]
-    MOV  ECX,EAX
+    lea  esi,[var_buf + 4]
+    mov  edi,[buf]
+    mov  ecx,eax
     CLD
     REP  MOVSB
 
     ; pull our header
-    LEA  EDX,[var_buf]
-    MOV  EDX,[EDX]
+    lea  edx,[var_buf]
+    mov  edx,[edx]
 
     ; FIXME: going to assume packets are meant for me, someone can validate the "to" part later...
     ; leaving just from here
-    AND  EDX,0xFFFF
+    AND  edx,0xFFFF
 
     ; set from port to header identifier
-    MOV  ECX,[src_addr]
-    LEA  ECX,[ECX + sockaddr_in.sin_port]
-    MOV  WORD [ECX],DX
+    mov  ecx,[src_addr]
+    lea  ecx,[ecx + sockaddr_in.sin_port]
+    mov  word [ecx],DX
 
-    XOR  EDX,EDX
-    MOV  ECX,[src_addr]
-    LEA  ECX,[ECX + sockaddr_in.sin_addr]
-    MOV  DWORD [ECX],EDX
+    xor  edx,edx
+    mov  ecx,[src_addr]
+    lea  ecx,[ecx + sockaddr_in.sin_addr]
+    mov  dword [ecx],edx
 
-    JMP  .exit
+    jmp  .exit
 
 .notunnel:
     ; call recvfrom first to get the packet
-    MOV  EAX,[addrlen]
-    PUSH EAX
-    MOV  EAX,[src_addr]
-    PUSH EAX
-    MOV  EAX,[flags]
-    PUSH EAX
-    MOV  EAX,[len]
-    PUSH EAX
-    MOV  EAX,[buf]
-    PUSH EAX
-    MOV  EAX,[sockfd]
-    PUSH EAX
-    CALL recvfrom
-    JMP  .exit
+    mov  eax,[addrlen]
+    push eax
+    mov  eax,[src_addr]
+    push eax
+    mov  eax,[flags]
+    push eax
+    mov  eax,[len]
+    push eax
+    mov  eax,[buf]
+    push eax
+    mov  eax,[sockfd]
+    push eax
+    call recvfrom
+    jmp  .exit
 
 .error:
-    MOV  EAX,-1
+    mov  eax,-1
 .exit:
-    POP  EDI
-    POP  ESI
-    MOV  ESP,EBP
-    POP  EBP
+    POP  edi
+    POP  esi
+    mov  ESP,ebp
+    POP  ebp
     RETN 24
 %pop

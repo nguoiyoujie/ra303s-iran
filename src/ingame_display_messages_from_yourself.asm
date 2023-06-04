@@ -5,7 +5,7 @@ _Message_Input_Display_Message_After_Sending_To_Players:
 
     ; Calculate duration the message is displayed for
     xor  ebx, ebx
-    mov  bx, [0x006667C7] ; ds:int RulesClass.MessageDelay
+    mov  bx, [Globals___Rule_MessageDelay]
     lea  eax, [ebx*8]
     sub  eax, ebx
     shl  eax, 5
@@ -16,12 +16,12 @@ _Message_Input_Display_Message_After_Sending_To_Players:
 
     push eax ; Message display duration
     push 0x4046 ; TextPrintType?
-    mov  al, BYTE [0x0067F313]
+    mov  al, byte [0x0067F313]
     movsx eax, al
     push eax ; PlayerColorType arg
 
     mov  ecx, 0x00680189
-    mov  bl, BYTE [0x00680201]
+    mov  bl, byte [0x00680201]
     movsx ebx, bl
     mov  edx, 0x0068017D ; offset byte_0068017D, text to display
     mov  eax, 0x0067F5A8; offset MessageListClass_67F5A8

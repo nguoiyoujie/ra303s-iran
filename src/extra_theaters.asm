@@ -23,30 +23,30 @@
 %define THEATERS_COUNT 8
 
 ;Theaters array
-Temperate       db "TEMPERATE", 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Temperat        db "TEMPERAT", 0, 0 ; 10 bytes
-Tem             db "TEM", 0 ; 4 bytes
-Snow            db "SNOW", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Snow_2          db "SNOW", 0, 0, 0, 0, 0, 0 ; 10 bytes
-Sno             db "SNO", 0 ; 4 bytes
-Interior        db "INTERIOR", 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Interior_2      db "INTERIOR", 0, 0 ; 10 bytes
-Int_            db "INT", 0 ; 4 bytes
-Winter          db "WINTER", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Winter2         db "WINTER", 0, 0, 0, 0 ; 10 bytes
-Win_            db "WIN", 0 ; 4 bytes, needs to be changed back to WIN
-Desert          db "DESERT", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Desert2         db "DESERT", 0, 0, 0, 0 ; 10 bytes
-Des             db "DES", 0 ; 4 bytes
-Jungle          db "JUNGLE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Jungle2         db "JUNGLE", 0, 0, 0, 0 ; 10 bytes
-Jun             db "JUN",0 ; 4 bytes
-Barren          db "BARREN", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Barren2         db "BARREN", 0, 0, 0, 0 ; 10 bytes
-Bar             db "BAR",0 ; 4 bytes
-Cave            db "CAVE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
-Cave2           db "CAVE", 0, 0, 0, 0, 0, 0 ; 10 bytes
-Cav             db "CAV",0 ; 4 bytes
+Temperate       db"TEMPERATE", 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Temperat        db"TEMPERAT", 0, 0 ; 10 bytes
+Tem             db"TEM", 0 ; 4 bytes
+Snow            db"SNOW", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Snow_2          db"SNOW", 0, 0, 0, 0, 0, 0 ; 10 bytes
+Sno             db"SNO", 0 ; 4 bytes
+Interior        db"INTERIOR", 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Interior_2      db"INTERIOR", 0, 0 ; 10 bytes
+Int_            db"INT", 0 ; 4 bytes
+Winter          db"WINTER", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Winter2         db"WINTER", 0, 0, 0, 0 ; 10 bytes
+Win_            db"WIN", 0 ; 4 bytes, needs to be changed back to WIN
+Desert          db"DESERT", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Desert2         db"DESERT", 0, 0, 0, 0 ; 10 bytes
+Des             db"DES", 0 ; 4 bytes
+Jungle          db"JUNGLE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Jungle2         db"JUNGLE", 0, 0, 0, 0 ; 10 bytes
+Jun             db"JUN",0 ; 4 bytes
+Barren          db"BARREN", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Barren2         db"BARREN", 0, 0, 0, 0 ; 10 bytes
+Bar             db"BAR",0 ; 4 bytes
+Cave            db"CAVE", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ; 16 bytes
+Cave2           db"CAVE", 0, 0, 0, 0, 0, 0 ; 10 bytes
+Cav             db"CAV",0 ; 4 bytes
 
 _TerrainClass__Unlimbo_Theater_Check_NOP:
     jmp  0x0056AAF1

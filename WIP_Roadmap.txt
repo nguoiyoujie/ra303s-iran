@@ -1,0 +1,20 @@
+Roadmap
+-------------------------------------------
+
+Code organization and documentation
+1. Restructure code according to the following groups:
+      - src/defines                Containing enums, class definitions, function addresses
+	  - src/macros                 Containing common reusable code. This includes the macros for getters and setters of class elements
+      - src/class_extensions       Expansion logic and preload sequences for various class definitions
+      - src/fixes                  General fixes
+      - src/features               New features
+
+    Others to be determined as they are encountered
+
+2. Code documentation
+      - Every file should be documented with some kind of specification.
+      - Ideally, one feature per file. If a function uses more than one feature, the function goes to the most critical/dominant of features, and the rest shall reference it.
+	  
+	  
+	  
+	  

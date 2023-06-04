@@ -16,37 +16,36 @@
 
 ; Internet button in the main menu goes to cncnet.org instead of WOL
 
-%define SessionClass_Session    0x0067F2B4
 %define ShellExecuteA           0x005E653C
 %define ShowWindow              0x005E6884
 %define pHWnd                   0x006B1498
 %define SW_MINIMIZE             6
 
-str_cncnet_org db "http://cncnet.org/", 0
-str_dot db ".", 0
+str_cncnet_org db"http://cncnet.org/", 0
+str_dot db".", 0
 
 @JMP 0x004F4D7E _Internet_Action
 
 _Internet_Action:
-    cmp  BYTE [enablewol], 1
+    cmp  byte [EnableWOL], 1
     jz   .Normal_Code
 
 
-    PUSH SW_MINIMIZE
-    MOV  EAX, [pHWnd]
-    PUSH EAX
-    CALL DWORD [ShowWindow]
+    push SW_MINIMIZE
+    mov  eax, [pHWnd]
+    push eax
+    call dword [ShowWindow]
 
-    PUSH 5
-    PUSH str_dot
-    PUSH 0
-    PUSH str_cncnet_org
-    PUSH 0
-    PUSH 0
-    CALL DWORD [ShellExecuteA]
+    push 5
+    push str_dot
+    push 0
+    push str_cncnet_org
+    push 0
+    push 0
+    call dword [ShellExecuteA]
 
-    MOV  BYTE [SessionClass_Session], 0
-    JMP  0x004F467B
+    mov  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    jmp  0x004F467B
 
 .Normal_Code:
     mov  eax, [0x0069172C]

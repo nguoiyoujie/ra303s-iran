@@ -29,17 +29,17 @@ _UnitClass_Try_To_Deploy_MCVUnhardcode:
 
 _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1:
     xor  eax, eax
-    mov  al, BYTE [Cache_UnitType_DeploysInto]
+    mov  al, byte [Cache_UnitType_DeploysInto]
     jmp  0x0057B9C1
 
 _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2:
     xor  eax, eax
-    mov  al, BYTE [Cache_UnitType_DeploysInto]
+    mov  al, byte [Cache_UnitType_DeploysInto]
     jmp  0x0057BA52
 
 _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3:
     xor  edx, edx
-    mov  dl, BYTE [Cache_UnitType_DeploysInto]
+    mov  dl, byte [Cache_UnitType_DeploysInto]
     jmp  0x0057BB08
 
 
@@ -55,7 +55,7 @@ _UnitClass_What_Action_MCVUnhardcode:
 
 _UnitClass_What_Action_ConstructionYardUnhardcode:
     xor  eax, eax
-    mov  al, BYTE [Cache_UnitType_DeploysInto]
+    mov  al, byte [Cache_UnitType_DeploysInto]
     jmp  0x0057F50E
 
 

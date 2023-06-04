@@ -1,7 +1,7 @@
 @HOOK 0x00420662 _AircraftClass__PoseDir_FixedWingTransportsFaceNorth
 
 _AircraftClass__PoseDir_FixedWingTransportsFaceNorth:
-    mov  dl, BYTE [edx + 0x196] ; dl is now the ID
+    mov  dl,byte [edx + 0x196] ; dl is now the ID
     movsx edx,dl
     push eax
     push ebx

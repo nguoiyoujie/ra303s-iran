@@ -31,13 +31,13 @@
 %define CREATE_ALWAYS           2
 %define FILE_ATTRIBUTE_NORMAL   128
 
-str_exception_title         db "Command & Conquer: Red Alert just crashed!",0
-str_exception_message       db "A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to Iran for debugging, thanks.",0
-str_exception_message2       db "A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to Iran for debugging, thanks.",0
-str_dbghelp_dll             db "dbghelp.dll",0
-str_MiniDumpWriteDump       db "MiniDumpWriteDump",0
-str_dump_name               db "ra95crash.dmp",0
-str_memory_dump_name        db "ra95crash_memory.dmp",0
+str_exception_title         db"Command & Conquer: Red Alert just crashed!",0
+str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to Iran for debugging, thanks.",0
+str_exception_message2       db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to Iran for debugging, thanks.",0
+str_dbghelp_dll             db"dbghelp.dll",0
+str_MiniDumpWriteDump       db"MiniDumpWriteDump",0
+str_dump_name               db"ra95crash.dmp",0
+str_memory_dump_name        db"ra95crash_memory.dmp",0
 
 dbghelp_dll                 dd 0
 hFile                       dd 0
@@ -76,7 +76,7 @@ exception_pointers:
 @HOOK 0x005DE62C _try_WinMain
 
 _try_WinMain:
-;    mov        DWORD [CommandLineArg], [esp+4h]
+;    mov        dword [CommandLineArg], [esp+4h]
 
 ;    push    esi
 ;    push    edi
@@ -85,31 +85,31 @@ _try_WinMain:
     ; load minidump stuff
     PUSHAD
 
-    PUSH str_dbghelp_dll
-    CALL LoadLibraryA
+    push str_dbghelp_dll
+    call LoadLibraryA
 
-    TEST EAX,EAX
-    JZ   .nodebug
+    test eax,eax
+    jz   .nodebug
 
-    MOV  [dbghelp_dll], EAX
+    mov  [dbghelp_dll],eax
 
-    PUSH str_MiniDumpWriteDump
-    PUSH EAX
-    CALL GetProcAddress
+    push str_MiniDumpWriteDump
+    push eax
+    call GetProcAddress
 
-    TEST EAX,EAX
-    JZ   .nodebug
+    test eax,eax
+    jz   .nodebug
 
-    MOV  [MiniDumpWriteDump], EAX
+    mov  [MiniDumpWriteDump],eax
 
-    CALL [GetCurrentProcess]
-    MOV  [hProcess], EAX
+    call [GetCurrentProcess]
+    mov  [hProcess],eax
 
-    CALL GetCurrentThreadId
-    MOV  [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ThreadId], EAX
+    call GetCurrentThreadId
+    mov  [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ThreadId],eax
 
-    CALL GetCurrentProcessId
-    MOV  [ProcessId], EAX
+    call GetCurrentProcessId
+    mov  [ProcessId],eax
 
     POPAD
 
@@ -118,10 +118,10 @@ _try_WinMain:
 
 ;    PUSHAD
 
-    MOV  ESI, _exception_handler
+    mov  esi,_exception_handler
     push esi
-    PUSH DWORD [FS:0]
-    MOV  [FS:0], ESP
+    push dword [FS:0]
+    mov  [FS:0],ESP
 
 ;    Restore_Registers
 
@@ -130,7 +130,7 @@ _try_WinMain:
 ;    pop        esi
 
 ;        pop    ebx
-;    mov        eax, ebx
+;    mov        eax,ebx
 
     push 0Ah
     push eax
@@ -138,109 +138,109 @@ _try_WinMain:
     push edx             ; lpModuleName
     call 0x005E58F8 ; GetModuleHandleA(x)
     push eax
-;    add        esp, 8
-    CALL WinMain
-;    sub        esp, 8
+;    add        esp,8
+    call WinMain
+;    sub        esp,8
 
     ; clean up our exception handler
-    POP  DWORD [FS:0]
-    ADD  ESP, 12 + 4
+    POP  dword [FS:0]
+    ADD  ESP,12 + 4
 
     ; free minidump library if loaded
-    CMP  DWORD [dbghelp_dll], 0
-    JE   .nodebugdll
+    cmp  dword [dbghelp_dll],0
+    je   .nodebugdll
 
-    PUSH DWORD [dbghelp_dll]
-    CALL [FreeLibrary]
+    push dword [dbghelp_dll]
+    call [FreeLibrary]
 
 .nodebugdll:
-    JMP  _exit
+    jmp  _exit
 
 .nodebug:
-    CALL WinMain
-    JMP  _exit
+    call WinMain
+    jmp  _exit
 
 _exception_handler:
-    MOV  EBX, DWORD [ESP + 0x4]
-    MOV  EDX, DWORD [ESP + 0x0C]
-    MOV  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord], EBX
-    MOV  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord], EBX
-    MOV  [exception_pointers + EXCEPTION_POINTERS.ContextRecord], EDX
+    mov  ebx,dword [ESP + 0x4]
+    mov  edx,dword [ESP + 0x0C]
+    mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
+    mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
+    mov  [exception_pointers + EXCEPTION_POINTERS.ContextRecord],edx
 
-    MOV  DWORD [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers], exception_pointers
-    MOV  DWORD [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ClientPointers], 1
+    mov  dword [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers],exception_pointers
+    mov  dword [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ClientPointers],1
 
-    PUSH 0
-    PUSH FILE_ATTRIBUTE_NORMAL
-    PUSH CREATE_ALWAYS
-    PUSH 0
-    PUSH 0
-    PUSH GENERIC_WRITE
-    PUSH str_dump_name
-    CALL [CreateFile]
+    push 0
+    push FILE_ATTRIBUTE_NORMAL
+    push CREATE_ALWAYS
+    push 0
+    push 0
+    push GENERIC_WRITE
+    push str_dump_name
+    call [CreateFile]
 
-    PUSH 0                  ; CallbackParam
-    PUSH 0                  ; UserStreamParam
-    PUSH exception_info                ; ExceptionParam
-    PUSH 0                  ; DumpType, normal dump
-;    PUSH 2                  ; DumpType, normal dump with full memory dump
-    PUSH EAX                ; hFile
-    PUSH DWORD [ProcessId]
-    PUSH DWORD [hProcess]
-    CALL [MiniDumpWriteDump]
+    push 0                  ; CallbackParam
+    push 0                  ; UserStreamParam
+    push exception_info                ; ExceptionParam
+    push 0                  ; DumpType, normal dump
+;    push 2                  ; DumpType, normal dump with full memory dump
+    push eax                ; hFile
+    push dword [ProcessId]
+    push dword [hProcess]
+    call [MiniDumpWriteDump]
 
-    CMP  BYTE [generatememorydump], 1
+    cmp  byte [GenerateMemoryDump],1
     jz   .Generate_Memory_Dump
 
-    PUSH 0
-    PUSH str_exception_title
-    PUSH str_exception_message
-    PUSH 0
-    CALL [MessageBoxA]
+    push 0
+    push str_exception_title
+    push str_exception_message
+    push 0
+    call [MessageBoxA]
 
-    MOV  ESP,[ESP + 8]
-    POP  DWORD [FS:0]
-    ADD  ESP, 4
+    mov  ESP,[ESP + 8]
+    POP  dword [FS:0]
+    ADD  ESP,4
 
     push ExitCode
-    PUSH DWORD [hProcess]
-    CALL GetExitCodeProcess
+    push dword [hProcess]
+    call GetExitCodeProcess
 
-    push DWORD [ExitCode]
+    push dword [ExitCode]
     jmp  _exit
 
 .Generate_Memory_Dump:
-    PUSH 0
-    PUSH FILE_ATTRIBUTE_NORMAL
-    PUSH CREATE_ALWAYS
-    PUSH 0
-    PUSH 0
-    PUSH GENERIC_WRITE
-    PUSH str_memory_dump_name
-    CALL [CreateFile]
+    push 0
+    push FILE_ATTRIBUTE_NORMAL
+    push CREATE_ALWAYS
+    push 0
+    push 0
+    push GENERIC_WRITE
+    push str_memory_dump_name
+    call [CreateFile]
 
-    PUSH 0                  ; CallbackParam
-    PUSH 0                  ; UserStreamParam
-    PUSH exception_info                ; ExceptionParam
-    PUSH 2                  ; DumpType, normal dump with full memory dump
-    PUSH EAX                ; hFile
-    PUSH DWORD [ProcessId]
-    PUSH DWORD [hProcess]
-    CALL [MiniDumpWriteDump]
+    push 0                  ; CallbackParam
+    push 0                  ; UserStreamParam
+    push exception_info                ; ExceptionParam
+    push 2                  ; DumpType,normal dump with full memory dump
+    push eax                ; hFile
+    push dword [ProcessId]
+    push dword [hProcess]
+    call [MiniDumpWriteDump]
 
-    PUSH 0
-    PUSH str_exception_title
-    PUSH str_exception_message2
-    PUSH 0
-    CALL [MessageBoxA]
+    push 0
+    push str_exception_title
+    push str_exception_message2
+    push 0
+    call [MessageBoxA]
 
-    MOV  ESP,[ESP + 8]
-    POP  DWORD [FS:0]
+    mov  ESP,[ESP + 8]
+    POP  dword [FS:0]
     ADD  ESP, 4
 
     push ExitCode
-    PUSH DWORD [hProcess]
-    CALL GetExitCodeProcess
+    push dword [hProcess]
+    call GetExitCodeProcess
 
-    push DWORD [ExitCode]
+    push dword [ExitCode]
     jmp  _exit

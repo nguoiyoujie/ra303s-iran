@@ -12,34 +12,34 @@ BuildingTypesExtCount       dd    0
 %define        OriginalBuildingTypeHeapCount    0x57
 
 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
-    mov  al, [NewBuildingTypeHeapCount]
+    mov  al,[NewBuildingTypeHeapCount]
 
-    cmp  bl, al
+    cmp  bl,al
     jl   0x004535BD
     jmp  0x0045371A
 
 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
-    mov  al, [NewBuildingTypeHeapCount]
-    cmp  bh, al
+    mov  al,[NewBuildingTypeHeapCount]
+    cmp  bh,al
     jl   0x0045967A
     jmp  0x004596C0
 
 Init_BuildingTypeClass:
 
-    mov  eax, 207h
+    mov  eax,207h
     call 0x00429F0C ;  BuildingTypeClass::operator new(uint)
-    test eax, eax
+    test eax,eax
     jz   .Ret
 
     push eax
-    mov  eax, edx
+    mov  eax,edx
     ; edx should have the name of the INI section already
     call 0x005C3900 ; strdup()
-    mov  ecx, eax
+    mov  ecx,eax
 
     pop  eax
-    mov  edx, ebx
-    add  edx, OriginalBuildingTypeHeapCount ; BuildingType
+    mov  edx,ebx
+    add  edx,OriginalBuildingTypeHeapCount ; BuildingType
 
     push 0
     push 0x005FEAF6 ; offset short const List22[]
@@ -67,17 +67,17 @@ Init_BuildingTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newbuildingtypes], -1
+    cmp  dword [stringtableoffset_newbuildingtypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx, dword [stringtableoffset_newbuildingtypes]
+    add  ebx,dword [stringtableoffset_newbuildingtypes]
     jmp  .Continue 
 .Default_Name:
-    mov  ebx, 305 ; Civilian Building
+    mov  ebx,305 ; Civilian Building
 .Continue:
     pop  eax
 
-    mov  DWORD [0x005FE83C], 6
+    mov  dword [0x005FE83C],6
     push 0FFFFFFFFh
     call 0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
 .Ret:
@@ -85,11 +85,11 @@ Init_BuildingTypeClass:
 
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
 
-    Loop_Over_RULES_INI_Section_Entries str_BuildingTypes, Init_BuildingTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_BuildingTypes,Init_BuildingTypeClass
     call _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes
 
 .Ret:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-14h]
     pop  edi
     pop  esi
     pop  edx
@@ -107,9 +107,9 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
 
     BuildingTypeClass.FromIndex(BuildingType.WEAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.WARFACTORY)
-    BuildingTypeClass.WarFactoryOverlayAnim.Set(edi, -1)
-    BuildingTypeClass.WarFactoryOverlayFrames.Set(edi, 4)
-    BuildingTypeClass.WarFactoryOverlayRate.Set(edi, 8)
+    BuildingTypeClass.WarFactoryOverlayAnim.Set(edi,-1)
+    BuildingTypeClass.WarFactoryOverlayFrames.Set(edi,4)
+    BuildingTypeClass.WarFactoryOverlayRate.Set(edi,8)
 
     BuildingTypeClass.FromIndex(BuildingType.PDOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
@@ -200,9 +200,9 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
 
     BuildingTypeClass.FromIndex(BuildingType.WEAF,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.FAKES)
-    BuildingTypeClass.WarFactoryOverlayAnim.Set(edi, -1)
-    BuildingTypeClass.WarFactoryOverlayFrames.Set(edi, 4)
-    BuildingTypeClass.WarFactoryOverlayRate.Set(edi, 8)
+    BuildingTypeClass.WarFactoryOverlayAnim.Set(edi,-1)
+    BuildingTypeClass.WarFactoryOverlayFrames.Set(edi,4)
+    BuildingTypeClass.WarFactoryOverlayRate.Set(edi,8)
 	
     BuildingTypeClass.FromIndex(BuildingType.FACF,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.FAKES)
@@ -219,21 +219,21 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
     retn
 
 _Init_Game_Set_BuildingTypes_Heap_Count:
-    ; update the stringtableoffset, if defined in Rules
-    call_INIClass__Get_Int 0x00666688, str_stringtableoffsets, str_stringtableoffset_newbuildingtypes, [stringtableoffset_newbuildingtypes]
-    mov  [stringtableoffset_newbuildingtypes], eax
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Building,[stringtableoffset_newbuildingtypes]
+    mov  [stringtableoffset_newbuildingtypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
-    mov  BYTE [BuildingTypesExtCount], al
-    mov  edx, eax
-    add  edx, OriginalBuildingTypeHeapCount
-    mov  BYTE [NewBuildingTypeHeapCount], dl
+    mov  byte [BuildingTypesExtCount],al
+    mov  edx,eax
+    add  edx,OriginalBuildingTypeHeapCount
+    mov  byte [NewBuildingTypeHeapCount],dl
     jmp  0x004F40AA
 
 _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count:
-    mov  BYTE al, [NewBuildingTypeHeapCount]
+    mov  byte al,[NewBuildingTypeHeapCount]
 
-    cmp  dl, al
+    cmp  dl,al
     jl   0x004537D8
     jmp  0x004537D1

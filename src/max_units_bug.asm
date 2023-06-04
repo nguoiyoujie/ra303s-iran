@@ -19,32 +19,32 @@
 
 _max_units_bug:
 
-    JE   0x004BF21B
-    CMP  DWORD [ECX+0x2A], 0
-    JE   .Abandon_Production
-    JMP  0x004BEFF3
+    je   0x004BF21B
+    cmp  dword [ecx+0x2A], 0
+    je   .Abandon_Production
+    jmp  0x004BEFF3
 
 .Abandon_Production:
 ;    mov eax, ecx
 ;    call 0x004BF228
     mov  eax, 17
     call 0x00426158 ; void Speak(VoxType)
-    JMP  0x004BF21B
+    jmp  0x004BF21B
 
 _FactorClass__Set_Speak_Unable_To_Build_More:
     mov  edi, [ecx+22h]
 
-    CMP  edi, 0
+    cmp  edi, 0
     jnz  .Dont_Speak
     mov  eax, [0x00669958] ; PlayerPtr
-    CMP  DWORD ebx, eax
+    cmp  dword ebx, eax
     jnz  .Dont_Speak
 
     Save_Registers
 
     xor  edx, edx
     mov  ebx, [ebp-0x10]
-    mov  BYTE dl, [ebx]
+    mov  byte dl, [ebx]
     call 0x004D671C  ; ProdFailType HouseClass::Abandon_Production(RTTIType)
 
     mov  eax, 17

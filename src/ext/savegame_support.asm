@@ -10,49 +10,49 @@
 
 ;ARGS: <offset/pointer to value to SAVE>, <size in byte>
 %macro Save_Global_Value 2
-    mov  ebx, %2
-    mov  esi, [ecx+8]
-    mov  edx, %1
-    mov  eax, ecx
+    mov  ebx,%2
+    mov  esi,[ecx+8]
+    mov  edx,%1
+    mov  eax,ecx
     call dword [esi+10h]
 %endmacro
 
 ;ARGS: <offset/pointer to value to LOAD>, <size in byte>
 %macro Load_Global_Value 2
-    mov  ebx, %2
-    mov  esi, [ecx+8]
-    mov  edx, %1
-    mov  eax, ecx
+    mov  ebx,%2
+    mov  esi,[ecx+8]
+    mov  edx,%1
+    mov  eax,ecx
     call dword [esi+8]
 %endmacro
 
 ; For early map load, to prevent savegame values from working on
 ; next map load
 Clear_Extended_Savegame_Values:
-    mov  BYTE [buildoffally], 0
-    mov  BYTE [aftermathfastbuildspeed], 0
-    mov  BYTE [deadplayersradar], 0
-    mov  BYTE [spawner_aftermath], 0
-    mov  BYTE [shortgame], 0
-    mov  BYTE [noteslazapeffectdelay], 0
-    mov  BYTE [noscreenshake], 0
-    mov  BYTE [techcenterbugfix], 0
-    mov  BYTE [forcedalliances], 0
-    mov  BYTE [allyreveal], 0
-    mov  BYTE [mcvundeploy], 0
-    mov  BYTE [buildingcrewstuckfix], 0
-    mov  BYTE [magicbuildfix], 0
-    mov  BYTE [infantryrangeexploitfix], 0
-    mov  BYTE [computerparanoidforcedisabledskirmish], 1
-    mov  BYTE [removeaitechupcheck], 0
-    mov  BYTE [fixaiparanoid], 0
-    mov  BYTE [fixaially], 0
-    mov  BYTE [fixformationspeed], 0
-    mov  BYTE [parabombsinmultiplayer], 0
-    mov  BYTE [evacinmp], 1
-    mov  BYTE [fixaisendingtankstopleft], 0
-    mov  DWORD [InCoopMode], 0
-    mov  DWORD [fixnavalexploits], 0
+    mov  byte [BuildOffAlly],0
+    mov  byte [AftermathFastBuildSpeed],0
+    mov  byte [DeadPlayersRadar],0
+    mov  byte [spawner_aftermath],0
+    mov  byte [ShortGame],0
+    mov  byte [NoTeslaZapEffectDelay],0
+    mov  byte [NoScreenShake],0
+    mov  byte [TechCenterBugFix],0
+    mov  byte [ForcedAlliances],0
+    mov  byte [AllyReveal],0
+    mov  byte [MCVUndeploy],0
+    mov  byte [buildingcrewstuckfix],0
+    mov  byte [magicbuildfix],0
+    mov  byte [infantryrangeexploitfix],0
+    mov  byte [ComputerParanoidForceDisabledSkirmish],1
+    mov  byte [RemoveAITechupCheck],0
+    mov  byte [FixAIParanoid],0
+    mov  byte [FixAIAlly],0
+    mov  byte [FixFormationSpeed],0
+    mov  byte [ParabombsInMultiplayer],0
+    mov  byte [EvacInMP],1
+    mov  byte [FixAISendingTanksTopLeft],0
+    mov  dword [InCoopMode],0
+    mov  dword [fixnavalexploits],0
     retn
 
 ; Loading and saving data in Save- and Load_Misc_Values_Extended_Savegames
@@ -60,116 +60,116 @@ Clear_Extended_Savegame_Values:
 _Save_Misc_Values_Extended_Savegames:
     call dword [esi+10h]
 
-    Save_Global_Value SessionClass__Session, 1
-    Save_Global_Value buildoffally, 1
-    Save_Global_Value aftermathfastbuildspeed, 1
-    Save_Global_Value deadplayersradar, 1
-    Save_Global_Value spawner_aftermath, 1
-    Save_Global_Value shortgame, 1
-    Save_Global_Value noteslazapeffectdelay, 1
-    Save_Global_Value noscreenshake, 1
-    Save_Global_Value techcenterbugfix, 1
-    Save_Global_Value forcedalliances, 1
-    Save_Global_Value allyreveal, 1
-    Save_Global_Value mcvundeploy, 1
-    Save_Global_Value buildingcrewstuckfix, 1
-    Save_Global_Value magicbuildfix, 1
-    Save_Global_Value infantryrangeexploitfix, 1
-    Save_Global_Value computerparanoidforcedisabledskirmish, 1
-    Save_Global_Value removeaitechupcheck, 1
-    Save_Global_Value fixaiparanoid, 1
-    Save_Global_Value fixaially, 1
-    Save_Global_Value fixformationspeed, 1
-    Save_Global_Value parabombsinmultiplayer, 1
-    Save_Global_Value evacinmp, 1
-    Save_Global_Value fixaisendingtankstopleft, 1
-    Save_Global_Value InCoopMode, 4
-    Save_Global_Value fixnavalexploits, 1
+    Save_Global_Value Globals___Session_Type,1
+    Save_Global_Value BuildOffAlly,1
+    Save_Global_Value AftermathFastBuildSpeed,1
+    Save_Global_Value DeadPlayersRadar,1
+    Save_Global_Value spawner_aftermath,1
+    Save_Global_Value ShortGame,1
+    Save_Global_Value NoTeslaZapEffectDelay,1
+    Save_Global_Value NoScreenShake,1
+    Save_Global_Value TechCenterBugFix,1
+    Save_Global_Value ForcedAlliances,1
+    Save_Global_Value AllyReveal,1
+    Save_Global_Value MCVUndeploy,1
+    Save_Global_Value buildingcrewstuckfix,1
+    Save_Global_Value magicbuildfix,1
+    Save_Global_Value infantryrangeexploitfix,1
+    Save_Global_Value ComputerParanoidForceDisabledSkirmish,1
+    Save_Global_Value RemoveAITechupCheck,1
+    Save_Global_Value FixAIParanoid,1
+    Save_Global_Value FixAIAlly,1
+    Save_Global_Value FixFormationSpeed,1
+    Save_Global_Value ParabombsInMultiplayer,1
+    Save_Global_Value EvacInMP,1
+    Save_Global_Value FixAISendingTanksTopLeft,1
+    Save_Global_Value InCoopMode,4
+    Save_Global_Value fixnavalexploits,1
 
 .Ret:
-    mov  eax, [0x00667808]; ds:Objects_Selected?
+    mov  eax,[0x00667808]; ds:Objects_Selected?
     jmp  0x00539042
 
 _Load_Misc_Values_Extended_Savegames:
     call dword [esi+8]
 
-    cmp  DWORD [SaveGameVersion], New_Savegame_Version
+    cmp  dword [SaveGameVersion],New_Savegame_Version
     jnz  .Ret ; SaveGameVersion != New_Savegame_Version so return
 
-    Load_Global_Value SessionClass__Session, 1
-    Load_Global_Value buildoffally, 1
-    Load_Global_Value aftermathfastbuildspeed, 1
-    Load_Global_Value deadplayersradar, 1
-    Load_Global_Value spawner_aftermath, 1
-    Load_Global_Value shortgame, 1
-    Load_Global_Value noteslazapeffectdelay, 1
-    Load_Global_Value noscreenshake, 1
-    Load_Global_Value techcenterbugfix, 1
-    Load_Global_Value forcedalliances, 1
-    Load_Global_Value allyreveal, 1
-    Load_Global_Value mcvundeploy, 1
-    Load_Global_Value buildingcrewstuckfix, 1
-    Load_Global_Value magicbuildfix, 1
-    Load_Global_Value infantryrangeexploitfix, 1
-    Load_Global_Value computerparanoidforcedisabledskirmish, 1
-    Load_Global_Value removeaitechupcheck, 1
-    Load_Global_Value fixaiparanoid, 1
-    Load_Global_Value fixaially, 1
-    Load_Global_Value fixformationspeed, 1
-    Load_Global_Value parabombsinmultiplayer, 1
-    Load_Global_Value evacinmp, 1
-    Load_Global_Value fixaisendingtankstopleft, 1
-    Load_Global_Value InCoopMode, 4
-    Load_Global_Value fixnavalexploits, 1
+    Load_Global_Value Globals___Session_Type,1
+    Load_Global_Value BuildOffAlly,1
+    Load_Global_Value AftermathFastBuildSpeed,1
+    Load_Global_Value DeadPlayersRadar,1
+    Load_Global_Value spawner_aftermath,1
+    Load_Global_Value ShortGame,1
+    Load_Global_Value NoTeslaZapEffectDelay,1
+    Load_Global_Value NoScreenShake,1
+    Load_Global_Value TechCenterBugFix,1
+    Load_Global_Value ForcedAlliances,1
+    Load_Global_Value AllyReveal,1
+    Load_Global_Value MCVUndeploy,1
+    Load_Global_Value buildingcrewstuckfix,1
+    Load_Global_Value magicbuildfix,1
+    Load_Global_Value infantryrangeexploitfix,1
+    Load_Global_Value ComputerParanoidForceDisabledSkirmish,1
+    Load_Global_Value RemoveAITechupCheck,1
+    Load_Global_Value FixAIParanoid,1
+    Load_Global_Value FixAIAlly,1
+    Load_Global_Value FixFormationSpeed,1
+    Load_Global_Value ParabombsInMultiplayer,1
+    Load_Global_Value EvacInMP,1
+    Load_Global_Value FixAISendingTanksTopLeft,1
+    Load_Global_Value InCoopMode,4
+    Load_Global_Value fixnavalexploits,1
 
 .Ret:
-    mov  ebx, 4
+    mov  ebx,4
     jmp  0x0053910E
 
 ; Save as new version
 _Save_Game_Save_Game_Version:
-    mov  eax, New_Savegame_Version
+    mov  eax,New_Savegame_Version
     jmp  0x00537B37
 
 _Load_Game_Patch_Version_Check:
 ;    jmp        0x0053805E ; HACK: always pass check
 
-    cmp  eax, New_Savegame_Version
+    cmp  eax,New_Savegame_Version
     jz   0x0053805E
 
-    cmp  eax, New_Savegame_Version
+    cmp  eax,New_Savegame_Version
     jz   0x0053805E
 
 .Normal_Code:
-    cmp  eax, 100618Ah
+    cmp  eax,100618Ah
     jmp  0x00537FF2
 
 _Get_Savefile_Info_Is_Old_Savegame:
 ;    jmp        0x005396E3 ; HACK: never an old savegame
 
-    cmp  DWORD EDI, New_Savegame_Version
+    cmp  dword edi,New_Savegame_Version
     jz   0x005396E3
 
-    cmp  DWORD edi, 100618Ah
+    cmp  dword edi,100618Ah
     jmp  0x005396B5
 
 ; args: <register or address of object>, <new size of object>, <old size of object>
 %macro    Clear_Memory 3
-    mov  eax, %1
-    add  eax, %3
-    mov  edx, 0
-    mov  ebx, %2-%3
+    mov  eax,%1
+    add  eax,%3
+    mov  edx,0
+    mov  ebx,%2-%3
 
     call 0x005C4E50 ; memset_
 %endmacro
 
 ; args: <register or address of object>, <new size of object>, <old size of object>
 %macro Clear_Extended_Class_Memory_For_Old_Saves 3
-    cmp  DWORD [SaveGameVersion], New_Savegame_Version
+    cmp  dword [SaveGameVersion],New_Savegame_Version
     jz   .Ret ; SaveGameVersion == New_Savegame_Version so return
     Save_Registers
 
-    Clear_Memory %1, %2, %3
+    Clear_Memory %1,%2,%3
 
     Restore_Registers
 %endmacro

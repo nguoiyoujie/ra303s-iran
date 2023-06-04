@@ -15,17 +15,17 @@
 %define WeaponTypeClass.Offset.IsElectric                0x008    ; BOOL // Already supported by game INI
 %define WeaponTypeClass.Bit.IsElectric                   4    
 ; 0x009, 0x00a and 0x00b are empty
-%define WeaponTypeClass.Offset.ChargeSound               0x00a    ; WORD
+%define WeaponTypeClass.Offset.ChargeSound               0x00a    ; word
 
 %define WeaponTypeClass.Offset.Burst                     0x00c    ; INT (0,1)
 %define WeaponTypeClass.Offset.Bullet                    0x010    ; INT PTR
 %define WeaponTypeClass.Offset.Damage                    0x014    ; INT
-%define WeaponTypeClass.Offset.MaxSpeed                  0x018    ; BYTE
+%define WeaponTypeClass.Offset.MaxSpeed                  0x018    ; byte
 %define WeaponTypeClass.Offset.WarheadPtr                0x019    ; INT PTR
 %define WeaponTypeClass.Offset.ROF                       0x01d    ; INT
-%define WeaponTypeClass.Offset.Range                     0x021    ; WORD
-%define WeaponTypeClass.Offset.Sound                     0x023    ; WORD
-%define WeaponTypeClass.Offset.Anim                      0x025    ; BYTE
+%define WeaponTypeClass.Offset.Range                     0x021    ; word
+%define WeaponTypeClass.Offset.Sound                     0x023    ; word
+%define WeaponTypeClass.Offset.Anim                      0x025    ; byte
 
 ; INI String controls
 str.WeaponTypeClass.IsTurboBoosted            db"TurboBoost",0          ;existing ini
@@ -49,7 +49,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 ; WeaponType class is NOT derived from ObjectTypeClass!
 ; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %2 must not be ESI or EDX
+; %2 must not be esi or edx
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro WeaponTypeClass.FromIDInner    4
     push esi
@@ -156,7 +156,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 %macro WeaponTypeClass.ReadBool    5
     WeaponTypeClass.ID %1,edx
-    Get_Bit BYTE [%1+%3], %4
+    Get_Bit byte [%1+%3], %4
     xor  ecx, ecx
     mov  cl, al
     call_INIClass__Get_Bool %2, edx, %5, ecx
@@ -166,17 +166,17 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 %macro WeaponTypeClass.ReadByte    4
     WeaponTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  BYTE cl, [%1+%3]
+    mov  byte cl, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  BYTE [%1+%3], al
+    mov  byte [%1+%3], al
 %endmacro
 
 %macro WeaponTypeClass.ReadWord    4
     WeaponTypeClass.ID %1,edx
     xor  ecx, ecx
-    mov  WORD cx, [%1+%3]
+    mov  word cx, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  WORD [%1+%3], ax
+    mov  word [%1+%3], ax
 %endmacro
 
 %macro WeaponTypeClass.ReadInt    4
@@ -191,25 +191,25 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
     WeaponTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, [%1+%3]
-    mov  WORD [ObjectTypeClass.ValueBuffer], cx
+    mov  word [ObjectTypeClass.ValueBuffer], cx
     xor  ecx, ecx
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
-    mov  BYTE al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
     test al, al
     jz   %%null_string
   %%valid_string:
     mov  eax, ObjectTypeClass.StringBuffer
     call %5
-    mov  WORD [%1+%3], ax
+    mov  word [%1+%3], ax
     jmp  %%done
   %%null_string:
   %%done:
-    mov  DWORD [ObjectTypeClass.ValueBuffer], 0
+    mov  dword [ObjectTypeClass.ValueBuffer], 0
 %endmacro
 
 
 ; args <Internal ID of type class>
-; returns the type class pointer as EAX
+; returns the type class pointer as eax
 %macro Get_WeaponTypeClass    1
     push edx
     mov  edx, [Count_WeaponTypeClass] 

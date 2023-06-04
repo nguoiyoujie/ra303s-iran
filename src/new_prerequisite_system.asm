@@ -110,8 +110,8 @@ _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3:
     ; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
     mov  esi,[eax + 0x93]
     ; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
-    ; Turn_On_Bit <Byte> <Bit>
-    ;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
+    ; Turn_On_Bit <byte> <Bit>
+    ;   <byte> = <houseID> * 32 + <buildingtypeID> >> 3
     ;   <Bit>  = <buildingtypeID> & 0x7
     lea  ebx,[Houses.BScan]
     shl  esi,5
@@ -122,7 +122,7 @@ _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3:
     and  ecx,7
     mov  al, 1
     shl  al, cl
-    or   BYTE [ebx], al
+    or   byte [ebx], al
 
     pop  eax
     pop  ebx
@@ -202,34 +202,35 @@ _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1:
     jmp  0x00456AAB
         
 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2:
-    push esi
-    push ecx
-    push ebx
-    push eax
-    mov  ecx,dword [eax + 1a1h]
-    sar  ecx,0x18
-    ; ecx is now the building type ID
-    ; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
-    mov  esi,[eax + 0x93]
-    ; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
-    ; Turn_On_Bit <Byte> <Bit>
-    ;   <Byte> = <houseID> * 32 + <buildingtypeID> >> 3
-    ;   <Bit>  = <buildingtypeID> & 0x7
-    lea  ebx,[Houses.BScan]
-    shl  esi,5
-    add  ebx,esi
-    mov  esi,ecx
-    sar  esi,3
-    add  ebx,esi
-    and  ecx,0xf
-    mov  al, 1
-    shl  al, cl
-    or   BYTE [ebx], al
-
-    pop  eax
-    pop  ebx
-    pop  ecx
-    pop  esi
+    ; clashes with DeploysInto logic, as buildings will perform Unlimbo but be deleted thereafter
+    ;push esi
+    ;push ecx
+    ;push ebx
+    ;push eax
+    ;mov  ecx,dword [eax + 1a1h]
+    ;sar  ecx,0x18
+    ;; ecx is now the building type ID
+    ;; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
+    ;mov  esi,[eax + 0x93]
+    ;; we want to set Houses.BScan[<houseID> * 256 + <buildingtypeID>]
+    ;; Turn_On_Bit <byte> <Bit>
+    ;;   <byte> = <houseID> * 32 + <buildingtypeID> >> 3
+    ;;   <Bit>  = <buildingtypeID> & 0x7
+    ;lea  ebx,[Houses.BScan]
+    ;shl  esi,5
+    ;add  ebx,esi
+    ;mov  esi,ecx
+    ;sar  esi,3
+    ;add  ebx,esi
+    ;and  ecx,0xf
+    ;mov  al, 1
+    ;shl  al, cl
+    ;or   byte [ebx], al
+	;
+    ;pop  eax
+    ;pop  ebx
+    ;pop  ecx
+    ;pop  esi
 
     mov  ecx,dword [eax + 138h]
     jmp  0x00456B07

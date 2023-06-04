@@ -3,8 +3,8 @@
 _Green_Shadow_On_Cloaked_Units_Fix:
 
     push 0x00657EE4
-    MOV  ESI, DWORD [EBP-24h]
+    mov  esi, dword [ebp-24h]
     push esi
-    MOV  EAX,DWORD [EBP+9h]
+    mov  eax,dword [ebp+9h]
     push 1130h
     jmp  0x005672EA
