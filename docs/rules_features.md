@@ -135,10 +135,10 @@ Example as follows:
 1=GUN13
 
 **`{Rules} ► [StringTableOffsets] ► Infantry (integer)`**\
-**`{Rules} ► [StringTableOffsets] ► Units (integer)`**\
-**`{Rules} ► [StringTableOffsets] ► Aircrafts (integer)`**\
-**`{Rules} ► [StringTableOffsets] ► Vessels (integer)`**\
-**`{Rules} ► [StringTableOffsets] ► Buildings (integer)`**
+**`{Rules} ► [StringTableOffsets] ► Unit (integer)`**\
+**`{Rules} ► [StringTableOffsets] ► Aircraft (integer)`**\
+**`{Rules} ► [StringTableOffsets] ► Vessel (integer)`**\
+**`{Rules} ► [StringTableOffsets] ► Building (integer)`**
 
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 

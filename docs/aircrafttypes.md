@@ -72,7 +72,7 @@ Example as follows:
 </details>
 
 <details>
-  <summary><b><code>{Rules} ► [StringTableOffsets] ► Aircrafts (integer)</code></b></summary>
+  <summary><b><code>{Rules} ► [StringTableOffsets] ► Aircraft (integer)</code></b></summary>
 
 ```New logic```
 
@@ -80,7 +80,7 @@ The `Name` entries can be used to set the names of objects, but is limited to 30
 
 This specifies the string entry location within `CONQUER.ENG` of new technotype entries. The index used is denoted by [Type] + [index in the new types section] + 1.
 
-For example, if `[StringTableOffsets] ► Aircrafts` is set to 400 and `[AircraftTypes] ► 2` is set to ORCA, then the string table entry for `[ORCA]` is 400 + 2 + 1 = **403**
+For example, if `[StringTableOffsets] ► Aircraft` is set to 400 and `[AircraftTypes] ► 2` is set to ORCA, then the string table entry for `[ORCA]` is 400 + 2 + 1 = **403**
 
 Ensure that `CONQUER.ENG` has sufficient entries, as attempting to read a missing entry will crash the game when hovering over the affected unit.
 
