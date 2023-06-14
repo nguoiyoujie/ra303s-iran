@@ -10,48 +10,48 @@
 @HOOK 0x00567048 _TechnoClass_Visual_Character_Spectator_Stuff
 
 _TechnoClass_Visual_Character_Spectator_Stuff:
-    cmp  cl, 5
+    cmp  cl,5
     jnz  .Ret
 
-    mov  dword eax, [0x00669958] ; PlayerPtr
-    cmp  dword [eax+EXT_IsSpectator], 0
+    mov  dword eax,[Globals___PlayerPtr]
+    cmp  dword [eax+EXT_IsSpectator],0
     jz   .Ret
 
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jz   .Ret
 
-    mov  cl, 3
+    mov  cl,3
 
 .Ret:
-    movsx eax, cl
-    lea  esp, [ebp-0Ch]
+    movsx eax,cl
+    lea  esp,[ebp-0Ch]
     jmp  0x0056704E
 
 _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator:
     push eax
-    mov  dword eax, [0x00669958] ; PlayerPtr
-    cmp  dword [eax+EXT_IsSpectator], 1
+    mov  dword eax,[Globals___PlayerPtr]
+    cmp  dword [eax+EXT_IsSpectator],1
     pop  eax
     jz   .Draw_Credits_Count
 
-    add  eax, edi
+    add  eax,edi
 
 .Ret:
-    cmp  cl, 14h
+    cmp  cl,14h
     jmp  0x0053285A
 
 .Draw_Credits_Count:
-    mov  eax, ebx
-    call 0x004D5E00 ; long const HouseClass::Available_Money(void)const  proc near
+    mov  eax,ebx
+    call HouseClass__Available_Money
     jmp  .Ret
 
 
 _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator:
 ;    push    eax
 
-    mov  dword eax, [0x00669958] ; PlayerPtr
+    mov  dword eax,[Globals___PlayerPtr]
 
-    cmp  dword [eax+EXT_IsSpectator], 1
+    cmp  dword [eax+EXT_IsSpectator],1
     jz   .Draw_Credits_Text
 
     push 12Ah
@@ -64,17 +64,17 @@ _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator:
     jmp  .Ret
 
 _BuildingClass__Read_INI_Skip_Dead_Houses:
-    call 0x004CD0E4 ; HouseTypeClass::From_Name(char *)
-    mov  bl, al
-    mov  edx, 0x005E8F5D ; ","
-    mov  bh, al
-    cmp  al, 0FFh
+    call HouseTypeClass__From_Name
+    mov  bl,al
+    mov  edx,str_Comma
+    mov  bh,al
+    cmp  al,0FFh
     jz   0x0045EF2E ; Code is different for buildings than for other stuff like infantry
 
     Save_Registers
 
     call HouseClass__As_Pointer
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -85,15 +85,15 @@ _BuildingClass__Read_INI_Skip_Dead_Houses:
     jmp  0x0045EED8
 
 _InfantryClass__Read_INI_Skip_Dead_Houses:
-    call 0x004CD0E4 ; HouseTypeClass::From_Name(char *)
-    mov  bh, al
-    cmp  al, 0FFh
+    call HouseTypeClass__From_Name
+    mov  bh,al
+    cmp  al,0FFh
     jz   0x004F0913
 
     Save_Registers
 
     call HouseClass__As_Pointer
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -104,15 +104,15 @@ _InfantryClass__Read_INI_Skip_Dead_Houses:
 
 
 _VesselClass__Read_INI_Skip_Dead_Houses:
-    call 0x004CD0E4 ; HouseTypeClass::From_Name(char *)
-    mov  bh, al
-    cmp  al, 0FFh
+    call HouseTypeClass__From_Name
+    mov  bh,al
+    cmp  al,0FFh
     jz   0x0058CA8B
 
     Save_Registers
 
     call HouseClass__As_Pointer
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -123,14 +123,14 @@ _VesselClass__Read_INI_Skip_Dead_Houses:
     jmp  0x0058CA8B
 
 _UnitClass__Read_INI_Skip_Dead_Houses:
-    call 0x004CD0E4 ; HouseTypeClass::From_Name(char *)
-    mov  bh, al
-    cmp  al, 0FFh
+    call HouseTypeClass__From_Name
+    mov  bh,al
+    cmp  al,0FFh
     jz   0x0058110B
     Save_Registers
 
     call HouseClass__As_Pointer
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jnz  .Next_Iteration
 
     Restore_Registers
@@ -142,24 +142,24 @@ _UnitClass__Read_INI_Skip_Dead_Houses:
 
 _HouseClass__Init_Data_Spectator_Stuff:
     Save_Registers
-    mov  byte [eax+178Fh], dl
+    mov  byte [eax+178Fh],dl
 
-    cmp  byte [spawner_is_active], 0
+    cmp  byte [spawner_is_active],0
     jz   .Ret
 
-    mov  ebx, eax
-    call 0x004D2C48 ;  const HouseClass::operator HousesType(void)
-    cmp  byte [SpectatorsArray+eax], 0
+    mov  ebx,eax
+    call HouseClass__HousesType
+    cmp  byte [SpectatorsArray+eax],0
     jz   .Ret
 
-    mov  eax, ebx
-    or   byte [eax+0x43], 1 ; Make house dead
-    mov  dword [eax+EXT_IsSpectator], 1
-;    mov     eax, 0x00668250
-;    mov     edx, 1
+    mov  eax,ebx
+    or   byte [eax+0x43],1 ; Make house dead
+    mov  dword [eax+EXT_IsSpectator],1
+;    mov     eax,Globals___Map
+;    mov     edx,1
 ;    call    0x0052D790
-;    mov     eax, 0x00668250
-;    mov     edx, 3
+;    mov     eax,Globals___Map
+;    mov     edx,3
 ;    call    0x0052D790
 
 .Ret:
@@ -168,29 +168,29 @@ _HouseClass__Init_Data_Spectator_Stuff:
 
 _Create_Units_Skip_Dead_Houses:
 
-    cmp  byte [spawner_is_active], 0
+    cmp  byte [spawner_is_active],0
     jz   .Ret
 
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jnz  .Spectator
 
 .Ret:
-    cmp  dword [ebp-0x8C], 0
+    cmp  dword [ebp-0x8C],0
     jmp  0x0053E502
 
 .Spectator:
     jmp  0x0053E4D6
 
 _Assign_Houses_Set_Up_Player_Pointer:
-    mov  dword [0x00669958], edi
+    mov  dword [Globals___PlayerPtr],edi
 
-    cmp  byte [spawner_is_active], 0
+    cmp  byte [spawner_is_active],0
     jz   .Ret
-    test byte [eax+0x43], 1
+    test byte [eax+0x43],1
     jz   .Ret
 
-    mov  dword [0x0065D7F0], 1
-    mov  dword [0x0067F315], 1
+    mov  dword [0x0065D7F0],1
+    mov  dword [0x0067F315],1
 
 .Ret:
     jmp  0x0053DFDD

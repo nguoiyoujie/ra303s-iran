@@ -3,12 +3,13 @@
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>
 ; returns: eax is 2 if side is Soviet, 0 if Allies
+; Note: Turkey is considered Allies
 _Side_From_Country:
-    cmp  dword eax, 2
+    cmp  dword eax, HousesType.USSR
     je   .Return_Soviet
-    cmp  dword eax, 4
+    cmp  dword eax, HousesType.Ukraine
     je   .Return_Soviet
-    cmp  dword eax, 9
+    cmp  dword eax, HousesType.BadGuy
     je   .Return_Soviet
 
 .Return_Allies:
@@ -32,13 +33,14 @@ _SidebarClass__StripClass__Recalc_Can_Build_Check:
     pop  eax
 
     mov  edx, eax
-    mov  eax, [0x00669958]; ds:HouseClass *PlayerPtr
+    mov  eax, [Globals___PlayerPtr]
     mov  eax, [eax+3Eh]
     sar  eax, 18h
     call _Side_From_Country
     mov  ebx, eax
-    mov  eax, [0x00669958]; ds:HouseClass *PlayerPtr
-    call 0x004D4014 ; const HouseClass::Can_Build(ObjectTypeClass *,HousesType)
+    mov  eax, [Globals___PlayerPtr]
+    call HouseClass__Can_Build
+
     jmp  0x0054EBB9
 
 .Ret_Now:

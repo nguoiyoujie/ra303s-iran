@@ -77,7 +77,7 @@ _Load_Game_Set_Session_Type_Hack:
 
     mov  edx, str_ext_mpr
     mov  eax, 0x006679D8
-    call 0x005CEC59 ; strstr()
+    call __strstr
 
     cmp  eax, 0 ; if eax == 0 the substring wasn't found
     jnz  .Set_Skirmish

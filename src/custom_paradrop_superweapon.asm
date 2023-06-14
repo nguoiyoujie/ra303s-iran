@@ -15,17 +15,17 @@ _Paradrop_Superweapon_Custom:
 
     ; Paradrop Cruisers
 ;    mov        eax,2
-;    call    0x00584858 ; VesselTypeClass::As_Reference(VesselType)
+;    call    VesselTypeClass__As_Reference
 
     ; Paradrop dogs
 ;    mov        eax,10
-;    call    0x004EB1B8 ; InfantryTypeClass::As_Reference(InfantryType)
+;    call    InfantryTypeClass__As_Reference
 
     ; Paradrop HELI
 ;    mov        eax,5
-;    call    0x004040F0 ; AircraftTypeClass::As_Reference(AircraftType)
+;    call    AircraftTypeClass__As_Reference
 
     mov  dword [esi+0ADh],eax
     mov  eax,esi
-    call Reinf___Do_Reinforcements ; Do_Reinforcements(TeamTypeClass *)
+    call Reinf___Do_Reinforcements
     jmp  0x004D6D40

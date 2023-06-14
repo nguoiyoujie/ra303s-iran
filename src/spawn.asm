@@ -19,50 +19,22 @@
 %define GetCommandLineA                             0x005E5904
 %define calloc                                      0x005E1EF6
 %define operator_new                                0x005BBF80
-%define IPXAddressClass__IPXAddressClass            0x004F9950
 %define DynamicVectorClass__Add                     0x004B9DA0
 %define nameTags                                    0x0068043A
-%define Start_Scenario                              0x0053A0A4
-%define SessionClass__Create_Connections            0x0054A4F8
 %define GameActive                                  0x00669924
-%define Init_Random                                 0x004F5EC4
 %define MessageListClass__Init                      0x00505244
 %define inet_addr                                   0x005E59B8
-%define SidebarClass_this                           0x00668250
-%define SidebarClass__Activate                      0x0054DA70
-%define GScreenClass__Flag_To_Redraw                0x004CB110
-%define GScreenClass__Render                        0x004CB110
-%define GraphicBuffer_HiddenPage                    0x00680700
-%define GraphicBuffer_VisiblePage                   0x0068065C
-%define GraphicBufferClass__Lock                    0x005C101A
-%define GraphicBufferClass__Unlock                  0x005C1191
 %define _Buffer_Clear                               0x005C4DE0
 %define pWinsock_this                               0x0069172C
-%define UDPInterfaceClass__UDPInterfaceClass        0x005A8560
-%define WinsockInterfaceClass__Init                 0x005A817C
-%define UDPInterfaceClass__Open_Socket              0x005A8698
-%define WinsockInterfaceClass__Start_Listening      0x005A80AC
-%define WinsockInterfaceClass__Discard_In_Buffers   0x005A812C
-%define WinsockInterfaceClass__Discard_Out_Buffers  0x005A8154
-%define Init_Network                                0x005063C8
-%define FrameSendRate                               0x0067F329
-%define MaxAhead                                    0x0067F325
 %define chatColor                                   0x0067F313
 %define TechLevel                                   0x006016C8
 %define Version107InMix                             0x00680538
-%define DifficultyMode1                             0x006678EC
-%define DifficultyMode2                             0x006678ED
+
 %define GameFlags                                   0x00669908
-%define Seed                                        0x00680658
-%define Seed2                                       0x00680654
-%define UnitBuildPenalty                            0x006017D8
+
 %define NetPort                                     0x00609DBC
 %define htonl                                       0x005E5A30
-%define IPXManagerClass__Set_Timing                 0x004FA910
-%define IPXManagerClass__Ipx                        0x006805B0
-%define PlanetWestwoodStartTime                     0x006ABBB0
 %define time_                                       0x005CEDA1
-%define PlanetWestwoodGameID                        0x006ABBAC
 
 @HOOK 0x004F44DC Select_Game
 ; these force the game to use the actual port for sending and receiving packets rather than the default 1234
@@ -162,21 +134,21 @@ HumanPlayers        dd 0 ; Need to read it from here for spawner stats
     mov  eax,1
     mov  edx, Player_size
     call calloc
-    ADD  eax, 0xC
+    add  eax, 0xC
     call IPXAddressClass__IPXAddressClass
-    SUB  eax, 0xC
+    sub  eax, 0xC
 %endmacro
 
 Initialize_Spawn:
 %push
     push ebp
-    mov  ebp, ESP
+    mov  ebp, esp
 
 %define plr ebp-4
 %define buf ebp-36
 %define sect ebp-68
 
-    SUB  ESP,68
+    sub  esp,68
 
     ; check -SPAWN exists
     call GetCommandLineA
@@ -384,16 +356,16 @@ Initialize_Spawn:
     mov  [game + Session.aiPlayers], eax
 
     spawn_INI_Get_Int str_Settings, str_Seed, 0
-    mov  [Seed], eax
-    mov  [Seed2], eax
+    mov  [Globals___Seed], eax
+    mov  [Globals___CustomSeed], eax
 
     spawn_INI_Get_Bool str_Settings, str_SlowUnitBuild, 0
     test eax,eax
 
-    mov  [UnitBuildPenalty], dword 0x64
+    mov  [Globals___UnitBuildPenalty], dword 0x64
 
     je   .nopenalty
-    mov  [UnitBuildPenalty], dword 0xFA
+    mov  [Globals___UnitBuildPenalty], dword 0xFA
 .nopenalty:
 
     spawn_INI_Get_Bool str_Settings, str_CaptureTheFlag, 0
@@ -423,21 +395,21 @@ Initialize_Spawn:
     JG   .diff_hard
 
     ; 2 = normal
-    mov  [DifficultyMode1], byte 1
-    mov  [DifficultyMode2], byte 1
+    mov  [Globals___Scen_Difficulty], byte 1
+    mov  [Globals___Scen_CDifficulty], byte 1
     jmp  .diff_end
 
 .diff_easy:
     ; <2 = easy
-    mov  [DifficultyMode1], byte 0
-    mov  [DifficultyMode2], byte 2
+    mov  [Globals___Scen_Difficulty], byte 0
+    mov  [Globals___Scen_CDifficulty], byte 2
 
     jmp  .diff_end
 
 .diff_hard:
     ; >2 = hard
-    mov  [DifficultyMode1], byte 2
-    mov  [DifficultyMode2], byte 0
+    mov  [Globals___Scen_Difficulty], byte 2
+    mov  [Globals___Scen_CDifficulty], byte 0
 
 .diff_end:
 
@@ -458,7 +430,7 @@ Initialize_Spawn:
     lea  eax, [buf]
     push eax
     mov  eax, [plr]
-    ADD  eax, Player.name
+    add  eax, Player.name
     push eax
     call _strcpy
 
@@ -479,7 +451,7 @@ Initialize_Spawn:
     xor  ecx,ecx
 
 .next_opp:
-    ADD  ecx,1
+    add  ecx,1
     lea  eax, [sect]
     call_sprintf eax, str_fmt_Other, ecx
 
@@ -492,7 +464,7 @@ Initialize_Spawn:
     lea  edx, [sect]
     mov  eax, CCINIClass_Spawn
     call INIClass__Get_String
-    POP  ecx
+    pop  ecx
 
     test eax,eax
     ; if no name present for this section, this is the last
@@ -511,7 +483,7 @@ Initialize_Spawn:
     lea  eax, [buf]
     push eax
     mov  eax, [plr]
-    ADD  eax, Player.name
+    add  eax, Player.name
     push eax
     call _strcpy
 
@@ -579,7 +551,7 @@ Initialize_Spawn:
     mov  eax, nameTags
     call DynamicVectorClass__Add
 
-    POP  ecx
+    pop  ecx
 
     jmp  .next_opp
 
@@ -627,19 +599,19 @@ Initialize_Spawn:
     mov  eax, [pWinsock_this]
     call WinsockInterfaceClass__Discard_Out_Buffers
 
-    call Init_Network
+    call NetDlg___Init_Network
 
     ; Added this to hopefully correct any timing issues
     spawn_INI_Get_Int str_Settings, str_MaxAhead, 15
-    mov  [MaxAhead], eax
+    mov  [Globals___Session_MaxAhead], eax
 
     spawn_INI_Get_Int str_Settings, str_FrameSendRate, 3
-    mov  [FrameSendRate], eax
+    mov  [Globals___Session_FrameSendRate], eax
 
     mov  ecx, 0x2E8
     mov  ebx, 0FFFFFFFFh
     mov  edx, 0x19
-    mov  eax, IPXManagerClass__Ipx
+    mov  eax, Globals___Ipx
     call IPXManagerClass__Set_Timing
 
 .nonet:
@@ -647,13 +619,13 @@ Initialize_Spawn:
     ; Initialize some stuff for statistics code
     xor  eax, eax
     call time_
-    mov  [PlanetWestwoodStartTime], eax
+    mov  [Internet___PlanetWestwoodStartTime], eax
 
     spawn_INI_Get_Int str_Settings, str_GameID, 0
-    mov  [PlanetWestwoodGameID], eax
+    mov  [Internet___PlanetWestwoodGameID], eax
 
     ; Init random number generator and related data
-    call Init_Random
+    call Init___Random
 
     ; fade to black
     xor  ebx,ebx
@@ -661,29 +633,29 @@ Initialize_Spawn:
     mov  edx, 0xF
     call PaletteClass__Set
 
-    mov  eax,GraphicBuffer_HiddenPage
+    mov  eax,Globals___HiddenPage
     call GraphicBufferClass__Lock
 
     push 0
-    push GraphicBuffer_HiddenPage
+    push Globals___HiddenPage
     call _Buffer_Clear
-    ADD  ESP,8
+    add  esp,8
 
-    mov  eax,GraphicBuffer_HiddenPage
+    mov  eax,Globals___HiddenPage
     call GraphicBufferClass__Unlock
 
-    mov  eax,GraphicBuffer_VisiblePage
+    mov  eax,Globals___VisiblePage
     call GraphicBufferClass__Lock
 
     push 0
-    push GraphicBuffer_VisiblePage
+    push Globals___VisiblePage
     call _Buffer_Clear
-    ADD  ESP,8
+    add  esp,8
 
-    mov  eax,GraphicBuffer_VisiblePage
+    mov  eax,Globals___VisiblePage
     call GraphicBufferClass__Unlock
 
-    lea  eax, [ScenarioName]
+    lea  eax, [Globals___Scen_ScenarioName]
     spawn_INI_Get_String str_Settings, str_Scenario, str_EmptyString, eax, 32
 
     ; copy secnario name
@@ -807,7 +779,7 @@ Initialize_Spawn:
 
     mov  edx, 1
     lea  eax, [buf]
-    call Start_Scenario
+    call Scenario___Start_Scenario
     test eax,eax
     je   .exit
 
@@ -816,15 +788,15 @@ Initialize_Spawn:
     mov  eax, game
     call SessionClass__Create_Connections
 
-    mov  eax,SidebarClass_this
+    mov  eax,Globals___Map
     mov  edx,1
     call SidebarClass__Activate
 
-    mov  eax,SidebarClass_this
+    mov  eax,Globals___Map
     xor  edx,edx
     call GScreenClass__Flag_To_Redraw
 
-    mov  eax,SidebarClass_this
+    mov  eax,Globals___Map
     call GScreenClass__Render
 
     call Conquer___Call_Back ; callback (is this needed?)
@@ -834,11 +806,12 @@ Initialize_Spawn:
     call Conquer___Call_Back ; callback (is this needed?)
 
     ; Refresh screen again (don't think this is working)
-    mov  eax,SidebarClass_this
+    ; lovalmidas, 2023-06-10: Had a bug where GScreenClass__Flag_To_Redraw was pointing to same address as GScreenClass__Render. Should probably check again.
+    mov  eax,Globals___Map
     xor  edx,edx
     call GScreenClass__Flag_To_Redraw
 
-    mov  eax,SidebarClass_this
+    mov  eax,Globals___Map
     call GScreenClass__Render
 
     mov  eax,1
@@ -848,14 +821,14 @@ Initialize_Spawn:
     mov  eax,-1
 
 .exit:
-    mov  ESP,ebp
-    POP  ebp
+    mov  esp,ebp
+    pop  ebp
     RETN
 %pop
 
 Select_Game:
     push ebp
-    mov  ebp,ESP
+    mov  ebp,esp
     push ebx
     push ecx
     push edx
@@ -868,12 +841,12 @@ Select_Game:
     ; if spawn not initialized, go to main menu
     je   0x004F44E4
 
-    POP  edi
-    POP  esi
-    POP  edx
-    POP  ecx
-    POP  ebx
-    POP  ebp
+    pop  edi
+    pop  esi
+    pop  edx
+    pop  ecx
+    pop  ebx
+    pop  ebp
     RETN
 
 SendFix:
@@ -888,11 +861,11 @@ SendFix:
     JNE  .have_port
     mov  AX,1234
 .have_port:
-    POP  ebx
+    pop  ebx
     jmp  0x005A8AE5
 
 ReceiveFix:
-    SUB  esi,4
+    sub  esi,4
     lea  edx,[ebp-18h]
 
     ; cleanup crap from port as using it as dword

@@ -1,10 +1,7 @@
 ; Fix the sidebar being incorrectly positioned after loading a save game
 @HOOK 0x00538748 _Load_Game_Init_IO
 
-%define SidebarClass__One_Time            0x0054D07C
-%define SidebarClass__Init_IO            0x0054D144
-%define SidebarClass__Reload_Sidebar    0x0054D340
-%define    MouseClass_Map                    0x00668250
+
 %define    stripbariconswidthoffset        0x0060174C
 %define selectbuttons                    0x0068A2C4
 %define downbuttons                        0x0068A254
@@ -12,10 +9,10 @@
 
 _Load_Game_Init_IO:
 ;    call    SidebarClass__One_Time
-;    mov        eax, MouseClass_Map
+;    mov        eax, Globals___Map
     call SidebarClass__Init_IO
 ;    mov        dword [stripbariconswidthoffset], 50h
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
 
     push eax
     push ebx
@@ -24,7 +21,7 @@ _Load_Game_Init_IO:
     push esi
 
     ;RadarClass stuff
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     mov  edx, eax
     mov  dword [eax+0C98h], 0A0h
     mov  dword [eax+0C9Ch], 8Ch
@@ -50,7 +47,7 @@ _Load_Game_Init_IO:
     mov  [0x006878FC], eax
 
     ;PowerClass stuff
-;    mov        eax, MouseClass_Map
+;    mov        eax, Globals___Map
 ;    mov     edx, 1E0h       ; modified by hifi hires patch
 ;    add        edx, [diff_width]
 ;    mov     ebx, 0B4h
@@ -62,7 +59,7 @@ _Load_Game_Init_IO:
 ;    mov     [0x006877D8], esi
 
     ;Sidebar stuff
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     mov  ebx, eax
 
 ;    mov     edx, 1F0h       ; modified by hifi's hires patch
@@ -78,7 +75,7 @@ _Load_Game_Init_IO:
 ;    mov     [0x00601750], edi
 
     ;Left sidebar strip stuff
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     mov  ebx, eax
 
     mov  ecx, 0x1F0

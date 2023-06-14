@@ -501,12 +501,12 @@ _Send_Statistics_Packet_Dump_Statistics:
 Write_Stats_File:
 
     push ebp
-    mov  ebp,ESP
+    mov  ebp,esp
 
 %define stats_buf     ebp-4
 %define stats_length  ebp-4-4
 %define stats_file    ebp-4-4-100
-    SUB  ESP,4+4+100
+    sub  esp,4+4+100
 
     lea  ebx,[stats_buf]
     mov  [ebx],eax
@@ -536,8 +536,8 @@ Write_Stats_File:
 .exit:
     mov  eax,1
 
-    mov  ESP,ebp
-    POP  ebp
+    mov  esp,ebp
+    pop  ebp
     RETN
 
 _Main_Game__Main_Loop_End_Spawner:

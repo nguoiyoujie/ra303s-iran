@@ -81,9 +81,9 @@ _try_WinMain:
 ;    push    esi
 ;    push    edi
 
- ;   INT3
+ ;   int3
     ; load minidump stuff
-    PUSHAD
+    pushad
 
     push str_dbghelp_dll
     call LoadLibraryA
@@ -111,17 +111,17 @@ _try_WinMain:
     call GetCurrentProcessId
     mov  [ProcessId],eax
 
-    POPAD
+    popad
 
     ; install exception handler
 
 
-;    PUSHAD
+;    pushad
 
     mov  esi,_exception_handler
     push esi
     push dword [FS:0]
-    mov  [FS:0],ESP
+    mov  [FS:0],esp
 
 ;    Restore_Registers
 
@@ -143,8 +143,8 @@ _try_WinMain:
 ;    sub        esp,8
 
     ; clean up our exception handler
-    POP  dword [FS:0]
-    ADD  ESP,12 + 4
+    pop  dword [FS:0]
+    add  esp,12 + 4
 
     ; free minidump library if loaded
     cmp  dword [dbghelp_dll],0
@@ -161,8 +161,8 @@ _try_WinMain:
     jmp  _exit
 
 _exception_handler:
-    mov  ebx,dword [ESP + 0x4]
-    mov  edx,dword [ESP + 0x0C]
+    mov  ebx,dword [esp + 0x4]
+    mov  edx,dword [esp + 0x0C]
     mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
     mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
     mov  [exception_pointers + EXCEPTION_POINTERS.ContextRecord],edx
@@ -198,9 +198,9 @@ _exception_handler:
     push 0
     call [MessageBoxA]
 
-    mov  ESP,[ESP + 8]
-    POP  dword [FS:0]
-    ADD  ESP,4
+    mov  esp,[esp + 8]
+    pop  dword [FS:0]
+    add  esp,4
 
     push ExitCode
     push dword [hProcess]
@@ -234,9 +234,9 @@ _exception_handler:
     push 0
     call [MessageBoxA]
 
-    mov  ESP,[ESP + 8]
-    POP  dword [FS:0]
-    ADD  ESP, 4
+    mov  esp,[esp + 8]
+    pop  dword [FS:0]
+    add  esp, 4
 
     push ExitCode
     push dword [hProcess]

@@ -2,6 +2,9 @@
 
 %assign        CCINIClass__Load                                       0x00462F50
 
+
+;         bool CCINIClass::Put_HousesType(char const * section, char const * entry, HousesType value)
+%assign        CCINIClass__Put_HousesType                             0x004637A8
 ;          int CCINIClass::Put_VQType(char *, char *, VQType)
 %assign        CCINIClass__Put_VQType                                 0x00463830
 ;          int CCINIClass::Put_ThemeType(char *, char *, ThemeType)
@@ -26,6 +29,15 @@
     mov edx, %2
     mov eax, %3
     call CCINIClass__Load
+%endmacro
+
+; args: <INIClass>, <Section>, <Key>, <VQType Value>
+%macro call_CCINIClass__Put_HousesType 4
+    mov  ebx, %3
+    mov  edx, %2
+    mov  eax, %1
+    mov  cl, %4
+    call CCINIClass__Put_HousesType
 %endmacro
 
 ; args: <INIClass>, <Section>, <Key>, <VQType Value>

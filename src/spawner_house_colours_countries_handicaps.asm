@@ -69,7 +69,7 @@ Multi8_Handicap:   db 0xFF
     mov  dl, %2    ; Handicap
     cmp  dl, 0xFF
     je   .Set_House_Handicap_Ret_%1
-    call 0x004D2D48
+    call HouseClass__Assign_Handicap
 .Set_House_Handicap_Ret_%1:
 %endmacro
 

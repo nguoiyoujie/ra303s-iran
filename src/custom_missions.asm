@@ -77,7 +77,7 @@ _Campaign_Do_Win_Next_mission_In_Campaign:
     mov  eax,NextCampaignMissionBuf
 
 .Ret:
-    call 0x0053A0A4; Start_Scenario(char *,int) ; Hooked by patch
+    call Scenario___Start_Scenario
     jmp  0x0053B241
 
 _Do_Win_Next_Mission_In_Campaign:
@@ -92,7 +92,7 @@ _Do_Win_Next_Mission_In_Campaign:
     mov  eax,NextCampaignMissionBuf
 
 .Ret:
-    call 0x0053A0A4; Start_Scenario(char *,int) ; Hooked by patch
+    call Scenario___Start_Scenario
     jmp  0x0053B525
 
 _Custom_Missions_Enable_Expansion_Missions_Button:

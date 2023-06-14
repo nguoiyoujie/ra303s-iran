@@ -603,12 +603,27 @@ _TEventClass__Operator_NoFactories_Check:
 
 _TEventClass__Operator_BuildingExists_Check:
 ; don't use ActiveBScan anymore, since that is used by the new prerequisite system
-    ;mov  eax,  ; houseclass
-    mov  edx,ecx  ; structtype id
-    sar  edx,18h
-    call 0x004DDCE8 ; HouseClass::Get_Quantity(structtype)
+    ;eax is houseclass, ecx right shifted 18-bits is structtype id
+    mov  eax, dword [eax + 1] ; HouseClass->ID     
+    shl  eax,5 ; ID * 32 bytes
+    lea  eax,[Houses.BScan + eax] ; eax is now pointer to start of the house's new BScan fields
+    sar  ecx,18h
+    mov  edx,ecx 
+    sar  edx,3
+    mov  eax,dword [eax + edx] ;e.g. ecx=100=8*12+4 -> check the 4th bit of [Houses.BScan + eax + 12]
+    and  ecx,0x7
+    mov  edx,1
+    shl  edx,cl
+    and  eax,edx ; bit match
     test eax,eax
     jmp  0x0056B4F9
+
+    ; GetQuantity method
+    ;mov  edx,ecx  ; structtype id
+    ;sar  edx,18h
+    ;call HouseClass__Get_Quantity ; Warning: Uses fixed array, will produce undefined results for new structures!
+    ;test eax,eax
+    ;jmp  0x0056B4F9
 
 _TEventClass__Operator_FakesDestroyed_Check:
     sub  esp,0xc

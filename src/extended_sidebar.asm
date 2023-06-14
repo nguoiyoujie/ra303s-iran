@@ -60,7 +60,6 @@ Strip2Shape dd 0
 %define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
 
 %define StripBarAreaVerticalSize 0x00601758
-%define MouseClass_Map            0x00668250
 %define IngameHeight 0x006016B4
 
 ; Height of up and down buttons is 27 pixels
@@ -82,7 +81,7 @@ _PowerClass_Draw_it_hires10:
     je   .No_Draw
 
 .Draw:
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
     jmp  0x00527C23
 
 .No_Draw:
@@ -210,7 +209,7 @@ _PowerClass_One_Time:
     jmp  0x00527622
 
 _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar till bottom of screen
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
     mov  ecx, 288
 ;    mov        ecx, 0xB4
 ;    add        ecx, 64h
@@ -231,7 +230,7 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     mov  eax, [PowerTileShape]
 ;    mov     eax, [0x006877BC]
     mov  edx, 0
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
 
     mov  dword ecx, [CurrentPowerBarDrawPosition2]
     add  dword [CurrentPowerBarDrawPosition2], 48
@@ -249,18 +248,18 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     jmp  0x00527748
 
 _StripClass_Recalc_hires: ; Fix graphical glitching when selling conyard and other situations
-;    mov        esi, MouseClass_Map
+;    mov        esi, Globals___Map
 ;    lea     eax, [esi+103Eh]
-;    call    0x0054E2CC ; StripClass::Flag_To_Redraw
+;    call    SidebarClass__StripClass__Flag_To_Redraw
 
-    mov  eax, MouseClass_Map
-    call 0x004CAFF4 ; GScreenClass::Flag_To_Redraw(int)
-;    mov     eax, MouseClass_Map
+    mov  eax, Globals___Map
+    call GScreenClass__Flag_To_Redraw
+;    mov     eax, Globals___Map
 ;    call    0x004CB110 ; GScreenClass::Render(void)
 
-;    mov        esi, MouseClass_Map
+;    mov        esi, Globals___Map
 ;    lea     eax, [esi+131Ah]
-;    call    0x0054E2CC ; StripClass::Flag_To_Redraw
+;    call    SidebarClass__StripClass__Flag_To_Redraw
 
     pop  edi
     pop  esi
@@ -294,7 +293,7 @@ _SidebarClass_Draw_It:
     push 0               ; __int32
     mov  eax, [Side4Shape]
     mov  edx, edi
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
 
     add  dword [CurrentStripDrawPosition], 48
     mov  dword ecx, [CurrentStripDrawPosition]
@@ -323,7 +322,7 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
     mov  [upbuttons+16+56], ebx
 
     ;Scroll up cameo list to top for right sidebar if it would be glitched
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     lea  eax, [eax+131Ah]
 
     mov  edx, [eax+25h] ; Current cameo item in sidebar
@@ -340,7 +339,7 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
 .No_Cameo_list_Right_Strip_Reset:
 
     ;Scroll up cameo list to top for left sidebar if it would be glitched
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     lea  eax, [eax+103Eh]
 
     mov  edx, [eax+25h] ; Current cameo item in sidebar
@@ -363,22 +362,22 @@ _Load_Game_hires: ; Fix up button vertical position and visible icon area size w
 
 _SidebarClass_Add_hires: ; Fix graphical glitching when new icons are added to sidebar
     mov  edx, esi
-    call 0x0054E1F8 ; SidebarClass::StripClass::Add(RTTIType,int)
+    call SidebarClass__StripClass__Add
     push eax
 
-    mov  esi, MouseClass_Map
+    mov  esi, Globals___Map
     lea  eax, [esi+103Eh]
-    call 0x0054E2CC ; StripClass::Flag_To_Redraw
+    call SidebarClass__StripClass__Flag_To_Redraw
 
-    mov  esi, MouseClass_Map
+    mov  esi, Globals___Map
     lea  eax, [esi+131Ah]
-    call 0x0054E2CC ; StripClass::Flag_To_Redraw
+    call SidebarClass__StripClass__Flag_To_Redraw
 
     pop  eax
     jmp  0x0054D64B
 
 _StripClass_Draw_It_hires3: ; Draw strip.shp background over each cameo
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
 
     mov  dword [CurrentStripIndex], 372
 .Loop:
@@ -397,7 +396,7 @@ _StripClass_Draw_It_hires3: ; Draw strip.shp background over each cameo
     push 0               ; __int32
     mov  edx, [esi+19h]
     add  ebx, 4
-    call 0x004A96E8 ; CC_Draw_Shape(void *,int,int,int,WindowNumberType,void *,void *,DirType,long)
+    call Conquer___CC_Draw_Shape
 
     add  dword [CurrentStripIndex], 48
     mov  dword ecx, [CurrentStripIndex]

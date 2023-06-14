@@ -4,9 +4,6 @@
 Scrolling db 0
 ProcessingSidebar dd 0
 
-%define HouseClass_PlayerPtr    0x00669958
-
-
 _Mouse_Wheel_Sidebar_Scrolling:
     cmp  byte [MouseWheelScrolling], 1
     jnz  .out
@@ -14,7 +11,7 @@ _Mouse_Wheel_Sidebar_Scrolling:
     cmp  esi, 20Ah               ;WM_MOUSEHWHEEL
     jnz  .out
 
-    mov  ecx, [HouseClass_PlayerPtr]
+    mov  ecx, [Globals___PlayerPtr]
     test ecx, ecx
     jz   .out
 
@@ -39,8 +36,8 @@ _Mouse_Wheel_Sidebar_Scrolling:
 
     mov  ebx, 0FFFFFFFFh
     mov  edx, 1
-    mov  eax, MouseClass_Map
-    call 0x0054D684      ;//SidebarClass::Scroll
+    mov  eax, Globals___Map
+    call SidebarClass__Scroll
 
     jmp  .done
 
@@ -48,8 +45,8 @@ _Mouse_Wheel_Sidebar_Scrolling:
 .scroll:
     mov  ebx, 0FFFFFFFFh
     xor  edx, edx
-    mov  eax, MouseClass_Map
-    call 0x0054D684      ;//SidebarClass::Scroll
+    mov  eax, Globals___Map
+    call SidebarClass__Scroll
 
 .done:
     mov  byte [Scrolling], 0

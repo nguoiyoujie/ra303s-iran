@@ -1,8 +1,12 @@
 ;----------------------------------------------------------------
 ; src/features/combat_negativedamage.asm
 ;
-; Negative weapon adjustments
-; Allows AI use of negative damage weapons
+; Negative damage adjustments.
+; Allows generic weapons to use negative damage. Negative damage are not (yet) subject to spread rules so as not to risk introducing breaking changes to Medic and Mechanic heal.
+; Allows AI use of negative damage weapons. This allows AI to use Medics and Mechanics
+;
+; This function is enabled by default and is not controllable.
+; No compatibility issues is expected as Medics and Mechanics was not given to the AI in the unmodified game. Modders and mappers beware.
 ;
 ;----------------------------------------------------------------
 
@@ -11,7 +15,6 @@
 @HOOK 0x004A3287 _Combat_Modify_Damage_NegativeDamage_Always_Count3
 @HOOK 0x004A32AA _Combat_Modify_Damage_NegativeDamage_Always_Count4
 @HOOK 0x004A32B1 _Combat_Modify_Damage_NegativeDamage_Always_Count5
-
 @HOOK 0x00564517 _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons
 
 _Combat_Modify_Damage_NegativeDamage_Always_Count:
@@ -27,7 +30,7 @@ _Combat_Modify_Damage_NegativeDamage_Always_Count2:
 
 
 _Combat_Modify_Damage_NegativeDamage_Always_Count3:
-; have IDIV work with negative values
+; have idiv work with negative values
     push edx
     xor  edx,edx
     mov  eax,ecx

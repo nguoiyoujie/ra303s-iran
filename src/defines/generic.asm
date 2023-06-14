@@ -25,11 +25,41 @@
 %define str_Side                                  0x005F028D ; "Side"
 %define str_Color                                 0x005EDE7A ; "Color"
 
+%define str_NewINIFormat                          0x005F000E ; "NewINIFormat"
+%define str_Intro                                 0x005EFFB7 ; "Intro"
+%define str_Brief                                 0x005EFFBD ; "Brief"
+%define str_Win                                   0x005EFFC3 ; "Win"
+%define str_Lose                                  0x005EFFC7 ; "Lose"
+%define str_Action                                0x005EFFCC ; "Action"
+%define str_ToCarryOver                           0x005EFFD3 ; "ToCarryOver"
+%define str_IsToInherit                           0x005EFFDF ; "IsToInherit"
+%define str_TimerInherit                          0x005EFFE9 ; "TimerInherit"
+%define str_EndOfGame                             0x005EFFF6 ; "EndOfGame"
+%define str_CivEvac                               0x005F0000 ; "CivEvac"
+%define str_Theme                                 0x005F0008 ; "Theme"
+%define str_CarryOverMoney                        0x005F001B ; "CarryOverMoney"
+%define str_CarryOverCap                          0x005F002A ; "CarryOverCap"
+
+%define str_NoSpyPlane                            0x005F0037 ; "NoSpyPlane"
+%define str_SkipScore                             0x005F0042 ; "SkipScore"
+%define str_OneTimeOnly                           0x005F004C ; "OneTimeOnly"
+%define str_SkipMapSelect                         0x005F0058 ; "SkipMapSelect"
+%define str_TruckCrate                            0x005F0066 ; "TruckCrate"
+%define str_FillSilos                             0x005F0071 ; "FillSilos"
+%define str_Percent                               0x005F007B ; "Percent"
+;%define str_Official                              0x005F009F ; "Official"
+
+%define str_Player                                0x005F0083 ; "Player"
+
 %define str_Basic                                 0x005EFFA5 ; "Basic"
 %define str_General                               0x005EF3EE ; "General"
 %define str_AI                                    0x005EFC29 ; "AI"
 %define str_Aftermath                             0x005EF3F6 ; "Aftermath"
 str_SetProcessAffinityMask                        db"SetProcessAffinityMask",0
+
+%define str_Weapons                               0x005EFE41 ; "Super"^"Weapons"
+str_Warheads                                      db"Warheads",0
+str_SoundEffects                                  db"SoundEffects",0
 
 
 str_Skirmish                                      db"Skirmish",0
@@ -100,6 +130,7 @@ str_mix_DOSInterfaceMod                           db"dosinterfacemod.MIX",0
 
 ; INI file references
 %define str_ini_RedAlert                          0x005EDE12 ; "REDALERT.INI"
+%define str_ini_Rules                             0x005EBB3B ; "RULES.INI"
 %define str_ini_AI                                0x006F3ACF ; "AI.INI"
 %define str_ini_OOSFix                            0x006F4CD7 ; "OOS-FIX.INI"
 str_ini_Spawn                                     db"SPAWN.INI",0
@@ -345,4 +376,5 @@ Houses.Radar                                      times 24 db 0
 Houses.Factory                                    times 24 db 0 
 Houses.BScan                                      times 768 db 0    ; 24 * (256 entries, 32 bytes)
 Houses.BGroupScan                                 times 768 db 0    ; 24 * (256 entries, 32 bytes)
+;Houses.BQuantity                                  times 6144 db 0   ; 24 * 256 entries
 

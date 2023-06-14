@@ -38,16 +38,17 @@ _SidebarClass__StripClass__Draw_It_Is_TechnoType_Being_Built_By_Its_Factory_Chec
 
     ; Get factory
     mov  edx, [ecx+3Ah]
-    mov  dword eax, [0x00669958] ; ds:HouseClass *PlayerPtr
+    mov  dword eax, [Globals___PlayerPtr]
     sar  edx, 18h
-    call 0x004DDBD0; const HouseClass::Fetch_Factory(RTTIType)
+    call HouseClass__Fetch_Factory
 
     ; If FactoryClass object is NULL goto .Hack_Prevented
     cmp  dword eax, 0
     jz   .Hack_Prevented
 
     ; Get what's being built
-    call 0x004BF368 ; TechnoClass * const FactoryClass::Get_Object(void)const
+    call FactoryClass__Get_Object
+
     ; If NULL, goto .Hack_Prevented
     cmp  dword eax, 0
     jz   .Hack_Prevented

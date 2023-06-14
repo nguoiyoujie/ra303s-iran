@@ -427,7 +427,7 @@ _HouseClass__AI_Player_Lose_Flag_Set_Remove_Win:
     cmp  dword [InCoopMode],1 ; if coop don't set PlayerLoses to true
     jz   .Ret
 
-    mov  dword [0x006680C8],1 ; PlayerWins
+    mov  dword [Globals___PlayerWins],1
 
 .Ret:
     jmp  0x004D85B3
@@ -438,7 +438,7 @@ _HouseClass__AI_Player_Win_Flag_Set_Remove_Lose:
     cmp  dword [InCoopMode],1 ; if coop don't set PlayerLoses to true
     jz   .Ret
 
-    mov  dword [0x006680CC],1 ; PlayerLoses
+    mov  dword [Globals___PlayerLoses],1
 
 .Ret:
     jmp  0x04D41D4

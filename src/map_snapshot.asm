@@ -1,7 +1,5 @@
 str_MapSnap_MPR db"MapSnap.MPR",0
 
-%define Basic_Section str_Basic
-
 ; sizes not actually verified
 MapSnapshot_CCINIClass  TIMES 256 db 0
 MapSnapshot_FileClass   TIMES 256 db 0
@@ -12,91 +10,166 @@ Create_Map_Snapshot:
     ; Initialize output file
     mov  edx, str_MapSnap_MPR
     mov  eax, MapSnapshot_FileClass
-    call 0x004627D4  ;   CCFileClass::CCFileClass(char *)
+    call CCFileClass__CCFileClass
 
     ; initialize CCINIClass
     mov  eax, MapSnapshot_CCINIClass
     call CCINIClass__CCINIClass
 
+; Follow SCENARIO.CPP/Write_Scenario_INI (which is not in the binary compilation
 ;===========================
     ; Write [Basic]
 
     ; Map name
-    mov  eax, 0x00667BD8
-    call_INIClass__Put_String MapSnapshot_CCINIClass, Basic_Section, 0x005EFFB2, eax
-
-    ; NewINIFormat
-    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F000E, dword [0x00665DE8]
+    mov  eax, Globals___Scen_Description
+    call_INIClass__Put_String MapSnapshot_CCINIClass, str_Basic, str_Name, eax
 
     ; Intro
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFB7, byte [0x00667C04]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, str_Basic, str_Intro, byte [Globals___Scen_IntroMovie]
 
     ; Brief
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFBD, byte [0x00667C05]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, str_Basic, str_Brief, byte [Globals___Scen_BriefMovie]
 
     ; Win
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC3, byte [0x00667C06]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, str_Basic, str_Win, byte [Globals___Scen_WinMovie]
 
     ; Lose
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFC7, byte [0x00667C07]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, str_Basic, str_Lose, byte [Globals___Scen_LoseMovie]
 
     ; Action
-    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, Basic_Section, 0x005EFFCC, byte [0x00667C08]
+    call_CCINIClass__Put_VQType MapSnapshot_CCINIClass, str_Basic, str_Action, byte [Globals___Scen_ActionMovie]
+
+    ; Player
+    mov ecx, dword [Globals___PlayerPtr]
+    call_CCINIClass__Put_HousesType MapSnapshot_CCINIClass, str_Basic, str_Player, byte [ecx + 1] ; HouseClass::ID
+
+    ; Theme
+    call_CCINIClass__Put_ThemeType MapSnapshot_CCINIClass, str_Basic, str_Theme, byte [Globals___Scen_TransitTheme]
+
+    ; CarryOverPercent / CarryOverMoney
+    call_INIClass__Put_Fixed MapSnapshot_CCINIClass, str_Basic, str_CarryOverMoney, Globals___Scen_CarryOverPercent
 
     ; ToCarryOver
     xor  ecx, ecx
-    test byte [0x006680A1], 8 ; ptr ds:Scenario_bool_bitfield_6680A1
+    test byte [Globals___Scen_ToCarryOver_Address], Globals___Scen_ToCarryOver_Bitmask
     setne cl
-    call_INIClass__Put_Bool MapSnapshot_CCINIClass, Basic_Section, 0x005EFFD3, ecx
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_ToCarryOver, ecx
 
-    ; Theme
-    call_CCINIClass__Put_ThemeType MapSnapshot_CCINIClass, Basic_Section, 0x005F0008, byte [0x00668009]
+    ; IsToInherit
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsToInherit_Address], Globals___Scen_IsToInherit_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_IsToInherit, ecx
 
-    ; CarryOverMoney
-    call_INIClass__Put_Fixed MapSnapshot_CCINIClass, Basic_Section, 0x0005F001B, 0x0066800B
+    ; TimerInherit
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsInheritTimer_Address], Globals___Scen_IsInheritTimer_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_TimerInherit, ecx
+
+    ; CivEvac
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsTanyaEvac_Address], Globals___Scen_IsTanyaEvac_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_CivEvac, ecx
+
+    ; NewINIFormat
+    call_INIClass__Put_Int MapSnapshot_CCINIClass, str_Basic, str_NewINIFormat, dword [0x00665DE8] ; this points to what?
 
     ; CarryOverCap
-    call_INIClass__Put_Int MapSnapshot_CCINIClass, Basic_Section, 0x005F002A, dword [0x00668011]
+    call_INIClass__Put_Int MapSnapshot_CCINIClass, str_Basic, str_CarryOverCap, dword [Globals___Scen_CarryOverCap]
+
+    ; EndOfGame
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsEndOfGame_Address], Globals___Scen_IsEndOfGame_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_EndOfGame, ecx
+
+    ; NoSpyPlane
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsNoSpyPlane_Address], Globals___Scen_IsNoSpyPlane_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_NoSpyPlane, ecx
+
+    ; SkipScore
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsSkipScore_Address], Globals___Scen_IsSkipScore_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_SkipScore, ecx
+    
+    ; OneTimeOnly
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsOneTimeOnly_Address], Globals___Scen_IsOneTimeOnly_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_OneTimeOnly, ecx
+    
+    ; SkipMapSelect
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsNoMapSel_Address], Globals___Scen_IsNoMapSel_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_SkipMapSelect, ecx
+    
+    ; FillSilos
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsMoneyTiberium_Address], Globals___Scen_IsMoneyTiberium_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_FillSilos, ecx
+    
+    ; TruckCrate
+    xor  ecx, ecx
+    test byte [Globals___Scen_IsTruckCrate_Address], Globals___Scen_IsTruckCrate_Bitmask
+    setne cl
+    call_INIClass__Put_Bool MapSnapshot_CCINIClass, str_Basic, str_TruckCrate, ecx
+    
+    ; Percent
+    call_INIClass__Put_Int MapSnapshot_CCINIClass, str_Basic, str_Percent, dword [Globals___Scen_Percent]
 
 ;=========================
     ; Write other stuff
-    mov  edx, MapSnapshot_CCINIClass
-    mov  eax, 0x00668250 ; offset MouseClass Map
-    call 0x004B545C   ;  void DisplayClass::Write_INI(CCINIClass &)
+    mov  eax,MapSnapshot_CCINIClass
+    call HouseClass__Write_INI
 
-    mov  edx, MapSnapshot_CCINIClass
-    mov  eax, 0x0067F28C ; offset BaseClass Base
-    call 0x00426944     ; void BaseClass::Write_INI(CCINIClass &)
+    mov  eax,MapSnapshot_CCINIClass
+    call TeamTypeClass__Write_INI
+
+    mov  eax,MapSnapshot_CCINIClass
+    call TriggerTypeClass__Write_INI
+
+    ; Map
+    mov  edx,MapSnapshot_CCINIClass
+    mov  eax,Globals___Map
+    call DisplayClass__Write_INI
+
+    mov  eax,MapSnapshot_CCINIClass
+    call TerrainClass__Write_INI
+
+    mov  eax,MapSnapshot_CCINIClass
+    call UnitClass__Write_INI
+
+    mov  eax,MapSnapshot_CCINIClass
+    call VesselClass__Write_INI
+
+    mov  eax,MapSnapshot_CCINIClass
+    call InfantryClass__Write_INI
+    
+    mov  eax,MapSnapshot_CCINIClass
+    call BuildingClass__Write_INI
+
+    ; Base    
+    mov  edx,MapSnapshot_CCINIClass
+    mov  eax,Globals___Base
+    call BaseClass__Write_INI
 
     mov  eax, MapSnapshot_CCINIClass
-    call 0x005501E4    ; void SmudgeClass::Write_INI(CCINIClass &)
+    call OverlayClass__Write_INI
+    
+    mov  eax,MapSnapshot_CCINIClass
+    call SmudgeClass__Write_INI
 
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0052736C     ; void OverlayClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0056076C ; void TeamTypeClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0056AD6C     ; void TerrainClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0056D640     ; void TriggerTypeClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x004DDEB0     ; void HouseClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x004F0A84    ; void InfantryClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x00581298     ; void UnitClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0058CC18     ; void VesselClass::Write_INI(CCINIClass &)
-
-    mov  eax, MapSnapshot_CCINIClass
-    call 0x0045F07C     ; void BuildingClass::Write_INI(CCINIClass &)
+    ; Briefing
+    ; 	if (strlen(Scen.BriefingText)) {
+	;       ini.Put_TextBlock("Briefing", Scen.BriefingText);
+	;   }
 
 .Save_File:
     xor  ebx, ebx

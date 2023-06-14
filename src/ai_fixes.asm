@@ -204,7 +204,7 @@ _EventClass__Execute_Make_Ally:
     mov  ecx,eax  ; now contains new HouseClass
     pop  eax ; HouseClass
     push ecx
-    call 0x004D2C48
+    call HouseClass__HousesType
     mov  edx,eax ; now contains new HouseType
     pop  eax        ; now conains new HouseClass
 

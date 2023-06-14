@@ -9,7 +9,7 @@ _RadarClass__Draw_It_1:
     test ch, 40h
     jz   0x0052DC0A
 
-    mov  eax, [0x00669958]
+    mov  eax, [Globals___PlayerPtr]
     test byte [eax+0x43], 1
     mov  eax, [ebp-0x020]
     jnz  0x0052DC0A
@@ -25,21 +25,21 @@ _HouseClass__AI_Radar3:
     mov  eax, [ebp-0x58]
     test byte [eax+0x43], 1
     jz   .Normal_Code
-    mov  eax, 0x00668250
+    mov  eax, Globals___Map
     cmp  byte [eax+0CB0h], 0
     ; need to restore eax
     jnz  .Ret
 
-    mov  eax, 0x00668250
+    mov  eax, Globals___Map
     mov  edx, 1
     call 0x0052D790
-    mov  eax, 0x00668250
+    mov  eax, Globals___Map
     mov  edx, 3
     call 0x0052D790
     jmp  .Ret
 
 .Normal_Code:
-    mov  eax, 0x00668250
+    mov  eax, Globals___Map
     call 0x0052D790
 
 .Ret:
@@ -91,7 +91,7 @@ _RadarClass__Activate_Play_Radar_Sound1:
     cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
-    mov  eax, [0x00669958]
+    mov  eax, [Globals___PlayerPtr]
     test byte [eax+0x43], 1
     jz   .Normal_Code
 
@@ -101,14 +101,14 @@ _RadarClass__Activate_Play_Radar_Sound1:
 
 .Normal_Code:
     mov  eax, 4Ah
-    call 0x00425F24 ; Sound_Effect(VocType,fixed,int,short,HousesType)
+    call Audio___Sound_Effect
     jmp  0x0052D837
 
 _RadarClass__Activate_Play_Radar_Sound2:
     cmp  byte [DeadPlayersRadar], 0
     jz   .Normal_Code
 
-    mov  eax, [0x00669958]
+    mov  eax, [Globals___PlayerPtr]
     test byte [eax+0x43], 1
     jz   .Normal_Code
 
@@ -118,5 +118,5 @@ _RadarClass__Activate_Play_Radar_Sound2:
 
 .Normal_Code:
     mov  eax, 49h
-    call 0x00425F24 ; Sound_Effect(VocType,fixed,int,short,HousesType)
+    call Audio___Sound_Effect
     jmp  0x0052D8DD

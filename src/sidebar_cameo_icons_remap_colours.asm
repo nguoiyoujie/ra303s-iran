@@ -13,7 +13,7 @@ _StripClass__Draw_It_Colour_Remap_Icon:
     cmp  byte [colorremapsidebarcameoicons], 0
     jz   .No_Colour_Remap
 
-    mov  eax, [0x00669958] ; HouseClass *PlayerPtr
+    mov  eax, [Globals___PlayerPtr]
     xor  ebx, ebx
     mov  bl, [eax+0x178F]
     call 0x004D6528 ; const HouseClass::Remap_Table(int,RemapType)

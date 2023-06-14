@@ -104,7 +104,7 @@ _BuildingClass_Mission_Exit_Coord:
     call Coord___Coord_Cell
     cwde
     imul edx,eax,3Ah
-    mov  dword eax,[0x0066826C] ; ds:SomethingWithCells
+    mov  dword eax,[Globals___Map_Array]
     add  eax,edx
 
 ;    int        3

@@ -34,6 +34,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/generic.asm"
 %include "src/defines/gametypes.asm"
 %include "src/defines/rttitypes.asm"
+%include "src/defines/housetypes.asm"
 %include "src/defines/armortypes.asm"
 %include "src/defines/prereqtypes.asm"
 %include "src/defines/specialtypes.asm"
@@ -75,36 +76,36 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/spawner_tunnel.asm"
 
 ;extended classses
-%include "src/ext/savegame_support.asm" ; this needs to go first before other extended classes
+%include "src/features/type_extensions/savegame_support.asm" ; this needs to go first before other extended classes
 
-%include "src/ext/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
-%include "src/ext/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
-%include "src/ext/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
-%include "src/ext/TechnoTypeClass/extended_technotypeclass_loading.asm"
-%include "src/ext/UnitTypeClass/extended_unittypeclass_loading.asm"
-%include "src/ext/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
-%include "src/ext/WeaponTypeClass/extended_weapontypeclass_loading.asm"
-%include "src/ext/VesselTypeClass/extended_vesseltypeclass_loading.asm"
+%include "src/features/type_extensions/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
+%include "src/features/type_extensions/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
+%include "src/features/type_extensions/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
+%include "src/features/type_extensions/TechnoTypeClass/extended_technotypeclass_loading.asm"
+%include "src/features/type_extensions/UnitTypeClass/extended_unittypeclass_loading.asm"
+%include "src/features/type_extensions/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
+%include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
+%include "src/features/type_extensions/VesselTypeClass/extended_vesseltypeclass_loading.asm"
 
-%include "src/ext/AircraftTypeClass/extended_aircrafttypeclass.asm"
-%include "src/ext/extended_houseclass.asm"
-%include "src/ext/extended_buildingclass.asm"
-%include "src/ext/extended_technoclass.asm"
-%include "src/ext/extended_footclass.asm"
-%include "src/ext/extended_triggeraction.asm"
+%include "src/features/type_extensions/AircraftTypeClass/extended_aircrafttypeclass.asm"
+%include "src/features/type_extensions/extended_houseclass.asm"
+%include "src/features/type_extensions/extended_buildingclass.asm"
+%include "src/features/type_extensions/extended_technoclass.asm"
+%include "src/features/type_extensions/extended_footclass.asm"
+%include "src/features/type_extensions/extended_triggeraction.asm"
 
 ; Unhardcode
-%include "src/ext/early_rules_ini_load.asm"
-%include "src/ext/AircraftTypeClass/aircrafttypeclass_unhardcode.asm"
-%include "src/ext/AnimTypeClass/animtypeclass_unhardcode.asm"
-%include "src/ext/BuildingTypeClass/buildingtypeclass_unhardcode.asm"
-%include "src/ext/BulletTypeClass/bullettypeclass_unhardcode.asm"
-%include "src/ext/InfantryTypeClass/infantrytypeclass_unhardcode.asm"
-%include "src/ext/UnitTypeClass/unittypeclass_unhardcode.asm"
-%include "src/ext/VesselTypeClass/vesseltypeclass_unhardcode.asm"
-%include "src/ext/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
-%include "src/ext/WeaponTypeClass/weapontypeclass_unhardcode.asm"
-%include "src/ext/soundeffectslist_unhardcode.asm"
+%include "src/features/type_extensions/early_rules_ini_load.asm"
+%include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_unhardcode.asm"
+%include "src/features/type_extensions/AnimTypeClass/animtypeclass_unhardcode.asm"
+%include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_unhardcode.asm"
+%include "src/features/type_extensions/BulletTypeClass/bullettypeclass_unhardcode.asm"
+%include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_unhardcode.asm"
+%include "src/features/type_extensions/UnitTypeClass/unittypeclass_unhardcode.asm"
+%include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_unhardcode.asm"
+%include "src/features/type_extensions/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
+%include "src/features/type_extensions/WeaponTypeClass/weapontypeclass_unhardcode.asm"
+%include "src/features/type_extensions/SoundEffectName/soundeffectslist_unhardcode.asm"
 
 ; AI for unhardcoded
 %include "src/features/ai_obeyprereq.asm" ; added by lovalmidas
@@ -157,8 +158,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/spawner_stats.asm"
 ;%include "src/debug_printing.asm" ; Seems to cause crashes
 %include "src/hotkeys.asm"
-%include "src/extra_theaters.asm"
-%include "src/extra_sounds.asm"
+%include "src/features/extra_theaters.asm"
+%include "src/features/extra_sounds.asm"
 %include "src/evac_in_mp.asm"
 ;%include "src/custom_paradrop_superweapon.asm"
 %include "src/pkt_loading.asm"
@@ -166,7 +167,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/music_loading.asm"
 %include "src/movie_loading.asm"
 %include "src/custom_missions.asm"
-%include "src/ally_shroud_reveal.asm"
+%include "src/features/ally_shroud_reveal.asm"
 %include "src/ingame_chat_improvments.asm"
 %include "src/extra_multiplayer_countries.asm"
 %include "src/aftermath_fast_buildspeed_option.asm"
@@ -196,20 +197,19 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/bullet_scatter.asm"
 %include "src/aircraft_transports_face_north.asm"
 
-%include "src/experiment_remap.asm" 
 %include "src/building_autobase_base_housecheck.asm" 
-%include "src/remake_shroud_mapedges.asm" 
-%include "src/resizable_map.asm" 
+%include "src/features/remake_shroud_mapedges.asm" 
+%include "src/features/resizable_map.asm" 
 %include "src/unit_deploys_into_unhardcode.asm" 
 %include "src/footclass_path.asm" 
-%include "src/vessel_carrier_autoacquire.asm" 
+%include "src/features/vessel_carrier_autoacquire.asm" 
 
 %include "src/features/combat_spreadfactorzero.asm" 
 %include "src/features/combat_negativedamage.asm" 
 
-
-
-;%include "src/refinery_experiment.asm" 
+; experimental
+%include "src/experimental/experiment_jam_remap.asm" 
+;%include "src/experimental/experiment_cnc_refinery.asm" 
 
 %ifdef USE_NOCD
 %include "src/nocd.asm"
@@ -235,7 +235,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/mouse_fixes.asm"
 %include "src/cpu_affinity_freeze_crash.asm"
 %include "src/max_units_bug.asm"
-%include "src/fence_bug.asm"
+%include "src/fixes/fence_bug.asm"
 %include "src/tags_bug.asm"
 %include "src/savegame_bug.asm"
 %include "src/credits_screen_cncddraw_fix.asm"

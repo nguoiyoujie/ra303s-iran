@@ -23,8 +23,8 @@
 Tunnel_SendTo:
 %push
     push ebp
-    mov  ebp,ESP
-    SUB  ESP,1024
+    mov  ebp,esp
+    sub  esp,1024
     push esi
     push edi
 
@@ -83,7 +83,7 @@ Tunnel_SendTo:
     mov  eax,[flags]
     push eax
     mov  eax,[len]
-    ADD  eax,4
+    add  eax,4
     push eax
     lea  eax,[var_buf]
     push eax
@@ -108,18 +108,18 @@ Tunnel_SendTo:
     call sendto
 
 .exit:
-    POP  edi
-    POP  esi
-    mov  ESP,ebp
-    POP  ebp
+    pop  edi
+    pop  esi
+    mov  esp,ebp
+    pop  ebp
     RETN 24
 %pop
 
 Tunnel_RecvFrom:
 %push
     push ebp
-    mov  ebp,ESP
-    SUB  ESP,1024
+    mov  ebp,esp
+    sub  esp,1024
     push esi
     push edi
 
@@ -160,7 +160,7 @@ Tunnel_RecvFrom:
     JL   .error
 
     ; remove header from return length
-    SUB  eax,4
+    sub  eax,4
 
     ; copy real packet after header to game buf
     lea  esi,[var_buf + 4]
@@ -209,9 +209,9 @@ Tunnel_RecvFrom:
 .error:
     mov  eax,-1
 .exit:
-    POP  edi
-    POP  esi
-    mov  ESP,ebp
-    POP  ebp
+    pop  edi
+    pop  esi
+    mov  esp,ebp
+    pop  ebp
     RETN 24
 %pop

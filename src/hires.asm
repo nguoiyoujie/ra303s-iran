@@ -301,8 +301,8 @@ _CellClass_Draw_It_Dont_Draw_Past_Map_Border:
     push edx
     mov  ax, [eax]
     movsx edx, ax
-    mov  eax, 0x00668250 ; MouseClass Map
-    call 0x004FE8AC ; MapClass::In_Radar(short)
+    mov  eax, Globals___Map
+    call MapClass__In_Radar
     test eax, eax
     jz   .Out
 
@@ -321,12 +321,12 @@ _Start_Scenario_Set_Flag_To_Redraw_Screen:
     mov  ecx, 1
     lea  ebx, [CellSize]
     mov  edx, 1h
-    mov  eax, 0x00668250 ; MouseClass Map
+    mov  eax, Globals___Map
     call 0x004D2B6C ; HelpClass::Scroll_Map(DirType,int &,int)
 
     mov  edx, 1
-    mov  eax, 0x00668250 ; MouseClass Map
-    call 0x004CAFF4 ; GScreenClass::Flag_To_Redraw(int)
+    mov  eax, Globals___Map
+    call GScreenClass__Flag_To_Redraw
 
     mov  eax, 0x00668188 ; GameOptionsClass Options
     jmp  0x0053A37B
@@ -381,7 +381,7 @@ _hires_ScoreScreenBackground:
     push 0ch
     push GraphicsViewPortClass_HidPage
     call _Buffer_Clear
-    ADD  ESP,8
+    add  esp,8
 %endmacro
 
 %macro hires_Clear_2 0
@@ -389,7 +389,7 @@ _hires_ScoreScreenBackground:
     push GraphicBufferClass_VisiblePage
 ;    push GraphicBufferClass_SeenBuffer
     call _Buffer_Clear
-    ADD  ESP,8
+    add  esp,8
 %endmacro
 
 _Load_Title_Screen_Clear_Background:
@@ -568,25 +568,25 @@ right_strip_offset      dd 0
 %macro _hires_adjust_width 1
     mov  ecx, [diff_width]
     mov  eax, %1
-    ADD  [eax], ecx
+    add  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_height 1
     mov  ecx, [diff_height]
     mov  eax, %1
-    ADD  [eax], ecx
+    add  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_top    1
     mov  ecx, [diff_top]
     mov  eax, %1
-    ADD  [eax], ecx
+    add  [eax], ecx
 %endmacro
 
 %macro _hires_adjust_left    1
     mov  ecx, [diff_left]
     mov  eax, %1
-    ADD  [eax], ecx
+    add  [eax], ecx
 %endmacro
 
 ; handles Width and Height redalert.ini options
@@ -619,7 +619,7 @@ _hires_ini:
 
     ; adjust width
     mov  eax, [ScreenWidth]
-    SUB  eax, 160
+    sub  eax, 160
     mov  ebx, 24
     xor  edx,edx
     DIV  ebx
@@ -631,15 +631,15 @@ _hires_ini:
     mov  ebx, 24
     MUL  ebx
 
-    ADD  eax, 160
+    add  eax, 160
     mov  [AdjustedWidth], eax
 
     ; adjusted width in eax
     mov  edx, [AdjustedWidth]
     mov  ebx, [ScreenHeight]
 
-    SUB  edx, 640
-    SUB  ebx, 400
+    sub  edx, 640
+    sub  ebx, 400
 
     mov  [diff_width], edx
     mov  [diff_height], ebx
@@ -647,12 +647,12 @@ _hires_ini:
     ; adjust top and left
     mov  eax, [ScreenHeight]
     SHR  eax, 1
-    SUB  eax, 200
+    sub  eax, 200
     mov  [diff_top], eax
 
     mov  eax, [ScreenWidth]
     SHR  eax, 1
-    SUB  eax, 320
+    sub  eax, 320
     mov  [diff_left], eax
 
     mov  edx, [AdjustedWidth]
@@ -666,7 +666,7 @@ _hires_ini:
 
 ;    mov ecx, 100
 ;    mov eax, 0x004A8AE1
-;    ADD [eax], ecx
+;    add [eax], ecx
 
     ; main menu please wait...
     _hires_adjust_top     0x004F43BF
@@ -1092,8 +1092,8 @@ _hires_ini:
     mov  byte [0x0054F380], 0xC3
 
 .Ret:
-    POP  edx
-    POP  ebx
+    pop  edx
+    pop  ebx
 
     jmp  0x00552979
 
@@ -1109,7 +1109,7 @@ _Fill_Rect_test:
     push dx                     ; __int16
     mov  bx, 1500  ; [ebp-0B8h]
     push bx                     ; __int16
-    mov  ebx, [0x006AC274] ; GraphicViewPortClass LogicPage
+    mov  ebx, [BuffGlbl___LogicPage]
     push ebx
     jmp  0x00507B65
 
@@ -1151,7 +1151,7 @@ _hires_Power_Usage_Indicator_Height:
 
 .Ret:
     mov  eax, [0x006877B8]
-    call 0x004A96E8
+    call Conquer___CC_Draw_Shape
     jmp  0x00527C23
 
 _hires_Deinterlace_Videos_Always_Deinterlace:
@@ -1433,11 +1433,11 @@ _hires_NewGameText_left dd 0x6E
 
 _hires_NewGameText:
     mov  eax, [diff_top]
-    ADD  eax,0x96
+    add  eax,0x96
     push eax
 
     mov  eax, [diff_left]
-    ADD  eax,0x6E
+    add  eax,0x6E
     push eax
 
     jmp  0x005518AA
@@ -1472,8 +1472,6 @@ _hires_MainMenuClearPalette:
     hires_Clear
     mov  eax, [0x006807E8]
     jmp  0x004F7600
-
-%define Set_Logic_Page 0x005C0FE7
 
 _Blacken_Screen_Border_Menu:
     call 0x005C9E60
@@ -1671,7 +1669,7 @@ _hires_Net_Join_Credits_Slider:
     add  ecx, [diff_top]
     mov  ebx, 0B9h
     add  ebx, [diff_left]
-    call 0x004C4CF0 ; GaugeClass::GaugeClass(uint,int,int,int,int)
+    call GaugeClass__GaugeClass
     jmp  0x00506DAE
 
 _hires_Net_Join_Static_Button:
@@ -1754,13 +1752,13 @@ _hires_Net_Join_Color_Draw_Colored_Rectangles:
 _hires_Net_Join_Color_Draw_Boxes:
     add  edx, [diff_top]
     add  eax, [diff_left]
-    call 0x004ADB5C ; Draw_Box(int,int,int,int,BoxStyleEnum,int)
+    call Dialog___Draw_Box
     jmp  0x00507BC0
 
 _hires_Net_Join_Color_Draw_Boxes2:
     add  edx, [diff_top]
     add  eax, [diff_left]
-    call 0x004ADB5C ; Draw_Box(int,int,int,int,BoxStyleEnum,int)
+    call Dialog___Draw_Box
     jmp  0x00507BE1
 
 _hires_Net_Join_Color_Box_Select_Thingy:
@@ -1794,7 +1792,7 @@ _hires_Net_Join_MessageBox:
 ;edx = 00000102 eax = 6E
 ;    cmp        eax,
     add  edx, [diff_top]
-    call 0x004ADB5C ; Draw_Box(int,int,int,int,BoxStyleEnum,int)
+    call Dialog___Draw_Box
     jmp  0x00507E00
 
 _hires_Net_Join_Unit_Count_Text_Print:

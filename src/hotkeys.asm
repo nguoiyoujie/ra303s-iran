@@ -51,7 +51,6 @@ _Keyboard_Process_Home_Key_Overwrite:
     jz   .Toggle_Sidebar
     cmp  word ax, [KeyMapSnapshot]
     jz   .Map_Snapshot
-
     cmp  word ax, [Globals___Options_KeyResign]
     jz   .Resign_Key
 
@@ -65,7 +64,7 @@ _Keyboard_Process_Home_Key_Overwrite:
 
 .Lock_Graphics_Buffer:
 ;    mov eax, 0 ; Crash
-    mov  eax, MouseClass_Map
+    mov  eax, Globals___Map
     mov  edx, 0FFFFFFFFh
     call 0x0054DA70 ;  SidebarClass::Activate(int)
 
@@ -111,10 +110,10 @@ _Keyboard_Process_Home_Key_Overwrite:
 
 .Redraw_Screen:
     mov  edx, 1
-    mov  eax, 0x00668250 ; MouseClass Map
-    call 0x004CAFF4 ; GScreenClass::Flag_To_Redraw(int)
+    mov  eax, Globals___Map
+    call GScreenClass__Flag_To_Redraw
 
-    mov  eax, 0x00668250 ; MouseClass Map
+    mov  eax, Globals___Map
     call 0x004CB110 ; GScreenClass::Render()
 
     pop  eax

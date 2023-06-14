@@ -34,7 +34,7 @@ _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2:
     push edx
     push ecx
-    mov  eax,[0x006680C4]
+    mov  eax,[Globals___Frame]
     xor  edx,edx
     mov  cx, word [temp.TurretFrameCount]
     idiv cx

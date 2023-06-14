@@ -249,7 +249,7 @@ _Select_Game_SetScenarioName:
     jz   .Ret
 .SetName:
     mov  edx,presetscenarioname
-    mov  eax,0x006678E8
+    mov  eax,Globals___Scen
     call ScenarioClass__Set_Scenario_Name
     mov  byte [presetscenarioname],0 ;invalidate the preset scenario name
 	jmp  0x004F4ADC
@@ -276,7 +276,8 @@ _Main_Game_AutoExit:
     mov  byte [closegamestate],0xff
 .SelectGame:
     mov  eax,[0x005FEDBC] 
-    call 0X004F44DC ; Select_Game
+    call Init___Select_Game
+
 .Ret:
     jmp  0x004A5389
 

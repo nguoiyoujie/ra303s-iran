@@ -26,7 +26,7 @@
     and  ebx, 0FFFFh     ; ebx & -1
     mov  word dx, eax
     and  eax, 0FFFFh     ; eax & -1
-    call 0x004BEA7C ; Desired_Facing256(int,int,int,int)
+    call Face_Desired_Facing256
 
     pop  ecx
     pop  edx
@@ -52,7 +52,7 @@
     and  ebx, 0FFFFh     ; ebx & -1
     mov  word dx, ax
     and  eax, 0FFFFh     ; eax & -1
-    call 0x004BEA7C ; Desired_Facing256(int,int,int,int)
+    call Face_Desired_Facing256
 
     pop  ecx
     pop  edx
@@ -123,7 +123,7 @@
     mov  word dx, ax
     pop  eax
     and  eax, 0FFFFh     ; eax & -1
-    call 0x004BEA20 ; Desired_Facing8(int,int,int,int)
+    call Face_Desired_Facing8
 
     pop  ecx
     pop  edx
@@ -157,7 +157,7 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
     jz   .Normal_Code
 
     mov  ebx, eax
-    call 0x004AC41C ; Distance()
+    call Coord___Distance_As_Coord
     push eax
 ;    mov     ebx, [ecx+11h]
 ;    call    dword [ebx+164h] ; TechnoClass::Turret_Facing()
@@ -223,7 +223,7 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
     jmp  0x00562782
 
 .Normal_Code:
-    call 0x004AC41C ; Distance()
+    call Coord___Distance_As_Coord
     jmp  0x00562782
 
 
@@ -233,7 +233,7 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
 
     mov  ebx, eax
     push edx
-    call 0x004AC41C ; Distance()
+    call Coord___Distance_As_Coord
     pop  edx
     push eax
 
@@ -299,5 +299,5 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
     jmp  0x00562861
 
 .Normal_Code:
-    call 0x004AC41C ; Distance()
+    call Coord___Distance_As_Coord
     jmp  0x00562861

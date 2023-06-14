@@ -8,8 +8,7 @@ _BuildingClass_ExitObject_Base_HouseCheck:
     test byte [eax + 0x42],2
     jnz  0x00459582
     push edx
-    mov  edx,0x0067F28C ; BaseClass
-    mov  dl,byte [edx + 0x18] ; BaseClass->House
+    mov  dl,byte [Globals___Base_House]
     cmp  byte [eax + 1],dl
     pop  edx
     jne  .SkipBase_NextBuildable
