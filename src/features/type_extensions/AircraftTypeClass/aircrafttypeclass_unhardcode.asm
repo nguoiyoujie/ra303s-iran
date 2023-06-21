@@ -1,13 +1,21 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_unhardcode.asm
+;
+; Continuation of Iran's work in enabling the game to use new AircraftTypeClass.
+; 
+; This function is enabled by including the section [AircraftTypes] in Rules.ini. This section includes an indexed array of names of sounds to load.
+;   [AircraftTypes]
+;   0=ORCA
+; 
+; No compatibility issues is expected as the original game lack the ability to add new types.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x00403F08 _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes
 @HOOK 0x004F40B6 _Init_Game_Set_AircraftTypes_Heap_Count
 @HOOK 0x00403EE3 _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
 @HOOK 0x00403FF3 _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes
 @HOOK 0x00459850 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
-
-str_AircraftTypes db"AircraftTypes",0
-NewAircraftTypeHeapCount      dd    0
-AircraftTypesTypesExtCount    dd    0
-%define        OriginalAircraftTypeHeapCount    7
 
 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
     mov  al,[NewAircraftTypeHeapCount]

@@ -684,7 +684,7 @@ Initialize_Spawn:
     mov  [ParabombsInMultiplayer], al
 
     spawn_INI_Get_Bool str_Settings, str_FixAIAlly, 0
-    mov  [FixAIAlly], al
+    mov  [Toggle_Fix_AIAlly], al
 
     spawn_INI_Get_Bool str_Settings, str_MCVUndeploy, 0
     mov  [MCVUndeploy], al
@@ -693,7 +693,7 @@ Initialize_Spawn:
     mov  [AllyReveal], al
 
     spawn_INI_Get_Bool str_Settings, str_ForcedAlliances, 0
-    mov  [ForcedAlliances], al
+    mov  [Toggle_Feature_ForcedAlliances], al
 
     spawn_INI_Get_Bool str_Settings, str_TechCenterBugFix, 0
     mov  [TechCenterBugFix], al
@@ -714,17 +714,17 @@ Initialize_Spawn:
     mov  [ShortGame], al
 
     spawn_INI_Get_Bool str_Settings, str_DeadPlayersRadar, 0
-    mov  [DeadPlayersRadar], al
+    mov  [Toggle_Feature_DeadPlayersRadar], al
 
     ; For an AI paranoid setting?
 ;    spawn_INI_Get_Bool Globals___RuleINI, str_AI, str_FixAIParanoid, 0
-;    mov        [FixAIParanoid], al
+;    mov        [Toggle_Fix_AIParanoid], al
 
 
     ; Fixes
-    mov  byte [FixAISendingTanksTopLeft], 1
-    mov  byte [EvacInMP], 0
-    mov  byte [fixnavalexploits], 1
+    mov  byte [Toggle_Fix_AISendingTanksToTopLeft], 1
+    mov  byte [Toggle_Feature_EvacInMP], 0
+    mov  byte [Toggle_Fix_NavalRepairExploit], 1
 
     ; Frag1 Explosion Anim fix should be enabled via loading.asm's hook for map start
     ; But enable it here just in case

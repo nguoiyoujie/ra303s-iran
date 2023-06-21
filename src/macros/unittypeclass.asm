@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/unittypeclass.asm
+;
+; Macros to access UnitTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define array location where building type classes are stored
 %define Array_UnitTypeClass                0x0065DF20

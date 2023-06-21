@@ -288,7 +288,7 @@
 
 
 %define Globals___RuleINI                                         0x00666688 ; CCINIClass RuleINI;
-; %define Globals___AftermathINI                                        
+; %define Globals___AftermathINI                                   0x0066668C ; CCINIClass AftermathINI;
 %define Globals___Rule                                            0x00666704 ; RulesClass Rule; This rules contains the combination of both RULES.INI and AFTRMATH.INI
 %define Globals___Rule_MaxIQ                                      0x00666780 ; int RulesClass::MaxIQ
 %define Globals___Rule_MessageDelay                               0x006667C7 ; int RulesClass::MessageDelay
@@ -364,6 +364,11 @@
 
 %define Globals___Map                                             0x00668250 ; MouseClass Map;
 %define Globals___Map_Array                                       0x0066826C ; VectorClass<CellClass> MapClass::Array;
+
+
+%define Globals___Map_IsZoomed_Address                            0x00668E9A ; unsigned RadarClass::IsZoomed:1;
+%define Globals___Map_IsZoomed_Bitmask                            0x01       ; unsigned RadarClass::IsZoomed:1;
+
 
 ;ScoreClass Score;
 ;CreditClass CreditDisplay;

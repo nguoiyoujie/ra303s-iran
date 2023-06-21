@@ -1,3 +1,13 @@
+;----------------------------------------------------------------
+; src/fixes/gnrl_ukraine_voice.asm
+;
+; Ukraine (Soviet) generals used Starvos voice. This is now fixed to the generic Soviet soldier.
+; 
+; This function is enabled by default and is not controllable.
+; No compatibility issues is expected. However, mod maps that use GNRL and have Ukraine as the player, beware.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x004EF7B5 _InfantryClass__Response_Move_GNRL_Is_Soviet
 @HOOK 0x004EF554 _InfantryClass__Response_Select_GNRL_Is_Soviet
 @HOOK 0x004EFA1D _InfantryClass__Response_Attack_GNRL_Is_Soviet

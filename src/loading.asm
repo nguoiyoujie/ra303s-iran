@@ -37,14 +37,6 @@ UseSinglePlayerAtomDamage dd 0
 AtomRadius dd 0
 
 
-
-
-
-
-
-
-
-
 extraremaptable TIMES 3600 db 0
 
 %define colorwhiteoffset    0
@@ -55,20 +47,15 @@ extraremaptable TIMES 3600 db 0
 
 SetProcessAffinityMask dd 0
 
-EasyAIOreValue dd -1
-EasyAIGemValue dd -1
-NormalAIOreValue dd -1
-NormalAIGemValue dd -1
-HardAIOreValue dd -1
-HardAIGemValue dd -1
+Toggle_Feature_DeadPlayersRadar db 0
+Toggle_Feature_ForcedAlliances db 0
+Toggle_Feature_MouseWheelScrolling db 0
 
-fixnavalexploits db 0
-ReenableAITechUpCheck db 0
+
 SingleplayerAIObeyPrerequisites db 0
 ForceSingleCPU db 0
 FastAMBuildSpeed db 0
 EnableWOL db 0
-DeadPlayersRadar db 0
 spawner_aftermath db 0
 ShortGame db 0
 NoTeslaZapEffectDelay db 0
@@ -76,7 +63,6 @@ SouthAdvantageFix db 0
 NoScreenShake db 0
 BuildOffAlly db 0
 TechCenterBugFix db 0
-ForcedAlliances db 0
 AllyReveal db 0
 MCVUndeploy db 0
 buildingcrewstuckfix dd 0
@@ -84,7 +70,6 @@ magicbuildfix db 0
 infantryrangeexploitfix db 0
 OreMineFoundation dd 0
 FRAG1AnimData dd 0
-ComputerParanoidForceDisabledSkirmish db 1
 colorremapsidebarcameoicons db 0
 UseBetaDestroyer db 0
 UseBetaCruiser db 0
@@ -95,9 +80,7 @@ AftermathFastBuildSpeed    db 0
 VideoInterlaceMode    dd 2
 SkipScoreScreen db 0
 RandomStartingSong db 0
-RemoveAITechupCheck db 0
-FixAIParanoid db 0
-FixAIAlly db 0
+
 FixFormationSpeed db 0
 GameLanguage dd 1
 DebugLogging db 1
@@ -109,19 +92,15 @@ DisplayOriginalMultiplayerMaps db 1
 DisplayCounterstrikeMultiplayerMaps db 1
 DisplayAftermathMultiplayerMaps db 1
 ParabombsInMultiplayer    db 0
-MouseWheelScrolling db 0
-EvacInMP db 1
 AlternativeRifleSound db 0
 UseGrenadeThrowingSound db 0
 UseBetaTeslaTank db 0
 KeySidebarToggle dw 0
 KeyMapSnapshot dw 0
-FixAISendingTanksTopLeft db 0
 GenerateMemoryDump    db 0
 UseDOSInterfaceMod db 0
 spawner_is_active  dd 0
 
-RemapJammedBuildings db 0
 
 stringtableoffset_newinfantrytypes  dd -1
 stringtableoffset_newunittypes      dd -1
@@ -453,13 +432,13 @@ _Map_Load_Before_Hook:
 
 .Dont_Clear_Savegame_Values:
 
-    mov  dword [EasyAIOreValue],-1
-    mov  dword [EasyAIGemValue],-1
-    mov  dword [NormalAIOreValue],-1
-    mov  dword [NormalAIGemValue],-1
-    mov  dword [HardAIOreValue],-1
-    mov  dword [HardAIGemValue],-1
-    mov  dword [ReenableAITechUpCheck],0
+    mov  dword [Integer_Feature_EasyAIGoldValue],-1
+    mov  dword [Integer_Feature_EasyAIGemValue],-1
+    mov  dword [Integer_Feature_NormalAIGoldValue],-1
+    mov  dword [Integer_Feature_NormalAIGemValue],-1
+    mov  dword [Integer_Feature_HardAIGoldValue],-1
+    mov  dword [Integer_Feature_HardAIGemValue],-1
+    mov  dword [Toggle_Fix_BuildRadarWithoutAirThreatCheck],-1
     mov  dword [SingleplayerAIObeyPrerequisites],0
 
     ; Set current credit count to be displayed on the credits tab to 0
@@ -555,7 +534,7 @@ _OptionsClass__Load_Settings:
 
     lea  eax,ebp_RedAlertINI
     call_INIClass__Get_Bool eax,str_Options,str_MouseWheelScrolling,0
-    mov  [MouseWheelScrolling],al
+    mov  [Toggle_Feature_MouseWheelScrolling],al
 
     lea  eax,ebp_RedAlertINI
     call_INIClass__Get_Bool eax,str_Options,str_DisplayCounterstrikeMultiplayerMaps,1
@@ -696,25 +675,22 @@ _Init_Game_Hook_Load:
     mov  [ParabombsInMultiplayer],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_EvacInMP,1
-    mov  [EvacInMP],al
+    mov  [Toggle_Feature_EvacInMP],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_RemapJammedBuildings,0
-    mov  [RemapJammedBuildings],al
+    mov  [Toggle_Feature_RemapJammedBuildings],al
     
-    call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_RemoveAITechupCheck,0
-    mov  [RemoveAITechupCheck],al
-
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIParanoid,0
-    mov  [FixAIParanoid],al
+    mov  [Toggle_Fix_AIParanoid],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIAlly,0
-    mov  [FixAIAlly],al
+    mov  [Toggle_Fix_AIAlly],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAISendingTanksTopLeft,0
-    mov  [FixAISendingTanksTopLeft],al
+    mov  [Toggle_Fix_AISendingTanksToTopLeft],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_ComputerParanoidForceDisabledSkirmish,1
-    mov  [ComputerParanoidForceDisabledSkirmish],al
+    mov  [Toggle_Feature_ComputerParanoidForceDisabledSkirmish],al
 
 
 ;  EXTRA COLOUR REMAP WHITE
@@ -975,26 +951,26 @@ Set_Single_CPU_Affinity:
 _RulesClass__AI_Load:
     Save_Registers
 
-    call_INIClass__Get_Int esi,str_AI,str_EasyAIGoldValue,[EasyAIOreValue]
-    mov  [EasyAIOreValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_EasyAIGoldValue,[Integer_Feature_EasyAIGoldValue]
+    mov  [Integer_Feature_EasyAIGoldValue],eax
 
-    call_INIClass__Get_Int esi,str_AI,str_EasyAIGemValue,[EasyAIGemValue]
-    mov  [EasyAIGemValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_EasyAIGemValue,[Integer_Feature_EasyAIGemValue]
+    mov  [Integer_Feature_EasyAIGemValue],eax
 
-    call_INIClass__Get_Int esi,str_AI,str_NormalAIGoldValue,[NormalAIOreValue]
-    mov  [NormalAIOreValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_NormalAIGoldValue,[Integer_Feature_NormalAIGoldValue]
+    mov  [Integer_Feature_NormalAIGoldValue],eax
 
-    call_INIClass__Get_Int esi,str_AI,str_NormalAIGemValue,[NormalAIGemValue]
-    mov  [NormalAIGemValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_NormalAIGemValue,[Integer_Feature_NormalAIGemValue]
+    mov  [Integer_Feature_NormalAIGemValue],eax
 
-    call_INIClass__Get_Int esi,str_AI,str_HardAIGoldValue,[HardAIOreValue]
-    mov  [HardAIOreValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_HardAIGoldValue,[Integer_Feature_HardAIGoldValue]
+    mov  [Integer_Feature_HardAIGoldValue],eax
 
-    call_INIClass__Get_Int esi,str_AI,str_HardAIGemValue,[HardAIGemValue]
-    mov  [HardAIGemValue],eax
+    call_INIClass__Get_Int esi,str_AI,str_HardAIGemValue,[Integer_Feature_HardAIGemValue]
+    mov  [Integer_Feature_HardAIGemValue],eax
 
-    call_INIClass__Get_Bool esi,str_AI,str_ReenableAITechUpCheck,[ReenableAITechUpCheck]
-    mov  [ReenableAITechUpCheck],eax
+    call_INIClass__Get_Bool esi,str_AI,str_BuildRadarWithoutAirThreatCheck,[Toggle_Fix_BuildRadarWithoutAirThreatCheck]
+    mov  [Toggle_Fix_BuildRadarWithoutAirThreatCheck],eax
 
     call_INIClass__Get_Bool esi,str_AI,str_SingleplayerAIObeyPrerequisites,[SingleplayerAIObeyPrerequisites]
     mov  [SingleplayerAIObeyPrerequisites],eax

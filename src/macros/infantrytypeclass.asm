@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/infantrytypeclass.asm
+;
+; Macros to access InfantryTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define array location where infantry type classes are stored
 %define Array_InfantryTypeClass            0x0065DE3C

@@ -1,3 +1,13 @@
+;----------------------------------------------------------------
+; src/features/skirmish_savegames.asm
+;
+; Provides save game support for skirmish games
+; 
+; This function is enabled by default and cannot be configured.
+; No compatibility issues is expected.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x004C9F62 _RedrawOptionsMenu_Skirmish_Savegames
 @HOOK 0x004C9F80 _RedrawOptionsMenu_Skirmish_Savegames2
 @HOOK 0x004C9F93 _RedrawOptionsMenu_Skirmish_Savegames3
@@ -9,8 +19,6 @@
 @HOOK 0x00538267 _Load_Game_Set_Session_Type_Hack
 @HOOK 0x00537A3C _Save_Game_House_Type_Get
 @HOOK 0x004FDB92 _LoadOptionsClass__Fill_Prepend_Skirmish_Text
-
-
 
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>
@@ -31,6 +39,7 @@ _Side_From_Country_Savegames:
     mov  eax, 2
     retn
 
+
 _LoadOptionsClass__Fill_Prepend_Skirmish_Text:
     mov  dh, [ebp-0x14]
     cmp  dh, 0xDD
@@ -48,6 +57,7 @@ _LoadOptionsClass__Fill_Prepend_Skirmish_Text:
     push ebx
     jmp  0x004FDBD3
 
+
 _Save_Game_House_Type_Get:
     mov  al, [eax+25h]
     mov  [ebp-10h], al
@@ -60,6 +70,7 @@ _Save_Game_House_Type_Get:
 
 .Not_Skirmish_Save:
     jmp  0x00537A42
+
 
 _Load_Game_Set_Session_Type_Hack:
     call 0x005D5BF4 ; LZOStraw::Get(void *,int)
@@ -76,13 +87,13 @@ _Load_Game_Set_Session_Type_Hack:
     mov  byte [Globals___Session_Type], GameType.GAME_NORMAL
 
     mov  edx, str_ext_mpr
-    mov  eax, 0x006679D8
+    mov  eax, Globals___Scen_ScenarioName
     call __strstr
 
     cmp  eax, 0 ; if eax == 0 the substring wasn't found
     jnz  .Set_Skirmish
 
-    cmp  byte [0x006679D8], 'S'
+    cmp  byte [Globals___Scen_ScenarioName], 'S'
     jne  .Ret
     cmp  byte [0x006679D9], 'C'
     jne  .Ret
@@ -96,6 +107,7 @@ _Load_Game_Set_Session_Type_Hack:
     Restore_Registers
     jmp  0x0053826C
 
+
 _RedrawOptionsMenu_Skirmish_Savegames:
     mov  [eax+ebp-11Ch], edx ; Hooked by patch
     cmp  byte cl, 0
@@ -108,8 +120,10 @@ _RedrawOptionsMenu_Skirmish_Savegames:
 .Ret:
     jmp  0x004C9F6D
 
+
 _RedrawOptionsMenu_Skirmish_Savegames2:
     jmp  0x004C9F85
+
 
 _RedrawOptionsMenu_Skirmish_Savegames3:
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
@@ -119,8 +133,10 @@ _RedrawOptionsMenu_Skirmish_Savegames3:
 
     jmp  0x004C9F9C
 
+
 _RedrawOptionsMenu_Skirmish_Savegames4:
     jmp  0x004C9FB5
+
 
 _RedrawOptionsMenu_Skirmish_Savegames5:
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
@@ -130,6 +146,7 @@ _RedrawOptionsMenu_Skirmish_Savegames5:
 
     jmp  0x004C9FBE
 
+
 _RedrawOptionsMenu_Skirmish_Savegames6:
     mov  ch, byte [Globals___Session_Type]
     test ch, ch
@@ -138,6 +155,7 @@ _RedrawOptionsMenu_Skirmish_Savegames6:
     jz   0x004CA2DC
 
     jmp  0x004CA2D7
+
 
 _RedrawOptionsMenu_Skirmish_Savegames7:
     test ch, ch
@@ -151,6 +169,7 @@ _RedrawOptionsMenu_Skirmish_Savegames7:
 .Ret:
     mov  edx, 2
     jmp  0x004CA95C
+
 
 _RedrawOptionsMenu_Skirmish_Savegames8:
     cmp  dword [ResignKeyPressed], 1

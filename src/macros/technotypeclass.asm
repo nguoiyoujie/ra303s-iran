@@ -1,3 +1,10 @@
+;----------------------------------------------------------------
+; src/macros/technotypeclass.asm
+;
+; Macros to access TechnoTypeClass offsets
+;
+;----------------------------------------------------------------
+
 
 ; define techno type field definitions
 %define TechnoTypeClass.Offset.Remap                  0x138    ; byte
@@ -241,9 +248,9 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.Prerequisite.Set(ptr_type,value)                     ObjectTypeClass.SetInt                ptr_type, TechnoTypeClass.Offset.Prerequisite, value
 %define TechnoTypeClass.Prerequisite.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, TechnoTypeClass.Offset.Prerequisite, str.TechnoTypeClass.Prerequisite, function
 
-%define TechnoTypeClass.MaxPassengers.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.MaxPassengers, reg_output
-%define TechnoTypeClass.MaxPassengers.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.MaxPassengers, value
-%define TechnoTypeClass.MaxPassengers.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.MaxPassengers, str.TechnoTypeClass.MaxPassengers
+%define TechnoTypeClass.MaxPassengers.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.MaxPassengers, reg_output
+%define TechnoTypeClass.MaxPassengers.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.MaxPassengers, value
+%define TechnoTypeClass.MaxPassengers.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.MaxPassengers, str.TechnoTypeClass.MaxPassengers
 
 %define TechnoTypeClass.DeathWeapon.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, reg_output
 %define TechnoTypeClass.DeathWeapon.Set(ptr_type,value)                      ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.DeathWeapon, value
@@ -256,6 +263,10 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.Facings.Get(ptr_type,reg_output)                     ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.Facings, reg_output
 %define TechnoTypeClass.Facings.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.Facings, value
 %define TechnoTypeClass.Facings.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadByte               ptr_type, ptr_rules, TechnoTypeClass.Offset.Facings, str.TechnoTypeClass.Facings
+
+%define TechnoTypeClass.MaxAmmo.Get(ptr_type,reg_output)                     ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.MaxAmmo, reg_output
+%define TechnoTypeClass.MaxAmmo.Set(ptr_type,value)                          ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.MaxAmmo, value
+%define TechnoTypeClass.MaxAmmo.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.MaxAmmo, str.TechnoTypeClass.MaxAmmo
 
 %define TechnoTypeClass.PrimaryWeapon.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.PrimaryWeapon, reg_output
 %define TechnoTypeClass.PrimaryWeapon.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.PrimaryWeapon, value

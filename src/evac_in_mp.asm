@@ -6,7 +6,7 @@ _Count_as_Civ_Evac_Check:
     jmp  .Normal_Function
 
 .Check_EvacInMP_Keyword:
-    cmp  byte [EvacInMP],1
+    cmp  byte [Toggle_Feature_EvacInMP],1
     jz   .Normal_Function
 
     mov  eax,0

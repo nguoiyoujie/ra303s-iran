@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/aircrafttypeclass.asm
+;
+; Macros to access AircraftTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define array location where aircraft type classes are stored
 %define Array_AircraftTypeClass            0x0065DDF0

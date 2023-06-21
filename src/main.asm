@@ -42,20 +42,22 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/functions.asm"
 
 ; macros ; added by lovalmidas
-%include "src/macros.asm"
-%include "src/macros_generic.asm"
+%include "src/macros/common.asm"
+%include "src/macros/generic.asm"
 
 ; typeclass_macros ; added by lovalmidas
-%include "src/macros_abstracttype.asm"
-%include "src/macros_objecttype.asm"
-%include "src/macros_technotype.asm"
-%include "src/macros_aircrafttype.asm"
-%include "src/macros_buildingtype.asm"
-%include "src/macros_infantrytype.asm"
-%include "src/macros_unittype.asm"
-%include "src/macros_vesseltype.asm"
-%include "src/macros_warheadtype.asm"
-%include "src/macros_weapontype.asm"
+%include "src/macros/abstracttypeclass.asm"
+%include "src/macros/objecttypeclass.asm"
+%include "src/macros/technotypeclass.asm"
+%include "src/macros/aircrafttypeclass.asm"
+%include "src/macros/buildingtypeclass.asm"
+%include "src/macros/infantrytypeclass.asm"
+%include "src/macros/unittypeclass.asm"
+%include "src/macros/vesseltypeclass.asm"
+%include "src/macros/warheadtypeclass.asm"
+%include "src/macros/weapontypeclass.asm"
+;%include "src/macros/houseclass.asm" ;wip
+;%include "src/macros/animtypeclass.asm" ;wip
 
 %ifdef USE_HIRES
 %include "src/hires.asm"
@@ -87,7 +89,6 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 %include "src/features/type_extensions/VesselTypeClass/extended_vesseltypeclass_loading.asm"
 
-%include "src/features/type_extensions/AircraftTypeClass/extended_aircrafttypeclass.asm"
 %include "src/features/type_extensions/extended_houseclass.asm"
 %include "src/features/type_extensions/extended_buildingclass.asm"
 %include "src/features/type_extensions/extended_technoclass.asm"
@@ -126,13 +127,13 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/no_digest.asm"
 %include "src/remove_C&C_text_references.asm"
 %include "src/modem_menu_remove.asm"
-%include "src/spectator.asm"
-%include "src/radar_spectator.asm"
-%include "src/forced_alliances.asm"
+%include "src/features/spectator.asm"
+%include "src/features/radar_spectator.asm"
+%include "src/features/forced_alliances.asm"
 %include "src/MCVUndeploy.asm"
 %include "src/teamtype_buildings.asm"
-;%include "src/south_advantage_fix.asm" ; test fix
-%include "src/game_difficulty_speed_modifier_remove.asm"
+;%include "src/fixes/south_advantage.asm" ; test fix
+%include "src/fixes/remove_difficulty_gamespeed_modifier.asm"
 %include "src/magic_build_fix.asm"
 %include "src/infantry_range_check.asm"
 %include "src/no_tesla_zap_effect_delay.asm"
@@ -172,15 +173,22 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/extra_multiplayer_countries.asm"
 %include "src/aftermath_fast_buildspeed_option.asm"
 %include "src/optional_scorescreen.asm"
-%include "src/zoom_out_radar_by_default.asm"
+%include "src/features/radar_default_zoom_out.asm"
 ;%include "src/features/load_ai_ini.asm" ; Changing AI settings desyncs online...
 %include "src/ai_fixes.asm"
+
+%include "src/fixes/ai_topleft_bug.asm"
+%include "src/features/ai_mutual_alliances.asm"
+%include "src/features/ai_difficulty_customizations.asm"
+%include "src/fixes/ai_build_radar_dome.asm"
+
 %include "src/fix_formation_glitch.asm"
 %include "src/parabombs_multiplayer.asm"
-%include "src/mousewheel_scrolling.asm"
-%include "src/skirmish_savegames.asm"
+%include "src/features/mousewheel_scrolling.asm"
+%include "src/features/skirmish_savegames.asm"
 %include "src/sidebar_cameo_icons_remap_colours.asm"
 %include "src/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
+%include "src/features/aircraft_maxpips.asm"
 ; code extensions, added by lovalmidas
 %include "src/map_sight_no_incremental.asm" 
 %include "src/building_mission_repair.asm" 
@@ -189,7 +197,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/battlecontrolterminated_delayblackscreen.asm" 
 %include "src/explosion_no_anim_crash_fix.asm" 
 %include "src/building_jammable_override.asm" 
-%include "src/building_power_fix.asm" 
+%include "src/fixes/building_power_clear_drain.asm" 
 %include "src/unit_turret_draw.asm" 
 %include "src/building_mission_unload.asm" 
 %include "src/tesla_charging_unhardcode.asm" 
@@ -224,7 +232,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/ore_truck_ore_patch_minimap_cursor_bug_fix.asm"
 %include "src/allies_NCO_helipad_airfield_bug.asm"
 %include "src/engi_q_freeze_fix.asm"
-%include "src/gnrl_ukraine_voices_fix.asm"
+%include "src/fixes/gnrl_ukraine_voice.asm"
 %include "src/score_screen_print_colour_fix.asm"
 %include "src/animate_score_objects_crash_fix.asm"
 %include "src/submarine_decloak_skip_campaign.asm"

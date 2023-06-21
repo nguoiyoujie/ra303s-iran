@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/buildingtypeclass.asm
+;
+; Macros to access BuildingTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define array location where building type classes are stored
 %define Array_BuildingTypeClass            0x0065DDA4

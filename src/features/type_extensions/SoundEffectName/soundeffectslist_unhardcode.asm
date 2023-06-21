@@ -23,11 +23,6 @@
 @HOOK 0x004260AB _Sound_Effect_Call_Voc_Name
 @HOOK 0x004260F5 _Sound_Effect_Call_Priority
 
-SoundEffectsList                               TIMES 2304 dd 0 ; 9 bytes per entry * 256; the new list supports up to 256 new entries 
-SoundEffectsCount                              dd 0
-%define        OriginalSoundEffectsCount       165 ; Exclude Remastered-exclusive 'BEACON'
-;%define        SoundEffectName                 0x005FE08F
-
 _Sound_Effect_Call_Where:
 ; eax is the voc id
     cmp  ax,OriginalSoundEffectsCount

@@ -1,3 +1,11 @@
+;----------------------------------------------------------------
+; src/macros/objecttypeclass.asm
+;
+; Macros to access ObjectTypeClass offsets
+;
+;----------------------------------------------------------------
+
+
 ; define object type field definitions
 %define ObjectTypeClass.Offset.Unknown                   0x021    ; INT // 5FAAD0 for infantry
 %define ObjectTypeClass.Offset.GraphicName               0x025    ; byte[256] // 

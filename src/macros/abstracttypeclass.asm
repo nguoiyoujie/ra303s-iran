@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/abstracttypeclass.asm
+;
+; Macros to access AbstractTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define abstract type field definitions
 %define AbstractTypeClass.Offset.RTTI                      0x000    ; byte

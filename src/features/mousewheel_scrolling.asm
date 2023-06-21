@@ -1,3 +1,16 @@
+;----------------------------------------------------------------
+; src/features/mousewheel_scrolling.asm
+;
+; Enables scrolling over the sidebar using the mousewheel
+;
+; This function is enabled by the folliwing key:
+;   RedAlert.ini > [Options] > MouseWheelScrolling=yes
+;
+; No compatibility issues is expected as this function was not present in the unmodified game.
+;
+;----------------------------------------------------------------
+
+; Intercepting void Check_For_Focus_Loss(void) in WINSTUB.CPP
 @HOOK 0x005B38DD _Mouse_Wheel_Sidebar_Scrolling
 ;@HOOK 0x0054E3BB _SidebarClass_StripClass__AI_Scroll_Check
 
@@ -5,10 +18,10 @@ Scrolling db 0
 ProcessingSidebar dd 0
 
 _Mouse_Wheel_Sidebar_Scrolling:
-    cmp  byte [MouseWheelScrolling], 1
+    cmp  byte [Toggle_Feature_MouseWheelScrolling], 1
     jnz  .out
     mov  esi, [ebp+0Ch]
-    cmp  esi, 20Ah               ;WM_MOUSEHWHEEL
+    cmp  esi, 20Ah ;WM_MOUSEHWHEEL
     jnz  .out
 
     mov  ecx, [Globals___PlayerPtr]

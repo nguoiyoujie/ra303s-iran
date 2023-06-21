@@ -32,8 +32,8 @@
 %define FILE_ATTRIBUTE_NORMAL   128
 
 str_exception_title         db"Command & Conquer: Red Alert just crashed!",0
-str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to Iran for debugging, thanks.",0
-str_exception_message2       db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to Iran for debugging, thanks.",0
+str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to lovalmidas for debugging, thanks.",0
+str_exception_message2      db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to lovalmidas for debugging, thanks.",0
 str_dbghelp_dll             db"dbghelp.dll",0
 str_MiniDumpWriteDump       db"MiniDumpWriteDump",0
 str_dump_name               db"ra95crash.dmp",0

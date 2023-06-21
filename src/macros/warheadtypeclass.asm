@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/warheadtypeclass.asm
+;
+; Macros to access WarheadTypeClass offsets
+;
+;----------------------------------------------------------------
 
 ; define array location where aircraft type classes are stored
 %define Array_WarheadTypeClass             0x00691634

@@ -1,3 +1,9 @@
+;----------------------------------------------------------------
+; src/macros/houseclass.asm
+;
+; Macros to access HouseClass offsets
+;
+;----------------------------------------------------------------
 
 ; define house class field definitions
 %define HouseClass.Offset.RTTI                   0x000    ; byte (0B)

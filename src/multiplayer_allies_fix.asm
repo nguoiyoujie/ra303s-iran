@@ -1,3 +1,7 @@
+;
+;
+;
+
 @HOOK 0x0053DC0B _Read_Scenario_INI_Ally_Test
 
 str_HouseAllyOne        db"HouseAllyOne",0
@@ -109,11 +113,6 @@ _Read_Scenario_INI_Ally_Test:
     Load_Alliances HOUSE_MULTI6, str_Multi6_Alliances, esi
     Load_Alliances HOUSE_MULTI7, str_Multi7_Alliances, esi
     Load_Alliances HOUSE_MULTI8, str_Multi8_Alliances, esi
-
-    ; Have Multi1 ally Multi2
-;    Ally_House HOUSE_MULTI1, HOUSE_MULTI2
-    ; Have Multi2 ally Multi1
-;    Ally_House HOUSE_MULTI2, HOUSE_MULTI1
 
     Restore_Registers
 

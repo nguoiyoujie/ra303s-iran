@@ -61,6 +61,9 @@ str_SetProcessAffinityMask                        db"SetProcessAffinityMask",0
 str_Warheads                                      db"Warheads",0
 str_SoundEffects                                  db"SoundEffects",0
 
+str_AircraftTypes                                 db"AircraftTypes",0
+
+
 
 str_Skirmish                                      db"Skirmish",0
 str_Multi1                                        db"Multi1",0
@@ -193,7 +196,7 @@ str_SecondaryColorScheme                          db"SecondaryColorScheme",0
 %define str_VideoInterlaceMode                    0x006EEE5E ; "VideoInterlaceMode"
 %define str_SkipScoreScreen                       0x006EEE71 ; "SkipScoreScreen"
 %define str_RandomStartingSong                    0x006EEE81 ; "RandomStartingSong"
-%define str_RemoveAITechupCheck                   0x006EEE97 ; "RemoveAITechupCheck"
+;%define str_RemoveAITechupCheck                   0x006EEE97 ; "RemoveAITechupCheck"
 %define str_FixAIParanoid                         0x006EEEAB ; "FixAIParanoid"
 ; str_FixAIAlly 
 %define str_GameLanguage                          0x006EEED5 ; "GameLanguage"
@@ -310,7 +313,7 @@ str_NormalAIGoldValue                             db"NormalAIGoldValue",0
 str_NormalAIGemValue                              db"NormalAIGemValue",0
 str_HardAIGoldValue                               db"HardAIGoldValue",0
 str_HardAIGemValue                                db"HardAIGemValue",0
-str_ReenableAITechUpCheck                         db"ReenableAITechUpCheck",0
+str_BuildRadarWithoutAirThreatCheck               db"BuildRadarWithoutAirThreatCheck",0 ; replaces RemoveAITechupCheck and ReenableAITechUpCheck
 
 str_FixAISendingTanksTopLeft                      db"FixAISendingTanksTopLeft",0
 str_ComputerParanoidForceDisabledSkirmish         db"ComputerParanoidForceDisabledSkirmish",0
@@ -367,6 +370,40 @@ CCFileClass_Map  TIMES 128 db 0
 CCINIClass_Map   TIMES 64 db 0
 
 
+;;; New type heap locations
+;Aircraft
+%define        OriginalAircraftTypeHeapCount      7
+NewAircraftTypeHeapCount                          dd    0
+AircraftTypesTypesExtCount                        dd    0
+
+
+
+
+;SoundEffects
+%define        OriginalSoundEffectsCount          165
+SoundEffectsList                                  TIMES 2304 dd 0 ; 9 bytes per entry * 256; the new list supports up to 256 new entries 
+SoundEffectsCount                                 dd 0
+;%define        SoundEffectName                 0x005FE08F
+
+
+;;; Temporary location for new global storages
+; intended for values that are loaded from INI
+Integer_Feature_EasyAIGoldValue dd -1
+Integer_Feature_EasyAIGemValue dd -1
+Integer_Feature_NormalAIGoldValue dd -1
+Integer_Feature_NormalAIGemValue dd -1
+Integer_Feature_HardAIGoldValue dd -1
+Integer_Feature_HardAIGemValue dd -1
+
+Toggle_Feature_ComputerParanoidForceDisabledSkirmish db 1
+Toggle_Fix_BuildRadarWithoutAirThreatCheck db -1
+Toggle_Feature_EvacInMP db 1
+Toggle_Feature_RemapJammedBuildings db 0
+
+Toggle_Fix_NavalRepairExploit db 0
+Toggle_Fix_AISendingTanksToTopLeft db 0
+Toggle_Fix_AIParanoid db 0
+Toggle_Fix_AIAlly db 0
 
 ;;; Temporary location until the House macros are completed
 ; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)

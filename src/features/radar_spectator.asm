@@ -1,3 +1,15 @@
+;----------------------------------------------------------------
+; src/features/radar_spectator.asm
+;
+; Provides spectators with radar
+; 
+; This function is enabled by with the following key:
+;   spawn.ini > [Settings] > DeadPlayersRadar=true
+;
+; No compatibility issues is expected.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x004D4EEF _HouseClass__AI_Radar1
 @HOOK 0x004D4ED3 _HouseClass__AI_Radar2
 @HOOK 0x004D4EFD _HouseClass__AI_Radar3
@@ -19,7 +31,7 @@ _RadarClass__Draw_It_1:
 
 
 _HouseClass__AI_Radar3:
-    cmp  byte [DeadPlayersRadar], 0
+    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -45,9 +57,10 @@ _HouseClass__AI_Radar3:
 .Ret:
     jmp  0x004D4F02
 
+
 _HouseClass__AI_Radar1:
     push eax
-    cmp  byte [DeadPlayersRadar], 0
+    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -68,7 +81,7 @@ _HouseClass__AI_Radar1:
 
 _HouseClass__AI_Radar2:
     push eax
-    cmp  byte [DeadPlayersRadar], 0
+    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -87,8 +100,9 @@ _HouseClass__AI_Radar2:
     mov  eax, [ebp-0x58]
     jmp  0x004D4ED8
 
+
 _RadarClass__Activate_Play_Radar_Sound1:
-    cmp  byte [DeadPlayersRadar], 0
+    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [Globals___PlayerPtr]
@@ -104,8 +118,9 @@ _RadarClass__Activate_Play_Radar_Sound1:
     call Audio___Sound_Effect
     jmp  0x0052D837
 
+
 _RadarClass__Activate_Play_Radar_Sound2:
-    cmp  byte [DeadPlayersRadar], 0
+    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [Globals___PlayerPtr]

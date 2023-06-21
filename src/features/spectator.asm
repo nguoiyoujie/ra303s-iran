@@ -1,3 +1,14 @@
+;----------------------------------------------------------------
+; src/features/spectator.asm
+;
+; Provides spectators function
+; 
+; This function is enabled by default and cannot be configured.
+; No compatibility issues is expected.
+;
+;----------------------------------------------------------------
+
+
 @HOOK 0x004D8CB4 _HouseClass__Init_Data_Spectator_Stuff
 @HOOK 0x0053E4FB _Create_Units_Skip_Dead_Houses
 @HOOK 0x0053DFD7 _Assign_Houses_Set_Up_Player_Pointer
@@ -26,6 +37,7 @@ _TechnoClass_Visual_Character_Spectator_Stuff:
     movsx eax,cl
     lea  esp,[ebp-0Ch]
     jmp  0x0056704E
+
 
 _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator:
     push eax
@@ -63,6 +75,7 @@ _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator:
     push 0xDF
     jmp  .Ret
 
+
 _BuildingClass__Read_INI_Skip_Dead_Houses:
     call HouseTypeClass__From_Name
     mov  bl,al
@@ -83,6 +96,7 @@ _BuildingClass__Read_INI_Skip_Dead_Houses:
 .Next_Iteration:
     Restore_Registers
     jmp  0x0045EED8
+
 
 _InfantryClass__Read_INI_Skip_Dead_Houses:
     call HouseTypeClass__From_Name
@@ -122,6 +136,7 @@ _VesselClass__Read_INI_Skip_Dead_Houses:
     Restore_Registers
     jmp  0x0058CA8B
 
+
 _UnitClass__Read_INI_Skip_Dead_Houses:
     call HouseTypeClass__From_Name
     mov  bh,al
@@ -139,6 +154,7 @@ _UnitClass__Read_INI_Skip_Dead_Houses:
 .Next_Iteration:
     Restore_Registers
     jmp  0x0058110B
+
 
 _HouseClass__Init_Data_Spectator_Stuff:
     Save_Registers
@@ -166,6 +182,7 @@ _HouseClass__Init_Data_Spectator_Stuff:
     Restore_Registers
     jmp  0x004D8CBA
 
+
 _Create_Units_Skip_Dead_Houses:
 
     cmp  byte [spawner_is_active],0
@@ -180,6 +197,7 @@ _Create_Units_Skip_Dead_Houses:
 
 .Spectator:
     jmp  0x0053E4D6
+
 
 _Assign_Houses_Set_Up_Player_Pointer:
     mov  dword [Globals___PlayerPtr],edi
