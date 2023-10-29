@@ -46,6 +46,8 @@ _UnitTypeClass__Read_INI_Extended:
 
     UnitTypeClass.DeploysInto.Read(esi,edi,_GetBuildingTypeIDFromString)
 
+    UnitTypeClass.AmmoReloadRate.Read(esi,edi)
+    UnitTypeClass.AmmoReloadAmount.Read(esi,edi)
 
     pop  esi
 .Ret:

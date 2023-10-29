@@ -13,6 +13,7 @@ UnitTypes represent vehicles, and are in essence play the second most major role
  - [General Settings](#general-settings) 
  - [Turret Adjustments](#turret-adjustments) 
  - [Deploys To Building](#deploys-to-building) 
+ - [Reload Logic](#reload-logic) 
 
 -------
 
@@ -251,5 +252,33 @@ The created building will be offset at the cell -1,-1 (directly north-west) from
 For the moment, teams with units with this modified characteristic may use the Undeploy mission to deploy.
 
 Interactions with other deploy logic (such as unloading passengers) are not presently known.
+
+</details>
+
+-------
+
+### Reload Logic
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;UnitType&gt;] ► AmmoReloadRate (integer)</code></b></summary>
+
+```New logic```
+
+If set, enables timed reload of ammunition, in seconds, up to the maximum defined by `Ammo`. Has no effect on units without `Ammo`.
+
+This is applicable to both units with weapons and the Minelayer's mines.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;UnitType&gt;] ► AmmoReloadAmount (integer)</code></b></summary>
+
+```New logic```
+
+If set, determines the number of ammo resupplied for each reload cycle. The ammunition restored will never allow the unit to exceed its maximum defined by `Ammo`
+
+This is applicable to both units with weapons and the Minelayer's mines.
+
+For example, setting `AmmoReloadRate` to 20 and `AmmoReloadAmount` to 2 for Minelayer will cause the Minelayer to restore 2 units of mines every 20 seconds.
 
 </details>

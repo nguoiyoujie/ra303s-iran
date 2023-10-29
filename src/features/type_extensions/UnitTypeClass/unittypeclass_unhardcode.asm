@@ -117,4 +117,7 @@ _UnitTypeClass__Init_Heap_OverrideExistingUnitTypes:
     UnitTypeClass.FromIndex(UnitType.MCV,edi)
     UnitTypeClass.DeploysInto.Set(edi,BuildingType.FACT)
 
+    UnitTypeClass.FromIndex(UnitType.V2RL,edi)
+    UnitTypeClass.AmmoReloadRate.Set(edi,30)
+
 	retn

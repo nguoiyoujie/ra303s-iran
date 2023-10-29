@@ -70,10 +70,12 @@
 ; Extended space (>= 0x19E)
 %define UnitTypeClass.Offset.ExtendedPrerequisite          0x19E    ; INTx8
 %define UnitTypeClass.Offset.TurretAdjustX                 0x21E    ; INT
-%define UnitTypeClass.Offset.TurretAdjustY                 0x223    ; INT
-%define UnitTypeClass.Offset.TurretFrameStart              0x227    ; word
-%define UnitTypeClass.Offset.TurretFrameCount              0x229    ; word
-%define UnitTypeClass.Offset.DeploysInto                   0x22B    ; byte
+%define UnitTypeClass.Offset.TurretAdjustY                 0x222    ; INT
+%define UnitTypeClass.Offset.TurretFrameStart              0x226    ; word
+%define UnitTypeClass.Offset.TurretFrameCount              0x228    ; word
+%define UnitTypeClass.Offset.DeploysInto                   0x22A    ; byte
+%define UnitTypeClass.Offset.AmmoReloadRate                      0x22B    ; INT
+%define UnitTypeClass.Offset.AmmoReloadAmount                    0x22F    ; INT
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -98,6 +100,8 @@ str.UnitTypeClass.TurretAdjustY                 db"TurretAdjustY",0             
 str.UnitTypeClass.TurretFrameStart              db"TurretFrameStart",0            ;new ini feature
 str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0            ;new ini feature
 str.UnitTypeClass.DeploysInto                   db"DeploysInto",0                 ;new ini feature
+str.UnitTypeClass.AmmoReloadRate                      db"AmmoReloadRate",0                    ;new ini feature
+str.UnitTypeClass.AmmoReloadAmount                    db"AmmoReloadAmount",0                  ;new ini feature
 
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_UnitTypeClass, Array_UnitTypeClass, reg_output
@@ -194,3 +198,10 @@ str.UnitTypeClass.DeploysInto                   db"DeploysInto",0               
 %define UnitTypeClass.DeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.DeploysInto, value
 %define UnitTypeClass.DeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, UnitTypeClass.Offset.DeploysInto, str.UnitTypeClass.DeploysInto, function
 
+%define UnitTypeClass.AmmoReloadRate.Get(ptr_type,reg_output)                    ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, reg_output
+%define UnitTypeClass.AmmoReloadRate.Set(ptr_type,value)                         ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, value
+%define UnitTypeClass.AmmoReloadRate.Read(ptr_type,ptr_rules)                    ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadRate, str.UnitTypeClass.AmmoReloadRate
+
+%define UnitTypeClass.AmmoReloadAmount.Get(ptr_type,reg_output)                  ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, reg_output
+%define UnitTypeClass.AmmoReloadAmount.Set(ptr_type,value)                       ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, value
+%define UnitTypeClass.AmmoReloadAmount.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadAmount, str.UnitTypeClass.AmmoReloadAmount
