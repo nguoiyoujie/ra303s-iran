@@ -11,6 +11,7 @@ VesselTypes represent units that are exclusive to the water. While analogous to 
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
+ - [Turret Logic](#turret-logic) 
 
 -------
 
@@ -110,11 +111,46 @@ TechnoType settings are also available to VesselTypes. See [TechnoTypes](./techn
 
 </details>
 
+-------
+
+### Turret Logic
+
+There are customized drawing of turrets, the most known of which is the Cruiser's double turrets. To enable the following options, make sure `HasTurret` (common to all TechnoTypes) is set.
+
+For the moment, firing coordinates still come from the center of the unit. This may change to follow the turret in the future.
+
 <details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretOffset (byte)</code></b></summary>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► HasSecondTurret (boolean)</code></b></summary>
+
+```New logic```
+
+Determines whether a second turret should be drawn. The second turret will always be drawn at the opposite offset of the first turret.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretName (string)</code></b></summary>
+
+```New logic```
+
+Determines the turret to be drawn. Defaults to MGUN for the Gunboat, SSAM for the Destroyer and TURR for the Cruiser. The SHP file representing the turret should support 32 directional frames.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretOffset (signed byte)</code></b></summary>
 
 ```Exposed UnitTypeClass->TurretOffset```
 
-*Functionality to be determined*
+Determines the offset of the turret towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretAdjustY (int)</code></b></summary>
+
+```New logic```
+
+Determines the vertical offset of the turret.
 
 </details>

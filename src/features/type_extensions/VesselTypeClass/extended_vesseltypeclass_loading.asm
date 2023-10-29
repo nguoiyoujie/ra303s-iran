@@ -7,6 +7,8 @@
 %define        Old_VesselTypeClass_Size        0x19E
 %define        New_VesselTypeClass_Size        0x240
 
+Buffer_VesselType           times 512 db 0 
+
 ;There is no Read_INI in VesselTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HOOK 0x005374A2 _RulesClass_Objects_Replace_VesselTypes_Read_INI
 
@@ -60,11 +62,17 @@ VesselTypes_Read_INI:
 	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
 
     VesselTypeClass.IsPieceOfEight.Read(esi,edi)             
+    VesselTypeClass.HasSecondTurret.Read(esi,edi)             
     ;VesselTypeClass.Type.Read(esi,edi)                       
     VesselTypeClass.TurretOffset.Read(esi,edi)               
     ;VesselTypeClass.DefaultMission.Read(esi,edi)             
     ;VesselTypeClass.Explosion.Read(esi,edi)                  
     ;VesselTypeClass.MaxSize.Read(esi,edi)                    
+    VesselTypeClass.TurretName.Read(esi,edi,_LoadTurretShapeFromString)
+    VesselTypeClass.TurretName.Get(esi,eax)
+    call _LoadTurretShapeFromString
+    
+    VesselTypeClass.TurretAdjustY.Read(esi,edi)             
 
     pop  edi
     pop  esi
@@ -73,4 +81,37 @@ VesselTypes_Read_INI:
     lea  esp,[ebp-0x18]
     Restore_Registers
     pop   ebp
+    retn
+
+
+_LoadTurretShapeFromString:
+   ;create shape with string from eax
+    push eax
+    push ebx
+    push ecx
+    push edx 
+    push esi 
+    push edi 
+    cmp  eax,0
+    je   .Retn
+    push 0x005E8EDE ; ".SHP"
+    mov  ecx,eax
+    lea  eax,[Buffer_VesselType]
+    xor  ebx,ebx
+    xor  edx,edx
+    call 0x005B8BEE    ; _makepath
+    lea  eax,[Buffer_VesselType]
+    call 0x005B9330    ; MFCD::Retrieve
+    ; move the result to TurretShape
+    mov  edx,esi
+    add  edx,VesselTypeClass.Offset.TurretShape
+    mov  dword [edx], eax
+
+.Retn:
+    pop edi
+    pop esi
+    pop edx
+    pop ecx
+    pop ebx
+    pop eax
     retn

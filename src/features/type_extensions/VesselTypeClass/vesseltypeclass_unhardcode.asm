@@ -5,6 +5,9 @@
 @HOOK 0x00459661 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes
 
 str_VesselTypes db"VesselTypes",0
+str_TURR db"TURR",0
+str_SSAM db"SSAM",0
+str_MGUN db"MGUN",0
 
 NewVesselTypeHeapCount      dd    0
 VesselTypesTypesExtCount    dd    0
@@ -71,6 +74,7 @@ Init_VesslTypeClass:
 _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes:
 
     Loop_Over_RULES_INI_Section_Entries str_VesselTypes,Init_VesslTypeClass
+    call _VesselTypeClass__Init_Heap_OverrideExistingVesselTypes
 
 .Ret:
     lea  esp,[ebp-14h]
@@ -98,3 +102,37 @@ _VesselTypeClass__From_Name_Unhardcode_VesselTypes:
     cmp  dl,al
     jl   0x00584B50
     jmp  0x00584B49
+
+_VesselTypeClass__Init_Heap_OverrideExistingVesselTypes:
+    push esi
+    VesselTypeClass.FromIndex(VesselType.PT,edi)
+    VesselTypeClass.TurretName.Set(edi,str_MGUN)
+    ;mov  ecx, dword [0x0068D2E8] ;MGUN
+    ;VesselTypeClass.TurretShape.Set(edi,ecx)
+    ;mov  eax,str_MGUN
+    ;mov  esi,edi
+    ;call _LoadTurretShapeFromString
+    VesselTypeClass.TurretOffset.Set(edi,14)
+    VesselTypeClass.TurretAdjustY.Set(edi,1)
+
+    VesselTypeClass.FromIndex(VesselType.DD,edi)
+    VesselTypeClass.TurretName.Set(edi,str_SSAM)
+    ;mov  ecx, dword [0x0068D2E4] ;SSAM
+    ;VesselTypeClass.TurretShape.Set(edi,ecx)
+    ;mov  eax,str_SSAM
+    ;mov  esi,edi
+    ;call _LoadTurretShapeFromString
+    VesselTypeClass.TurretOffset.Set(edi,-8)
+    VesselTypeClass.TurretAdjustY.Set(edi,-4)
+
+    VesselTypeClass.FromIndex(VesselType.CA,edi)
+    VesselTypeClass.TurretName.Set(edi,str_TURR)
+    ;mov  ecx, dword [0x0068D2E0] ; TURR
+    ;VesselTypeClass.TurretShape.Set(edi,ecx)
+    ;mov  eax,str_TURR
+    ;mov  esi,edi
+    ;call _LoadTurretShapeFromString
+    VesselTypeClass.HasSecondTurret.Set(edi,1)
+    VesselTypeClass.TurretOffset.Set(edi,22)
+    VesselTypeClass.TurretAdjustY.Set(edi,-4)
+    pop esi
