@@ -142,7 +142,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/shorter_multiplayer_reconnect_timer.asm"
 ;%include "src/harvester_harvest_closest_ore.asm" ; same thing what pressing S on harvesters does, desyncs online and keeps mining new ore spawned by ore mines
 %include "src/building_crew_impassable_terrain_fix.asm"
-%include "src/predetermined_alliances.asm"
+%include "src/features/multiplayer_predetermined_alliances.asm"
 %include "src/build_off_ally.asm"
 %include "src/selectable_Spawn_locations.asm"
 %include "src/tech_center_bug_fix.asm"
