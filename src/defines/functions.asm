@@ -23,6 +23,7 @@
 ; AUDIO.CPP
 %define Audio___Sound_Effect_At_Coord                             0x00425D1C ; void Sound_Effect(VocType voc, COORDINATE coord, int variation, HousesType house)
 %define Audio___Sound_Effect                                      0x00425F24 ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
+%define Audio___SoundEffectName                                   0x005FE090 ; SoundEffectName[VOC_COUNT]
 
 ; CCFile.CPP
 ; !!! FileClass is a base type, check what derived type these addresses really point to
@@ -110,6 +111,7 @@
 %define AircraftTypeClass__AircraftTypeClass                      0x00401210 ; AircraftTypeClass::AircraftTypeClass(AircraftType,int,char *,int,int,int,int,int,int,int,int,int,int,int,int,StructType,int,int,MissionType)
 %define AircraftTypeClass__new                                    0x00401324 ; AircraftTypeClass::operator new(uint)
 %define AircraftTypeClass__As_Reference                           0x004040F0 ; AircraftTypeClass & AircraftTypeClass::As_Reference(AircraftType type)
+
 
 ; TYPE.H
 %define BulletTypeClass__BulletTypeClass                          0x00426A20 ; BulletTypeClass::BulletTypeClass(char *)

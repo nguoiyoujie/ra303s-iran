@@ -31,7 +31,7 @@ _Sound_Effect_Call_Where:
 .Normal_Code:
     shl  eax,0x3
     add  eax,ecx
-    mov  cl,byte [eax + 0x005FE098]
+    mov  cl,byte [eax + Audio___SoundEffectName + 8]
     jmp  0x00425FEA
 
 .Check_Unhardcoded_Sound_Effects:
@@ -57,7 +57,7 @@ _Sound_Effect_Call_Priority:
     jge  .Check_Unhardcoded_Sound_Effects
 
 .Normal_Code:
-    mov  edx,dword [esi + edx*0x8 + 0x005FE094]
+    mov  edx,dword [esi + edx*0x8 + Audio___SoundEffectName + 4]
     jmp  0x004260FC
 
 .Check_Unhardcoded_Sound_Effects:
@@ -87,7 +87,7 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
 
 .Normal_Code:
     lea  edx,[eax*9]
-    mov  eax,[0x005FE090+edx] ; ds:SoundEffectName SoundEffectName[][edx+eax*8]
+    mov  eax,[Audio___SoundEffectName+edx] ; ds:SoundEffectName SoundEffectName[][edx+eax*8]
     jmp  0x00425D15
 
 .Check_Unhardcoded_Sound_Effects:

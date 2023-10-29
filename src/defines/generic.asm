@@ -383,7 +383,6 @@ AircraftTypesTypesExtCount                        dd    0
 %define        OriginalSoundEffectsCount          165
 SoundEffectsList                                  TIMES 2304 dd 0 ; 9 bytes per entry * 256; the new list supports up to 256 new entries 
 SoundEffectsCount                                 dd 0
-;%define        SoundEffectName                 0x005FE08F
 
 
 ;;; Temporary location for new global storages
