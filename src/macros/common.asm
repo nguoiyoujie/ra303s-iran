@@ -110,7 +110,8 @@ Loop_Over_RULES_INI_Section_Entries_:
 
 ; args <What to clear bit on>, <what bit>, <turn on or off>, <identifier for branch>
 %macro Set_Bit_Byte    3
-    cmp  byte %3, 0
+    mov  al, %3
+    cmp  al, 0
     jz   %%turn_off
 
     Turn_On_Bit    %1, %2
