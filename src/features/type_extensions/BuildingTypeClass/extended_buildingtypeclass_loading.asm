@@ -33,11 +33,14 @@ d_Occupy_101_000_101          dw 0,2,0x100,0x102,0x7FFF                         
 d_Occupy_111_111_111          dw 0,1,2,0x80,0x81,0x82,0x100,0x101,0x102,0x7FFF            ;21, YARD
 d_Occupy_S11                  dw 0xFF80,0xFF81,0x7FFF                                     ;22, SAM Overlap special (2 cells above)
 d_Occupy_S111                 dw 0xFF80,0xFF81,0xFF82,0x7FFF                              ;23, Overlap special (3 cells above)
-d_Occupy_S11_00_00_11         dw 0,1,0x100,0x180,0x181,0x7FFF                             ;24, C&C HAND Overlap special (2 cells above, and 2 cells on 3rd row)
+d_Occupy_S11_00_10_11         dw 0,1,0x100,0x180,0x181,0x7FFF                             ;24, C&C HAND Overlap special (2 cells above, and 2 cells on 3rd row)
 d_Occupy_S111_000_000_111     dw 0xFF80,0xFF81,0xFF82,0x100,0x101,0x102,0x7FFF            ;25, Overlap special (3 cells above, and 3 cells on 3rd row)
 d_Occupy_000_111_011          dw 0x80,0x81,0x82,0x101,0x102,0x7FFF                        ;26, Special (C&C WEAP)
 d_Occupy_111_000_100          dw 0,1,2,0x100,0x7FFF                                       ;27, Overlap special (C&C WEAP)
 d_Occupy_00_11_01             dw 0x80,0x81,0x101,0x7FFF                                   ;28, C&C HAND
+d_Occupy_S11_00_00_11         dw 0,1,0x180,0x181,0x7FFF                                   ;29, 
+d_Occupy_00_11_11             dw 0x80,0x81,0x100,0x101,0x7FFF                             ;30, 
+
 
 %define d_ExitPyle            0x005FEA5C      ;0
 %define d_ExitSub             0x005FEA78      ;1
@@ -399,7 +402,7 @@ _SelectOccupyList:
 .Check_Occupy_S11_00_00_11:
     cmp  eax,24
     jnz .Check_Occupy_S111_000_000_111
-    mov  eax,d_Occupy_S11_00_00_11
+    mov  eax,d_Occupy_S11_00_10_11
     jmp .Retn
 
 .Check_Occupy_S111_000_000_111:
@@ -422,8 +425,20 @@ _SelectOccupyList:
 
 .Check.Occupy_00_11_01:
     cmp  eax,28
-    jnz .DefaultNull
+    jnz .Check.Occupy_S11_00_00_11
     mov  eax,d_Occupy_00_11_01
+    jmp .Retn
+
+.Check.Occupy_S11_00_00_11:
+    cmp  eax,29
+    jnz .Check.Occupy_00_11_11
+    mov  eax,d_Occupy_S11_00_00_11
+    jmp .Retn
+
+.Check.Occupy_00_11_11:
+    cmp  eax,30
+    jnz .DefaultNull
+    mov  eax,d_Occupy_00_11_11
     jmp .Retn
     
 .DefaultNull:

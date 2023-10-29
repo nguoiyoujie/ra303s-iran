@@ -282,11 +282,13 @@ The following values for both entries are supported. *Note that this syntax is e
  > 21 = [XXX][XXX][XXX]\
  > 22 = [SXX] (overlap list used for sam sites, to prevent graphical issues with the firing animation)\
  > 23 = [SXXX]\
- > 24 = [SXX][--][--][XX]\
+ > 24 = [SXX][--][X-][XX]\
  > 25 = [SXXX][---][---][XXX]\
  > 26 = [---][XXX][-XX]\
  > 27 = [XXX][---][X--]\
- > 28 = [--][XX][-X] (occupy list for the C&C Hand of Nod)
+ > 28 = [--][XX][-X] (occupy list for the C&C Hand of Nod)\
+ > 29 = [SXX][--][--][XX]\
+ > 30 = [--][XX][XX]
 
 </details>
 
