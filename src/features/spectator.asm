@@ -8,7 +8,6 @@
 ;
 ;----------------------------------------------------------------
 
-
 @HOOK 0x004D8CB4 _HouseClass__Init_Data_Spectator_Stuff
 @HOOK 0x0053E4FB _Create_Units_Skip_Dead_Houses
 @HOOK 0x0053DFD7 _Assign_Houses_Set_Up_Player_Pointer
