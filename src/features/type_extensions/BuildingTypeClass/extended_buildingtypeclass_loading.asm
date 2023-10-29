@@ -115,6 +115,7 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.WarFactoryOverlayRate.Read(esi,edi)
     BuildingTypeClass.WarFactoryExitFacing.Read(esi,edi)
     BuildingTypeClass.WarFactoryExitTrack.Read(esi,edi)
+    BuildingTypeClass.CustomFoundationList.Read(esi,edi,_CustomOccupyListFromString)
 
     pop  eax
     pop  edi
@@ -241,7 +242,6 @@ _SelectExitList:
 
 .Retn:
     retn
-
 
 
 _SelectOccupyList:
@@ -453,7 +453,7 @@ _GetSpecialsFromString:
     push edx
     push ecx
     push ebx
-     xor  edi,edi
+    xor  edi,edi
     cmp  eax,0
     je  .Retn ; just return 0
     mov  ebx,eax
@@ -474,7 +474,7 @@ _GetSpecialsFromString:
     test eax,eax
     je   .Retn
     mov  cl,al
-     xor  eax,eax
+    xor  eax,eax
     mov  eax,1   
     shl  eax,cl
     or   edi,eax
@@ -486,7 +486,7 @@ _GetSpecialsFromString:
     test eax,eax
     je   .Retn
     mov  cl,al
-     xor  eax,eax
+    xor  eax,eax
     mov  eax,1   
     shl  eax,cl
     or   edi,eax
@@ -598,6 +598,112 @@ _GetOverlayFromString:
     call 0x005B8BEE    ; _makepath
     lea  eax,[Buffer_BuildingType]
     call 0x005B9330    ; MFCD::Retrieve
+
+.Retn:
+    pop edi
+    pop esi
+    pop edx
+    pop ecx
+    pop ebx
+    retn
+
+
+_CustomOccupyListFromString:
+   ;generate BuildingTypeClass.Offset.CustomOccupyList and BuildingTypeClass.Offset.CustomOverlapList, using string from eax
+    push ebx
+    push ecx
+    push edx 
+    push esi 
+    push edi 
+    ; check for null string
+    cmp  eax,0
+    je   .Retn
+    
+    ;; Rules
+    ;
+    ; The cursor starts from point (0,0), and follows a set of instructions
+    ; S -> advances the cursor to the 1st column of the row above. This can be used to begin the sequence at the row above the  building's top-left corner (e.g. SAM Sites)
+    ; - -> advances the cursor to the right
+    ; X -> marks the current location as (impassable) placement foundation, then advances the cursor to the right
+    ; O -> marks the current location as overlay tile (not part of the building foundation, but part of the object's refresh area, then advances the cursor to the right
+    ; | -> marks a new line. advances the cursor to the 1st column of the row below
+    ; Any other character found will be terminate the sequence
+    ; Note that the game applies bib foundations separately, so exclude them from this data. 
+    ; 
+    ; Examples:
+    ;   RA1 Power Plant: XX|XX
+    ;   C&C Power Plant: X|XX
+    ;   RA1 Refinery: OXO|XXX|XOO
+    ;   C&C Refinery: OXO|XXX|OOX
+    ;   RA1 Sam Site: SOO|XX
+    ;   RA1 Tesla Coil: O|X
+
+    ; eax is the string, so it shall serve as our instruction 'pointer'
+    ; esi is the type object
+    ; Let bx be used as our cursor (word)
+    ; ecx will be our temporary variable
+    ; edx is our cursor for CustomOccupyList
+    ; edi is our cursor for CustomOverlapList
+
+    ; set bx to 0. (top-left coord)   
+    xor  bx,bx
+    mov  edx,esi
+    add  edx,BuildingTypeClass.Offset.CustomOccupyList
+    mov  edi,esi
+    add  edi,BuildingTypeClass.Offset.CustomOverlapList
+.GetInstruction:
+    mov  cl, byte [eax]
+    inc  eax ; advance eax to the next character
+
+.CheckInstruction.S:
+    cmp  cl, 'S'
+    jne  .CheckInstruction.Dash
+    add  bx,0xFF80  ; subtract 0x80 (row)
+    and  bl,0x80    ; clear the column (0x0 - 0x7F)
+    jmp  .GetInstruction
+
+.CheckInstruction.Dash:
+    cmp  cl, '-'
+    jne  .CheckInstruction.Next
+    inc  bx         ; add one column
+    jmp  .GetInstruction
+
+.CheckInstruction.Next:
+    cmp  cl, '|'
+    jne  .CheckInstruction.X
+    add  bx,0x80    ; add 0x80 (row)
+    and  bl,0x80    ; clear the column (0x0 - 0x7F)
+    jmp  .GetInstruction
+
+.CheckInstruction.X:
+    cmp  cl, 'X'
+    jne  .CheckInstruction.O
+    mov  word [edx], bx
+    add  edx, 2
+    inc  bx         ; add one column
+    jmp  .GetInstruction
+
+.CheckInstruction.O:
+    cmp  cl, 'O'
+    jne  .CheckInstruction.Abort
+    mov  word [edi], bx
+    add  edi, 2
+    inc  bx         ; add one column
+    jmp  .GetInstruction
+
+.CheckInstruction.Abort:
+    ; append the terminating 0x7FFF
+    mov  bx,0x7FFF
+    mov  word [edx], bx
+    mov  word [edi], bx
+
+    ; replace lists
+    mov  edx,esi
+    add  edx,BuildingTypeClass.Offset.CustomOccupyList
+    mov  ecx,esi
+    add  ecx,BuildingTypeClass.Offset.CustomOverlapList   
+    BuildingTypeClass.OccupyList.Set(esi,edx)
+    BuildingTypeClass.OverlapList.Set(esi,ecx)
 
 .Retn:
     pop edi

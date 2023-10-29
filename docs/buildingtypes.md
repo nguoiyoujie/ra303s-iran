@@ -235,6 +235,38 @@ Determines the size occupied by this building, not inclusive of the bib. This af
 
 </details>
 
+There are two methods to customize building foundations. One may be easier to use than the other. The second one is kept for compatibility.
+
+**Method 1**
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► CustomFoundationList (string)</code></b></summary>
+
+```New Logic```
+
+Determines the combined occupy and visual overlap foundations for this building. Takes in a sequence of characters to move the cursor and build the foundation list.
+Up to 32 cells can be supported this way. Exceeding 32 cells may result in undefined behaviour.
+
+The following characters are supported. Note that they are case sensitive.
+
+ >The marking cursor starts at position (0,0), normally the top-left cell of the building\
+ >\
+ > The first row is aligned to the top of the image\
+ > X denotes occupied, - denotes clear\
+ > Example: A 2x3 grid is XXX|XXX\
+ > Example: A 2x2 grid occupying one row above the image and the first row of the image is SXX|XX\
+ >\
+ > S -> advances the cursor to the 1st column of the row above. This can be used to begin the sequence at the row above the  building's top-left corner (e.g. SAM Sites)\
+ > - -> advances the cursor to the right\
+ > X -> marks the current location as (impassable) placement foundation, then advances the cursor to the right\
+ > O -> marks the current location as overlay tile (not part of the building foundation, but part of the object's refresh area, then advances the cursor to the right\
+ > | -> marks a new line. advances the cursor to the 1st column of the row below\
+ > Any other character terminates the sequence
+
+</details>
+
+**Method 2**
+
 <details>
   <summary>
     <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► OccupyList (byte)</code></b><br>
