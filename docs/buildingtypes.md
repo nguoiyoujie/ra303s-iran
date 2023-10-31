@@ -256,11 +256,11 @@ The following characters are supported. Note that they are case sensitive.
  > Example: A 2x3 grid is XXX|XXX\
  > Example: A 2x2 grid occupying one row above the image and the first row of the image is SXX|XX\
  >\
- > S -> advances the cursor to the 1st column of the row above. This can be used to begin the sequence at the row above the  building's top-left corner (e.g. SAM Sites)\
- > - -> advances the cursor to the right\
- > X -> marks the current location as (impassable) placement foundation, then advances the cursor to the right\
- > O -> marks the current location as overlay tile (not part of the building foundation, but part of the object's refresh area, then advances the cursor to the right\
- > | -> marks a new line. advances the cursor to the 1st column of the row below\
+ > 'S' -> advances the cursor to the 1st column of the row above. This can be used to begin the sequence at the row above the  building's top-left corner (e.g. SAM Sites)\
+ > '-' -> advances the cursor to the right\
+ > 'X' -> marks the current location as (impassable) placement foundation, then advances the cursor to the right\
+ > 'O' -> marks the current location as overlay tile (not part of the building foundation, but part of the object's refresh area, then advances the cursor to the right\
+ > '|' -> marks a new line. advances the cursor to the 1st column of the row below\
  > Any other character terminates the sequence
 
 </details>
