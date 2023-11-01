@@ -1,3 +1,16 @@
+;----------------------------------------------------------------
+; src/fixes/tech_center_bug_fix.asm
+;
+; Fixes tech center confusion
+; 
+; This function is enabled by including the following key in Rules.ini. 
+;   Rules.ini > [General] > TechCenterBugFix=true/false
+; or
+;   Spawn.ini > [Settings] > TechCenterBugFix=true/false
+;
+; No compatibility issues is expected.
+;----------------------------------------------------------------
+
 @HOOK 0x0054EBAC _SidebarClass__StripClass__Recalc_Can_Build_Check
 
 ; Gets a side based on a country type

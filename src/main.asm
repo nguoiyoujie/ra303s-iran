@@ -115,7 +115,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/ai_infantry.asm" 
 
 ; new prerequisite system
-%include "src/new_prerequisite_system.asm" 
+%include "src/features/new_prerequisite_system.asm" 
+%include "src/features/superweapons.asm" 
 
 ; generic
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
@@ -134,8 +135,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/teamtype_buildings.asm"
 ;%include "src/fixes/south_advantage.asm" ; test fix
 %include "src/fixes/remove_difficulty_gamespeed_modifier.asm"
-%include "src/magic_build_fix.asm"
-%include "src/infantry_range_check.asm"
+%include "src/fixes/magic_build_fix.asm"
+%include "src/fixes/infantry_range_check.asm"
 %include "src/no_tesla_zap_effect_delay.asm"
 %include "src/short_game.asm"
 %include "src/no_screenshake.asm"
@@ -146,8 +147,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/build_off_ally.asm"
 %include "src/selectable_Spawn_locations.asm"
 %include "src/tech_center_bug_fix.asm"
-%include "src/special_colourscheme.asm"
-%include "src/arguments.asm"
+;%include "src/unused/special_colourscheme.asm"
+%include "src/features/arguments.asm"
 %include "src/image_keyword_fix.asm"
 %include "src/strip_cameos_glitch_bug.asm"
 %include "src/internet_cncnet.asm"
@@ -198,7 +199,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/explosion_no_anim_crash_fix.asm" 
 %include "src/building_jammable_override.asm" 
 %include "src/fixes/building_power_clear_drain.asm" 
-%include "src/unit_turret_draw.asm" 
+%include "src/features/unit_turret_draw.asm" 
 %include "src/building_mission_unload.asm" 
 %include "src/tesla_charging_unhardcode.asm" 
 %include "src/new_tracktypes.asm"

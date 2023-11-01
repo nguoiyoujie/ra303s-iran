@@ -16,6 +16,15 @@
 
 ; Original -LAN code was in CCHyper's 3.04, love you <3
 
+;----------------------------------------------------------------
+; src/features/arguments.asm
+;
+; Lists the command-line arguments supported by this extension.
+; 
+; This function is enabled by default and is not controllable.
+; No compatibility issues is expected.
+;----------------------------------------------------------------
+
 @HOOK 0x004F5B38 _arguments
 @HOOK 0x005025CC _Select_Game_AntMissions_Check
 @HOOK 0x004F496C _Select_Game_SkipDifficulty
@@ -25,8 +34,6 @@
 @HOOK 0x004A537F _Main_Game_AutoExit
 
 %define recording_mode                               0x00680151
-
-
 
 antmissionsenabled                                   db 0
 newmissionsenabled                                   db 0

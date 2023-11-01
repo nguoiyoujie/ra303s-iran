@@ -1,3 +1,5 @@
+; unused
+
 ;@HOOK 0x00567343 _TechnoClass__Remap_Table_Building_Check
 
 _TechnoClass__Remap_Table_Building_Check:

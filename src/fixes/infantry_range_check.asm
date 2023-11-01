@@ -1,3 +1,16 @@
+;----------------------------------------------------------------
+; src/fixes/infantry_range_check.asm
+;
+; Fixes exploit where infantry may launch projectiles at a target beyond their range.
+; 
+; This function is enabled by including the following key in Rules.ini. 
+;   Rules.ini > [General] > FixRangeExploit=true/false
+; or
+;   Spawn.ini > [Settings] > FixRangeExploit=true/false
+;
+; No compatibility issues is expected.
+;----------------------------------------------------------------
+
 @HOOK 0x004EEE3B _InfantryClass__Fire_At_Range_Check
 @HOOK 0x004F10FE _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire
 

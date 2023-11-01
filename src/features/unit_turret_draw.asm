@@ -1,3 +1,14 @@
+;----------------------------------------------------------------
+; src/fixes/unit_turret_draw.asm
+;
+; Unit turrets use new rules definitions. This includes TurretFrameStart and TurretFrameCount
+; 
+; This function is enabled by including the following key in Rules.ini. 
+;   Rules.ini > [<UnitType>] > TurretFrameStart=(integer)
+;   Rules.ini > [<UnitType>] > TurretFrameCount=(integer)
+;
+; No compatibility issues is expected, as this is a new feature.
+;----------------------------------------------------------------
 
 @HOOK 0x0057CAF3 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
 @HOOK 0x0057CB08 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
