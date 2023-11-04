@@ -297,7 +297,7 @@
 %define Globals___Rule_AtomDamage                                 0x006667EB ; int RulesClass::AtomDamage
 
 %define Globals___Rule_IsMCVDeploy_Address                        0x00666831 ; unsigned RulesClass::IsMCVDeploy:1;
-%define Globals___Rule_IsMCVDeploy_BitMask                        0x40       ; unsigned RulesClass::IsMCVDeploy:1;
+%define Globals___Rule_IsMCVDeploy_BitMask                        0x80       ; unsigned RulesClass::IsMCVDeploy:1;
 
 %define Globals___Rule_GoldValue                                  0x00666888 ; int RulesClass::GoldValue
 %define Globals___Rule_GemValue                                   0x0066688C ; int RulesClass::GemValue
