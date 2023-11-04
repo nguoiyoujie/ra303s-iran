@@ -1,3 +1,15 @@
+;----------------------------------------------------------------
+; src/features/unit_deploys_into_unhardcode.asm
+;
+; Implements customization of unit deploys.
+; 
+; This function is enabled by including the following key in Rules.ini. 
+;   Rules.ini > [<UnitType>] > DeploysInto=<BuildingType>
+;
+; No compatibility issues is expected.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x0057B953 _UnitClass_Try_To_Deploy_MCVUnhardcode
 @HOOK 0x0057B9BC _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
 @HOOK 0x0057BA4D _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2

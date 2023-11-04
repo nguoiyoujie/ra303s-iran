@@ -106,12 +106,12 @@ str_Multi8                                        db"Multi8",0
 %define str_mix_SpanishLanguagePack               0x006F4672 ; "spanishlanguagepack.MIX"
 %define str_mix_RussianLanguagePack               0x006F468A ; "russianlanguagepack.MIX"
 %define str_mix_Expand3                           0x006F46A2 ; "expand3.MIX"
-%define str_mix_Expand4                           0x006F46AE ; "expand3.MIX"
-%define str_mix_Expand5                           0x006F46BA ; "expand3.MIX"
-%define str_mix_Expand6                           0x006F46C6 ; "expand3.MIX"
-%define str_mix_Expand7                           0x006F46D2 ; "expand3.MIX"
-%define str_mix_Expand8                           0x006F46DE ; "expand3.MIX"
-%define str_mix_Expand9                           0x006F46EA ; "expand3.MIX"
+%define str_mix_Expand4                           0x006F46AE ; "expand4.MIX"
+%define str_mix_Expand5                           0x006F46BA ; "expand5.MIX"
+%define str_mix_Expand6                           0x006F46C6 ; "expand6.MIX"
+%define str_mix_Expand7                           0x006F46D2 ; "expand7.MIX"
+%define str_mix_Expand8                           0x006F46DE ; "expand8.MIX"
+%define str_mix_Expand9                           0x006F46EA ; "expand9.MIX"
 %define str_mix_Movies_1                          0x006F46F6 ; "movies-1.MIX"
 %define str_mix_Movies_2                          0x006F4703 ; "movies-2.MIX"
 %define str_mix_Movies_3                          0x006F4710 ; "movies-3.MIX"
@@ -140,7 +140,7 @@ str_ini_Spawn                                     db"SPAWN.INI",0
 
 
 ; DLL file references
-%define str_dll_Kernel32                          0x005E6947 ; "KERNEL32.IDLL"
+%define str_dll_Kernel32                          0x005E6947 ; "KERNEL32.DLL"
 
 
 ; DMP file references

@@ -9,14 +9,6 @@
 %define Array_VesselTypeClass              0x0065DF6C
 %define Count_VesselTypeClass              0x0065DF44
 
-%define        VesselType.SS       0
-%define        VesselType.DD       1
-%define        VesselType.CA       2
-%define        VesselType.LST      3
-%define        VesselType.PT       4
-%define        VesselType.MSUB     5
-%define        VesselType.CARR     6
-
 ; define aircraft type field definitions
 %define VesselTypeClass.Offset.IsPieceOfEight                0x192    ; BOOL, BIT 1
 %define VesselTypeClass.Bit.IsPieceOfEight                   1    

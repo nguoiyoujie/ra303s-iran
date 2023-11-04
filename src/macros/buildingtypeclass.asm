@@ -19,44 +19,6 @@
 %define        BSIZE_42    7
 %define        BSIZE_55    8
 
-%define        BuildingType.ATEK    0
-%define        BuildingType.IRON    1
-%define        BuildingType.WEAP    2
-%define        BuildingType.PDOX    3
-%define        BuildingType.PBOX    4
-%define        BuildingType.HBOX    5
-%define        BuildingType.DOME    6
-%define        BuildingType.GAP     7
-%define        BuildingType.GUN     8
-%define        BuildingType.AGUN    9
-%define        BuildingType.FTUR    10
-%define        BuildingType.FACT    11
-%define        BuildingType.PROC    12
-%define        BuildingType.SILO    13
-%define        BuildingType.HPAD    14
-%define        BuildingType.SAM     15
-%define        BuildingType.AFLD    16
-%define        BuildingType.POWR    17
-%define        BuildingType.APWR    18
-%define        BuildingType.STEK    19
-%define        BuildingType.HOSP    20
-%define        BuildingType.BARR    21
-%define        BuildingType.TENT    22
-%define        BuildingType.KENN    23
-%define        BuildingType.FIX     24
-%define        BuildingType.BIO     25
-%define        BuildingType.MISS    26
-%define        BuildingType.SYRD    27
-%define        BuildingType.SPEN    28
-%define        BuildingType.MSLO    29
-%define        BuildingType.FCOM    30
-%define        BuildingType.TSLA    31
-%define        BuildingType.WEAF    32
-%define        BuildingType.FACF    33
-%define        BuildingType.SYRF    34
-%define        BuildingType.SPEF    35
-%define        BuildingType.DOMF    36
-
 ; define building type field definitions
 %define BuildingTypeClass.Offset.IsBase                    0x192    ; BOOL // Already supported by game INI
 %define BuildingTypeClass.Bit.IsBase                       1    
@@ -125,11 +87,12 @@
 %define BuildingTypeClass.Offset.WarFactoryOverlayRate     0x22F    ; INT
 %define BuildingTypeClass.Offset.WarFactoryExitFacing      0x233    ; byte
 %define BuildingTypeClass.Offset.WarFactoryExitTrack       0x234    ; byte
-%define BuildingTypeClass.Offset.CustomFoundationList      0x235    ; INT PTR to string, then to word*
+%define BuildingTypeClass.Offset.UndeploysInto             0x235    ; byte
+%define BuildingTypeClass.Offset.CustomFoundationList      0x236    ; INT PTR to string, then to word*
 ; Custom storages
-%define BuildingTypeClass.Offset.CustomOccupyList          0x239    ; word[32]
-%define BuildingTypeClass.Offset.CustomOverlapList         0x279    ; word[32]
-; 0x2BA
+%define BuildingTypeClass.Offset.CustomOccupyList          0x23A    ; word[32]
+%define BuildingTypeClass.Offset.CustomOverlapList         0x27A    ; word[32]
+; 0x2BB
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -183,6 +146,7 @@ str.BuildingTypeClass.WarFactoryOverlayRate     db"WarFactoryOverlayRate",0     
 str.BuildingTypeClass.WarFactoryExitFacing      db"WarFactoryExitFacing",0        ;new ini feature
 str.BuildingTypeClass.WarFactoryExitTrack       db"WarFactoryExitTrack",0         ;new ini feature
 str.BuildingTypeClass.CustomFoundationList      db"CustomFoundationList",0        ;new ini feature
+str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0        ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
@@ -365,3 +329,6 @@ str.BuildingTypeClass.CustomFoundationList      db"CustomFoundationList",0      
 %define BuildingTypeClass.CustomFoundationList.Set(ptr_type,value)                  ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.CustomFoundationList, value
 %define BuildingTypeClass.CustomFoundationList.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, BuildingTypeClass.Offset.CustomFoundationList, str.BuildingTypeClass.CustomFoundationList, function
 
+%define BuildingTypeClass.UndeploysInto.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, reg_output
+%define BuildingTypeClass.UndeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, value
+%define BuildingTypeClass.UndeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.UndeploysInto, str.BuildingTypeClass.UndeploysInto, function

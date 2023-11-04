@@ -1,3 +1,48 @@
+;----------------------------------------------------------------
+; src/features/load_more_mix_files.asm
+;
+; Allow additional mix files to be loaded. This includes 
+;   spawn1.MIX
+;   betateslatank.MIX
+;   betadestroyer.MIX
+;   betagunboat.MIX
+;   betasubmarine.MIX
+;   betacruiser.MIX
+;   dosinterfacemod.MIX
+;   campaign.MIX
+;   aftermath.MIX
+;   counterstrike.MIX
+;   smallinfantry.MIX
+;   oos-fix.MIX
+;   movies-tlf.MIX
+;   germanlanguagepack.MIX
+;   germancensoredlanguagepack.MIX
+;   germanuncensoredlanguagepack.MIX
+;   frenchlanguagepack.MIX
+;   spanishlanguagepack.MIX
+;   russianlanguagepack.MIX
+;   expand3.MIX
+;   expand4.MIX
+;   expand5.MIX
+;   expand6.MIX
+;   expand7.MIX
+;   expand8.MIX
+;   expand9.MIX
+;   movies-1.MIX
+;   movies-2.MIX
+;   movies-3.MIX
+;   movies-4.MIX
+;   movies-5.MIX
+;   movies-6.MIX
+;   movies-7.MIX
+;   movies-8.MIX
+;   movies-9.MIX
+;   movies-10.MIX
+; 
+; This function is enabled by default and is not controllable.
+; No compatibility issues is expected.
+;----------------------------------------------------------------
+
 @HOOK 0x004F7E13 _load_more_mix_files ; Called before other MIX files are loaded
 @HOOK 0x004F7F26 _Conditionally_Load_Small_Infantry_MIX ; Called AFTER REDALERT.MIX is loaded
 

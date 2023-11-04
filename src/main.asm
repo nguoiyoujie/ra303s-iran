@@ -34,6 +34,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/generic.asm"
 %include "src/defines/gametypes.asm"
 %include "src/defines/rttitypes.asm"
+%include "src/defines/technotypes.asm"
 %include "src/defines/housetypes.asm"
 %include "src/defines/armortypes.asm"
 %include "src/defines/prereqtypes.asm"
@@ -138,7 +139,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/fixes/magic_build_fix.asm"
 %include "src/fixes/infantry_range_check.asm"
 %include "src/no_tesla_zap_effect_delay.asm"
-%include "src/short_game.asm"
+%include "src/features/short_game.asm"
 %include "src/no_screenshake.asm"
 %include "src/shorter_multiplayer_reconnect_timer.asm"
 ;%include "src/harvester_harvest_closest_ore.asm" ; same thing what pressing S on harvesters does, desyncs online and keeps mining new ore spawned by ore mines
@@ -155,7 +156,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/singleplayer_custom_colours_countries.asm"
 %include "src/sidebar_special_houses.asm"
 %include "src/video_stretching_helpers.asm"
-%include "src/load_more_mix_files.asm"
+%include "src/features/load_more_mix_files.asm"
 %include "src/spawner_house_colours_countries_handicaps.asm"
 %include "src/spawner_stats.asm"
 ;%include "src/debug_printing.asm" ; Seems to cause crashes
@@ -209,7 +210,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/building_autobase_base_housecheck.asm" 
 %include "src/features/remake_shroud_mapedges.asm" 
 %include "src/features/resizable_map.asm" 
-%include "src/unit_deploys_into_unhardcode.asm" 
+%include "src/features/unit_deploys_into_unhardcode.asm" 
+%include "src/features/building_undeploys_into_unhardcode.asm" 
 %include "src/footclass_path.asm" 
 %include "src/features/vessel_carrier_autoacquire.asm" 
 %include "src/features/vessel_turret_draw.asm" 
@@ -234,7 +236,7 @@ _str_version: db"3.03p-iB1v1",0
 ;%include "src/invisible_explosions_fix.asm" ; Causes desync with 3.03
 %include "src/ore_truck_ore_patch_minimap_cursor_bug_fix.asm"
 %include "src/allies_NCO_helipad_airfield_bug.asm"
-%include "src/engi_q_freeze_fix.asm"
+%include "src/fixes/engi_q_freeze_fix.asm"
 %include "src/fixes/gnrl_ukraine_voice.asm"
 %include "src/score_screen_print_colour_fix.asm"
 %include "src/animate_score_objects_crash_fix.asm"
@@ -254,7 +256,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/cancel_network_join_menu_lag_fix.asm"
 %include "src/skip_deleting_conquer_eng.asm"
 %include "src/green_shadow_on_cloaked_units_fix.asm"
-%include "src/always_load_building_icons.asm"
+%include "src/fixes/always_load_building_icons.asm"
 %include "src/movies2_loading_bug.asm"
 %endif
 

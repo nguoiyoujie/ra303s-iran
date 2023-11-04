@@ -1,3 +1,16 @@
+;----------------------------------------------------------------
+; src/features/short_game.asm
+;
+; Adds support for short games, where a house is defeated when he no longer has a building or MCV
+; 
+; This function is enabled by including the following key(s): 
+;   Rules.ini > [General] > ShortGame=true/false
+;   Spawn.ini > [Settings] > ShortGame=true/false
+;
+; No compatibility issues is expected.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x004D4C79 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check
 
 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check:
