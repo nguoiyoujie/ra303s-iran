@@ -137,6 +137,7 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
 
     BuildingTypeClass.FromIndex(BuildingType.FACT,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.CONYARD)
+    BuildingTypeClass.UndeploysInto.Set(edi,UnitType.MCV)
 
     BuildingTypeClass.FromIndex(BuildingType.PROC,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REFINERY)

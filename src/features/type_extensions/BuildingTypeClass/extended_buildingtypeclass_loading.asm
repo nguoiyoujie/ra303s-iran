@@ -116,6 +116,7 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.WarFactoryExitFacing.Read(esi,edi)
     BuildingTypeClass.WarFactoryExitTrack.Read(esi,edi)
     BuildingTypeClass.CustomFoundationList.Read(esi,edi,_CustomOccupyListFromString)
+    BuildingTypeClass.UndeploysInto.Read(esi,edi,_GetUnitTypeIDFromString)
 
     pop  eax
     pop  edi
@@ -710,5 +711,19 @@ _CustomOccupyListFromString:
     pop esi
     pop edx
     pop ecx
+    pop ebx
+    retn
+
+
+_GetUnitTypeIDFromString:
+    ;select UnitType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    UnitTypeClass.FromID(eax,ebx)
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
     pop ebx
     retn
