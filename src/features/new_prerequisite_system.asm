@@ -208,6 +208,14 @@ _BuildingClass__Check_Fire_Sale_UseNewFactoriesPrereqType:
     test dword [eax + 13Bh], 0x1C0C2 ; 1 << 1, 1 << 6, 1 << 7, 1 << 14, 1 << 15, 1 << 16
     jmp  0x004D9CAE
 
+_HouseClass__AI_SpeakSilosNeeded_Check:
+    test byte [eax + 13bh], 0x12 ; CONYARD | REFINERY
+    jmp  0x004D4844
+
+_HouseClass__AI_SpeakLowPower_Check:
+    test byte [eax + 13bh], 0x2 ; CONYARD
+    jmp  0x004D490A
+
 ; For now we use the new Prerequisite system to check for radar. In the future different variables can be introduced to _HouseClass__Recalc_Attributes_SetSpecialTypes to activate them
 _HouseClass__AI_RadarMap_Check1:
 ;    test dword [eax + 13bh],0x100 ; 1 << 8
