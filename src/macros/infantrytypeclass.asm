@@ -6,8 +6,8 @@
 ;----------------------------------------------------------------
 
 ; define array location where infantry type classes are stored
-%define Array_InfantryTypeClass            0x0065DE3C
-%define Count_InfantryTypeClass            0x0065DE14
+%define InfantryTypeClass.Array            0x0065DE3C
+%define InfantryTypeClass.Count            0x0065DE14
 
 ; define infantry type field definitions
 %define InfantryTypeClass.Offset.IsFemale                  0x192    ; BOOL
@@ -69,8 +69,8 @@ str.InfantryTypeClass.OverrideRemap             db"OverrideRemap",0             
 %define DoControls.EINS                                    0x00601FCC
 
 
-%define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_InfantryTypeClass, Array_InfantryTypeClass, reg_output
-%define InfantryTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_InfantryTypeClass, Array_InfantryTypeClass, reg_output
+%define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
+%define InfantryTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

@@ -41,6 +41,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/specialtypes.asm"
 %include "src/defines/tracktypes.asm"
 %include "src/defines/functions.asm"
+%include "src/defines/fixediheapclass_templates.asm"
 
 ; macros ; added by lovalmidas
 %include "src/macros/common.asm"
@@ -82,13 +83,14 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/savegame_support.asm" ; this needs to go first before other extended classes
 
 %include "src/features/type_extensions/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
+%include "src/features/type_extensions/AnimTypeClass/extended_animtypeclass_loading.asm"
 %include "src/features/type_extensions/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
 %include "src/features/type_extensions/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
 %include "src/features/type_extensions/TechnoTypeClass/extended_technotypeclass_loading.asm"
 %include "src/features/type_extensions/UnitTypeClass/extended_unittypeclass_loading.asm"
+%include "src/features/type_extensions/VesselTypeClass/extended_vesseltypeclass_loading.asm"
 %include "src/features/type_extensions/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
-%include "src/features/type_extensions/VesselTypeClass/extended_vesseltypeclass_loading.asm"
 
 %include "src/features/type_extensions/extended_houseclass.asm"
 %include "src/features/type_extensions/extended_buildingclass.asm"

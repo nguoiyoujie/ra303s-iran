@@ -1,12 +1,9 @@
 ;Read INI settings
-@HOOK 0x004C73ED _TFixedIHeapClass__fn_init_New_BuildingTypes_Heap_Size
+@HOOK 0x004C73ED _TFixedIHeapClass__fn_init_BuildingTypes_Heap
 @HOOK 0x004D0953 _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
 @HOOK 0x004D0A36 _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
 @HOOK 0x004D0A51 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory
 @HOOK 0x00453FFB _BuildingTypeClass__Read_INI_Extended
-
-%define        Old_BuildingTypeClass_Size        0x207
-%define        New_BuildingTypeClass_Size        0x307
 
 ; OccupyList, OverlapList
 d_Occupy_1                    dw 0,0x7FFF                                                 ;00, GUN,SILO
@@ -54,22 +51,22 @@ Buffer_BuildingType           times 512 db 0
 
 
 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_BuildingTypeClass_Size,Old_BuildingTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,BuildingTypeClass.NEW_SIZE,BuildingTypeClass.ORIGINAL_SIZE
 .Ret:
     lea  edx,[ebp-0x14]
     mov  eax,ecx
     jmp  0x004D0A56
 
-_TFixedIHeapClass__fn_init_New_BuildingTypes_Heap_Size:
-    mov  edx,New_BuildingTypeClass_Size
+_TFixedIHeapClass__fn_init_BuildingTypes_Heap:
+    mov  edx,BuildingTypeClass.NEW_SIZE
     jmp  0x004C73F2
 
 _TFixedIHeapClass__BuildingTypeClass__Load_New_Size:
-    mov  ebx,New_BuildingTypeClass_Size
+    mov  ebx,BuildingTypeClass.NEW_SIZE
     jmp  0x004D0A3B
 
 _TFixedIHeapClass__BuildingTypeClass__Save_New_Size:
-    mov  ebx,New_BuildingTypeClass_Size
+    mov  ebx,BuildingTypeClass.NEW_SIZE
     jmp  0x004D0958
 
 _BuildingTypeClass__Read_INI_Extended:

@@ -106,12 +106,14 @@
 %define AnimTypeClass__AnimTypeClass                              0x00407388 ; AnimTypeClass::AnimTypeClass(AnimType,char                *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
 %define AnimTypeClass__new                                        0x00407564 ; AnimTypeClass::operator new(uint)
 
-
 ; AADATA.CPP
 %define AircraftTypeClass__AircraftTypeClass                      0x00401210 ; AircraftTypeClass::AircraftTypeClass(AircraftType,int,char *,int,int,int,int,int,int,int,int,int,int,int,int,StructType,int,int,MissionType)
 %define AircraftTypeClass__new                                    0x00401324 ; AircraftTypeClass::operator new(uint)
 %define AircraftTypeClass__As_Reference                           0x004040F0 ; AircraftTypeClass & AircraftTypeClass::As_Reference(AircraftType type)
 
+; BDATA.CPP
+%define BuildingTypeClass__BuildingTypeClass                      0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
+%define BuildingTypeClass__new                                    0x00429F0C ; BuildingTypeClass::operator new(uint)
 
 ; TYPE.H
 %define BulletTypeClass__BulletTypeClass                          0x00426A20 ; BulletTypeClass::BulletTypeClass(char *)
@@ -122,6 +124,8 @@
 %define BulletClass__new                                          0x00460EAC ; BulletClass::operator new(uint)
 
 ; IDATA.CPP
+%define InfantryTypeClass__InfantryTypeClass                      0x004DF5E0 ; InfantryTypeClass::InfantryTypeClass(InfantryType,int,char *,int,int,int,int,int,int,int,int,PipEnum,DoInfoStruct *,int,int,char *)
+%define InfantryTypeClass__new                                    0x004DF728 ; InfantryTypeClass::operator new(uint)
 %define InfantryTypeClass__As_Reference                           0x004EB1B8 ; InfantryTypeClass & InfantryTypeClass::As_Reference(InfantryType type)
 
 ; INFANTRY.CPP
@@ -204,13 +208,19 @@
 %define TriggerTypeClass__Write_INI                               0x0056D640 ; void TriggerTypeClass::Write_INI(CCINIClass & ini)
 
 ; UDATA.CPP
+%define UnitTypeClass_UnitTypeClass                               0x0056E09C ; UnitTypeClass::UnitTypeClass( lots of args..)
+%define UnitTypeClass_new                                         0x0056E290 ; UnitTypeClass::operator new(uint)
 %define UnitTypeClass__As_Reference                               0x00578C24 ; UnitTypeClass & UnitTypeClass::As_Reference(UnitType type)
 
 ; UNIT.CPP
 %define UnitClass__Write_INI                                      0x00581298 ; void UnitClass::Write_INI(CCINIClass & ini)
 
 ; VDATA.CPP
+%define VesselTypeClass_VesselTypeClass                           0x00581F0C ; VesselTypeClass::VesselTypeClass(VesselType,int,char *,AnimType,int,int,int,int,int,int,int,int,int,int)
+%define VesselTypeClass_new                                       0x00581FEC ; VesselTypeClass::operator new(uint)
 %define VesselTypeClass__As_Reference                             0x00584858 ; VesselTypeClass & VesselTypeClass::As_Reference(VesselType type)
+
+
 
 ; VESSEL.CPP
 %define VesselClass__Write_INI                                    0x0058CC18 ; void VesselClass::Write_INI(CCINIClass & ini)
@@ -267,11 +277,6 @@
 
 ; REINF.CPP
 %define Reinf___Do_Reinforcements                                 0x00533178 ; bool Do_Reinforcements(TeamTypeClass const * teamtype)
-
-
-; macros
-%define Count_BulletTypeClass                                     0x0065DE60 ; FixedHeapClass::Buffer
-%define Array_BulletTypeClass                                     0x0065DE88 ; FixedHeapClass::Buffer
 
 
 

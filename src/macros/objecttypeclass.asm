@@ -50,8 +50,8 @@ str.ObjectTypeClass.DimensionData             db"DimensionData",0          ;inte
 str.ObjectTypeClass.RadarIcon                 db"RadarIcon",0              ;internal feature
 
 
-%define ObjectTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_ObjectTypeClass, Array_ObjectTypeClass, reg_output
-%define ObjectTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_ObjectTypeClass, Array_ObjectTypeClass, reg_output
+;%define ObjectTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, ObjectTypeClass.Count, ObjectTypeClass.Array, reg_output
+;%define ObjectTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, ObjectTypeClass.Count, ObjectTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

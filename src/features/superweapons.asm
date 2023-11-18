@@ -31,6 +31,12 @@
 @HOOK 0x0045D8E0 _BuildingClass_Mission_Missile_SpecialWeapon_NuclearLaunchCheck
 @HOOK 0x004D6B89 _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck
 
+@HOOK 0x004D68DC _HouseClass__Place_Special_Blast_SwitchRoute
+@HOOK 0x004D71B4 _HouseClass__Place_Special_Blast_Redefine_Chrono2
+
+%define        SpecialChrono2        0xFE
+
+
 _HouseClass__Recalc_Attributes_SetSpecialTypes:
 ;ecx is 0
     mov  dword [eax + 0x137],ecx
@@ -337,3 +343,15 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
 
 .NotFound:
     jmp  0x004D6BC7
+
+
+_HouseClass__Place_Special_Blast_SwitchRoute:
+    cmp  dx,SpecialChrono2
+    jz   0x004D71F0 ; SPC_CHRONO2
+    cmp  dx,0x8
+    ja   0x004D7668 ; end of handling
+    jmp  0x004D68E5 ; specials 0-6
+
+_HouseClass__Place_Special_Blast_Redefine_Chrono2:
+    mov  byte [0x00668EC7],SpecialChrono2
+    jmp  0x004D71BB

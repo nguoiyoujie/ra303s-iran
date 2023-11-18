@@ -1,16 +1,12 @@
 ; Extended memory size of the class, with save and load support
-;@HOOK 0x0056E298 _UnitTypeClass_operator_new_Hard_Code_New_Size
 @HOOK 0x004C9685 _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size
 @HOOK 0x004D1333 _TFixedIHeapClass__UnitTypeClass__Save_New_Size
 @HOOK 0x004D1416 _TFixedIHeapClass__UnitTypeClass__Load_New_Size
 @HOOK 0x004D1431 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory
-@HOOK 0x004C74D2 _TFixedIHeapClass__fn_init_New_UnitTypes_Heap_Size
+@HOOK 0x004C74D2 _TFixedIHeapClass__fn_init_UnitTypes_Heap
 
 ;Read INI settings
 @HOOK 0x00578DCE _UnitTypeClass__Read_INI_Extended
-
-%define        Old_UnitTypeClass_Size        0x19E
-%define        New_UnitTypeClass_Size        0x240
 
 _UnitTypeClass__Read_INI_Extended:
 
@@ -58,26 +54,26 @@ _UnitTypeClass__Read_INI_Extended:
     jmp  0x00578DD4
 
 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx,New_UnitTypeClass_Size,Old_UnitTypeClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,UnitTypeClass.NEW_SIZE,UnitTypeClass.ORIGINAL_SIZE
 .Ret:
     lea  edx,[ebp-0x14]
     mov  eax,ecx
     jmp  0x004D1436
 
-_TFixedIHeapClass__fn_init_New_UnitTypes_Heap_Size:
-    mov  edx,New_UnitTypeClass_Size
+_TFixedIHeapClass__fn_init_UnitTypes_Heap:
+    mov  edx,UnitTypeClass.NEW_SIZE
     jmp  0x004C74D7
 
 _TFixedIHeapClass__UnitTypeClass__Load_New_Size:
-    mov  ebx,New_UnitTypeClass_Size
+    mov  ebx,UnitTypeClass.NEW_SIZE
     jmp  0x004D141B
 
 _TFixedIHeapClass__UnitTypeClass__Save_New_Size:
-    mov  ebx,New_UnitTypeClass_Size
+    mov  ebx,UnitTypeClass.NEW_SIZE
     jmp  0x004D1338
 
 _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size:
-    mov  edx,New_UnitTypeClass_Size
+    mov  edx,UnitTypeClass.NEW_SIZE
     jmp  0x004C968A
 
 _GetBuildingTypeIDFromString:

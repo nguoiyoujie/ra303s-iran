@@ -6,8 +6,8 @@
 ;----------------------------------------------------------------
 
 ; define array location where aircraft type classes are stored
-%define Array_WeaponTypeClass              0x00691680
-%define Count_WeaponTypeClass              0x00691658
+%define WeaponTypeClass.Array              0x00691680
+%define WeaponTypeClass.Count              0x00691658
 
 ; define warhead type field definitions
 %define WeaponTypeClass.Offset.ID                        0x000    ; INT // ID
@@ -21,9 +21,9 @@
 %define WeaponTypeClass.Offset.IsElectric                0x008    ; BOOL // Already supported by game INI
 %define WeaponTypeClass.Bit.IsElectric                   4    
 ; 0x009, 0x00a and 0x00b are empty
-%define WeaponTypeClass.Offset.ChargeSound               0x00a    ; word
+%define WeaponTypeClass.Offset.ChargeSound               0x00A    ; word
 
-%define WeaponTypeClass.Offset.Burst                     0x00c    ; INT (0,1)
+%define WeaponTypeClass.Offset.Burst                     0x00C    ; INT (0,1)
 %define WeaponTypeClass.Offset.Bullet                    0x010    ; INT PTR
 %define WeaponTypeClass.Offset.Damage                    0x014    ; INT
 %define WeaponTypeClass.Offset.MaxSpeed                  0x018    ; byte
@@ -50,8 +50,8 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
 str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 
-%define WeaponTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
-%define WeaponTypeClass.FromID(d_index,reg_output)                           WeaponTypeClass.FromIDInner            d_index, Count_WeaponTypeClass, Array_WeaponTypeClass, reg_output
+%define WeaponTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, WeaponTypeClass.Count, WeaponTypeClass.Array, reg_output
+%define WeaponTypeClass.FromID(d_index,reg_output)                           WeaponTypeClass.FromIDInner            d_index, WeaponTypeClass.Count, WeaponTypeClass.Array, reg_output
 
 ; WeaponType class is NOT derived from ObjectTypeClass!
 ; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
@@ -218,11 +218,11 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 ; returns the type class pointer as eax
 %macro Get_WeaponTypeClass    1
     push edx
-    mov  edx, [Count_WeaponTypeClass] 
+    mov  edx, [WeaponTypeClass.Count] 
     cmp  %1, edx
     jge  %%invalid_type
 
-    mov  edx, [Array_WeaponTypeClass] 
+    mov  edx, [WeaponTypeClass.Array] 
     shl  %1, 2
     add  edx, %1
     mov  eax, [edx] 

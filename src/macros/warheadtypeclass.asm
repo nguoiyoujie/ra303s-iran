@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where aircraft type classes are stored
-%define Array_WarheadTypeClass             0x00691634
-%define Count_WarheadTypeClass             0x0069160C
-
 ; define warhead type field definitions
 %define WarheadTypeClass.Offset.ID                        0x000    ; INT // ID
 %define WarheadTypeClass.Offset.IniName                   0x004    ; INT PTR to STRING
@@ -54,8 +50,8 @@ str.WarheadTypeClass.ExplosionSet              db"Explosion",0              ;exi
 str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;existing ini
 
 
-%define WarheadTypeClass.FromIndex(d_index,reg_output)                         TechnoTypeClass.FromIndex              d_index, Count_WarheadTypeClass, Array_WarheadTypeClass, reg_output
-%define WarheadTypeClass.FromID(d_index,reg_output)                            TechnoTypeClass.FromID                 d_index, Count_WarheadTypeClass, Array_WarheadTypeClass, reg_output
+%define WarheadTypeClass.FromIndex(d_index,reg_output)                         TechnoTypeClass.FromIndex              d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
+%define WarheadTypeClass.FromID(d_index,reg_output)                            TechnoTypeClass.FromID                 d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -113,11 +109,11 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 ; returns the type class pointer as eax
 %macro Get_WarheadTypeClass    1
     push edx
-    mov  edx, [Count_WarheadTypeClass] 
+    mov  edx, [WarheadTypeClass.Count] 
     cmp  %1, edx
     jge  %%invalid_type
 
-    mov  edx, [Array_WarheadTypeClass] 
+    mov  edx, [WarheadTypeClass.Array] 
     shl  %1, 2
     add  edx, %1
     mov  eax, [edx] 

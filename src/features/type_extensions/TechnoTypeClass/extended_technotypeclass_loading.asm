@@ -37,7 +37,6 @@ _TechnoTypeClass__Read_INI_Extended:
     TechnoTypeClass.PrereqType.Read(esi,edi,_SelectPrereqTypeFromString)
     TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteFromString)
 
-
     pop  edi
     pop  esi
  

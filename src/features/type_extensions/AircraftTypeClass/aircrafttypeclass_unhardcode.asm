@@ -43,7 +43,7 @@ Init_AircraftTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,OriginalAircraftTypeHeapCount
+    add  edx,AircraftTypeClass.ORIGINAL_MAX
 
     push 0Eh
     push 20h
@@ -100,7 +100,7 @@ _Init_Game_Set_AircraftTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
     mov  byte [AircraftTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalAircraftTypeHeapCount
+    add  edx,AircraftTypeClass.ORIGINAL_MAX
     mov  byte [NewAircraftTypeHeapCount],dl
     jmp  0x004F40BB
 

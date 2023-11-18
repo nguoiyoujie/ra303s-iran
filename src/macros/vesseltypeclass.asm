@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where vessel type classes are stored
-%define Array_VesselTypeClass              0x0065DF6C
-%define Count_VesselTypeClass              0x0065DF44
-
 ; define aircraft type field definitions
 %define VesselTypeClass.Offset.IsPieceOfEight                0x192    ; BOOL, BIT 1
 %define VesselTypeClass.Bit.IsPieceOfEight                   1    
@@ -39,8 +35,8 @@ str.VesselTypeClass.MaxSize                   db"MaxSize",0                     
 str.VesselTypeClass.TurretName                db"TurretName",0                  ;new ini feature
 str.VesselTypeClass.TurretAdjustY             db"TurretAdjustY",0               ;new ini feature
 
-%define VesselTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_VesselTypeClass, Array_VesselTypeClass, reg_output
-%define VesselTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_VesselTypeClass, Array_VesselTypeClass, reg_output
+%define VesselTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
+%define VesselTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

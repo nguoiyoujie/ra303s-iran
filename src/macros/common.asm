@@ -129,11 +129,11 @@ Loop_Over_RULES_INI_Section_Entries_:
 ; returns the type class pointer as eax
 %macro Get_BulletTypeClass    1
     push edx
-    mov  edx, [Count_BulletTypeClass] 
+    mov  edx, [BulletTypeClass.Count] 
     cmp  %1, edx
     jge  %%invalid_type
 
-    mov  edx, [Array_BulletTypeClass] 
+    mov  edx, [BulletTypeClass.Array] 
     shl  %1, 2
     add  edx, %1
     mov  eax, [edx] 

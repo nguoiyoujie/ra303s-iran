@@ -4,11 +4,6 @@
 @HOOK 0x004597F2 _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes
 @HOOK 0x004EB159 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes
 
-str_InfantryTypes db"InfantryTypes",0
-InfantryTypesExtCount    dd    0
-NewInfantryTypeHeapCount    dd    0
-%define        OriginalInfantryTypeHeapCount       0x1A
-
 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
     mov  al,[NewInfantryTypeHeapCount]
     cmp  dl,al
@@ -22,8 +17,8 @@ _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
     jmp  0x004597FB
 
 Init_InfantryTypeClass:
-    mov  eax,1A2h
-    call 0x004DF728 ; InfantryTypeClass::operator new(uint)
+    mov  eax,InfantryTypeClass.NEW_SIZE
+    call InfantryTypeClass__new
     test eax,eax
     jz   .Ret
 
@@ -35,7 +30,7 @@ Init_InfantryTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,OriginalInfantryTypeHeapCount ; InfantryType
+    add  edx,InfantryTypeClass.ORIGINAL_MAX ; InfantryType
 
     push 0               ; __int32
     push 2               ; char
@@ -64,7 +59,7 @@ Init_InfantryTypeClass:
 
     push 35h             ; __int32
     mov  dword [0x006019C4],1
-    call 0x004DF5E0 ; InfantryTypeClass::InfantryTypeClass(InfantryType,int,char *,int,int,int,int,int,int,int,int,PipEnum,DoInfoStruct *,int,int,char *)
+    call InfantryTypeClass__InfantryTypeClass
 .Ret:
     retn
 
@@ -89,7 +84,7 @@ _Init_Game_Set_InfantryTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_InfantryTypes
     mov  byte [InfantryTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalInfantryTypeHeapCount
+    add  edx,InfantryTypeClass.ORIGINAL_MAX
     mov  byte [NewInfantryTypeHeapCount],dl
     jmp  0x004F40CC
 

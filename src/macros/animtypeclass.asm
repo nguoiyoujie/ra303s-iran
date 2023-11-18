@@ -4,56 +4,42 @@
 ; Macros to access AnimTypeClass offsets
 ;
 ;----------------------------------------------------------------
+; NOTE: for the moment this does nothing as AnimTypes did not come with Read_INI. That has to be implemented firxt.
 
-; define array location where aircraft type classes are stored
-;%define Array_AircraftTypeClass            0x0065DDF0
-;%define Count_AircraftTypeClass            0x0065DDC8
+; define anim type field definitions
+%define AnimTypeClass.Offset.IsNormalized                  0x138    ; BOOL
+%define AnimTypeClass.Bit.IsNormalized                     1    
+%define AnimTypeClass.Offset.IsGroundLayer                 0x138    ; BOOL
+%define AnimTypeClass.Bit.IsGroundLayer                    2    
+%define AnimTypeClass.Offset.IsTranslucent                 0x138    ; BOOL
+%define AnimTypeClass.Bit.IsTranslucent                    3    
+%define AnimTypeClass.Offset.IsWhiteTrans                  0x138    ; BOOL
+%define AnimTypeClass.Bit.IsWhiteTrans                     4    
+%define AnimTypeClass.Offset.IsFlameThrower                0x138    ; BOOL ; not used in RA1
+%define AnimTypeClass.Bit.IsFlameThrower                   5    
+%define AnimTypeClass.Offset.IsScorcher                    0x138    ; BOOL
+%define AnimTypeClass.Bit.IsScorcher                       6    
+%define AnimTypeClass.Offset.IsCraterForming               0x138    ; BOOL
+%define AnimTypeClass.Bit.IsCraterForming                  7    
+%define AnimTypeClass.Offset.IsSticky                      0x138    ; BOOL ; not used in RA1
+%define AnimTypeClass.Bit.IsSticky                         8    
+%define AnimTypeClass.Offset.IsTheater                     0x139    ; BOOL
+%define AnimTypeClass.Bit.IsTheater                        1
+; 0x13A and 0x13B are unused due to padding
+%define AnimTypeClass.Offset.Type                          0x13C   ; byte (AnimType)
+%define AnimTypeClass.Offset.Size                          0x13D   ; INT
+%define AnimTypeClass.Offset.Biggest                       0x141   ; INT
+%define AnimTypeClass.Offset.Damage                        0x145   ; fixed // fixed is word, in units of 1/256
+%define AnimTypeClass.Offset.Delay                         0x147   ; INT
+%define AnimTypeClass.Offset.Start                         0x14B   ; INT
+%define AnimTypeClass.Offset.LoopStart                     0x14F   ; INT
+%define AnimTypeClass.Offset.LoopEnd                       0x153   ; INT
+%define AnimTypeClass.Offset.Stages                        0x157   ; INT
+%define AnimTypeClass.Offset.Loops                         0x15B   ; INT
+%define AnimTypeClass.Offset.Sound                         0x15F   ; word (VocType)
+%define AnimTypeClass.Offset.ChainTo                       0x161   ; byte (AnimType)
+; 0x162
 
-
-;		unsigned IsNormalized:1;
-;		unsigned IsGroundLayer:1;
-;		unsigned IsTranslucent:1;
-;		unsigned IsWhiteTrans:1;
-;		unsigned IsFlameThrower:1;   ; not used in RA1
-;		unsigned IsScorcher:1;
-;		unsigned IsCraterForming:1;
-;		unsigned IsSticky:1;         ; not used in RA1
-;		unsigned IsTheater:1;
-;		AnimType Type;
-;		int Size;
-;		int Biggest;
-;		fixed Damage;
-;		int Delay;
-;		int Start;
-;		int LoopStart;
-;		int LoopEnd;
-;		int Stages;
-;		int Loops;
-;		VocType Sound;
-;		AnimType ChainTo;
-;		int VirtualStages;
-;		int VirtualScale;
-;		char const * VirtualName;
-;		AnimType VirtualAnim;
-
-; 0x138 - ???
-
-
-
-; define aircraft type field definitions
-;%define AircraftTypeClass.Offset.IsFixedWing               0x192    ; BOOL, BIT 1
-;%define AircraftTypeClass.Bit.IsFixedWing                  1    
-;%define AircraftTypeClass.Offset.IsLandable                0x192    ; BOOL, BIT 2
-;%define AircraftTypeClass.Bit.IsLandable                   2    
-;%define AircraftTypeClass.Offset.IsRotorEquipped           0x192    ; BOOL, BIT 3
-;%define AircraftTypeClass.Bit.IsRotorEquipped              3    
-;%define AircraftTypeClass.Offset.IsRotorCustom             0x192    ; BOOL, BIT 4
-;%define AircraftTypeClass.Bit.IsRotorCustom                4    
-;; 0x193, 0x194 and 0x195 are empty... 
-;%define AircraftTypeClass.Offset.Type                      0x196    ; byte
-;%define AircraftTypeClass.Offset.DefaultMission            0x197    ; byte
-;%define AircraftTypeClass.Offset.PreferredBuilding         0x198    ; byte ; hardcode to 0E (Helipad) or 10 (Airstrip) depending on IsFixedWing for now
-;%define AircraftTypeClass.Offset.LandingSpeed              0x199    ; INT
 ;
 ;; INI String controls
 ;str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0                 ;new ini feature
@@ -65,8 +51,8 @@
 ;str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
 ;str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0                ;new ini feature
 ;
-;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_AircraftTypeClass, Array_AircraftTypeClass, reg_output
-;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_AircraftTypeClass, Array_AircraftTypeClass, reg_output
+;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Array, reg_output
+;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Array, reg_output
 ;
 ;;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 ;

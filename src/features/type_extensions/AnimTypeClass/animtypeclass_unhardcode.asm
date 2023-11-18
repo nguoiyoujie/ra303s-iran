@@ -6,12 +6,6 @@
 ; We emulate this by placing the directional animations at the end of our list, then use the ID of the first animation to determine if an animation is directional
 ; The animation file is not loaded at this time, so we cannot obtain the frame 
 
-;@HOOK 0x0041C5D8 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
-;@HOOK 0x004F40E9 _Init_Game_Set_AnimTypes_Heap_Count
-;@HOOK 0x0041C654 _AnimTypeClass__One_Time_UnhardCode_AnimTypes
-;@HOOK 0x0041C6E3 _AnimTypeClass__Init_UnhardCode_AnimTypes
-;@HOOK 0x00423EE8 _Anim_From_Name_Unhardcode_AnimTypes
-
 @HOOK 0x0041C5D8 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
 @HOOK 0x004F40E9 _Init_Game_Set_AnimTypes_Heap_Count
 @HOOK 0x0041C654 _AnimTypeClass__One_Time_UnhardCode_AnimTypes
@@ -21,21 +15,13 @@
 
 Tracker_AnimDir           db    0
 FirstDirectionalAnim      db    0xFF
-
-str_AnimTypes             db    "AnimTypes",0
-str_DirectionalAnimTypes  db    "DirectionalAnimTypes",0
-AnimTypesTypesExtCount    db    0
-NewAnimTypeHeapCount      dd    0
+%define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
 
 temp_AnimID               db    0
 temp_AnimStr              dd    0
 temp_AnimDirection        dd    0
 temp_AnimDirFrameStart    dd    0
 temp_AnimDirFrameBiggest  dd    0
-
-%define        OriginalAnimTypesHeapCount    0x50
-%define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
-
 temp_animtypeclass_constructor_arg dd 0
 
 ; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
@@ -86,7 +72,7 @@ _Init_Game_Set_AnimTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_AnimTypes
     mov  byte [AnimTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalAnimTypesHeapCount
+    add  edx,AnimTypesHeap.ORIGINAL_MAX
     mov  byte [FirstDirectionalAnim],dl
 
     Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
@@ -100,7 +86,7 @@ _Init_Game_Set_AnimTypes_Heap_Count:
 
 ; We preserve this for now, we can tidy this later when we want to customize
 Init_AnimTypeClass:
-    mov  eax,162h
+    mov  eax,AnimTypeClass.NEW_SIZE
     call AnimTypeClass__new
     test eax,eax
     jz   .Ret
@@ -113,7 +99,7 @@ Init_AnimTypeClass:
     pop  eax
 
     mov  edx,ebx
-    add  edx,OriginalAnimTypesHeapCount ; AnimType
+    add  edx,AnimTypesHeap.ORIGINAL_MAX ; AnimType
     mov  ebx,ecx ; Name/ID
 
     ; these settings were derived from ANIM_FBALL1 / FBALL1
@@ -173,7 +159,7 @@ Init_DirectionalAnimTypeClass:
     pop  eax
 
 .Create:
-    mov  eax,162h
+    mov  eax,AnimTypeClass.NEW_SIZE
     call AnimTypeClass__new
     test eax,eax
     jz   .Ret
@@ -213,7 +199,6 @@ Init_DirectionalAnimTypeClass:
     mov  ecx,55         ; size (max of width or height,to establish refresh area)
     push dword [temp_AnimDirFrameBiggest]               ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
     call AnimTypeClass__AnimTypeClass
-    
     jmp .Next
 
 .RetPop:
@@ -225,10 +210,8 @@ Init_DirectionalAnimTypeClass:
 
 
 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
-
     Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
     Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
-
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi

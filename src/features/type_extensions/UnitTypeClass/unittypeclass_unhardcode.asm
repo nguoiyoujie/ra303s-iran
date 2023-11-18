@@ -4,11 +4,6 @@
 @HOOK 0x00459715 _BuildingClass__Update_Buildables_UnhardCode_UnitTypes
 @HOOK 0X00578ADB _UnitTypeClass__One_Time_UnhardCode_UnitTypes
 
-str_UnitTypes db"UnitTypes",0
-UnitTypesExtCount       dd    0
-NewUnitTypeHeapCount    dd    0
-%define        OriginalUnitTypeHeapCount       0x16
-
 _UnitTypeClass__One_Time_UnhardCode_UnitTypes:
     mov  al,[NewUnitTypeHeapCount]
     cmp  dl,al
@@ -22,8 +17,8 @@ _BuildingClass__Update_Buildables_UnhardCode_UnitTypes:
     jmp  0x0045971A
 
 Init_UnitTypeClass:
-    mov  eax,19Eh
-    call 0x0056E290 ; UnitTypeClass::operator new(uint)
+    mov  eax,UnitTypeClass.NEW_SIZE
+    call UnitTypeClass_new
     test eax,eax
     jz   .Ret
 
@@ -35,7 +30,7 @@ Init_UnitTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,OriginalUnitTypeHeapCount ; UnitType
+    add  edx,UnitTypeClass.ORIGINAL_MAX ; UnitType
 
     push 0Eh
     push 0
@@ -75,7 +70,7 @@ Init_UnitTypeClass:
     push 1
     mov  dword [0x006057E4],3 ; Turret Dir adjust
     push 2
-    call 0x0056E09C    ; UnitTypeClass::UnitTypeClass( lots of args..)
+    call UnitTypeClass_UnitTypeClass
 .Ret:
     retn
 
@@ -101,7 +96,7 @@ _Init_Game_Set_UnitTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_UnitTypes
     mov  byte [UnitTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalUnitTypeHeapCount
+    add  edx,UnitTypeClass.ORIGINAL_MAX
     mov  byte [NewUnitTypeHeapCount],dl
     jmp  0x004F40FF
 

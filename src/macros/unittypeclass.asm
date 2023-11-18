@@ -5,9 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where building type classes are stored
-%define Array_UnitTypeClass                0x0065DF20
-%define Count_UnitTypeClass                0x0065DEF8
 
 ; define building type field definitions
 %define UnitTypeClass.Offset.IsCrateGoodie                 0x192    ; BOOL
@@ -80,8 +77,8 @@ str.UnitTypeClass.AmmoReloadRate                db"AmmoReloadRate",0            
 str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0            ;new ini feature
 
 
-%define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_UnitTypeClass, Array_UnitTypeClass, reg_output
-%define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_UnitTypeClass, Array_UnitTypeClass, reg_output
+%define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
+%define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

@@ -4,15 +4,6 @@
 @HOOK 0x00584A3A _VesselTypeClass__One_Time_Unhardcode_VesselTypes
 @HOOK 0x00459661 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes
 
-str_VesselTypes db"VesselTypes",0
-str_TURR db"TURR",0
-str_SSAM db"SSAM",0
-str_MGUN db"MGUN",0
-
-NewVesselTypeHeapCount      dd    0
-VesselTypesTypesExtCount    dd    0
-%define        OriginalVesselTypeHeapCount       7
-
 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
     mov  byte al,[NewVesselTypeHeapCount]
     cmp  dl,al
@@ -26,8 +17,8 @@ _VesselTypeClass__One_Time_Unhardcode_VesselTypes:
     jmp  0x00584A43
 
 Init_VesslTypeClass:
-    mov  eax,19Eh
-    call 0x00581FEC ; VesselTypeClass::operator new(uint)
+    mov  eax,VesselTypeClass.NEW_SIZE
+    call VesselTypeClass_new
     test eax,eax
     jz   .Ret
 
@@ -39,7 +30,7 @@ Init_VesslTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,OriginalVesselTypeHeapCount ; VesselType
+    add  edx,VesselTypeClass.ORIGINAL_MAX ; VesselType
 
     push 0Eh
     push 8
@@ -66,8 +57,7 @@ Init_VesslTypeClass:
     pop  eax
 
     mov  dword [0x00605A90],1 ; __Vessel_Idx
-    call 0x00581F0C ; VesselTypeClass::VesselTypeClass(VesselType,int,char *,AnimType,int,int,int,int,int,int,int,int,int,int)
-
+    call VesselTypeClass_VesselTypeClass
 .Ret:
     retn
 
@@ -92,7 +82,7 @@ _Init_Game_Set_VesselTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_VesselTypes
     mov  byte [VesselTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalVesselTypeHeapCount
+    add  edx,VesselTypeClass.ORIGINAL_MAX
     mov  byte [NewVesselTypeHeapCount],dl
     jmp  0x004F4110
 

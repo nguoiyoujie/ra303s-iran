@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where aircraft type classes are stored
-%define Array_AircraftTypeClass            0x0065DDF0
-%define Count_AircraftTypeClass            0x0065DDC8
-
 ; define aircraft type field definitions
 %define AircraftTypeClass.Offset.IsFixedWing                 0x192    ; BOOL, BIT 1
 %define AircraftTypeClass.Bit.IsFixedWing                    1    
@@ -37,8 +33,8 @@ str.AircraftTypeClass.Type                      db"Type",0                      
 str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
 str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0                ;new ini feature
 
-%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_AircraftTypeClass, Array_AircraftTypeClass, reg_output
-%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_AircraftTypeClass, Array_AircraftTypeClass, reg_output
+%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
+%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

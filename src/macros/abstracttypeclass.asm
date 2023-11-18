@@ -17,8 +17,8 @@ str.AbstractTypeClass.RTTI                      db"RTTI",0                ;inter
 str.AbstractTypeClass.Index                     db"Index",0               ;internal feature
 str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;internal feature
 
-%define AbstractTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_AbstractTypeClass, Array_AbstractTypeClass, reg_output
-%define AbstractTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_AbstractTypeClass, Array_AbstractTypeClass, reg_output
+%define AbstractTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AbstractTypeClass.Count, AbstractTypeClass.Array, reg_output
+%define AbstractTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AbstractTypeClass.Count, AbstractTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

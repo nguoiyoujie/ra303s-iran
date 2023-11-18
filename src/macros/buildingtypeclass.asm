@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where building type classes are stored
-%define Array_BuildingTypeClass            0x0065DDA4
-%define Count_BuildingTypeClass            0x0065DD7C
-
 %define        BSIZE_11    0
 %define        BSIZE_21    1
 %define        BSIZE_12    2
@@ -149,8 +145,8 @@ str.BuildingTypeClass.CustomFoundationList      db"CustomFoundationList",0      
 str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0        ;new ini feature
 
 
-%define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
-%define BuildingTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, Count_BuildingTypeClass, Array_BuildingTypeClass, reg_output
+%define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
+%define BuildingTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

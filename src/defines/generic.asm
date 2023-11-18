@@ -58,12 +58,6 @@
 str_SetProcessAffinityMask                        db"SetProcessAffinityMask",0
 
 %define str_Weapons                               0x005EFE41 ; "Super"^"Weapons"
-str_Warheads                                      db"Warheads",0
-str_SoundEffects                                  db"SoundEffects",0
-
-str_AircraftTypes                                 db"AircraftTypes",0
-
-
 
 str_Skirmish                                      db"Skirmish",0
 str_Multi1                                        db"Multi1",0
@@ -74,6 +68,11 @@ str_Multi5                                        db"Multi5",0
 str_Multi6                                        db"Multi6",0
 str_Multi7                                        db"Multi7",0
 str_Multi8                                        db"Multi8",0
+
+; Hardcoded naval turrets
+str_TURR                                          db"TURR",0
+str_SSAM                                          db"SSAM",0
+str_MGUN                                          db"MGUN",0
 
 ; Multi-use Strings
 ; If a string is used in more than one location, put them here, and reference them in comment in their respective use locations
@@ -319,10 +318,17 @@ str_FixAISendingTanksTopLeft                      db"FixAISendingTanksTopLeft",0
 str_ComputerParanoidForceDisabledSkirmish         db"ComputerParanoidForceDisabledSkirmish",0
 str_SingleplayerAIObeyPrerequisites               db"SingleplayerAIObeyPrerequisites",0
 
-
-
-
-
+; Rules.ini new instance lists
+str_AircraftTypes                                 db"AircraftTypes",0
+str_AnimTypes                                     db"AnimTypes",0
+str_DirectionalAnimTypes                          db"DirectionalAnimTypes",0
+str_BuildingTypes                                 db"BuildingTypes",0
+str_BulletTypes                                   db"BulletTypes",0
+str_InfantryTypes                                 db"InfantryTypes",0
+str_SoundEffects                                  db"SoundEffects",0
+str_UnitTypes                                     db"UnitTypes",0
+str_VesselTypes                                   db"VesselTypes",0
+str_Warheads                                      db"Warheads",0
 
 ;str_CustomMissions                                db"Custom Missions",0
 ;str_ExpansionMissions                             db"Expansions Missions",0
@@ -339,13 +345,6 @@ str_MapSelectA                                    db"MapSelectA",0
 str_MapSelectB                                    db"MapSelectB",0
 str_MapSelectC                                    db"MapSelectC",0
 str_IsCoopMode                                    db"IsCoopMode",0
-
-
-
-
-
-
-
 
 
 
@@ -371,16 +370,35 @@ CCINIClass_Map   TIMES 64 db 0
 
 
 ;;; New type heap locations
-;Aircraft
-%define        OriginalAircraftTypeHeapCount      7
-NewAircraftTypeHeapCount                          dd    0
-AircraftTypesTypesExtCount                        dd    0
+;AircraftType
+NewAircraftTypeHeapCount            dd    0
+AircraftTypesTypesExtCount          dd    0
 
+;AnimType
+AnimTypesTypesExtCount              db    0
+NewAnimTypeHeapCount                dd    0
 
+;BuildingType
+NewBuildingTypeHeapCount            dd    0
+BuildingTypesExtCount               dd    0
 
+;BulletType
+BulletTypesExtCount                 db    0
+
+;InfantryType
+InfantryTypesExtCount               dd    0
+NewInfantryTypeHeapCount            dd    0
+
+;UnitType
+UnitTypesExtCount                   dd    0
+NewUnitTypeHeapCount                dd    0
+
+;VesselType
+NewVesselTypeHeapCount              dd    0
+VesselTypesTypesExtCount            dd    0
 
 ;SoundEffects
-%define        OriginalSoundEffectsCount          165
+%define  OriginalSoundEffectsCount          165
 SoundEffectsList                                  TIMES 2304 dd 0 ; 9 bytes per entry * 256; the new list supports up to 256 new entries 
 SoundEffectsCount                                 dd 0
 

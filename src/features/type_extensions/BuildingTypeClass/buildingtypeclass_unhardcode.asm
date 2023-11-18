@@ -4,16 +4,8 @@
 @HOOK 0x004596BB _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
 @HOOK 0x00453711 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
 
-str_BuildingTypes db"BuildingTypes",0 ;2x2
-
-NewBuildingTypeHeapCount    dd    0
-BuildingTypesExtCount       dd    0
-
-%define        OriginalBuildingTypeHeapCount    0x57
-
 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
     mov  al,[NewBuildingTypeHeapCount]
-
     cmp  bl,al
     jl   0x004535BD
     jmp  0x0045371A
@@ -25,9 +17,8 @@ _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
     jmp  0x004596C0
 
 Init_BuildingTypeClass:
-
-    mov  eax,207h
-    call 0x00429F0C ;  BuildingTypeClass::operator new(uint)
+    mov  eax,BuildingTypeClass.NEW_SIZE
+    call BuildingTypeClass__new
     test eax,eax
     jz   .Ret
 
@@ -39,7 +30,7 @@ Init_BuildingTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,OriginalBuildingTypeHeapCount ; BuildingType
+    add  edx,BuildingTypeClass.ORIGINAL_MAX ; BuildingType
 
     push 0
     push 0x005FEAF6 ; offset short const List22[]
@@ -79,7 +70,7 @@ Init_BuildingTypeClass:
 
     mov  dword [0x005FE83C],6
     push 0FFFFFFFFh
-    call 0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
+    call BuildingTypeClass__BuildingTypeClass
 .Ret:
     retn
 
@@ -228,7 +219,7 @@ _Init_Game_Set_BuildingTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
     mov  byte [BuildingTypesExtCount],al
     mov  edx,eax
-    add  edx,OriginalBuildingTypeHeapCount
+    add  edx,BuildingTypeClass.ORIGINAL_MAX
     mov  byte [NewBuildingTypeHeapCount],dl
     jmp  0x004F40AA
 

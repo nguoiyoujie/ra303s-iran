@@ -1,8 +1,8 @@
-@HOOK 0x004C7175 _TFixedHeapClass_fn_init_New_HouseClass_Size
-@HOOK 0x004C8365 _TFixedHeapClass__HouseClass__Constructor_New_HouseClass_Size
-@HOOK 0x004DDD1D _HouseClass__Read_INI_New_HouseClass_Size
-@HOOK 0x004CED13 _TFixedHeapClass__HouseClass__Save_New_HouseClass_Size
-@HOOK 0x004CEDF5 _TFixedHeapClass__HouseClass__Load_New_HouseClass_Size
+@HOOK 0x004C7175 _TFixedHeapClass_fn_init_HouseClass
+@HOOK 0x004C8365 _TFixedHeapClass__HouseClass__Constructor_HouseClass
+@HOOK 0x004DDD1D _HouseClass__Read_INI_HouseClass
+@HOOK 0x004CED13 _TFixedHeapClass__HouseClass__Save_HouseClass
+@HOOK 0x004CEDF5 _TFixedHeapClass__HouseClass__Load_HouseClass
 @HOOK 0x004CEE10 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames
 @HOOK 0x004DDD31 _HouseClass__Read_INI
 @HOOK 0x00540F20 _ScoreClass__Presentation_Proper_Country_Check
@@ -11,9 +11,6 @@
 
 
 allyneutral db 1
-
-%define Old_HouseClass_Size     0x17A8
-%define New_HouseClass_Size     0x27A8
 
 %define    EXT_Resigned                0x17BC
 %define    EXT_ConnectionLost            0x17B8
@@ -30,7 +27,7 @@ allyneutral db 1
 ; Use Offset +0x1A00 to +0x1B60 for buildings left
 
 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
-    Clear_Extended_Class_Memory_For_Old_Saves esi,New_HouseClass_Size,Old_HouseClass_Size
+    Clear_Extended_Class_Memory_For_Old_Saves esi,HouseClass.NEW_SIZE,HouseClass.ORIGINAL_SIZE
 
     mov  byte [esi+EXT_SecondaryColorScheme],0xFF
 
@@ -38,31 +35,31 @@ _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
     mov  ebx,0x005F6538
     jmp  0x004CEE15
 
-_TFixedHeapClass_fn_init_New_HouseClass_Size:
-    mov  edx,New_HouseClass_Size
+_TFixedHeapClass_fn_init_HouseClass:
+    mov  edx,HouseClass.NEW_SIZE
     jmp  0x004C717A
 
-_TFixedHeapClass__HouseClass__Constructor_New_HouseClass_Size:
-    mov  edx,New_HouseClass_Size
+_TFixedHeapClass__HouseClass__Constructor_HouseClass:
+    mov  edx,HouseClass.NEW_SIZE
     jmp  0x004C836A
 
-_HouseClass__Read_INI_New_HouseClass_Size:
-    mov  edx,New_HouseClass_Size
+_HouseClass__Read_INI_HouseClass:
+    mov  edx,HouseClass.NEW_SIZE
     jmp  0x004DDD22
 
-_TFixedHeapClass__HouseClass__Save_New_HouseClass_Size:
-    mov  ebx,New_HouseClass_Size
+_TFixedHeapClass__HouseClass__Save_HouseClass:
+    mov  ebx,HouseClass.NEW_SIZE
     jmp  0x004CED18
 
-_TFixedHeapClass__HouseClass__Load_New_HouseClass_Size:
+_TFixedHeapClass__HouseClass__Load_HouseClass:
     cmp  dword [SaveGameVersion],New_Savegame_Version
     jnz  .Old_Savegame
 
-    mov  ebx,New_HouseClass_Size
+    mov  ebx,HouseClass.NEW_SIZE
     jmp  0x004CEDFA
 
 .Old_Savegame:
-    mov  ebx,Old_HouseClass_Size
+    mov  ebx,HouseClass.ORIGINAL_SIZE
     jmp  0x004CEDFA
 
 _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double:
