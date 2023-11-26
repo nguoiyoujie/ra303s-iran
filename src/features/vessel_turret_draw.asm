@@ -13,6 +13,7 @@
 
 @HOOK 0x0058A1E4 _VesselClass__Draw_It_Check_Second_Turret
 @HOOK 0x00584A78 _VesselClass__Turret_Adjust_Apply_TurretOffset
+@HOOK 0x0058B5FC _VesselClass__Fire_Data_Apply_Offsets
 
 temp_objecttype      dd    0
 
@@ -81,4 +82,36 @@ _VesselClass__Turret_Adjust_Apply_TurretOffset:
     add  eax,ecx
     pop  edi
     jmp  0x00584B0B
-    
+
+
+_VesselClass__Fire_Data_Apply_Offsets:
+    ; ebx is the ID
+    push edi
+    push eax
+    VesselTypeClass.FromIndex(ebx,edi)
+    ; check IsSecondShot
+    mov  al,byte[ecx+72h]
+    mov  dl,byte[ecx+0xba] ; PrimaryFacing
+    test al,10h ; IsSecondShot
+    jz   .FirstShot
+    VesselTypeClass.HasSecondTurret.Get(edi,bl) ; modifies eax
+    test bl,bl
+    jz   .FirstShot
+.SecondShot:
+    add  dl,80h
+.FirstShot:
+    pop  eax
+    and  edx,0xff
+    VesselTypeClass.TurretFireOffset.Get(edi,ebx)
+    call 0x004AC798 ; Coord_Move
+    TechnoTypeClass.VerticalOffset.Get(edi,ebx)
+    xor  edx,edx ; DIR_N
+    call 0x004AC798 ; Coord_Move
+    TechnoTypeClass.PrimaryOffset.Get(edi,ebx)
+    pop  edi
+    mov  edx,dword [ecx+0x11]
+    mov  esi,eax
+    mov  eax,ecx
+    call dword [edx+0x164]
+    xor  edx,edx
+    jmp  0x0058B648

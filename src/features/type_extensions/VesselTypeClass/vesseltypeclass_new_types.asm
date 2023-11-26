@@ -102,6 +102,9 @@ Init_Heap_OverrideExistingVesselTypes:
     VesselTypeClass.TurretName.Set(edi,str_MGUN)
     VesselTypeClass.TurretOffset.Set(edi,14)
     VesselTypeClass.TurretAdjustY.Set(edi,1)
+    VesselTypeClass.TurretFireOffset.Set(edi,80h)
+    TechnoTypeClass.PrimaryOffset.Set(edi,10h)
+    TechnoTypeClass.VerticalOffset.Set(edi,20h)
 
     VesselTypeClass.FromIndex(VesselType.DD,edi)
     VesselTypeClass.TurretName.Set(edi,str_SSAM)
@@ -113,6 +116,9 @@ Init_Heap_OverrideExistingVesselTypes:
     VesselTypeClass.HasSecondTurret.Set(edi,1)
     VesselTypeClass.TurretOffset.Set(edi,22)
     VesselTypeClass.TurretAdjustY.Set(edi,-4)
+    VesselTypeClass.TurretFireOffset.Set(edi,100h)
+    TechnoTypeClass.PrimaryOffset.Set(edi,40h)
+    TechnoTypeClass.VerticalOffset.Set(edi,30h)
     pop esi
     retn
 

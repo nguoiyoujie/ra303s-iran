@@ -47,6 +47,7 @@ VesselTypes_Read_INI:
     VesselTypeClass.HasSecondTurret.Read(esi,edi)             
     ;VesselTypeClass.Type.Read(esi,edi)                       
     VesselTypeClass.TurretOffset.Read(esi,edi)               
+    VesselTypeClass.TurretFireOffset.Read(esi,edi)               
     ;VesselTypeClass.DefaultMission.Read(esi,edi)             
     ;VesselTypeClass.Explosion.Read(esi,edi)                  
     ;VesselTypeClass.MaxSize.Read(esi,edi)                    

@@ -21,19 +21,21 @@
 %define VesselTypeClass.Offset.ExtendedPrerequisite          0x19E    ; INTx8
 %define VesselTypeClass.Offset.TurretName                    0x21E    ; int ptr to string
 %define VesselTypeClass.Offset.TurretShape                   0x222    ; int ptr to SHP file memory
-%define VesselTypeClass.Offset.TurretAdjustY                 0x226    ; INT
-
+%define VesselTypeClass.Offset.TurretFireOffset              0x226    ; INT
+%define VesselTypeClass.Offset.TurretAdjustY                 0x22A    ; INT
+;0x22E
 
 ; INI String controls
 str.VesselTypeClass.IsPieceOfEight            db"IsPieceOfEight",0              ;internal feature
 str.VesselTypeClass.HasSecondTurret           db"HasSecondTurret",0             ;new ini feature
 str.VesselTypeClass.Type                      db"Type",0                        ;internal feature
-str.VesselTypeClass.TurretOffset              db"TurretOffset",0                ;unused feature, now new ini feature
+str.VesselTypeClass.TurretOffset              db"TurretOffset",0                ;unused feature, now new ini feature (measured in pixels)
 str.VesselTypeClass.DefaultMission            db"DefaultMission",0              ;unused feature
 str.VesselTypeClass.Explosion                 db"Explosion",0                   ;internal feature
 str.VesselTypeClass.MaxSize                   db"MaxSize",0                     ;internal feature
 str.VesselTypeClass.TurretName                db"TurretName",0                  ;new ini feature
-str.VesselTypeClass.TurretAdjustY             db"TurretAdjustY",0               ;new ini feature
+str.VesselTypeClass.TurretFireOffset          db"TurretFireOffset",0            ;new ini feature (measured in leptons)
+str.VesselTypeClass.TurretAdjustY             db"TurretAdjustY",0               ;new ini feature (measured in pixels)
 
 %define VesselTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
 %define VesselTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
@@ -55,6 +57,10 @@ str.VesselTypeClass.TurretAdjustY             db"TurretAdjustY",0               
 %define VesselTypeClass.TurretOffset.Get(ptr_type,reg_output)                ObjectTypeClass.GetByte                ptr_type, VesselTypeClass.Offset.TurretOffset, reg_output
 %define VesselTypeClass.TurretOffset.Set(ptr_type,value)                     ObjectTypeClass.SetByte                ptr_type, VesselTypeClass.Offset.TurretOffset, value
 %define VesselTypeClass.TurretOffset.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadByte               ptr_type, ptr_rules, VesselTypeClass.Offset.TurretOffset, str.VesselTypeClass.TurretOffset  
+
+%define VesselTypeClass.TurretFireOffset.Get(ptr_type,reg_output)            ObjectTypeClass.GetInt                 ptr_type, VesselTypeClass.Offset.TurretFireOffset, reg_output
+%define VesselTypeClass.TurretFireOffset.Set(ptr_type,value)                 ObjectTypeClass.SetInt                 ptr_type, VesselTypeClass.Offset.TurretFireOffset, value
+%define VesselTypeClass.TurretFireOffset.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadInt                ptr_type, ptr_rules, VesselTypeClass.Offset.TurretFireOffset, str.VesselTypeClass.TurretFireOffset  
 
 %define VesselTypeClass.DefaultMission.Get(ptr_type,reg_output)              ObjectTypeClass.GetByte                ptr_type, VesselTypeClass.Offset.DefaultMission, reg_output
 %define VesselTypeClass.DefaultMission.Set(ptr_type,value)                   ObjectTypeClass.SetByte                ptr_type, VesselTypeClass.Offset.DefaultMission, value
