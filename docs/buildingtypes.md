@@ -18,6 +18,8 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
  - [Radar Buildings](#radar-buildings) 
  - [Jamming Buildings](#jamming-buildings) 
  - [Superweapons](#superweapons) 
+ - [Undeploys To Unit](#undeploys-to-unit) 
+
 
 -------
 
@@ -436,6 +438,21 @@ The list of supported SpecialWeapons are:
 > GPS, the satellite launch. Creates a GPS satellite animation at launch, which may look weird depending on the building you hook into
 
 For example, `SpecialWeapons=GPS,SPYPLANE` grants both spy plane and GPS special powers while the building remains standing.
+
+</details>
+
+-------
+
+### Undeploys To Unit
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► UndeploysInto (string representing UnitType)</code></b></summary>
+
+```New logic```
+
+Allows the building to repack into the indicated unit. The controls to undeploy is the same as repacking an Construction Yard - give the building a move command.
+
+The created building will be offset at the cell +1,+1 (directly south-east) from the building's top right cell This may change in the future towards an automatic centering.
 
 </details>
 

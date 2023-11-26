@@ -119,6 +119,19 @@ There are customized drawing of turrets, the most known of which is the Cruiser'
 
 For the moment, firing coordinates still come from the center of the unit. This may change to follow the turret in the future.
 
+Use 
+- TurretOffset
+- TurretAdjustY
+
+to control the position of the turret, and 
+
+- TurretFireOffset
+- PrimaryOffset
+- VerticalOffset
+
+to control the position of the bullet. 
+
+
 <details>
   <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► HasSecondTurret (boolean)</code></b></summary>
 
@@ -142,7 +155,7 @@ Determines the turret to be drawn. Defaults to MGUN for the Gunboat, SSAM for th
 
 ```Exposed UnitTypeClass->TurretOffset```
 
-Determines the offset of the turret towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret
+Determines the offset of the turret, in pixels, towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret
 
 </details>
 
@@ -151,6 +164,33 @@ Determines the offset of the turret towards the front of the unit. Negative valu
 
 ```New logic```
 
-Determines the vertical offset of the turret.
+Determines the vertical offset, in pixels, of the turret.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretFireOffset (int)</code></b></summary>
+
+```New logic```
+
+Determines the offset of the firing animation, in leptons, towards the front of the vessel.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► PrimaryOffset (int)</code></b></summary>
+
+```Modified TechnoTypeClass->VerticalOffset```
+
+Determines the forward offset of the firing animation, in leptons, relative to the vessels's line of fire after applying TurretFireOffset.
+
+</details>
+
+<details>
+  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► VerticalOffset (int)</code></b></summary>
+
+```Modified TechnoTypeClass->PrimaryOffset```
+
+Determines the upward offset of the firing animation, in leptons, relative to the vessels's position after applying TurretFireOffset.
 
 </details>

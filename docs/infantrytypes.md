@@ -148,6 +148,15 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
 </details>
 
 <details>
+  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► DoControls (string representing InfantryType)</code></b></summary>
+
+```Exposed InfantryTypeClass->DoControls```
+
+If specified, loads that units' animation control frames for the infantry. Only the original units (up to MECHANIC) are supported.
+
+</details>
+
+<details>
   <summary>
     <b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► FireFrame (byte)</code></b><br>
     <b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► ProneFireFrame (byte)</code></b>

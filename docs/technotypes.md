@@ -266,7 +266,7 @@ Determines if the number of directions applicable for this object's rotation. On
 
 ```Exposed TechnoTypeClass->VerticalOffset```
 
-Determines the upward offset of the firing animation relative to the unit's center.
+Determines the upward offset of the firing animation, in leptons, relative to the unit's center.
 
 </details>
 
@@ -275,7 +275,7 @@ Determines the upward offset of the firing animation relative to the unit's cent
 
 ```Exposed TechnoTypeClass->PrimaryOffset```
 
-Determines the forward offset of the firing animation relative to the unit's line of fire.
+Determines the forward offset of the firing animation, in leptons, relative to the unit's line of fire.
 
 </details>
 
