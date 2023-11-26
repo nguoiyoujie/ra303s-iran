@@ -148,6 +148,10 @@
 ; MAPSEL.CPP
 %define MapSel___Map_Selection                                    0x00500A68 ; char const * Map_Selection(void)
 
+; MIXFILE.CPP
+%define MFCD__Retrieve                                            0x005B9330 ; void const * MixFileClass<T>::Retrieve(char const * filename)
+
+
 ; OVERLAY.CPP
 %define OverlayTypeClass__As_Reference                            0x00524C10 ; OverlayTypeClass & OverlayTypeClass::As_Reference(OverlayType type)
 %define OverlayClass__Write_INI                                   0x0052736C ; void OverlayClass::Write_INI(CCINIClass & ini)

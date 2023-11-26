@@ -53,21 +53,6 @@ str.InfantryTypeClass.FireFrame                 db"FireFrame",0                 
 str.InfantryTypeClass.ProneFireFrame            db"ProneFireFrame",0              ;new ini feature
 str.InfantryTypeClass.OverrideRemap             db"OverrideRemap",0               ;for civilian remap
 
-;DoInfoStruct (size 0x80)
-%define DoControls.DOG                                     0x006019CC
-%define DoControls.E1                                      0x00601A4C
-%define DoControls.E2                                      0x00601ACC
-%define DoControls.E3                                      0x00601B4C
-%define DoControls.E4                                      0x00601BCC ; also used for SHOK
-%define DoControls.E6                                      0x00601C4C
-%define DoControls.E7                                      0x00601CCC
-%define DoControls.SPY                                     0x00601D4C
-%define DoControls.THF                                     0x00601DCC
-%define DoControls.MEDIC                                   0x00601E4C ; also used for MECH
-%define DoControls.GNRL                                    0x00601ECC
-%define DoControls.CIV                                     0x00601F4C ; also used for DELPHI, CHAN
-%define DoControls.EINS                                    0x00601FCC
-
 
 %define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
 %define InfantryTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
@@ -116,7 +101,7 @@ str.InfantryTypeClass.OverrideRemap             db"OverrideRemap",0             
 
 %define InfantryTypeClass.DoControls.Get(ptr_type,reg_output)                  ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.DoControls, reg_output
 %define InfantryTypeClass.DoControls.Set(ptr_type,value)                       ObjectTypeClass.SetInt                 ptr_type, InfantryTypeClass.Offset.DoControls, value
-;%define InfantryTypeClass.DoControls.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadInt                ptr_type, ptr_rules, InfantryTypeClass.Offset.DoControls, str.InfantryTypeClass.DoControls
+%define InfantryTypeClass.DoControls.Read(ptr_type,ptr_rules,function)         ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.DoControls, str.InfantryTypeClass.DoControls, function
 
 %define InfantryTypeClass.FireFrame.Get(ptr_type,reg_output)                   ObjectTypeClass.GetByte                ptr_type, InfantryTypeClass.Offset.FireFrame, reg_output
 %define InfantryTypeClass.FireFrame.Set(ptr_type,value)                        ObjectTypeClass.SetByte                ptr_type, InfantryTypeClass.Offset.FireFrame, value

@@ -47,8 +47,8 @@
 %define UnitTypeClass.Offset.TurretFrameStart              0x226    ; word
 %define UnitTypeClass.Offset.TurretFrameCount              0x228    ; word
 %define UnitTypeClass.Offset.DeploysInto                   0x22A    ; byte
-%define UnitTypeClass.Offset.AmmoReloadRate                      0x22B    ; INT
-%define UnitTypeClass.Offset.AmmoReloadAmount                    0x22F    ; INT
+%define UnitTypeClass.Offset.AmmoReloadRate                0x22B    ; INT
+%define UnitTypeClass.Offset.AmmoReloadAmount              0x22F    ; INT
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -126,10 +126,9 @@ str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0          
 %define UnitTypeClass.IsNoFireWhileMoving.Set(ptr_type,value)              ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoFireWhileMoving, UnitTypeClass.Bit.IsNoFireWhileMoving, value
 %define UnitTypeClass.IsNoFireWhileMoving.Read(ptr_type,ptr_rules)         ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoFireWhileMoving, UnitTypeClass.Bit.IsNoFireWhileMoving, str.UnitTypeClass.IsNoFireWhileMoving
 
-%define UnitTypeClass.IsNoSmoke.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, reg_output
-%define UnitTypeClass.IsNoSmoke.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, value
-%define UnitTypeClass.IsNoSmoke.Read(ptr_type,ptr_rules)                    ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, str.UnitTypeClass.IsNoSmoke
-
+%define UnitTypeClass.IsNoSmoke.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, reg_output
+%define UnitTypeClass.IsNoSmoke.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, value
+%define UnitTypeClass.IsNoSmoke.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, str.UnitTypeClass.IsNoSmoke
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.Type, value
@@ -171,10 +170,10 @@ str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0          
 %define UnitTypeClass.DeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.DeploysInto, value
 %define UnitTypeClass.DeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, UnitTypeClass.Offset.DeploysInto, str.UnitTypeClass.DeploysInto, function
 
-%define UnitTypeClass.AmmoReloadRate.Get(ptr_type,reg_output)                    ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, reg_output
-%define UnitTypeClass.AmmoReloadRate.Set(ptr_type,value)                         ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, value
-%define UnitTypeClass.AmmoReloadRate.Read(ptr_type,ptr_rules)                    ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadRate, str.UnitTypeClass.AmmoReloadRate
+%define UnitTypeClass.AmmoReloadRate.Get(ptr_type,reg_output)              ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, reg_output
+%define UnitTypeClass.AmmoReloadRate.Set(ptr_type,value)                   ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, value
+%define UnitTypeClass.AmmoReloadRate.Read(ptr_type,ptr_rules)              ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadRate, str.UnitTypeClass.AmmoReloadRate
 
-%define UnitTypeClass.AmmoReloadAmount.Get(ptr_type,reg_output)                  ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, reg_output
-%define UnitTypeClass.AmmoReloadAmount.Set(ptr_type,value)                       ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, value
-%define UnitTypeClass.AmmoReloadAmount.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadAmount, str.UnitTypeClass.AmmoReloadAmount
+%define UnitTypeClass.AmmoReloadAmount.Get(ptr_type,reg_output)            ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, reg_output
+%define UnitTypeClass.AmmoReloadAmount.Set(ptr_type,value)                 ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, value
+%define UnitTypeClass.AmmoReloadAmount.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadAmount, str.UnitTypeClass.AmmoReloadAmount

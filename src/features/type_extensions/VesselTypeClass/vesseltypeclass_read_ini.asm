@@ -1,34 +1,19 @@
-;Read INI settings
-@HOOK 0x004C750C _TFixedIHeapClass__fn_init_VesselTypes_Heap
-@HOOK 0x004D1533 _TFixedIHeapClass__VesselTypeClass__Save_New_Size
-@HOOK 0x004D1616 _TFixedIHeapClass__VesselTypeClass__Load_New_Size
-@HOOK 0x004D1631 _TFixedIHeapClass__VesselTypeClass__Load_Clear_Memory
-
-Buffer_VesselType           times 512 db 0 
+;----------------------------------------------------------------
+; src/features/type_extensions/VesselTypeClass/vesseltypeclass_read_ini.asm
+;
+; Implements the reading of new INI settings, or modifications to existing INI reads, if any.
+; 
+; This function is enabled by default and is not configurable.
+; 
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
 
 ;There is no Read_INI in VesselTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HOOK 0x005374A2 _RulesClass_Objects_Replace_VesselTypes_Read_INI
 
-;%define        TechnoTypeClass_Read_INI             0x00569914 ;defined in AircraftTypes
+Buffer_VesselType           times 512 db 0 
 
-_TFixedIHeapClass__VesselTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx,VesselTypeClass.NEW_SIZE,VesselTypeClass.ORIGINAL_SIZE
-.Ret:
-    lea  edx,[ebp-0x14]
-    mov  eax,ecx
-    jmp  0x004D1636
-
-_TFixedIHeapClass__fn_init_VesselTypes_Heap:
-    mov  edx,VesselTypeClass.NEW_SIZE
-    jmp  0x004C7511
-
-_TFixedIHeapClass__VesselTypeClass__Load_New_Size:
-    mov  ebx,VesselTypeClass.NEW_SIZE
-    jmp  0x004D161B
-
-_TFixedIHeapClass__VesselTypeClass__Save_New_Size:
-    mov  ebx,VesselTypeClass.NEW_SIZE
-    jmp  0x004D1538
 
 _RulesClass_Objects_Replace_VesselTypes_Read_INI:
     mov  dword eax,[ecx+eax]
@@ -98,7 +83,7 @@ _LoadTurretShapeFromString:
     xor  edx,edx
     call 0x005B8BEE    ; _makepath
     lea  eax,[Buffer_VesselType]
-    call 0x005B9330    ; MFCD::Retrieve
+    call MFCD__Retrieve
     ; move the result to TurretShape
     mov  edx,esi
     add  edx,VesselTypeClass.Offset.TurretShape

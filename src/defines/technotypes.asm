@@ -80,7 +80,32 @@
 %define        VesselType.CARR     6
 
 ; InfantryType
-
+%define        InfantryType.E1         0
+%define        InfantryType.E2         1
+%define        InfantryType.E3         2
+%define        InfantryType.E4         3
+%define        InfantryType.E6         4
+%define        InfantryType.E7         5
+%define        InfantryType.SPY        6
+%define        InfantryType.THF        7
+%define        InfantryType.MEDI       8
+%define        InfantryType.GNRL       9
+%define        InfantryType.DOG        10
+%define        InfantryType.C1         11
+%define        InfantryType.C2         12
+%define        InfantryType.C3         13
+%define        InfantryType.C4         14
+%define        InfantryType.C5         15
+%define        InfantryType.C6         16
+%define        InfantryType.C7         17
+%define        InfantryType.C8         18
+%define        InfantryType.C9         19
+%define        InfantryType.C10        20
+%define        InfantryType.EINSTEIN   21
+%define        InfantryType.DELPHI     22
+%define        InfantryType.CHAN       23
+%define        InfantryType.SHOK       24 ; Aftermath
+%define        InfantryType.MECH       25
 
 ; AircraftType
 

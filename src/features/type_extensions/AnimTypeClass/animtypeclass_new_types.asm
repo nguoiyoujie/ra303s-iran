@@ -1,3 +1,19 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/AnimTypeClass/animtypeclass_new_types.asm
+;
+; Continuation of Iran's work in enabling the game to use new AnimTypeClass.
+; 
+; This function is enabled by including the section [AnimTypes] and [DirectionalAnimTypes] in Rules.ini. This section includes an indexed array of names of animations to load.
+;   [AnimTypes]
+;   0=CHEPALM
+;
+;   [DirectionalAnimTypes]
+;   0=FIREANIM
+; 
+; No compatibility issues is expected as the original game lack the ability to add new types.
+;
+;----------------------------------------------------------------
+
 ; There are two classes of animations
 ; One of them is a full animation loaded from a single file
 ; The other is a set of 8 directional animations loaded from a single file.
@@ -7,10 +23,10 @@
 ; The animation file is not loaded at this time, so we cannot obtain the frame 
 
 @HOOK 0x0041C5D8 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
-@HOOK 0x004F40E9 _Init_Game_Set_AnimTypes_Heap_Count
 @HOOK 0x0041C654 _AnimTypeClass__One_Time_UnhardCode_AnimTypes
 @HOOK 0x0041C6E3 _AnimTypeClass__Init_UnhardCode_AnimTypes
 @HOOK 0x00423EE8 _Anim_From_Name_Unhardcode_AnimTypes
+@HOOK 0x004F40E9 _Init_Game_Set_AnimTypes_Heap_Count
 @HOOK 0x005655C5 _TechnoClass_FireAt_ApplyDirectionalAnim
 
 Tracker_AnimDir           db    0
@@ -26,62 +42,16 @@ temp_animtypeclass_constructor_arg dd 0
 
 ; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
 
-_Anim_From_Name_Unhardcode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
-    cmp  dl,al
-    jl   0x00423EF4
-    jmp  0x00423EED
 
-_AnimTypeClass__Init_UnhardCode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
-    cmp  bl,al
-    jl   0x0041C68E
-    jmp  0x0041C6E8
-
-_AnimTypeClass__One_Time_UnhardCode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
-    cmp  dh,al
-    jl   0x0041C5F8
-    jmp  0x0041C659
-
-_TechnoClass_FireAt_ApplyDirectionalAnim:
-    cmp  al,byte [FirstDirectionalAnim]
-    jge  .DirectionalAnim
-    cmp  al,0x19
-    jc   0x005655D7
-    jbe  0x005657D8
-    jmp  0x005655CF
-
-.DirectionalAnim:
-    push edx
-    mov  edx,eax
-    mov  eax,dword [ebp-0x18]
-    add  eax,0xba
-    mov  al,byte [eax]
-    add  al,0x10
-    and  eax,0xff
-    sar  eax,0x5
-    add  al,dl 
+_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
+    Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
+    Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
+.Ret:
+    lea  esp,[ebp-14h]
+    pop  edi
+    pop  esi
     pop  edx
-    mov  byte [ebp-0x10],al
-    jmp  0x005655D7
-
-
-_Init_Game_Set_AnimTypes_Heap_Count:
-
-    Get_RULES_INI_Section_Entry_Count str_AnimTypes
-    mov  byte [AnimTypesTypesExtCount],al
-    mov  edx,eax
-    add  edx,AnimTypesHeap.ORIGINAL_MAX
-    mov  byte [FirstDirectionalAnim],dl
-
-    Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
-    shl  al,3 ;x8
-    add  byte [AnimTypesTypesExtCount],al
-    add  edx,eax
-    mov  byte [NewAnimTypeHeapCount],dl
-
-    jmp  0x004F40EE
+    jmp  0x0041C5DE
 
 
 ; We preserve this for now, we can tidy this later when we want to customize
@@ -127,6 +97,7 @@ Init_AnimTypeClass:
     call AnimTypeClass__AnimTypeClass
 .Ret:
     retn
+
 
 Init_DirectionalAnimTypeClass:
     mov  dword [temp_AnimDirection],0
@@ -208,13 +179,60 @@ Init_DirectionalAnimTypeClass:
     retn
 
 
+_AnimTypeClass__One_Time_UnhardCode_AnimTypes:
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  dh,al
+    jl   0x0041C5F8
+    jmp  0x0041C659
 
-_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
-    Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
-    Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
-.Ret:
-    lea  esp,[ebp-14h]
-    pop  edi
-    pop  esi
+
+_AnimTypeClass__Init_UnhardCode_AnimTypes:
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  bl,al
+    jl   0x0041C68E
+    jmp  0x0041C6E8
+    
+    
+_Anim_From_Name_Unhardcode_AnimTypes:
+    mov  al,[NewAnimTypeHeapCount]
+    cmp  dl,al
+    jl   0x00423EF4
+    jmp  0x00423EED
+
+
+_Init_Game_Set_AnimTypes_Heap_Count:
+    Get_RULES_INI_Section_Entry_Count str_AnimTypes
+    mov  byte [AnimTypesTypesExtCount],al
+    mov  edx,eax
+    add  edx,AnimTypesHeap.ORIGINAL_MAX
+    mov  byte [FirstDirectionalAnim],dl
+
+    Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
+    shl  al,3 ;x8
+    add  byte [AnimTypesTypesExtCount],al
+    add  edx,eax
+    mov  byte [NewAnimTypeHeapCount],dl
+    jmp  0x004F40EE
+
+
+_TechnoClass_FireAt_ApplyDirectionalAnim:
+    cmp  al,byte [FirstDirectionalAnim]
+    jge  .DirectionalAnim
+    cmp  al,0x19
+    jc   0x005655D7
+    jbe  0x005657D8
+    jmp  0x005655CF
+
+.DirectionalAnim:
+    push edx
+    mov  edx,eax
+    mov  eax,dword [ebp-0x18]
+    add  eax,0xba
+    mov  al,byte [eax]
+    add  al,0x10
+    and  eax,0xff
+    sar  eax,0x5
+    add  al,dl 
     pop  edx
-    jmp  0x0041C5DE
+    mov  byte [ebp-0x10],al
+    jmp  0x005655D7

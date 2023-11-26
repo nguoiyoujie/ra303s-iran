@@ -1,8 +1,15 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/BuildingTypeClass/buildingtypeclass_read_ini.asm
+;
+; Implements the reading of new INI settings, or modifications to existing INI reads, if any.
+; 
+; This function is enabled by default and is not configurable.
+; 
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
+
 ;Read INI settings
-@HOOK 0x004C73ED _TFixedIHeapClass__fn_init_BuildingTypes_Heap
-@HOOK 0x004D0953 _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
-@HOOK 0x004D0A36 _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
-@HOOK 0x004D0A51 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory
 @HOOK 0x00453FFB _BuildingTypeClass__Read_INI_Extended
 
 ; OccupyList, OverlapList
@@ -49,25 +56,6 @@ d_ExitCCAirstrip              dw 0xFF7F,0xFFFF,0x7F,0xFF,0xFF80,0x100,0xFF81,0x1
 
 Buffer_BuildingType           times 512 db 0 
 
-
-_TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:
-    Clear_Extended_Class_Memory_For_Old_Saves ecx,BuildingTypeClass.NEW_SIZE,BuildingTypeClass.ORIGINAL_SIZE
-.Ret:
-    lea  edx,[ebp-0x14]
-    mov  eax,ecx
-    jmp  0x004D0A56
-
-_TFixedIHeapClass__fn_init_BuildingTypes_Heap:
-    mov  edx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004C73F2
-
-_TFixedIHeapClass__BuildingTypeClass__Load_New_Size:
-    mov  ebx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004D0A3B
-
-_TFixedIHeapClass__BuildingTypeClass__Save_New_Size:
-    mov  ebx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004D0958
 
 _BuildingTypeClass__Read_INI_Extended:
     push esi
@@ -595,7 +583,7 @@ _GetOverlayFromString:
     xor  edx,edx
     call 0x005B8BEE    ; _makepath
     lea  eax,[Buffer_BuildingType]
-    call 0x005B9330    ; MFCD::Retrieve
+    call MFCD__Retrieve
 
 .Retn:
     pop edi

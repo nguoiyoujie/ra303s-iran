@@ -1,10 +1,23 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/TechnoTypeClass/technotypeclass_read_ini.asm
+;
+; Implements the reading of new INI settings, or modifications to existing INI reads, if any.
+; 
+; This function is enabled by default and is not configurable.
+; 
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
+
 ; Expose other technotype fields that already exist
 ;Read INI settings
 @HOOK 0x00569B6A _TechnoTypeClass__SkipReading_Prerequisite
 @HOOK 0x00569E1F _TechnoTypeClass__Read_INI_Extended
 
+
 _TechnoTypeClass__SkipReading_Prerequisite:
     jmp  0x00569B72
+
 
 _TechnoTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
@@ -16,8 +29,6 @@ _TechnoTypeClass__Read_INI_Extended:
     push eax
     xor  eax,eax
     TechnoTypeClass.DeathWeapon.Set(esi,eax)
-    ;xor  eax,eax
-    ;TechnoTypeClass.Prerequisite.Set(esi,eax)
     pop eax
 
     ;TechnoTypeClass.IsScanner.Read(esi,edi) ;already existing
@@ -47,7 +58,6 @@ _TechnoTypeClass__Read_INI_Extended:
     pop  esi
     pop  ecx
     jmp  0x00569E2A
-
 
 
 _GetWeaponTypeFromString:

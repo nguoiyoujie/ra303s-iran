@@ -176,11 +176,11 @@ _SidebarClass_Reload_Sidebar_hires: ; Load side specific graphics
     jz   .Load_Soviet_Sidebar
 
     mov  eax, side4na_str
-    call 0x005B9330 ; MixFileClass<CCFileClass>::Finder(char *)
+    call MFCD__Retrieve 
     mov  [Side4Shape], eax
 
     mov  eax, strip2na_str
-    call 0x005B9330 ; MixFileClass<CCFileClass>::Finder(char *)
+    call MFCD__Retrieve 
     mov  [Strip2Shape], eax
 
     pop  eax    ; restore eax
@@ -189,11 +189,11 @@ _SidebarClass_Reload_Sidebar_hires: ; Load side specific graphics
 .Load_Soviet_Sidebar:
 
     mov  eax, side4us_str
-    call 0x005B9330 ; MixFileClass<CCFileClass>::Finder(char *)
+    call MFCD__Retrieve 
     mov  [Side4Shape], eax
 
     mov  eax, strip2us_str
-    call 0x005B9330 ; MixFileClass<CCFileClass>::Finder(char *)
+    call MFCD__Retrieve 
     mov  [Strip2Shape], eax
 
     pop  eax    ; restore eax
@@ -203,7 +203,7 @@ _PowerClass_One_Time:
     mov  [0x006877BC], eax ; ds:void *PowerClass::PowerBarShape
 
     mov  eax, powerext_str
-    call 0x005B9330 ; MixFileClass<CCFileClass>::Finder(char *)
+    call MFCD__Retrieve 
     mov  [PowerTileShape], eax
 
     jmp  0x00527622

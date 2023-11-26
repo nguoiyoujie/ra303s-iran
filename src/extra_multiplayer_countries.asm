@@ -22,7 +22,7 @@ _Skirmish_Dialog_DropList_Increase_Drop_List_Display_Size:
     jmp  0x00512910
 
 _Net_Join_Dialog_DropList_Increase_Drop_List_Display_Size:
-    call 0x005B9330
+    call MFCD__Retrieve
     push eax
     push 70h
     jmp  0x00506C30

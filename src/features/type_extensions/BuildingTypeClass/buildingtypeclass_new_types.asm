@@ -1,20 +1,35 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/BuildingTypeClass/buildingtypeclass_new_types.asm
+;
+; Continuation of Iran's work in enabling the game to use new BuildingTypeClass.
+; 
+; This function is enabled by including the section [BuildingTypes] in Rules.ini. This section includes an indexed array of names of buildings to load.
+;   [BuildingTypes]
+;   0=OBEL
+; 
+; No compatibility issues is expected as the original game lack the ability to add new types.
+;
+;----------------------------------------------------------------
+
 @HOOK 0x004537CC _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count
-@HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
 @HOOK 0x0045359B _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes
-@HOOK 0x004596BB _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
 @HOOK 0x00453711 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
+@HOOK 0x004596BB _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
+@HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
 
-_BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
-    mov  al,[NewBuildingTypeHeapCount]
-    cmp  bl,al
-    jl   0x004535BD
-    jmp  0x0045371A
 
-_BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
-    mov  al,[NewBuildingTypeHeapCount]
-    cmp  bh,al
-    jl   0x0045967A
-    jmp  0x004596C0
+_BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
+
+    Loop_Over_RULES_INI_Section_Entries str_BuildingTypes,Init_BuildingTypeClass
+    call Init_OverrideExistingBuildingTypes
+
+.Ret:
+    lea  esp,[ebp-14h]
+    pop  edi
+    pop  esi
+    pop  edx
+    jmp  0x004535A1
+
 
 Init_BuildingTypeClass:
     mov  eax,BuildingTypeClass.NEW_SIZE
@@ -74,20 +89,8 @@ Init_BuildingTypeClass:
 .Ret:
     retn
 
-_BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
 
-    Loop_Over_RULES_INI_Section_Entries str_BuildingTypes,Init_BuildingTypeClass
-    call _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes
-
-.Ret:
-    lea  esp,[ebp-14h]
-    pop  edi
-    pop  esi
-    pop  edx
-    jmp  0x004535A1
-
-
-_BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
+Init_OverrideExistingBuildingTypes:
     ; explicit set default PrereqType values for compatibility
 
     BuildingTypeClass.FromIndex(BuildingType.ATEK,edi)
@@ -210,6 +213,29 @@ _BuildingTypeClass__Init_Heap_OverrideExistingBuildingTypes:
 
     retn
 
+
+_BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count:
+    mov  byte al,[NewBuildingTypeHeapCount]
+
+    cmp  dl,al
+    jl   0x004537D8
+    jmp  0x004537D1
+
+
+_BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
+    mov  al,[NewBuildingTypeHeapCount]
+    cmp  bl,al
+    jl   0x004535BD
+    jmp  0x0045371A
+
+
+_BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
+    mov  al,[NewBuildingTypeHeapCount]
+    cmp  bh,al
+    jl   0x0045967A
+    jmp  0x004596C0
+
+
 _Init_Game_Set_BuildingTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
     call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Building,[stringtableoffset_newbuildingtypes]
@@ -222,10 +248,3 @@ _Init_Game_Set_BuildingTypes_Heap_Count:
     add  edx,BuildingTypeClass.ORIGINAL_MAX
     mov  byte [NewBuildingTypeHeapCount],dl
     jmp  0x004F40AA
-
-_BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count:
-    mov  byte al,[NewBuildingTypeHeapCount]
-
-    cmp  dl,al
-    jl   0x004537D8
-    jmp  0x004537D1

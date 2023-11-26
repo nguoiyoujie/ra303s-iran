@@ -42,17 +42,29 @@
 
 ;
 ;; INI String controls
-;str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0                 ;new ini feature
-;str.AircraftTypeClass.IsLandable                db"IsLandable",0                  ;new ini feature
-;str.AircraftTypeClass.IsRotorEquipped           db"IsRotorEquipped",0             ;new ini feature
-;str.AircraftTypeClass.IsRotorCustom             db"IsRotorCustom",0               ;new ini feature
-;str.AircraftTypeClass.PreferredBuilding         db"PreferredBuilding",0           ;internal feature
-;str.AircraftTypeClass.Type                      db"Type",0                        ;internal feature
-;str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
-;str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0                ;new ini feature
-;
-;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Array, reg_output
-;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Array, reg_output
+%define str.AnimTypeClass.IsNormalized          db"IsNormalized",0                 ;internal feature
+%define str.AnimTypeClass.IsGroundLayer         db"IsGroundLayer",0                ;internal feature
+%define str.AnimTypeClass.IsTranslucent         db"IsTranslucent",0                ;internal feature
+%define str.AnimTypeClass.IsWhiteTrans          db"IsWhiteTrans",0                 ;internal feature
+%define str.AnimTypeClass.IsFlameThrower        db"IsFlameThrower",0               ;internal feature
+%define str.AnimTypeClass.IsScorcher            db"IsScorcher",0                   ;internal feature
+%define str.AnimTypeClass.IsCraterForming       db"IsCraterForming",0              ;internal feature
+%define str.AnimTypeClass.IsSticky              db"IsSticky",0                     ;internal feature
+%define str.AnimTypeClass.IsTheater             db"IsTheater",0                    ;internal feature
+%define str.AnimTypeClass.Biggest               db"Biggest",0                      ;internal feature
+%define str.AnimTypeClass.Damage                db"Damage",0                       ;internal feature
+%define str.AnimTypeClass.Delay                 db"Delay",0                        ;internal feature
+%define str.AnimTypeClass.Start                 db"Start",0                        ;internal feature
+%define str.AnimTypeClass.LoopStart             db"LoopStart",0                    ;internal feature
+%define str.AnimTypeClass.LoopEnd               db"LoopEnd",0                      ;internal feature
+%define str.AnimTypeClass.Stages                db"Stages",0                       ;internal feature
+%define str.AnimTypeClass.Loops                 db"Loops",0                        ;internal feature
+%define str.AnimTypeClass.Sound                 db"Sound",0                        ;internal feature
+%define str.AnimTypeClass.ChainTo               db"ChainTo",0                      ;internal feature
+
+
+;%define AnimTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Array, reg_output
+;%define AnimTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Array, reg_output
 ;
 ;;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 ;

@@ -82,15 +82,23 @@ _str_version: db"3.03p-iB1v1",0
 ;extended classses
 %include "src/features/type_extensions/savegame_support.asm" ; this needs to go first before other extended classes
 
-%include "src/features/type_extensions/AircraftTypeClass/extended_aircrafttypeclass_loading.asm"
-%include "src/features/type_extensions/AnimTypeClass/extended_animtypeclass_loading.asm"
-%include "src/features/type_extensions/BuildingTypeClass/extended_buildingtypeclass_loading.asm"
-%include "src/features/type_extensions/InfantryTypeClass/extended_infantrytypeclass_loading.asm"
-%include "src/features/type_extensions/TechnoTypeClass/extended_technotypeclass_loading.asm"
-%include "src/features/type_extensions/UnitTypeClass/extended_unittypeclass_loading.asm"
-%include "src/features/type_extensions/VesselTypeClass/extended_vesseltypeclass_loading.asm"
+;extended classses - loading / heap size
+%include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_heap_size.asm"
+%include "src/features/type_extensions/AnimTypeClass/animtypeclass_heap_size.asm"
+%include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_heap_size.asm"
+%include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_heap_size.asm"
+%include "src/features/type_extensions/UnitTypeClass/unittypeclass_heap_size.asm"
+%include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_heap_size.asm"
 %include "src/features/type_extensions/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
+
+;extended classses - read ini
+%include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_read_ini.asm"
+%include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_read_ini.asm"
+%include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_read_ini.asm"
+%include "src/features/type_extensions/TechnoTypeClass/technotypeclass_read_ini.asm"
+%include "src/features/type_extensions/UnitTypeClass/unittypeclass_read_ini.asm"
+%include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_read_ini.asm"
 
 %include "src/features/type_extensions/extended_houseclass.asm"
 %include "src/features/type_extensions/extended_buildingclass.asm"
@@ -100,13 +108,15 @@ _str_version: db"3.03p-iB1v1",0
 
 ; Unhardcode
 %include "src/features/type_extensions/early_rules_ini_load.asm"
-%include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_unhardcode.asm"
-%include "src/features/type_extensions/AnimTypeClass/animtypeclass_unhardcode.asm"
-%include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_unhardcode.asm"
-%include "src/features/type_extensions/BulletTypeClass/bullettypeclass_unhardcode.asm"
-%include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_unhardcode.asm"
-%include "src/features/type_extensions/UnitTypeClass/unittypeclass_unhardcode.asm"
-%include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_unhardcode.asm"
+
+;extended classses - new types
+%include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_new_types.asm"
+%include "src/features/type_extensions/AnimTypeClass/animtypeclass_new_types.asm"
+%include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_new_types.asm"
+%include "src/features/type_extensions/BulletTypeClass/bullettypeclass_new_types.asm"
+%include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_new_types.asm"
+%include "src/features/type_extensions/UnitTypeClass/unittypeclass_new_types.asm"
+%include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_new_types.asm"
 %include "src/features/type_extensions/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
 %include "src/features/type_extensions/WeaponTypeClass/weapontypeclass_unhardcode.asm"
 %include "src/features/type_extensions/SoundEffectName/soundeffectslist_unhardcode.asm"
