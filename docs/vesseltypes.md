@@ -6,58 +6,25 @@ VesselTypes represent units that are exclusive to the water. While analogous to 
 
 -------
 
- - [Feature Availability](#feature-availability)
- - [Modification References](#modification-references) 
+ - [Documentation Guide](#documentation-guide)
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
  - [Turret Logic](#turret-logic) 
 
--------
-
-### Feature Availability
-
-Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
-
-However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
-
-`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
 
 -------
-
-### Modification References
-
-Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
-
-The following desciptions can be used as a reference point to its relationship with Remastered source code.
-
- - ```Exposed <Reference>```
-   
-   The variable, usually defined in an internal class, is now exposed via this INI key.
-
- - ```Modified <Reference>```
-   
-   Modifications have been applied to the meaning or use of this variable.
-
- - ```New logic```
-
-   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
-
-Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
-
--------
-
 ### New Type Extensions
+[Top](#vesseltypes)
 
 These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
 
-<details>
-  <summary><b><code>{Rules} ► [VesselTypes]</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [VesselTypes]
+</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new VesselType.
 
@@ -70,13 +37,12 @@ Example as follows:
 0=BSHIP
 1=CARR
 ```
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules} ► [StringTableOffsets] ► Vessel (integer)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [StringTableOffsets] ► Vessel
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 
@@ -89,31 +55,33 @@ Ensure that `CONQUER.ENG` has sufficient entries, as attempting to read a missin
 Do not create entries that exceed 1000 as the game will route to `DEBUG.ENG` instead, which for now is beyond the scope of the project.
 
 If not defined, or set to -1, all additional unit types will default their names to the 'Civilian' text entry.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### TechnoTypes
+[Top](#vesseltypes)
 
 TechnoType settings are also available to VesselTypes. See [TechnoTypes](./technotypes.md) for more details.
 
+
 -------
-
 ### General Settings
+[Top](#vesseltypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► IsPieceOfEight (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► IsPieceOfEight
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed UnitTypeClass->IsPieceOfEight```
 
 *Functionality to be determined*
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Turret Logic
+[Top](#vesseltypes)
 
 There are customized drawing of turrets, the most known of which is the Cruiser's double turrets. To enable the following options, make sure `HasTurret` (common to all TechnoTypes) is set.
 
@@ -132,65 +100,68 @@ to control the position of the turret, and
 to control the position of the bullet. 
 
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► HasSecondTurret (boolean)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► HasSecondTurret
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines whether a second turret should be drawn. The second turret will always be drawn at the opposite offset of the first turret.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretName (string)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretName
+</td><td width="50">String</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the turret to be drawn. Defaults to MGUN for the Gunboat, SSAM for the Destroyer and TURR for the Cruiser. The SHP file representing the turret should support 32 directional frames.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretOffset (signed byte)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretOffset
+</td><td width="50">Signed Byte</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed UnitTypeClass->TurretOffset```
 
 Determines the offset of the turret, in pixels, towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretAdjustY (int)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretAdjustY
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the vertical offset, in pixels, of the turret.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► TurretFireOffset (int)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretFireOffset
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the offset of the firing animation, in leptons, towards the front of the vessel.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► PrimaryOffset (int)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► PrimaryOffset
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Modified TechnoTypeClass->VerticalOffset```
 
 Determines the forward offset of the firing animation, in leptons, relative to the vessels's line of fire after applying TurretFireOffset.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;VesselType&gt;] ► VerticalOffset (int)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► VerticalOffset
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Modified TechnoTypeClass->PrimaryOffset```
 
 Determines the upward offset of the firing animation, in leptons, relative to the vessels's position after applying TurretFireOffset.
+</details></td></tr></table>
 
-</details>
+
+-------
+[Return to Features](./features.md)
+

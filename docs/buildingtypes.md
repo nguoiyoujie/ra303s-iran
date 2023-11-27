@@ -6,8 +6,7 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
 
 -------
 
- - [Feature Availability](#feature-availability)
- - [Modification References](#modification-references) 
+ - [Documentation Guide](#documentation-guide)
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
@@ -18,54 +17,28 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
  - [Radar Buildings](#radar-buildings) 
  - [Jamming Buildings](#jamming-buildings) 
  - [Superweapons](#superweapons) 
- - [Undeploys To Unit](#undeploys-to-unit) 
+ - [Unpacking Buildings](#unpacking-buildings) 
 
 
 -------
+### Documentation Guide
+[Top](#buildingtypes)
 
-### Feature Availability
+A guide on how to interpret the information is available [here](./dockeys.md).
 
-Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
-
-However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
-
-`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
 
 -------
-
-### Modification References
-
-Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
-
-The following desciptions can be used as a reference point to its relationship with Remastered source code.
-
- - ```Exposed <Reference>```
-   
-   The variable, usually defined in an internal class, is now exposed via this INI key.
-
- - ```Modified <Reference>```
-   
-   Modifications have been applied to the meaning or use of this variable.
-
- - ```New logic```
-
-   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
-
-Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
-
--------
-
 ### New Type Extensions
+[Top](#buildingtypes)
 
 These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<details>
-  <summary><b><code>{Rules} ► [BuildingTypes]</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [BuildingTypes]
+</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-```New logic```
-  
 This section carries a zero-based list of IDs to be recognized as new BuildingType.
 
 Care must be taken that the list keys follow the zero-based index exactly. Duplicate keys (e.g. two '0='), or missing keys, may crash the game at boot. The requirement for strict ordering may change in the future.
@@ -77,14 +50,13 @@ Example as follows:
 0=COMM
 1=EYE
 ```
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules} ► [StringTableOffsets] ► Building (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [StringTableOffsets] ► Building
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-```New logic```
-  
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 
 This specifies the string entry location within `CONQUER.ENG` of new technotype entries. The index used is denoted by [Type] + [index in the new types section] + 1.
@@ -96,70 +68,75 @@ Ensure that `CONQUER.ENG` has sufficient entries, as attempting to read a missin
 Do not create entries that exceed 1000 as the game will route to `DEBUG.ENG` instead, which for now is beyond the scope of the project.
 
 If not defined, or set to -1, all additional building types will default their names to the 'Civilian Building' text entry.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### TechnoTypes
+[Top](#buildingtypes)
 
 TechnoType settings are also available to BuildingTypes. See [TechnoTypes](./technotypes.md) for more details.
 
+
 -------
-
 ### General Settings
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► IsSimpleDamage (boolean)</code></b></summary>
-  
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsSimpleDamage
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
 ```Exposed BuildingTypeClass->IsSimpleDamage```
 
 In Tiberium Dawn, this was used for the oil pump to determine the damaged frames. This appears to be obsolete and unused by the game code, in favour for customizable anim frames.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► ConstantAnimation (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ConstantAnimation
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->IsRegulated```
 
 Determines if the building plays its animation throughout its operation. The building will always play its animation for the Construction stage no matter the value of this setting.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► ExitCoordX (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► ExitCoordY (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitCoordX<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitCoordY
+</td><td width="50">Integer<br>Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->ExitCoordinate```
 
 Determines the exit coordinates, in leptons, from the top-left corner of the building.
+</details></td></tr></table>
 
-</details>
+
 
 -------
-
 ### Factory Production
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► FactoryType (string: AircraftType, BuildingType, InfantryType, UnitType, VesselType)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► FactoryType
+</td><td width="50">String: AircraftType, BuildingType, InfantryType, UnitType, VesselType</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->ToBuild```
 
 Determines if the building is a factory for a certain techno class. If BuildingType is used, the building will also play its Active animation (if defined) when a building is constructed and this building is the primary building.
 
-Note: *The Map Trigger Event [Destroyed, All Factories] as well as the AI Fire Sale check does not check for FactoryType. But checks for the PrerequisiteType= attribute. See [TechnoTypes ► Prerequisite System](./technotypes.md#prerequisite-system).*
+Note: The Map Trigger Event [Destroyed, All Factories] as well as the Skirmish AI Fire Sale check does not check for FactoryType. But checks for the PrerequisiteType= attribute. See [TechnoTypes ► Prerequisite System](./technotypes.md#prerequisite-system).
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### War Factory Settings
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► ExitList (-1, 0, 1, 2) </code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitList
+</td><td width="50">Byte: -1 to 5</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->ExitList```
 
@@ -172,35 +149,30 @@ Determines the exit destinations of an object produced from this building. Units
  > 3 = Units exit the factory like it is leaving a C&C Hand of Nod\
  > 4 = Units exit the factory like it is leaving a C&C Weapons Factory\
  > 5 = Units exit the factory like it is leaving a C&C Nod Airstrip
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► WarFactoryOverlayAnim (string: image name)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► WarFactoryOverlayFrames (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► WarFactoryOverlayRate (integer)</code></b>
-  </summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayAnim<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayFrames<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayRate
+</td><td width="50">String<br>Integer<br>Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If defined on a building with `FactoryType = UnitType`, overrides the factory door overlay as well as its animation sequence. This sequence plays as the War Factory. This can be used to implement the opening doors of different war factories, as they are rendered abov the unit. Defaults to the default War Factory door animation parameters (WEAP2) for the War Factory and its fake counterpart, none (no animation) otherwise. If the animation does not exist, use default.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► WarFactoryExitFacing (byte) </code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryExitFacing
+</td><td width="50">Byte</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If defined on a building with `FactoryType = UnitType`, overrides the starting rotation of the unit being ejected from the factory. This can be used to emulate the slightly offset angle used by the C&C GDI Weapons Factory. Defaults to 128, which is facing directly south.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► WarFactoryExitTrack (byte: up to 67) </code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryExitTrack
+</td><td width="50">Byte: 0 to 67</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If defined on a building with `FactoryType = UnitType`, overrides the initial fixed movement track of the unit being ejected from the factory. Generally, a unit on a track cannot be redirected until the movement is over. Defaults to 66, which is the default exit track for War Factory.
 
@@ -211,15 +183,16 @@ A new unit exit track (ID 67) has been created to emulate the exit track used by
  > 65: C&C Harvester undocking from Refinery track (unused in RA1)\
  > 66: Default War Factory exit track\
  > 67: Emulated C&C GDI Weapons Factory exit track (new)
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Building Foundations
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► BSize (byte) </code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► BSize
+</td><td width="50">Byte: 0 to 8</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->BSize```
 
@@ -234,17 +207,16 @@ Determines the size occupied by this building, not inclusive of the bib. This af
  > 6 = 3x3 (Adv. Power Plant, Refinery)\
  > 7 = 4x2 (C&C Airfield)\
  > 8 = 5x5 
+</details></td></tr></table>
 
-</details>
 
 There are two methods to customize building foundations. One may be easier to use than the other. The second one is kept for compatibility.
 
 **Method 1**
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► CustomFoundationList (string)</code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► CustomFoundationList
+</td><td width="50">String</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the combined occupy and visual overlap foundations for this building. Takes in a sequence of characters to move the cursor and build the foundation list.
 Up to 32 cells can be supported this way. Exceeding 32 cells may result in undefined behaviour.
@@ -264,16 +236,15 @@ The following characters are supported. Note that they are case sensitive.
  > 'O' -> marks the current location as overlay tile (not part of the building foundation, but part of the object's refresh area, then advances the cursor to the right\
  > '|' -> marks a new line. advances the cursor to the 1st column of the row below\
  > Any other character terminates the sequence
+</details></td></tr></table>
 
-</details>
 
 **Method 2**
 
-<details>
-  <summary>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► OccupyList (byte)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► OverlapList (byte)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OccupyList<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OverlapList
+</td><td width="50">Byte<br>Byte</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->OccupyList```\
 ```Exposed BuildingTypeClass->OverlapList```
@@ -323,104 +294,114 @@ The following values for both entries are supported. *Note that this syntax is e
  > 28 = [--][XX][-X] (occupy list for the C&C Hand of Nod)\
  > 29 = [SXX][--][--][XX]\
  > 30 = [--][XX][XX]
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Building Animations
+[Top](#buildingtypes)
 
-<details>
-  <summary>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Construct_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Construct_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Construct_Rate (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Idle_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Idle_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Idle_Rate (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Active_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Active_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Active_Rate (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Full_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Full_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Full_Rate (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux1_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux1_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux1_Rate (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux2_Start (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux2_Count (integer)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► Anim_Aux2_Rate (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Rate<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Idle_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Idle_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Idle_Rate<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Active_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Active_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Active_Rate<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Full_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Full_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Full_Rate<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux1_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux1_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux1_Rate<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux2_Start<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux2_Count<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Aux2_Rate
+</td><td width="50">Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>Integer<br></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->Anims[BSTATE_COUNT]```
 
 Determines the animation settings for each stage of the building. The three options for each stage are as follows:
 
- - **Start** : The frame index within the shp file to use as the first frame of this stage
+|Parameter|Explanation             
+:---------|:------------
+|`Start`  |The frame index within the shp file to use as the first frame of this stage.
+|`Count`  |The number of frames used in this stage, some stages may loop back to Start after the last frame is reached.
+|`Rate`   |The number of in-game frames to pass before rendering the next animation frame.
 
- - **Count** : The number of frames used in this stage, some stages may loop back to Start after the last frame is reached.
-
- - **Rate** : The number of in-game frames to pass before rendering the next animation frame.
 
 The stages are as follows:
 
- - **Construct**: The build-up animation. The deconstruction animation is the reverse of this animation.
+|Stage           |Explanation             
+:----------------|:------------
+|`Construct`     |The build-up animation.<br>The deconstruction animation is the reverse of this animation.
+|`Idle`          |The idle animation.<br>Use with `ConstantAnimation` for repeat animation, such as the rotating radar dish for C&C-style comm center.
+|`Active`        |The active animation.<br>Used by various buildings, such as<li>Chronosphere discharging,</li><li>Construction Yard handling materials, and</li><li>the Service Depot repair animation.</li>
+|`Full`          |Used only by the C&C Refinery when docked with a Harvester. Has no use in Red Alert.
+|`Aux1` / `Aux2` |Alternative sequences, used only by the Missile Silo.<br>The Missile Silo uses <li>`Active` for its door opening animation, </li><li>`Aux1` for the launch, and </li><li>`Aux2` for the closing of the door.</li>
+</details></td></tr></table>
 
- - **Idle**: The idle animation. Use with `ConstantAnimation` to allow idle animation, such as the rotating radar dish for C&C-style communication centers.
-
- - **Active**: The active animation. Used by various buildings, such as Chronosphere discharging, Construction Yard handling materials, and the Service Depot repair animation.
-
- - **Full**: Used only by the C&C Refinery when docked with a Harvester. Has no use in Red Alert.
-
- - **Aux1, Aux2**: Alternative sequences, used only by the Missile Silo. The Missile Silo uses **Active** for its door opening animation, **Aux1** for the launch, and **Aux2** for the closing of the door.
-
-</details>
 
 -------
-
 ### Radar Buildings
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► IsRadar (boolean)</code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRadar
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Allows a building to provide Radar capabilities to the player, given sufficient power. If combined with `IsJammable=true`, will also generate the static jam effect when a jammer unit is close to it.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Jamming Buildings
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► IsJammable (boolean)</code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsJammable
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If set to true, has the following effects:
  - If the building provides radar, and the player as no other active/unjammed radar, wipes the radar screen with static
  - If the building has a weapon, it will be unable to fire.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [General] ► RemapJammedBuildings (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [General] ► RemapJammedBuildings
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-```New Logic```
+If set to true, remaps jammed buildings using the Shade remap.
+</details></td></tr></table>
 
-Remaps jammed buildings using the Shade remap.
-
-</details>
 
 -------
-
 ### Superweapons
+[Top](#buildingtypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► SpecialWeapons (comma-delimited list of strings)</code></b></summary>
-
-```New Logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► SpecialWeapons
+</td><td width="50">String Array</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the Special Weapons that may be fired by this building. Note that some buildings require some animations to be enabled for the special weapon to work properly. Global overrides, such the Nuke being a fluke below TechLevel=10, still apply.
 
@@ -428,31 +409,35 @@ For a building with existing special weapons, they can be overriden (not appende
 
 The list of supported SpecialWeapons are:
 
-> SONARPULSE, the sonar pulse. SpecialWeapons= has no affect due to the special spy requirements.\
-> NUCLEARBOMB, the nuke. Requires the building to have the animations ACTIVE, AUX1 and AUX2 to create the actual Nuke.\
-> CHRONOSPHERE, the chrono warp.\
-> PARABOMB, the parabomb.\
-> PARAINFANTRY, the paradrop.\
-> SPYPLANE, the spy plane.\
-> IRONCURTAIN, the iron curtain effect.\
-> GPS, the satellite launch. Creates a GPS satellite animation at launch, which may look weird depending on the building you hook into
+|SpecialWeapon |Explanation             
+:--------------|:------------
+|`SONARPULSE`  |The sonar pulse.<br>SpecialWeapons= has no affect due to the special spy requirements.
+|`NUCLEARBOMB` |The nuke.<br>Requires the building to have the animations ACTIVE, AUX1 and AUX2 to create the actual Nuke.
+|`CHRONOSPHERE`|The chrono warp.
+|`PARABOMB`    |The parabomb.
+|`PARAINFANTRY`|The paradrop.
+|`SPYPLANE`    |The spy plane.
+|`IRONCURTAIN` |The iron curtain effect.
+|`GPS`         |The satellite launch.<br>Creates a GPS satellite animation at launch, which may look weird depending on the building you hook into.
 
 For example, `SpecialWeapons=GPS,SPYPLANE` grants both spy plane and GPS special powers while the building remains standing.
+</details></td></tr></table>
 
-</details>
 
 -------
+### Unpacking Buildings
+[Top](#buildingtypes)
 
-### Undeploys To Unit
-
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;BuildingType&gt;] ► UndeploysInto (string representing UnitType)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► UndeploysInto
+</td><td width="50"><a href="./defines.md#unittypes">UnitType</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Allows the building to repack into the indicated unit. The controls to undeploy is the same as repacking an Construction Yard - give the building a move command.
 
-The created building will be offset at the cell +1,+1 (directly south-east) from the building's top right cell This may change in the future towards an automatic centering.
+The created building will be offset at the cell +1,+1 (directly south-east) from the building's top right cell. This may change in the future towards an automatic centering.
+</details></td></tr></table>
 
-</details>
+
+-------
+[Return to Features](./features.md)
 

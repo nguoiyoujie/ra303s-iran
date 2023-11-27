@@ -6,51 +6,25 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
 
 -------
 
- - [Feature Availability](#feature-availability)
- - [Modification References](#modification-references) 
+ - [Documentation Guide](#documentation-guide)
  - [New Type Extensions](#new-type-extensions) 
  - [New Armor-types](#new-armor-types) 
- - [QoL Changes](#gol-changes) 
+ - [QoL Changes](#qol-changes) 
  - [Prerequisite System](#prerequisite-system) 
  - [General Settings](#general-settings) 
  - [Firing Offsets](#firing-offsets) 
  - [Death Weapons](#death-weapons) 
 
 -------
+### Documentation Guide
+[Top](#technotypes)
 
-### Feature Availability
+A guide on how to interpret the information is available [here](./dockeys.md).
 
-Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
-
-However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
-
-`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
 
 -------
-
-### Modification References
-
-Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
-
-The following desciptions can be used as a reference point to its relationship with Remastered source code.
-
- - ```Exposed <Reference>```
-   
-   The variable, usually defined in an internal class, is now exposed via this INI key.
-
- - ```Modified <Reference>```
-   
-   Modifications have been applied to the meaning or use of this variable.
-
- - ```New logic```
-
-   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
-
-Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
-
--------
-
 ### New Type Extensions
+[Top](#technotypes)
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
@@ -63,12 +37,13 @@ Check the following specific types to learn how to introduce new types:
  - [AircraftTypes](./aircrafttypes.md#new-type-extensions)
 
 -------
-
 ### New Armor-types
+[Top](#technotypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► Armor (strings)</code></b></summary>
-  
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;] ► Armor
+</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
 ```Modified TechnoTypeClass->Armor```
 
 The number of supported types have been increased to 9, matching the first nine armortypes used in Red Alert 2. For compatibility, the original armor types are not changed.
@@ -86,25 +61,26 @@ You are expected to modify the existing Warhead entries to make use of them. See
  > 8 = Steel
 
 Special_1 and Special_2 are not yet supported in this version, but may be in the future.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### QoL Changes
+[Top](#technotypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► Image (strings)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Image
+</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
 ```Inherited from iran's r-series```
 
 The Image= keyword now works in a map file, instead of just globally in RULES.INI.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Prerequisite System
+[Top](#technotypes)
 
 **New Prerequisite-types**\
 *This constitutes a breaking change, therefore this system may be subject to change in the future in case of work to make it compatible with unmodified RA.*
@@ -115,10 +91,9 @@ The prerequisite system has been extended to aid with the overall softcoding of 
 
 This is analogus to the Prerequisite Groups system implemented in Tiberian Sun and beyond. Unlike Tiberian Sun, a building does not (yet) belong to more than one Type.
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► PrerequisiteType (string)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrerequisiteType
+</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Each building can be assigned one of several Prerequisite types. A total of 32 are supported, as below.
 
@@ -177,10 +152,11 @@ Defaults to the following values, depending on the building in question:
  > ADV.WEAPON2: [MSLO]\
  > FAKES: [WEAF], [FACF], [SYRF], [SPEF], [DOMF]\
  > NONE: All other buildings
-</details>
+</details></td></tr></table>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► Prerequisite (comma-delimited list of strings)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Prerequisite
+</td><td width="50">String Array</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Modified TechnoTypeClass->Prerequisite```
 
@@ -194,7 +170,7 @@ Example: If a unit has Prerequisite=POWER,BARRACKS,FIX,STEK. The prerequisite re
  - At least one [FIX] (Service Depot)
  - At least one [STEK] (Soviet Tech Center)
 
-</details>
+</details></td></tr></table>
 
 <details>
 <summary><i>Compatibility Notices:</i></summary>
@@ -218,105 +194,117 @@ Example: If a unit has Prerequisite=POWER,BARRACKS,FIX,STEK. The prerequisite re
 </details>
 
 -------
-
 ### General Settings
+[Top](#technotypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► IsNominal (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsNominal
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed TechnoTypeClass->IsNominal```
 
 Determines whether this object uses its true name. Overrides the name behaviour from `IsCivilian`.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► IsTheater (boolean)</code></b></summary>
-
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsTheater
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
 ```Exposed TechnoTypeClass->IsTheater```
 
 Determines if the artwork for this object is theater specific.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► HasTurret (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► HasTurret
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed TechnoTypeClass->IsTurretEquipped```
 
 Determines if this object has a turret. For buildings, if set to true, the object will use 64 frames for each of its rotation stages, and another 64 frames for each of its damaged rotation stages. For units, if set to true, the object will use 32 frames for its turret rotation stages.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► Facings (values 8, 16, 32)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Facings
+</td><td width="50">8, 16, or 32</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->Rotation```
 
 Determines if the number of directions applicable for this object's rotation. Only certain values have an impact. Has no impact for buildings (fixed to 64) and infantry. For a unit, special logic may occur if set other than the default.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Firing Offsets
+[Top](#technotypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► VerticalOffset (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► VerticalOffset
+</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->VerticalOffset```
 
 Determines the upward offset of the firing animation, in leptons, relative to the unit's center.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► PrimaryOffset (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryOffset
+</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->PrimaryOffset```
 
 Determines the forward offset of the firing animation, in leptons, relative to the unit's line of fire.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► PrimaryLateral (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryLateral
+</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->PrimaryLateral```
 
 Determines the offset of the firing animation perpendicular to the unit's line of fire. Units with `Burst=2` will shoot their second bullet at the opposite offset.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► SecondaryOffset (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryOffset
+</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->SecondaryOffset```
 
 Determines the forward offset of the firing animation relative to the unit's line of fire. This is used for the secondary weapon.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► SecondaryLateral (integer)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryLateral
+</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->SecondaryLateral```
 
 Determines the offset of the firing animation perpendicular to the unit's line of fire. Units with `Burst=2` will shoot their second bullet at the opposite offset. This is used for the secondary weapon.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Death Weapons
+[Top](#technotypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;TechnoType&gt;] ► DeathWeapon (string)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► DeathWeapon
+</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the damage and warhead that is released on this technotype's death. Setting this entry overrides the original behavior of using the technotype's Primary weapon and the technotype's MaxStrength.
 
 Note that the explosion type and spread of the damage is still determined by the damage value (the stellar examples being Mammoth Tank explosion and the Monster Tank explosion), though this is now tied to the weapon's damage.
+</details></td></tr></table>
 
-</details>
+
+-------
+[Return to Features](./features.md)
+

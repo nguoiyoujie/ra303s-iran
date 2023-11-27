@@ -6,56 +6,29 @@ InfantryTypes represent infantry and creatures that are occupy a subspace of a c
 
 -------
 
- - [Feature Availability](#feature-availability)
- - [Modification References](#modification-references) 
+ - [Documentation Guide](#documentation-guide)
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
 
 -------
+### Documentation Guide
+[Top](#infantrytypes)
 
-### Feature Availability
+A guide on how to interpret the information is available [here](./dockeys.md).
 
-Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
-
-However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
-
-`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
 
 -------
-
-### Modification References
-
-Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
-
-The following desciptions can be used as a reference point to its relationship with Remastered source code.
-
- - ```Exposed <Reference>```
-   
-   The variable, usually defined in an internal class, is now exposed via this INI key.
-
- - ```Modified <Reference>```
-   
-   Modifications have been applied to the meaning or use of this variable.
-
- - ```New logic```
-
-   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
-
-Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
-
--------
-
 ### New Type Extensions
+[Top](#infantrytypes)
 
 These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<details>
-  <summary><b><code>{Rules} ► [InfantryTypes]</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [InfantryTypes]
+</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new InfantryType.
 
@@ -68,13 +41,12 @@ Example as follows:
 0=COMMANDO
 1=E5
 ```
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules} ► [StringTableOffsets] ► Infantry (integer)</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [StringTableOffsets] ► Infantry
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 
@@ -87,39 +59,43 @@ Ensure that `CONQUER.ENG` has sufficient entries, as attempting to read a missin
 Do not create entries that exceed 1000 as the game will route to `DEBUG.ENG` instead, which for now is beyond the scope of the project.
 
 If not defined, or set to -1, all additional unit types will default their names to the 'Civilian' text entry.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### TechnoTypes
+[Top](#infantrytypes)
 
 TechnoType settings are also available to InfantryTypes. See [TechnoTypes](./technotypes.md) for more details.
 
+
 -------
-
 ### General Settings
+[Top](#infantrytypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► IsFemale (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsFemale
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsFemale```
 
 Determines if this civilian infantry should use the female civilian voice.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► IsCrawling (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCrawling
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsCrawling```
 
 Acts as override switch to `IsFraidyCat`. An infantry that has `IsFraidyCat` set to true and `IsCrawling` set to false will have their speed multiplied by 2 when prone (to emulate the civilian panic sprint). Any other combination will result in the typical reduction of speed by half when prone.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► IsCivilian (boolean)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCivilian
+</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsCivilian```
 
@@ -129,11 +105,12 @@ Determines if this infantry is a civilian, applying the following changes:
  - Name description is changed to `Civilian`, unless overriden by the rules / map.
  - Score counting
   - If combined with `Cloakable`, does not uncloak to fire.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► Pip (byte)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► Pip
+</td><td width="50">Byte</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->Pip```
 
@@ -144,27 +121,32 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
  > 5 = Yellow pip (engineer)\
  > 6 = Grey pip (civilian)\
  > 7 = Red pip (commando)
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► DoControls (string representing InfantryType)</code></b></summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls
+</td><td width="50"><a href="./defines.md#infantrytypes">InfantryType</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->DoControls```
 
 If specified, loads that units' animation control frames for the infantry. Only the original units (up to MECHANIC) are supported.
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► FireFrame (byte)</code></b><br>
-    <b><code>{Rules/Map} ► [&lt;InfantryType&gt;] ► ProneFireFrame (byte)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► FireFrame<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ProneFireFrame
+</td><td width="50">Byte<br>Byte</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->FireFrame```\
 ```Exposed InfantryTypeClass->ProneFireFrame```
 
 Determines the frame offset from the begining of the firing sequence when the weapon actually fires. This allows for certain frames of animations to pass before the actual weapon is fired. Examples of infantry with this feature is, the Grenadier, the Medic and the Mechanic.
+</details></td></tr></table>
 
-</details>
+
+
+-------
+[Return to Features](./features.md)
+

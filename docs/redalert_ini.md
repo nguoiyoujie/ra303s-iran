@@ -16,15 +16,15 @@ Preload options can be customized on redalert.ini, which may improve the quality
  - [Sound Overrides](#sound-overrides) 
  - [Visual Overrides](#visual-overrides) 
 
+
 -------
-
 ### Custom Resolutions 
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► Width (integer)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► Height (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► Width<br>
+<code>{redalert.ini}</code> ► [Options]  ► Height
+</td><td width="50">Integer<br>Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from hifi's p-series, modified in iran's s-series```
 
@@ -56,181 +56,158 @@ The original code for this high resolution feature was written by hifi. Addition
  - 640x480 does not show black bars on the top and bottom of the screen anymore.
  - You no longer need to scroll the map and open the options menu to fix glitching with maps
    smaller than your resolution.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### No CD
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► NoCD (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► NoCD
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from hifi's p-series```
 
 No-CD mode can be enabled/disabled with the `NoCD`= (yes/no) keyword under the [Options] section of **REDALERT.INI**. (from hifi's p-series)
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Enable Expansions
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► CounterstrikeEnabled (boolean)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► AftermathEnabled (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► CounterstrikeEnabled<br>
+<code>{redalert.ini}</code> ► [Options]  ► AftermathEnabled
+</td><td width="50">Boolean<br>Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 The Counterstrike expansion can be enabled/disabled with the `CounterstrikeEnabled`= (yes/no) keyword under the [Options] section of **REDALERT.INI**. Likewise there's a `AftermathEnabled`= (yes/no) keyword to enable/disable the Aftermath expansion.
-	 
-</details>
+	 </details></td></tr></table>
+
 
 -------
-
 ### Music Listing
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► ShowAllMusic (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► ShowAllMusic
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Added an **REDALERT.INI** keyword `ShowAllMusic`= (yes/no) under the [Options] section to enable/disable showing all the game's music, normally the game only shows some music depending on what side you're playing as. With this option enabled it always shows all music except for the score, map and main menu music.	 
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► RandomStartingSong (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► RandomStartingSong
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 It's now possible to have a random starting song start after a map is loaded, the keyword `RandomStartingSong`= (yes/no) under [Options] in **REDALERT.INI** controls this.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Multiplayer Defaults
+[Top](#red-alert-ini-options)
 
 All multiplayer settings are now configurable.
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► Money (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Money
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Sets the initial cash that each player receives at the start of the game.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► ShroudRegrows (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► ShroudRegrows
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines whether shroud regrows over time. The regrowth rate is determined by `{Rules/Map} ► [General] ► ShroudRate`, defaulting to 4 in-game minutes.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► CaptureTheFlag (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► CaptureTheFlag
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines whether the Capture The Flag game mode is active.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► Crates (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Crates
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines whether crates will spawn periodically on the map.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► Bases (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Bases
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines whether each player receives an MCV at the start of the game.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► OreRegenerates (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► OreRegenerates
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines whether ore regenerates over time. Essentially this overrides `{Rules/Map} ► [General] ► OreGrows` and `{Rules/Map} ► [General] ► OreSpreads`. The regrowth rate is determined by `{Rules/Map} ► [General] ► GrowthRate`, defaulting to 2 in-game minutes.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► UnitCount (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► UnitCount
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines the number of units each player receives at the start of the game.
+</details></td></tr></table>
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► TechLevel (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► TechLevel
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines each player techlevel at the start of the game. (It is possible to modify the techlevel via a map trigger action.)
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► AIDifficulty (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► AIDifficulty
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines the AI players' difficulty setting for the game. (0 = easy, 1 = Medium, 2 = Hard)
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [MultiplayerDefaults] ► AIPlayers (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► AIPlayers
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Determines the number of AI players for the game.
-
-</details>
+</details></td></tr></table>
 
 Note the following:
 
@@ -241,103 +218,95 @@ Note the following:
  - If UnitCount multiplied by players is too high, the game will crash.
  - Setting AIPlayers to higher than 7 causes the game to freeze.
 
+
 -------
-
 ### English Intro
+[Top](#red-alert-ini-options)
+</details></td></tr></table>
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► PlayEnglishIntro (integer)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► PlayEnglishIntro
+</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Playing the ENGLISH.VQA intro is now optional. a new **REDALERT.INI** boolean option `PlayEnglishIntro`= under the [Options] section controls this.
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Video Interlacing
+[Top](#red-alert-ini-options)
 
-</details>
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► VideoInterlaceMode (0, 1, 2)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► SkipScoreScreen
+</td><td width="50">0, 1 or 2</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Optional deinterlacing of videos, this is controlled by the VideoInterlaceMode= keyword in REDALERT.INI under the [Options] section, if set to 2 videos are deinterlaced, if set to 0 they're horizontally interlaced and when set to 1 they're supposed to be vertically interlaced (though the vertical interlacing doesn't seem to work). The game's previously unknown deinterlacing feature was discovered by AlexB, he also wrote a fix for a bit of graphical glitching at the bottom of the screen.
-	 
-</details>
+</details></td></tr></table>
+
 
 -------
-
 ### Skipping Scores
+[Top](#red-alert-ini-options)
 
-</details>
-
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► SkipScoreScreen (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► SkipScoreScreen
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Added a `SkipScoreScreen`= (yes/no) keyword under [Options] in **REDALERT.INI**, when set to 'yes' the single player and multiplayer score screens won't be shown.
 
 If the score screen is not shown, no new entry will be generated into HALLFAME.DAT because the player will not be given an opportunity to enter his name.
- 
-</details>
+</details></td></tr></table>
+
 
 -------
-
 ### Sound Overrides
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► AlternativeRifleSound (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► AlternativeRifleSound
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Added **REDALERT.INI** keyword `AlternativeRifleSound`= (yes/no) under [Options]. If enabled the Rifle Infantry will use an alternative firing sound. MGUNINF1 will be used as firing sound. This overwrites the M1Carbine's `Report`= setting in **RULES.INI**.
- 
-</details>
+</details></td></tr></table>
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► UseGrenadeThrowingSound (boolean)</code></b>
-  </summary>
+
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► UseGrenadeThrowingSound
+</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Added **REDALERT.INI** keyword `UseGrenadeThrowingSound`= (yes/no) under [Options]. If enabled the Grenadier will have a throwing sound when throwing his grenades. This overwrites the Grenade's `Report`= setting in **RULES.INI**.
- 
-</details>
+ </details></td></tr></table>
+
 
 -------
-
 ### Visual Overrides
+[Top](#red-alert-ini-options)
 
-<details>
-  <summary>
-    <b><code>{redalert.ini} ► [Options] ► UseBetaTeslaTank (boolean)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► UseBetaDestroyer (boolean)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► UseBetaSubmarine (boolean)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► UseBetaCruiser (boolean)</code></b><br>
-    <b><code>{redalert.ini} ► [Options] ► UseBetaGunboat (boolean)</code></b>
-  </summary>
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{redalert.ini}</code> ► [Options]  ► UseBetaTeslaTank<br>
+<code>{redalert.ini}</code> ► [Options]  ► UseBetaDestroyer<br>
+<code>{redalert.ini}</code> ► [Options]  ► UseBetaSubmarine<br>
+<code>{redalert.ini}</code> ► [Options]  ► UseBetaCruiser<br>
+<code>{redalert.ini}</code> ► [Options]  ► UseBetaGunboat  
+</td><td width="50">Boolean<br>Boolean<br>Boolean<br>Boolean<br>Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
 Added **REDALERT.INI** keyword `UseBetaTeslaTank`= (yes/no) under [Options]. If enabled betateslatank.MIX will be loaded by the game. Likewise `UseBetaDestroyer`= to load betadestroyer.MIX, `UseBetaSubmarine`= to load betasubmarine.MIX, `UseBetaCruiser`= to load betacruiser.MIX, `UseBetaGunboat`= to load betagunboat.MIX. These options load recreations of beta graphics, the recreation for the beta Tesla Tank was made by Nyerguds, the recreations of naval units were made by Allen262. 
-
-</details>
+</details></td></tr></table>
 
 -------
+[Return to Features](./features.md)
 

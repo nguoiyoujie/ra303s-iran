@@ -6,53 +6,26 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It include
 
 -------
 
- - [Feature Availability](#feature-availability)
- - [Modification References](#modification-references) 
+ - [Documentation Guide](#documentation-guide)
  - [New Entries](#new-entries) 
  - [Tesla Charge Settings](#tesla-charge-settings) 
 
 -------
+### Documentation Guide
+[Top](#weapontypes)
 
-### Feature Availability
+A guide on how to interpret the information is available [here](./dockeys.md).
 
-Most extended features can applied by setting the value on the Rules ini or the map specific ini (e.g. SCG01EA.ini). Reloading the map refreshes such values. These features are indicated with `{Rules/Map}`.
-
-However, some features are only effective on game engine initialization, and can only be used on rules.ini. For example, some settings modify the memory heap size allocated by the game to store certain elements, which cannot be resized without resetting the game. These features are indicated with `{Rules}`.
-
-`{Rules}` include both rules.ini and aftrmath.ini. `{Rules/Map}` includes any multiplayer spawn.ini that may be used by your choice of multiplayer client.
 
 -------
-
-### Modification References
-
-Much of the inner workings of the Red Alert game engine was unraveled by the release of the source code in the Remastered release. While not exact, the source code provides an easy reference point for the usage of internal variables, allowing easier debugging and research. The chief aim of the project is to allow prospective modders and mappers greater flexibility in their project by exposing some of the hidden or hardcoded logic into modifiable entries in the existant INI read system.
-
-The following desciptions can be used as a reference point to its relationship with Remastered source code.
-
- - ```Exposed <Reference>```
-   
-   The variable, usually defined in an internal class, is now exposed via this INI key.
-
- - ```Modified <Reference>```
-   
-   Modifications have been applied to the meaning or use of this variable.
-
- - ```New logic```
-
-   The Remastered source code does not have a reference point for this key. This may happen if original implementation is baked into game logic without the use of stored variables.
-
-Warning: Remastered source code is not exact with legacy Red Alert. Keep this in mind if you wish to dabble into forking and modifying this project!
-
--------
-
 ### New Entries
+[Top](#weapontypes)
 
 These settings enable you to define new weapon entries, expanding modding capabilities.
 
-<details>
-  <summary><b><code>{Rules} ► [Weapons]</code></b></summary>
-
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules}</code> ► [Weapons]
+</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new Weapon.
 
@@ -67,18 +40,22 @@ Example as follows:
 0=HandCannon
 1=Mortar
 ```
+</details></td></tr></table>
 
-</details>
 
 -------
-
 ### Tesla Charge Settings
+[Top](#weapontypes)
 
-<details>
-  <summary><b><code>{Rules/Map} ► [&lt;WeaponType&gt;] ► ChargeSound (string)</code></b></summary>
 
-```New logic```
+<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► ChargeSound
+</td><td width="50">String</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-If used on a weapon with `Charges`=true, overrides the charging sound. This string must be already defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+If used on a weapon with `Charges`=true, overrides the charging sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+</details></td></tr></table>
 
-</details>
+
+-------
+[Return to Features](./features.md)
+

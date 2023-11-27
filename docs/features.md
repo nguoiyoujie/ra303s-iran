@@ -6,6 +6,10 @@ The feature list is still in the works, pending write-ups on the changes from th
 
 In the meantime, you may refer to the below for information. 
 
+**General Information**
+ - [Documentation Guide](./dockeys.md)
+ - [Definitions](./defines.md)
+
 **Command-line Arguments**
 
  - [Command-line Arguments](./cmd_arguments.md)
@@ -93,7 +97,7 @@ Features
      DisplayOriginalMultiplayerMaps=       ; Whether to display the original 24 multiplayer maps (Load MISSIONS.PKT or not)
      DisplayCounterstrikeMultiplayerMaps=  ; Whether to display Counterstrike multiplayer maps (Load CSTRIKE.PKT or not)
      DisplayAftermathMultiplayerMaps=      ; Whether to display Aftermath multiplayer maps (Load AFTMATH.PKT or not)
-     ``
+     ```
 
 
 
