@@ -30,7 +30,7 @@ These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [UnitTypes]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -47,7 +47,7 @@ Example as follows:
 ```
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Unit
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
@@ -78,7 +78,7 @@ TechnoType settings are also available to UnitTypes. See [TechnoTypes](./technot
 ### General Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsCrateGoodie
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -88,7 +88,7 @@ Determines if this unit can be spawned from a goodie crate.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► Crusher
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -98,7 +98,7 @@ Determines if this unit can crush infantry that does not have `Crushable` set. B
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsToHarvest
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -108,7 +108,7 @@ Determines if this unit performs harvesting operations when over an ore patch. *
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsRotatingTurret
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -118,7 +118,7 @@ Determines if this unit renders a rotating radar dish above its sprite. If set t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsFireAnim
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -128,7 +128,7 @@ Determines if this unit renders a firing animation when firing.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsLockTurret
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -138,7 +138,7 @@ Determines if this unit renders a firing animation when firing.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► Large
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -151,7 +151,7 @@ Note that this does not determine the size of the unit select box. This is deter
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsAnimating
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -161,7 +161,7 @@ Determines if this unit constantly animates, like a Visceroid. *Does not work as
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsJammer
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -171,7 +171,7 @@ Determines if this unit acts like the Radar Jammer and can jam nearby radar dome
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsGapper
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -185,7 +185,7 @@ Determines if this unit acts like the Mobile Gap Generator and produces shroud a
 ### Turret Adjustments
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► TurretAdjustX
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -193,7 +193,7 @@ Determines the horizontal turret offset
 </details></td></tr></table>
 
  
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► TurretAdjustY
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -201,7 +201,7 @@ Determines the vertical turret offset
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► TurretFrameStart
 </samp></td><td width="120"><samp>Short</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -209,7 +209,7 @@ Determines the frame of the image used for the start of the turret animation. Us
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► TurretFrameCount
 </samp></td><td width="120"><samp>Short</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -222,7 +222,7 @@ Determines the number of frames used for the turret animation. Useful in conjunc
 ### Deploys To Building
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► DeploysInto
 </samp></td><td width="120"><samp><a href="./defines.md#buildingtypes">BuildingType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -241,7 +241,7 @@ Interactions with other deploy logic (such as unloading passengers) are not pres
 ### Reload Logic
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AmmoReloadRate
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -251,7 +251,7 @@ This is applicable to both units with weapons and the Minelayer's mines.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AmmoReloadAmount
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

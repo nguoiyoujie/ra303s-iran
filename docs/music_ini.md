@@ -12,7 +12,7 @@ Additional music can be loaded into the game via music.ini.
 ### New Music Entries 
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Fullnames]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -22,7 +22,7 @@ The list of names for the music, in display order.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Filenames]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -32,7 +32,7 @@ The list of file names that each music entry references, in order.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Tracklength]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

@@ -43,7 +43,7 @@ Check the following specific types to learn how to introduce new types:
 ### New Armor-types
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;] ► Armor
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -72,7 +72,7 @@ Special_1 and Special_2 are not yet supported in this version, but may be in the
 ### QoL Changes
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Image
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
@@ -96,7 +96,7 @@ The prerequisite system has been extended to aid with the overall softcoding of 
 
 This is analogus to the Prerequisite Groups system implemented in Tiberian Sun and beyond. Unlike Tiberian Sun, a building does not (yet) belong to more than one Type.
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrerequisiteType
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -159,7 +159,7 @@ Defaults to the following values, depending on the building in question:
  > NONE: All other buildings
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Prerequisite
 </samp></td><td width="120"><samp>String Array</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
@@ -203,7 +203,7 @@ Example: If a unit has Prerequisite=POWER,BARRACKS,FIX,STEK. The prerequisite re
 ### General Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsNominal
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
@@ -213,7 +213,7 @@ Determines whether this object uses its true name. Overrides the name behaviour 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsTheater
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
@@ -223,7 +223,7 @@ Determines if the artwork for this object is theater specific.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► HasTurret
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
@@ -233,7 +233,7 @@ Determines if this object has a turret. For buildings, if set to true, the objec
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Facings
 </samp></td><td width="120"><samp>8, 16, or 32</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -248,7 +248,7 @@ Determines if the number of directions applicable for this object's rotation. On
 ### Firing Offsets
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► VerticalOffset
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -258,7 +258,7 @@ Determines the upward offset of the firing animation, in leptons, relative to th
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryOffset
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -268,7 +268,7 @@ Determines the forward offset of the firing animation, in leptons, relative to t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryLateral
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -278,7 +278,7 @@ Determines the offset of the firing animation perpendicular to the unit's line o
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryOffset
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -288,7 +288,7 @@ Determines the forward offset of the firing animation relative to the unit's lin
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryLateral
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -303,7 +303,7 @@ Determines the offset of the firing animation perpendicular to the unit's line o
 ### Death Weapons
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► DeathWeapon
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

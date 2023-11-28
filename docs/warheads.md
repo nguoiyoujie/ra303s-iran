@@ -25,7 +25,7 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 
 These settings enable you to define new warhead entries, expanding modding capabilities.
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [Warheads]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -50,7 +50,7 @@ Example as follows:
 ### New Armor-types
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;Warhead&gt;]  ► Verses
 </samp></td><td width="120"><samp>Percentage Array</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
@@ -83,7 +83,7 @@ Defaults to 100% for all armor types.
 ### Atomic Weapons
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► UseAtomWhiteScreenEffectInMP
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -93,7 +93,7 @@ Normally, detonating a nuke flashes a white screen in single-player maps. This i
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► UseSinglePlayerAtomDamage
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -103,7 +103,7 @@ Atom damage is generally reduced in multiplayer battles. Toggle this on to use s
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► AtomRadius
 </samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

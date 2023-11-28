@@ -23,7 +23,7 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 
 These settings enable you to define new weapon entries, expanding modding capabilities.
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [Weapons]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -49,7 +49,7 @@ Example as follows:
 <br>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► ChargeSound
 </samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

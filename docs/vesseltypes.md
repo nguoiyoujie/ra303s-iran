@@ -29,7 +29,7 @@ These settings enable you to define new types, expanding modding capabilities.
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [VesselTypes]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -47,7 +47,7 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Vessel
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
@@ -78,7 +78,7 @@ TechnoType settings are also available to VesselTypes. See [TechnoTypes](./techn
 ### General Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► IsPieceOfEight
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -110,7 +110,7 @@ to control the position of the turret, and
 to control the position of the bullet. 
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► HasSecondTurret
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -118,7 +118,7 @@ Determines whether a second turret should be drawn. The second turret will alway
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretName
 </samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -126,7 +126,7 @@ Determines the turret to be drawn. Defaults to MGUN for the Gunboat, SSAM for th
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretOffset
 </samp></td><td width="120"><samp>Signed Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -136,7 +136,7 @@ Determines the offset of the turret, in pixels, towards the front of the unit. N
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretAdjustY
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -144,7 +144,7 @@ Determines the vertical offset, in pixels, of the turret.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretFireOffset
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -152,7 +152,7 @@ Determines the offset of the firing animation, in leptons, towards the front of 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► PrimaryOffset
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -162,7 +162,7 @@ Determines the forward offset of the firing animation, in leptons, relative to t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► VerticalOffset
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

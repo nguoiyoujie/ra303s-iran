@@ -20,7 +20,7 @@ Preload options can be customized on redalert.ini, which may improve the quality
 ### Custom Resolutions 
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► Width<br>
 <code>{redalert.ini}</code> ► [Options]  ► Height
 </samp></td><td width="120"><samp>Integer<br>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -63,7 +63,7 @@ The original code for this high resolution feature was written by hifi. Addition
 ### No CD
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► NoCD
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -78,7 +78,7 @@ No-CD mode can be enabled/disabled with the `NoCD`= (yes/no) keyword under the [
 ### Enable Expansions
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► CounterstrikeEnabled<br>
 <code>{redalert.ini}</code> ► [Options]  ► AftermathEnabled
 </samp></td><td width="120"><samp>Boolean<br>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -94,7 +94,7 @@ The Counterstrike expansion can be enabled/disabled with the `CounterstrikeEnabl
 ### Music Listing
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► ShowAllMusic
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -103,7 +103,7 @@ The Counterstrike expansion can be enabled/disabled with the `CounterstrikeEnabl
 Added an **REDALERT.INI** keyword `ShowAllMusic`= (yes/no) under the [Options] section to enable/disable showing all the game's music, normally the game only shows some music depending on what side you're playing as. With this option enabled it always shows all music except for the score, map and main menu music.	 
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► RandomStartingSong
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -120,7 +120,7 @@ It's now possible to have a random starting song start after a map is loaded, th
 
 All multiplayer settings are now configurable.
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Money
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -129,7 +129,7 @@ All multiplayer settings are now configurable.
 Sets the initial cash that each player receives at the start of the game.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► ShroudRegrows
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -138,7 +138,7 @@ Sets the initial cash that each player receives at the start of the game.
 Determines whether shroud regrows over time. The regrowth rate is determined by `{Rules/Map} ► [General] ► ShroudRate`, defaulting to 4 in-game minutes.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► CaptureTheFlag
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -147,7 +147,7 @@ Determines whether shroud regrows over time. The regrowth rate is determined by 
 Determines whether the Capture The Flag game mode is active.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Crates
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -156,7 +156,7 @@ Determines whether the Capture The Flag game mode is active.
 Determines whether crates will spawn periodically on the map.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► Bases
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -165,7 +165,7 @@ Determines whether crates will spawn periodically on the map.
 Determines whether each player receives an MCV at the start of the game.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► OreRegenerates
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -174,7 +174,7 @@ Determines whether each player receives an MCV at the start of the game.
 Determines whether ore regenerates over time. Essentially this overrides `{Rules/Map} ► [General] ► OreGrows` and `{Rules/Map} ► [General] ► OreSpreads`. The regrowth rate is determined by `{Rules/Map} ► [General] ► GrowthRate`, defaulting to 2 in-game minutes.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► UnitCount
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -183,7 +183,7 @@ Determines whether ore regenerates over time. Essentially this overrides `{Rules
 Determines the number of units each player receives at the start of the game.
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► TechLevel
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -193,7 +193,7 @@ Determines each player techlevel at the start of the game. (It is possible to mo
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► AIDifficulty
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -203,7 +203,7 @@ Determines the AI players' difficulty setting for the game. (0 = easy, 1 = Mediu
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [MultiplayerDefaults]  ► AIPlayers
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -229,7 +229,7 @@ Note the following:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► PlayEnglishIntro
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -245,7 +245,7 @@ Playing the ENGLISH.VQA intro is now optional. a new **REDALERT.INI** boolean op
 <br>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► SkipScoreScreen
 </samp></td><td width="120"><samp>0, 1 or 2</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -260,7 +260,7 @@ Optional deinterlacing of videos, this is controlled by the VideoInterlaceMode= 
 ### Skipping Scores
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► SkipScoreScreen
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -277,7 +277,7 @@ If the score screen is not shown, no new entry will be generated into HALLFAME.D
 ### Sound Overrides
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► AlternativeRifleSound
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -287,7 +287,7 @@ Added **REDALERT.INI** keyword `AlternativeRifleSound`= (yes/no) under [Options]
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► UseGrenadeThrowingSound
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -302,7 +302,7 @@ Added **REDALERT.INI** keyword `UseGrenadeThrowingSound`= (yes/no) under [Option
 ### Visual Overrides
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{redalert.ini}</code> ► [Options]  ► UseBetaTeslaTank<br>
 <code>{redalert.ini}</code> ► [Options]  ► UseBetaDestroyer<br>
 <code>{redalert.ini}</code> ► [Options]  ► UseBetaSubmarine<br>

@@ -35,7 +35,7 @@ These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [BuildingTypes]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -53,7 +53,7 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Building
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -84,7 +84,7 @@ TechnoType settings are also available to BuildingTypes. See [TechnoTypes](./tec
 ### General Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsSimpleDamage
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
@@ -94,7 +94,7 @@ In Tiberium Dawn, this was used for the oil pump to determine the damaged frames
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ConstantAnimation
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -104,7 +104,7 @@ Determines if the building plays its animation throughout its operation. The bui
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitCoordX<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitCoordY
 </samp></td><td width="120"><samp>Integer<br>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -121,7 +121,7 @@ Determines the exit coordinates, in leptons, from the top-left corner of the bui
 ### Factory Production
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► FactoryType
 </samp></td><td width="120"><samp>String: AircraftType, BuildingType, InfantryType, UnitType, VesselType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -138,7 +138,7 @@ Note: The Map Trigger Event [Destroyed, All Factories] as well as the Skirmish A
 ### War Factory Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitList
 </samp></td><td width="120"><samp>Byte: -1 to 5</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -156,7 +156,7 @@ Determines the exit destinations of an object produced from this building. Units
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayAnim<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayFrames<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryOverlayRate
@@ -166,7 +166,7 @@ If defined on a building with `FactoryType = UnitType`, overrides the factory do
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryExitFacing
 </samp></td><td width="120"><samp>Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -174,7 +174,7 @@ If defined on a building with `FactoryType = UnitType`, overrides the starting r
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► WarFactoryExitTrack
 </samp></td><td width="120"><samp>Byte: 0 to 67</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -195,7 +195,7 @@ A new unit exit track (ID 67) has been created to emulate the exit track used by
 ### Building Foundations
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► BSize
 </samp></td><td width="120"><samp>Byte: 0 to 8</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -219,7 +219,7 @@ There are two methods to customize building foundations. One may be easier to us
 
 **Method 1**
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► CustomFoundationList
 </samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -246,7 +246,7 @@ The following characters are supported. Note that they are case sensitive.
 
 **Method 2**
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OccupyList<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OverlapList
 </samp></td><td width="120"><samp>Byte<br>Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -307,7 +307,7 @@ The following values for both entries are supported. *Note that this syntax is e
 ### Building Animations
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Start<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Count<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► Anim_Construct_Rate<br>
@@ -377,7 +377,7 @@ The stages are as follows:
 ### Radar Buildings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRadar
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -390,7 +390,7 @@ Allows a building to provide Radar capabilities to the player, given sufficient 
 ### Jamming Buildings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsJammable
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -400,7 +400,7 @@ If set to true, has the following effects:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General] ► RemapJammedBuildings
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -413,7 +413,7 @@ If set to true, remaps jammed buildings using the Shade remap.
 ### Superweapons
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► SpecialWeapons
 </samp></td><td width="120"><samp>String Array</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -446,7 +446,7 @@ For example, `SpecialWeapons=GPS,SPYPLANE` grants both spy plane and GPS special
 ### Unpacking Buildings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► UndeploysInto
 </samp></td><td width="120"><samp><a href="./defines.md#unittypes">UnitType</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 

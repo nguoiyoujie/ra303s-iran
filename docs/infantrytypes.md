@@ -27,7 +27,7 @@ These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [InfantryTypes]
 </samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -45,7 +45,7 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Infantry
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -76,7 +76,7 @@ TechnoType settings are also available to InfantryTypes. See [TechnoTypes](./tec
 ### General Settings
 <br>
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsFemale
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -86,7 +86,7 @@ Determines if this civilian infantry should use the female civilian voice.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCrawling
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -96,7 +96,7 @@ Acts as override switch to `IsFraidyCat`. An infantry that has `IsFraidyCat` set
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCivilian
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -111,7 +111,7 @@ Determines if this infantry is a civilian, applying the following changes:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► Pip
 </samp></td><td width="120"><samp>Byte</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -127,7 +127,7 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls
 </samp></td><td width="120"><samp><a href="./defines.md#infantrytypes">InfantryType</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
@@ -137,7 +137,7 @@ If specified, loads that units' animation control frames for the infantry. Only 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► FireFrame<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ProneFireFrame
 </samp></td><td width="120"><samp>Byte<br>Byte</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
