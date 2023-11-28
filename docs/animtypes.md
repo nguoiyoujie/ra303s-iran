@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
 <h2 align="center">AnimTypes</h2>
 
 AnimTypes represent animations (sequences of images) that can be played in the game.
@@ -60,5 +60,5 @@ Example as follows:
 
 <a href="#animtypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
 

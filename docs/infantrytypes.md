@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
 <h2 align="center">InfantryTypes</h2>
 
 InfantryTypes represent infantry and creatures that are occupy a subspace of a cell. A cell can contain up to five infantry objects, and they are often eligible for crushing deaths. 
@@ -151,5 +151,5 @@ Determines the frame offset from the begining of the firing sequence when the we
 
 <a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
 

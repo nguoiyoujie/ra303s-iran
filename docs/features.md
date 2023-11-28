@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>
 <h2 align="center">Features</h2>
 
 -------
@@ -575,4 +575,4 @@ Features
 
 <a href="#features"><kbd>Top</kbd></a><br>
 ------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>

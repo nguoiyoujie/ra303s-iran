@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>
 <h2 align="center">TechnoTypes</h2>
 
 Technotypes represent common elements between [BuildingTypes](../buildingtypes.md), [UnitTypes](../unittypes.md), [InfantryTypes](../infantrytypes.md), [VesselTypes](../vesseltypes.md) and [AircraftTypes](../aircrafttypes.md)
@@ -315,4 +315,4 @@ Note that the explosion type and spread of the damage is still determined by the
 
 <a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>

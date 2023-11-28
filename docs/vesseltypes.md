@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>VesselTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>VesselTypes</kbd></kbd><br>
 <h2 align="center">VesselTypes</h2>
 
 VesselTypes represent units that are exclusive to the water. While analogous to UnitTypes, they do not share most of their code, so are to be treated differently.
@@ -174,5 +174,5 @@ Determines the upward offset of the firing animation, in leptons, relative to th
 
 <a href="#vesseltypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>VesselTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>VesselTypes</kbd></kbd><br>
 

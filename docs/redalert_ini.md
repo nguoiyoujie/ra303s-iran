@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Red Alert INI Options</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Red Alert INI Options</kbd></kbd><br>
 <h2 align="center">Red Alert INI Options</h2>
 
 Preload options can be customized on redalert.ini, which may improve the quality of the game experience.
@@ -318,5 +318,5 @@ Added **REDALERT.INI** keyword `UseBetaTeslaTank`= (yes/no) under [Options]. If 
 
 <a href="#red-alert-ini-options"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Red Alert INI Options</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Red Alert INI Options</kbd></kbd><br>
 

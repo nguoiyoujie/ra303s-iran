@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
 <h2 align="center">WeaponTypes</h2>
 
 WeaponTypes represent the logical aspects of a damage-dealing object. It also includes visual and audio references to provide immersive feedback to the player.
@@ -59,5 +59,5 @@ If used on a weapon with `Charges`=true, overrides the charging sound. This stri
 
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
 

@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Trigger Actions</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Trigger Actions</kbd></kbd><br>
 <h2 align="center">Trigger Actions</h2>
 
 Trigger Actions are effects that are granted upon a map, when certain conditions are fulfilled. Used extensively in single-player missions.
@@ -248,4 +248,4 @@ The map does not yet rescroll after setting the new dimensions. It is possible f
 
 <a href="#trigger-actions"><kbd>Top</kbd></a><br>
 ------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Trigger Actions</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Trigger Actions</kbd></kbd><br>

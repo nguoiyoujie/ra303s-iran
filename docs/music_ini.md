@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>
 <h2 align="center">Music INI Options</h2>
 
 Additional music can be loaded into the game via music.ini.
@@ -59,4 +59,4 @@ Make sure there's an empty (blank) line at the end of the file or the last entry
 
 <a href="#music-ini-options"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>

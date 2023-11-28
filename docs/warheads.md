@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
 <h2 align="center">Warheads</h2>
 
 Warheads contain special information for WeaponTypes, such as effectiveness against armor, explosion types, infantry kill animations and damage spread.
@@ -115,5 +115,5 @@ Note that due to a bug in the original game, damage decreases in strength closer
 
 <a href="#warheads"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
 

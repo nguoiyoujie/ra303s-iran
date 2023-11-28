@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Miscellaneous Changes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Miscellaneous Changes</kbd></kbd><br>
 <h2 align="center">Miscellaneous Changes</h2>
 
 This section covers changes that are not part of other sections. Usually these have no controls, so they are either fixes or breaking changes. These should ideally contain only fixes
@@ -433,4 +433,4 @@ Scattering behaviour had changed, which may mean a greater spread of bullets for
 
 <a href="#miscellaneous-changes"><kbd>Top</kbd></a><br>
 ------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Miscellaneous Changes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Miscellaneous Changes</kbd></kbd><br>

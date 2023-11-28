@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BulletTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BulletTypes</kbd></kbd><br>
 <h2 align="center">BulletTypes</h2>
 
 BulletTypes represent projectiles that are emitted from WeaponTypes. They apply their effect on reaching the target or expire by other means.
@@ -44,4 +44,4 @@ Example as follows:
 
 <a href="#bullettypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BulletTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BulletTypes</kbd></kbd><br>

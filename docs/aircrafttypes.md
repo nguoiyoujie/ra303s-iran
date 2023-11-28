@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>
 <h2 align="center">AircraftTypes</h2>
 
 AircraftTypes represent things that... fly. They include fixed-wing and rotor-wing aircrafts. These units are generally not bound by terrain during movement.
@@ -142,4 +142,4 @@ When using the Airfield, the game does no checks on the aircraft's descent again
 
 <a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>

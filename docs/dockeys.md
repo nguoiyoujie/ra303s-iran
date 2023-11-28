@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Documentation Guide</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Documentation Guide</kbd></kbd><br>
 <h2 align="center">Documentation Guide</h2>
 
 This page provides additional context on the information displayed on other pages, in particular on INI configuration.
@@ -48,4 +48,4 @@ The following desciptions can be used as a reference point to its relationship w
 
 <a href="#documentation-guide"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Documentation Guide</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Documentation Guide</kbd></kbd><br>

@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>UnitTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>UnitTypes</kbd></kbd><br>
 <h2 align="center">UnitTypes</h2>
 
 UnitTypes represent vehicles, and are in essence play the second most major role, second to BuildingTypes, having the most amount of logic not available to other types. This includes MCV deployment, harvesting, generalized turrets, and several customized visual animation aspects.
@@ -265,5 +265,5 @@ For example, setting `AmmoReloadRate` to 20 and `AmmoReloadAmount` to 2 for Mine
 
 <a href="#unittypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>UnitTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>UnitTypes</kbd></kbd><br>
 

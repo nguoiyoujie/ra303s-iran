@@ -1,4 +1,4 @@
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>
 <h2 align="center">BuildingTypes</h2>
 
 BuildingTypes represent static structures (there is a notable exception in C&C). There is no base, and no production, without them.
@@ -450,5 +450,5 @@ The created building will be offset at the cell +1,+1 (directly south-east) from
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>
 
