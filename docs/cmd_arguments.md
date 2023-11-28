@@ -6,6 +6,8 @@ The patched Red Alert executable supports an extension of command-line arguments
 -------
 ### Arguments
 
+<samp>
+
 |Argument                  |Explanation                         
 :---------------------------------------------------------------|:----------------
 |`-NOTITLE`                                                     |Skips the title screen on initialization of the game.
@@ -16,7 +18,7 @@ The patched Red Alert executable supports an extension of command-line arguments
 |`-LAN`<br>`-INTERNET`<br>`-SKIRMISH`                           |Automatically opens the relevant dialog upon entering the main menu screen.
 |`-NEWMISSIONS`                                                 |Enables the new missions button, though that does nothing since another part of the code already enables it.
 |`-ATTRACT`<br>`-RECORD`<br>`-PLAYBACK`                         |*Function to be determined*
-
+</samp>
 
 <a href="#command-line-arguments"><kbd>Top</kbd></a><br>
 -------

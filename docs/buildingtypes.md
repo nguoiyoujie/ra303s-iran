@@ -348,14 +348,18 @@ Integer<br>Integer<br></samp></td></tr><tr><td colspan="3"><details><summary><b>
 
 Determines the animation settings for each stage of the building. The three options for each stage are as follows:
 
+<samp>
+
 |Parameter|Explanation             
 :---------|:------------
 |`Start`  |The frame index within the shp file to use as the first frame of this stage.
 |`Count`  |The number of frames used in this stage, some stages may loop back to Start after the last frame is reached.
 |`Rate`   |The number of in-game frames to pass before rendering the next animation frame.
-
+</samp>
 
 The stages are as follows:
+
+<samp>
 
 |Stage           |Explanation             
 :----------------|:------------
@@ -364,6 +368,7 @@ The stages are as follows:
 |`Active`        |The active animation.<br>Used by various buildings, such as<li>Chronosphere discharging,</li><li>Construction Yard handling materials, and</li><li>the Service Depot repair animation.</li>
 |`Full`          |Used only by the C&C Refinery when docked with a Harvester. Has no use in Red Alert.
 |`Aux1` / `Aux2` |Alternative sequences, used only by the Missile Silo.<br>The Missile Silo uses <li>`Active` for its door opening animation, </li><li>`Aux1` for the launch, and </li><li>`Aux2` for the closing of the door.</li>
+</samp>
 </details></td></tr></table>
 
 
@@ -418,6 +423,8 @@ For a building with existing special weapons, they can be overriden (not appende
 
 The list of supported SpecialWeapons are:
 
+<samp>
+
 |SpecialWeapon |Explanation             
 :--------------|:------------
 |`SONARPULSE`  |The sonar pulse.<br>SpecialWeapons= has no affect due to the special spy requirements.
@@ -428,6 +435,7 @@ The list of supported SpecialWeapons are:
 |`SPYPLANE`    |The spy plane.
 |`IRONCURTAIN` |The iron curtain effect.
 |`GPS`         |The satellite launch.<br>Creates a GPS satellite animation at launch, which may look weird depending on the building you hook into.
+</samp>
 
 For example, `SpecialWeapons=GPS,SPYPLANE` grants both spy plane and GPS special powers while the building remains standing.
 </details></td></tr></table>
