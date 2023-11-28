@@ -1,9 +1,9 @@
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Definitions</kbd></kbd><br>
+<h2 align="center">Definitions</h2>
 
-## Definitions
+ID mappings of supported object types are listed on this page for reference
 
 -------
-ID mappings of supported object types are listed on this page for reference
 
  - [AircraftTypes](#aircrafttypes)
  - [AnimTypes](#animtypes)
@@ -21,9 +21,12 @@ ID mappings of supported object types are listed on this page for reference
  - [WeaponTypes](#weapontypes)
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### AircraftTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name |UI Name                         
 :--|:--------|:------------------------------
@@ -34,11 +37,14 @@ ID mappings of supported object types are listed on this page for reference
 | 4|TRAN     |Chinook Transport               
 | 5|HELI     |Longbow Attack Helicopter       
 | 6|HIND     |Hind Attack Helicopter          
+</samp>
 
-
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### AnimTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name             
 :--|:----------
@@ -126,11 +132,15 @@ ID mappings of supported object types are listed on this page for reference
 |81|ANTDIE (Ant1) (*Aftermath*) 
 |82|ANTDIE (Ant2) (*Aftermath*) 
 |83|ANTDIE (Ant3) (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### BuildingTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name |UI Name                         
 :--|:--------|:------------------------------
@@ -221,11 +231,15 @@ ID mappings of supported object types are listed on this page for reference
 |84|QUEE     |Queen Ant (*Aftermath*) 
 |85|LAR1     |Larva (*Aftermath*) 
 |86|LAR2     |Larvae (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### BulletTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name     
 :--|:-----------
@@ -247,62 +261,74 @@ ID mappings of supported object types are listed on this page for reference
 |15|GPSSatellite 
 |16|NukeUp       
 |17|NukeDown     
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### HouseTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name     
 :--|:-----------
-| 0|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) Spain        
-| 1|[![#8d95ba](https://placehold.it/8/8d95ba/8d95ba.png)](#) Greece       
-| 2|[![#ce0000](https://placehold.it/8/ce0000/ce0000.png)](#) USSR         
-| 3|[![#9dbe75](https://placehold.it/8/9dbe75/9dbe75.png)](#) England      
-| 4|[![#eaa140](https://placehold.it/8/eaa140/eaa140.png)](#) Ukraine      
-| 5|[![#baa599](https://placehold.it/8/baa599/baa599.png)](#) Germany      
-| 6|[![#4ca189](https://placehold.it/8/4ca189/4ca189.png)](#) France       
-| 7|[![#ae5d44](https://placehold.it/8/ae5d44/ae5d44.png)](#) Turkey       
-| 8|[![#8d95ba](https://placehold.it/8/8d95ba/8d95ba.png)](#) GoodGuy      
-| 9|[![#ce0000](https://placehold.it/8/ce0000/ce0000.png)](#) BadGuy       
-|10|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) Neutral      
-|11|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) Special      
-|12|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) Multi1       
-|13|[![#8d95ba](https://placehold.it/8/8d95ba/8d95ba.png)](#) Multi2       
-|14|[![#ce0000](https://placehold.it/8/ce0000/ce0000.png)](#) Multi3       
-|15|[![#9dbe75](https://placehold.it/8/9dbe75/9dbe75.png)](#) Multi4       
-|16|[![#eaa140](https://placehold.it/8/eaa140/eaa140.png)](#) Multi5       
-|17|[![#baa599](https://placehold.it/8/baa599/baa599.png)](#) Multi6       
-|18|[![#4ca189](https://placehold.it/8/4ca189/4ca189.png)](#) Multi7       
-|19|[![#ae5d44](https://placehold.it/8/ae5d44/ae5d44.png)](#) Multi8       
+| 0|[![#b4a458](./img/8x8/0_yellow.png)](#)      Spain        
+| 1|[![#8d95ba](./img/8x8/1_ltblue.png)](#)      Greece       
+| 2|[![#ce0000](./img/8x8/2_red.png)](#)         USSR         
+| 3|[![#9dbe75](./img/8x8/3_green.png)](#)       England      
+| 4|[![#eaa140](./img/8x8/4_orange.png)](#)      Ukraine      
+| 5|[![#baa599](./img/8x8/5_grey.png)](#)        Germany      
+| 6|[![#4ca189](./img/8x8/6_teal.png)](#)        France       
+| 7|[![#ae5d44](./img/8x8/7_brown.png)](#)       Turkey       
+| 8|[![#8d95ba](./img/8x8/1_ltblue.png)](#)      GoodGuy      
+| 9|[![#ce0000](./img/8x8/2_red.png)](#)         BadGuy       
+|10|[![#b4a458](./img/8x8/0_yellow.png)](#)      Neutral      
+|11|[![#b4a458](./img/8x8/0_yellow.png)](#)      Special      
+|12|[![#b4a458](./img/8x8/0_yellow.png)](#)      Multi1       
+|13|[![#8d95ba](./img/8x8/1_ltblue.png)](#)      Multi2       
+|14|[![#ce0000](./img/8x8/2_red.png)](#)         Multi3       
+|15|[![#9dbe75](./img/8x8/3_green.png)](#)       Multi4       
+|16|[![#eaa140](./img/8x8/4_orange.png)](#)      Multi5       
+|17|[![#baa599](./img/8x8/5_grey.png)](#)        Multi6       
+|18|[![#4ca189](./img/8x8/6_teal.png)](#)        Multi7       
+|19|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi8       
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### HouseColorTypes 
-[Top](#definitions)
+<br>
 
 Original colors number from 0 to 7. New colors are added after this index. 
 
+<samp>
+
 |ID|INI Name                                                               
 :--|:-----------------------------------------------------------------------
-| 0|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) YELLOW       
-| 1|[![#8d95ba](https://placehold.it/8/8d95ba/8d95ba.png)](#) LTBLUE       
-| 2|[![#ce0000](https://placehold.it/8/ce0000/ce0000.png)](#) RED          
-| 3|[![#9dbe75](https://placehold.it/8/9dbe75/9dbe75.png)](#) GREEN        
-| 4|[![#eaa140](https://placehold.it/8/eaa140/eaa140.png)](#) ORANGE       
-| 5|[![#baa599](https://placehold.it/8/baa599/baa599.png)](#) GREY         
-| 6|[![#4ca189](https://placehold.it/8/4ca189/4ca189.png)](#) BLUE         
-| 7|[![#ae5d44](https://placehold.it/8/ae5d44/ae5d44.png)](#) BROWN        
-| 8|[![#4495e6](https://placehold.it/8/4495e6/4495e6.png)](#) FLAMING_BLUE
-| 9|[![#eeeeee](https://placehold.it/8/eeeeee/eeeeee.png)](#) WHITE        
-|10|[![#383838](https://placehold.it/8/383838/383838.png)](#) BLACK        
-|11|[![#7c7c7c](https://placehold.it/8/7c7c7c/7c7c7c.png)](#) TRUE_GREY    
-|12|[![#74785c](https://placehold.it/8/74785c/74785c.png)](#) DIRTY_GREEN  
+| 0|[![#b4a458](./img/8x8/0_yellow.png)](#)       YELLOW       
+| 1|[![#8d95ba](./img/8x8/1_ltblue.png)](#)       LTBLUE       
+| 2|[![#ce0000](./img/8x8/2_red.png)](#)          RED          
+| 3|[![#9dbe75](./img/8x8/3_green.png)](#)        GREEN        
+| 4|[![#eaa140](./img/8x8/4_orange.png)](#)       ORANGE       
+| 5|[![#baa599](./img/8x8/5_grey.png)](#)         GREY         
+| 6|[![#4ca189](./img/8x8/6_teal.png)](#)         BLUE         
+| 7|[![#ae5d44](./img/8x8/7_brown.png)](#)        BROWN        
+| 8|[![#4495e6](./img/8x8/8_flamingblue.png)](#)  FLAMING_BLUE
+| 9|[![#eeeeee](./img/8x8/9_white.png)](#)        WHITE        
+|10|[![#383838](./img/8x8/10_black.png)](#)       BLACK        
+|11|[![#7c7c7c](./img/8x8/11_truegrey.png)](#)    TRUE_GREY    
+|12|[![#74785c](./img/8x8/12_dirtygreen.png)](#)  DIRTY_GREEN  
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### InfantryTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name |UI Name                         
 :--|:--------|:------------------------------
@@ -332,27 +358,35 @@ Original colors number from 0 to 7. New colors are added after this index.
 |23|CHAN     |Dr. Chan                        
 |24|SHOK     |Shock Trooper (*Aftermath*)
 |25|MECH     |Mechanic (*Aftermath*)                   
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### MessageColorTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name                                                               
 :--|:-----------------------------------------------------------------------
-| 0|[![#b4a458](https://placehold.it/8/b4a458/b4a458.png)](#) YELLOW       
-| 1|[![#8d95ba](https://placehold.it/8/8d95ba/8d95ba.png)](#) LTBLUE       
-| 2|[![#ce0000](https://placehold.it/8/ce0000/ce0000.png)](#) RED          
-| 3|[![#9dbe75](https://placehold.it/8/9dbe75/9dbe75.png)](#) GREEN        
-| 4|[![#eaa140](https://placehold.it/8/eaa140/eaa140.png)](#) ORANGE       
-| 5|[![#baa599](https://placehold.it/8/baa599/baa599.png)](#) GREY         
-| 6|[![#4ca189](https://placehold.it/8/4ca189/4ca189.png)](#) BLUE         
-| 7|[![#ae5d44](https://placehold.it/8/ae5d44/ae5d44.png)](#) BROWN        
+| 0|[![#b4a458](./img/8x8/0_yellow.png)](#)        YELLOW       
+| 1|[![#8d95ba](./img/8x8/1_ltblue.png)](#)        LTBLUE       
+| 2|[![#ce0000](./img/8x8/2_red.png)](#)           RED          
+| 3|[![#9dbe75](./img/8x8/3_green.png)](#)         GREEN        
+| 4|[![#eaa140](./img/8x8/4_orange.png)](#)        ORANGE       
+| 5|[![#baa599](./img/8x8/5_grey.png)](#)          GREY         
+| 6|[![#4ca189](./img/8x8/6_teal.png)](#)          BLUE         
+| 7|[![#ae5d44](./img/8x8/7_brown.png)](#)         BROWN        
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### MissionTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|Mission Name                                                               
 :--|:---------------
@@ -379,13 +413,17 @@ Original colors number from 0 to 7. New colors are added after this index.
 |20|Rescue
 |21|Missile
 |22|Harmless
+</samp>
    
    
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### SoundEffects 
-[Top](#definitions)
+<br>
 
 Some entries are unused. Those are marked with an 'x'
+
+<samp>
 
 | ID|INI Name    
 :---|:---------
@@ -555,11 +593,15 @@ Some entries are unused. Those are marked with an 'x'
 |173|MADEXPLO (*Aftermath*)
 |174|SHKTROP1 (*Aftermath*)
 |175|BEACON (*Aftermath*)
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### UnitTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name |UI Name                         
 :--|:--------|:------------------------------
@@ -585,11 +627,15 @@ Some entries are unused. Those are marked with an 'x'
 |19|QTNK     |MAD Tank (*Aftermath*) 
 |20|DTRK     |Demolition Truck (*Aftermath*) 
 |21|STNK     |Phase Tank (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### VesselTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name |UI Name                         
 :--|:--------|:------------------------------
@@ -600,11 +646,15 @@ Some entries are unused. Those are marked with an 'x'
 | 4|PT       |Gunboat                         
 | 5|MSUB     |Missile Submarine (*Aftermath*) 
 | 6|CARR     |Helicarrier (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### WarheadTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name             
 :--|:------------
@@ -617,11 +667,15 @@ Some entries are unused. Those are marked with an 'x'
 | 6|Organic              
 | 7|Nuke                 
 | 8|Mechanical (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
 ### WeaponTypes 
-[Top](#definitions)
+<br>
+
+<samp>
 
 |ID|INI Name             
 :--|:------------
@@ -668,7 +722,9 @@ Some entries are unused. Those are marked with an 'x'
 |40|APTusk (*Aftermath*) 
 |41|Democharge (*Aftermath*) 
 |42|AirAssault (*Aftermath*) 
+</samp>
 
 
+<a href="#definitions"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Definitions</kbd></kbd><br>

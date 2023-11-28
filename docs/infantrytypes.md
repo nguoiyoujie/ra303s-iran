@@ -1,6 +1,5 @@
-[Return to Features](./features.md)
-
-## InfantryTypes
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
+<h2 align="center">InfantryTypes</h2>
 
 InfantryTypes represent infantry and creatures that are occupy a subspace of a cell. A cell can contain up to five infantry objects, and they are often eligible for crushing deaths. 
 
@@ -11,24 +10,26 @@ InfantryTypes represent infantry and creatures that are occupy a subspace of a c
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
 
+
 -------
 ### Documentation Guide
-[Top](#infantrytypes)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
 ### New Type Extensions
-[Top](#infantrytypes)
+<br>
 
 These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [InfantryTypes]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new InfantryType.
 
@@ -44,9 +45,9 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Infantry
-</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 
@@ -62,20 +63,22 @@ If not defined, or set to -1, all additional unit types will default their names
 </details></td></tr></table>
 
 
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
 ### TechnoTypes
-[Top](#infantrytypes)
+<br>
 
 TechnoType settings are also available to InfantryTypes. See [TechnoTypes](./technotypes.md) for more details.
 
 
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
 ### General Settings
-[Top](#infantrytypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsFemale
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsFemale```
 
@@ -83,9 +86,9 @@ Determines if this civilian infantry should use the female civilian voice.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCrawling
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsCrawling```
 
@@ -93,9 +96,9 @@ Acts as override switch to `IsFraidyCat`. An infantry that has `IsFraidyCat` set
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► IsCivilian
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->IsCivilian```
 
@@ -108,9 +111,9 @@ Determines if this infantry is a civilian, applying the following changes:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► Pip
-</td><td width="50">Byte</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Byte</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->Pip```
 
@@ -124,9 +127,9 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls
-</td><td width="50"><a href="./defines.md#infantrytypes">InfantryType</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp><a href="./defines.md#infantrytypes">InfantryType</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->DoControls```
 
@@ -134,10 +137,10 @@ If specified, loads that units' animation control frames for the infantry. Only 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► FireFrame<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ProneFireFrame
-</td><td width="50">Byte<br>Byte</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Byte<br>Byte</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->FireFrame```\
 ```Exposed InfantryTypeClass->ProneFireFrame```
@@ -146,7 +149,7 @@ Determines the frame offset from the begining of the firing sequence when the we
 </details></td></tr></table>
 
 
-
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>
 

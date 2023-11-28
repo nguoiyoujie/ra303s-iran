@@ -1,6 +1,7 @@
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
+<h2 align="center">Warheads</h2>
 
-## Warheads
+Warheads contain special information for WeaponTypes, such as effectiveness against armor, explosion types, infantry kill animations and damage spread.
 
 -------
 
@@ -9,22 +10,24 @@
  - [New Armor-types](#new-armor-types) 
  - [Atomic Weapons](#atomic-weapons) 
 
+
 -------
 ### Documentation Guide
-[Top](#warheads)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
+<a href="#warheads"><kbd>Top</kbd></a><br>
 -------
 ### New Entries
-[Top](#warheads)
+<br>
 
 These settings enable you to define new warhead entries, expanding modding capabilities.
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [Warheads]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new Warheads.
 
@@ -42,13 +45,14 @@ Example as follows:
 </details></td></tr></table>
 
 
+<a href="#warheads"><kbd>Top</kbd></a><br>
 -------
 ### New Armor-types
-[Top](#warheads)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;Warhead&gt;]  ► Verses
-</td><td width="50">Percentage Array</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Percentage Array</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
 ```Modified WarheadTypeClass->Modifier[ARMOR_COUNT]```
 
@@ -56,27 +60,32 @@ The number of supported types have been increased to 9, matching the first nine 
 
 The first nine values will be read, to determine the warhead's effectiveness against the armortypes in order:
 
- > 0 = None\
- > 1 = Wood\
- > 2 = Light\
- > 3 = Heavy\
- > 4 = Concrete\
- > 5 = Flak\
- > 6 = Plate\
- > 7 = Medium\
- > 8 = Steel
+```
+0 = None
+1 = Wood
+2 = Light
+3 = Heavy
+4 = Concrete
+5 = Flak
+6 = Plate
+7 = Medium
+8 = Steel
+```
+
+If the end of the entry is reached before the last armortype, effectiveness against remaining armortypes default to 100%.
 
 Defaults to 100% for all armor types.
 </details></td></tr></table>
 
 
+<a href="#warheads"><kbd>Top</kbd></a><br>
 -------
 ### Atomic Weapons
-[Top](#warheads)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► UseAtomWhiteScreenEffectInMP
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's r-series)```
 
@@ -84,9 +93,9 @@ Normally, detonating a nuke flashes a white screen in single-player maps. This i
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► UseSinglePlayerAtomDamage
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's r-series)```
 
@@ -94,9 +103,9 @@ Atom damage is generally reduced in multiplayer battles. Toggle this on to use s
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [General]  ► AtomRadius
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 The radial range of nuclear warheards in the scenario, not including the center cell. Effectively the blast covers a square area of `AtomRadius * 2 + 1`. 
 
@@ -104,6 +113,7 @@ Note that due to a bug in the original game, damage decreases in strength closer
 </details></td></tr></table>
 
 
+<a href="#warheads"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Warheads</kbd></kbd><br>
 

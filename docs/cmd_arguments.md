@@ -1,11 +1,10 @@
-[Return to Features](./features.md)
-
-## Executable Argument Features ##
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Command-Line Arguments</kbd></kbd><br>
+<h2 align="center">Command-Line Arguments</h2>
 
 The patched Red Alert executable supports an extension of command-line arguments, allowing external programs to control the game's initial state.
 
 -------
-### Arguments ###
+### Arguments
 
 |Argument                  |Explanation                         
 :---------------------------------------------------------------|:----------------
@@ -19,5 +18,6 @@ The patched Red Alert executable supports an extension of command-line arguments
 |`-ATTRACT`<br>`-RECORD`<br>`-PLAYBACK`                         |*Function to be determined*
 
 
+<a href="#command-line-arguments"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Command-Line Arguments</kbd></kbd><br>

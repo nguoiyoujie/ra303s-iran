@@ -1,28 +1,31 @@
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
+<h2 align="center">AnimTypes</h2>
 
-## AnimTypes
+AnimTypes represent animations (sequences of images) that can be played in the game.
 
 -------
 
  - [Documentation Guide](#documentation-guide)
  - [New Entries](#new-entries) 
 
+
 -------
 ### Documentation Guide
-[Top](#animtypes)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
+<a href="#animtypes"><kbd>Top</kbd></a><br>
 -------
 ### New Entries
-[Top](#animtypes)
+<br>
 
 These settings enable you to define new animation entries, expanding modding capabilities.
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [AnimTypes]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new animations. These animations can then be used with Image=
 
@@ -37,9 +40,9 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [DirectionalAnimTypes]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new directional animations. These animations can then be used with Image=
 
@@ -55,7 +58,7 @@ Example as follows:
 ```
 </details></td></tr></table>
 
-
+<a href="#animtypes"><kbd>Top</kbd></a><br>
 -------
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AnimTypes</kbd></kbd><br>
 
-[Return to Features](./features.md)

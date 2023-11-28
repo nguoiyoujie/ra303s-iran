@@ -1,4 +1,5 @@
-## Features
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>
+<h2 align="center">Features</h2>
 
 -------
 
@@ -11,16 +12,13 @@ In the meantime, you may refer to the below for information.
  - [Definitions](./defines.md)
 
 **Command-line Arguments**
-
  - [Command-line Arguments](./cmd_arguments.md)
 
 **Additional INI Options**
-
  - [RedAlert INI Options](./redalert_ini.md)
  - [Music INI Options](./music_ini.md)
 
 **Game Definition Extensions**
-
  - [TechnoTypes](./technotypes.md)
    - [BuildingTypes](./buildingtypes.md)
    - [InfantryTypes](./infantrytypes.md)
@@ -39,6 +37,7 @@ In the meantime, you may refer to the below for information.
  - [Other Changes](./other_changes.md)
 
 
+<a href="#features"><kbd>Top</kbd></a><br>
 -------
 
 Unsorted features from previous patches are kept here.
@@ -572,3 +571,8 @@ Features
 
     
 147.	It's now possible to use BuildingTypes in TeamTypes/taskforces. So you can for example now have buildings paradropped in.
+
+
+<a href="#features"><kbd>Top</kbd></a><br>
+------
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Features</kbd></kbd><br>

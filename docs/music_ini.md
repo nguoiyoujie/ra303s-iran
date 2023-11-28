@@ -1,6 +1,5 @@
-[Return to Features](./features.md)
-
-## Music INI Options
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>
+<h2 align="center">Music INI Options</h2>
 
 Additional music can be loaded into the game via music.ini.
 
@@ -11,11 +10,11 @@ Additional music can be loaded into the game via music.ini.
 
 -------
 ### New Music Entries 
-[Top](#music-ini-options)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Fullnames]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
@@ -23,9 +22,9 @@ The list of names for the music, in display order.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Filenames]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
@@ -33,9 +32,9 @@ The list of file names that each music entry references, in order.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{music.ini}</code> ► [Tracklength]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
 
@@ -58,5 +57,6 @@ An example of the complete listing of one additional music is as follows:
 Make sure there's an empty (blank) line at the end of the file or the last entry may not be read.
 
 
+<a href="#music-ini-options"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>Music INI Options</kbd></kbd><br>

@@ -1,6 +1,5 @@
-[Return to Features](./features.md)
-
-## TechnoTypes
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>
+<h2 align="center">TechnoTypes</h2>
 
 Technotypes represent common elements between [BuildingTypes](../buildingtypes.md), [UnitTypes](../unittypes.md), [InfantryTypes](../infantrytypes.md), [VesselTypes](../vesseltypes.md) and [AircraftTypes](../aircrafttypes.md)
 
@@ -15,16 +14,18 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Firing Offsets](#firing-offsets) 
  - [Death Weapons](#death-weapons) 
 
+
 -------
 ### Documentation Guide
-[Top](#technotypes)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### New Type Extensions
-[Top](#technotypes)
+<br>
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
@@ -36,13 +37,15 @@ Check the following specific types to learn how to introduce new types:
  - [VesselTypes](./vesseltypes.md#new-type-extensions) 
  - [AircraftTypes](./aircrafttypes.md#new-type-extensions)
 
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### New Armor-types
-[Top](#technotypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;] ► Armor
-</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Modified TechnoTypeClass->Armor```
 
@@ -64,13 +67,14 @@ Special_1 and Special_2 are not yet supported in this version, but may be in the
 </details></td></tr></table>
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### QoL Changes
-[Top](#technotypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Image
-</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
 ```Inherited from iran's r-series```
 
@@ -78,9 +82,10 @@ The Image= keyword now works in a map file, instead of just globally in RULES.IN
 </details></td></tr></table>
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### Prerequisite System
-[Top](#technotypes)
+<br>
 
 **New Prerequisite-types**\
 *This constitutes a breaking change, therefore this system may be subject to change in the future in case of work to make it compatible with unmodified RA.*
@@ -91,9 +96,9 @@ The prerequisite system has been extended to aid with the overall softcoding of 
 
 This is analogus to the Prerequisite Groups system implemented in Tiberian Sun and beyond. Unlike Tiberian Sun, a building does not (yet) belong to more than one Type.
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrerequisiteType
-</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Each building can be assigned one of several Prerequisite types. A total of 32 are supported, as below.
 
@@ -154,9 +159,9 @@ Defaults to the following values, depending on the building in question:
  > NONE: All other buildings
 </details></td></tr></table>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/eaa140/531?text=mod"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Prerequisite
-</td><td width="50">String Array</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String Array</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Modified TechnoTypeClass->Prerequisite```
 
@@ -193,13 +198,14 @@ Example: If a unit has Prerequisite=POWER,BARRACKS,FIX,STEK. The prerequisite re
 
 </details>
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### General Settings
-[Top](#technotypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsNominal
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed TechnoTypeClass->IsNominal```
 
@@ -207,9 +213,9 @@ Determines whether this object uses its true name. Overrides the name behaviour 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsTheater
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed TechnoTypeClass->IsTheater```
 
@@ -217,9 +223,9 @@ Determines if the artwork for this object is theater specific.
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► HasTurret
-</td><td width="50">Boolean</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed TechnoTypeClass->IsTurretEquipped```
 
@@ -227,9 +233,9 @@ Determines if this object has a turret. For buildings, if set to true, the objec
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Facings
-</td><td width="50">8, 16, or 32</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>8, 16, or 32</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->Rotation```
 
@@ -237,13 +243,14 @@ Determines if the number of directions applicable for this object's rotation. On
 </details></td></tr></table>
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### Firing Offsets
-[Top](#technotypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► VerticalOffset
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->VerticalOffset```
 
@@ -251,9 +258,9 @@ Determines the upward offset of the firing animation, in leptons, relative to th
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryOffset
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->PrimaryOffset```
 
@@ -261,9 +268,9 @@ Determines the forward offset of the firing animation, in leptons, relative to t
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrimaryLateral
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->PrimaryLateral```
 
@@ -271,9 +278,9 @@ Determines the offset of the firing animation perpendicular to the unit's line o
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryOffset
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->SecondaryOffset```
 
@@ -281,9 +288,9 @@ Determines the forward offset of the firing animation relative to the unit's lin
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► SecondaryLateral
-</td><td width="50">Integer</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed TechnoTypeClass->SecondaryLateral```
 
@@ -291,13 +298,14 @@ Determines the offset of the firing animation perpendicular to the unit's line o
 </details></td></tr></table>
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
 ### Death Weapons
-[Top](#technotypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► DeathWeapon
-</td><td width="50">String</a></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the damage and warhead that is released on this technotype's death. Setting this entry overrides the original behavior of using the technotype's Primary weapon and the technotype's MaxStrength.
 
@@ -305,6 +313,6 @@ Note that the explosion type and spread of the damage is still determined by the
 </details></td></tr></table>
 
 
+<a href="#technotypes"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
-
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>TechnoTypes</kbd></kbd><br>

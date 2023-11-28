@@ -1,8 +1,7 @@
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
+<h2 align="center">WeaponTypes</h2>
 
-## WeaponTypes
-
-WeaponTypes represent the logical aspects of a damage-dealing object. It includes visual and audio references to provide immersive feedback to the player.
+WeaponTypes represent the logical aspects of a damage-dealing object. It also includes visual and audio references to provide immersive feedback to the player.
 
 -------
 
@@ -10,22 +9,23 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It include
  - [New Entries](#new-entries) 
  - [Tesla Charge Settings](#tesla-charge-settings) 
 
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
 ### Documentation Guide
-[Top](#weapontypes)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
 -------
 ### New Entries
-[Top](#weapontypes)
+<br>
 
 These settings enable you to define new weapon entries, expanding modding capabilities.
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [Weapons]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new Weapon.
 
@@ -43,19 +43,21 @@ Example as follows:
 </details></td></tr></table>
 
 
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
 ### Tesla Charge Settings
-[Top](#weapontypes)
+<br>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► ChargeSound
-</td><td width="50">String</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If used on a weapon with `Charges`=true, overrides the charging sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
 </details></td></tr></table>
 
 
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>WeaponTypes</kbd></kbd><br>
 

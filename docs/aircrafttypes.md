@@ -1,6 +1,5 @@
-[Return to Features](./features.md)
-
-## AircraftTypes
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>
+<h2 align="center">AircraftTypes</h2>
 
 AircraftTypes represent things that... fly. They include fixed-wing and rotor-wing aircrafts. These units are generally not bound by terrain during movement.
 
@@ -13,23 +12,26 @@ AircraftTypes represent things that... fly. They include fixed-wing and rotor-wi
  - [Rotor Wing Flight Controls](#rotor-wing-flight-controls) 
  - [Fixed Wing Flight Controls](#fixed-wing-flight-controls) 
 
+
 -------
 ### Documentation Guide
-[Top](#aircrafttypes)
+<br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
 
+
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### New Type Extensions
-[Top](#aircrafttypes)
+<br>
 
 These settings enable you to define new types, expanding modding capabilities.
 
 The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [AircraftTypes]
-</td><td width="50">List</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 This section carries a zero-based list of IDs to be recognized as new AircraftType.
 
@@ -45,9 +47,9 @@ Example as follows:
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/6cb189/135?text=new"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [StringTableOffsets] ► Aircraft
-</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
 
@@ -62,19 +64,23 @@ Do not create entries that exceed 1000 as the game will route to `DEBUG.ENG` ins
 If not defined, or set to -1, all additional unit types will default their names to the 'Civilian' text entry.
 </details></td></tr></table>
 
+
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### TechnoTypes
-[Top](#aircrafttypes)
+<br>
 
 TechnoType settings are also available to AircraftTypes. See [TechnoTypes](./technotypes.md) for more details.
 
+
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### General Settings
-[Top](#aircrafttypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► IsFixedWing
-</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed AircraftTypeClass->IsFixedWing```
 
@@ -82,22 +88,24 @@ Determines if this aircraft type behaves like a fixed wing aircraft (such as the
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► IsLandable
-</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed AircraftTypeClass->IsLandable```
 
 Has no impact on the unit or the game. Supposedly this determines whether this aircraft type can land on terrain, but this appears to be overriden by IsFixedWing, and the source code from Remastered does not appear to use it.
 </details></td></tr></table>
 
+
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### Rotor Wing Flight Controls
-[Top](#aircrafttypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► IsRotorEquipped
-</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed AircraftTypeClass->IsRotorEquipped```
 
@@ -105,22 +113,24 @@ Determines if additional aircraft rotor should be drawn on top of the aircraft. 
 </details></td></tr></table>
 
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► IsRotorCustom
-</td><td width="50">Boolean</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed AircraftTypeClass->IsRotorCustom```
 
 Has no impact on the unit or the game. The transport heli is presently hardcoded to draw two rotors after checking for `IsRotorEquipped`, and `IsRotorCustom` does not appear to be used.
 </details></td></tr></table>
 
+
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### Fixed Wing Flight Controls
-[Top](#aircrafttypes)
+<br>
 
-<table><tr><td width="50"><a href="#"><img src="https://placehold.it/30x15/b4a458/331?text=ref"></a></td><td>
+<table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► LandingSpeed
-</td><td width="50">Integer</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed AircraftTypeClass->LandingSpeed```
 
@@ -130,5 +140,6 @@ When using the Airfield, the game does no checks on the aircraft's descent again
 </details></td></tr></table>
 
 
+<a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
-[Return to Features](./features.md)
+<a href="../readme.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AircraftTypes</kbd></kbd><br>
