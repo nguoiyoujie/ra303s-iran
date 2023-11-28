@@ -20,7 +20,7 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
 
 
 -------
-###### Documentation Guide
+### Documentation Guide
 <br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
@@ -28,7 +28,7 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### New Type Extensions
+### New Type Extensions
 <br>
 
 These settings enable you to define new types, expanding modding capabilities.
@@ -73,7 +73,7 @@ If not defined, or set to -1, all additional building types will default their n
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### TechnoTypes
+### TechnoTypes
 <br>
 
 TechnoType settings are also available to BuildingTypes. See [TechnoTypes](./technotypes.md) for more details.
@@ -81,7 +81,7 @@ TechnoType settings are also available to BuildingTypes. See [TechnoTypes](./tec
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### General Settings
+### General Settings
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
@@ -118,7 +118,7 @@ Determines the exit coordinates, in leptons, from the top-left corner of the bui
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Factory Production
+### Factory Production
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
@@ -135,7 +135,7 @@ Note: The Map Trigger Event [Destroyed, All Factories] as well as the Skirmish A
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### War Factory Settings
+### War Factory Settings
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
@@ -192,7 +192,7 @@ A new unit exit track (ID 67) has been created to emulate the exit track used by
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Building Foundations
+### Building Foundations
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
@@ -304,7 +304,7 @@ The following values for both entries are supported. *Note that this syntax is e
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Building Animations
+### Building Animations
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/ref.png"></a></td><td width="842"><samp>
@@ -369,7 +369,7 @@ The stages are as follows:
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Radar Buildings
+### Radar Buildings
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
@@ -382,7 +382,7 @@ Allows a building to provide Radar capabilities to the player, given sufficient 
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Jamming Buildings
+### Jamming Buildings
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
@@ -405,7 +405,7 @@ If set to true, remaps jammed buildings using the Shade remap.
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
-###### Superweapons
+### Superweapons
 <br>
 
 <table><tr><td width="50"><a href="#"><img src="./img/30x15/new.png"></a></td><td width="842"><samp>
