@@ -7,6 +7,7 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It also in
 
  - [Documentation Guide](#documentation-guide)
  - [New Entries](#new-entries) 
+ - [Negative Damage](#negative-damage) 
  - [Tesla Charge Settings](#tesla-charge-settings) 
 
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
@@ -40,6 +41,25 @@ Example as follows:
 0=HandCannon
 1=Mortar
 ```
+</details></td></tr></table>
+
+
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
+-------
+## Negative Damage
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► Damage
+</samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Modified WeaponTypeClass->Damage```
+
+In the original game, there are hardcoded checks to restrict the use of negative damage to the Medic and the Mechanic. Moreover, the game restricts the area of effect of such weapons to 8 leptons. 
+
+Now all weapons can deal negative damage, and the area of effect of the weapon follows the warhead spread factor. Setting `Spread=0` for the warhead restores the area effect of 8 leptons.
+
+The mechanics of healing is not yet fully unraveled, so negative damage weapons may not work in all scenarios. For example, Units with negative damage weapons do not know to only target damaged units.
 </details></td></tr></table>
 
 
