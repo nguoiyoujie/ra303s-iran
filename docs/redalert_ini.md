@@ -305,7 +305,7 @@ Playing the ENGLISH.VQA intro is now optional. a new **REDALERT.INI** boolean op
 
 
 <table><tr><td width="892"><samp>
-<code>{redalert.ini}</code> ► [Options]  ► SkipScoreScreen
+<code>{redalert.ini}</code> ► [Options]  ► VideoInterlaceMode
 </samp></td><td width="120"><samp>0, 1 or 2</samp></td></tr><tr><td colspan="2"><details><summary><b>View</b></summary>
 
 ```Inherited from iran's s-series```
