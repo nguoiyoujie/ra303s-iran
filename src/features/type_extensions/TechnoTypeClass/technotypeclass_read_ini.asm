@@ -23,7 +23,7 @@ _TechnoTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
     push edi
-    mov edi,Globals___RuleINI
+    mov  edi,[ebp-18h]
 
     ; Clear the fields of Risk and Reward, as they are replaced with other functions
     push eax
