@@ -54,7 +54,7 @@ _InfantryClass__What_Action_House_Instant_Capture:
     jz   .Capture_Building
 
 .Normal_Code:
-    mov  bx,[0x00665E04] ; EngineerCaptureLevel
+    mov  bx,[Globals___EngineerCaptureLevel] ; EngineerCaptureLevel
     mov  ax,[eax]
     cmp  ax,bx
     setbe al

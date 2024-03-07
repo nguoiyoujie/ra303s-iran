@@ -223,6 +223,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/remake_shroud_mapedges.asm" 
 %include "src/features/resizable_map.asm" 
 %include "src/features/unit_deploys_into_unhardcode.asm" 
+%include "src/features/unit_unload_passengers_unhardcode.asm" 
+%include "src/features/entering_transports_triggers_event.asm" 
 %include "src/features/building_undeploys_into_unhardcode.asm" 
 %include "src/footclass_path.asm" 
 %include "src/features/vessel_carrier_autoacquire.asm" 

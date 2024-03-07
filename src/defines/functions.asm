@@ -151,6 +151,8 @@
 ; MIXFILE.CPP
 %define MFCD__Retrieve                                            0x005B9330 ; void const * MixFileClass<T>::Retrieve(char const * filename)
 
+; OBJECT.CPP
+%define ObjectClass__Health_Ratio                                 0x0051E77B ; fixed ObjectClass::Health_Ratio(void)
 
 ; OVERLAY.CPP
 %define OverlayTypeClass__As_Reference                            0x00524C10 ; OverlayTypeClass & OverlayTypeClass::As_Reference(OverlayType type)
@@ -207,6 +209,10 @@
 
 ; TECHNO.CPP
 %define TechnoClass__Combat_Damage                                0x00560CBC ; int TechnoClass::Combat_Damage(int which) 
+%define TechnoClass__Owner                                        0x00564358 ; HouseType TechnoClass::Owner(void)  
+
+; TRIGGER.CPP
+%define TriggerClass__Spring                                      0x0056CC54 ; bool TriggerClass::Spring(TEventType event, ObjectClass * obj, CELL cell, bool forced)
 
 ; TRIGTYPE.CPP
 %define TriggerTypeClass__Write_INI                               0x0056D640 ; void TriggerTypeClass::Write_INI(CCINIClass & ini)
@@ -291,7 +297,7 @@
 
 %define Globals___AntsEnabled                                     0x00665DDC
 %define Globals___NewUnitsEnabled                                 0x00665DE0
-
+%define Globals___EngineerCaptureLevel                            0x00665E04
 
 
 ;%define Globals___Options                                         ?????????? ; GameOptionsClass Options;
