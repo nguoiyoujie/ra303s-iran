@@ -36,6 +36,8 @@
 
 @HOOK 0x00533180 _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses
 
+@CLEAR 0x004D406F 0x90 0x004D4070
+
 ; Crates stuff?
 
 ;004A0B5B   EB 13            jmp SHORT ra95-spa.004A0B70
@@ -258,9 +260,13 @@ _UnitClass__Read_INI_Use_Single_Player_Logic:
 
 
 _HouseClass__Use_Single_Player_Logic:
+    cmp  byte [SingleplayerAIObeyPrerequisites], 1
+    jz   0x004D407D
+    
     cmp  dword [InCoopMode],1
     jz   .Ret
 
+.NormalCheck:
     cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x004D407D
 
