@@ -33,6 +33,13 @@
 
 @HOOK 0x004D68DC _HouseClass__Place_Special_Blast_SwitchRoute
 @HOOK 0x004D71B4 _HouseClass__Place_Special_Blast_Redefine_Chrono2
+@HOOK 0x004D5460 _HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2
+@HOOK 0x004B343F _DisplayClass__TacticalClass__Action_Chrono_Target_Icon_new_Chrono2
+@HOOK 0x0057E1C5 _UnitClass__Mission_Unload__Chrono_Tank_new_Chrono2
+@HOOK 0x0057F708 _UnitClass__What_Action__Chrono_Tank_new_Chrono2
+@HOOK 0x00566898 _TechnoClass__Record_The_Kill__Chrono_Tank_new_Chrono2
+@HOOK 0x005666AE _TechnoClass__Take_Damage__Chrono_Tank_new_Chrono2
+
 
 %define        SpecialChrono2        0xFE
 
@@ -345,6 +352,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     jmp  0x004D6BC7
 
 
+; Moving SPC_CHRONO2 from 8 to 0xFE
 _HouseClass__Place_Special_Blast_SwitchRoute:
     cmp  dx,SpecialChrono2
     jz   0x004D71F0 ; SPC_CHRONO2
@@ -352,6 +360,42 @@ _HouseClass__Place_Special_Blast_SwitchRoute:
     ja   0x004D7668 ; end of handling
     jmp  0x004D68E5 ; specials 0-6
 
+
 _HouseClass__Place_Special_Blast_Redefine_Chrono2:
-    mov  byte [0x00668EC7],SpecialChrono2
+    mov  byte [Globals___Map_IsTargettingMode],SpecialChrono2
     jmp  0x004D71BB
+
+_HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2:
+    mov  ah,byte [Globals___Map_IsTargettingMode]
+    cmp  ah,0x2
+    jz   0x004D54C4
+    cmp  ah,SpecialChrono2
+    jz   0x004D5479
+    jmp  0x004D54CB
+
+_DisplayClass__TacticalClass__Action_Chrono_Target_Icon_new_Chrono2:
+    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    jz   0x004B344C
+    jg   0x004B34BD
+    mov  byte [ebp-10h], 0x11 ; ACTION_PARA_INFANTRY (to replace later)
+    jmp  0x004B34BD
+
+_UnitClass__Mission_Unload__Chrono_Tank_new_Chrono2:
+    mov  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    jmp  0x0057E1CC
+
+_UnitClass__What_Action__Chrono_Tank_new_Chrono2:
+    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    jnz  0x0057F718
+    jmp  0x0057F711
+
+_TechnoClass__Record_The_Kill__Chrono_Tank_new_Chrono2:
+    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    jnz  0x005668F8
+    jmp  0x005668A5
+
+_TechnoClass__Take_Damage__Chrono_Tank_new_Chrono2:
+    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    jnz  0x00566711
+    jmp  0x005666B7
+

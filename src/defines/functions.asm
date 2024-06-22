@@ -386,6 +386,7 @@
 %define Globals___Map_IsZoomed_Address                            0x00668E9A ; unsigned RadarClass::IsZoomed:1;
 %define Globals___Map_IsZoomed_Bitmask                            0x01       ; unsigned RadarClass::IsZoomed:1;
 
+%define Globals___Map_IsTargettingMode                            0x00668EC7 ; SpecialWeaponType DisplayClass::IsTargettingMode;
 
 ;ScoreClass Score;
 ;CreditClass CreditDisplay;
