@@ -34,7 +34,7 @@ _TechnoClass__TechnoDrawObject_RemapJammedAsShade:
     jz   0x00567242
     mov  eax,dword [ebp - 0x10]
     ;mov  al,byte [eax + 0x196]
-    ;movsx eax,al
+    ;movzx eax,al
     test byte [eax + 0xd7],0x10 ;Jammed
     jz   0x00567242
     mov dword [ebp - 0x24],0x006561E0 ;FadingShade

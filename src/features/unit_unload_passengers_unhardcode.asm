@@ -16,7 +16,7 @@
 ;Replaces the Supply Truck check with a Passengers=xx check
 ;_UnitClass_Mission_Unload_PassengerUnhardcode:
 ;    push eax
-;    movsx eax,al
+;    movzx eax,al
 ;    UnitTypeClass.FromIndex(eax,eax)
 ;    TechnoTypeClass.MaxPassengers.Get(eax,eax)
 ;    cmp  eax, 0
@@ -27,7 +27,7 @@
 ; For Unit IDs >= 0x11
 _UnitClass_Mission_Unload_PassengerUnhardcode:
     push eax
-    movsx eax,al
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     TechnoTypeClass.MaxPassengers.Get(eax,eax)
     cmp  eax, 0

@@ -117,7 +117,7 @@ _HouseClass__Super_Weapon_Handler_GPS_Check3:
     jmp  0x004D52EA
 
 _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck1:
-    movsx eax,al
+    movzx eax,al
     ; eax is the id
     push ebx
     push ecx
@@ -130,7 +130,7 @@ _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck1:
     jmp  0x004D52AB
 
 _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck2:
-    movsx eax,al
+    movzx eax,al
     ; eax is the id
     push ebx
     push ecx
@@ -290,7 +290,7 @@ _HouseClass__Super_Weapon_Handler_Parabomb_Check2:
     jmp  0x004D5BC4
 
 _BuildingClass_Mission_Missile_SpecialWeapon_GPSCheck:
-    movsx eax,al
+    movzx eax,al
     ; eax is the id
     push ebx
     push ecx
@@ -303,7 +303,7 @@ _BuildingClass_Mission_Missile_SpecialWeapon_GPSCheck:
     jmp  0x0045D8BA
 
 _BuildingClass_Mission_Missile_SpecialWeapon_NuclearLaunchCheck:
-    movsx eax,al
+    movzx eax,al
     ; eax is the id
     push ebx
     push ecx

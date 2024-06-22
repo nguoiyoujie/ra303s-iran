@@ -24,8 +24,10 @@ Cache_BuildingType_UndeploysInto       db 0
 
 ;Replaces the FACT check with a UndeploysInto=xx check
 _BuildingClass_Active_Click_With_ConYardUnhardcode:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  al,0
+    je   0x0045898D
     mov  al, byte [eax + BuildingTypeClass.Offset.UndeploysInto]
     cmp  al,0
     jle  0x0045898D 
@@ -34,7 +36,7 @@ _BuildingClass_Active_Click_With_ConYardUnhardcode:
 ;Replaces the FACT check with a UndeploysInto=xx check
 _BuildingClass_What_Action_ConYardUnhardcode:
     ; note: preserve FACT's interaction with Is_MCV_Deploy()
-    movsx edx,ah
+    movzx edx,ah
     cmp   edx,BuildingType.FACT
     jnz   .Continue
 .Check_Is_MCV_Deploy:
@@ -42,6 +44,8 @@ _BuildingClass_What_Action_ConYardUnhardcode:
     jz   0x0045A723
 .Continue:
     BuildingTypeClass.FromIndex(edx,edx)
+    cmp  dl,0
+    je   0x0045A723
     mov  dl, byte [edx + BuildingTypeClass.Offset.UndeploysInto]
     cmp  dl, 0
     jle  0x0045A723
@@ -49,24 +53,30 @@ _BuildingClass_What_Action_ConYardUnhardcode:
 
 _BuildingClass_Can_Enter_Cell_ConYardUnhardcode:
 ; Allows the code to check only one cell, instead of all cells in the foundation
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  al,0
+    je   0x0045BA00
     mov  al, byte [eax + BuildingTypeClass.Offset.UndeploysInto]
     cmp  al, 0
     jle  0x0045BA00
     jmp  0x0045B999
 
 _BuildingClass_Mission_Deconstruct_MCVUnhardcode1:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  al,0
+    je   0x0045C1FE
     mov  al, byte [eax + BuildingTypeClass.Offset.UndeploysInto]
     cmp  al, 0
     jle  0x0045C1FE
     jmp  0x0045C3EF
     
 _BuildingClass_Mission_Deconstruct_MCVUnhardcode2:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  al,0
+    je   0x0045C746
     mov  al, byte [eax + BuildingTypeClass.Offset.UndeploysInto]
     ; value will be used in _BuildingClass_Mission_Deconstruct_MCVUnhardcode3
     mov  byte [Cache_BuildingType_UndeploysInto], al
@@ -80,8 +90,10 @@ _BuildingClass_Mission_Deconstruct_MCVUnhardcode3:
     jmp  0x0045C5C0
 
 _BuildingClass_Can_Player_Move_ConYardUnhardcode:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  al,0
+    je   .NoUndeploy
     mov  al,byte [eax + BuildingTypeClass.Offset.UndeploysInto]
     cmp  al,0
     jg  .Undeploy

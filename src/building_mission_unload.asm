@@ -20,10 +20,10 @@ Cache_WarFactory_DoorFrames     dd 0
 Cache_WarFactory_DoorStages     dd 0
 Cache_WarFactory_DoorRate     dd 0
 
-
+; Use movzx to support 255 structure types
 ;Overrides the structure type check with a FactoryType=xx check
 _BuildingClass_Mission_Unload_WeaponsFactoryOpening:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jnz  0x0045E2FB 
@@ -100,8 +100,10 @@ _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor2:
 
 
 _BuildingClass_Draw_It_WeaponsFactoryDoor:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
+    cmp  eax,0
+    je   0x0045541A
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jz   .IsWarFactory ; is a war factory
     jmp  0x0045541A
@@ -118,7 +120,7 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor:
     jmp  0x0045544A
 
 _BuildingClass_Draw_It_WeaponsFactoryDoorFake:
-    movsx eax,al
+    movzx eax,al
 ; future code for custom fakes
     ;BuildingTypeClass.FromIndex(eax,eax)
     ;push ebx
@@ -134,7 +136,7 @@ _BuildingClass_Draw_It_WeaponsFactoryDoorFake:
 
 .IsWarFactory:
     push edx
-    BuildingTypeClass.FromIndex(eax,eax)
+    BuildingTypeClass.FromIndex(eax,eax) ;no need for null check; only one ID (0x20) expected here
     mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayAnim]
     mov  dword [Cache_WarFactory_DoorAnim],edx
     mov  edx,dword [eax + BuildingTypeClass.Offset.WarFactoryOverlayFrames]
@@ -181,14 +183,14 @@ _BuildingClass_ExitObject_Factories:
     jz   0x00458DEC ; is a refinery
 
     push  eax
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.InfantryType 
     pop  eax
     jz   0x004590B8 ; is a barracks
     
     push  eax
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     pop  eax
@@ -198,7 +200,7 @@ _BuildingClass_ExitObject_Factories:
 
 
 _BuildingClass_ExitObject_Factories2:
-    movsx eax,al
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jnz  0x00458ED8 

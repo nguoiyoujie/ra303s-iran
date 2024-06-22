@@ -2,7 +2,7 @@
 
 _AircraftClass__PoseDir_FixedWingTransportsFaceNorth:
     mov  dl,byte [edx + 0x196] ; dl is now the ID
-    movsx edx,dl
+    movzx edx,dl
     push eax
     push ebx
     AircraftTypeClass.FromIndex(edx,ebx)

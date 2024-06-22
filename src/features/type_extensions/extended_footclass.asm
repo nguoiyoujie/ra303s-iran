@@ -19,7 +19,7 @@ _FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell:
     add  ebx,eax
 .Next_Iteation:
     mov  al,[ebx+1A4h]
-    movsx eax,al
+    movzx eax,al
     cmp  eax,0x18        ; Check if structtype is Service Depot
     jnz  .Increment_Loop_Counter
 

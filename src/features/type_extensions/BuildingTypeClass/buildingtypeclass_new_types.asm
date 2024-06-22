@@ -11,12 +11,33 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004537CC _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count
+@HOOK 0x004537C4 _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count
 @HOOK 0x0045359B _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes
-@HOOK 0x00453711 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
-@HOOK 0x004596BB _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
+@HOOK 0x00453709 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
+@HOOK 0x004596B3 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
 @HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
 
+; BuildingTypeClass::BuildingTypeClass
+; convert sar edx,18 to shr edx,18
+@CLEAR 0x00429D43 0xEA 0x00429D44
+@CLEAR 0x00429D4B 0xEA 0x00429D4C
+
+; BuildingTypeClass::As_Reference
+; convert movsx to movzx
+@CLEAR 0x00453A77 0xB6 0x00453A78
+
+; TFixedIHeapClass<BuildingTypeClass>::Ptr
+; convert sar ecx,18 to shr ecx,18
+@CLEAR 0x00457EB8 0xE9 0x00457EB9
+@CLEAR 0x00457ED7 0xE9 0x00457ED8
+
+; BuildingClass::AI
+; convert movsx to movzx
+@CLEAR 0x004566C9 0xB6 0x004566CA
+
+; BuildingClass::Animation_AI
+; convert movsx to movzx
+@CLEAR 0x004603B0 0xB6 0x004603B1
 
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
 
@@ -215,24 +236,34 @@ Init_OverrideExistingBuildingTypes:
 
 
 _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count:
-    mov  byte al,[NewBuildingTypeHeapCount]
-
+    mov  dl,byte [ebp-0xc]
+    inc  dl
+    mov  byte [ebp-0xc],dl
+    mov  al,byte [NewBuildingTypeHeapCount]
     cmp  dl,al
-    jl   0x004537D8
+    jb   0x004537D8
     jmp  0x004537D1
 
 
 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
-    mov  al,[NewBuildingTypeHeapCount]
+    mov  bl,byte [ebp-0x18]
+    inc  bl
+    mov  byte [ebp-0x18],bl
+    mov  al,byte [NewBuildingTypeHeapCount]
     cmp  bl,al
-    jl   0x004535BD
+    jb   0x004535BD
     jmp  0x0045371A
 
 
 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
-    mov  al,[NewBuildingTypeHeapCount]
+    ;push ebx
+    mov  bh,byte [ebp-0x20] ; was bh
+    inc  bh
+    mov  byte [ebp-0x20],bh
+    mov  al,byte [NewBuildingTypeHeapCount]
     cmp  bh,al
-    jl   0x0045967A
+    ;pop  ebx
+    jb   0x0045967A
     jmp  0x004596C0
 
 
@@ -243,8 +274,8 @@ _Init_Game_Set_BuildingTypes_Heap_Count:
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
-    mov  byte [BuildingTypesExtCount],al
+    mov  [BuildingTypesExtCount],eax
     mov  edx,eax
     add  edx,BuildingTypeClass.ORIGINAL_MAX
-    mov  byte [NewBuildingTypeHeapCount],dl
+    mov  [NewBuildingTypeHeapCount],edx
     jmp  0x004F40AA

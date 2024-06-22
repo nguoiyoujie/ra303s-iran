@@ -31,7 +31,7 @@ Cache_UnitType_DeploysInto       db 0
 
 ;Replaces the MCV check with a DeploysInto=xx check
 _UnitClass_Try_To_Deploy_MCVUnhardcode:
-    movsx eax,al
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
     mov  byte [Cache_UnitType_DeploysInto], al
@@ -57,7 +57,7 @@ _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3:
 
 ;Replaces the MCV check with a DeploysInto=xx check
 _UnitClass_What_Action_MCVUnhardcode:
-    movsx eax,al
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
     mov  byte [Cache_UnitType_DeploysInto], al
@@ -73,7 +73,7 @@ _UnitClass_What_Action_ConstructionYardUnhardcode:
 
 ;Replaces the MCV check with a DeploysInto=xx check
 _UnitClass_Mission_Guard_MCVUnhardcode:
-    movsx eax,al
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
     ;mov  byte [Cache_UnitType_DeploysInto], al ; use only if Mission_Guard requires a reference
@@ -99,7 +99,7 @@ _UnitClass_Mission_Unload_DeploysInto_Status2_Check:
 ;Replaces the MCV check with a DeploysInto=xx check
 _UnitClass_Mission_Unload_MCVUnhardcode:
     push eax
-    movsx eax,al
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
     ;mov  byte [Cache_UnitType_DeploysInto], al

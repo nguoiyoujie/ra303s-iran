@@ -38,7 +38,7 @@ _UnitClass__Reload_AI_UseAmmoReloadRate2:
     push edi
     push edx
     mov  dl,byte [temp_reload_id]
-    movsx edx,dl  
+    movzx edx,dl  
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadAmount.Get(edi,edx) 
     mov  dword [temp_reload_amt],edx
@@ -83,7 +83,7 @@ _UnitClass__Fire_At_UpdateReload:
     push edi
     push edx
     mov  dl,al
-    movsx edx,dl  
+    movzx edx,dl  
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
     mov  dword [temp_reload],edx
