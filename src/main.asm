@@ -92,6 +92,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 
+%include "src/features/type_extensions/CellClass/mapclass_array_cellclass_heap_size.asm"
 ;extended classses - read ini
 %include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_read_ini.asm"
 %include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_read_ini.asm"
