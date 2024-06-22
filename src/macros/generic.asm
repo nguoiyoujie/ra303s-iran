@@ -10,7 +10,7 @@
 
 ; args <Pointer to type class>,<offset of data>,<bit of data>,<register to output the result to>
 ; %1-%3 must not be eax
-; Registers eax are trashed in the process
+; Register eax istrashed in the process
 ; return <output>: 1 if true, 0 otherwise
 %macro ObjectTypeClass.GetBool    4
     Get_Bit byte [%1+%2], %3
@@ -18,22 +18,26 @@
 %endmacro
 
 ; args <Pointer to type class>,<offset of data>,<bit of data>,<new value>
-; Registers eax are trashed in the process
+; Register eax istrashed in the process
 %macro ObjectTypeClass.SetBool    4
     Set_Bit_Byte [%1+%2], %3, %4
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<bit of data>,<Pointer to INI keyword string>
-; %1-%5 must not be eax, ebx, ecx, or edx
-; Registers eax, ebx, ecx, edx are trashed in the process
+; %1-%5 must not be eax
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, the currently set value in the offset is not changed
 %macro ObjectTypeClass.ReadBool    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     Get_Bit byte [%1+%3], %4
     xor  ecx, ecx
     mov  cl, al
     call_INIClass__Get_Bool %2, edx, %5, ecx
     Set_Bit_Byte [%1+%3], %4, al
+    pop  ecx
+    pop  edx
 %endmacro
 
 ;;;;;;;;;;;;;;; byte ;;;;;;;;;;;;;;;
@@ -52,29 +56,37 @@
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
-; %1-%4 must not be eax, ebx, ecx, or edx
-; Registers eax, ebx, ecx, edx are trashed in the process
+; %1-%4 must not be eax
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, the currently set value in the offset is not changed
 %macro ObjectTypeClass.ReadByte    4
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  byte cl, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     mov  byte [%1+%3], al
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
-; %1-%4 must not be eax, ebx, ecx, or edx
+; %1-%4 must not be eax
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in AL
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadByteExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  byte cl, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     call %5
     mov  byte [%1+%3], al
+    pop  ecx
+    pop  edx
 %endmacro
 
 ;;;;;;;;;;;;;;; word / SHORT ;;;;;;;;;;;;;;;
@@ -93,29 +105,37 @@
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
-; %1-%4 must not be eax, ebx, ecx, or edx
-; Registers eax, ebx, ecx, edx are trashed in the process
+; %1-%4 must not be eax
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, the currently set value in the offset is not changed
 %macro ObjectTypeClass.ReadWord    4
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  word cx, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     mov  word [%1+%3], ax
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
-; %1-%4 must not be eax, ebx, ecx, or edx
+; %1-%4 must not be eax
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in AX
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadWordExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  word cx, [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     call %5
     mov  word [%1+%3], ax
+    pop  ecx
+    pop  edx
 %endmacro
 
 ;;;;;;;;;;;;;;; dword / INT ;;;;;;;;;;;;;;;
@@ -134,29 +154,37 @@
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
-; %1-%4 must not be eax, ebx, ecx, or edx
-; Registers eax, ebx, ecx, edx are trashed in the process
+; %1-%4 must not be eax
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, the currently set value in the offset is not changed
 %macro ObjectTypeClass.ReadInt    4
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, dword [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     mov  dword [%1+%3], eax
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
-; %1-%4 must not be eax, ebx, ecx, or edx
+; %1-%4 must not be eax
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in eax
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadIntExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, dword [%1+%3]
     call_INIClass__Get_Int %2, edx, %4, ecx
     call %5
     mov  dword [%1+%3], eax
+    pop  ecx
+    pop  edx
 %endmacro
 
 ;;;;;;;;;;;;;;; STRING ;;;;;;;;;;;;;;;
@@ -165,24 +193,30 @@ ObjectTypeClass.StringBuffer: TIMES 256 DB 0
 ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
-; %1-%4 must not be eax, ebx, ecx, or edx
-; Registers eax, ebx, ecx, edx are trashed in the process
+; %1-%4 must not be eax
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, the currently set value in the offset is not changed
 ; A string buffer of 256 length is supported
 %macro ObjectTypeClass.ReadString    4
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, dword [%1+%3]
     call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
     mov  dword [%1+%3], ObjectTypeClass.StringBuffer
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
-; %1-%4 must not be eax, ebx, ecx, or edx
+; %1-%4 must not be eax
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in AL
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadStringToByteExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  byte cl, [%1+%3]
@@ -202,14 +236,18 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ;mov  byte [%1+%3], al
   %%done:
     mov  dword [ObjectTypeClass.ValueBuffer], 0
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
 ; %1-%4 must not be eax, ebx, ecx, or edx
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in AX
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadStringToWordExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, [%1+%3]
@@ -229,14 +267,18 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ;mov  word [%1+%3], ax
   %%done:
     mov  dword [ObjectTypeClass.ValueBuffer], 0
+    pop  ecx
+    pop  edx
 %endmacro
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>,<Function to process INI value into final output>
-; %1-%4 must not be eax, ebx, ecx, or edx
+; %1-%4 must not be eax
 ; %5 should be a valid function, which takes in the output INI value as eax, and outputs the final value in eax
-; Registers eax, ebx, ecx, edx are trashed in the process
+; Register eax istrashed in the process
 ; Reads the value from the INI rules, and updates the corresponding offset. If the INI key is not defined, it is up to the function to handle the pre-existing value in the offset
 %macro ObjectTypeClass.ReadStringExt    5
+    push edx
+    push ecx
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  dword ecx, [%1+%3]
@@ -256,4 +298,6 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ;mov  dword [%1+%3], eax
   %%done:
     mov  dword [ObjectTypeClass.ValueBuffer], 0
+    pop  ecx
+    pop  edx
 %endmacro
