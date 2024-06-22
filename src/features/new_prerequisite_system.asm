@@ -11,7 +11,7 @@
 ;   Adv. Power Plant no longer fulfill prerequisites that require Power Plant
 ;----------------------------------------------------------------
 
-@HOOK 0x004D40AD _HouseClass__Can_Build_DontCombineFlags
+@@JMP 0x004D40AD 0x004D40CE ;_HouseClass__Can_Build_DontCombineFlags
 @HOOK 0x004D40DF _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
 @HOOK 0x004DD5BF _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1
 @HOOK 0x004DD61D _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType2
@@ -40,8 +40,8 @@
 @HOOK 0x0056B259 _TEventClass__Operator_FakesDestroyed_Check
 
 ; with the new system, do not combine the STRUCTF_ADVANCED_POWER with STRUCTF_POWER, or STRUCTF_SOVIET_TECH with STRUCTF_ADVANCED_TECH
-_HouseClass__Can_Build_DontCombineFlags:
-    jmp  0x004D40CE
+;_HouseClass__Can_Build_DontCombineFlags:
+;    jmp  0x004D40CE
 
 _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck:
     ; edx is the technotype pointer 

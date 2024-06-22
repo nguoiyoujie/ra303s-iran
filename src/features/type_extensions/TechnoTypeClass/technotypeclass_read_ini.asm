@@ -11,12 +11,12 @@
 
 ; Expose other technotype fields that already exist
 ;Read INI settings
-@HOOK 0x00569B6A _TechnoTypeClass__SkipReading_Prerequisite
+@JMP 0x00569B6A 0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
 @HOOK 0x00569E1F _TechnoTypeClass__Read_INI_Extended
 
 
-_TechnoTypeClass__SkipReading_Prerequisite:
-    jmp  0x00569B72
+;_TechnoTypeClass__SkipReading_Prerequisite:
+;    jmp  0x00569B72
 
 
 _TechnoTypeClass__Read_INI_Extended:
