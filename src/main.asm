@@ -235,6 +235,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/combat_spreadfactorzero.asm" 
 %include "src/features/combat_negativedamage.asm" 
 
+%include "src/fixes/invalid_team_crash_fix.asm"
 ; experimental
 %include "src/experimental/experiment_jam_remap.asm" 
 ;%include "src/experimental/experiment_cnc_refinery.asm" 
