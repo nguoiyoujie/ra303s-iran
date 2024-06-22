@@ -14,6 +14,8 @@
 @JMP 0x00569B6A 0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
 @HOOK 0x00569E1F _TechnoTypeClass__Read_INI_Extended
 
+@CLEAR 0x00569B6F 0x90 0x00569B72
+@CLEAR 0x00569B7B 0x90 0x00569B81 ; bug-fix: remove actual writing of value into prerequisite
 
 ;_TechnoTypeClass__SkipReading_Prerequisite:
 ;    jmp  0x00569B72
