@@ -25,6 +25,7 @@ _TechnoTypeClass__Read_INI_Extended:
 ;========= start loading from INI ==============
     push esi
     push edi
+    ;mov edi,Globals___RuleINI
     mov  edi,[ebp-18h]
 
     ; Clear the fields of Risk and Reward, as they are replaced with other functions
@@ -32,6 +33,10 @@ _TechnoTypeClass__Read_INI_Extended:
     xor  eax,eax
     TechnoTypeClass.DeathWeapon.Set(esi,eax)
     pop eax
+
+    ;ObjectTypeClass
+    ObjectTypeClass.IsSelectable.Read(esi,edi)
+    ObjectTypeClass.IsInsignificant.Read(esi,edi)
 
     ;TechnoTypeClass.IsScanner.Read(esi,edi) ;already existing
     TechnoTypeClass.IsNominal.Read(esi,edi)

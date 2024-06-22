@@ -59,6 +59,11 @@ str.ObjectTypeClass.RadarIcon                 db"RadarIcon",0              ;inte
 %define ObjectTypeClass.IsSelectable.Set(ptr_type,value)                     ObjectTypeClass.SetBool                ptr_type, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, value
 %define ObjectTypeClass.IsSelectable.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadBool               ptr_type, ptr_rules, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, str.ObjectTypeClass.IsSelectable
 
+%define ObjectTypeClass.IsInsignificant.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, reg_output
+%define ObjectTypeClass.IsInsignificant.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, value
+%define ObjectTypeClass.IsInsignificant.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, str.ObjectTypeClass.IsSelectable
+
+
 ;%define ObjectTypeClass.RTTI.Get(ptr_type,reg_output)                        ObjectTypeClass.GetByte                ptr_type, ObjectTypeClass.Offset.RTTI, reg_output
 ;%define ObjectTypeClass.RTTI.Set(ptr_type,value)                             ObjectTypeClass.SetByte                ptr_type, ObjectTypeClass.Offset.RTTI, value
 ;%define ObjectTypeClass.RTTI.Read(ptr_type,ptr_rules)                        ObjectTypeClass.ReadByte               ptr_type, ptr_rules, ObjectTypeClass.Offset.RTTI, str.ObjectTypeClass.RTTI  
