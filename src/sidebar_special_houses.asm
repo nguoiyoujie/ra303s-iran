@@ -1,14 +1,19 @@
+; Fix 20240527 - It is possible cmp is evaluated against a number FFF.....
+; Change jng to jbe
+
 @HOOK 0x0054D359 _SidebarClass__Reload_Sidebar_Special_Houses
 @HOOK 0x0054E0A4 _SidebarClass__Reload_Logoshape_Special_Houses
 @HOOK 0x0052DA5C _RadarClass__Draw_It_Radarshape_Special_Houses
 @HOOK 0x0052DB02 _RadarClass__Draw_It_Radarframes_Special_Houses
+
+@CLEAR 0x0052DA61 0x90 0x0052DA62
 
 _RadarClass__Draw_It_Radarframes_Special_Houses:
     mov  eax, [eax+3Eh]  ; hooked by patch
     sar  eax, 18h
 
     cmp  eax, 9
-    jng  .Dont_Change_Radarframes_House
+    jbe  .Dont_Change_Radarframes_House
 
     mov  eax, 0 ; set sidebar to grab to Allies
 
@@ -20,7 +25,7 @@ _RadarClass__Draw_It_Radarshape_Special_Houses:
     sar  eax, 18h
 
     cmp  eax, 9
-    jng  .Dont_Change_Radarshape_House
+    jbe  .Dont_Change_Radarshape_House
 
     mov  eax, 0 ; set sidebar to grab to Allies
 
@@ -32,7 +37,7 @@ _SidebarClass__Reload_Logoshape_Special_Houses:
     sar  eax, 18h
 
     cmp  eax, 9
-    jng  .Dont_Change_Logoshape_House
+    jbe  .Dont_Change_Logoshape_House
 
     mov  eax, 0 ; set sidebar to grab to Allies
 
@@ -42,7 +47,7 @@ _SidebarClass__Reload_Logoshape_Special_Houses:
 _SidebarClass__Reload_Sidebar_Special_Houses:
 
     cmp  eax, 9
-    jng  .Dont_Change_Sidebar_House
+    jbe  .Dont_Change_Sidebar_House
 
     mov  eax, 0 ; set sidebar to grab to Allies
 
