@@ -6,7 +6,7 @@
 
 %define New_Savegame_Version    0x1007000
 %define Old_Savegame_Version    0x100618B
-%define SaveGameVersion            0x0065D7C0 ; global variable
+%define SaveGameVersion         0x0065D7C0 ; global variable
 
 ;ARGS: <offset/pointer to value to SAVE>, <size in byte>
 %macro Save_Global_Value 2
@@ -112,6 +112,7 @@ _Load_Misc_Values_Extended_Savegames:
     Load_Global_Value magicbuildfix,1
     Load_Global_Value infantryrangeexploitfix,1
     Load_Global_Value Toggle_Feature_ComputerParanoidForceDisabledSkirmish,1
+    Load_Global_Value Toggle_Fix_BuildRadarWithoutAirThreatCheck,1
     Load_Global_Value Toggle_Fix_AIParanoid,1
     Load_Global_Value Toggle_Fix_AIAlly,1
     Load_Global_Value FixFormationSpeed,1
