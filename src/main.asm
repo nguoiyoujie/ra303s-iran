@@ -134,7 +134,6 @@ _str_version: db"3.03p-iB1v1",0
 
 ; generic
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
-%include "src/attract.asm"
 %include "src/atom_damage_custom.asm"
 %include "src/ingame_display_messages_from_yourself.asm"
 %include "src/naval_exploits_fixes.asm"
@@ -270,6 +269,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/cpu_affinity_freeze_crash.asm"
 %include "src/max_units_bug.asm"
 %include "src/fixes/fence_bug.asm"
+%include "src/fixes/playback_fix.asm"
 %include "src/tags_bug.asm"
 %include "src/savegame_bug.asm"
 %include "src/credits_screen_cncddraw_fix.asm"
