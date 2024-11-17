@@ -346,7 +346,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     and  eax,0xff
     inc  al
     cmp  al, byte [NewBuildingTypeHeapCount]
-    jl   .CheckSpecialWeapons
+    jb   .CheckSpecialWeapons ;use unsigned check
 
 .NotFound:
     jmp  0x004D6BC7
