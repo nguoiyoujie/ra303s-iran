@@ -977,7 +977,15 @@ _RulesClass__AI_Load:
 
     call_INIClass__Get_Int esi,str_General,str_AtomRadius,-1
     mov  dword [AtomRadius],eax
+    
+    call_INIClass__Get_Bool esi,str_General,str_NoScreenShake, 0
+    mov  [NoScreenShake], al
 
+    call_INIClass__Get_Bool esi,str_General,str_NoTeslaZapEffectDelay, 0
+    mov  [NoTeslaZapEffectDelay], al
+
+    call_INIClass__Get_Bool esi,str_General,str_BuildOffAlly, 0
+    mov  [BuildOffAlly], al
 
 .Ret:
     Restore_Registers
