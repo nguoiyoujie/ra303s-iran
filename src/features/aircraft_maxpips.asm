@@ -1,7 +1,7 @@
 ;----------------------------------------------------------------
 ; src/features/type_extensions/AircraftTypeClass/aircraft_maxpips.asm
 ;
-; Aircraft showed 5 pips for its ammo though less is used.
+; Aircraft showed 5 pips for its ammo though less may be used.
 ; Aircraft now shows up to 5 pips. 
 ; 
 ; This function is enabled by default and is not controllable.

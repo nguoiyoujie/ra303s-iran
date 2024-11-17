@@ -4,9 +4,8 @@
 ; Fixes exploit where the game doesn't refresh whether build location is buildable if you don't move mouse cursor while trying to place a building
 ; Allowing you to build on a spot that's no longer in proximity as long as you don't move your mouse cursor
 ;
-; This function is enabled by including the following key in Rules.ini. 
+; This function is enabled by including the following key(s):
 ;   Rules.ini > [General] > FixMagicBuild=true/false
-; or
 ;   Spawn.ini > [Settings] > FixMagicBuild=true/false
 ;
 ; No compatibility issues is expected.

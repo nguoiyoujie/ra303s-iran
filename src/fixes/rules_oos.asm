@@ -9,7 +9,8 @@
 ; specify any value left out by Westwood's rules.ini in their mod map, and if this value is different from the game's default. E.g.:
 ;
 ; Rules.ini doesn't contain value herp=, but a mod map does, and the game does try to load herp=, because it isn't found the default value is loaded instead. The first
-; time this happens is when rules.ini is loaded at startup, it will be initialized to the previous variable's value which is specified RulesClass' constructor. Once this ; mod map is loaded however, the value will be set to the mod map's. Whenever the game loads rules.ini again it will load the default value because rules.ini doesn't
+; time this happens is when rules.ini is loaded at startup, it will be initialized to the previous variable's value which is specified RulesClass' constructor. Once this 
+; mod map is loaded however, the value will be set to the mod map's. Whenever the game loads rules.ini again it will load the default value because rules.ini doesn't
 ; contain herp=, THIS DEFAULT VALUE IS THE PREVIOUS VALUE OF THE VARIABLE WHICH NOW IS THE MOD MAPS' VALUE. So everytime rules.ini is loaded again the value of herp= will
 ; stay the mod map's value. Because this value is different from the default rules.ini the game goes out of sync with people who have the normal rules.ini value.
 ;

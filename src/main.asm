@@ -62,13 +62,13 @@ _str_version: db"3.03p-iB1v1",0
 ;%include "src/macros/animtypeclass.asm" ;wip
 
 %ifdef USE_HIRES
-%include "src/hires.asm"
-%include "src/fix_savegame_resolution_sidebar.asm"
-%include "src/multiplayer_print_is_aftermath_game.asm"
-%include "src/extended_sidebar.asm"
+%include "src/hires/hires.asm"
+%include "src/hires/savegame_resolution_sidebar_fix.asm"
+%include "src/hires/multiplayer_print_is_aftermath_game.asm"
+%include "src/hires/extended_sidebar.asm"
 %endif
 
-; loading code
+;loading code
 %include "src/loading.asm"
 
 ;map snapshot code
@@ -93,6 +93,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 
 %include "src/features/type_extensions/CellClass/mapclass_array_cellclass_heap_size.asm"
+
 ;extended classses - read ini
 %include "src/features/type_extensions/AircraftTypeClass/aircrafttypeclass_read_ini.asm"
 %include "src/features/type_extensions/BuildingTypeClass/buildingtypeclass_read_ini.asm"
@@ -107,7 +108,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/extended_footclass.asm"
 %include "src/features/type_extensions/extended_triggeraction.asm"
 
-; Unhardcode
+;rules unhardcode
 %include "src/features/type_extensions/early_rules_ini_load.asm"
 
 ;extended classses - new types
@@ -122,47 +123,37 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/WeaponTypeClass/weapontypeclass_unhardcode.asm"
 %include "src/features/type_extensions/SoundEffectName/soundeffectslist_unhardcode.asm"
 
-; AI for unhardcoded
+;feature: AI enhancements to use extended classes
 %include "src/features/ai_obeyprereq.asm" ; added by lovalmidas
-%include "src/ai_vessels.asm" ;probably desyncs online with 3.03
-%include "src/ai_units.asm" 
-%include "src/ai_infantry.asm" 
+%include "src/features/ai_vessels.asm" ;probably desyncs online with 3.03
+%include "src/features/ai_units.asm" 
+%include "src/features/ai_infantry.asm" 
 
-; new prerequisite system
+;feature: new prerequisite system
 %include "src/features/new_prerequisite_system.asm" 
 %include "src/features/superweapons.asm" 
 
-; generic
+; features
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
-%include "src/atom_damage_custom.asm"
+%include "src/features/atom_damage_custom.asm"
 %include "src/ingame_display_messages_from_yourself.asm"
-%include "src/naval_exploits_fixes.asm"
-%include "src/coop.asm"
-%include "src/no_digest.asm"
-%include "src/remove_C&C_text_references.asm"
-%include "src/modem_menu_remove.asm"
+%include "src/features/coop.asm"
+%include "src/features/no_digest.asm"
 %include "src/features/spectator.asm"
 %include "src/features/radar_spectator.asm"
 %include "src/features/forced_alliances.asm"
-%include "src/MCVUndeploy.asm"
-%include "src/teamtype_buildings.asm"
-;%include "src/fixes/south_advantage.asm" ; test fix
-%include "src/fixes/remove_difficulty_gamespeed_modifier.asm"
-%include "src/fixes/magic_build_fix.asm"
-%include "src/fixes/infantry_range_check.asm"
-%include "src/no_tesla_zap_effect_delay.asm"
+%include "src/features/teamtype_buildings.asm"
+
+%include "src/features/no_tesla_zap_effect_delay.asm"
 %include "src/features/short_game.asm"
-%include "src/no_screenshake.asm"
+%include "src/features/no_screenshake.asm"
 %include "src/shorter_multiplayer_reconnect_timer.asm"
 ;%include "src/harvester_harvest_closest_ore.asm" ; same thing what pressing S on harvesters does, desyncs online and keeps mining new ore spawned by ore mines
-%include "src/building_crew_impassable_terrain_fix.asm"
 %include "src/features/multiplayer_predetermined_alliances.asm"
-%include "src/build_off_ally.asm"
+%include "src/features/build_off_ally.asm"
 %include "src/selectable_Spawn_locations.asm"
-%include "src/tech_center_bug_fix.asm"
 ;%include "src/unused/special_colourscheme.asm"
 %include "src/features/arguments.asm"
-%include "src/image_keyword_fix.asm"
 %include "src/strip_cameos_glitch_bug.asm"
 %include "src/internet_cncnet.asm"
 %include "src/singleplayer_custom_colours_countries.asm"
@@ -172,7 +163,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/spawner_house_colours_countries_handicaps.asm"
 %include "src/spawner_stats.asm"
 ;%include "src/debug_printing.asm" ; Seems to cause crashes
-%include "src/hotkeys.asm"
+%include "src/features/hotkeys.asm"
 %include "src/features/extra_theaters.asm"
 %include "src/features/extra_sounds.asm"
 %include "src/evac_in_mp.asm"
@@ -185,18 +176,16 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/ally_shroud_reveal.asm"
 %include "src/ingame_chat_improvments.asm"
 %include "src/extra_multiplayer_countries.asm"
-%include "src/aftermath_fast_buildspeed_option.asm"
+%include "src/features/aftermath_fast_buildspeed_option.asm"
 %include "src/optional_scorescreen.asm"
 %include "src/features/radar_default_zoom_out.asm"
 ;%include "src/features/load_ai_ini.asm" ; Changing AI settings desyncs online...
 %include "src/ai_fixes.asm"
 
-%include "src/fixes/ai_topleft_bug.asm"
 %include "src/features/ai_mutual_alliances.asm"
 %include "src/features/ai_difficulty_customizations.asm"
-%include "src/fixes/ai_build_radar_dome.asm"
 
-%include "src/fix_formation_glitch.asm"
+
 %include "src/parabombs_multiplayer.asm"
 %include "src/features/mousewheel_scrolling.asm"
 %include "src/features/skirmish_savegames.asm"
@@ -204,22 +193,18 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
 %include "src/features/aircraft_maxpips.asm"
 ; code extensions, added by lovalmidas
-%include "src/map_sight_no_incremental.asm" 
-%include "src/building_mission_repair.asm" 
-%include "src/aircraft_isdropping_act_like_parabombs.asm" 
-%include "src/building_unlimbo_owners.asm" 
-%include "src/battlecontrolterminated_delayblackscreen.asm" 
-%include "src/explosion_no_anim_crash_fix.asm" 
-%include "src/building_jammable_override.asm" 
-%include "src/fixes/building_power_clear_drain.asm" 
+%include "src/features/aircraft_isdropping_act_like_parabombs.asm" 
+%include "src/features/battlecontrolterminated_delayblackscreen.asm"  
+%include "src/features/building_jammable_override.asm" 
+%include "src/features/building_mission_repair.asm" 
+%include "src/features/building_mission_unload.asm" 
+%include "src/features/building_true_owners.asm" 
 %include "src/features/unit_turret_draw.asm" 
-%include "src/building_mission_unload.asm" 
-%include "src/tesla_charging_unhardcode.asm" 
-%include "src/new_tracktypes.asm"
-%include "src/bullet_scatter.asm"
-%include "src/aircraft_transports_face_north.asm"
+%include "src/features/tesla_charging_unhardcode.asm" 
+%include "src/features/new_tracktypes.asm"
+%include "src/features/aircraft_transports_face_north.asm"
 
-%include "src/building_autobase_base_housecheck.asm" 
+%include "src/features/building_autobase_base_housecheck.asm" 
 %include "src/features/remake_shroud_mapedges.asm" 
 %include "src/features/resizable_map.asm" 
 %include "src/features/unit_deploys_into_unhardcode.asm" 
@@ -237,17 +222,13 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/combat_spreadfactorzero.asm" 
 %include "src/features/combat_negativedamage.asm" 
 
-%include "src/fixes/refresh_cells_crash_fix.asm"
-%include "src/fixes/invalid_team_crash_fix.asm"
-
-
-
 ; experimental
+%include "src/experimental/bullet_scatter.asm"
 %include "src/experimental/experiment_jam_remap.asm" 
 ;%include "src/experimental/experiment_cnc_refinery.asm" 
 
 %ifdef USE_NOCD
-%include "src/nocd.asm"
+%include "src/features/nocd.asm"
 %endif
 
 %ifdef USE_EXCEPTIONS
@@ -255,31 +236,53 @@ _str_version: db"3.03p-iB1v1",0
 %endif
 
 %ifdef USE_BUGFIXES
-;%include "src/invisible_explosions_fix.asm" ; Causes desync with 3.03
-%include "src/ore_truck_ore_patch_minimap_cursor_bug_fix.asm"
-%include "src/allies_NCO_helipad_airfield_bug.asm"
-%include "src/fixes/engi_q_freeze_fix.asm"
-%include "src/fixes/gnrl_ukraine_voice.asm"
-%include "src/score_screen_print_colour_fix.asm"
-%include "src/animate_score_objects_crash_fix.asm"
-%include "src/submarine_decloak_skip_campaign.asm"
-%include "src/what_weapon_should_i_use_crash_fix.asm"
-%include "src/radar_dome_crash_fix.asm"
-%include "src/fix_toinherit_keyword.asm"
-%include "src/localise_draw_strings.asm"
-%include "src/mouse_fixes.asm"
-%include "src/cpu_affinity_freeze_crash.asm"
-%include "src/max_units_bug.asm"
-%include "src/fixes/fence_bug.asm"
-%include "src/fixes/playback_fix.asm"
-%include "src/tags_bug.asm"
-%include "src/savegame_bug.asm"
-%include "src/credits_screen_cncddraw_fix.asm"
-%include "src/fix_multiplayer_settings_saving.asm"
-%include "src/cancel_network_join_menu_lag_fix.asm"
-%include "src/skip_deleting_conquer_eng.asm"
-%include "src/green_shadow_on_cloaked_units_fix.asm"
+; fixes should not depend on one another
+; sort alphabetically
+%include "src/fixes/ai_build_radar_dome.asm"
+%include "src/fixes/ai_topleft_bug.asm"
 %include "src/fixes/always_load_building_icons.asm"
+%include "src/fixes/animate_score_objects_crash_fix.asm"
+%include "src/fixes/building_crew_impassable_terrain_fix.asm"
+%include "src/fixes/building_power_clear_drain.asm" 
+%include "src/fixes/cancel_network_join_menu_lag_fix.asm"
+%include "src/fixes/cloaked_units_shadow_fix.asm"
+%include "src/fixes/cpu_affinity_freeze_crash.asm"
+%include "src/fixes/credits_screen_cncddraw_fix.asm"
+%include "src/fixes/engi_q_freeze_fix.asm"
+%include "src/fixes/error_dialog_title_fix.asm"
+%include "src/fixes/explosion_no_anim_crash_fix.asm"
+%include "src/fixes/fence_bug.asm"
+%include "src/fixes/formation_glitch_fix.asm"
+%include "src/fixes/gnrl_ukraine_voice.asm"
+%include "src/fixes/infantry_range_check.asm"
+%include "src/fixes/invalid_team_crash_fix.asm"
+%include "src/fixes/invisible_explosions_fix.asm" ; Causes desync with 3.03
+%include "src/fixes/localise_draw_strings.asm"
+%include "src/fixes/map_sight_no_incremental.asm" 
+%include "src/fixes/max_units_bug.asm"
+%include "src/fixes/magic_build_fix.asm"
+%include "src/fixes/mcv_undeploy_fix.asm"
+%include "src/fixes/modem_menu_remove.asm"
+%include "src/fixes/mouse_fixes.asm"
+%include "src/fixes/multiplayer_settings_saving_fix.asm"
+%include "src/fixes/naval_repair_fix.asm"
+;%include "src/fixes/south_advantage.asm" ; test fix
+%include "src/fixes/playback_fix.asm"
+%include "src/fixes/radar_dome_crash_fix.asm"
+%include "src/fixes/refresh_cells_crash_fix.asm"
+%include "src/fixes/remove_difficulty_gamespeed_modifier.asm"
+%include "src/fixes/ore_truck_ore_patch_minimap_cursor_bug_fix.asm"
+%include "src/fixes/savegame_diskspace_fix.asm"
+%include "src/fixes/score_screen_print_colour_fix.asm"
+%include "src/fixes/skip_deleting_conquer_eng.asm"
+%include "src/fixes/submarine_decloak_skip_campaign.asm"
+%include "src/fixes/tech_center_bug_fix.asm"
+%include "src/fixes/toinherit_fix.asm"
+%include "src/fixes/what_weapon_should_i_use_crash_fix.asm"
+
+%include "src/image_keyword_fix.asm"
+%include "src/allies_NCO_helipad_airfield_bug.asm"
+%include "src/tags_bug.asm"
 %include "src/movies2_loading_bug.asm"
 %endif
 

@@ -2,7 +2,7 @@
 ; src/features/remake_shroud_mapedges.asm
 ;
 ; Old code sets the map edge perimeter as visible. This ensures the shroud does not enroach from the map bounds.
-; This poses very visible issues if the map is resized. 
+; This poses very visible issues if the map is resized mid-game (via new trigger actions). 
 ; Employ Remastered's new method of map-edge checking instead.
 ; 
 ; This function is enabled by default and is not controllable.

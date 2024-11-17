@@ -85,7 +85,6 @@ _HouseClass__Read_INI_Optional_House_Neutral_Ally:
     jmp  0x004DDE62
 
 _ScoreClass__Presentation_Proper_Country_Check:
-
     mov  byte dl,[eax+0x41]
     mov  edi,eax
     jmp  0x00540F25

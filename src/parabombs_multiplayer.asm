@@ -1,6 +1,6 @@
-@HOOK 0x004D5B13 _Paraboms_Single_Player_Check
+@HOOK 0x004D5B13 _Parabombs_Single_Player_Check
 
-_Paraboms_Single_Player_Check:
+_Parabombs_Single_Player_Check:
     cmp  byte [ParabombsInMultiplayer],1
     jz   0x004D5B1C
 

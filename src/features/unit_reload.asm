@@ -8,8 +8,6 @@
 ; 
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
-; 
-; 
 ;----------------------------------------------------------------
 
 @HOOK 0x00579FAD _UnitClass__Reload_AI_UseAmmoReloadRate

@@ -1,7 +1,7 @@
 ;----------------------------------------------------------------
 ; src/experimental/experiment_jam_remap.asm
 ;
-; Attempt to have ore truck attach to the refinery, just like in Tiberium Dawn
+; Apply a different palette to jammed buildings 
 ;
 ; This function is enabled by using the key:
 ;   Rules.ini > [General] > RemapJammedBuildings=yes
