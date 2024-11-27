@@ -65,36 +65,36 @@ Multi8_Handicap:   db 0xFF
 %endmacro
 
 Set_Colour_For_Houses:
-    Set_House_Colour HousesType.Multi1, [Multi1_Colour]
-    Set_House_Colour HousesType.Multi2, [Multi2_Colour]
-    Set_House_Colour HousesType.Multi3, [Multi3_Colour]
-    Set_House_Colour HousesType.Multi4, [Multi4_Colour]
-    Set_House_Colour HousesType.Multi5, [Multi5_Colour]
-    Set_House_Colour HousesType.Multi6, [Multi6_Colour]
-    Set_House_Colour HousesType.Multi7, [Multi7_Colour]
-    Set_House_Colour HousesType.Multi8, [Multi8_Colour]
+    Set_House_Colour HouseType.Multi1, [Multi1_Colour]
+    Set_House_Colour HouseType.Multi2, [Multi2_Colour]
+    Set_House_Colour HouseType.Multi3, [Multi3_Colour]
+    Set_House_Colour HouseType.Multi4, [Multi4_Colour]
+    Set_House_Colour HouseType.Multi5, [Multi5_Colour]
+    Set_House_Colour HouseType.Multi6, [Multi6_Colour]
+    Set_House_Colour HouseType.Multi7, [Multi7_Colour]
+    Set_House_Colour HouseType.Multi8, [Multi8_Colour]
     retn
 
 Set_Country_For_Houses:
-    Set_House_Country HousesType.Multi1, [Multi1_Country]
-    Set_House_Country HousesType.Multi2, [Multi2_Country]
-    Set_House_Country HousesType.Multi3, [Multi3_Country]
-    Set_House_Country HousesType.Multi4, [Multi4_Country]
-    Set_House_Country HousesType.Multi5, [Multi5_Country]
-    Set_House_Country HousesType.Multi6, [Multi6_Country]
-    Set_House_Country HousesType.Multi7, [Multi7_Country]
-    Set_House_Country HousesType.Multi8, [Multi8_Country]
+    Set_House_Country HouseType.Multi1, [Multi1_Country]
+    Set_House_Country HouseType.Multi2, [Multi2_Country]
+    Set_House_Country HouseType.Multi3, [Multi3_Country]
+    Set_House_Country HouseType.Multi4, [Multi4_Country]
+    Set_House_Country HouseType.Multi5, [Multi5_Country]
+    Set_House_Country HouseType.Multi6, [Multi6_Country]
+    Set_House_Country HouseType.Multi7, [Multi7_Country]
+    Set_House_Country HouseType.Multi8, [Multi8_Country]
     retn
 
 Set_Handicap_For_Houses:
-    Set_House_Handicap HousesType.Multi1, [Multi1_Handicap]
-    Set_House_Handicap HousesType.Multi2, [Multi2_Handicap]
-    Set_House_Handicap HousesType.Multi3, [Multi3_Handicap]
-    Set_House_Handicap HousesType.Multi4, [Multi4_Handicap]
-    Set_House_Handicap HousesType.Multi5, [Multi5_Handicap]
-    Set_House_Handicap HousesType.Multi6, [Multi6_Handicap]
-    Set_House_Handicap HousesType.Multi7, [Multi7_Handicap]
-    Set_House_Handicap HousesType.Multi8, [Multi8_Handicap]
+    Set_House_Handicap HouseType.Multi1, [Multi1_Handicap]
+    Set_House_Handicap HouseType.Multi2, [Multi2_Handicap]
+    Set_House_Handicap HouseType.Multi3, [Multi3_Handicap]
+    Set_House_Handicap HouseType.Multi4, [Multi4_Handicap]
+    Set_House_Handicap HouseType.Multi5, [Multi5_Handicap]
+    Set_House_Handicap HouseType.Multi6, [Multi6_Handicap]
+    Set_House_Handicap HouseType.Multi7, [Multi7_Handicap]
+    Set_House_Handicap HouseType.Multi8, [Multi8_Handicap]
     retn
 
 _Assign_Houses_Epilogue:

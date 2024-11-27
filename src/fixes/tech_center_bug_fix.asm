@@ -18,11 +18,11 @@
 ; returns: eax is 2 if side is Soviet, 0 if Allies
 ; Note: Turkey is considered Allies
 _Side_From_Country:
-    cmp  dword eax, HousesType.USSR
+    cmp  dword eax, HouseType.USSR
     je   .Return_Soviet
-    cmp  dword eax, HousesType.Ukraine
+    cmp  dword eax, HouseType.Ukraine
     je   .Return_Soviet
-    cmp  dword eax, HousesType.BadGuy
+    cmp  dword eax, HouseType.BadGuy
     je   .Return_Soviet
 
 .Return_Allies:
