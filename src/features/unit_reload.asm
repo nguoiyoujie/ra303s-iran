@@ -104,6 +104,7 @@ _UnitClass__Mission_Unload_Minelayer_Reload:
     push edx
     push edi
     mov  edx,dword[eax + 0x15c]
+    movzx edx,dl
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
     imul edx,15 ; don't forget to convert seconds to ticks

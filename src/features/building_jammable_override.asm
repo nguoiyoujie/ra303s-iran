@@ -14,6 +14,7 @@ _BuildingClass_AI_UseIsJammable:
     ; eax is the id
     push ebx
     push ecx
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.IsJammable.Get(ebx,cl)
     test cl,cl
@@ -36,6 +37,7 @@ _UnitClass_Take_Damage_UseIsNoSmoke:
     push eax
     push ebx
     push ecx
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,ebx)
     UnitTypeClass.IsNoSmoke.Get(ebx,cl)
     test cl,cl

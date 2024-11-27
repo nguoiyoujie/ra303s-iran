@@ -22,6 +22,7 @@ _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
     push eax
     push ebx
     push ecx
+    movzx eax,al
     UnitTypeClass.FromIndex(eax,ebx)
     UnitTypeClass.TurretFrameStart.Get(ebx,cx)
     test cx,cx
@@ -61,7 +62,7 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     push eax
     push esi
     push edi
-    and  eax,0xff
+    movzx eax,al
     mov  edi,ebx
     mov  esi,ecx
     xor  ecx,ecx

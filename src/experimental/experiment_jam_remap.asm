@@ -52,6 +52,7 @@ _BuildingClass__Animation_AI_AlwaysUpdateJammable:
     ; eax is the building type ID
     push ebx
     push ecx
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.IsJammable.Get(ebx,cl)
     test cl,cl

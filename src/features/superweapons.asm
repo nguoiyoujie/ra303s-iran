@@ -343,7 +343,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
 
 .Next:
     mov  eax,esi
-    and  eax,0xff
+    movzx eax,al
     inc  al
     cmp  al, byte [NewBuildingTypeHeapCount]
     jb   .CheckSpecialWeapons ;use unsigned check

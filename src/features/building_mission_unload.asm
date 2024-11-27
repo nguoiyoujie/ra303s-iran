@@ -90,6 +90,7 @@ _BuildingClass_Mission_Unload_WeaponsFactory_ForceTrack:
 ; ebx is the factory building index
     push ebx
     xor  edx,edx
+    movzx ebx,bl
     BuildingTypeClass.FromIndex(ebx,ebx)
     BuildingTypeClass.WarFactoryExitTrack.Get(ebx,dl)
     pop  ebx

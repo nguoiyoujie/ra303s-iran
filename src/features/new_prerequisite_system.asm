@@ -188,6 +188,7 @@ _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2:
 
 ; Does_Enemy_Building_Exist is not used by the game, but we could use it~
 _BuildingClass__Does_Enemy_Building_Exist_UsePrereqType:
+    movzx edx,dl
     BuildingTypeClass.FromIndex(edx,ecx)
     TechnoTypeClass.PrereqType.Get(ecx,al)
     jmp  0x004D7E35
@@ -244,9 +245,10 @@ _HouseClass__AI_RadarMap_Check2:
     jmp  0x004D4E50
 
 _HouseClass__AI_RadarJammed_Check:
-    ; eax is the id
+    ; eax is the id // need to enforce 0xFF
     push ebx
     push ecx
+    movzx eax,al
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.IsRadar.Get(ebx,cl)
     test cl,cl
