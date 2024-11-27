@@ -11,7 +11,7 @@
 ;   Adv. Power Plant no longer fulfill prerequisites that require Power Plant
 ;----------------------------------------------------------------
 
-@@JMP 0x004D40AD 0x004D40CE ;_HouseClass__Can_Build_DontCombineFlags
+@JMP 0x004D40AD 0x004D40CE ;_HouseClass__Can_Build_DontCombineFlags
 @HOOK 0x004D40DF _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
 @HOOK 0x004DD5BF _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1
 @HOOK 0x004DD61D _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType2
