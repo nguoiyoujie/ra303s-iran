@@ -105,19 +105,19 @@ _Read_Scenario_INI_Ally_Test:
 
     mov  esi, CCINIClass_Spawn ; SPAWN.INI
     ; args <HouseType>, <INI section string>, <INIClass>
-    Load_Alliances HousesType.Multi1, str_Multi1_Alliances, esi
-    Load_Alliances HousesType.Multi2, str_Multi2_Alliances, esi
-    Load_Alliances HousesType.Multi3, str_Multi3_Alliances, esi
-    Load_Alliances HousesType.Multi4, str_Multi4_Alliances, esi
-    Load_Alliances HousesType.Multi5, str_Multi5_Alliances, esi
-    Load_Alliances HousesType.Multi6, str_Multi6_Alliances, esi
-    Load_Alliances HousesType.Multi7, str_Multi7_Alliances, esi
-    Load_Alliances HousesType.Multi8, str_Multi8_Alliances, esi
+    Load_Alliances HouseType.Multi1, str_Multi1_Alliances, esi
+    Load_Alliances HouseType.Multi2, str_Multi2_Alliances, esi
+    Load_Alliances HouseType.Multi3, str_Multi3_Alliances, esi
+    Load_Alliances HouseType.Multi4, str_Multi4_Alliances, esi
+    Load_Alliances HouseType.Multi5, str_Multi5_Alliances, esi
+    Load_Alliances HouseType.Multi6, str_Multi6_Alliances, esi
+    Load_Alliances HouseType.Multi7, str_Multi7_Alliances, esi
+    Load_Alliances HouseType.Multi8, str_Multi8_Alliances, esi
 
     ; Have Multi1 ally Multi2
-;    Ally_House HousesType.Multi1, HousesType.Multi2
+;    Ally_House HouseType.Multi1, HouseType.Multi2
     ; Have Multi2 ally Multi1
-;    Ally_House HousesType.Multi2, HousesType.Multi1
+;    Ally_House HouseType.Multi2, HouseType.Multi1
 
     Restore_Registers
 
