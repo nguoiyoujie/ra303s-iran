@@ -280,6 +280,7 @@ str_FixRangeExploit                               db"FixRangeExploit",0
 str_FixMagicBuild                                 db"FixMagicBuild",0
 ; str_ParabombsInMultiplayer (multi-use)
 ; str_FixAIAlly 
+str_FixWideAreaDamage                             db"FixWideAreaDamage",0
 %define str_MCVUndeploy                           0x005EF831 ; "MCVUndeploy"
 %define str_AllyReveal                            0x005EF81A ; "AllyReveal"
 str_ForcedAlliances                               db"ForcedAlliances",0
@@ -421,6 +422,7 @@ Toggle_Fix_NavalRepairExploit db 0
 Toggle_Fix_AISendingTanksToTopLeft db 0
 Toggle_Fix_AIParanoid db 0
 Toggle_Fix_AIAlly db 0
+Toggle_Fix_WideAreaDamage db 0
 
 ;;; Temporary location until the House macros are completed
 ; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)

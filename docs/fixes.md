@@ -22,6 +22,7 @@ This section covers changes that are intended to fix a broken feature, or preven
    - Overriding Building Power Supply/Drain
    - Resign Fix
    - <code>{Rules}</code> ► [AI]  ► FixAISendingTanksTopLeft
+   - <code>{Rules}</code> ► [General]  ► FixWideAreaDamage
    - Engineer Q Move Fix
    - Ore Mine Foundation Fix
    - Persistent Chrono Vortex Fix
@@ -192,6 +193,16 @@ The resign hotkey now actually works. There wasn't any code to do anything when 
 AI with AutoBase set (either by map trigger, or by default in skirmish and multiplayer), sometimes send tanks to the top left corner of the map. That is because AI sometimes receives cell -1 as the target position, but does not filter the result.
 
 This fix is applied by default in skirmish mode. Because this fix desyncs online with 3.03 players it's added as a RULES.INI keyword. 
+</details></td></tr></table>
+
+
+<table><tr><td width="892"><samp>
+<code>{Rules}</code> ► [General]  ► FixWideAreaDamage
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="2"><details><summary><b>View</b></summary>
+
+Large explosions with a very large area of effect (Nuke, Monster Tank explosions) had their damage values calculated incorrectly - the damage increases the further it is from the epicenter.
+
+This fix inverts the relationship so that the epicenter receives the maximum damage, and the radial edge receives 0 damage. 
 </details></td></tr></table>
 
 

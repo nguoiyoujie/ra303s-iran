@@ -680,6 +680,10 @@ _Init_Game_Hook_Load:
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_RemapJammedBuildings,0
     mov  [Toggle_Feature_RemapJammedBuildings],al
     
+    call_INIClass__Get_Bool Globals___RuleINI,str_General,str_FixWideAreaDamage,0
+    mov  [Toggle_Fix_WideAreaDamage],al
+
+
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIParanoid,0
     mov  [Toggle_Fix_AIParanoid],al
 

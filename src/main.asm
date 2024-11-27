@@ -279,6 +279,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/fixes/tech_center_bug_fix.asm"
 %include "src/fixes/toinherit_fix.asm"
 %include "src/fixes/what_weapon_should_i_use_crash_fix.asm"
+%include "src/fixes/wide_area_damage.asm"
 
 %include "src/image_keyword_fix.asm"
 %include "src/allies_NCO_helipad_airfield_bug.asm"
