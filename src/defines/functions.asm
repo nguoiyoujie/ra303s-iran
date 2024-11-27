@@ -294,6 +294,8 @@
 %define Globals___Houses                                          0x006017F0 ; TFixedIHeapClass<HouseClass> Houses;
 %define Globals___BuildingTypes                                   0x0060181C ; TFixedIHeapClass<BuildingTypeClass> BuildingTypes;
 
+%define Globals___FormSpeed                                       0x0065E0D0
+%define Globals___FormMaxSpeed                                    0x0065E0D1
 
 %define Globals___AntsEnabled                                     0x00665DDC
 %define Globals___NewUnitsEnabled                                 0x00665DE0

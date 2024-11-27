@@ -12,8 +12,7 @@
 @HOOK 0x004B3F80 _Formation_Speed_Glitched_Loop
 @HOOK 0x004B45FD _DisplayClass__Mouse_Left_Release_Function_End
 
-%define FormSpeed        0x0065E0D0
-%define FormMaxSpeed    0x0065E0D1
+
 
 firstformationunit: db 1
 
@@ -38,7 +37,7 @@ _Formation_Speed_Glitched_Loop:
     mov  eax, ecx
     call [esi+34h]
     mov  byte al, [eax+15Ch]
-    mov  byte [FormMaxSpeed], al
+    mov  byte [Globals___FormMaxSpeed], al
 
 .Not_First_Unit_FormMaxSpeed:
     mov  esi, [ecx+11h]
@@ -46,9 +45,9 @@ _Formation_Speed_Glitched_Loop:
     call [esi+34h]
     mov  byte al, [eax+15Ch]
 
-    cmp  byte [FormMaxSpeed], al
+    cmp  byte [Globals___FormMaxSpeed], al
     jle  .Dont_Set_As_MaxFormSpeed
-    mov  byte [FormMaxSpeed], al
+    mov  byte [Globals___FormMaxSpeed], al
 
 .Dont_Set_As_MaxFormSpeed:
     mov  esi, [ecx+11h]
@@ -63,15 +62,15 @@ _Formation_Speed_Glitched_Loop:
     mov  eax, ecx
     call [esi+34h]
     mov  byte al, [eax+15Dh]
-    mov  byte [FormSpeed], al
+    mov  byte [Globals___FormSpeed], al
 .Not_First_Unit_FormSpeed:
     mov  esi, [ecx+11h]
     mov  eax, ecx
     call [esi+34h]
     mov  byte al, [eax+15Dh]
-    cmp  byte [FormSpeed], al
+    cmp  byte [Globals___FormSpeed], al
     jle  .Dont_Set_As_FormSpeed
-    mov  byte [FormSpeed], al
+    mov  byte [Globals___FormSpeed], al
 
 .Dont_Set_As_FormSpeed:
     mov  byte [firstformationunit], 0
@@ -84,13 +83,13 @@ _Formation_Speed_Glitched_Loop:
     call [esi+34h]
     mov  al, [eax+15Ch]
     mov  esi, [ecx+11h]
-    mov  [FormMaxSpeed], al
+    mov  [Globals___FormMaxSpeed], al
     mov  eax, ecx
     add  ebx, 4
     call [esi+34h]
     mov  al, [eax+15Dh]
     inc  edx
-    mov  [FormSpeed], al
+    mov  [Globals___FormSpeed], al
     jmp  0x004B3FAA
 
 _DisplayClass__Mouse_Left_Release_Function_End:
