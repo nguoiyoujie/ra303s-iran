@@ -30,7 +30,7 @@ _InfantryClass__Fire_At_Range_Check:
     push ebx
     push edx
 
-    call 0x004EDF98 ; InfantryClass::Can_Fire(long, int)
+    call InfantryClass__Can_Fire
     cmp  dword eax, 0
     jne  .Cant_Fire ; If NOT 0 goto .Cant_Fire, function returns 0 on if can fire..
 

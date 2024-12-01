@@ -129,6 +129,7 @@
 %define InfantryTypeClass__As_Reference                           0x004EB1B8 ; InfantryTypeClass & InfantryTypeClass::As_Reference(InfantryType type)
 
 ; INFANTRY.CPP
+%define InfantryClass__Can_Fire                                   0x004EDF98 ; InfantryClass::Can_Fire(long, int)
 %define InfantryClass__Write_INI                                  0x004F0A84 ; void InfantryClass::Write_INI(CCINIClass & ini)
 
 ; INIT.CPP
