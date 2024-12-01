@@ -245,6 +245,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/fixes/building_crew_impassable_terrain_fix.asm"
 %include "src/fixes/building_power_clear_drain.asm" 
 %include "src/fixes/cancel_network_join_menu_lag_fix.asm"
+%include "src/fixes/cell_occupier_multi_buildings.asm"
 %include "src/fixes/cloaked_units_shadow_fix.asm"
 %include "src/fixes/cpu_affinity_freeze_crash.asm"
 %include "src/fixes/credits_screen_cncddraw_fix.asm"

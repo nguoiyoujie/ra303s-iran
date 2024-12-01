@@ -114,6 +114,8 @@
 ; BDATA.CPP
 %define BuildingTypeClass__BuildingTypeClass                      0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
 %define BuildingTypeClass__new                                    0x00429F0C ; BuildingTypeClass::operator new(uint)
+%define BuildingTypeClass__Bib_And_Offset                         0x00453BB4 ; bool BuildingTypeClass::Bib_And_Offset(SmudgeType & bib, CELL & cell) const
+
 
 ; TYPE.H
 %define BulletTypeClass__BulletTypeClass                          0x00426A20 ; BulletTypeClass::BulletTypeClass(char *)
@@ -144,7 +146,12 @@
 
 ; MAP.CPP
 %define MapClass__In_Radar                                        0x004FE8AC ; bool MapClass::In_Radar(CELL cell) const
+%define MapClass__Place_Down                                      0x004FE918 ; void MapClass::Place_Down(CELL cell, ObjectClass * object)
+%define MapClass__Pick_Up                                         0x004FEA28 ; void MapClass::Pick_Up(CELL cell, ObjectClass * object)
 %define MapClass__Nearby_Location                                 0x004FFAC4 ; CELL MapClass::Nearby_Location(CELL cell, SpeedType speed, int zone, MZoneType check, bool checkflagged, int locationmod) const
+
+
+
 
 ; MAPSEL.CPP
 %define MapSel___Map_Selection                                    0x00500A68 ; char const * Map_Selection(void)
@@ -200,6 +207,8 @@
 %define SmudgeTypeClass__As_Reference                             0x00549F34 ; SmudgeTypeClass & SmudgeTypeClass::As_Reference(SmudgeType type)
 
 ; SMUDGE.CPP
+%define SmudgeClass__new                                          0x0054FC10 ; void * SmudgeClass::operator new(size_t )
+%define SmudgeClass__SmudgeClass                                  0x0054FC50 ; SmudgeClass::SmudgeClass(SmudgeType type, COORDINATE pos, HousesType house) :
 %define SmudgeClass__Write_INI                                    0x005501E4 ; void SmudgeClass::Write_INI(CCINIClass & ini)
 
 ; TERRAIN.CPP
