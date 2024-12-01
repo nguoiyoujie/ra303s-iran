@@ -1125,6 +1125,70 @@ Loop_Over_Object_Heap_And_Update_IsLocked:
 .Ret:
     retn
 
+; Magic spawn Reinforcements
+; clone Do_Reinforcements, but always use the waypoint cell as spawn point
+Do_Magic_Reinforcements:
+    mov  edx,[ebp+TActionClass_This]
+    mov  eax,[0x00601804]
+    inc  edx
+    mov  esi,[eax+4]
+    mov  edx,[edx]
+    imul edx,esi
+    mov  eax,[eax+0x10]
+    add  eax,edx
+.Setup_Stack:
+    push ebp
+    mov  ebp,esp
+    push ebx
+    push ecx
+    push edx
+    push esi
+    push edi
+    sub  esp,34h
+    mov  dword [ebp-30h],eax ; Parameter 1: Team
+    test eax,eax
+    jz   .No_Team
+    cmp  dword [eax+0xa5],0 ; TeamType.ClassCount, 0 means the team is empty
+    jnz  .Team
+.No_Team:
+    xor  eax,eax
+    jmp  .End_Stack
+.Team:
+    cmp  dword [eax+3dh],0 
+    jnz  .Create_Group
+.Create_Attack_Script:
+    mov  dword [eax+3dh],1 ; set MissionCount = 1
+    mov  dword [eax+41h],1 ; TMISSION_ATT_WAYPT
+    mov  edx,dword [ebp-30h] 
+    mov  eax,dword [eax+35h] ; Team->Origin
+    mov  dword [edx+42h],eax ; set MissionList[0].Data.Value to origin 
+.Create_Group:
+    mov  dword [ebp-30h],eax ; Team
+    call _Create_Group
+    mov  ebx,eax
+    mov  esi,eax
+    test eax,eax ; check if _Create_Group produced at least one object
+    jz  .End_Stack
+; skip infantry only check
+; assign cell (EDX)    
+    mov  ebx,dword [ebp-30h] ; Team
+    mov  ebx,dword [ebx+35h] ; Team->Origin
+    xor  edi,edi
+    lea  ebx,[ebx*2]
+    mov  di,[0x006678F7+ebx] ; Waypoint[]
+; jump back to Do_Reinforcements routine, the rest of the logic is identical. ret will be executed there
+    jmp  0x00533336
+.End_Stack:
+    lea  esp,[ebp-0x14]
+    pop  edi    
+    pop  esi
+    pop  edx
+    pop  ecx
+    pop  ebx
+    pop  ebp
+    ret
+
+
 _TActionClass__operator__New_Trigger_Actions:
 
     cmp  al,40
@@ -1178,6 +1242,8 @@ _TActionClass__operator__New_Trigger_Actions:
     ; Lovalmidas add-ons
     cmp  al,68
     jz   .New_Set_Map_Dimensions
+    cmp  al,80 ; follow RA2 format
+    jz   .New_Do_Magic_Reinforcements
 
     cmp  al,24h         ; Check to see if action ID is less than 37
     ja   0x0055418A ; NO_ACTION
@@ -1286,6 +1352,10 @@ _TActionClass__operator__New_Trigger_Actions:
 
 .New_Set_Map_Dimensions:
     call Set_Map_Dimensions
+    TAction__Operator__Epilogue
+
+.New_Do_Magic_Reinforcements:
+    call Do_Magic_Reinforcements
     TAction__Operator__Epilogue
 
 

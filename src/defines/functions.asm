@@ -166,6 +166,13 @@
 %define OverlayTypeClass__As_Reference                            0x00524C10 ; OverlayTypeClass & OverlayTypeClass::As_Reference(OverlayType type)
 %define OverlayClass__Write_INI                                   0x0052736C ; void OverlayClass::Write_INI(CCINIClass & ini)
 
+; REINF.CPP
+%define _Pop_Group_Out_Of_Object                                  0x00532C10 ; static bool _Pop_Group_Out_Of_Object(FootClass * group, TechnoClass * object)
+%define _Create_Group                                             0x00532E44 ; static FootClass * _Create_Group(TeamTypeClass const * teamtype)
+%define _Consists_Only_Of_Infantry                                0x00533098 ; static bool _Consists_Only_Of_Infantry(FootClass const * first)
+%define _Who_Can_Pop_Out_Of                                       0x005330C4 ; static TechnoClass * _Who_Can_Pop_Out_Of(CELL origin)
+%define Do_Reinforcements                                         0x00533178 ; bool Do_Reinforcements(TeamTypeClass const * teamtype)
+
 ; RULES.CPP
 %define RulesClass__General                                       0x005342DC
 %define RulesClass__Recharge                                      0x00535CF0
