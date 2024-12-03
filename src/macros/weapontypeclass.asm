@@ -83,7 +83,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
   %%next:
     inc  edx
     cmp  edx, [%2] 
-    jge  %%done_no_match
+    jae  %%done_no_match
     jmp  %%loop
 
   %%done_no_match:

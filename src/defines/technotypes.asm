@@ -45,6 +45,49 @@
 %define        BuildingType.SPEF    35
 %define        BuildingType.DOMF    36
 ; civilian buildings
+%define        BuildingType.MINV    43
+%define        BuildingType.MINP    44
+%define        BuildingType.V01     45
+%define        BuildingType.V02     46
+%define        BuildingType.V03     47
+%define        BuildingType.V04     48
+%define        BuildingType.V05     49
+%define        BuildingType.V06     40
+%define        BuildingType.V07     51
+%define        BuildingType.V08     52
+%define        BuildingType.V09     53
+%define        BuildingType.V10     54
+%define        BuildingType.V11     55
+%define        BuildingType.V12     56
+%define        BuildingType.V13     57
+%define        BuildingType.V14     58
+%define        BuildingType.V15     59
+%define        BuildingType.V16     60
+%define        BuildingType.V17     61
+%define        BuildingType.V18     62
+%define        BuildingType.V19     63
+%define        BuildingType.V20     64
+%define        BuildingType.V21     65
+%define        BuildingType.V22     66
+%define        BuildingType.V23     67
+%define        BuildingType.V24     68
+%define        BuildingType.V25     69
+%define        BuildingType.V26     70
+%define        BuildingType.V27     71
+%define        BuildingType.V28     72
+%define        BuildingType.V29     73
+%define        BuildingType.V30     74
+%define        BuildingType.V31     75
+%define        BuildingType.V32     76
+%define        BuildingType.V33     77
+%define        BuildingType.V34     78
+%define        BuildingType.V35     79
+%define        BuildingType.V36     80
+%define        BuildingType.V37     81
+%define        BuildingType.BARL    82
+%define        BuildingType.BRL3    83
+
+
 
 ; UnitType
 %define        UnitType.4TNK    0

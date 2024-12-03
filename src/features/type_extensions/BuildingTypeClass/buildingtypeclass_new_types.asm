@@ -232,6 +232,14 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.DOMF,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.FAKES)
 
+    BuildingTypeClass.FromIndex(BuildingType.BARL,edi)
+    BuildingTypeClass.SpreadExplosionDamage.Set(edi,200)
+    BuildingTypeClass.SpreadExplosionWarhead.Set(edi,3) ;WARHEAD_FIRE
+
+    BuildingTypeClass.FromIndex(BuildingType.BRL3,edi)
+    BuildingTypeClass.SpreadExplosionDamage.Set(edi,200)
+    BuildingTypeClass.SpreadExplosionWarhead.Set(edi,3) ;WARHEAD_FIRE
+
     retn
 
 

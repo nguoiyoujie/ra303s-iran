@@ -127,7 +127,7 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
     mov  esi, [%2] 
     mov  edi, %1
     cmp  edi, esi
-    jge  %%invalid_type
+    jae  %%invalid_type
 
     mov  esi, [%3] 
     shl  edi, 2
@@ -174,7 +174,7 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
   %%next:
     inc  edx
     cmp  edx, [%2] 
-    jge  %%done_no_match
+    jae  %%done_no_match
     jmp  %%loop
 
   %%done_no_match:

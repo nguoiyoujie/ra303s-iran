@@ -88,7 +88,10 @@
 ; Custom storages
 %define BuildingTypeClass.Offset.CustomOccupyList          0x23A    ; word[32]
 %define BuildingTypeClass.Offset.CustomOverlapList         0x27A    ; word[32]
-; 0x2BB
+;
+%define BuildingTypeClass.Offset.SpreadExplosionDamage     0x2BA    ; INT
+%define BuildingTypeClass.Offset.SpreadExplosionWarhead    0x2BE    ; INT PTR
+;0x2C2
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -142,7 +145,9 @@ str.BuildingTypeClass.WarFactoryOverlayRate     db"WarFactoryOverlayRate",0     
 str.BuildingTypeClass.WarFactoryExitFacing      db"WarFactoryExitFacing",0        ;new ini feature
 str.BuildingTypeClass.WarFactoryExitTrack       db"WarFactoryExitTrack",0         ;new ini feature
 str.BuildingTypeClass.CustomFoundationList      db"CustomFoundationList",0        ;new ini feature
-str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0        ;new ini feature
+str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0               ;new ini feature
+str.BuildingTypeClass.SpreadExplosionDamage     db"SpreadExplosionDamage",0       ;new ini feature
+str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0      ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
@@ -328,3 +333,15 @@ str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0        ;new 
 %define BuildingTypeClass.UndeploysInto.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, reg_output
 %define BuildingTypeClass.UndeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, value
 %define BuildingTypeClass.UndeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.UndeploysInto, str.BuildingTypeClass.UndeploysInto, function
+
+%define BuildingTypeClass.SpreadExplosionDamage.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionDamage, reg_output
+%define BuildingTypeClass.SpreadExplosionDamage.Set(ptr_type,value)                      ObjectTypeClass.SetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionDamage, value
+%define BuildingTypeClass.SpreadExplosionDamage.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadInt          ptr_type, ptr_rules, BuildingTypeClass.Offset.SpreadExplosionDamage, str.BuildingTypeClass.SpreadExplosionDamage
+
+%define BuildingTypeClass.SpreadExplosionWarhead.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionWarhead, reg_output
+%define BuildingTypeClass.SpreadExplosionWarhead.Set(ptr_type,value)                     ObjectTypeClass.SetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionWarhead, value
+%define BuildingTypeClass.SpreadExplosionWarhead.Read(ptr_type,ptr_rules, function)      ObjectTypeClass.ReadStringExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.SpreadExplosionWarhead, str.BuildingTypeClass.SpreadExplosionWarhead, function
+
+
+
+

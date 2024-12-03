@@ -102,6 +102,8 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.WarFactoryExitTrack.Read(esi,edi)
     BuildingTypeClass.CustomFoundationList.Read(esi,edi,_CustomOccupyListFromString)
     BuildingTypeClass.UndeploysInto.Read(esi,edi,_GetUnitTypeIDFromString)
+    BuildingTypeClass.SpreadExplosionDamage.Read(esi,edi)
+    BuildingTypeClass.SpreadExplosionWarhead.Read(esi,edi,_GetWarheadTypeIDFromString)
 
     pop  eax
     pop  edi
@@ -708,6 +710,18 @@ _GetUnitTypeIDFromString:
     UnitTypeClass.FromID(eax,ebx)
     mov  ebx,dword [ebx+1]; index
 	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn
+
+_GetWarheadTypeIDFromString:
+    ;select WarheadType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    WarheadTypeClass.FromID(eax,ebx)
+    mov  ebx,dword [ebx]; index
     mov  eax,ebx
 .Retn:
     pop ebx

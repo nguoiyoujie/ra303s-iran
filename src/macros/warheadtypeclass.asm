@@ -51,7 +51,50 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
 
 %define WarheadTypeClass.FromIndex(d_index,reg_output)                         TechnoTypeClass.FromIndex              d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
-%define WarheadTypeClass.FromID(d_index,reg_output)                            TechnoTypeClass.FromID                 d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
+%define WarheadTypeClass.FromID(d_index,reg_output)                            WarheadTypeClass.FromIDInner           d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
+
+; WarheadType class is NOT derived from ObjectTypeClass!
+; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
+; %2 must not be esi or edx
+; return <output>: the type class pointer, or 0 / NULL if invalid
+%macro WarheadTypeClass.FromIDInner    4
+    push esi
+    push edi
+    push eax
+    push edx
+
+    mov  edx, 0
+    mov  eax, %1
+
+  %%loop:
+    push edx
+    TechnoTypeClass.FromIndex  edx, %2, %3, edi
+    push eax
+	mov  edx, [edi+WarheadTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WarheadTypeClass is a pointer instead of a buffer
+    call _strcmpi
+    test eax, eax
+    pop  eax
+    pop  edx
+    jnz  %%next
+
+    mov  %4, edi
+    jmp  %%done
+
+  %%next:
+    inc  edx
+    cmp  edx, [%2] 
+    jae  %%done_no_match
+    jmp  %%loop
+
+  %%done_no_match:
+    mov  %4, 0
+
+  %%done:
+    pop  edx
+    pop  eax
+    pop  edi
+    pop  esi
+%endmacro
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

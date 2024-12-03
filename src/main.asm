@@ -221,6 +221,7 @@ _str_version: db"3.03p-iB1v1",0
 
 %include "src/features/combat_spreadfactorzero.asm" 
 %include "src/features/combat_negativedamage.asm" 
+%include "src/features/building_barrel_explosions.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
