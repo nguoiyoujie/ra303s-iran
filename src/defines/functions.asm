@@ -82,6 +82,8 @@
 %define FactoryClass__Get_Object                                  0x004BF368 ; TechnoClass * FactoryClass::Get_Object(void) const
 
 ; HDATA.CPP
+%define HouseTypeClass__HouseTypeClass                            0x004CB774 ; HouseTypeClass::HouseTypeClass(HousesType house, char const * ini, int fullname, char const * ext, int lemon, PlayerColorType remapcolor, char prefix)
+%define HouseTypeClass__new                                       0x004CB820 ; void * HouseTypeClass::operator new(size_t)
 %define HouseTypeClass__From_Name                                 0x004CD0E4 ; HousesType HouseTypeClass::From_Name(char const * name)
 
 
@@ -309,6 +311,7 @@
 
 ; GLOBALS.CPP
 %define Globals___Houses                                          0x006017F0 ; TFixedIHeapClass<HouseClass> Houses;
+%define Globals___HouseTypes                                      0x00601818 ; TFixedIHeapClass<HouseTypeClass> HouseTypeClass;
 %define Globals___BuildingTypes                                   0x0060181C ; TFixedIHeapClass<BuildingTypeClass> BuildingTypes;
 
 %define Globals___FormSpeed                                       0x0065E0D0
