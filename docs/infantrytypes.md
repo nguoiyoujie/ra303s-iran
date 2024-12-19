@@ -129,11 +129,186 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
 
 <table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls
-</samp></td><td width="120"><samp><a href="./defines.md#infantrytypes">InfantryType</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp><a href="./defines.md#infantrytypes">InfantryType</a> or 'CUSTOM'</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed InfantryTypeClass->DoControls```
 
 If specified, loads that units' animation control frames for the infantry. Only the original units (up to MECHANIC) are supported.
+For full customization, use CUSTOM.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Ready_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Ready_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Ready_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Guard_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Guard_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Guard_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Prone_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Prone_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Prone_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Walk_Start      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Walk_Count      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Walk_Jump       <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Fire_Start      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Fire_Count      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Fire_Jump       <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_LieDown_Start   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_LieDown_Count   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_LieDown_Jump    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Crawl_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Crawl_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Crawl_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_GetUp_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_GetUp_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_GetUp_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_FireProne_Start <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_FireProne_Count <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_FireProne_Jump  <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle1_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle1_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle1_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle2_Start     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle2_Count     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Idle2_Jump      <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death1_Start    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death1_Count    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death1_Jump     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2_Start    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2_Count    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2_Jump     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2b_Start   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2b_Count   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death2b_Jump    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death3_Start    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death3_Count    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death3_Jump     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death4_Start    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death4_Count    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Death4_Jump     <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture1_Start  <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture1_Count  <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture1_Jump   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute1_Start   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute1_Count   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute1_Jump    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture2_Start  <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture2_Count  <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Gesture2_Jump   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute2_Start   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute2_Count   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_Salute2_Jump    <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_DogMaul_Start   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_DogMaul_Count   <br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls_DogMaul_Jump
+</samp></td><td width="120"><samp>Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer<br>
+Integer
+</td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Exposed InfantryTypeClass->DoControls```
+
+If DoControls is set to CUSTOM, the animation settings for each stage is defined here. The three options for each stage are as follows:
+
+<samp>
+
+|Parameter|Explanation             
+:---------|:------------
+|`Start`  |The frame index within the shp file to use as the first frame of this stage.
+|`Count`  |The number of frames used in this stage, some stages (such as walking) may loop back to Start after the last frame is reached.
+|`Jump`   |The number of frames to offset per facing direction, using the 8-cardinal directions. Use 0 if the animation does not depend on the facing.
+</samp>
+
+The stages are as follows:
+
+<samp>
+
+|Stage           |Explanation             
+:----------------|:------------
+|`Ready`         |Default state
+|`Guard`         |Guard stance
+|`Prone`         |The infantry is prone on the ground. Note that panicking civilians are also considered 'prone'
+|`Walk`          |Moving to another location
+|`Fire`          |Firing weapon
+|`LieDown`       |Laying down transition from Ready to Prone
+|`Crawl`         |Moving while prone
+|`GetUp`         |Getting up transition from Prone to Ready
+|`FireProne`     |Firing weapon, but while prone
+|`Idle1`         |Idle animation
+|`Idle2`         |Idle animation #2
+|`Death1`        |Death by small arms (Warhead ► Explosion=1)
+|`Death2`        |Death by AP explosion (Warhead ► Explosion=2)
+|`Death2b`       |Death by AP explosion (this appears to be unused)
+|`Death3`        |Death by HE explosion (Warhead ► Explosion=3)
+|`Death4`        |Death by Fire or Nuke (Warhead ► Explosion=4 or Explosion=6)
+|`Gesture1`      |Idle animation #3
+|`Gesture2`      |Idle animation #4
+|`Salute1`       |Idle animation #5
+|`Salute2`       |Idle animation #6
+|`DogMaul`       |Special animation played after completing a Dog attack
+</samp>
 </details></td></tr></table>
 
 

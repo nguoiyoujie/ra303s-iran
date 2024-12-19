@@ -55,6 +55,7 @@ list.DoControlsByInfantryType      dd DoControls.E1, \      ; E1
                                       DoControls.E4, \      ; SHOK      
                                       DoControls.MEDI, \    ; MECH      
 
+str.CUSTOM                           db"CUSTOM",0
 
 _InfantryTypeClass__Read_INI_Extended:                    
     push esi                                              
@@ -72,6 +73,69 @@ _InfantryTypeClass__Read_INI_Extended:
     InfantryTypeClass.FireFrame.Read(esi,edi)
     InfantryTypeClass.ProneFireFrame.Read(esi,edi)
     InfantryTypeClass.DoControls.Read(esi,edi,_SelectDoControlsFromString)
+    InfantryTypeClass.DoControls_Ready_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Ready_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Ready_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Guard_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Guard_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Guard_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Prone_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Prone_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Prone_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Walk_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Walk_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Walk_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Fire_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Fire_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Fire_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_LieDown_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_LieDown_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_LieDown_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Crawl_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Crawl_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Crawl_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_GetUp_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_GetUp_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_GetUp_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_FireProne_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_FireProne_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_FireProne_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle1_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle1_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle1_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle2_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle2_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Idle2_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death1_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death1_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death1_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2b_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2b_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death2b_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death3_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death3_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death3_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death4_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death4_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Death4_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture1_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture1_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture1_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute1_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute1_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute1_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture2_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture2_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Gesture2_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute2_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute2_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_Salute2_Jump.Read(esi,edi)
+    InfantryTypeClass.DoControls_DogMaul_Start.Read(esi,edi)
+    InfantryTypeClass.DoControls_DogMaul_Count.Read(esi,edi)
+    InfantryTypeClass.DoControls_DogMaul_Jump.Read(esi,edi)
 
     pop  edi
     pop  esi
@@ -86,10 +150,22 @@ _InfantryTypeClass__Read_INI_Extended:
 
 
 _SelectDoControlsFromString:
-    ;select InfantryType by performing string compare on eax
     push ebx
     cmp  eax,0
     jle  .Retn ; just return 0
+
+.CheckCustom:
+    mov  edx,str.CUSTOM
+    mov  ebx,eax
+    call _strcmpi
+    test eax,eax
+    jnz  .CheckInfantry
+    lea  eax,[esi+InfantryTypeClass.Offset.DoControls_Ready_Start]
+    jmp  .Retn
+
+.CheckInfantry:
+    ;select InfantryType by performing string compare on eax
+    mov  eax,ebx
     InfantryTypeClass.FromID(eax,ebx)
     mov  ebx,dword [ebx+1]; index
 
