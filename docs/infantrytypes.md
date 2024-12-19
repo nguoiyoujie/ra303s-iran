@@ -277,8 +277,8 @@ If DoControls is set to CUSTOM, the animation settings for each stage is defined
 |Parameter|Explanation             
 :---------|:------------
 |`Start`  |The frame index within the shp file to use as the first frame of this stage.
-|`Count`  |The number of frames used in this stage, some stages (such as walking) may loop back to Start after the last frame is reached.
-|`Jump`   |The number of frames to offset per facing direction, using the 8-cardinal directions. Use 0 if the animation does not depend on the facing.
+|`Count`  |The number of frames used in this stage, some stages (such as walking) may loop back to Start after <br>the last frame is reached.
+|`Jump`   |The number of frames to offset per facing direction, using the 8-cardinal directions. Use 0 if the <br>animation does not depend on the facing.
 </samp>
 
 The stages are as follows:

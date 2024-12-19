@@ -249,7 +249,7 @@ The following characters are supported. Note that they are case sensitive.
 <table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OccupyList<br>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► OverlapList
-</samp></td><td width="120"><samp>Byte<br>Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String<br>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed BuildingTypeClass->OccupyList```\
 ```Exposed BuildingTypeClass->OverlapList```

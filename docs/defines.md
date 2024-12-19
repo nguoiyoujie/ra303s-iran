@@ -329,11 +329,13 @@ Original colors number from 0 to 7. New colors are added after this index.
 | 5|[![#baa599](./img/8x8/5_grey.png)](#)         GREY         
 | 6|[![#4ca189](./img/8x8/6_teal.png)](#)         BLUE         
 | 7|[![#ae5d44](./img/8x8/7_brown.png)](#)        BROWN        
-| 8|[![#4495e6](./img/8x8/8_flamingblue.png)](#)  FLAMING_BLUE
-| 9|[![#eeeeee](./img/8x8/9_white.png)](#)        WHITE        
-|10|[![#383838](./img/8x8/10_black.png)](#)       BLACK        
-|11|[![#7c7c7c](./img/8x8/11_truegrey.png)](#)    TRUE_GREY    
-|12|[![#74785c](./img/8x8/12_dirtygreen.png)](#)  DIRTY_GREEN  
+| 8|[![#4495e6](./img/8x8/8_flamingblue.png)](#)  FLAMING_BLUE*
+| 9|[![#eeeeee](./img/8x8/9_white.png)](#)        WHITE*        
+|10|[![#383838](./img/8x8/10_black.png)](#)       BLACK*        
+|11|[![#7c7c7c](./img/8x8/11_truegrey.png)](#)    TRUE_GREY*    
+|12|[![#74785c](./img/8x8/12_dirtygreen.png)](#)  DIRTY_GREEN*  
+
+* Extended colors
 </samp>
 
 
