@@ -21,6 +21,7 @@
 %define __strstr                                                  0x005CEC59 ; strstr()
 
 ; AUDIO.CPP
+%define Audio___Voc_From_Name                                     0x00425CA0 ; VocType Voc_From_Name(char const * name)
 %define Audio___Sound_Effect_At_Coord                             0x00425D1C ; void Sound_Effect(VocType voc, COORDINATE coord, int variation, HousesType house)
 %define Audio___Sound_Effect                                      0x00425F24 ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
 %define Audio___SoundEffectName                                   0x005FE090 ; SoundEffectName[VOC_COUNT]

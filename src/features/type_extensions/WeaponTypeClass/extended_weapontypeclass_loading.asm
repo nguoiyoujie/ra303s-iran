@@ -21,5 +21,5 @@ _WeaponTypeClass__Read_INI_Extended:
 
 _GetVocTypeFromString:
    ;create voc type with string from eax
-    call 0x00425CA0    ; Voc_From_Name
+    call Audio___Voc_From_Name    ; Voc_From_Name
     retn

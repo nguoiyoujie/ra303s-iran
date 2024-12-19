@@ -324,6 +324,19 @@ Determines the frame offset from the begining of the firing sequence when the we
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack
+</samp></td><td width="120"><samp>List<br>List<br>List</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```New Logic```
+
+If defined, replaces the infantry response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
+ 
+</details></td></tr></table>
+
+
 <a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>InfantryTypes</kbd></kbd><br>

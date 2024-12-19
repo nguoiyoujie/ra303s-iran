@@ -102,6 +102,13 @@
 %define InfantryTypeClass.Offset.DoControls_DogMaul_Count          0x23E    ; byte
 %define InfantryTypeClass.Offset.DoControls_DogMaul_Jump           0x23F    ; byte
 ;0x240
+%define InfantryTypeClass.Offset.Response_Select                   0x240    ; INT
+%define InfantryTypeClass.Offset.Response_Select_Data              0x244    ; word x16
+%define InfantryTypeClass.Offset.Response_Move                     0x264    ; INT
+%define InfantryTypeClass.Offset.Response_Move_Data                0x268    ; word x16
+%define InfantryTypeClass.Offset.Response_Attack                   0x288    ; INT
+%define InfantryTypeClass.Offset.Response_Attack_Data              0x28C    ; word x16
+
 
 
 ; INI String controls
@@ -182,6 +189,10 @@ str.InfantryTypeClass.DoControls_Salute2_Jump       db"DoControls_Salute2_Jump",
 str.InfantryTypeClass.DoControls_DogMaul_Start      db"DoControls_DogMaul_Start",0
 str.InfantryTypeClass.DoControls_DogMaul_Count      db"DoControls_DogMaul_Count",0
 str.InfantryTypeClass.DoControls_DogMaul_Jump       db"DoControls_DogMaul_Jump",0         
+str.InfantryTypeClass.Response_Select               db"ResponseSelect",0         
+str.InfantryTypeClass.Response_Move                 db"ResponseMove",0         
+str.InfantryTypeClass.Response_Attack               db"ResponseAttack",0         
+
 
 
 %define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
@@ -496,4 +507,18 @@ str.InfantryTypeClass.DoControls_DogMaul_Jump       db"DoControls_DogMaul_Jump",
 %define InfantryTypeClass.DoControls_DogMaul_Jump.Get(ptr_type,reg_output)     ObjectTypeClass.GetByte                ptr_type, InfantryTypeClass.Offset.DoControls_DogMaul_Jump, reg_output
 %define InfantryTypeClass.DoControls_DogMaul_Jump.Set(ptr_type,value)          ObjectTypeClass.SetByte                ptr_type, InfantryTypeClass.Offset.DoControls_DogMaul_Jump, value
 %define InfantryTypeClass.DoControls_DogMaul_Jump.Read(ptr_type,ptr_rules)     ObjectTypeClass.ReadByte               ptr_type, ptr_rules, InfantryTypeClass.Offset.DoControls_DogMaul_Jump, str.InfantryTypeClass.DoControls_DogMaul_Jump
+
+%define InfantryTypeClass.Response_Select.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Response_Select, reg_output
+%define InfantryTypeClass.Response_Select_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Response_Select_Data, reg_output
+%define InfantryTypeClass.Response_Select.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.Response_Select, str.InfantryTypeClass.Response_Select, function
+
+%define InfantryTypeClass.Response_Move.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Response_Move, reg_output
+%define InfantryTypeClass.Response_Move_Data.Get(ptr_type,reg_output)          ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Response_Move_Data, reg_output
+%define InfantryTypeClass.Response_Move.Read(ptr_type,ptr_rules,function)      ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.Response_Move, str.InfantryTypeClass.Response_Move, function
+
+%define InfantryTypeClass.Response_Attack.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Response_Attack, reg_output
+%define InfantryTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Response_Attack_Data, reg_output
+%define InfantryTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.Response_Attack, str.InfantryTypeClass.Response_Attack, function
+
+
 
