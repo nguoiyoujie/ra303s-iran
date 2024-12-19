@@ -26,6 +26,8 @@
 %define Audio___Sound_Effect                                      0x00425F24 ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
 %define Audio___SoundEffectName                                   0x005FE090 ; SoundEffectName[VOC_COUNT]
 
+
+
 ; CCFile.CPP
 ; !!! FileClass is a base type, check what derived type these addresses really point to
 %define CCFileClass__CCFileClass                                  0x004627D4 ; CCFileClass::CCFileClass(char const * filename)
@@ -86,7 +88,7 @@
 %define HouseTypeClass__HouseTypeClass                            0x004CB774 ; HouseTypeClass::HouseTypeClass(HousesType house, char const * ini, int fullname, char const * ext, int lemon, PlayerColorType remapcolor, char prefix)
 %define HouseTypeClass__new                                       0x004CB820 ; void * HouseTypeClass::operator new(size_t)
 %define HouseTypeClass__From_Name                                 0x004CD0E4 ; HousesType HouseTypeClass::From_Name(char const * name)
-
+%define HouseTypeClass__Read_INI                                  0x004CD174 ; bool HouseTypeClass::Read_INI(CCINIClass & ini)
 
 ; HOUSE.CPP
 %define HouseClass__HousesType                                    0x004D2C48 ; HouseClass::operator HousesType(void) const

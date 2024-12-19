@@ -293,6 +293,20 @@ ID mappings of supported object types are listed on this page for reference
 |17|[![#baa599](./img/8x8/5_grey.png)](#)        Multi6       
 |18|[![#4ca189](./img/8x8/6_teal.png)](#)        Multi7       
 |19|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi8       
+|20|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi9*       
+|21|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi10*       
+|22|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi11*      
+|23|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi12*      
+|24|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi13*      
+|25|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi14*      
+|26|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi15*      
+|27|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi16*      
+|28|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi17*      
+|29|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi18*      
+|30|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi19*      
+|31|[![#ae5d44](./img/8x8/7_brown.png)](#)       Multi20*      
+
+* Extended housetypes
 </samp>
 
 

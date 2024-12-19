@@ -58,7 +58,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/macros/vesseltypeclass.asm"
 %include "src/macros/warheadtypeclass.asm"
 %include "src/macros/weapontypeclass.asm"
-;%include "src/macros/houseclass.asm" ;wip
+%include "src/macros/houseclass.asm" ;wip
 ;%include "src/macros/animtypeclass.asm" ;wip
 
 %ifdef USE_HIRES
@@ -103,6 +103,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_read_ini.asm"
 
 %include "src/features/type_extensions/extended_houseclass.asm"
+%include "src/features/type_extensions/extended_housetypeclass.asm"
 %include "src/features/type_extensions/extended_buildingclass.asm"
 %include "src/features/type_extensions/extended_technoclass.asm"
 %include "src/features/type_extensions/extended_footclass.asm"

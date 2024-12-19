@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/building_jammable_override.asm
+; src/features/coop.asm
 ;
 ; MP Coop support
 ;
@@ -87,10 +87,13 @@ _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses:
 _Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode:
     cmp  dword [InCoopMode],1
     jz   0x004AB661
+    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    jz   0x004AB661
 
     cmp  al,0x0c
     jl   0x004AB661
-    jmp  0x004AB65D
+    cmp  al,HouseType.Count-1
+    jmp  0x004AB65F
 
 InCoopMode    dd 0
 

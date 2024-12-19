@@ -69,6 +69,32 @@ str_Multi6                                        db"Multi6",0
 str_Multi7                                        db"Multi7",0
 str_Multi8                                        db"Multi8",0
 
+;Additional houses
+str_Multi9                                        db"Multi9",0
+str_Multi10                                       db"Multi10",0
+str_Multi11                                       db"Multi11",0
+str_Multi12                                       db"Multi12",0
+str_Multi13                                       db"Multi13",0
+str_Multi14                                       db"Multi14",0
+str_Multi15                                       db"Multi15",0
+str_Multi16                                       db"Multi16",0
+str_Multi17                                       db"Multi17",0
+str_Multi18                                       db"Multi18",0
+str_Multi19                                       db"Multi19",0
+str_Multi20                                       db"Multi20",0
+str_MP9                                           db"MP9",0
+str_MP10                                          db"M10",0
+str_MP11                                          db"M11",0
+str_MP12                                          db"M12",0
+str_MP13                                          db"M13",0
+str_MP14                                          db"M14",0
+str_MP15                                          db"M15",0
+str_MP16                                          db"M16",0
+str_MP17                                          db"M17",0
+str_MP18                                          db"M18",0
+str_MP19                                          db"M19",0
+str_MP20                                          db"M20",0
+
 ; Hardcoded naval turrets
 str_TURR                                          db"TURR",0
 str_SSAM                                          db"SSAM",0
@@ -426,11 +452,29 @@ Toggle_Fix_WideAreaDamage db 0
 
 ;;; Temporary location until the House macros are completed
 ; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)
-; 20 houses are supported, but we leave space for 24
-Houses.SpecialScan                                times 24 dd 0 
-Houses.Radar                                      times 24 db 0 
-Houses.Factory                                    times 24 db 0 
-Houses.BScan                                      times 768 db 0    ; 24 * (256 entries, 32 bytes)
-Houses.BGroupScan                                 times 768 db 0    ; 24 * (256 entries, 32 bytes)
+; 20 houses are supported, we introduce Multi9-20 to support up to 32 houses
+Houses.SpecialScan                                times 32 dd 0 
+Houses.Radar                                      times 32 db 0 
+Houses.Factory                                    times 32 db 0 
+Houses.BScan                                      times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
+Houses.BGroupScan                                 times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
 ;Houses.BQuantity                                  times 6144 db 0   ; 24 * 256 entries
+Houses.HouseTriggers                              times 768 db 0 ; 32 houses * 24 bytes
+HouseTypeClass.Multi9                             times 316 db 0
+HouseTypeClass.Multi10                            times 316 db 0
+HouseTypeClass.Multi11                            times 316 db 0
+HouseTypeClass.Multi12                            times 316 db 0
+HouseTypeClass.Multi13                            times 316 db 0
+HouseTypeClass.Multi14                            times 316 db 0
+HouseTypeClass.Multi15                            times 316 db 0
+HouseTypeClass.Multi16                            times 316 db 0
+HouseTypeClass.Multi17                            times 316 db 0
+HouseTypeClass.Multi18                            times 316 db 0
+HouseTypeClass.Multi19                            times 316 db 0
+HouseTypeClass.Multi20                            times 316 db 0
 
+HouseTypeClass.DestructorPtrs                     times 256 db 0 ; 32 total houses * 2 ptrs
+;HouseTypeClass_p1                                 dd 0x00405610
+;HouseTypeClass_p2                                 dd 0x0040561C
+;HouseTypeClass_p3                                 dd 0x0040566C
+;HouseTypeClass_p4                                 dd 0x004CD174

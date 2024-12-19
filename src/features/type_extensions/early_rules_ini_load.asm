@@ -47,5 +47,5 @@ _Init_Game_Early_RULES_INI_Load:
 
 .Ret:
     Restore_Registers
-    mov  edx,14h
+    mov  edx,HouseType.Count ; was 14h
     jmp  0x004F4099

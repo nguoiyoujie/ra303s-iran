@@ -142,4 +142,73 @@
 ;
 ;str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                     ;existing feature
 
-
+%macro HouseTypeClass.new    2
+    mov  eax,0x13a ; size
+    call HouseTypeClass__new
+    test eax,eax
+    jz   %%skip
+    mov  ecx,6
+    mov  dl,byte [%1]
+    mov  esi,%1 + 5
+    mov  byte [eax],dl
+    mov  edx, [%1 + 1]
+    lea  edi,[eax+5]
+    mov  dword [eax+1],edx
+    add  eax,0x12c
+    rep movsd 
+    mov  edx,dword [%1 + 0x1d]
+    mov  ecx,0x40
+    mov  dword [eax-0x10b],0x005F6468
+    mov  esi,%1 + 0x26
+    mov  dword [eax-0x10f],edx
+    mov  dl,byte [%1 + 0x25]
+    lea  edi,[eax-0x106]
+    mov  byte [eax-0x107],dl
+    mov  edx,[%1 + 0x126]
+    rep movsd 
+    mov  dword [eax-6],edx
+    mov  dl,byte [%1 + 0x12A]
+    mov  byte [eax-2],dl
+    mov  dl,byte [%1 + 0x12B]
+    mov  byte [eax-1],dl
+    mov  edx,%1 + 0x12C
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x12C]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x12E
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x12E]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x130
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x130]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x132
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x132]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x134
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x134]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x136
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    add  eax,2
+    mov  dx,word [%1 + 0x136]
+    mov  word [eax-2],dx
+    mov  edx,%1 + 0x138
+    call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
+    sub  eax,0x138
+    mov  dx,word [%1 + 0x138]
+    mov  word [eax+0x138],dx
+    mov  dword [eax+0x21],0x005FA8A8
+    ;mov  dword [HouseTypeClass.DestructorPtrs-0x14*8+%2*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
+    ;mov  dword [HouseTypeClass.DestructorPtrs-0x14*8+4+%2*8],%1
+    ;mov  dword [eax+0x21],HouseTypeClass.DestructorPtrs;+0xC*8 ;0x005FA8A8
+%%skip:
+%endmacro

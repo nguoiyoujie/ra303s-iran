@@ -6,6 +6,7 @@ HouseTypes represent a player slot. There are originally a total of 20 Houses / 
 -------
 
  - [Documentation Guide](#documentation-guide)
+ - [Expanded House Roster](#expanded-house-roster) 
  - [General Settings](#general-settings) 
 
 
@@ -18,47 +19,10 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 
 <a href="#housetypes"><kbd>Top</kbd></a><br>
 -------
-### New Type Extensions
-<br>
+### Expanded House Roster
 
-These settings enable you to define new types, expanding modding capabilities.
-
-The game allows for a maximum of 255 types of each kind, inclusive of the ones included in the original game. Be careful not to over-extend it!
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [HouseTypes]
-</samp></td><td width="120"><samp>List</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-
-This section carries a zero-based list of IDs to be recognized as new BuildingType.
-
-Care must be taken that the list keys follow the zero-based index exactly. Duplicate keys (e.g. two '0='), or missing keys, may crash the game at boot. The requirement for strict ordering may change in the future.
-
-Example as follows:
-
-```ini
-[HouseTypes]
-0=Multi9
-1=Multi10
-```
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [StringTableOffsets] ► House
-</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-
-The `Name` entries can be used to set the names of objects, but is limited to 30 across all instances before the game crashes. Instead, it is recommended to utilize `CONQUER.ENG` and its language counterparts to supply these names.
-
-This specifies the string entry location within `CONQUER.ENG` of new technotype entries. The index used is denoted by [Type] + [index in the new types section] + 1.
-
-For example, if `[StringTableOffsets] ► House` is set to 400 and `[HouseTypes] ► 2` is set to Multi11, then the string table entry for `[Multi11]` is 400 + 2 + 1 = **403**
-
-Ensure that `CONQUER.ENG` has sufficient entries, as attempting to read a missing entry will crash the game when hovering over the affected unit.
-
-Do not create entries that exceed 1000 as the game will route to `DEBUG.ENG` instead, which for now is beyond the scope of the project.
-
-If not defined, or set to -1, all additional house types will default their names to the 'Civilian' text entry.
-</details></td></tr></table>
+The game now supports 12 additional houses, up to a total of 32.
+The full list of houses are available <a href="./defines.md#housetypes">here</a>.
 
 
 <a href="#housetypes"><kbd>Top</kbd></a><br>
