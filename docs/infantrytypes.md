@@ -334,15 +334,15 @@ Determines the frame offset from the begining of the firing sequence when the we
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath3<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath4<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath5
-</samp></td><td width="120"><samp><a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
-<a href="./defines.md#soundeffects">SoundEffect</a> Array
+</samp></td><td width="120"><samp>List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List
 </a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```New Logic```
