@@ -474,7 +474,7 @@ HouseTypeClass.Multi19                            times 316 db 0
 HouseTypeClass.Multi20                            times 316 db 0
 
 HouseTypeClass.DestructorPtrs                     times 256 db 0 ; 32 total houses * 2 ptrs
-;HouseTypeClass_p1                                 dd 0x00405610
-;HouseTypeClass_p2                                 dd 0x0040561C
-;HouseTypeClass_p3                                 dd 0x0040566C
-;HouseTypeClass_p4                                 dd 0x004CD174
+HouseTypeClass_p1                                 dd 0x00405610
+HouseTypeClass_p2                                 dd 0x0040561C
+HouseTypeClass_p3                                 dd 0x0040566C
+HouseTypeClass_p4                                 dd 0x004CD174
