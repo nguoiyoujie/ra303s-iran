@@ -99,7 +99,7 @@ _TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber:
     call 0x005CEDFE ; srand_
     call 0x005CEDDA ; rand_
     mov  edx, eax
-    mov  eax, 0x00667760 ; offset RandomClass NonCriticalRandomNumber
+    mov  eax, Globals___NonCriticalRandomNumber
     jmp  0x004C779D
 
 
@@ -116,9 +116,9 @@ _Load_Game_Queue_Song:
     call INIClass__Entry_Count
     mov  ebx, 26h
     add  ebx, eax
-    mov  eax, 0x00667760
+    mov  eax, Globals___NonCriticalRandomNumber
     xor  edx, edx
-    call 0x005BC960 ; RandomClass::operator()(int, int)
+    call RandomClass_Random
     mov  edx, eax
     mov  eax, 0x00668248 ; ThemeClass Theme
     call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
@@ -143,9 +143,9 @@ _Start_Scenario_Queue_Theme:
     call INIClass__Entry_Count
     mov  ebx, 26h
     add  ebx, eax
-    mov  eax, 0x00667760 ;  RandomClass NonCriticalRandomNumber
+    mov  eax, Globals___NonCriticalRandomNumber
     xor  edx, edx
-    call 0x005BC960 ; RandomClass::operator()(int, int)
+    call RandomClass_Random
     mov  edx, eax
     mov  eax, 0x00668248 ; ThemeClass Theme
     call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)

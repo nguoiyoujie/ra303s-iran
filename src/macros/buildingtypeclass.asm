@@ -187,13 +187,13 @@ str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0    
 %define BuildingTypeClass.IsPowered.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsPowered, BuildingTypeClass.Bit.IsPowered, value
 %define BuildingTypeClass.IsPowered.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsPowered, BuildingTypeClass.Bit.IsPowered, str.BuildingTypeClass.IsPowered
 
-%define BuildingTypeClass.IsJammable.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, reg_output
-%define BuildingTypeClass.IsJammable.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, value
-%define BuildingTypeClass.IsJammable.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, str.BuildingTypeClass.IsJammable
+%define BuildingTypeClass.IsJammable.Get(ptr_type,reg_output)                  ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, reg_output
+%define BuildingTypeClass.IsJammable.Set(ptr_type,value)                       ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, value
+%define BuildingTypeClass.IsJammable.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsJammable, BuildingTypeClass.Bit.IsJammable, str.BuildingTypeClass.IsJammable
 
-%define BuildingTypeClass.IsRadar.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, reg_output
-%define BuildingTypeClass.IsRadar.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, value
-%define BuildingTypeClass.IsRadar.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, str.BuildingTypeClass.IsRadar
+%define BuildingTypeClass.IsRadar.Get(ptr_type,reg_output)                     ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, reg_output
+%define BuildingTypeClass.IsRadar.Set(ptr_type,value)                          ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, value
+%define BuildingTypeClass.IsRadar.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, str.BuildingTypeClass.IsRadar
 
 %define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              ObjectTypeClass.GetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
 %define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   ObjectTypeClass.SetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
