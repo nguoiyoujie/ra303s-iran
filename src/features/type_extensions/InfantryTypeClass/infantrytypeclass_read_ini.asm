@@ -139,6 +139,12 @@ _InfantryTypeClass__Read_INI_Extended:
     InfantryTypeClass.Response_Select.Read(esi,edi,_GetResponseSelectFromString)
     InfantryTypeClass.Response_Move.Read(esi,edi,_GetResponseMoveFromString)
     InfantryTypeClass.Response_Attack.Read(esi,edi,_GetResponseAttackFromString)
+    InfantryTypeClass.Response_Invade.Read(esi,edi,_GetResponseInvadeFromString)
+    InfantryTypeClass.Report_Death1.Read(esi,edi,_GetReportDeath1FromString)
+    InfantryTypeClass.Report_Death2.Read(esi,edi,_GetReportDeath2FromString)
+    InfantryTypeClass.Report_Death3.Read(esi,edi,_GetReportDeath3FromString)
+    InfantryTypeClass.Report_Death4.Read(esi,edi,_GetReportDeath4FromString)
+    InfantryTypeClass.Report_Death5.Read(esi,edi,_GetReportDeath5FromString)
 
     pop  edi
     pop  esi
@@ -333,3 +339,294 @@ _GetResponseAttackFromString:
     pop edx
     pop edi
     retn
+
+
+_GetResponseInvadeFromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Response_Invade_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Response_Invade_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+
+
+
+_GetReportDeath1FromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death1_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death1_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+	
+
+_GetReportDeath2FromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death2_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death2_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+
+
+_GetReportDeath3FromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death3_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death3_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+	
+
+_GetReportDeath4FromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death4_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death4_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+	
+
+_GetReportDeath5FromString:
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je  .Retn ; just return 0
+    mov  ebx,eax
+
+.Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je  .Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Read_Next
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death5_Data+edi*2],ax
+    inc  edi
+    cmp  edi,16 ; do not exceed 16
+    jge  .Retn
+    jmp  .Read_Next
+
+.Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   .Retn
+    mov  word[esi+InfantryTypeClass.Offset.Report_Death5_Data+edi*2],ax
+    inc  edi
+    
+.Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+	
+

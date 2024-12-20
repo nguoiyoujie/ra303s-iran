@@ -90,7 +90,7 @@
 %define InfantryTypeClass.Array            0x0065DE3C
 %define InfantryTypeClass.ORIGINAL_MAX     1Ah
 %define InfantryTypeClass.ORIGINAL_SIZE    1A2h
-%define InfantryTypeClass.NEW_SIZE         2A0h
+%define InfantryTypeClass.NEW_SIZE         3A0h
 
 ; BulletTypeClass                          0x0065DE54
 %define BulletTypeClass.Count              0x0065DE60

@@ -34,6 +34,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/generic.asm"
 %include "src/defines/gametypes.asm"
 %include "src/defines/rttitypes.asm"
+%include "src/defines/missiontypes.asm"
 %include "src/defines/technotypes.asm"
 %include "src/defines/housetypes.asm"
 %include "src/defines/armortypes.asm"

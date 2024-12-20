@@ -327,13 +327,46 @@ Determines the frame offset from the begining of the firing sequence when the we
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack
-</samp></td><td width="120"><samp>List<br>List<br>List</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseInvade<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath1<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath2<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath3<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath4<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath5
+</samp></td><td width="120"><samp><a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array<br>
+<a href="./defines.md#soundeffects">SoundEffect</a> Array
+</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```New Logic```
 
 If defined, replaces the infantry response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
  
+Each entry are as follows:
+
+<samp>
+
+|Stage             |Explanation             
+:------------------|:------------
+|`ResponseSelect`  |Response when selected
+|`ResponseMove`    |Response when ordered to move to a location
+|`ResponseInvade`  |Response when ordered to capture or infiltrate a building.<br>If not defined, falls back to `ResponseMove`
+|`ResponseAttack`  |Response when ordered to attack a target
+|`ReportDeath1`    |Report when killed by small arms (Warhead ► Explosion=1)
+|`ReportDeath2`    |Report when killed by AP explosion (Warhead ► Explosion=2)
+|`ReportDeath3`    |Report when killed by HE explosion (Warhead ► Explosion=3)
+|`ReportDeath4`    |Report when killed by fire (Warhead ► Explosion=4)
+|`ReportDeath5`    |Report when killed by shock (Warhead ► Explosion=5)
+
+</samp>
+
 </details></td></tr></table>
 
 

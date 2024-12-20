@@ -302,7 +302,7 @@
 
 
 
-
+%define RandomClass_Random                                        0x005BC960 ; RandomClass::operator()(int, int)
 
 ; PALETTEC.CPP
 %define PaletteClass__Set                                         0x005BCF44 ; void PaletteClass::Set(int time, void (* callback)(void)) const
@@ -345,6 +345,7 @@
 
 %define Globals___Keyboard                                        0x00666904 ; KeyboardClass * Keyboard;
 
+%define Globals___NonCriticalRandomNumber                         0x00667760 ; RandomClass NonCriticalRandomNumber;
 
 %define Globals___Scen                                            0x006678E8 ; ScenarioClass Scen;
 %define Globals___Scen_RandomNumber                               0x006678E8 ; RandomClass ScenarioClass::RandomNumber;
