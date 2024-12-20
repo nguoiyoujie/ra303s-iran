@@ -458,5 +458,22 @@ The created building will be offset at the cell +1,+1 (directly south-east) from
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
+### Explosions
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► SpreadExplosionDamage<br>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► SpreadExplosionWarhead
+</samp></td><td width="120"><samp>Integer<br>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If defined, causes the building to explode like a Barrel, producing secondary explosions in its 4 cardinal directions. Determines the damage and warhead that is released on this building's destruction death. 
+The barrel uses 200 damage / Fire warhead.
+
+Note that the explosion center uses cell coordinates, which means a 2x2 building may generate the explosions around the top-left cell.
+</details></td></tr></table>
+
+
+<a href="#buildingtypes"><kbd>Top</kbd></a><br>
+-------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>
 
