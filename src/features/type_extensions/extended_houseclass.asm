@@ -110,7 +110,7 @@ _Replace_HouseTriggers_53AB84:
 @CLEAR 0x004DE61E HouseType.Count 0x004DE61F ; bool HouseClass::Is_Allowed_To_Ally(HousesType house) const, was 0x14
 @CLEAR 0x004DE688 HouseType.Count 0x004DE689 ; void HouseClass::Computer_Paranoid(void)
 @CLEAR 0x004DE6E2 HouseType.Count 0x004DE6E3 ; void HouseClass::Computer_Paranoid(void)
-@CLEAR 0x004FE1F6 HouseType.Count 0x004FE1F7 ; void LogicClass::AI(void), was 0x14
+@CLEAR 0x004FE1F4 HouseType.Count 0x004FE1F5 ; void LogicClass::AI(void), was 0x14
 @CLEAR 0x004FE220 HouseType.Count 0x004FE221 ; void LogicClass::AI(void), was 0x14
 @CLEAR 0x004FFECE HouseType.Count 0x004FFECF ; bool MapClass::Base_Region(CELL cell, HousesType & house, ZoneType & zone), was 0x14
 @CLEAR 0x005321C3 HouseType.Count 0x005321C4 ; bool RadarClass::Spy_Next_House(void)
