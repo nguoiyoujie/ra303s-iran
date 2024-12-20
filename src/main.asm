@@ -229,7 +229,7 @@ _str_version: db"3.03p-iB1v1",0
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
 %include "src/experimental/experiment_jam_remap.asm" 
-%include "src/experimental/experiment_cnc_refinery.asm" 
+;%include "src/experimental/experiment_cnc_refinery.asm" 
 
 %ifdef USE_NOCD
 %include "src/features/nocd.asm"
