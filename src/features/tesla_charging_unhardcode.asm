@@ -82,7 +82,7 @@ _BuildingClass_ChargingAI_UseWeaponChargeVoice:
     pop  edx
     pop  ecx
     cmp  ax,-1 ; VOC_NONE
-    je   0x0045FDB3
+    jne  0x0045FDB3
     mov  eax,0x45 ;VOC_TESLA_POWER_UP
     jmp  0x0045FDB3
 
