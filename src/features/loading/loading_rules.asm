@@ -4,10 +4,10 @@
 ; Load setting keys from rules.ini. Some of the logic may be called again when loading from map
 ;
 ;----------------------------------------------------------------
-@HOOK 0x004F446C _Init_Game_Hook_Load ; For rules.ini stuff
-@HOOK 0x00536AB5 _RulesClass__AI_Load
+@HOOK 0x004F446C _Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
+@HOOK 0x00536AB5 _RulesClass__AI_Load ; it doesn't matter if we hook RulesClass::AI or RulesClass::General, the loaidng is contiguous. Intended for logic that should load per map.
 
-
+; only loaded once on game init, not per map
 _Init_Game_Hook_Load:
     push ecx
     push ebx
@@ -56,9 +56,77 @@ _Init_Game_Hook_Load:
     jmp  0x004F4471
 
 
+; loaded per map
 _RulesClass__AI_Load:
     Save_Registers
 
+    ; [General]
+.DeathReport1:
+    call_INIClass__Get_String esi, str_General, str_DeathReport1, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DeathReport2
+    GetVocArrayFromString Rules.General.DeathReport1_Data,16
+    mov  [Rules.General.DeathReport1],eax
+
+.DeathReport2:
+    call_INIClass__Get_String esi, str_General, str_DeathReport2, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DeathReport3
+    GetVocArrayFromString Rules.General.DeathReport2_Data,16
+    mov  [Rules.General.DeathReport2],eax
+
+.DeathReport3:
+    call_INIClass__Get_String esi, str_General, str_DeathReport3, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DeathReport4
+    GetVocArrayFromString Rules.General.DeathReport3_Data,16
+    mov  [Rules.General.DeathReport3],eax
+
+.DeathReport4:
+    call_INIClass__Get_String esi, str_General, str_DeathReport4, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DeathReport5
+    GetVocArrayFromString Rules.General.DeathReport4_Data,16
+    mov  [Rules.General.DeathReport4],eax
+
+.DeathReport5:
+    call_INIClass__Get_String esi, str_General, str_DeathReport5, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DeathReport
+    GetVocArrayFromString Rules.General.DeathReport5_Data,16
+    mov  [Rules.General.DeathReport5],eax
+
+.DeathReport:
+    call_INIClass__Get_String esi, str_General, str_DeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .TanyaDeathReport
+    GetVocArrayFromString Rules.General.DeathReport_Data,16
+    mov  [Rules.General.DeathReport],eax
+
+.TanyaDeathReport:
+    call_INIClass__Get_String esi, str_General, str_TanyaDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .DogDeathReport
+    GetVocArrayFromString Rules.General.TanyaDeathReport_Data,16
+    mov  [Rules.General.TanyaDeathReport],eax
+
+.DogDeathReport:
+    call_INIClass__Get_String esi, str_General, str_DogDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax, ObjectTypeClass.StringBuffer
+    cmp  byte[eax],0
+    je   .AI
+    GetVocArrayFromString Rules.General.DogDeathReport_Data,16
+    mov  [Rules.General.DogDeathReport],eax
+
+.AI:
+    ; [AI]
     call_INIClass__Get_Int esi,str_AI,str_EasyAIGoldValue,[Rules.AI.EasyAIGoldValue]
     mov  [Rules.AI.EasyAIGoldValue],eax
 

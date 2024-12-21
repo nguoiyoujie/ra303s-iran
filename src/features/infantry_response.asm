@@ -10,11 +10,11 @@
 
 @HOOK 0x0056586D _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate
 @HOOK 0x004EBECD _InfantryClass__Take_Damage_RememberID
-@HOOK 0x004EBF33 _InfantryClass__Take_Damage_ReportDeath1
-@HOOK 0x004EBF68 _InfantryClass__Take_Damage_ReportDeath2
-@HOOK 0x004EBF9F _InfantryClass__Take_Damage_ReportDeath3
-@HOOK 0x004EBFD6 _InfantryClass__Take_Damage_ReportDeath4
-@HOOK 0x004EC002 _InfantryClass__Take_Damage_ReportDeath5
+@HOOK 0x004EBF33 _InfantryClass__Take_Damage_DeathReport1
+@HOOK 0x004EBF68 _InfantryClass__Take_Damage_DeathReport2
+@HOOK 0x004EBF9F _InfantryClass__Take_Damage_DeathReport3
+@HOOK 0x004EBFD6 _InfantryClass__Take_Damage_DeathReport4
+@HOOK 0x004EC002 _InfantryClass__Take_Damage_DeathReport5
 @HOOK 0x004EF463 _InfantryClass__Response_Select_CustomVoice
 @HOOK 0x004EF6C3 _InfantryClass__Response_Move_CustomVoice
 @HOOK 0x004EF92B _InfantryClass__Response_Attack_CustomVoice
@@ -45,102 +45,120 @@ _InfantryClass__Take_Damage_RememberID:
     jmp  0x004EBED3
 
 
-_InfantryClass__Take_Damage_ReportDeath1:
-    ; edx is the sound, eax and ecx are available
+; %1 - deathtyppe: 1 to 5
+; %2 - register to place the result, unmodified if no custom deathreport is found. Expects ebx or edx
+%macro GetCustomDeathReport 2
+    ; eax and ecx are available
     mov  al,byte[Temp.DeathInfantryID] ; ID
     movsx eax,al
     InfantryTypeClass.FromIndex(eax,ecx) 
-    InfantryTypeClass.Report_Death1.Get(ecx,eax)
+    InfantryTypeClass.DeathReport%1.Get(ecx,eax)
     test eax,eax
-    jz   .Retn
-    lea  ecx,[ecx+InfantryTypeClass.Offset.Report_Death1_Data]
+    jz   %%CheckDeathReport
+    lea  ecx,[ecx+InfantryTypeClass.Offset.DeathReport%1_Data]
     lea  ebx,[eax-1]
     mov  eax,Globals___NonCriticalRandomNumber
     xor  edx,edx
     call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%CheckDeathReport:
+    InfantryTypeClass.DeathReport.Get(ecx,eax)
+    test eax,eax
+    jz   %%CheckSpecialInfantry
+    lea  ecx,[ecx+InfantryTypeClass.Offset.DeathReport_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
     xor  edx,edx
-    mov  dx,word[ecx+eax*2]
-.Retn:
+    call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%CheckSpecialInfantry:
+    cmp  byte[Temp.DeathInfantryID],InfantryType.E7
+    je   %%CheckSpecialTanyaDeathReport
+    cmp  byte[Temp.DeathInfantryID],InfantryType.DOG
+    je   %%CheckSpecialDogDeathReport
+    jmp  %%CheckGeneralDeathReportNum
+  %%CheckSpecialTanyaDeathReport:
+    mov  eax,[Rules.General.TanyaDeathReport]
+    test eax,eax
+    jz   %%Retn
+    lea  ecx,[Rules.General.TanyaDeathReport_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%CheckSpecialDogDeathReport:
+    mov  eax,[Rules.General.DogDeathReport]
+    test eax,eax
+    jz   %%Retn
+    lea  ecx,[Rules.General.DogDeathReport_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%CheckGeneralDeathReportNum:
+    mov  eax,[Rules.General.DeathReport%1]
+    test eax,eax
+    jz   %%CheckGeneralDeathReport
+    lea  ecx,[Rules.General.DeathReport%1_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%CheckGeneralDeathReport:
+    mov  eax,[Rules.General.DeathReport]
+    test eax,eax
+    jz   %%Retn
+    lea  ecx,[Rules.General.DeathReport_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    mov  %2,word[ecx+eax*2]
+    jmp  %%Retn
+  %%Retn:
+%endmacro
+
+
+_InfantryClass__Take_Damage_DeathReport1:
+    GetCustomDeathReport 1,dx
+    movsx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF38
 
 
-_InfantryClass__Take_Damage_ReportDeath2:
-    ; edx is the sound, eax and ecx are available
-    mov  al,byte[Temp.DeathInfantryID] ; ID
-    movsx eax,al
-    InfantryTypeClass.FromIndex(eax,ecx) 
-    InfantryTypeClass.Report_Death2.Get(ecx,eax)
-    test eax,eax
-    jz   .Retn
-    lea  ecx,[ecx+InfantryTypeClass.Offset.Report_Death2_Data]
-    lea  ebx,[eax-1]
-    mov  eax,Globals___NonCriticalRandomNumber
-    xor  edx,edx
-    call RandomClass_Random
-    xor  edx,edx
-    mov  dx,word[ecx+eax*2]
-.Retn:
+_InfantryClass__Take_Damage_DeathReport2:
+    GetCustomDeathReport 2,dx
+    movsx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF6D
 
 
-_InfantryClass__Take_Damage_ReportDeath3:
-    ; edx is the sound, eax and ecx are available
-    mov  al,byte[Temp.DeathInfantryID] ; ID
-    movsx eax,al
-    InfantryTypeClass.FromIndex(eax,ecx) 
-    InfantryTypeClass.Report_Death3.Get(ecx,eax)
-    test eax,eax
-    jz   .Retn
-    lea  ecx,[ecx+InfantryTypeClass.Offset.Report_Death3_Data]
-    lea  ebx,[eax-1]
-    mov  eax,Globals___NonCriticalRandomNumber
-    xor  edx,edx
-    call RandomClass_Random
-    xor  edx,edx
-    mov  dx,word[ecx+eax*2]
-.Retn:
+_InfantryClass__Take_Damage_DeathReport3:
+    GetCustomDeathReport 3,dx
+    movsx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFA4
 
 
-_InfantryClass__Take_Damage_ReportDeath4:
-    ; ebx is the sound, eax and ecx are available
-    mov  al,byte[Temp.DeathInfantryID] ; ID
-    movsx eax,al
-    InfantryTypeClass.FromIndex(eax,ecx) 
-    InfantryTypeClass.Report_Death4.Get(ecx,eax)
-    test eax,eax
-    jz   .Retn
-    lea  ecx,[ecx+InfantryTypeClass.Offset.Report_Death4_Data]
-    lea  ebx,[eax-1]
-    mov  eax,Globals___NonCriticalRandomNumber
-    xor  edx,edx
-    call RandomClass_Random
-    xor  ebx,ebx
-    mov  bx,word[ecx+eax*2]
-.Retn:
+_InfantryClass__Take_Damage_DeathReport4:
+    ; ebx is the sound
+    GetCustomDeathReport 4,bx
+    movsx ebx,bx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFDB
 
 
-_InfantryClass__Take_Damage_ReportDeath5:
-    ; edx is the sound, eax and ecx are available
-    mov  al,byte[Temp.DeathInfantryID] ; ID
-    movsx eax,al
-    InfantryTypeClass.FromIndex(eax,ecx) 
-    InfantryTypeClass.Report_Death5.Get(ecx,eax)
-    test eax,eax
-    jz   .Retn
-    lea  ecx,[ecx+InfantryTypeClass.Offset.Report_Death5_Data]
-    lea  ebx,[eax-1]
-    mov  eax,Globals___NonCriticalRandomNumber
-    xor  edx,edx
-    call RandomClass_Random
-    xor  edx,edx
-    mov  dx,word[ecx+eax*2]
-.Retn:
+_InfantryClass__Take_Damage_DeathReport5:
+    GetCustomDeathReport 5,dx
+    movsx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EC007
 

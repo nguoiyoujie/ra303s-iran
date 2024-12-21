@@ -331,6 +331,15 @@ str_EvacInMP                                      db"EvacInMP",0
 str_RemapJammedBuildings                          db"RemapJammedBuildings",0
 str_AtomRadius                                    db"AtomRadius",0
 ; str_ParabombsInMultiplayer (multi-use)
+str_DeathReport1                                  db"DeathReport1",0         
+str_DeathReport2                                  db"DeathReport2",0         
+str_DeathReport3                                  db"DeathReport3",0         
+str_DeathReport4                                  db"DeathReport4",0         
+str_DeathReport5                                  db"DeathReport5",0         
+str_DeathReport                                   db"DeathReport",0         
+str_TanyaDeathReport                              db"TanyaDeathReport",0         
+str_DogDeathReport                                db"DogDeathReport",0         
+
 
 ; Rules.ini > [AI]
 str_EasyAIGoldValue                               db"EasyAIGoldValue",0

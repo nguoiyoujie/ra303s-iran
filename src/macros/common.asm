@@ -174,7 +174,7 @@ Loop_Over_RULES_INI_Section_Entries_:
     call Audio___Voc_From_Name
     cmp  ax,-1
     je   %%Read_Next
-    mov  word[esi+%1+edi*2],ax
+    mov  word[%1+edi*2],ax
     inc  edi
     cmp  edi,%2 ; stop on max entry
     jge  %%Retn
@@ -184,7 +184,7 @@ Loop_Over_RULES_INI_Section_Entries_:
     call Audio___Voc_From_Name
     cmp  ax,-1
     je   %%Retn
-    mov  word[esi+%1+edi*2],ax
+    mov  word[%1+edi*2],ax
     inc  edi
   %%Retn:
     mov eax,edi
@@ -192,7 +192,6 @@ Loop_Over_RULES_INI_Section_Entries_:
     pop ecx
     pop edx
     pop edi
-    retn
 %endmacro
 
 

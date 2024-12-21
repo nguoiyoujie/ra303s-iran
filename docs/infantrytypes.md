@@ -298,11 +298,11 @@ The stages are as follows:
 |`FireProne`     |Firing weapon, but while prone
 |`Idle1`         |Idle animation
 |`Idle2`         |Idle animation #2
-|`Death1`        |Death by small arms (Warhead ► Explosion=1)
-|`Death2`        |Death by AP explosion (Warhead ► Explosion=2)
+|`Death1`        |Death by small arms (Warhead ► InfDeath=1)
+|`Death2`        |Death by AP explosion (Warhead ► InfDeath=2)
 |`Death2b`       |Death by AP explosion (this appears to be unused)
-|`Death3`        |Death by HE explosion (Warhead ► Explosion=3)
-|`Death4`        |Death by Fire or Nuke (Warhead ► Explosion=4 or Explosion=6)
+|`Death3`        |Death by HE explosion (Warhead ► InfDeath=3)
+|`Death4`        |Death by Fire or Nuke (Warhead ► InfDeath=4 or InfDeath=6)
 |`Gesture1`      |Idle animation #3
 |`Gesture2`      |Idle animation #4
 |`Salute1`       |Idle animation #5
@@ -329,12 +329,28 @@ Determines the frame offset from the begining of the firing sequence when the we
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseInvade<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath1<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath2<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath3<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath4<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ReportDeath5
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport1<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport2<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport3<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport4<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport5<br>
+<code>{Rules/Map}</code> ► [General]  ► TanyaDeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DogDeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport1<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport2<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport3<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport4<br>
+
 </samp></td><td width="120"><samp>List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
 List<br>
 List<br>
 List<br>
@@ -359,12 +375,49 @@ Each entry are as follows:
 |`ResponseMove`    |Response when ordered to move to a location
 |`ResponseInvade`  |Response when ordered to capture or infiltrate a building.<br>If not defined, falls back to `ResponseMove`
 |`ResponseAttack`  |Response when ordered to attack a target
-|`ReportDeath1`    |Report when killed by small arms (Warhead ► Explosion=1)
-|`ReportDeath2`    |Report when killed by AP explosion (Warhead ► Explosion=2)
-|`ReportDeath3`    |Report when killed by HE explosion (Warhead ► Explosion=3)
-|`ReportDeath4`    |Report when killed by fire (Warhead ► Explosion=4)
-|`ReportDeath5`    |Report when killed by shock (Warhead ► Explosion=5)
+|`DeathReport`     |Report when killed <br>(fallback if specific warhead death reports are not specifed)
+|`DeathReport1`    |Report when killed by small arms (Warhead ► InfDeath=1)<br>If not defined, falls back to `DeathReport`
+|`DeathReport2`    |Report when killed by AP explosion (Warhead ► InfDeath=2)<br>If not defined, falls back to `DeathReport`
+|`DeathReport3`    |Report when killed by HE explosion (Warhead ► InfDeath=3)<br>If not defined, falls back to `DeathReport`
+|`DeathReport4`    |Report when killed by fire (Warhead ► InfDeath=4)<br>If not defined, falls back to `DeathReport`
+|`DeathReport5`    |Report when killed by shock (Warhead ► InfDeath=5)<br>If not defined, falls back to `DeathReport`
 
+</samp>
+
+Death reports are supported in `[General]` as well, the difference being that `Tanya` and `Dog` have special keys to emulate their special voices in the base game.
+
+Death with Warhead ► InfDeath=X (All infantry except `Tanya` and `Dog`)
+<samp>
+
+|Read Priority                         
+:----------------------------
+|`[&lt;InfantryType&gt;]  ► DeathReportX`     
+|`[&lt;InfantryType&gt;]  ► DeathReport`     
+|`[General]  ► DeathReportX`     
+|`[General]  ► DeathReport`    
+|Default values 
+</samp>
+
+Death with Warhead ► InfDeath=X (`Tanya`)
+<samp>
+
+|Read Priority                         
+:----------------------------
+|`[&lt;InfantryType&gt;]  ► DeathReport2`     
+|`[&lt;InfantryType&gt;]  ► DeathReport`     
+|`[General]  ► TanyaDeathReport`     
+|Default Tanya scream 
+</samp>
+
+Death with Warhead ► InfDeath=X (`Dog`)
+<samp>
+
+|Read Priority                         
+:----------------------------
+|`[&lt;InfantryType&gt;]  ► DeathReport3`     
+|`[&lt;InfantryType&gt;]  ► DeathReport`     
+|`[General]  ► DogDeathReport`     
+|Default Dog whine 
 </samp>
 
 </details></td></tr></table>

@@ -140,12 +140,12 @@ _InfantryTypeClass__Read_INI_Extended:
     InfantryTypeClass.Response_Move.Read(esi,edi,_GetResponseMoveFromString)
     InfantryTypeClass.Response_Attack.Read(esi,edi,_GetResponseAttackFromString)
     InfantryTypeClass.Response_Invade.Read(esi,edi,_GetResponseInvadeFromString)
-    InfantryTypeClass.Report_Death1.Read(esi,edi,_GetReportDeath1FromString)
-    InfantryTypeClass.Report_Death2.Read(esi,edi,_GetReportDeath2FromString)
-    InfantryTypeClass.Report_Death3.Read(esi,edi,_GetReportDeath3FromString)
-    InfantryTypeClass.Report_Death4.Read(esi,edi,_GetReportDeath4FromString)
-    InfantryTypeClass.Report_Death5.Read(esi,edi,_GetReportDeath5FromString)
-    InfantryTypeClass.Report_Death.Read(esi,edi,_GetReportDeathFromString)
+    InfantryTypeClass.DeathReport1.Read(esi,edi,_GetDeathReport1FromString)
+    InfantryTypeClass.DeathReport2.Read(esi,edi,_GetDeathReport2FromString)
+    InfantryTypeClass.DeathReport3.Read(esi,edi,_GetDeathReport3FromString)
+    InfantryTypeClass.DeathReport4.Read(esi,edi,_GetDeathReport4FromString)
+    InfantryTypeClass.DeathReport5.Read(esi,edi,_GetDeathReport5FromString)
+    InfantryTypeClass.DeathReport.Read(esi,edi,_GetDeathReportFromString)
 
     pop  edi
     pop  esi
@@ -199,32 +199,42 @@ _SelectDoControlsFromString:
 
 
 _GetResponseSelectFromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Response_Select_Data,16
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Select_Data,16
+    retn
 
 _GetResponseMoveFromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Response_Move_Data,16
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Move_Data,16
+    retn
 
 _GetResponseAttackFromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Response_Attack_Data,16
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Attack_Data,16
+    retn
 
 _GetResponseInvadeFromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Response_Invade_Data,16
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Invade_Data,16
+    retn
 
-_GetReportDeath1FromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death1_Data,16
+_GetDeathReport1FromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport1_Data,16
+    retn
 
-_GetReportDeath2FromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death2_Data,16
+_GetDeathReport2FromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport2_Data,16
+    retn
 
-_GetReportDeath3FromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death3_Data,16
+_GetDeathReport3FromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport3_Data,16
+    retn
 
-_GetReportDeath4FromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death4_Data,16
+_GetDeathReport4FromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport4_Data,16
+    retn
 
-_GetReportDeath5FromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death5_Data,16
+_GetDeathReport5FromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport5_Data,16
+    retn
 
-_GetReportDeathFromString:
-    GetVocArrayFromString InfantryTypeClass.Offset.Report_Death_Data,16
+_GetDeathReportFromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport_Data,16
+    retn
 
