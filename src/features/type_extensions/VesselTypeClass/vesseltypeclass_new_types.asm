@@ -19,7 +19,7 @@
 
 
 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
-    mov  byte al,[NewVesselTypeHeapCount]
+    mov  byte al,[VesselTypeClass.Count]
     cmp  dl,al
     jl   0x00459620
     jmp  0x00459666
@@ -27,15 +27,13 @@ _BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
 
 _Init_Game_Set_VesselTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Vessel,[stringtableoffset_newvesseltypes]
-    mov  [stringtableoffset_newvesseltypes],eax
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Vessel,[Rules.StringTableOffsets.VesselTypes]
+    mov  [Rules.StringTableOffsets.VesselTypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_VesselTypes
-    mov  byte [VesselTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,VesselTypeClass.ORIGINAL_MAX
-    mov  byte [NewVesselTypeHeapCount],dl
+    add  edx,VesselTypeClass.ORIGINAL_COUNT
     jmp  0x004F4110
 
 
@@ -64,7 +62,7 @@ Init_VesslTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,VesselTypeClass.ORIGINAL_MAX ; VesselType
+    add  edx,VesselTypeClass.ORIGINAL_COUNT ; VesselType
 
     push 0Eh
     push 8
@@ -80,10 +78,10 @@ Init_VesslTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newvesseltypes],-1
+    cmp  dword [Rules.StringTableOffsets.VesselTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [stringtableoffset_newvesseltypes]
+    add  ebx,dword [Rules.StringTableOffsets.VesselTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -124,15 +122,14 @@ Init_Heap_OverrideExistingVesselTypes:
 
 
 _VesselTypeClass__One_Time_Unhardcode_VesselTypes:
-    mov  byte al,[NewVesselTypeHeapCount]
+    mov  byte al,[VesselTypeClass.Count]
     cmp  dh,al
     jl   0x0058497D
     jmp  0x00584A43
 
 
 _VesselTypeClass__From_Name_Unhardcode_VesselTypes:
-    mov  byte al,[NewVesselTypeHeapCount]
-
+    mov  byte al,[VesselTypeClass.Count]
     cmp  dl,al
     jl   0x00584B50
     jmp  0x00584B49

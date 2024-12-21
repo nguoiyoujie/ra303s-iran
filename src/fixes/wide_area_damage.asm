@@ -24,7 +24,7 @@
 
 _Combat_Wide_Area_Damage_FixInverseDamageSpread:
     mov  edx,[ebp-0x60] ; original damage
-    cmp  byte [Toggle_Fix_WideAreaDamage],0
+    cmp  byte [Rules.General.FixWideAreaDamage],0
     jz   .Continue
     mov  eax,[ebp-0x54] ; max damage
     cmp  edx,eax

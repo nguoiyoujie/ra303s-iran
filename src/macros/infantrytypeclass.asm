@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where infantry type classes are stored
-%define InfantryTypeClass.Array            0x0065DE3C
-%define InfantryTypeClass.Count            0x0065DE14
-
 ; define infantry type field definitions
 %define InfantryTypeClass.Offset.IsFemale                  0x192    ; BOOL
 %define InfantryTypeClass.Bit.IsFemale                     1    
@@ -121,7 +117,9 @@
 %define InfantryTypeClass.Offset.Report_Death4_Data                0x340    ; word x16
 %define InfantryTypeClass.Offset.Report_Death5                     0x360    ; INT
 %define InfantryTypeClass.Offset.Report_Death5_Data                0x364    ; word x16
-;0x384
+%define InfantryTypeClass.Offset.Report_Death                      0x384    ; INT
+%define InfantryTypeClass.Offset.Report_Death_Data                 0x388    ; word x16
+;0x3A8
 
 
 ; INI String controls
@@ -211,6 +209,7 @@ str.InfantryTypeClass.Report_Death2                 db"ReportDeath2",0
 str.InfantryTypeClass.Report_Death3                 db"ReportDeath3",0         
 str.InfantryTypeClass.Report_Death4                 db"ReportDeath4",0         
 str.InfantryTypeClass.Report_Death5                 db"ReportDeath5",0         
+str.InfantryTypeClass.Report_Death                  db"ReportDeath",0         
 
 
 %define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
@@ -541,6 +540,10 @@ str.InfantryTypeClass.Report_Death5                 db"ReportDeath5",0
 %define InfantryTypeClass.Response_Invade.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Response_Invade, reg_output
 %define InfantryTypeClass.Response_Invade_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Response_Invade_Data, reg_output
 %define InfantryTypeClass.Response_Invade.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.Response_Invade, str.InfantryTypeClass.Response_Invade, function
+
+%define InfantryTypeClass.Report_Death.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Report_Death, reg_output
+%define InfantryTypeClass.Report_Death_Data.Get(ptr_type,reg_output)           ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Report_Death_Data, reg_output
+%define InfantryTypeClass.Report_Death.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.Report_Death, str.InfantryTypeClass.Report_Death, function
 
 %define InfantryTypeClass.Report_Death1.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.Report_Death1, reg_output
 %define InfantryTypeClass.Report_Death1_Data.Get(ptr_type,reg_output)          ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.Report_Death1_Data, reg_output

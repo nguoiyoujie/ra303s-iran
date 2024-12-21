@@ -20,7 +20,7 @@ _InfantryClass__Fire_At_Range_Check:
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Apply_Fix
 
-    cmp  byte [infantryrangeexploitfix], 1
+    cmp  byte [Spawn.Settings.FixRangeExploit], 1
     jz   .Apply_Fix
 
     jmp  .Ret
@@ -52,7 +52,7 @@ _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire:
     jz   .Apply_Fix
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [infantryrangeexploitfix], 1
+    cmp  byte [Spawn.Settings.FixRangeExploit], 1
     jz   .Apply_Fix
 
     jmp  .Original_Code

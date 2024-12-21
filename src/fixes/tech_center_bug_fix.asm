@@ -37,7 +37,7 @@ _SidebarClass__StripClass__Recalc_Can_Build_Check:
     push eax
     call dword [edi+2Ch] ; ObjectTypeClass::Who_Can_Build_Me(int, int, HousesType)
 
-    cmp  byte [TechCenterBugFix], 0
+    cmp  byte [Spawn.Settings.TechCenterBugFix], 0
     jz   .Normal_Code
 
     cmp  dword eax, 0

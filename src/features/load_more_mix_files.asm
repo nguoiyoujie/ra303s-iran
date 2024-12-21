@@ -43,12 +43,10 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x004F7E13 _load_more_mix_files ; Called before other MIX files are loaded
-@HOOK 0x004F7F26 _Conditionally_Load_Small_Infantry_MIX ; Called AFTER REDALERT.MIX is loaded
+@HOOK 0x004F7E13 _Init_Bootstrap_Mixfiles__Preload_Mixes ; Called before other MIX files are loaded
+@HOOK 0x004F7F26 _Init_Bootstrap_Mixfiles__Postload_Mixes; Called AFTER REDALERT.MIX is loaded
 
-%define MixFileClass_CCFileClass_Retrieve 0x005B8F30
-%define MixFileClass_CCFileClass_Cache 0x005B93F0
-%define PKey__FastKey 0x00665F68
+
 
 
 
@@ -72,7 +70,7 @@ mov     ecx, 0x006017D0
 mov     eax, 24h
 call    0x005BBF80
 test    eax, eax
-mov     ebx, PKey__FastKey
+mov     ebx, Globals___FastKey
 call    MixFileClass_CCFileClass_Retrieve
 %endmacro
 
@@ -84,60 +82,60 @@ mov     ecx, 0x006017D0
 mov     eax, 24h
 call    0x005BBF80
 test    eax, eax
-mov     ebx, PKey__FastKey
+mov     ebx, Globals___FastKey
 call    MixFileClass_CCFileClass_Retrieve
 mov     eax, %1
 xor     edx, edx
 call    MixFileClass_CCFileClass_Cache
 %endmacro
 
-_Conditionally_Load_Small_Infantry_MIX:
+_Init_Bootstrap_Mixfiles__Postload_Mixes:
     Save_Registers
 
     call MixFileClass_CCFileClass_Retrieve
 
-    cmp  byte [UseDOSInterfaceMod], 0
+    cmp  byte [RedAlert.Options.UseDOSInterfaceMod], 0
     jz   .Load_Beta_Cruiser
 
     Load_Mix_File_Cached str_mix_DOSInterfaceMod
 
 .Load_Beta_Cruiser:
 
-    cmp  byte [UseBetaCruiser], 0
+    cmp  byte [RedAlert.Options.UseBetaCruiser], 0
     jz   .Load_Beta_Gunboat
 
     Load_Mix_File_Cached str_mix_BetaCruiser
 
 .Load_Beta_Gunboat:
 
-    cmp  byte [UseBetaGunboat], 0
+    cmp  byte [RedAlert.Options.UseBetaGunboat], 0
     jz   .Load_Beta_Submarine
 
     Load_Mix_File_Cached str_mix_BetaGunboat
 
 .Load_Beta_Submarine:
 
-    cmp  byte [UseBetaSubmarine], 0
+    cmp  byte [RedAlert.Options.UseBetaSubmarine], 0
     jz   .Load_Destroyer_Mix
 
     Load_Mix_File_Cached str_mix_BetaSubmarine
 
 .Load_Destroyer_Mix:
 
-    cmp  byte [UseBetaDestroyer], 0
+    cmp  byte [RedAlert.Options.UseBetaDestroyer], 0
     jz   .Load_Beta_Tesla_Tank_Mix
 
     Load_Mix_File_Cached str_mix_BetaDestroyer
 
 .Load_Beta_Tesla_Tank_Mix:
 
-    cmp  byte [UseBetaTeslaTank], 0
+    cmp  byte [RedAlert.Options.UseBetaTeslaTank], 0
     jz   .Load_Smallinfantry_MIX
 
     Load_Mix_File_Cached str_mix_BetaTeslaTank
 
 .Load_Smallinfantry_MIX:
-    cmp  byte [UseSmallInfantry], 0
+    cmp  byte [RedAlert.Options.UseSmallInfantry], 0
     jz   .Load_Spawn1_MIX
 
     Load_Mix_File_Cached str_mix_SmallInfantry
@@ -161,42 +159,43 @@ _Conditionally_Load_Small_Infantry_MIX:
     Restore_Registers
     jmp  0x004F7F2B
 
-_load_more_mix_files:
+
+_Init_Bootstrap_Mixfiles__Preload_Mixes:
     ; The load order is important, files loaded first can't have their file content overwritten by files loaded later
 
     ; LANGUAGE PACKS STUFF
     call_CCINIClass__Load str_ini_RedAlert, CCFileClass_RedAlert, CCINIClass_RedAlert
 
     call_INIClass__Get_Int CCINIClass_RedAlert, str_Options, str_GameLanguage, 1
-    mov  [GameLanguage], eax
+    mov  [RedAlert.Options.GameLanguage], eax
 
-    cmp  dword [GameLanguage], 1
+    cmp  dword [RedAlert.Options.GameLanguage], 1
     jz   .Jump_Over
 
-    cmp  dword [GameLanguage], 2
+    cmp  dword [RedAlert.Options.GameLanguage], 2
     jnz  .No_German
     Load_Mix_File_Cached str_mix_GermanLanguagePack
 
 .No_German:
-    cmp  dword [GameLanguage], 3
+    cmp  dword [RedAlert.Options.GameLanguage], 3
     jnz  .No_German_Censored
     Load_Mix_File_Cached str_mix_GermanCensoredLanguagePack
 
 .No_German_Censored:
-    cmp  dword [GameLanguage], 4
+    cmp  dword [RedAlert.Options.GameLanguage], 4
     jnz  .No_German_Uncensored
     Load_Mix_File_Cached str_mix_GermanUncensoredLanguagePack
 .No_German_Uncensored:
-    cmp  dword [GameLanguage], 5
+    cmp  dword [RedAlert.Options.GameLanguage], 5
     jnz  .No_French
     Load_Mix_File_Cached str_mix_FrenchLanguagePack
 
 .No_French:
-    cmp  dword [GameLanguage], 6
+    cmp  dword [RedAlert.Options.GameLanguage], 6
     jnz  .No_Spanish
     Load_Mix_File_Cached str_mix_SpanishLanguagePack
 .No_Spanish:
-    cmp  dword [GameLanguage], 7
+    cmp  dword [RedAlert.Options.GameLanguage], 7
     jnz  .No_Russian
     Load_Mix_File_Cached str_mix_RussianLanguagePack
 .No_Russian:

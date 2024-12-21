@@ -23,11 +23,11 @@
 _HouseClass__AI_Building_Build_Radar_Dome:
     jnz  0x004DB0E4
 
-    cmp  byte [Toggle_Fix_BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],-1
     jz   .Normal_Code
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .No_Techup_Check
-    cmp  byte [Toggle_Fix_BuildRadarWithoutAirThreatCheck],1
+    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .No_Techup_Check
 
 .Normal_Code:
@@ -41,11 +41,11 @@ _HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check:
     jnz  0x004DB050
 
     ; do we need to do this check twice?
-    cmp  byte [Toggle_Fix_BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],-1
     jz   .Normal_Code
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .War_Check
-    cmp  byte [Toggle_Fix_BuildRadarWithoutAirThreatCheck],1
+    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .War_Check
 
     jmp  .Normal_Code

@@ -143,7 +143,7 @@
 %endmacro
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception:
-    cmp  byte [SouthAdvantageFix], 0
+    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
     jz   .Normal_Code
     jmp  0x00562840
 
@@ -153,7 +153,7 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception:
     jmp  0x005627D0
 
 _TechnoClass_In_Range_Long_Int_No_Building_Exception:
-    cmp  byte [SouthAdvantageFix], 0
+    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
     jz   .Normal_Code
 
     jmp  0x00562762
@@ -165,7 +165,7 @@ _TechnoClass_In_Range_Long_Int_No_Building_Exception:
 
 ; 0x80 = shooting southward, 0x00 = shooting northward, 0xc0 = westward, 0x40 = eastward
 _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
-    cmp  byte [SouthAdvantageFix], 0
+    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
     jz   .Normal_Code
 
     mov  ebx, eax
@@ -240,7 +240,7 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
 
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
-    cmp  byte [SouthAdvantageFix], 0
+    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
     jz   .Normal_Code
 
     mov  ebx, eax

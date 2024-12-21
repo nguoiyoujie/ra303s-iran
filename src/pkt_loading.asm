@@ -11,7 +11,7 @@ str_blankpkt db"BLANK.PKT",0
 %define aftmathpkt_str    0x005F0770
 
 _Conditionally_Load_Missions_PKT:
-    cmp  byte [DisplayOriginalMultiplayerMaps], 1
+    cmp  byte [RedAlert.Options.DisplayOriginalMultiplayerMaps], 1
     jnz  .No_Load
 
     mov  edx, missionspkt_str
@@ -25,7 +25,7 @@ _Patch_Out_Counterstrike_Installed_Check:
     jmp  0x0054BD3D
 
 _Conditionally_Load_Cstrike_PKT:
-    cmp  byte [DisplayCounterstrikeMultiplayerMaps], 1
+    cmp  byte [RedAlert.Options.DisplayCounterstrikeMultiplayerMaps], 1
     jnz  .No_Load
 
     mov  edx, cstrikepkt_str
@@ -39,7 +39,7 @@ _Patch_Out_Aftermath_Installed_Check:
     jmp  0x0054BEAB
 
 _Conditionally_Load_Aftmath_PKT:
-    cmp  byte [DisplayAftermathMultiplayerMaps], 1
+    cmp  byte [RedAlert.Options.DisplayAftermathMultiplayerMaps], 1
     jnz  .No_Load
 
     mov  edx, aftmathpkt_str

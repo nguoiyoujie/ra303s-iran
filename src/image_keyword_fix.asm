@@ -1,7 +1,7 @@
 @HOOK 0x0053755D _RulesClass__Objects_Epilogue
 @HOOK 0x00453703 _BuildingTypeClass__One_Time_Civilian_Buildings_Fix
 @HOOK 0x00453689 _BuildingTypeClass__One_Time_Missile_Silo_Buildup_Fix
-@HOOK 0x004EB12E _InfantryTypeClass__One_Time_Invisible_Icon_Fix
+;@HOOK 0x004EB12E _InfantryTypeClass__One_Time_Invisible_Icon_Fix ; already overriden by no_cameo_icons
 @HOOK 0x004EB0D7 _InfantryTypeClass__One_Time_Invisible_Infantry_Fix
 
 %define UnitTypeClass__One_Time    0x005789AC

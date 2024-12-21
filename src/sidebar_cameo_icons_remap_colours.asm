@@ -10,7 +10,7 @@ _StripClass__Draw_It_Colour_Remap_Icon:
     mov  ebx, 1
     mov  eax, 0 ; just to be sure
 
-    cmp  byte [colorremapsidebarcameoicons], 0
+    cmp  byte [RedAlert.Options.ColorRemapSidebarIcons], 0
     jz   .No_Colour_Remap
 
     mov  eax, [Globals___PlayerPtr]

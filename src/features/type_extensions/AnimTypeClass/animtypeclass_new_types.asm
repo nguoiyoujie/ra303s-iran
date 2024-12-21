@@ -69,7 +69,7 @@ Init_AnimTypeClass:
     pop  eax
 
     mov  edx,ebx
-    add  edx,AnimTypesHeap.ORIGINAL_MAX ; AnimType
+    add  edx,AnimTypesHeap.ORIGINAL_COUNT ; AnimType
     mov  ebx,ecx ; Name/ID
 
     ; these settings were derived from ANIM_FBALL1 / FBALL1
@@ -180,21 +180,21 @@ Init_DirectionalAnimTypeClass:
 
 
 _AnimTypeClass__One_Time_UnhardCode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
+    mov  al,byte[AnimTypeClass.Count]
     cmp  dh,al
     jl   0x0041C5F8
     jmp  0x0041C659
 
 
 _AnimTypeClass__Init_UnhardCode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
+    mov  al,byte[AnimTypeClass.Count]
     cmp  bl,al
     jl   0x0041C68E
     jmp  0x0041C6E8
     
     
 _Anim_From_Name_Unhardcode_AnimTypes:
-    mov  al,[NewAnimTypeHeapCount]
+    mov  al,byte[AnimTypeClass.Count]
     cmp  dl,al
     jl   0x00423EF4
     jmp  0x00423EED
@@ -202,16 +202,13 @@ _Anim_From_Name_Unhardcode_AnimTypes:
 
 _Init_Game_Set_AnimTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_AnimTypes
-    mov  byte [AnimTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,AnimTypesHeap.ORIGINAL_MAX
+    add  edx,AnimTypesHeap.ORIGINAL_COUNT
     mov  byte [FirstDirectionalAnim],dl
 
     Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
     shl  al,3 ;x8
-    add  byte [AnimTypesTypesExtCount],al
     add  edx,eax
-    mov  byte [NewAnimTypeHeapCount],dl
     jmp  0x004F40EE
 
 

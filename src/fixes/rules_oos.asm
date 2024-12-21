@@ -36,7 +36,7 @@
 _Load_Game_Load_OOS_FIX_INI:
     Save_Registers
 
-    cmp  dword [spawner_is_active], 1
+    cmp  byte [spawner_is_active], 1
     jz   .Ret
 
     mov  edx, str_ini_OOSFix
@@ -95,7 +95,7 @@ _Load_Game_Load_OOS_FIX_INI:
     jmp  0x00538B7D
 
 _Read_Scenario_INI_Load_OOS_FIX_INI:
-    cmp  dword [spawner_is_active], 1
+    cmp  byte [spawner_is_active], 1
     jz   .Ret
 
     mov  edx, str_ini_OOSFix

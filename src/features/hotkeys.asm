@@ -57,9 +57,9 @@ _UnhardCode_Keyboard_Key0:
     jmp  0x004A6221
 
 _Keyboard_Process_Home_Key_Overwrite:
-    cmp  word ax, [KeySidebarToggle]
+    cmp  word ax, [RedAlert.WinHotKeys.KeySidebarToggle]
     jz   .Toggle_Sidebar
-    cmp  word ax, [KeyMapSnapshot]
+    cmp  word ax, [RedAlert.WinHotKeys.KeyMapSnapshot]
     jz   .Map_Snapshot
     cmp  word ax, [Globals___Options_KeyResign]
     jz   .Resign_Key

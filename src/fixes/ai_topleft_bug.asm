@@ -20,7 +20,7 @@ _HouseClass__Where_To_Go_Save_CurrentObject:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Toggle_Fix_AISendingTanksToTopLeft],1
+    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
 .Apply_Fix_For_Skirmish:
@@ -43,7 +43,7 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Toggle_Fix_AISendingTanksToTopLeft],1
+    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
 .Apply_Fix_For_Skirmish:
@@ -76,7 +76,7 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
-;    cmp  byte [Toggle_Fix_AISendingTanksToTopLeft],1
+;    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
 ;    jnz  .Original_Code
 ;
 ;.Apply_Fix_For_Skirmish:
@@ -103,7 +103,7 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
-;    cmp  byte [Toggle_Fix_AISendingTanksToTopLeft],1
+;    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
 ;    jnz  .Original_Code
 ;
 ;.Apply_Fix_For_Skirmish:

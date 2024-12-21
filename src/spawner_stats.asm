@@ -232,7 +232,7 @@ _Send_Statistics_Packet_Send_Only_Once:
     cmp  dword [SaveGameVersion], 0 ; if we loaded from savegame dont send statistics
     jnz  .Early_Ret
 
-    cmp  dword [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Normal_Code
     cmp  byte [Statistics_Packet_Sent], 0
     jz   .First_Time
@@ -444,7 +444,7 @@ _UnitTrackerClass__Decrement_Unit_Total_Skip_Singleplayer:
     jmp  0x00581CAF ; jmp to RETN instruction at tend of function
 
 .Hack_For_Old_Skirmish_Savegames:
-    cmp  dword [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Early_Return
 
     cmp  dword [SaveGameVersion], 0
@@ -473,7 +473,7 @@ _UnitTrackerClass__Increment_Unit_Total_Skip_Singleplayer:
     jmp  0x00581CA3 ; jmp to RETN instruction at tend of function
 
 .Hack_For_Old_Skirmish_Savegames:
-    cmp  dword [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Early_Return
 
     cmp  dword [SaveGameVersion], 0
@@ -541,7 +541,7 @@ Write_Stats_File:
     RETN
 
 _Main_Game__Main_Loop_End_Spawner:
-    cmp  dword [spawner_is_active], 1
+    cmp  byte [spawner_is_active], 1
     jz   0x004A55A1
 
     cmp  dword [0x006ABBB8], 0 ; GameStatisticsPacketSent
@@ -549,7 +549,7 @@ _Main_Game__Main_Loop_End_Spawner:
 
 
 _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner:
-;;    cmp  dword [spawner_is_active], 1
+;;    cmp  byte [spawner_is_active], 1
 ;;    jz   .Continue
 
 ;;    cmp  ah, 4
@@ -561,7 +561,7 @@ _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner:
 _CellClass__Goodie_Check_Track_Crates_Spawner:
     jmp  0x004A0B09
 
-;;    cmp  dword [spawner_is_active], 1
+;;    cmp  byte [spawner_is_active], 1
 ;;    jz   0x004A0B09
 
 ;;    cmp  byte [Globals___Session_Type], GameType.GAME_INTERNET
@@ -569,7 +569,7 @@ _CellClass__Goodie_Check_Track_Crates_Spawner:
 
 _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner:
     jmp  0x004D3E5F
-;;    cmp  dword [spawner_is_active], 1
+;;    cmp  byte [spawner_is_active], 1
 ;;    jz   0x004D3E5F
 
 ;;    cmp  byte [Globals___Session_Type], GameType.GAME_INTERNET

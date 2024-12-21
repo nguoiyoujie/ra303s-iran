@@ -27,14 +27,14 @@ _Change_Weapon_Sounds:
     jmp  0x0058FF45
 
 .Modify_Grenade_Sound:
-    cmp  byte [UseGrenadeThrowingSound], 1
+    cmp  byte [RedAlert.Options.UseGrenadeThrowingSound], 1
     jnz  .No_Change
 
     mov  word [esi+23h], 41 ; GRENADE1
     jmp  0x0058FF49
 
 .Modify_Rifle_Sound:
-    cmp  byte [AlternativeRifleSound], 1
+    cmp  byte [RedAlert.Options.AlternativeRifleSound], 1
     jnz  .No_Change
 
     mov  word [esi+23h], 56 ; MGUNINF1

@@ -1,6 +1,6 @@
 @HOOK 0x004CB760 _HouseTypeClass__AddNewHouseTypes
 @HOOK 0x004CD0DB _HouseTypeClass__Init_Heap_AddNewHouseTypes
-;@CLEAR 0x004F4095 HouseType.Count 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
+;@CLEAR 0x004F4095 HouseTypeClass.NEW_COUNT 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
 @HOOK 0x00537513 _RulesClass__Objects_ReadIni_Fix
 
 _RulesClass__Objects_ReadIni_Fix:
@@ -178,7 +178,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  dword[HouseTypeClass.DestructorPtrs-0x1F*8+4],HouseTypeClass.Multi20
 
     mov  dword[0x006018B0],HouseTypeClass.DestructorPtrs
-    mov  dword[0x006018B4],HouseType.Count 
+    mov  dword[0x006018B4],HouseTypeClass.NEW_COUNT 
     jmp  0x004CB76A
 
 

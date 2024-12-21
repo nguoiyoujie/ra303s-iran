@@ -62,20 +62,20 @@ _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties:
     jmp  .Ret
 
 .AI_Easy_Dfficulty:
-    mov  ecx,[Integer_Feature_EasyAIGemValue]
-    mov  ebx,[Integer_Feature_EasyAIGoldValue]
+    mov  ecx,[Rules.AI.EasyAIGemValue]
+    mov  ebx,[Rules.AI.EasyAIGoldValue]
     call Check_AI_Difficulty_Gem_And_Gold_Values
     jmp  .Ret
 
 .AI_Normal_Dfficulty:
-    mov  ecx,[Integer_Feature_NormalAIGemValue]
-    mov  ebx,[Integer_Feature_NormalAIGoldValue]
+    mov  ecx,[Rules.AI.NormalAIGemValue]
+    mov  ebx,[Rules.AI.NormalAIGoldValue]
     call Check_AI_Difficulty_Gem_And_Gold_Values
     jmp  .Ret
 
 .AI_Hard_Dfficulty:
-    mov  ecx,[Integer_Feature_HardAIGemValue]
-    mov  ebx,[Integer_Feature_HardAIGoldValue]
+    mov  ecx,[Rules.AI.HardAIGemValue]
+    mov  ebx,[Rules.AI.HardAIGoldValue]
     call Check_AI_Difficulty_Gem_And_Gold_Values
     jmp  .Ret
 

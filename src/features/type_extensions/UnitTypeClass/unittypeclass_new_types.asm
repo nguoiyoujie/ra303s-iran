@@ -19,7 +19,7 @@
 
 
 _BuildingClass__Update_Buildables_UnhardCode_UnitTypes:
-    mov  al,[NewUnitTypeHeapCount]
+    mov  byte al,[UnitTypeClass.Count]
     cmp  bl,al
     jl   0x004596D4
     jmp  0x0045971A
@@ -27,15 +27,13 @@ _BuildingClass__Update_Buildables_UnhardCode_UnitTypes:
 
 _Init_Game_Set_UnitTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Unit,[stringtableoffset_newunittypes]
-    mov  [stringtableoffset_newunittypes],eax
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Unit,[Rules.StringTableOffsets.UnitTypes]
+    mov  [Rules.StringTableOffsets.UnitTypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_UnitTypes
-    mov  byte [UnitTypesExtCount],al
     mov  edx,eax
-    add  edx,UnitTypeClass.ORIGINAL_MAX
-    mov  byte [NewUnitTypeHeapCount],dl
+    add  edx,UnitTypeClass.ORIGINAL_COUNT
     jmp  0x004F40FF
 
 
@@ -64,7 +62,7 @@ Init_UnitTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,UnitTypeClass.ORIGINAL_MAX ; UnitType
+    add  edx,UnitTypeClass.ORIGINAL_COUNT ; UnitType
 
     push 0Eh
     push 0
@@ -91,10 +89,10 @@ Init_UnitTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newunittypes],-1
+    cmp  dword [Rules.StringTableOffsets.UnitTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [stringtableoffset_newunittypes]
+    add  ebx,dword [Rules.StringTableOffsets.UnitTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -122,14 +120,14 @@ Init_Heap_OverrideExistingUnitTypes:
 
 
 _UnitTypeClass__From_Name_Unhardcode_UnitTypes_Count:
-    mov  byte al,[NewUnitTypeHeapCount]
+    mov  byte al,[UnitTypeClass.Count]
     cmp  dl,al
     jl   0x00578980
     jmp  0x0057899E
 
 
 _UnitTypeClass__One_Time_UnhardCode_UnitTypes:
-    mov  al,[NewUnitTypeHeapCount]
+    mov  byte al,[UnitTypeClass.Count]
     cmp  dl,al
     jl   0x005789BF
     jmp  0x00578AE4

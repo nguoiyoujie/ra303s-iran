@@ -25,7 +25,7 @@ _HouseClass_Is_No_YakMig_UseFixedWing:
     mov  dword [AircraftFixedWingSelectableCount],0 ;initial count 0
 
 .Check:
-    cmp  edi,[NewAircraftTypeHeapCount]
+    cmp  edi,[AircraftTypeClass.Count]
     jge  .Done
 .Loop:
     push eax

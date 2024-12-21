@@ -25,7 +25,7 @@
 
 _Sound_Effect_Call_Where:
 ; eax is the voc id
-    cmp  ax,OriginalSoundEffectsCount
+    cmp  ax,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects
 
 .Normal_Code:
@@ -35,8 +35,8 @@ _Sound_Effect_Call_Where:
     jmp  0x00425FEA
 
 .Check_Unhardcoded_Sound_Effects:
-    sub  ax,OriginalSoundEffectsCount
-    cmp  word ax,[SoundEffectsCount]
+    sub  ax,SoundEffects.ORIGINAL_COUNT 
+    cmp  word ax,[SoundEffects.Count]
     jge  .Return_False
 
     push edx
@@ -53,7 +53,7 @@ _Sound_Effect_Call_Where:
 
 _Sound_Effect_Call_Priority:
 ; edx is the voc id
-    cmp  dx,OriginalSoundEffectsCount
+    cmp  dx,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects
 
 .Normal_Code:
@@ -61,8 +61,8 @@ _Sound_Effect_Call_Priority:
     jmp  0x004260FC
 
 .Check_Unhardcoded_Sound_Effects:
-    sub  dx,OriginalSoundEffectsCount
-    cmp  word dx,[SoundEffectsCount]
+    sub  dx,SoundEffects.ORIGINAL_COUNT 
+    cmp  word dx,[SoundEffects.Count]
     jge  .Return_False
 
     lea  edx,[SoundEffectsList+edx*9]
@@ -82,7 +82,7 @@ _Sound_Effect_Call_Voc_Name:
     jmp  0x004260B4
 
 _Voc_Name_Add_Unhardcoded_Sound_Effects:
-    cmp  ax,OriginalSoundEffectsCount
+    cmp  ax,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects
 
 .Normal_Code:
@@ -91,8 +91,8 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
     jmp  0x00425D15
 
 .Check_Unhardcoded_Sound_Effects:
-    sub  ax,OriginalSoundEffectsCount
-    cmp  word ax,[SoundEffectsCount]
+    sub  ax,SoundEffects.ORIGINAL_COUNT 
+    cmp  word ax,[SoundEffects.Count]
     jge  .Return_False
 
     xor  edx,edx
@@ -106,14 +106,14 @@ _Voc_Name_Add_Unhardcoded_Sound_Effects:
     jmp  0x00425D15
 
 _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
-    cmp  cx,OriginalSoundEffectsCount
+    cmp  cx,SoundEffects.ORIGINAL_COUNT 
     jl   0x00425CC8
 
 .Check_Unharded_Sound_Effects:
     mov  word [ebp-0x10],0
     mov  ecx,0
 
-    cmp  word [SoundEffectsCount],0
+    cmp  word [SoundEffects.Count],0
     jz   .Ret_False
 
     jmp  .Loop
@@ -124,7 +124,7 @@ _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
 
 .Loop:
     xor  edx,edx
-    mov  dx,word [SoundEffectsCount]
+    mov  dx,word [SoundEffects.Count]
 ;    sub        dx,1
     cmp  dx,cx
     je   .Ret_False
@@ -143,7 +143,7 @@ _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
 .Return_VocType:
     xor  eax,eax
     mov  ax,cx
-    add  ax,OriginalSoundEffectsCount
+    add  ax,SoundEffects.ORIGINAL_COUNT 
     jmp  0x00425CED
 
 Init_SoundEffect:
@@ -164,7 +164,7 @@ Init_SoundEffect:
 Rules_INI_Load_Sound_Effects_List:
 
     Get_RULES_INI_Section_Entry_Count str_SoundEffects
-    mov  word [SoundEffectsCount],ax
+    mov  word [SoundEffects.Count],ax
 
     Loop_Over_RULES_INI_Section_Entries str_SoundEffects,Init_SoundEffect
     retn

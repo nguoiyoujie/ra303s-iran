@@ -38,7 +38,7 @@ _DisplayClass__Map_Cell_Share_Shroud:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Shroud_Share
 
-    cmp  byte [AllyReveal],1
+    cmp  byte [Spawn.Settings.AllyReveal],1
     jz   .Shroud_Share
 
     jmp  .No_Shroud_Share

@@ -27,7 +27,7 @@ temp_unkC dd 0
 temp_unk10 dd 0
 
 _TeamClass__TMission_Spy_Chrono_Tank_Check:
-    cmp  dword [ChronoReinforceTanks],1
+    cmp  dword [Map.Basic.ChronoReinforceTanks],1
     jz   .Ret
 
     cmp  edx,11h
@@ -37,7 +37,7 @@ _TeamClass__TMission_Spy_Chrono_Tank_Check:
 jmp        0x0055F9EC
 
 _TeamClass__Coordinate_Attack_Chrono_Tank_Check2:
-    cmp  dword [ChronoReinforceTanks],1
+    cmp  dword [Map.Basic.ChronoReinforceTanks],1
     jz   .Ret
 
     cmp  eax,11h
@@ -47,7 +47,7 @@ _TeamClass__Coordinate_Attack_Chrono_Tank_Check2:
     jmp  0x0055E1F3
 
 _TeamClass__Coordinate_Attack_Chrono_Tank_Check:
-    cmp  dword [ChronoReinforceTanks],1
+    cmp  dword [Map.Basic.ChronoReinforceTanks],1
     jz   .Ret
 
     cmp  eax,11h

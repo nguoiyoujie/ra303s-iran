@@ -43,8 +43,7 @@ Init_BulletTypeClass:
 
 
 _BulletTypeClass__One_Time_Unhardcode_BulletTypes:
-    mov  al,[BulletTypesExtCount]
-    add  al,BulletTypeClass.ORIGINAL_MAX
+    mov  al,byte[BulletTypeClass.Count]
     cmp  dh,al
     jl   0x00426CAD
     jmp  0x00426CFA
@@ -52,16 +51,14 @@ _BulletTypeClass__One_Time_Unhardcode_BulletTypes:
 
 _CCINIClass__Get_BulletType_Unhardcode_BulletTypes_Count:
     mov  [ebp-0x4],dl
-    mov  al,[BulletTypesExtCount]
-    add  al,BulletTypeClass.ORIGINAL_MAX
+    mov  al,byte[BulletTypeClass.Count]
     cmp  dl,al
     jl   0x00463710
     jmp  0x00463709
 
 
 _Init_Game_Set_Bullet_Types_Heap_Count:
-    mov  edx,BulletTypeClass.ORIGINAL_MAX
+    mov  edx,BulletTypeClass.ORIGINAL_COUNT
     Get_RULES_INI_Section_Entry_Count str_BulletTypes
-    mov  [BulletTypesExtCount],al
     add  edx,eax
     jmp  0x004F40DD

@@ -345,7 +345,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     mov  eax,esi
     movzx eax,al
     inc  al
-    cmp  al, byte [NewBuildingTypeHeapCount]
+    cmp  al, byte [BuildingTypeClass.Count]
     jb   .CheckSpecialWeapons ;use unsigned check
 
 .NotFound:

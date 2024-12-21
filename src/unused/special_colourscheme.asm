@@ -22,5 +22,5 @@ _TechnoClass__Remap_Table_Building_Check:
 
 .Ret_Custom_Building_Unit_Scheme:
     mov  eax, 0x00666A24 ; blue remap
-;    mov        eax, extraremaptable+colorblackoffset
+;    mov        eax, ColorRemaps.ExtendedColors+ColorRemaps.Black.Offset
     jmp  0x005673A1

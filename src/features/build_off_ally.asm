@@ -24,7 +24,7 @@
 %endmacro
 
 _Build_Off_Ally_Buildings:
-    cmp  byte [BuildOffAlly],0
+    cmp  byte [Rules.General.BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
@@ -49,7 +49,7 @@ _Build_Off_Ally_Buildings:
     jmp  0x004AF826
 
 _Build_Off_Ally_Buildings2:
-    cmp  byte [BuildOffAlly],0
+    cmp  byte [Rules.General.BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
@@ -74,7 +74,7 @@ _Build_Off_Ally_Buildings2:
     jmp  0x004AF9D8
 
 _Build_Off_Ally_Buildings3:
-    cmp  byte [BuildOffAlly],0
+    cmp  byte [Rules.General.BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers
@@ -100,7 +100,7 @@ _Build_Off_Ally_Buildings3:
     jmp  0x004AFAFD
 
 _Build_Off_Ally_Buildings4:
-    cmp  byte [BuildOffAlly],0
+    cmp  byte [Rules.General.BuildOffAlly],0
     jz   .Normal_Code_
 
     Save_Registers
@@ -129,7 +129,7 @@ _Build_Off_Ally_Buildings4:
     jmp  0x004AFB87
 
 _Build_Off_Ally_Buildings5:
-    cmp  byte [BuildOffAlly],0
+    cmp  byte [Rules.General.BuildOffAlly],0
     jz   .Normal_Code
 
     Save_Registers

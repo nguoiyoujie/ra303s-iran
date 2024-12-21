@@ -236,7 +236,7 @@ str_SecondaryColorScheme                          db"SecondaryColorScheme",0
 %define str_MouseWheelScrolling                   0x006EEFA5 ; "MouseWheelScrolling"
 ; str_FixFormationSpeed (multi-use)
 ; str_ParabombsInMultiplayer (multi-use)
-str_ForceSingleCPU                                db"ForceSingleCPU",0
+str_RedAlert.Options.ForceSingleCPU                                db"RedAlert.Options.ForceSingleCPU",0
 str_AlternativeRifleSound                         db"AlternativeRifleSound",0
 str_UseGrenadeThrowingSound                       db"UseGrenadeThrowingSound",0
 str_UseBetaTeslaTank                              db"UseBetaTeslaTank",0
@@ -374,107 +374,3 @@ str_MapSelectC                                    db"MapSelectC",0
 str_IsCoopMode                                    db"IsCoopMode",0
 
 
-
-
-;;; Temporary location for CCFILE storage 
-; Note: sizes not actually verified. Check against Remaster
-; src/fixes/rules_oos.asm
-CCFileClass_OOSFix  TIMES 256 db 0
-CCINIClass_OOSFix   TIMES 256 db 0
-; src/features/load_ai_ini.asm
-CCFileClass_AI  TIMES 256 db 0
-CCINIClass_AI    TIMES 256 db 0
-; src/features/loading.asm
-CCFileClass_RedAlert    TIMES 128 db 0
-CCINIClass_RedAlert TIMES 64 db 0
-
-; src/features/spawn.asm
-CCFileClass_Spawn  TIMES 128 db 0
-CCINIClass_Spawn   TIMES 64 db 0
-
-CCFileClass_Map  TIMES 128 db 0
-CCINIClass_Map   TIMES 64 db 0
-
-
-;;; New type heap locations
-;AircraftType
-NewAircraftTypeHeapCount            dd    0
-AircraftTypesTypesExtCount          dd    0
-
-;AnimType
-AnimTypesTypesExtCount              db    0
-NewAnimTypeHeapCount                dd    0
-
-;BuildingType
-NewBuildingTypeHeapCount            dd    0
-BuildingTypesExtCount               dd    0
-
-;BulletType
-BulletTypesExtCount                 db    0
-
-;InfantryType
-InfantryTypesExtCount               dd    0
-NewInfantryTypeHeapCount            dd    0
-
-;UnitType
-UnitTypesExtCount                   dd    0
-NewUnitTypeHeapCount                dd    0
-
-;VesselType
-NewVesselTypeHeapCount              dd    0
-VesselTypesTypesExtCount            dd    0
-
-;SoundEffects
-%define  OriginalSoundEffectsCount          165
-SoundEffectsList                                  TIMES 2304 dd 0 ; 9 bytes per entry * 256; the new list supports up to 256 new entries 
-SoundEffectsCount                                 dd 0
-
-
-;;; Temporary location for new global storages
-; intended for values that are loaded from INI
-Integer_Feature_EasyAIGoldValue dd -1
-Integer_Feature_EasyAIGemValue dd -1
-Integer_Feature_NormalAIGoldValue dd -1
-Integer_Feature_NormalAIGemValue dd -1
-Integer_Feature_HardAIGoldValue dd -1
-Integer_Feature_HardAIGemValue dd -1
-
-Toggle_Feature_ComputerParanoidForceDisabledSkirmish db 1
-Toggle_Fix_BuildRadarWithoutAirThreatCheck db -1
-Toggle_Feature_EvacInMP db 1
-Toggle_Feature_RemapJammedBuildings db 0
-
-Toggle_Fix_NavalRepairExploit db 0
-Toggle_Fix_AISendingTanksToTopLeft db 0
-Toggle_Fix_AIParanoid db 0
-Toggle_Fix_AIAlly db 0
-Toggle_Fix_WideAreaDamage db 0
-
-;;; Temporary location until the House macros are completed
-; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)
-; 20 houses are supported, we introduce Multi9-20 to support up to 32 houses
-Houses.SpecialScan                                times 32 dd 0 
-Houses.Radar                                      times 32 db 0 
-Houses.Factory                                    times 32 db 0 
-Houses.BScan                                      times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
-Houses.BGroupScan                                 times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
-;Houses.BQuantity                                  times 6144 db 0   ; 24 * 256 entries
-Houses.HouseTriggers                              times 768 db 0 ; 32 houses * 24 bytes
-HouseTypeClass.Multi9                             times 316 db 0
-HouseTypeClass.Multi10                            times 316 db 0
-HouseTypeClass.Multi11                            times 316 db 0
-HouseTypeClass.Multi12                            times 316 db 0
-HouseTypeClass.Multi13                            times 316 db 0
-HouseTypeClass.Multi14                            times 316 db 0
-HouseTypeClass.Multi15                            times 316 db 0
-HouseTypeClass.Multi16                            times 316 db 0
-HouseTypeClass.Multi17                            times 316 db 0
-HouseTypeClass.Multi18                            times 316 db 0
-HouseTypeClass.Multi19                            times 316 db 0
-HouseTypeClass.Multi20                            times 316 db 0
-
-HouseTypeClass.DestructorPtrs                     times 256 db 0 ; 32 total houses * 2 ptrs 
-HouseTypeClass_p1                                 dd 0x00405610 ; (originally around 0x005FA8A8)
-HouseTypeClass_p2                                 dd 0x0040561C
-HouseTypeClass_p3                                 dd 0x0040566C
-HouseTypeClass_p4                                 dd 0x004CD174 ; do not remove - the deconstructor may use these functions

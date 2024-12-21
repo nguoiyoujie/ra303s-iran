@@ -95,12 +95,12 @@ _HouseClass__AI_Infantry_Extend_Stackframe:
     jmp  0x004DC169
 	
 _HouseClass__AI_Infantry_Expand:
-    cmp  al,[NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
+    cmp  al,[InfantryTypeClass.Count] ; was INFANTRY_COUNT (0x1A)
     jl   0x004DC462
     jmp  0x004DC51E
 
 _HouseClass__AI_Infantry_Expand_Choice:
-    cmp  al,[NewInfantryTypeHeapCount] ; was INFANTRY_COUNT (0x1A)
+    cmp  al,[InfantryTypeClass.Count] ; was INFANTRY_COUNT (0x1A)
     jge  0x004DC713
     jmp  0x004DC574
 

@@ -44,6 +44,9 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/defines/functions.asm"
 %include "src/defines/fixediheapclass_templates.asm"
 
+; stored variables
+%include "src/defines/storeddata.asm"
+
 ; macros ; added by lovalmidas
 %include "src/macros/common.asm"
 %include "src/macros/generic.asm"
@@ -70,7 +73,12 @@ _str_version: db"3.03p-iB1v1",0
 %endif
 
 ;loading code
-%include "src/loading.asm"
+%include "src/loading.asm" ; now empty, split to features/loading/
+%include "src/features/loading/loading_redalert.asm"
+%include "src/features/loading/loading_spawn.asm"
+%include "src/features/loading/loading_rules.asm"
+%include "src/features/loading/loading_savegame.asm"
+%include "src/features/loading/loading_map.asm"
 
 ;map snapshot code
 %include "src/map_snapshot.asm"
@@ -192,7 +200,8 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/mousewheel_scrolling.asm"
 %include "src/features/skirmish_savegames.asm"
 %include "src/sidebar_cameo_icons_remap_colours.asm"
-%include "src/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
+%include "src/features/extended_house_colors.asm"
+;%include "unused/more_colour_remaps.asm" ; not done yet and needs a fix for a crash
 %include "src/features/aircraft_maxpips.asm"
 ; code extensions, added by lovalmidas
 %include "src/features/aircraft_isdropping_act_like_parabombs.asm" 

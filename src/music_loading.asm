@@ -107,7 +107,7 @@ _Load_Game_Menu_Queue_Song_Call_Patch_Out:
     jmp  0x004F4B88
 
 _Load_Game_Queue_Song:
-    cmp  byte [RandomStartingSong], 0
+    cmp  byte [RedAlert.Options.RandomStartingSong], 0
     jz   .Ret
 
 .Select_Random_Song:
@@ -132,7 +132,7 @@ _Load_Game_Queue_Song:
 
 _Start_Scenario_Queue_Theme:
     xor  edx, edx
-    cmp  byte [RandomStartingSong], 0
+    cmp  byte [RedAlert.Options.RandomStartingSong], 0
     jz   .Ret
     cmp  dword [SongsAvailable], 0
     jz   .Ret

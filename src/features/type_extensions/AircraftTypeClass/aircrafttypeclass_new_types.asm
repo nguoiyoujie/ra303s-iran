@@ -44,7 +44,7 @@ Init_AircraftTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,AircraftTypeClass.ORIGINAL_MAX
+    add  edx,AircraftTypeClass.ORIGINAL_COUNT
 
     push 0Eh
     push 20h
@@ -65,10 +65,10 @@ Init_AircraftTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newaircrafttypes],-1
+    cmp  dword [Rules.StringTableOffsets.AircraftTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [stringtableoffset_newaircrafttypes]
+    add  ebx,dword [Rules.StringTableOffsets.AircraftTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -83,21 +83,21 @@ Init_AircraftTypeClass:
 
 
 _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes:
-    mov  byte al,[NewAircraftTypeHeapCount]
+    mov  byte al,[AircraftTypeClass.Count]
     cmp  dl,al
     jl   0x00403F14
     jmp  0x00403F0D
 
 
 _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes:
-    mov  al,[NewAircraftTypeHeapCount]
+    mov  al,[AircraftTypeClass.Count]
     cmp  dl,al
     jl   0x00403F55
     jmp  0x00403FFC
 
     
 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
-    mov  al,[NewAircraftTypeHeapCount]
+    mov  al,[AircraftTypeClass.Count]
     cmp  ah,al
     jl   0x0045980F
     jmp  0x00459855
@@ -105,13 +105,11 @@ _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
 
 _Init_Game_Set_AircraftTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Aircraft,[stringtableoffset_newaircrafttypes]
-    mov  [stringtableoffset_newaircrafttypes],eax
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Aircraft,[Rules.StringTableOffsets.AircraftTypes]
+    mov  [Rules.StringTableOffsets.AircraftTypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_AircraftTypes
-    mov  byte [AircraftTypesTypesExtCount],al
     mov  edx,eax
-    add  edx,AircraftTypeClass.ORIGINAL_MAX
-    mov  byte [NewAircraftTypeHeapCount],dl
+    add  edx,AircraftTypeClass.ORIGINAL_COUNT
     jmp  0x004F40BB

@@ -12,16 +12,14 @@
 @HOOK 0x004B3F80 _Formation_Speed_Glitched_Loop
 @HOOK 0x004B45FD _DisplayClass__Mouse_Left_Release_Function_End
 
-
-
-firstformationunit: db 1
+Temp.FormationFirstUnit: db 1 ; whether the current unit is the formation's first unit
 
 _Formation_Speed_Glitched_Loop:
     cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jz   .Apply_Fix
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [FixFormationSpeed], 1
+    cmp  byte [Rules.General.FixFormationSpeed], 1
     jz   .Apply_Fix
 
     jmp  .Dont_Fix
@@ -31,7 +29,7 @@ _Formation_Speed_Glitched_Loop:
     mov  eax, ecx
     call [esi+34h]
     mov  byte al, [eax+15Ch]
-    cmp  byte [firstformationunit], 1
+    cmp  byte [Temp.FormationFirstUnit], 1
     jnz  .Not_First_Unit_FormMaxSpeed
     mov  esi, [ecx+11h]
     mov  eax, ecx
@@ -56,7 +54,7 @@ _Formation_Speed_Glitched_Loop:
     call [esi+34h]
     mov  byte al, [eax+15Dh]
     inc  edx
-    cmp  byte [firstformationunit], 1
+    cmp  byte [Temp.FormationFirstUnit], 1
     jnz  .Not_First_Unit_FormSpeed
     mov  esi, [ecx+11h]
     mov  eax, ecx
@@ -73,7 +71,7 @@ _Formation_Speed_Glitched_Loop:
     mov  byte [Globals___FormSpeed], al
 
 .Dont_Set_As_FormSpeed:
-    mov  byte [firstformationunit], 0
+    mov  byte [Temp.FormationFirstUnit], 0
     jmp  0x004B3FAA
 
 
@@ -93,7 +91,7 @@ _Formation_Speed_Glitched_Loop:
     jmp  0x004B3FAA
 
 _DisplayClass__Mouse_Left_Release_Function_End:
-    mov  byte [firstformationunit], 1
+    mov  byte [Temp.FormationFirstUnit], 1
     lea  esp, [ebp-8]
     pop  edi
     pop  esi

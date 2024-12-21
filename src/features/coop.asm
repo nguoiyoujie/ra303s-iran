@@ -92,7 +92,7 @@ _Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode:
 
     cmp  al,0x0c
     jl   0x004AB661
-    cmp  al,HouseType.Count-1
+    cmp  al,HouseTypeClass.NEW_COUNT-1
     jmp  0x004AB65F
 
 InCoopMode    dd 0
@@ -271,7 +271,7 @@ _UnitClass__Read_INI_Use_Single_Player_Logic:
 
 
 _HouseClass__Use_Single_Player_Logic:
-    cmp  byte [SingleplayerAIObeyPrerequisites], 1
+    cmp  byte [Rules.AI.SingleplayerAIObeyPrerequisites], 1
     jz   0x004D407D
     
     cmp  dword [InCoopMode],1

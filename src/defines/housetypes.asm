@@ -42,6 +42,5 @@
 %define HouseType.Multi19                  30
 %define HouseType.Multi20                  31
 
-%define HouseType.Count                    32
 
 

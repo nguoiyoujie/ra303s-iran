@@ -5,10 +5,6 @@
 ;
 ;----------------------------------------------------------------
 
-; define array location where aircraft type classes are stored
-%define WeaponTypeClass.Array              0x00691680
-%define WeaponTypeClass.Count              0x00691658
-
 ; define warhead type field definitions
 %define WeaponTypeClass.Offset.ID                        0x000    ; INT // ID
 %define WeaponTypeClass.Offset.IniName                   0x004    ; INT PTR to STRING

@@ -155,7 +155,7 @@ _Mono_Printf_Redirect:
 
 _Print_CRCs_Debug_On_Check:
     ; do cmp
-    cmp  byte [DebugLogging],1
+    cmp  byte [RedAlert.Options.DebugLogging],1
     jz   .Debug_On
 
     retn

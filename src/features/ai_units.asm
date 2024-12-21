@@ -131,16 +131,16 @@ _HouseClass__AI_Unit_Extend_BaseBuildingList_5:
     jmp  0x004DBCE6
 
 _HouseClass__AI_Unit_Expand:
-    cmp  bl,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  byte bl,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBB27
     jmp  0x004DBBCE
 
 _HouseClass__AI_Unit_Expand_Choice:
-    cmp  al,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  byte al,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBC05
     jmp  0x004DBC91
 
 _HouseClass__AI_Unit_Expand_Choice_2:
-    cmp  dh,[NewUnitTypeHeapCount] ; was UNIT_COUNT (0x16)
+    cmp  byte dh,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBCD6
     jmp  0x004DBCB3

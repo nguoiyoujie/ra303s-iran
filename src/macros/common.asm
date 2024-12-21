@@ -146,6 +146,57 @@ Loop_Over_RULES_INI_Section_Entries_:
 %endmacro
 
 
+; %1 = address to store data
+; %2 = max entries
+; return: eax = number of entries loaded
+%macro GetVocArrayFromString 2
+    push edi
+    push edx
+    push ecx
+    push ebx
+    xor  edi,edi
+    cmp  eax,0
+    je   %%Retn ; just return 0
+    mov  ebx,eax
+
+  %%Read_Next:
+   ; the string is a comma-delimited set
+    mov  edx,str_Comma
+    mov  eax,ebx
+    push eax
+    call _stristr
+    test eax,eax
+    je   %%Read_Last    
+    mov  byte [eax],0
+    lea  eax,[eax + 1]
+    mov  ebx,eax
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   %%Read_Next
+    mov  word[esi+%1+edi*2],ax
+    inc  edi
+    cmp  edi,%2 ; stop on max entry
+    jge  %%Retn
+    jmp  %%Read_Next
+  %%Read_Last:
+    pop  eax
+    call Audio___Voc_From_Name
+    cmp  ax,-1
+    je   %%Retn
+    mov  word[esi+%1+edi*2],ax
+    inc  edi
+  %%Retn:
+    mov eax,edi
+    pop ebx
+    pop ecx
+    pop edx
+    pop edi
+    retn
+%endmacro
+
+
+
 
 
 

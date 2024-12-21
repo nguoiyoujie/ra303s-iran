@@ -19,7 +19,7 @@
 
 
 _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
-    mov  al,[NewInfantryTypeHeapCount]
+    mov  al,[InfantryTypeClass.Count]
     cmp  dh,al
     jl   0x0045972F
     jmp  0x004597FB
@@ -49,7 +49,7 @@ Init_InfantryTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,InfantryTypeClass.ORIGINAL_MAX ; InfantryType
+    add  edx,InfantryTypeClass.ORIGINAL_COUNT ; InfantryType
 
     push 0               ; __int32
     push 2               ; char
@@ -66,10 +66,10 @@ Init_InfantryTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newinfantrytypes],-1
+    cmp  dword [Rules.StringTableOffsets.InfantryTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [stringtableoffset_newinfantrytypes]
+    add  ebx,dword [Rules.StringTableOffsets.InfantryTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -84,14 +84,14 @@ Init_InfantryTypeClass:
 
 
 _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count:
-    mov  al,[NewInfantryTypeHeapCount]
+    mov  al,[InfantryTypeClass.Count]
     cmp  dl,al
     jl   0x004EB04C
     jmp  0x004EB045
 
 
 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
-    mov  al,[NewInfantryTypeHeapCount]
+    mov  al,[InfantryTypeClass.Count]
     cmp  dl,al
     jl   0x004EB08D
     jmp  0x004EB162
@@ -99,14 +99,12 @@ _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
 
 _Init_Game_Set_InfantryTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Infantry,[stringtableoffset_newinfantrytypes]
-    mov  [stringtableoffset_newinfantrytypes],eax
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Infantry,[Rules.StringTableOffsets.InfantryTypes]
+    mov  [Rules.StringTableOffsets.InfantryTypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_InfantryTypes
-    mov  byte [InfantryTypesExtCount],al
     mov  edx,eax
-    add  edx,InfantryTypeClass.ORIGINAL_MAX
-    mov  byte [NewInfantryTypeHeapCount],dl
+    add  edx,InfantryTypeClass.ORIGINAL_COUNT
     jmp  0x004F40CC
 

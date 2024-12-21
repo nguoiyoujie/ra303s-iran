@@ -31,7 +31,7 @@ _RadarClass__Draw_It_1:
 
 
 _HouseClass__AI_Radar3:
-    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
+    cmp  byte [Spawn.Settings.DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -60,7 +60,7 @@ _HouseClass__AI_Radar3:
 
 _HouseClass__AI_Radar1:
     push eax
-    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
+    cmp  byte [Spawn.Settings.DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -81,7 +81,7 @@ _HouseClass__AI_Radar1:
 
 _HouseClass__AI_Radar2:
     push eax
-    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
+    cmp  byte [Spawn.Settings.DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [ebp-0x58]
@@ -102,7 +102,7 @@ _HouseClass__AI_Radar2:
 
 
 _RadarClass__Activate_Play_Radar_Sound1:
-    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
+    cmp  byte [Spawn.Settings.DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [Globals___PlayerPtr]
@@ -120,7 +120,7 @@ _RadarClass__Activate_Play_Radar_Sound1:
 
 
 _RadarClass__Activate_Play_Radar_Sound2:
-    cmp  byte [Toggle_Feature_DeadPlayersRadar], 0
+    cmp  byte [Spawn.Settings.DeadPlayersRadar], 0
     jz   .Normal_Code
 
     mov  eax, [Globals___PlayerPtr]

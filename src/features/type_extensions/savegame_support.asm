@@ -29,28 +29,28 @@
 ; For early map load, to prevent savegame values from working on
 ; next map load
 Clear_Extended_Savegame_Values:
-    mov  byte [BuildOffAlly],0
-    mov  byte [AftermathFastBuildSpeed],0
-    mov  byte [Toggle_Feature_DeadPlayersRadar],0
-    mov  byte [spawner_aftermath],0
-    mov  byte [ShortGame],0
-    mov  byte [NoTeslaZapEffectDelay],0
-    mov  byte [NoScreenShake],0
-    mov  byte [TechCenterBugFix],0
-    mov  byte [Toggle_Feature_ForcedAlliances],0
-    mov  byte [AllyReveal],0
-    mov  byte [MCVUndeploy],0
+    mov  byte [Rules.General.BuildOffAlly],0
+    mov  byte [Rules.Aftermath.AftermathFastBuildSpeed],0
+    mov  byte [Spawn.Settings.DeadPlayersRadar],0
+    mov  byte [Spawn.Settings.Aftermath],0
+    mov  byte [Spawn.Settings.ShortGame],0
+    mov  byte [Rules.General.NoTeslaZapEffectDelay],0
+    mov  byte [Rules.General.NoScreenShake],0
+    mov  byte [Spawn.Settings.TechCenterBugFix],0
+    mov  byte [Spawn.Settings.ForcedAlliances],0
+    mov  byte [Spawn.Settings.AllyReveal],0
+    mov  byte [Spawn.Settings.MCVUndeploy],0
     mov  byte [buildingcrewstuckfix],0
-    mov  byte [magicbuildfix],0
-    mov  byte [infantryrangeexploitfix],0
-    mov  byte [Toggle_Feature_ComputerParanoidForceDisabledSkirmish],1
-    mov  byte [Toggle_Fix_BuildRadarWithoutAirThreatCheck],-1
-    mov  byte [Toggle_Fix_AIParanoid],0
-    mov  byte [Toggle_Fix_AIAlly],0
-    mov  byte [FixFormationSpeed],0
-    mov  byte [ParabombsInMultiplayer],0
-    mov  byte [Toggle_Feature_EvacInMP],1
-    mov  byte [Toggle_Fix_AISendingTanksToTopLeft],0
+    mov  byte [Spawn.Settings.FixMagicBuild],0
+    mov  byte [Spawn.Settings.FixRangeExploit],0
+    mov  byte [Rules.AI.ComputerParanoidForceDisabledSkirmish],1
+    mov  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    mov  byte [Rules.AI.FixAIParanoid],0
+    mov  byte [Rules.AI.FixAIAlly],0
+    mov  byte [Rules.General.FixFormationSpeed],0
+    mov  byte [Rules.General.ParabombsInMultiplayer],0
+    mov  byte [Rules.General.EvacInMP],1
+    mov  byte [Rules.AI.FixAISendingTanksTopLeft],0
     mov  dword [InCoopMode],0
     mov  dword [Toggle_Fix_NavalRepairExploit],0
     retn
@@ -61,28 +61,28 @@ _Save_Misc_Values_Extended_Savegames:
     call dword [esi+10h]
 
     Save_Global_Value Globals___Session_Type,1
-    Save_Global_Value BuildOffAlly,1
-    Save_Global_Value AftermathFastBuildSpeed,1
-    Save_Global_Value Toggle_Feature_DeadPlayersRadar,1
-    Save_Global_Value spawner_aftermath,1
-    Save_Global_Value ShortGame,1
-    Save_Global_Value NoTeslaZapEffectDelay,1
-    Save_Global_Value NoScreenShake,1
-    Save_Global_Value TechCenterBugFix,1
-    Save_Global_Value Toggle_Feature_ForcedAlliances,1
-    Save_Global_Value AllyReveal,1
-    Save_Global_Value MCVUndeploy,1
+    Save_Global_Value Rules.General.BuildOffAlly,1
+    Save_Global_Value Rules.Aftermath.AftermathFastBuildSpeed,1
+    Save_Global_Value Spawn.Settings.DeadPlayersRadar,1
+    Save_Global_Value Spawn.Settings.Aftermath,1
+    Save_Global_Value Spawn.Settings.ShortGame,1
+    Save_Global_Value Rules.General.NoTeslaZapEffectDelay,1
+    Save_Global_Value Rules.General.NoScreenShake,1
+    Save_Global_Value Spawn.Settings.TechCenterBugFix,1
+    Save_Global_Value Spawn.Settings.ForcedAlliances,1
+    Save_Global_Value Spawn.Settings.AllyReveal,1
+    Save_Global_Value Spawn.Settings.MCVUndeploy,1
     Save_Global_Value buildingcrewstuckfix,1
-    Save_Global_Value magicbuildfix,1
-    Save_Global_Value infantryrangeexploitfix,1
-    Save_Global_Value Toggle_Feature_ComputerParanoidForceDisabledSkirmish,1
-    Save_Global_Value Toggle_Fix_BuildRadarWithoutAirThreatCheck,1
-    Save_Global_Value Toggle_Fix_AIParanoid,1
-    Save_Global_Value Toggle_Fix_AIAlly,1
-    Save_Global_Value FixFormationSpeed,1
-    Save_Global_Value ParabombsInMultiplayer,1
-    Save_Global_Value Toggle_Feature_EvacInMP,1
-    Save_Global_Value Toggle_Fix_AISendingTanksToTopLeft,1
+    Save_Global_Value Spawn.Settings.FixMagicBuild,1
+    Save_Global_Value Spawn.Settings.FixRangeExploit,1
+    Save_Global_Value Rules.AI.ComputerParanoidForceDisabledSkirmish,1
+    Save_Global_Value Rules.AI.BuildRadarWithoutAirThreatCheck,1
+    Save_Global_Value Rules.AI.FixAIParanoid,1
+    Save_Global_Value Rules.AI.FixAIAlly,1
+    Save_Global_Value Rules.General.FixFormationSpeed,1
+    Save_Global_Value Rules.General.ParabombsInMultiplayer,1
+    Save_Global_Value Rules.General.EvacInMP,1
+    Save_Global_Value Rules.AI.FixAISendingTanksTopLeft,1
     Save_Global_Value InCoopMode,4
     Save_Global_Value Toggle_Fix_NavalRepairExploit,1
 
@@ -97,28 +97,28 @@ _Load_Misc_Values_Extended_Savegames:
     jnz  .Ret ; SaveGameVersion != New_Savegame_Version so return
 
     Load_Global_Value Globals___Session_Type,1
-    Load_Global_Value BuildOffAlly,1
-    Load_Global_Value AftermathFastBuildSpeed,1
-    Load_Global_Value Toggle_Feature_DeadPlayersRadar,1
-    Load_Global_Value spawner_aftermath,1
-    Load_Global_Value ShortGame,1
-    Load_Global_Value NoTeslaZapEffectDelay,1
-    Load_Global_Value NoScreenShake,1
-    Load_Global_Value TechCenterBugFix,1
-    Load_Global_Value Toggle_Feature_ForcedAlliances,1
-    Load_Global_Value AllyReveal,1
-    Load_Global_Value MCVUndeploy,1
+    Load_Global_Value Rules.General.BuildOffAlly,1
+    Load_Global_Value Rules.Aftermath.AftermathFastBuildSpeed,1
+    Load_Global_Value Spawn.Settings.DeadPlayersRadar,1
+    Load_Global_Value Spawn.Settings.Aftermath,1
+    Load_Global_Value Spawn.Settings.ShortGame,1
+    Load_Global_Value Rules.General.NoTeslaZapEffectDelay,1
+    Load_Global_Value Rules.General.NoScreenShake,1
+    Load_Global_Value Spawn.Settings.TechCenterBugFix,1
+    Load_Global_Value Spawn.Settings.ForcedAlliances,1
+    Load_Global_Value Spawn.Settings.AllyReveal,1
+    Load_Global_Value Spawn.Settings.MCVUndeploy,1
     Load_Global_Value buildingcrewstuckfix,1
-    Load_Global_Value magicbuildfix,1
-    Load_Global_Value infantryrangeexploitfix,1
-    Load_Global_Value Toggle_Feature_ComputerParanoidForceDisabledSkirmish,1
-    Load_Global_Value Toggle_Fix_BuildRadarWithoutAirThreatCheck,1
-    Load_Global_Value Toggle_Fix_AIParanoid,1
-    Load_Global_Value Toggle_Fix_AIAlly,1
-    Load_Global_Value FixFormationSpeed,1
-    Load_Global_Value ParabombsInMultiplayer,1
-    Load_Global_Value Toggle_Feature_EvacInMP,1
-    Load_Global_Value Toggle_Fix_AISendingTanksToTopLeft,1
+    Load_Global_Value Spawn.Settings.FixMagicBuild,1
+    Load_Global_Value Spawn.Settings.FixRangeExploit,1
+    Load_Global_Value Rules.AI.ComputerParanoidForceDisabledSkirmish,1
+    Load_Global_Value Rules.AI.BuildRadarWithoutAirThreatCheck,1
+    Load_Global_Value Rules.AI.FixAIParanoid,1
+    Load_Global_Value Rules.AI.FixAIAlly,1
+    Load_Global_Value Rules.General.FixFormationSpeed,1
+    Load_Global_Value Rules.General.ParabombsInMultiplayer,1
+    Load_Global_Value Rules.General.EvacInMP,1
+    Load_Global_Value Rules.AI.FixAISendingTanksTopLeft,1
     Load_Global_Value InCoopMode,4
     Load_Global_Value Toggle_Fix_NavalRepairExploit,1
 

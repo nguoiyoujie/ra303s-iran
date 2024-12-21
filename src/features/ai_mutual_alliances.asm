@@ -35,10 +35,10 @@ _HouseClass__Computer_Paranoid_Force_Disabled_Skirmish:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Ret
 
-    cmp  byte [Toggle_Feature_ComputerParanoidForceDisabledSkirmish],1
+    cmp  byte [Rules.AI.ComputerParanoidForceDisabledSkirmish],1
     jz   .Ret
 
-    cmp  byte [Toggle_Feature_ForcedAlliances],1
+    cmp  byte [Spawn.Settings.ForcedAlliances],1
     jz   .Ret
 
     jmp  .Normal_Ret
@@ -76,7 +76,7 @@ _EventClass__Execute_Make_Ally:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Toggle_Fix_AIAlly],0
+    cmp  byte [Rules.AI.FixAIAlly],0
     jz   .Ret
 
 .Apply_Fix_For_Skirmish:
@@ -108,7 +108,7 @@ _HouseClass__Is_Allowed_To_Ally_AI_Player_Fix:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Allow_AI_Ally
 
-    cmp  byte [Toggle_Fix_AIAlly],1
+    cmp  byte [Rules.AI.FixAIAlly],1
     jz   .Allow_AI_Ally
 
     cmp  dword eax,0
@@ -126,7 +126,7 @@ _HouseClass__Make_Ally_Computer_Paranoid_Call_Patch_Out:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Jump_Over
 
-    cmp  byte [Toggle_Fix_AIParanoid],1
+    cmp  byte [Rules.AI.FixAIParanoid],1
     jz   .Jump_Over
 
     call HouseClass__Computer_Paranoid

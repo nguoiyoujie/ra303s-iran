@@ -14,11 +14,11 @@
 
 _Time_To_Build_NewUnitsEnabled_Check:
 
-    cmp  byte [AftermathFastBuildSpeed],1
+    cmp  byte [Rules.Aftermath.AftermathFastBuildSpeed],1
 
     jz   0x00561206
 
-    cmp  byte [FastAMBuildSpeed],1
+    cmp  byte [RedAlert.Options.FastAMBuildSpeed],1 ; legacy option?
     jz   .Fast_AM_For_Skirmish_And_Singleplayer
 
 .Normal_Code:

@@ -299,7 +299,9 @@
 %define WinsockInterfaceClass__Discard_In_Buffers                 0x005A812C ; void WinsockInterfaceClass::Discard_In_Buffers (void)
 %define WinsockInterfaceClass__Discard_Out_Buffers                0x005A8154 ; void WinsockInterfaceClass::Discard_Out_Buffers (void)
 
-
+; MIXFILE.CPP
+%define MixFileClass_CCFileClass_Retrieve                         0x005B8F30 ; void const * MixFileClass<T>::Retrieve(char const * filename)
+%define MixFileClass_CCFileClass_Cache                            0x005B93F0 ; bool MixFileClass<T>::Cache(char const * filename, Buffer const * buffer)
 
 
 %define RandomClass_Random                                        0x005BC960 ; RandomClass::operator()(int, int)
@@ -323,6 +325,7 @@
 %define Globals___AntsEnabled                                     0x00665DDC
 %define Globals___NewUnitsEnabled                                 0x00665DE0
 %define Globals___EngineerCaptureLevel                            0x00665E04
+%define Globals___FastKey                                         0x00665F68 ; PKey FastKey;
 
 
 ;%define Globals___Options                                         ?????????? ; GameOptionsClass Options;

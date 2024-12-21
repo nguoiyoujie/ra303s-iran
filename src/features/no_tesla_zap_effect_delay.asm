@@ -17,7 +17,7 @@
 @HOOK 0x005656DD _TechnoClass__Fire_At_No_Tesla_Zap_Effect_Delay
 
 _TechnoClass__Fire_At_No_Tesla_Zap_Effect_Delay:
-    cmp  byte [NoTeslaZapEffectDelay], 1
+    cmp  byte [Rules.General.NoTeslaZapEffectDelay], 1
     jz   .Dont_Call_Delay
 
     call 0x005D0F10 ; Delay(int)

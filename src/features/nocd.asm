@@ -30,7 +30,7 @@
 @HOOK 0x00551FC8 _Patch_In_Later_GetCDClass_Init
 ;@HOOK 0x004AAE0C _Fix_CDROM_Name_Get_Crash
 
-;NoCDMode db 1
+;RedAlert.Options.NoCDMode db 1
 
 %define GetCDClass__GetCDClass    0x005CDD10
 %define CDList                    0x00680884
@@ -46,7 +46,7 @@ _Fix_CDROM_Name_Get_Crash:
     jmp  0x004AAE11
 
 _Force_CD_Available:
-    cmp  byte [NoCDMode], 1
+    cmp  byte [RedAlert.Options.NoCDMode], 1
     jz   .Ret_Now
 
     push ebp
@@ -62,7 +62,7 @@ _Force_CD_Available:
     RETN
 
 _Init_CDROM_Access:
-    cmp  byte [NoCDMode], 1
+    cmp  byte [RedAlert.Options.NoCDMode], 1
     jz   .Ret_Now
 
     sub  esp, 1Ch
@@ -81,7 +81,7 @@ _Init_CDROM_Access:
     RETN
 
 _GetCDClass__GetCDClass_GetDriveType:
-    cmp  byte [NoCDMode], 1
+    cmp  byte [RedAlert.Options.NoCDMode], 1
     jz   .Get_Hard_Drive
 
     cmp  eax, 5

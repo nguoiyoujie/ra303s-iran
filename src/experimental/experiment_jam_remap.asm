@@ -29,7 +29,7 @@ _TechnoClass__TechnoDrawObject_RemapJammedAsShade:
     jz   0x00567194
     cmp  al,RTTIType.Building
     jnz  0x00567242
-    mov  al,byte [Toggle_Feature_RemapJammedBuildings]
+    mov  al,byte [Rules.General.RemapJammedBuildings]
     cmp  al,0
     jz   0x00567242
     mov  eax,dword [ebp - 0x10]

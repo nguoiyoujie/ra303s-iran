@@ -48,7 +48,7 @@
 @HOOK 0x005292E5 _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols
 
 _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols:
-    cmp  dword [spawner_is_active], 0 ; if spawner is active jump over version protocol check
+    cmp  byte [spawner_is_active], 0 ; if spawner is active jump over version protocol check
     jnz  .Ret
 
     cmp  byte [0x0067F2B5], 2
@@ -59,7 +59,7 @@ jmp        0x005292EE
 
 _Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols:
     mov  byte dh, [0x0067F2B5]
-    cmp  dword [spawner_is_active], 0 ; if spawner isn't active do normal code
+    cmp  byte [spawner_is_active], 0 ; if spawner isn't active do normal code
     jz   .Ret
     cmp  byte dh, 2 ; if protocol version isn't 2 jump to protocol 2 speed
     jnz  0x004A7D82
@@ -169,7 +169,7 @@ Initialize_Spawn:
     call_CCINIClass__Load str_ini_Spawn, CCFileClass_Spawn, CCINIClass_Spawn
 
     ; Set spawner_is_running global variable to 'true'
-    mov  dword [spawner_is_active], 1
+    mov  byte [spawner_is_active], 1
 
     ; load settings from ini
     mov  [game + Session.type], byte 5 ; Set to type skirmish
@@ -417,7 +417,7 @@ Initialize_Spawn:
     spawn_INI_Get_Bool str_Settings, str_Aftermath, 0
     mov  [Globals___NewUnitsEnabled], eax
     mov  [Version107InMix], eax
-    mov  byte [AftermathEnabled], AL
+    mov  byte [RedAlert.Options.AftermathEnabled], AL
 
     ; create self
     New_Player
@@ -669,61 +669,61 @@ Initialize_Spawn:
     call_INIClass__Get_String CCINIClass_Map, str_Basic, str_Name, str_EmptyString, 0x0067F2D6, 0x2A
 
     spawn_INI_Get_Bool str_Settings, str_AftermathFastBuildSpeed, 0
-    mov  [AftermathFastBuildSpeed], al
+    mov  [Rules.Aftermath.AftermathFastBuildSpeed], al
 
     spawn_INI_Get_Bool str_Settings, str_FixFormationSpeed, 0
-    mov  [FixFormationSpeed], al
+    mov  [Rules.General.FixFormationSpeed], al
 
     spawn_INI_Get_Bool str_Settings, str_FixRangeExploit, 0
-    mov  byte [infantryrangeexploitfix], al
+    mov  byte [Spawn.Settings.FixRangeExploit], al
 
     spawn_INI_Get_Bool str_Settings, str_FixMagicBuild, 0
-    mov  byte [magicbuildfix], al
+    mov  byte [Spawn.Settings.FixMagicBuild], al
 
     spawn_INI_Get_Bool str_Settings, str_ParabombsInMultiplayer, 0
-    mov  [ParabombsInMultiplayer], al
+    mov  [Rules.General.ParabombsInMultiplayer], al
 
     spawn_INI_Get_Bool str_Settings, str_FixAIAlly, 0
-    mov  [Toggle_Fix_AIAlly], al
+    mov  [Rules.AI.FixAIAlly], al
 
     spawn_INI_Get_Bool str_Settings, str_MCVUndeploy, 0
-    mov  [MCVUndeploy], al
+    mov  [Spawn.Settings.MCVUndeploy], al
 
     spawn_INI_Get_Bool str_Settings, str_AllyReveal, 0
-    mov  [AllyReveal], al
+    mov  [Spawn.Settings.AllyReveal], al
 
     spawn_INI_Get_Bool str_Settings, str_ForcedAlliances, 0
-    mov  [Toggle_Feature_ForcedAlliances], al
+    mov  [Spawn.Settings.ForcedAlliances], al
 
     spawn_INI_Get_Bool str_Settings, str_TechCenterBugFix, 0
-    mov  [TechCenterBugFix], al
+    mov  [Spawn.Settings.TechCenterBugFix], al
 
     spawn_INI_Get_Bool str_Settings, str_BuildOffAlly, 0
-    mov  [BuildOffAlly], al
+    mov  [Rules.General.BuildOffAlly], al
 
     spawn_INI_Get_Bool str_Settings, str_SouthAdvantageFix, 0
-    mov  [SouthAdvantageFix], al
+    mov  [Spawn.Settings.SouthAdvantageFix], al
 
     spawn_INI_Get_Bool str_Settings, str_NoScreenShake, 0
-    mov  [NoScreenShake], al
+    mov  [Rules.General.NoScreenShake], al
 
     spawn_INI_Get_Bool str_Settings, str_NoTeslaZapEffectDelay, 0
-    mov  [NoTeslaZapEffectDelay], al
+    mov  [Rules.General.NoTeslaZapEffectDelay], al
 
     spawn_INI_Get_Bool str_Settings, str_ShortGame, 0
-    mov  [ShortGame], al
+    mov  [Spawn.Settings.ShortGame], al
 
     spawn_INI_Get_Bool str_Settings, str_DeadPlayersRadar, 0
-    mov  [Toggle_Feature_DeadPlayersRadar], al
+    mov  [Spawn.Settings.DeadPlayersRadar], al
 
     ; For an AI paranoid setting?
 ;    spawn_INI_Get_Bool Globals___RuleINI, str_AI, str_FixAIParanoid, 0
-;    mov        [Toggle_Fix_AIParanoid], al
+;    mov        [Rules.AI.FixAIParanoid], al
 
 
     ; Fixes
-    mov  byte [Toggle_Fix_AISendingTanksToTopLeft], 1
-    mov  byte [Toggle_Feature_EvacInMP], 0
+    mov  byte [Rules.AI.FixAISendingTanksTopLeft], 1
+    mov  byte [Rules.General.EvacInMP], 0
     mov  byte [Toggle_Fix_NavalRepairExploit], 1
 
     ; Frag1 Explosion Anim fix should be enabled via loading.asm's hook for map start
@@ -879,7 +879,7 @@ ReceiveFix:
     jmp  0x005A8A81
 
 _Wait_For_Players_Hack_Wait_Time:
-    cmp  dword [spawner_is_active], 0
+    cmp  byte [spawner_is_active], 0
     jz   .Ret
     mov  edx, 120 ; NOT HEX
 

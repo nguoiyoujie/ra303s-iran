@@ -27,7 +27,7 @@ str_dot db".", 0
 @JMP 0x004F4D7E _Internet_Action
 
 _Internet_Action:
-    cmp  byte [EnableWOL], 1
+    cmp  byte [RedAlert.Options.EnableWOL], 1
     jz   .Normal_Code
 
 

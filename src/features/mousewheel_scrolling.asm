@@ -18,7 +18,7 @@ Scrolling db 0
 ProcessingSidebar dd 0
 
 _Mouse_Wheel_Sidebar_Scrolling:
-    cmp  byte [Toggle_Feature_MouseWheelScrolling], 1
+    cmp  byte [RedAlert.Options.MouseWheelScrolling], 1
     jnz  .out
     mov  esi, [ebp+0Ch]
     cmp  esi, 20Ah ;WM_MOUSEHWHEEL

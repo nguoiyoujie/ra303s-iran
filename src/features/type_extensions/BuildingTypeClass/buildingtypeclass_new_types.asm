@@ -17,27 +17,13 @@
 @HOOK 0x004596B3 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
 @HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
 
-; BuildingTypeClass::BuildingTypeClass
-; convert sar edx,18 to shr edx,18
-@CLEAR 0x00429D43 0xEA 0x00429D44
+@CLEAR 0x00429D43 0xEA 0x00429D44 ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr edx,18
 @CLEAR 0x00429D4B 0xEA 0x00429D4C
-
-; BuildingTypeClass::As_Reference
-; convert movsx to movzx
-@CLEAR 0x00453A77 0xB6 0x00453A78
-
-; TFixedIHeapClass<BuildingTypeClass>::Ptr
-; convert sar ecx,18 to shr ecx,18
-@CLEAR 0x00457EB8 0xE9 0x00457EB9
+@CLEAR 0x00453A77 0xB6 0x00453A78 ; BuildingTypeClass::As_Reference ; convert movsx to movzx
+@CLEAR 0x00457EB8 0xE9 0x00457EB9 ; TFixedIHeapClass<BuildingTypeClass>::Ptr ; convert sar ecx,18 to shr ecx,18
 @CLEAR 0x00457ED7 0xE9 0x00457ED8
-
-; BuildingClass::AI
-; convert movsx to movzx
-@CLEAR 0x004566C9 0xB6 0x004566CA
-
-; BuildingClass::Animation_AI
-; convert movsx to movzx
-@CLEAR 0x004603B0 0xB6 0x004603B1
+@CLEAR 0x004566C9 0xB6 0x004566CA ; BuildingClass::AI ; convert movsx to movzx
+@CLEAR 0x004603B0 0xB6 0x004603B1 ; BuildingClass::Animation_AI ; convert movsx to movzx
 
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
 
@@ -66,7 +52,7 @@ Init_BuildingTypeClass:
 
     pop  eax
     mov  edx,ebx
-    add  edx,BuildingTypeClass.ORIGINAL_MAX ; BuildingType
+    add  edx,BuildingTypeClass.ORIGINAL_COUNT ; BuildingType
 
     push 0
     push 0x005FEAF6 ; offset short const List22[]
@@ -94,10 +80,10 @@ Init_BuildingTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [stringtableoffset_newbuildingtypes],-1
+    cmp  dword [Rules.StringTableOffsets.BuildingTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [stringtableoffset_newbuildingtypes]
+    add  ebx,dword [Rules.StringTableOffsets.BuildingTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,305 ; Civilian Building
@@ -247,7 +233,7 @@ _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count:
     mov  dl,byte [ebp-0xc]
     inc  dl
     mov  byte [ebp-0xc],dl
-    mov  al,byte [NewBuildingTypeHeapCount]
+    mov  al,byte [BuildingTypeClass.Count]
     cmp  dl,al
     jb   0x004537D8
     jmp  0x004537D1
@@ -257,7 +243,7 @@ _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes:
     mov  bl,byte [ebp-0x18]
     inc  bl
     mov  byte [ebp-0x18],bl
-    mov  al,byte [NewBuildingTypeHeapCount]
+    mov  al,byte [BuildingTypeClass.Count]
     cmp  bl,al
     jb   0x004535BD
     jmp  0x0045371A
@@ -268,7 +254,7 @@ _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
     mov  bh,byte [ebp-0x20] ; was bh
     inc  bh
     mov  byte [ebp-0x20],bh
-    mov  al,byte [NewBuildingTypeHeapCount]
+    mov  al,byte [BuildingTypeClass.Count]
     cmp  bh,al
     ;pop  ebx
     jb   0x0045967A
@@ -277,13 +263,11 @@ _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes:
 
 _Init_Game_Set_BuildingTypes_Heap_Count:
     ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Building,[stringtableoffset_newbuildingtypes]
-    mov  [stringtableoffset_newbuildingtypes],eax
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Building,[Rules.StringTableOffsets.BuildingTypes]
+    mov  [Rules.StringTableOffsets.BuildingTypes],eax
 
     ; update heap count
     Get_RULES_INI_Section_Entry_Count str_BuildingTypes
-    mov  [BuildingTypesExtCount],eax
     mov  edx,eax
-    add  edx,BuildingTypeClass.ORIGINAL_MAX
-    mov  [NewBuildingTypeHeapCount],edx
+    add  edx,BuildingTypeClass.ORIGINAL_COUNT
     jmp  0x004F40AA

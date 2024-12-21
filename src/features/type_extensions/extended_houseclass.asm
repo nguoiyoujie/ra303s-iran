@@ -34,7 +34,7 @@ _Replace_HouseTriggers_4C7966:
     ;mov dword[0x005F99C0],Houses.HouseTriggers
     ;mov ebx,0x005F9274
     ;mov eax,Houses.HouseTriggers
-    ;mov edx,HouseType.Count
+    ;mov edx,HouseTypeClass.NEW_COUNT
     ;mov edi,0x2a
     jmp 0x004C796B ; 0x004C7978
 
@@ -90,36 +90,36 @@ _Replace_HouseTriggers_53AB84:
 
 ; TO-DO: check FlasherClass::FlashCountPerPlayer[HOUSE_COUNT] as well, it is possible FlashCountPerPlayer only exists in Remastered code
 
-@CLEAR 0x004C796F HouseType.Count 0x004C7970 ; init
-@CLEAR 0x004F77B0 HouseType.Count+1 0x004F77B1 ; static void Init_Heaps(void)
-@CLEAR 0x004633A5 HouseType.Count 0x004633A6 ; CCINIClass::Put_Owners, was 0x14
-@CLEAR 0x004A0298 HouseType.Count 0x004A0299 ;void CellClass::Adjust_Threat(HousesType house, int threat_value), was 0x14
-;@CLEAR 0x004AB65E HouseType.Count-1 0x004AB65F ; Conquer::Owner_From_Name, was 0x13; hooked by features/coop.asm
+@CLEAR 0x004C796F HouseTypeClass.NEW_COUNT 0x004C7970 ; init
+@CLEAR 0x004F77B0 HouseTypeClass.NEW_COUNT+1 0x004F77B1 ; static void Init_Heaps(void)
+@CLEAR 0x004633A5 HouseTypeClass.NEW_COUNT 0x004633A6 ; CCINIClass::Put_Owners, was 0x14
+@CLEAR 0x004A0298 HouseTypeClass.NEW_COUNT 0x004A0299 ;void CellClass::Adjust_Threat(HousesType house, int threat_value), was 0x14
+;@CLEAR 0x004AB65E HouseTypeClass.NEW_COUNT-1 0x004AB65F ; Conquer::Owner_From_Name, was 0x13; hooked by features/coop.asm
 ;@CLEAR ??? 0x20 ??? ; Conquer::Shake_The_Screen, seems to exist only in Remastered
-@CLEAR 0x004CD0FE HouseType.Count 0x004CD0FF ; HouseTypeClass::From_Name, was 0x14
-@CLEAR 0x004D4128 HouseType.Count 0x004D4129 ; void HouseClass::Init(void), was 0x14
-@CLEAR 0x004D7E73 HouseType.Count 0x004D7E74 ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype), was 0x14
-@CLEAR 0x004D866B HouseType.Count 0x004D866C ; void HouseClass::Tally_Score(void), was 0x14
-@CLEAR 0x004D880A HouseType.Count 0x004D880B ; void HouseClass::Tally_Score(void), was 0x14
-@CLEAR 0x004D9814 HouseType.Count 0x004D9815 ; int HouseClass::Expert_AI(void), was 0x14
-@CLEAR 0x004DA334 HouseType.Count 0x004DA335 ; int HouseClass::AI_Building(void), was 0x14
-@CLEAR 0x004DB0EE HouseType.Count 0x004DB0EF ; int HouseClass::AI_Building(void), was 0x14
-@CLEAR 0x004DDE8F HouseType.Count 0x004DDE90 ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
-@CLEAR 0x004DDE9C HouseType.Count 0x004DDE9D ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
-@CLEAR 0x004DDEF4 HouseType.Count 0x004DDEF5 ; void HouseClass::Write_INI(CCINIClass & ini), was 0x14
-@CLEAR 0x004DE61E HouseType.Count 0x004DE61F ; bool HouseClass::Is_Allowed_To_Ally(HousesType house) const, was 0x14
-@CLEAR 0x004DE688 HouseType.Count 0x004DE689 ; void HouseClass::Computer_Paranoid(void)
-@CLEAR 0x004DE6E2 HouseType.Count 0x004DE6E3 ; void HouseClass::Computer_Paranoid(void)
-@CLEAR 0x004FE1F4 HouseType.Count 0x004FE1F5 ; void LogicClass::AI(void), was 0x14
-@CLEAR 0x004FE220 HouseType.Count 0x004FE221 ; void LogicClass::AI(void), was 0x14
-@CLEAR 0x004FFECE HouseType.Count 0x004FFECF ; bool MapClass::Base_Region(CELL cell, HousesType & house, ZoneType & zone), was 0x14
-@CLEAR 0x005321C3 HouseType.Count 0x005321C4 ; bool RadarClass::Spy_Next_House(void)
-;@CLEAR 0x00532859 HouseType.Count 0x0053285A ; void RadarClass::Draw_Names(void) ; extend UnitsKilled / BuildingsKilled first
-@CLEAR 0x00537522 HouseType.Count 0x00537523 ; bool RulesClass::Objects(CCINIClass & ini)
-@CLEAR 0x005378AE HouseType.Count 0x005378AF ; static void Put_All(Pipe & pipe, int save_net)
-@CLEAR 0x00538556 HouseType.Count 0x00538557 ; bool Load_Game(const char *file_name)
-@CLEAR 0x0053AA2F HouseType.Count 0x0053AA30 ; void Fill_In_Data(void)
-@CLEAR 0x0053AB99 HouseType.Count 0x0053AB9A ; void Clear_Scenario(void)
+@CLEAR 0x004CD0FE HouseTypeClass.NEW_COUNT 0x004CD0FF ; HouseTypeClass::From_Name, was 0x14
+@CLEAR 0x004D4128 HouseTypeClass.NEW_COUNT 0x004D4129 ; void HouseClass::Init(void), was 0x14
+@CLEAR 0x004D7E73 HouseTypeClass.NEW_COUNT 0x004D7E74 ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype), was 0x14
+@CLEAR 0x004D866B HouseTypeClass.NEW_COUNT 0x004D866C ; void HouseClass::Tally_Score(void), was 0x14
+@CLEAR 0x004D880A HouseTypeClass.NEW_COUNT 0x004D880B ; void HouseClass::Tally_Score(void), was 0x14
+@CLEAR 0x004D9814 HouseTypeClass.NEW_COUNT 0x004D9815 ; int HouseClass::Expert_AI(void), was 0x14
+@CLEAR 0x004DA334 HouseTypeClass.NEW_COUNT 0x004DA335 ; int HouseClass::AI_Building(void), was 0x14
+@CLEAR 0x004DB0EE HouseTypeClass.NEW_COUNT 0x004DB0EF ; int HouseClass::AI_Building(void), was 0x14
+@CLEAR 0x004DDE8F HouseTypeClass.NEW_COUNT 0x004DDE90 ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
+@CLEAR 0x004DDE9C HouseTypeClass.NEW_COUNT 0x004DDE9D ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
+@CLEAR 0x004DDEF4 HouseTypeClass.NEW_COUNT 0x004DDEF5 ; void HouseClass::Write_INI(CCINIClass & ini), was 0x14
+@CLEAR 0x004DE61E HouseTypeClass.NEW_COUNT 0x004DE61F ; bool HouseClass::Is_Allowed_To_Ally(HousesType house) const, was 0x14
+@CLEAR 0x004DE688 HouseTypeClass.NEW_COUNT 0x004DE689 ; void HouseClass::Computer_Paranoid(void)
+@CLEAR 0x004DE6E2 HouseTypeClass.NEW_COUNT 0x004DE6E3 ; void HouseClass::Computer_Paranoid(void)
+@CLEAR 0x004FE1F4 HouseTypeClass.NEW_COUNT 0x004FE1F5 ; void LogicClass::AI(void), was 0x14
+@CLEAR 0x004FE220 HouseTypeClass.NEW_COUNT 0x004FE221 ; void LogicClass::AI(void), was 0x14
+@CLEAR 0x004FFECE HouseTypeClass.NEW_COUNT 0x004FFECF ; bool MapClass::Base_Region(CELL cell, HousesType & house, ZoneType & zone), was 0x14
+@CLEAR 0x005321C3 HouseTypeClass.NEW_COUNT 0x005321C4 ; bool RadarClass::Spy_Next_House(void)
+;@CLEAR 0x00532859 HouseTypeClass.NEW_COUNT 0x0053285A ; void RadarClass::Draw_Names(void) ; extend UnitsKilled / BuildingsKilled first
+@CLEAR 0x00537522 HouseTypeClass.NEW_COUNT 0x00537523 ; bool RulesClass::Objects(CCINIClass & ini)
+@CLEAR 0x005378AE HouseTypeClass.NEW_COUNT 0x005378AF ; static void Put_All(Pipe & pipe, int save_net)
+@CLEAR 0x00538556 HouseTypeClass.NEW_COUNT 0x00538557 ; bool Load_Game(const char *file_name)
+@CLEAR 0x0053AA2F HouseTypeClass.NEW_COUNT 0x0053AA30 ; void Fill_In_Data(void)
+@CLEAR 0x0053AB99 HouseTypeClass.NEW_COUNT 0x0053AB9A ; void Clear_Scenario(void)
 
 
 
@@ -167,12 +167,12 @@ _TFixedHeapClass__HouseClass__Constructor_HouseClass:
     jmp  0x004C836A
 
 ;_HouseClass__Read_INI_HouseClass_HouseTypes_1:
-;    cmp  bl,HouseType.Count
+;    cmp  bl,HouseTypeClass.NEW_COUNT
 ;    jl   0x004DDE67
 ;    jmp  0x004DDE92
 
 ;_HouseClass__Read_INI_HouseClass_HouseTypes_2:
-;    cmp  cl,HouseType.Count
+;    cmp  cl,HouseTypeClass.NEW_COUNT
 ;    jl   0x004DDD0F
 ;    jmp  0x004DDEA3
 

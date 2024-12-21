@@ -34,11 +34,11 @@ _Init_Game_Should_Load_AFTRMATH_INI:
     jz   .Non_Spawner_Check
 
     xor  eax,eax
-    mov  byte al,[spawner_aftermath]
+    mov  byte al,[Spawn.Settings.Aftermath]
     retn
 
 .Non_Spawner_Check:
-    cmp  byte [AftermathEnabled],1
+    cmp  byte [RedAlert.Options.AftermathEnabled],1
     jz   .Ret_True
 
 .Ret_False:
@@ -49,7 +49,7 @@ _Init_Game_Should_Load_AFTRMATH_INI:
     retn
 
 _Is_Counterstrike_Installed:
-    cmp  byte [CounterstrikeEnabled],1
+    cmp  byte [RedAlert.Options.CounterstrikeEnabled],1
     jz   .Ret_True
 
     mov  eax,0

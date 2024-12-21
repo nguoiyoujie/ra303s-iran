@@ -189,7 +189,7 @@ _exception_handler:
     push dword [hProcess]
     call [MiniDumpWriteDump]
 
-    cmp  byte [GenerateMemoryDump],1
+    cmp  byte [RedAlert.Options.GenerateMemoryDump],1
     jz   .Generate_Memory_Dump
 
     push 0

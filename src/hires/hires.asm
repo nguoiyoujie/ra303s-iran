@@ -1181,7 +1181,7 @@ _hires_Deinterlace_Videos_Fix_Bottom_Line:
 
 _hires_Deinterlace_Videos:
 ;    mov     eax, 2 ; video mode, 2 = deinterlace
-    mov  eax, [VideoInterlaceMode]
+    mov  eax, [RedAlert.Options.VideoInterlaceMode]
     jmp  0x005B30D5
 
 ;_hires_Deinterlace_Videos2:

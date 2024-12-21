@@ -19,7 +19,7 @@ _DisplayClass_Set_Cursor_Pos_Magic_Build_Fix:
     jz   .Apply_Fix
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [magicbuildfix], 1
+    cmp  byte [Spawn.Settings.FixMagicBuild], 1
     jz   .Apply_Fix
 
     ; if fix isn't applied this check is done
@@ -34,7 +34,7 @@ _DisplayClass__TacticalClass__Action_Magic_Build_Fix:
     jz   .Apply_Fix
     cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [magicbuildfix], 1
+    cmp  byte [Spawn.Settings.FixMagicBuild], 1
     jz   .Apply_Fix
 
     ; if fix isn't applied this check is done
