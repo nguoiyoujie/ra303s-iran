@@ -404,7 +404,7 @@ Death with Warhead ► InfDeath=X (`Tanya`)
 
 |Read Priority                         
 :----------------------------
-|`[&lt;InfantryType&gt;]  ► DeathReport2`     
+|`[&lt;InfantryType&gt;]  ► DeathReportX`     
 |`[&lt;InfantryType&gt;]  ► DeathReport`     
 |`[General]  ► TanyaDeathReport`     
 |Default Tanya scream 
@@ -415,7 +415,7 @@ Death with Warhead ► InfDeath=X (`Dog`)
 
 |Read Priority                         
 :----------------------------
-|`[&lt;InfantryType&gt;]  ► DeathReport3`     
+|`[&lt;InfantryType&gt;]  ► DeathReportX`     
 |`[&lt;InfantryType&gt;]  ► DeathReport`     
 |`[General]  ► DogDeathReport`     
 |Default Dog whine 
