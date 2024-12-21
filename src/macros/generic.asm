@@ -189,8 +189,9 @@
 
 ;;;;;;;;;;;;;;; STRING ;;;;;;;;;;;;;;;
 ;; For Get and Set, use GetInt and SetInt as they work for string addresses (dword) as well
-ObjectTypeClass.StringBuffer: TIMES 256 DB 0
-ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
+%define ObjectTypeClass.StringBuffer.Length      1024
+ObjectTypeClass.StringBuffer                     times ObjectTypeClass.StringBuffer.Length db 0
+ObjectTypeClass.ValueBuffer                      dd 0
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
 ; %1-%4 must not be eax
@@ -203,7 +204,7 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     ObjectTypeClass.ID %1,edx
     xor  ecx, ecx
     mov  ecx, dword [%1+%3]
-    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
     mov  dword [%1+%3], ObjectTypeClass.StringBuffer
     pop  ecx
     pop  edx
@@ -222,7 +223,7 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  byte cl, [%1+%3]
     mov  byte [ObjectTypeClass.ValueBuffer], cl
     xor  ecx, ecx
-    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
     mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
     test al, al
     jz   %%null_string
@@ -253,7 +254,7 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  ecx, [%1+%3]
     mov  word [ObjectTypeClass.ValueBuffer], cx
     xor  ecx, ecx
-    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
     mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
     test al, al
     jz   %%null_string
@@ -284,7 +285,7 @@ ObjectTypeClass.ValueBuffer:  TIMES 4 DB 0
     mov  dword ecx, [%1+%3]
     mov  dword [ObjectTypeClass.ValueBuffer], ecx
     xor  ecx, ecx
-    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
+    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
     mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
     test al, al
     jz   %%null_string
