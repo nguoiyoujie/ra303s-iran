@@ -47,12 +47,25 @@ You may find the features documentation [here](./docs/features.md).
 
 ### Credits
 
+**Helpers of the current patch**
+
+ - *tomsons26*: Sharing the 3.03 symbols list to greatly accelerate my attempts 
+   to trace and map game functions in disassembly.
+ - *Nyerguds*: Sharing of general knowledge, trivia and handling of some data 
+   formats.
+ - *iran*: Contributing some of the later discoveries, fixes to the game
+   record/playback function.
+ - *[TES]*: Lots of testing and reporting game bugs.
+ - *JackoDerp*: For introducing me to the patch and its features (especially new 
+   map trigger actions) many years ago with his own campaign mission set with the 
+   3.03r.
+
 **Authors of the original patch**
 
 *In alphabetical order*
 
- - hifi
- - iran
+ - hifi (3.03p)
+ - iran (3.03r)
  - sonarpulse
 
 **Helpers of the original patch**
