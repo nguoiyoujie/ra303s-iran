@@ -55,7 +55,7 @@ You may find the features documentation [here](./docs/features.md).
    formats.
  - *iran*: Contributing some of the later discoveries, fixes to the game
    record/playback function.
- - *[TES]*: Lots of testing and reporting game bugs.
+ - *Testol*: Lots of testing and reporting game bugs.
  - *JackoDerp*: For introducing me to the patch and its features (especially new 
    map trigger actions) many years ago with his own campaign mission set with the 
    3.03r.
