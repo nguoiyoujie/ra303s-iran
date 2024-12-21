@@ -87,7 +87,6 @@ Rules.StringTableOffsets.UnitTypes      dd -1
 Rules.StringTableOffsets.AircraftTypes  dd -1
 Rules.StringTableOffsets.VesselTypes    dd -1
 Rules.StringTableOffsets.BuildingTypes  dd -1
-Toggle_Fix_NavalRepairExploit db 0
 
 ; [Aftermath]
 Rules.Aftermath.AftermathFastBuildSpeed    db 0
@@ -146,6 +145,7 @@ ColorRemaps.ExtendedColors                 times RemapControlType.SIZE * 5 db 0 
 %define ColorRemaps.DirtyGreen.Offset      RemapControlType.SIZE * 4
 
 ; unsorted
+Toggle_Fix_NavalRepairExploit db 0 ; 'hardcoded' and not settable?
 buildingcrewstuckfix dd 0 ; 'hardcoded' and not settable?
 spawner_is_active  db 0 ; seems to be only read and not written to?
 SetProcessAffinityMask dd 0

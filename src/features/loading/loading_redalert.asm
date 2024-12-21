@@ -23,7 +23,7 @@ _OptionsClass__Load_Settings:
     Save_Registers
 
     lea  eax,ebp_RedAlertINI
-    call_INIClass__Get_Bool eax,str_Options,str_RedAlert.Options.ForceSingleCPU,0
+    call_INIClass__Get_Bool eax,str_Options,str_ForceSingleCPU,0
     mov  [RedAlert.Options.ForceSingleCPU],al
 
     cmp  al,0

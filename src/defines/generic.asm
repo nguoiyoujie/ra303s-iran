@@ -236,7 +236,7 @@ str_SecondaryColorScheme                          db"SecondaryColorScheme",0
 %define str_MouseWheelScrolling                   0x006EEFA5 ; "MouseWheelScrolling"
 ; str_FixFormationSpeed (multi-use)
 ; str_ParabombsInMultiplayer (multi-use)
-str_RedAlert.Options.ForceSingleCPU                                db"RedAlert.Options.ForceSingleCPU",0
+str_ForceSingleCPU               db"ForceSingleCPU",0
 str_AlternativeRifleSound                         db"AlternativeRifleSound",0
 str_UseGrenadeThrowingSound                       db"UseGrenadeThrowingSound",0
 str_UseBetaTeslaTank                              db"UseBetaTeslaTank",0
