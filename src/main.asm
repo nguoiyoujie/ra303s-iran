@@ -63,6 +63,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/macros/warheadtypeclass.asm"
 %include "src/macros/weapontypeclass.asm"
 %include "src/macros/houseclass.asm" ;wip
+;%include "src/macros/housetypeclass.asm" ;wip
 ;%include "src/macros/animtypeclass.asm" ;wip
 
 %ifdef USE_HIRES
