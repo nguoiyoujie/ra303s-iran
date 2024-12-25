@@ -9,6 +9,8 @@ InfantryTypes represent infantry and creatures that are occupy a subspace of a c
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
+ - [Infantry Animations](#infantry-animations)
+ - [Custom Voices](#custom-voices) 
 
 
 -------
@@ -126,6 +128,10 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
  > 7 = Red pip (commando)
 </details></td></tr></table>
 
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
+-------
+### Infantry Animations
+<br>
 
 <table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DoControls
@@ -323,6 +329,11 @@ The stages are as follows:
 Determines the frame offset from the begining of the firing sequence when the weapon actually fires. This allows for certain frames of animations to pass before the actual weapon is fired. Examples of infantry with this feature is, the Grenadier, the Medic and the Mechanic.
 </details></td></tr></table>
 
+
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
+-------
+### Custom Voices
+<br>
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>

@@ -10,6 +10,7 @@ VesselTypes represent units that are exclusive to the water. While analogous to 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
  - [Turret Logic](#turret-logic) 
+ - [Custom Voices](#custom-voices) 
 
 
 -------
@@ -169,6 +170,39 @@ Determines the forward offset of the firing animation, in leptons, relative to t
 ```Modified TechnoTypeClass->PrimaryOffset```
 
 Determines the upward offset of the firing animation, in leptons, relative to the vessels's position after applying TurretFireOffset.
+</details></td></tr></table>
+
+
+<a href="#vesseltypes"><kbd>Top</kbd></a><br>
+-------
+### Custom Voices
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack
+
+</samp></td><td width="120"><samp>List<br>
+List<br>
+List
+</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```New Logic```
+
+If defined, replaces the infantry response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
+ 
+Each entry are as follows:
+
+<samp>
+
+|Stage             |Explanation             
+:------------------|:------------
+|`ResponseSelect`  |Response when selected
+|`ResponseMove`    |Response when ordered to move to a location
+|`ResponseAttack`  |Response when ordered to attack a target
+
+</samp>
 </details></td></tr></table>
 
 

@@ -12,6 +12,7 @@ UnitTypes represent vehicles, and are in essence play the second most major role
  - [Turret Adjustments](#turret-adjustments) 
  - [Deploys To Building](#deploys-to-building) 
  - [Reload Logic](#reload-logic) 
+ - [Custom Voices](#custom-voices) 
 
 
 -------
@@ -260,6 +261,39 @@ If set, determines the number of ammo resupplied for each reload cycle. The ammu
 This is applicable to both units with weapons and the Minelayer's mines.
 
 For example, setting `AmmoReloadRate` to 20 and `AmmoReloadAmount` to 2 for Minelayer will cause the Minelayer to restore 2 units of mines every 20 seconds.
+</details></td></tr></table>
+
+
+<a href="#unittypes"><kbd>Top</kbd></a><br>
+-------
+### Custom Voices
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack
+
+</samp></td><td width="120"><samp>List<br>
+List<br>
+List
+</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```New Logic```
+
+If defined, replaces the infantry response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
+ 
+Each entry are as follows:
+
+<samp>
+
+|Stage             |Explanation             
+:------------------|:------------
+|`ResponseSelect`  |Response when selected
+|`ResponseMove`    |Response when ordered to move to a location
+|`ResponseAttack`  |Response when ordered to attack a target
+
+</samp>
 </details></td></tr></table>
 
 
