@@ -41,14 +41,24 @@
 %define UnitTypeClass.Offset.MaxSize                       0x19A    ; INT
 
 ; Extended space (>= 0x19E)
+; Common space for UnitTypeClass and VesselTypeClass (pseudo-DriveClass)
 %define UnitTypeClass.Offset.ExtendedPrerequisite          0x19E    ; INTx8
-%define UnitTypeClass.Offset.TurretAdjustX                 0x21E    ; INT
-%define UnitTypeClass.Offset.TurretAdjustY                 0x222    ; INT
-%define UnitTypeClass.Offset.TurretFrameStart              0x226    ; word
-%define UnitTypeClass.Offset.TurretFrameCount              0x228    ; word
-%define UnitTypeClass.Offset.DeploysInto                   0x22A    ; byte
-%define UnitTypeClass.Offset.AmmoReloadRate                0x22B    ; INT
-%define UnitTypeClass.Offset.AmmoReloadAmount              0x22F    ; INT
+%define UnitTypeClass.Offset.AmmoReloadRate                0x21E    ; INT
+%define UnitTypeClass.Offset.AmmoReloadAmount              0x222    ; INT
+%define UnitTypeClass.Offset.Response_Select               0x226    ; INT
+%define UnitTypeClass.Offset.Response_Select_Data          0x22A    ; word x16
+%define UnitTypeClass.Offset.Response_Move                 0x24A    ; INT
+%define UnitTypeClass.Offset.Response_Move_Data            0x24E    ; word x16
+%define UnitTypeClass.Offset.Response_Attack               0x26E    ; INT
+%define UnitTypeClass.Offset.Response_Attack_Data          0x272    ; word x16
+;0x282
+; unique space
+%define UnitTypeClass.Offset.TurretAdjustX                 0x282    ; INT
+%define UnitTypeClass.Offset.TurretAdjustY                 0x286    ; INT
+%define UnitTypeClass.Offset.TurretFrameStart              0x28A    ; word
+%define UnitTypeClass.Offset.TurretFrameCount              0x28C    ; word
+%define UnitTypeClass.Offset.DeploysInto                   0x28E    ; byte
+;0x28F
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -72,10 +82,12 @@ str.UnitTypeClass.TurretAdjustX                 db"TurretAdjustX",0             
 str.UnitTypeClass.TurretAdjustY                 db"TurretAdjustY",0               ;new ini feature
 str.UnitTypeClass.TurretFrameStart              db"TurretFrameStart",0            ;new ini feature
 str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0            ;new ini feature
-str.UnitTypeClass.DeploysInto                   db"DeploysInto",0                 ;new ini feature
+str.UnitTypeClass.DeploysInto                   db"DeploysInto",0              ;new ini feature
+str.UnitTypeClass.Response_Select               db"ResponseSelect",0              ;new ini feature
+str.UnitTypeClass.Response_Move                 db"ResponseMove",0                ;new ini feature
+str.UnitTypeClass.Response_Attack               db"ResponseAttack",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadRate                db"AmmoReloadRate",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0            ;new ini feature
-
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 %define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
@@ -177,3 +189,16 @@ str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0          
 %define UnitTypeClass.AmmoReloadAmount.Get(ptr_type,reg_output)            ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, reg_output
 %define UnitTypeClass.AmmoReloadAmount.Set(ptr_type,value)                 ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AmmoReloadAmount, value
 %define UnitTypeClass.AmmoReloadAmount.Read(ptr_type,ptr_rules)            ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoReloadAmount, str.UnitTypeClass.AmmoReloadAmount
+
+%define UnitTypeClass.Response_Select.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Select, reg_output
+%define UnitTypeClass.Response_Select_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Select_Data, reg_output
+%define UnitTypeClass.Response_Select.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Select, str.UnitTypeClass.Response_Select, function
+
+%define UnitTypeClass.Response_Move.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Move, reg_output
+%define UnitTypeClass.Response_Move_Data.Get(ptr_type,reg_output)          ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Move_Data, reg_output
+%define UnitTypeClass.Response_Move.Read(ptr_type,ptr_rules,function)      ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Move, str.UnitTypeClass.Response_Move, function
+
+%define UnitTypeClass.Response_Attack.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Attack, reg_output
+%define UnitTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Attack_Data, reg_output
+%define UnitTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Attack, str.UnitTypeClass.Response_Attack, function
+
