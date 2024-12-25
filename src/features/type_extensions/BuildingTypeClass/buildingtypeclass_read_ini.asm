@@ -105,6 +105,34 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.SpreadExplosionDamage.Read(esi,edi)
     BuildingTypeClass.SpreadExplosionWarhead.Read(esi,edi,_GetWarheadTypeIDFromString)
 
+    ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
+    push edx
+    push ecx
+    push ebx
+    xor  edx,edx
+    ObjectTypeClass.IsInsignificant.Get(esi,dl)
+    mov  ebx,[esi+AbstractTypeClass.Offset.Index]
+    mov  ecx,ebx
+    sar  ebx,3
+    and  ecx,7
+    test dl,dl
+    je   .SetSignificantScan
+.ClearSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    add  al,1
+    neg  al
+    and  byte[Houses.BSignificantScan+ebx],al
+    jmp  .ExitSignificantScan
+.SetSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    or   byte[Houses.BSignificantScan+ebx],al
+.ExitSignificantScan:
+    pop  ebx
+    pop  ecx
+    pop  edx
+
     pop  eax
     pop  edi
     pop  esi
