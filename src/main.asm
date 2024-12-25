@@ -269,6 +269,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/fixes/fence_bug.asm"
 %include "src/fixes/formation_glitch_fix.asm"
 %include "src/fixes/gnrl_ukraine_voice.asm"
+%include "src/fixes/infantry_infinite_deathloop_fix.asm"
 %include "src/fixes/infantry_range_check.asm"
 %include "src/fixes/invalid_team_crash_fix.asm"
 %include "src/fixes/invisible_explosions_fix.asm" ; Causes desync with 3.03
