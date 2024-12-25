@@ -102,10 +102,10 @@ str_MGUN                                          db"MGUN",0
 
 ; Multi-use Strings
 ; If a string is used in more than one location, put them here, and reference them in comment in their respective use locations
-%define str_ParabombsInMultiplayer                0x006EEF8E ; "ParabombsInMultiplayer"                 ; Rules.ini > [General] and Spawn.ini > [Settings]
-%define str_AftermathFastBuildSpeed               0x006F3A40 ; "AftermathFastBuildSpeed"                ; Rules.ini > [Aftermath] and Spawn.ini > [Settings]
-%define str_FixFormationSpeed                     0x006EEEC3 ; "FixFormationSpeed"                      ; Rules.ini > [General] and Spawn.ini > [Settings]
-%define str_FixAIAlly                             0x006EEEB9 ; "FixAIAlly"                              ; Rules.ini > [General] and Spawn.ini > [Settings]
+str_ParabombsInMultiplayer                        db"ParabombsInMultiplayer",0                 ; Rules.ini > [General] and Spawn.ini > [Settings]
+str_AftermathFastBuildSpeed                       db"AftermathFastBuildSpeed",0                ; Rules.ini > [Aftermath] and Spawn.ini > [Settings]
+str_FixFormationSpeed                             db"FixFormationSpeed",0                      ; Rules.ini > [General] and Spawn.ini > [Settings]
+str_FixAIAlly                                     db"FixAIAlly",0                              ; Rules.ini > [General] and Spawn.ini > [Settings]
 
 ; TechnoType Names
 %define str_Aircraft                              0x005EFA03 ; "Aircraft"
@@ -118,35 +118,35 @@ str_MGUN                                          db"MGUN",0
 
 
 ; MIX file references
-%define str_mix_Campaign                          0x006F45AA ; "campaign.MIX"
-%define str_mix_Aftermath                         0x006F45B7 ; "aftermath.MIX"
-%define str_mix_Counterstrike                     0x006F45C5 ; "counterstrike.MIX"
-%define str_mix_SmallInfantry                     0x006F45D7 ; "smallinfantry.MIX"
-%define str_mix_OOSFix                            0x006F45E9 ; "oos-fix.MIX"
-%define str_mix_MoviesTLF                         0x006F45F5 ; "movies-tlf.MIX"
-%define str_mix_GermanLanguagePack                0x006F4604 ; "germanlanguagepack.MIX"
-%define str_mix_GermanCensoredLanguagePack        0x006F461B ; "germancensoredlanguagepack.MIX"
-%define str_mix_GermanUncensoredLanguagePack      0x006F463A ; "germanuncensoredlanguagepack.MIX"
-%define str_mix_FrenchLanguagePack                0x006F465B ; "frenchlanguagepack.MIX"
-%define str_mix_SpanishLanguagePack               0x006F4672 ; "spanishlanguagepack.MIX"
-%define str_mix_RussianLanguagePack               0x006F468A ; "russianlanguagepack.MIX"
-%define str_mix_Expand3                           0x006F46A2 ; "expand3.MIX"
-%define str_mix_Expand4                           0x006F46AE ; "expand4.MIX"
-%define str_mix_Expand5                           0x006F46BA ; "expand5.MIX"
-%define str_mix_Expand6                           0x006F46C6 ; "expand6.MIX"
-%define str_mix_Expand7                           0x006F46D2 ; "expand7.MIX"
-%define str_mix_Expand8                           0x006F46DE ; "expand8.MIX"
-%define str_mix_Expand9                           0x006F46EA ; "expand9.MIX"
-%define str_mix_Movies_1                          0x006F46F6 ; "movies-1.MIX"
-%define str_mix_Movies_2                          0x006F4703 ; "movies-2.MIX"
-%define str_mix_Movies_3                          0x006F4710 ; "movies-3.MIX"
-%define str_mix_Movies_4                          0x006F471D ; "movies-4.MIX"
-%define str_mix_Movies_5                          0x006F472A ; "movies-5.MIX"
-%define str_mix_Movies_6                          0x006F4737 ; "movies-6.MIX"
-%define str_mix_Movies_7                          0x006F4744 ; "movies-7.MIX"
-%define str_mix_Movies_8                          0x006F4751 ; "movies-8.MIX"
-%define str_mix_Movies_9                          0x006F475E ; "movies-9.MIX"
-%define str_mix_Movies_10                         0x006F476B ; "movies-10.MIX"
+str_mix_Campaign                                  db"campaign.MIX",0
+str_mix_Aftermath                                 db"aftermath.MIX",0
+str_mix_Counterstrike                             db"counterstrike.MIX",0
+str_mix_SmallInfantry                             db"smallinfantry.MIX",0
+str_mix_OOSFix                                    db"oos-fix.MIX",0
+str_mix_MoviesTLF                                 db"movies-tlf.MIX",0
+str_mix_GermanLanguagePack                        db"germanlanguagepack.MIX",0
+str_mix_GermanCensoredLanguagePack                db"germancensoredlanguagepack.MIX",0
+str_mix_GermanUncensoredLanguagePack              db"germanuncensoredlanguagepack.MIX",0
+str_mix_FrenchLanguagePack                        db"frenchlanguagepack.MIX",0
+str_mix_SpanishLanguagePack                       db"spanishlanguagepack.MIX",0
+str_mix_RussianLanguagePack                       db"russianlanguagepack.MIX",0
+str_mix_Expand3                                   db"expand3.MIX",0
+str_mix_Expand4                                   db"expand4.MIX",0
+str_mix_Expand5                                   db"expand5.MIX",0
+str_mix_Expand6                                   db"expand6.MIX",0
+str_mix_Expand7                                   db"expand7.MIX",0
+str_mix_Expand8                                   db"expand8.MIX",0
+str_mix_Expand9                                   db"expand9.MIX",0
+str_mix_Movies_1                                  db"movies-1.MIX",0
+str_mix_Movies_2                                  db"movies-2.MIX",0
+str_mix_Movies_3                                  db"movies-3.MIX",0
+str_mix_Movies_4                                  db"movies-4.MIX",0
+str_mix_Movies_5                                  db"movies-5.MIX",0
+str_mix_Movies_6                                  db"movies-6.MIX",0
+str_mix_Movies_7                                  db"movies-7.MIX",0
+str_mix_Movies_8                                  db"movies-8.MIX",0
+str_mix_Movies_9                                  db"movies-9.MIX",0
+str_mix_Movies_10                                 db"movies-10.MIX",0
 str_mix_Spawn1                                    db"spawn1.MIX",0
 str_mix_BetaTeslaTank                             db"betateslatank.MIX",0
 str_mix_BetaDestroyer                             db"betadestroyer.MIX",0
@@ -159,8 +159,8 @@ str_mix_DOSInterfaceMod                           db"dosinterfacemod.MIX",0
 ; INI file references
 %define str_ini_RedAlert                          0x005EDE12 ; "REDALERT.INI"
 %define str_ini_Rules                             0x005EBB3B ; "RULES.INI"
-%define str_ini_AI                                0x006F3ACF ; "AI.INI"
-%define str_ini_OOSFix                            0x006F4CD7 ; "OOS-FIX.INI"
+str_ini_AI                                        db"AI.INI",0
+str_ini_OOSFix                                    db"OOS-FIX.INI",0
 str_ini_Spawn                                     db"SPAWN.INI",0
 
 
@@ -218,25 +218,25 @@ str_AllyTheNeutralHouse                           db"AllyTheNeutralHouse",0
 str_SecondaryColorScheme                          db"SecondaryColorScheme",0
 
 ; RedAlert.ini > [Options]
-%define str_VideoInterlaceMode                    0x006EEE5E ; "VideoInterlaceMode"
-%define str_SkipScoreScreen                       0x006EEE71 ; "SkipScoreScreen"
-%define str_RandomStartingSong                    0x006EEE81 ; "RandomStartingSong"
-;%define str_RemoveAITechupCheck                   0x006EEE97 ; "RemoveAITechupCheck"
-%define str_FixAIParanoid                         0x006EEEAB ; "FixAIParanoid"
-; str_FixAIAlly 
-%define str_GameLanguage                          0x006EEED5 ; "GameLanguage"
-%define str_DebugLogging                          0x006EEEE2 ; "DebugLogging"
-%define str_AftermathEnabled                      0x006EEEEF ; "AftermathEnabled"
-%define str_CounterstrikeEnabled                  0x006EEF00 ; "CounterstrikeEnabled"
-%define str_UseSmallInfantry                      0x006EEF15 ; "UseSmallInfantry"
-%define str_NoCD                                  0x006EEF26 ; "NoCD"
-%define str_DisplayOriginalMultiplayerMaps        0x006EEF2B ; "DisplayOriginalMultiplayerMaps"
-%define str_DisplayAftermathMultiplayerMaps       0x006EEF4A ; "DisplayAftermathMultiplayerMaps"
-%define str_DisplayCounterstrikeMultiplayerMaps   0x006EEF6A ; "DisplayCounterstrikeMultiplayerMaps"
-%define str_MouseWheelScrolling                   0x006EEFA5 ; "MouseWheelScrolling"
+str_VideoInterlaceMode                            db"VideoInterlaceMode",0
+str_SkipScoreScreen                               db"SkipScoreScreen",0
+str_RandomStartingSong                            db"RandomStartingSong",0
+str_RemoveAITechupCheck                           db"RemoveAITechupCheck",0
+str_FixAIParanoid                                 db"FixAIParanoid",0
+; str_FixAIAlly
+str_GameLanguage                                  db"GameLanguage",0
+str_DebugLogging                                  db"DebugLogging",0
+str_AftermathEnabled                              db"AftermathEnabled",0
+str_CounterstrikeEnabled                          db"CounterstrikeEnabled",0
+str_UseSmallInfantry                              db"UseSmallInfantry",0
+str_NoCD                                          db"NoCD",0
+str_DisplayOriginalMultiplayerMaps                db"DisplayOriginalMultiplayerMaps",0
+str_DisplayAftermathMultiplayerMaps               db"DisplayAftermathMultiplayerMaps",0
+str_DisplayCounterstrikeMultiplayerMaps           db"DisplayCounterstrikeMultiplayerMaps",0
+str_MouseWheelScrolling                           db"MouseWheelScrolling",0
 ; str_FixFormationSpeed (multi-use)
 ; str_ParabombsInMultiplayer (multi-use)
-str_ForceSingleCPU               db"ForceSingleCPU",0
+str_ForceSingleCPU                                db"ForceSingleCPU",0
 str_AlternativeRifleSound                         db"AlternativeRifleSound",0
 str_UseGrenadeThrowingSound                       db"UseGrenadeThrowingSound",0
 str_UseBetaTeslaTank                              db"UseBetaTeslaTank",0
@@ -278,16 +278,16 @@ str_Ip                                            db"Ip",0
 ; Spawn.ini > [Settings]
 %define str_Bases                                 0x005EF984 ; "Bases"
 %define str_Credits                               0x005EB940 ; "Credits"
-%define str_OreRegenerates                        0x006F4082 ; "OreRegenerates"
-%define str_Crates                                0x006F4075 ; "Crates"
-%define str_UnitCount                             0x006F4091 ; "UnitCount"
-%define str_AIPlayers                             0x006F40B2 ; "AIPlayers"
+str_OreRegenerates                                db"OreRegenerates",0
+%define str_Crates                                0x005EF993 ; "Crates"
+str_UnitCount                                     db"UnitCount",0
+str_AIPlayers                                     db"AIPlayers",0
 str_Seed                                          db"Seed",0
 str_SlowUnitBuild                                 db"SlowUnitBuild",0
-%define str_CaptureTheFlag                        0x006F4066 ; "CaptureTheFlag"
-%define str_ShroudRegrows                         0x006F4058 ; "ShroudRegrows"
-%define str_TechLevel                             0x006F409B ; "TechLevel"
-%define str_AIDifficulty                          0x006F40A5 ; "AIDifficulty"
+%define str_CaptureTheFlag                        0x005EF99A ; "CaptureTheFlag"
+str_ShroudRegrows                                 db"ShroudRegrows",0
+%define str_TechLevel                             0x005EF909 ; "TechLevel"
+str_AIDifficulty                                  db"AIDifficulty",0
 ; Aftermath (generic)
 ; Name (generic)
 ; Side (generic)

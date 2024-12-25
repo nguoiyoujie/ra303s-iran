@@ -9,6 +9,7 @@ copy ra95.dat %TEMP% 1>nul
 echo Building [petool]
 echo -------------------------------------------------------------
 tools\petool.exe %TEMP% edit AUTO rwxc
+tools\petool.exe %TEMP% add .patch rwxci 196608 ::0x30000
 @if errorlevel 1 goto handleerror
 ::tools\petool.exe ra95.exe add .patch rwxci 131072
 echo.

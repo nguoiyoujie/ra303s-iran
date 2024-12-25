@@ -1,0 +1,5 @@
+CHanges to ra95.dat from 3.03p original
+
+1. Trimmed PE by removing .reloc and .edata section
+2. Use Resource Hacker to transfer icons and version info to result
+3. Adjust offsets accordingly
