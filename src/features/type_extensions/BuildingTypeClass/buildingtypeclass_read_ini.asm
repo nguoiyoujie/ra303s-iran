@@ -708,6 +708,9 @@ _GetUnitTypeIDFromString:
     cmp  eax,0
     jle  .Retn ; just return 0
     UnitTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
     mov  ebx,dword [ebx+1]; index
 	;ObjectTypeClass.ID ebx,ebx
     mov  eax,ebx
@@ -721,6 +724,9 @@ _GetWarheadTypeIDFromString:
     cmp  eax,0
     jle  .Retn ; just return 0
     WarheadTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
     mov  ebx,dword [ebx]; index
     mov  eax,ebx
 .Retn:
