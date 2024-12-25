@@ -28,13 +28,13 @@
 %define VesselTypeClass.Offset.Response_Move_Data            0x24E    ; word x16
 %define VesselTypeClass.Offset.Response_Attack               0x26E    ; INT
 %define VesselTypeClass.Offset.Response_Attack_Data          0x272    ; word x16
-;0x282
-; unique space
-%define VesselTypeClass.Offset.TurretName                    0x282    ; int ptr to string
-%define VesselTypeClass.Offset.TurretShape                   0x286    ; int ptr to SHP file memory
-%define VesselTypeClass.Offset.TurretFireOffset              0x28A    ; INT
-%define VesselTypeClass.Offset.TurretAdjustY                 0x28E    ; INT
 ;0x292
+; unique space
+%define VesselTypeClass.Offset.TurretName                    0x292    ; int ptr to string
+%define VesselTypeClass.Offset.TurretShape                   0x296    ; int ptr to SHP file memory
+%define VesselTypeClass.Offset.TurretFireOffset              0x29A    ; INT
+%define VesselTypeClass.Offset.TurretAdjustY                 0x29E    ; INT
+;0x2A2
 
 
 ; INI String controls
