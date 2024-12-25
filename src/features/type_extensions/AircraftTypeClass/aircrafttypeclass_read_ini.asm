@@ -50,6 +50,9 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.IsRotorCustom.Read(esi,edi)
     ;AircraftTypeClass.PreferredBuilding.Read(esi,edi)
     AircraftTypeClass.LandingSpeed.Read(esi,edi)
+    AircraftTypeClass.Response_Select.Read(esi,edi,_GetAircraftResponseSelectFromString)
+    AircraftTypeClass.Response_Move.Read(esi,edi,_GetAircraftResponseMoveFromString)
+    AircraftTypeClass.Response_Attack.Read(esi,edi,_GetAircraftResponseAttackFromString)
 
     lea  edx,[esi+5]
     Get_Bit byte [esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
@@ -73,4 +76,17 @@ AircraftTypes_Read_INI:
     lea  esp,[ebp-0x18]
     Restore_Registers
     pop  ebp
+    retn
+
+
+_GetAircraftResponseSelectFromString:
+    GetVocArrayFromString esi+AircraftTypeClass.Offset.Response_Select_Data,16
+    retn
+
+_GetAircraftResponseMoveFromString:
+    GetVocArrayFromString esi+AircraftTypeClass.Offset.Response_Move_Data,16
+    retn
+
+_GetAircraftResponseAttackFromString:
+    GetVocArrayFromString esi+AircraftTypeClass.Offset.Response_Attack_Data,16
     retn

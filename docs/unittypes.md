@@ -270,9 +270,9 @@ For example, setting `AmmoReloadRate` to 20 and `AmmoReloadAmount` to 2 for Mine
 <br>
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseSelect<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseMove<br>
-<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ResponseAttack
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► ResponseSelect<br>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► ResponseMove<br>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► ResponseAttack
 
 </samp></td><td width="120"><samp>List<br>
 List<br>
@@ -281,7 +281,7 @@ List
 
 ```New Logic```
 
-If defined, replaces the infantry response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
+If defined, replaces the voice response when selected or given an order. Up to 16 entries (16 for Select, 16 for Move, 16 for Attack) can be supported. Each entry must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. Entries can be repeated for higher probability.
  
 Each entry are as follows:
 

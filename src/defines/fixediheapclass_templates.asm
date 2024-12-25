@@ -86,7 +86,7 @@
 %define AircraftTypeClass.Array            0x0065DDF0
 %define AircraftTypeClass.ORIGINAL_COUNT   7h
 %define AircraftTypeClass.ORIGINAL_SIZE    19Dh
-%define AircraftTypeClass.NEW_SIZE         240h
+%define AircraftTypeClass.NEW_SIZE         289h
 
 ; InfantryTypeClass                        0x0065DE08
 %define InfantryTypeClass.Count            0x0065DE14

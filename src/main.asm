@@ -233,6 +233,7 @@ _str_version: db"3.03p-iB1v1",0
 %include "src/features/combat_spreadfactorzero.asm" 
 %include "src/features/combat_negativedamage.asm" 
 %include "src/features/building_barrel_explosions.asm"
+%include "src/features/aircraft_response.asm"
 %include "src/features/infantry_response.asm"
 %include "src/features/unit_vessel_response.asm"
 

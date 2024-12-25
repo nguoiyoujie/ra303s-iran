@@ -22,6 +22,13 @@
 
 ; Extended space (>= 0x19D)
 %define AircraftTypeClass.Offset.ExtendedPrerequisite        0x19D    ; INTx8
+%define AircraftTypeClass.Offset.Response_Select             0x21D    ; INT
+%define AircraftTypeClass.Offset.Response_Select_Data        0x221    ; word x16
+%define AircraftTypeClass.Offset.Response_Move               0x241    ; INT
+%define AircraftTypeClass.Offset.Response_Move_Data          0x245    ; word x16
+%define AircraftTypeClass.Offset.Response_Attack             0x265    ; INT
+%define AircraftTypeClass.Offset.Response_Attack_Data        0x269    ; word x16
+;0x289
 
 ; INI String controls
 str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0                 ;new ini feature
@@ -32,6 +39,9 @@ str.AircraftTypeClass.PreferredBuilding         db"PreferredBuilding",0         
 str.AircraftTypeClass.Type                      db"Type",0                        ;internal feature
 str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
 str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0                ;new ini feature
+str.AircraftTypeClass.Response_Select           db"ResponseSelect",0              ;new ini feature
+str.AircraftTypeClass.Response_Move             db"ResponseMove",0                ;new ini feature
+str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0              ;new ini feature
 
 %define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
 %define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
@@ -70,6 +80,17 @@ str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0              
 %define AircraftTypeClass.LandingSpeed.Set(ptr_type,value)                     ObjectTypeClass.SetInt                 ptr_type, AircraftTypeClass.Offset.LandingSpeed, value
 %define AircraftTypeClass.LandingSpeed.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadInt                ptr_type, ptr_rules, AircraftTypeClass.Offset.LandingSpeed, str.AircraftTypeClass.LandingSpeed
 
+%define AircraftTypeClass.Response_Select.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, AircraftTypeClass.Offset.Response_Select, reg_output
+%define AircraftTypeClass.Response_Select_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, AircraftTypeClass.Offset.Response_Select_Data, reg_output
+%define AircraftTypeClass.Response_Select.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Select, str.AircraftTypeClass.Response_Select, function
+
+%define AircraftTypeClass.Response_Move.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, AircraftTypeClass.Offset.Response_Move, reg_output
+%define AircraftTypeClass.Response_Move_Data.Get(ptr_type,reg_output)          ObjectTypeClass.GetWord                ptr_type, AircraftTypeClass.Offset.Response_Move_Data, reg_output
+%define AircraftTypeClass.Response_Move.Read(ptr_type,ptr_rules,function)      ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Move, str.AircraftTypeClass.Response_Move, function
+
+%define AircraftTypeClass.Response_Attack.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, AircraftTypeClass.Offset.Response_Attack, reg_output
+%define AircraftTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, AircraftTypeClass.Offset.Response_Attack_Data, reg_output
+%define AircraftTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Attack, str.AircraftTypeClass.Response_Attack, function
 
 
 

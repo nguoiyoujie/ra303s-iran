@@ -3,7 +3,7 @@
 ;
 ; Allows unit and vessel voices to be customized by INI.
 ;
-; This function is enabled by defining ResponseSelect=, ResponseMove=, or ResponseAttack= in the infantry type definitions
+; This function is enabled by defining ResponseSelect=, ResponseMove=, or ResponseAttack= in the type definitions
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
@@ -16,7 +16,7 @@
 @HOOK 0x004B625F _DriveClass__Response_Move_CustomVoice
 @HOOK 0x004B62B7 _DriveClass__Response_Attack_CustomVoice
 
-; edx is the unit/vessel class
+; ecx is the unit/vessel class
 _DriveClass__Response_Select_CustomVoice:
     mov  al,byte[ecx] ; RTTI
     cmp  al,RTTIType.Unit
