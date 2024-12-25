@@ -114,14 +114,14 @@
 %define UnitTypeClass.Array                0x0065DF20
 %define UnitTypeClass.ORIGINAL_COUNT       16h
 %define UnitTypeClass.ORIGINAL_SIZE        19Eh
-%define UnitTypeClass.NEW_SIZE             240h
+%define UnitTypeClass.NEW_SIZE             2A0h
 
 ; VesselTypeClass                          0x0065DF38
 %define VesselTypeClass.Count              0x0065DF44
 %define VesselTypeClass.Array              0x0065DF6C
 %define VesselTypeClass.ORIGINAL_COUNT     7h
 %define VesselTypeClass.ORIGINAL_SIZE      19Eh
-%define VesselTypeClass.NEW_SIZE           240h
+%define VesselTypeClass.NEW_SIZE           2A0h
 
 ; TemplateTypeClass
 

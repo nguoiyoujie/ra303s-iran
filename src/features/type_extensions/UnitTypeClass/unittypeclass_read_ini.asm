@@ -48,6 +48,9 @@ _UnitTypeClass__Read_INI_Extended:
 
     UnitTypeClass.AmmoReloadRate.Read(esi,edi)
     UnitTypeClass.AmmoReloadAmount.Read(esi,edi)
+    UnitTypeClass.Response_Select.Read(esi,edi,_GetUnitResponseSelectFromString)
+    UnitTypeClass.Response_Move.Read(esi,edi,_GetUnitResponseMoveFromString)
+    UnitTypeClass.Response_Attack.Read(esi,edi,_GetUnitResponseAttackFromString)
 
     pop  esi
 .Ret:
@@ -64,9 +67,25 @@ _GetBuildingTypeIDFromString:
     cmp  eax,0
     jle  .Retn ; just return 0
     BuildingTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
     mov  ebx,dword [ebx+1]; index
 	;ObjectTypeClass.ID ebx,ebx
     mov  eax,ebx
 .Retn:
     pop ebx
+    retn
+
+
+_GetUnitResponseSelectFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Select_Data,16
+    retn
+
+_GetUnitResponseMoveFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Move_Data,16
+    retn
+
+_GetUnitResponseAttackFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Attack_Data,16
     retn

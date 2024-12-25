@@ -55,7 +55,13 @@ VesselTypes_Read_INI:
     VesselTypeClass.TurretName.Get(esi,eax)
     call _LoadTurretShapeFromString
     
-    VesselTypeClass.TurretAdjustY.Read(esi,edi)             
+    VesselTypeClass.TurretAdjustY.Read(esi,edi)    
+
+    VesselTypeClass.AmmoReloadRate.Read(esi,edi)
+    VesselTypeClass.AmmoReloadAmount.Read(esi,edi)
+    VesselTypeClass.Response_Select.Read(esi,edi,_GetVesselResponseSelectFromString)
+    VesselTypeClass.Response_Move.Read(esi,edi,_GetVesselResponseMoveFromString)
+    VesselTypeClass.Response_Attack.Read(esi,edi,_GetVesselResponseAttackFromString)         
 
     pop  edi
     pop  esi
@@ -97,4 +103,17 @@ _LoadTurretShapeFromString:
     pop ecx
     pop ebx
     pop eax
+    retn
+
+
+_GetVesselResponseSelectFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Select_Data,16
+    retn
+
+_GetVesselResponseMoveFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Move_Data,16
+    retn
+
+_GetVesselResponseAttackFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Attack_Data,16
     retn
