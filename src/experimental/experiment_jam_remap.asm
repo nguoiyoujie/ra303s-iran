@@ -61,4 +61,5 @@ _BuildingClass__Animation_AI_AlwaysUpdateJammable:
     jnz  0x004603BB
     ; existing SAM-SITE check
     cmp  eax,0xf
-    jmp  0x004603B5
+    jnz  0x004603CB
+    jmp  0x004603B7
