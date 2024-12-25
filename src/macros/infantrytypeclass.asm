@@ -107,18 +107,18 @@
 %define InfantryTypeClass.Offset.Response_Invade                   0x2AC    ; INT
 %define InfantryTypeClass.Offset.Response_Invade_Data              0x2B0    ; word x16
 ;0x2D0
-%define InfantryTypeClass.Offset.DeathReport1                     0x2D0    ; INT
-%define InfantryTypeClass.Offset.DeathReport1_Data                0x2D4    ; word x16
-%define InfantryTypeClass.Offset.DeathReport2                     0x2F4    ; INT
-%define InfantryTypeClass.Offset.DeathReport2_Data                0x2F8    ; word x16
-%define InfantryTypeClass.Offset.DeathReport3                     0x318    ; INT
-%define InfantryTypeClass.Offset.DeathReport3_Data                0x31C    ; word x16
-%define InfantryTypeClass.Offset.DeathReport4                     0x33C    ; INT
-%define InfantryTypeClass.Offset.DeathReport4_Data                0x340    ; word x16
-%define InfantryTypeClass.Offset.DeathReport5                     0x360    ; INT
-%define InfantryTypeClass.Offset.DeathReport5_Data                0x364    ; word x16
-%define InfantryTypeClass.Offset.DeathReport                      0x384    ; INT
-%define InfantryTypeClass.Offset.DeathReport_Data                 0x388    ; word x16
+%define InfantryTypeClass.Offset.DeathReport1                      0x2D0    ; INT
+%define InfantryTypeClass.Offset.DeathReport1_Data                 0x2D4    ; word x16
+%define InfantryTypeClass.Offset.DeathReport2                      0x2F4    ; INT
+%define InfantryTypeClass.Offset.DeathReport2_Data                 0x2F8    ; word x16
+%define InfantryTypeClass.Offset.DeathReport3                      0x318    ; INT
+%define InfantryTypeClass.Offset.DeathReport3_Data                 0x31C    ; word x16
+%define InfantryTypeClass.Offset.DeathReport4                      0x33C    ; INT
+%define InfantryTypeClass.Offset.DeathReport4_Data                 0x340    ; word x16
+%define InfantryTypeClass.Offset.DeathReport5                      0x360    ; INT
+%define InfantryTypeClass.Offset.DeathReport5_Data                 0x364    ; word x16
+%define InfantryTypeClass.Offset.DeathReport                       0x384    ; INT
+%define InfantryTypeClass.Offset.DeathReport_Data                  0x388    ; word x16
 ;0x3A8
 
 

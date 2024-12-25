@@ -27,6 +27,6 @@ _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2:
     pop   eax
     jz    0x004B03AA
 
-    movsx eax,word [ebx]  
+    movzx eax,word[ebx]  
     cmp   eax,7FFFh
     jmp   0x004B0663

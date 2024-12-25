@@ -136,10 +136,10 @@ _InfantryTypeClass__Read_INI_Extended:
     InfantryTypeClass.DoControls_DogMaul_Start.Read(esi,edi)
     InfantryTypeClass.DoControls_DogMaul_Count.Read(esi,edi)
     InfantryTypeClass.DoControls_DogMaul_Jump.Read(esi,edi)
-    InfantryTypeClass.Response_Select.Read(esi,edi,_GetResponseSelectFromString)
-    InfantryTypeClass.Response_Move.Read(esi,edi,_GetResponseMoveFromString)
-    InfantryTypeClass.Response_Attack.Read(esi,edi,_GetResponseAttackFromString)
-    InfantryTypeClass.Response_Invade.Read(esi,edi,_GetResponseInvadeFromString)
+    InfantryTypeClass.Response_Select.Read(esi,edi,_GetInfantryResponseSelectFromString)
+    InfantryTypeClass.Response_Move.Read(esi,edi,_GetInfantryResponseMoveFromString)
+    InfantryTypeClass.Response_Attack.Read(esi,edi,_GetInfantryResponseAttackFromString)
+    InfantryTypeClass.Response_Invade.Read(esi,edi,_GetInfantryResponseInvadeFromString)
     InfantryTypeClass.DeathReport1.Read(esi,edi,_GetDeathReport1FromString)
     InfantryTypeClass.DeathReport2.Read(esi,edi,_GetDeathReport2FromString)
     InfantryTypeClass.DeathReport3.Read(esi,edi,_GetDeathReport3FromString)
@@ -198,19 +198,19 @@ _SelectDoControlsFromString:
     retn
 
 
-_GetResponseSelectFromString:
+_GetInfantryResponseSelectFromString:
     GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Select_Data,16
     retn
 
-_GetResponseMoveFromString:
+_GetInfantryResponseMoveFromString:
     GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Move_Data,16
     retn
 
-_GetResponseAttackFromString:
+_GetInfantryResponseAttackFromString:
     GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Attack_Data,16
     retn
 
-_GetResponseInvadeFromString:
+_GetInfantryResponseInvadeFromString:
     GetVocArrayFromString esi+InfantryTypeClass.Offset.Response_Invade_Data,16
     retn
 
