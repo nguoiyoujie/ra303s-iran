@@ -39,7 +39,7 @@ _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate:
 
 
 _InfantryClass__Take_Damage_RememberID:
-    movsx eax,al
+    movzx eax,al
     mov  byte[Temp.DeathInfantryID],al
     cmp  eax,5
     jmp  0x004EBED3
@@ -50,7 +50,7 @@ _InfantryClass__Take_Damage_RememberID:
 %macro GetCustomDeathReport 2
     ; eax and ecx are available
     mov  al,byte[Temp.DeathInfantryID] ; ID
-    movsx eax,al
+    movzx eax,al
     InfantryTypeClass.FromIndex(eax,ecx) 
     InfantryTypeClass.DeathReport%1.Get(ecx,eax)
     test eax,eax
@@ -129,21 +129,21 @@ _InfantryClass__Take_Damage_RememberID:
 
 _InfantryClass__Take_Damage_DeathReport1:
     GetCustomDeathReport 1,dx
-    movsx edx,dx
+    movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF38
 
 
 _InfantryClass__Take_Damage_DeathReport2:
     GetCustomDeathReport 2,dx
-    movsx edx,dx
+    movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF6D
 
 
 _InfantryClass__Take_Damage_DeathReport3:
     GetCustomDeathReport 3,dx
-    movsx edx,dx
+    movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFA4
 
@@ -151,14 +151,14 @@ _InfantryClass__Take_Damage_DeathReport3:
 _InfantryClass__Take_Damage_DeathReport4:
     ; ebx is the sound
     GetCustomDeathReport 4,bx
-    movsx ebx,bx
+    movzx ebx,bx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFDB
 
 
 _InfantryClass__Take_Damage_DeathReport5:
     GetCustomDeathReport 5,dx
-    movsx edx,dx
+    movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EC007
 
@@ -166,7 +166,7 @@ _InfantryClass__Take_Damage_DeathReport5:
 _InfantryClass__Response_Select_CustomVoice:
     push eax
     mov  al,byte[eax+0x196] ; ID
-    movsx eax,al
+    movzx eax,al
     InfantryTypeClass.FromIndex(eax,edx) 
     InfantryTypeClass.Response_Select.Get(edx,eax)
     test eax,eax
@@ -184,7 +184,7 @@ _InfantryClass__Response_Select_CustomVoice:
 _InfantryClass__Response_Move_CustomVoice:
     push eax
     mov  al,byte[eax+0x196] ; ID
-    movsx eax,al
+    movzx eax,al
     InfantryTypeClass.FromIndex(eax,edx) 
     cmp  byte[Temp.UseResponseInvade],1
     jne  .UseMove
@@ -214,7 +214,7 @@ _InfantryClass__Response_Move_CustomVoice:
 _InfantryClass__Response_Attack_CustomVoice:
     push eax
     mov  al,byte[eax+0x196] ; ID
-    movsx eax,al
+    movzx eax,al
     InfantryTypeClass.FromIndex(eax,edx) 
     InfantryTypeClass.Response_Attack.Get(edx,eax)
     test eax,eax
