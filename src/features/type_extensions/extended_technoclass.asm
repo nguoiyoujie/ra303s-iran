@@ -10,7 +10,8 @@ temp.fakes.fakeof db 2,11,27,28,6
 
 _Patch_Unit_Drawing:
     mov  eax,[Globals___PlayerPtr]
-    mov  dword ebx,[eax+178Ch]
+    xor  ebx,ebx
+    mov  bl,byte[eax+HouseClass.Offset.RemapColor]
     sar  ebx,0x18
     jmp  0x005671D6
 
@@ -29,10 +30,10 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
 
     push eax
 
-    cmp  byte [eax+0x1802],0xFF
+    cmp  byte [eax+HouseClass.Offset.SecondaryColorScheme],0xFF
     jz   .Normal_Code
     cmp  byte [edi],0x05 ; Is Building?
-    je  .Normal_Code
+    je   .Normal_Code
     cmp  byte [edi],0x1C ; Is Unit?
     jnz  .Draw_Secondary_Color_Scheme
     mov  eax,edi
@@ -50,8 +51,8 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
 .Normal_Code:
     pop  eax
     pop  edi
-    mov  dword ebx,[eax+178Ch]
-    sar  ebx,0x18
+    xor  ebx,ebx
+    mov  bl,byte[eax+HouseClass.Offset.RemapColor]
     mov  edx,ecx
     call 0x004D6528 ;  char * const HouseClass::Remap_Table(int,RemapType)const  proc near
     jmp  0x0056739A
@@ -60,7 +61,7 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
     pop  eax
     pop  edi
     xor  ebx,ebx
-    mov  bl,byte [eax+0x1802]
+    mov  bl,byte[eax+HouseClass.Offset.SecondaryColorScheme]
     mov  edx,ecx
     call 0x004D6528 ;  char * const HouseClass::Remap_Table(int,RemapType)const  proc near
     jmp  0x0056739A

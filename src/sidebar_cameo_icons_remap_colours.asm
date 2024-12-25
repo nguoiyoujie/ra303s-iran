@@ -15,7 +15,7 @@ _StripClass__Draw_It_Colour_Remap_Icon:
 
     mov  eax, [Globals___PlayerPtr]
     xor  ebx, ebx
-    mov  bl, [eax+0x178F]
+    mov  bl, [eax+HouseClass.Offset.RemapColor]
     call 0x004D6528 ; const HouseClass::Remap_Table(int,RemapType)
 
 .No_Colour_Remap:

@@ -24,7 +24,7 @@ _TechnoClass_Visual_Character_Spectator_Stuff:
     jnz  .Ret
 
     mov  dword eax,[Globals___PlayerPtr]
-    cmp  dword [eax+EXT_IsSpectator],0
+    cmp  byte[eax+HouseClass.Offset.IsSpectator],0
     jz   .Ret
 
     test byte [eax+0x43],1
@@ -41,7 +41,7 @@ _TechnoClass_Visual_Character_Spectator_Stuff:
 _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator:
     push eax
     mov  dword eax,[Globals___PlayerPtr]
-    cmp  dword [eax+EXT_IsSpectator],1
+    cmp  byte[eax+HouseClass.Offset.IsSpectator],1
     pop  eax
     jz   .Draw_Credits_Count
 
@@ -62,7 +62,7 @@ _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator:
 
     mov  dword eax,[Globals___PlayerPtr]
 
-    cmp  dword [eax+EXT_IsSpectator],1
+    cmp  byte[eax+HouseClass.Offset.IsSpectator],1
     jz   .Draw_Credits_Text
 
     push 12Ah
@@ -169,7 +169,7 @@ _HouseClass__Init_Data_Spectator_Stuff:
 
     mov  eax,ebx
     or   byte [eax+0x43],1 ; Make house dead
-    mov  dword [eax+EXT_IsSpectator],1
+    mov  byte[eax+HouseClass.Offset.IsSpectator],1
 ;    mov     eax,Globals___Map
 ;    mov     edx,1
 ;    call    0x0052D790

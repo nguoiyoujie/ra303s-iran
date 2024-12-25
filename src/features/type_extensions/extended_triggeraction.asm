@@ -170,7 +170,7 @@ Set_House_Primary_Color_Scheme:
     mov  dword eax,[eax+1] ; Parameter 1, HouseType to set color for
 
     call HouseClass__As_Pointer
-    mov  [eax+0x178F],dl
+    mov  [eax+HouseClass.Offset.RemapColor],dl
 
     retn
 

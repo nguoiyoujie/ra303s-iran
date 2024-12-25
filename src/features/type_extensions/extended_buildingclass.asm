@@ -4,14 +4,13 @@
 
 ; no buildingcrew if the house has no building crew set
 ; this requires the extended houseclass option NoBuildingCrew
-; which is EXTENDED HouseClass + offset 0x1801
 _BuildingClass__Building_Crew_House_NoBuildingCrew:
     Save_Registers
 
     mov  edx,[eax+0x11]  ; vtable
     call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+0x1801],1
+    cmp  byte [eax+HouseClass.Offset.NoBuildingCrew],1
     Restore_Registers
     jz   .No_Building_Crew
 
@@ -22,7 +21,7 @@ _BuildingClass__Building_Crew_House_NoBuildingCrew:
 .No_Building_Crew:
     jmp  0x0045E542
 
-;edi = buildingclass, HouseClass + offset 0x1800 = BuildingsGetInstantlyCaptured
+;edi = buildingclass
 _InfantryClass__Per_Cell_Process_House_Instant_Capture:
     Save_Registers
 
@@ -30,7 +29,7 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
     mov  edx,[eax+0x11]  ; vtable
     call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+0x1800],1
+    cmp  byte [eax+HouseClass.Offset.InstantCapture],1
     Restore_Registers
     jz   .Capture_Building
 
@@ -41,7 +40,7 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
 .Capture_Building:
     jmp  0x004EC59A
 
-;ebx = buildingclass, HouseClass + offset 0x1800 = BuildingsGetInstantlyCaptured
+;ebx = buildingclass
 _InfantryClass__What_Action_House_Instant_Capture:
     Save_Registers
 
@@ -49,7 +48,7 @@ _InfantryClass__What_Action_House_Instant_Capture:
     mov  edx,[eax+0x11]  ; vtable
     call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+0x1800],1
+    cmp  byte [eax+HouseClass.Offset.InstantCapture],1
     Restore_Registers
     jz   .Capture_Building
 

@@ -12,10 +12,10 @@
 
 _BuildingTypeClass_Read_Ini_ResetDrain:
     jge  .PositivePower
-    mov  dword [esi + 0x1aa],0
+    mov  dword [esi + BuildingTypeClass.Offset.Power],0
     neg  eax
-    mov  dword [esi + 0x1ae],eax
+    mov  dword [esi + BuildingTypeClass.Offset.Drain],eax
     jmp  0x00453FF6
 .PositivePower:
-    mov  dword [esi + 0x1ae],0
+    mov  dword [esi + BuildingTypeClass.Offset.Drain],0
     jmp  0x00453FF6

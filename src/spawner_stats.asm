@@ -20,11 +20,11 @@
 @HOOK 0x004DCE40 _HouseClass__Tracking_Add_New_Vessels_Tracking
 @HOOK 0x004DCBFB _HouseClass__Tracking_Remove_New_Vessels_Tracking
 @HOOK 0x004DCCF8 _HouseClass__Tracking_Add_New_Planes_Tracking
-@HOOK 0x004DCB7C _HouseClass__Tracking_Remove_New_Planes_Tracking
+@HOOK 0x004DCB79 _HouseClass__Tracking_Remove_New_Planes_Tracking
 @HOOK 0x004DCD5B _HouseClass__Tracking_Add_New_Infantry_Tracking
 @HOOK 0x004DCBA7 _HouseClass__Tracking_Remove_New_Infantry_Tracking
 @HOOK 0x004DCC8F _HouseClass__Tracking_Add_New_Building_Tracking
-@HOOK 0x004DCB5B _HouseClass__Tracking_Remove_New_Building_Tracking
+@HOOK 0x004DCB58 _HouseClass__Tracking_Remove_New_Building_Tracking
 ;@HOOK 0x005B712F _Send_Statistics_Packet_Skip_Clear_Unit_Total
 @HOOK 0x005B6544 _Send_Statistics_Packet_Send_Only_Once
 @HOOK 0x005B7754 _Send_Statistics_Packet_New_Per_Player_Fields
@@ -32,6 +32,11 @@
 @HOOK 0x00506676 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info
 @HOOK 0x004BD1FF _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event
 
+@CLEAR 0x004DCC7D 0xB6 0x004DCC7E ; HouseClass::Tracking_Add ; convert movsx to movzx
+@CLEAR 0x004DCC86 0xB6 0x004DCC87 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@CLEAR 0x004DCCE6 0xB6 0x004DCCE7 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@CLEAR 0x004DCCEF 0xB6 0x004DCCF0 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@CLEAR 0x004DCDA3 0xB6 0x004DCDA4 ; HouseClass::Tracking_Add ; convert movsx to movzx
 
 @JMP  0x005B654A 0x005B6557 ; jump over pWOLobject == NULL check
 @JMP  0x005B6574 0x005B659C ; jump over SDFX WOL code
@@ -54,28 +59,22 @@
 
 ; PlanetWestwoodStartTime & PlanetWestwoodGameID are global int32 variables that probably need to be filled in by spawner code
 
-; Use Offset +0x1803 to +0x1873 for infantry left
-; Use Offset +0x1873 to +0x18E3 for tanks left
-; Use Offset +0x1903 to +0x1973 for planes left
-; Use Offset +0x1973 to +0x19E3 for vessels left
-; Use Offset +0x1A00 to +0x1B60 for buildings left
-
 %define Stats_PacketClass_This    -0x6C
 
 Statistics_Packet_Sent: db    0
 
 _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event:
-    mov  dword [eax+EXT_Resigned], 1
+    mov  byte[eax+HouseClass.Offset.Resigned],1
     call HouseClass__Flag_To_Die
     jmp  0x004BD204
 
 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info:
     cmp  edx, 0
     jz   .Ret
-    mov  dword [eax+EXT_ConnectionLost], 1 ; for connection lost
+    mov  byte[eax+HouseClass.Offset.ConnectionLost],1 ; for connection lost
 
 .Ret:
-    test byte [eax+42h], 2
+    test byte[eax+42h],2
     jz   0x00506837
     jmp  0x0050667C
 
@@ -112,7 +111,7 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  byte [Ally_Field_Player], al
 
     mov  eax, 10h
-    mov  ebx, [esi+0x174C] ; Alliances bit field
+    mov  ebx, [esi+HouseClass.Offset.Allies] ; Alliances bit field
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .Ally_Field_Operator_New_Failed
@@ -125,12 +124,13 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     call 0x005B7A14 ; PacketClass::Add_Field(FieldClass *)
 
 ;ConnectionLost field
-    mov  al, byte [ebp-0x48]
+    mov  al, byte[ebp-0x48]
     add  al, 31h
-    mov  byte [ConnectionLost_Field_Player], al
+    mov  byte[ConnectionLost_Field_Player], al
 
     mov  eax, 10h
-    mov  ebx, [esi+EXT_ConnectionLost]
+    xor  ebx, ebx
+    mov  bl, byte[esi+HouseClass.Offset.ConnectionLost]
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .ConnectionLost_Field_Operator_New_Failed
@@ -143,12 +143,13 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     call 0x005B7A14 ; PacketClass::Add_Field(FieldClass *)
 
 ;Resigned field
-    mov  al, byte [ebp-0x48]
+    mov  al, byte[ebp-0x48]
     add  al, 31h
-    mov  byte [Resigned_Field_Player], al
+    mov  byte[Resigned_Field_Player], al
 
     mov  eax, 10h
-    mov  ebx, [esi+EXT_Resigned]
+    xor  ebx, ebx
+    mov  bl, byte[esi+HouseClass.Offset.Resigned]
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .Resigned_Field_Operator_New_Failed
@@ -166,7 +167,8 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  byte [SpawnLocation_Field_Player], al
 
     mov  eax, 10h
-    mov  ebx, [esi+EXT_SpawnLocation] ; SpawnLocation
+    xor  ebx,ebx
+    mov  bx, word[esi+HouseClass.Offset.SpawnLocation] ; SpawnLocation
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .SpawnLocation_Field_Operator_New_Failed
@@ -204,7 +206,8 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  byte [IsSpectator_Field_Player], al
 
     mov  eax, 10h
-    mov  ebx, [esi+EXT_IsSpectator] ; Alliances bit field
+    xor  ebx,ebx
+    mov  bl, byte[esi+HouseClass.Offset.IsSpectator] ; Alliances bit field
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .IsSpectator_Field_Operator_New_Failed
@@ -256,127 +259,106 @@ _Send_Statistics_Packet_Skip_Clear_Unit_Total:
     jmp  0x005B716A
 
 _HouseClass__Tracking_Remove_New_Building_Tracking:
-    dec  dword [ebx+eax*4+0x1A00]
-
-    dec  dword [ebx+eax*4+306h]
+    shr  eax, 18h
+    dec  dword [ebx+eax*4+HouseClass.Offset.NewBQuantity]
+    dec  dword [ebx+eax*4+HouseClass.Offset.BQuantity]
     jmp  0x004DCB62
 
 _HouseClass__Tracking_Add_New_Building_Tracking:
-    inc  dword [esi+0x1A00]
-
-    inc  dword [esi+306h]
+    inc  dword [esi+HouseClass.Offset.NewBQuantity]
+    inc  dword [esi+HouseClass.Offset.BQuantity]
     jmp  0x004DCC95
 
 _HouseClass__Tracking_Remove_New_Infantry_Tracking:
-    sar  eax, 18h
-
-    dec  dword [ebx+eax*4+0x1803]
-
+    shr  eax, 18h
+    dec  dword [ebx+eax*4+HouseClass.Offset.NewIQuantity]
     cmp  eax, 18h
     jmp  0x004DCBAD
 
 _HouseClass__Tracking_Add_New_Infantry_Tracking:
-    movsx eax, cl
-
-    inc  dword [ebx+eax*4+0x1803]
-
+    movzx eax, cl
+    inc  dword [ebx+eax*4+HouseClass.Offset.NewIQuantity]
     cmp  eax, 18h
     jmp  0x004DCD61
 
 _HouseClass__Tracking_Remove_New_Planes_Tracking:
-    dec  dword [ebx+eax*4+0x1903]
-
+    shr  eax, 18h
+    dec  dword [ebx+eax*4+HouseClass.Offset.NewAQuantity]
     dec  dword [ebx+eax*4+4EEh]
     jmp  0x004DCB83
 
 _HouseClass__Tracking_Add_New_Planes_Tracking:
-    inc  dword [esi+0x1903]
-
+    inc  dword [esi+HouseClass.Offset.NewAQuantity]
     inc  dword [esi+4EEh]
     jmp  0x004DCCFE
 
 _HouseClass__Tracking_Remove_New_Vessels_Tracking:
-    sar  eax, 18h
-
-    dec  dword [ebx+eax*4+0x1973]
-
+    shr  eax, 18h
+    dec  dword [ebx+eax*4+HouseClass.Offset.NewVQuantity]
     cmp  eax, 5
     jmp  0x004DCC01
 
 _HouseClass__Tracking_Add_New_Vessels_Tracking:
     movsx eax, cl
-
-    inc  dword [ebx+eax*4+0x1973]
-
+    inc  dword [ebx+eax*4+HouseClass.Offset.NewVQuantity]
     cmp  eax, 5
     jmp  0x004DCE46
 
 _HouseClass__Tracking_Remove_New_Vehicle_Tracking:
-    sar  eax, 18h
-
-    dec  dword [ebx+eax*4+0x1873]
-
+    shr  eax, 18h
+    dec  dword [ebx+eax*4+HouseClass.Offset.NewUQuantity]
     cmp  eax, 11h
     jmp  0x004DCBD7
 
 _HouseClass__Tracking_Add_New_Vehicle_Tracking:
-    movsx eax, cl
-
-    inc  dword [ebx+eax*4+0x1873]
-
+    movzx eax, cl
+    inc  dword [ebx+eax*4+HouseClass.Offset.NewUQuantity]
     cmp  eax, 11h
     jmp  0x004DCDD8
 
+; consider expanding to support 256 items
 _Send_Statistics_Packet_Fix_VSLx_Info:
-    lea  eax, [esi+0x1973]
-    mov  dword ecx, 7
+    lea  eax, [esi+HouseClass.Offset.NewVQuantity]
+    mov  ecx, 7
     call Dword_Swap_Memory
-
-    lea  ebx, [esi+0x1973]
-    mov  dword ecx, 0x1c
+    lea  ebx, [esi+HouseClass.Offset.NewVQuantity]
+    mov  ecx, 0x1c
     mov  eax, 0x10
-
     jmp  0x005B7587
 
 _Send_Statistics_Packet_Fix_PLLx_Info:
-    lea  eax, [esi+0x1903]
-    mov  dword ecx, 7
+    lea  eax, [esi+HouseClass.Offset.NewAQuantity]
+    mov  ecx, 7
     call Dword_Swap_Memory
-
-    lea  ebx, [esi+0x1903]
-    mov  dword ecx, 0x1c
+    lea  ebx, [esi+HouseClass.Offset.NewAQuantity]
+    mov  ecx, 0x1c
     mov  eax, 0x10
     jmp  0x005B7519
 
 _Send_Statistics_Packet_Fix_UNLx_Info:
-    lea  eax, [esi+0x1873]
-    mov  dword ecx, 0x16
+    lea  eax, [esi+HouseClass.Offset.NewUQuantity]
+    mov  ecx, 0x16
     call Dword_Swap_Memory
-
-    lea  ebx, [esi+0x1873]
-    mov  dword ecx, 88
+    lea  ebx, [esi+HouseClass.Offset.NewUQuantity]
+    mov  ecx, 88
     mov  eax, 0x10
-
     jmp  0x005B74E0
 
 _Send_Statistics_Packet_Fix_INLx_Info:
-
-    lea  eax, [esi+0x1803]
-    mov  dword ecx, 26
+    lea  eax, [esi+HouseClass.Offset.NewIQuantity]
+    mov  ecx, 26
     call Dword_Swap_Memory
-
-    lea  ebx, [esi+0x1803]
-    mov  dword ecx, 0x68
+    lea  ebx, [esi+HouseClass.Offset.NewIQuantity]
+    mov  ecx, 0x68
     mov  eax, 0x10
     jmp  0x005B74AB
 
 _Send_Statistics_Packet_FIX_BLLx_Info:
-    lea  eax, [esi+0x1A00]
-    mov  dword ecx, 87
+    lea  eax, [esi+HouseClass.Offset.NewBQuantity]
+    mov  ecx, 87
     call Dword_Swap_Memory
-
-    lea  ebx, [esi+0x1A00]
-    mov  dword ecx, 0x15C
+    lea  ebx, [esi+HouseClass.Offset.NewBQuantity]
+    mov  ecx, 0x15C
     mov  eax, 0x10
     jmp  0x005B754E
 
@@ -405,7 +387,7 @@ Dword_Swap_Memory:
     retn
 
 _Send_Statistics_Packet_Fix_NUMP_Human_Player_Count:
-    mov  dword ebx, [HumanPlayers]
+    mov  ebx, [HumanPlayers]
     jmp  0x005B65F6
 
 _Send_Statistics_Packet_Fix_VSLx_Byte_Order:
@@ -420,7 +402,7 @@ _Send_Statistics_Packet_Fix_Color_Info:
     xor  eax, eax
     mov  al, dl
     call HouseClass__As_Pointer
-    mov  byte dl, [eax+0x178F]
+    mov  byte dl, [eax+HouseClass.Offset.RemapColor]
     mov  eax, 0x10
     jmp  0x005B6F46
 

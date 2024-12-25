@@ -46,16 +46,17 @@
 
 _HouseClass__Recalc_Attributes_SetSpecialTypes:
 ;ecx is 0
-    mov  dword [eax + 0x137],ecx
-    mov  dword [eax + 0x13b],ecx
-    mov  dword [eax + 0x14f],ecx
-    mov  dword [eax + 0x153],ecx
-    mov  dword [eax + 0x143],ecx
-    mov  dword [eax + 0x147],ecx
-    mov  dword [eax + 0x15b],ecx
-    mov  dword [eax + 0x15f],ecx
-    mov  dword [eax + 0x167],ecx
-    mov  dword [eax + 0x16b],ecx
+    mov  dword [eax + HouseClass.Offset.BScan],ecx
+    mov  dword [eax + HouseClass.Offset.ActiveBScan],ecx
+    mov  dword [eax + HouseClass.Offset.UScan],ecx
+    mov  dword [eax + HouseClass.Offset.ActiveUScan],ecx
+    mov  dword [eax + HouseClass.Offset.IScan],ecx
+    mov  dword [eax + HouseClass.Offset.ActiveIScan],ecx
+    mov  dword [eax + HouseClass.Offset.AScan],ecx
+    mov  dword [eax + HouseClass.Offset.ActiveAScan],ecx
+    mov  dword [eax + HouseClass.Offset.VScan],ecx
+    mov  dword [eax + HouseClass.Offset.ActiveVScan],ecx
+    mov  dword [eax + HouseClass.Offset.BPreGroupScan],ecx
     ; zero out 32-bit SpecialScan
     lea  eax, [Houses.SpecialScan]
     lea  eax, [eax + edx*4]

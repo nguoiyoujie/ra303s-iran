@@ -174,9 +174,14 @@ Map.Basic.UseSinglePlayerAtomDamage dd 0
 Houses.SpecialScan                                times 32 dd 0 
 Houses.Radar                                      times 32 db 0 
 Houses.Factory                                    times 32 db 0 
+Houses.BSignificantScan                           times 32 db 0      ; 256 entries, 32 bytes
 Houses.BScan                                      times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
-Houses.BGroupScan                                 times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
-;Houses.BQuantity                                  times 6144 db 0   ; 24 * 256 entries
+;Houses.BGroupScan                                 times 1024 db 0    ; 32 houses * (256 entries, 32 bytes)
+Houses.BQuantity                                  times 8192 db 0    ; 32 houses  * 256 entries
+Houses.UQuantity                                  times 8192 db 0    ; 32 houses  * 256 entries
+Houses.IQuantity                                  times 8192 db 0    ; 32 houses  * 256 entries
+Houses.AQuantity                                  times 8192 db 0    ; 32 houses  * 256 entries
+Houses.VQuantity                                  times 8192 db 0    ; 32 houses  * 256 entries
 Houses.HouseTriggers                              times 768 db 0 ; 32 houses * 24 bytes
 HouseTypeClass.Multi9                             times 316 db 0
 HouseTypeClass.Multi10                            times 316 db 0

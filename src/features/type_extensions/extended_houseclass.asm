@@ -87,7 +87,6 @@ _Replace_HouseTriggers_53AB84:
     jmp 0x0053AB89
 
 
-
 ; TO-DO: check FlasherClass::FlashCountPerPlayer[HOUSE_COUNT] as well, it is possible FlashCountPerPlayer only exists in Remastered code
 
 @CLEAR 0x004C796F HouseTypeClass.NEW_COUNT 0x004C7970 ; init
@@ -133,26 +132,10 @@ _Replace_HouseTriggers_53AB84:
 
 allyneutral db 1
 
-%define    EXT_Resigned                0x17BC
-%define    EXT_ConnectionLost            0x17B8
-%define EXT_SpawnLocation            0x17B4
-%define EXT_IsSpectator                0x17B0
-%define EXT_SecondaryColorScheme    0x1802
-; Use offset +0x1800 for bool BuildingsGetInstantlyCpatured
-; Use offset +0x1801 for bool NoBuildingCrew
-; Use offset +0x1802 for byte SecondaryColorScheme
-; Use Offset +0x1803 to +0x1873 for infantry left
-; Use Offset +0x1873 to +0x18E3 for tanks left
-; Use Offset +0x1903 to +0x1973 for planes left
-; Use Offset +0x1973 to +0x19E3 for vessels left
-; Use Offset +0x1A00 to +0x1B60 for buildings left
-
-
-
 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
     Clear_Extended_Class_Memory_For_Old_Saves esi,HouseClass.NEW_SIZE,HouseClass.ORIGINAL_SIZE
 
-    mov  byte [esi+EXT_SecondaryColorScheme],0xFF
+    mov  byte [esi+HouseClass.Offset.SecondaryColorScheme],0xFF
 
 .Ret:
     mov  ebx,0x005F6538
@@ -239,7 +222,7 @@ _HouseClass__Read_INI:
     cmp  byte al,0xFF
     jz   .No_Custom_Colour
 
-    mov  [esi+0x178F],al
+    mov  [esi+HouseClass.Offset.RemapColor],al
 
 .No_Custom_Colour:
 
@@ -258,7 +241,7 @@ _HouseClass__Read_INI:
     cmp  byte al,0xFF
     jz   .No_Custom_Color
 
-    mov  [esi+0x178F],al
+    mov  [esi+HouseClass.Offset.RemapColor],al
 
 .No_Custom_Color:
 
@@ -292,7 +275,7 @@ _HouseClass__Read_INI:
     mov  ebx,str_BuildingsGetInstantlyCaptured  ; key
     call INIClass__Get_Bool
     mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1800],al
+    mov  [ecx+HouseClass.Offset.InstantCapture],al
 
     Restore_Registers
 
@@ -304,7 +287,7 @@ _HouseClass__Read_INI:
     mov  ebx,str_NoBuildingCrew  ; key
     call INIClass__Get_Bool
     mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1801],al
+    mov  [ecx+HouseClass.Offset.NoBuildingCrew],al
 
     Restore_Registers
 
@@ -316,7 +299,7 @@ _HouseClass__Read_INI:
     mov  ebx,str_SecondaryColorScheme ; key
     call INIClass__Get_Int
     mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+0x1802],al
+    mov  [ecx+HouseClass.Offset.SecondaryColorScheme],al
 
     Restore_Registers
 

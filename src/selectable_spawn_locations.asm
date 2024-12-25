@@ -79,10 +79,8 @@ _Create_Units_Set_Selected_Spawn_Locations:
 
 ; Save spawn location in EXTENDED HouseClass so we can dump this info for statistics
 _Create_Units_Save_Spawn_Location_In_HouseClass:
-    xor  eax, eax ; just to be sure
     mov  ax, [ebp-0x30] ; SpawnLocation
-    mov  dword [esi+EXT_SpawnLocation], eax
-
+    mov  word [esi+HouseClass.Offset.SpawnLocation],ax
 .Ret:
     mov  eax, [ebp-0x1C]
     and  eax, 7Fh
