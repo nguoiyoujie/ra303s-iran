@@ -232,6 +232,7 @@
 ; TECHNO.CPP
 %define TechnoClass__Combat_Damage                                0x00560CBC ; int TechnoClass::Combat_Damage(int which) 
 %define TechnoClass__Owner                                        0x00564358 ; HouseType TechnoClass::Owner(void)  
+%define TechnoTypeClass__Read_INI                                 0x00569914 ;
 
 ; TRIGGER.CPP
 %define TriggerClass__Spring                                      0x0056CC54 ; bool TriggerClass::Spring(TEventType event, ObjectClass * obj, CELL cell, bool forced)

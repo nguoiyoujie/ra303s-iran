@@ -32,8 +32,8 @@ VesselTypes_Read_INI:
     sub   esp,0x8
     mov   esi,eax
     mov   edi,edx
-    call  TechnoTypeClass_Read_INI
-    test  eax,eax ;check if TechnoTypeClass_Read_INI is successful, if not,skip all other reads
+    call  TechnoTypeClass__Read_INI
+    test  eax,eax ;check if TechnoTypeClass__Read_INI is successful, if not,skip all other reads
     jz    .Ret
     
 .BeginRead:

@@ -12,8 +12,6 @@
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HOOK 0x005374C5 _RulesClass_Objects_Replace_AircraftTypes_Read_INI
 
-%define        TechnoTypeClass_Read_INI             0x00569914 ;consider moving this to functions.asm
-
 _RulesClass_Objects_Replace_AircraftTypes_Read_INI:
     mov  dword eax,[esi+eax]
     mov  edx,ebx
@@ -31,8 +29,8 @@ AircraftTypes_Read_INI:
     sub   esp,0x8
     mov   esi,eax
     mov   edi,edx
-    call  TechnoTypeClass_Read_INI
-    test  eax,eax ;check if TechnoTypeClass_Read_INI is successful,if not,skip all other reads
+    call  TechnoTypeClass__Read_INI
+    test  eax,eax ;check if TechnoTypeClass__Read_INI is successful,if not,skip all other reads
     jz    .Ret
     
 .BeginRead:
