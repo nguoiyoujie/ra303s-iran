@@ -10,7 +10,7 @@
 %define AbstractTypeClass.Offset.Index                     0x001    ; INT
 %define AbstractTypeClass.Offset.ININame                   0x002    ; byte[24]
 %define AbstractTypeClass.Offset.StringTableName           0x01D    ; INT
-; 0x001 - 0x020
+; 0x021
 
 ; INI String controls
 str.AbstractTypeClass.RTTI                      db"RTTI",0                ;internal feature

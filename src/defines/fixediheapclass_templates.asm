@@ -36,8 +36,8 @@
 ; FactoryClass
 
 ; HouseClass
-%define HouseClass.ORIGINAL_SIZE           0x17A8
-%define HouseClass.NEW_SIZE                0x27A8
+%define HouseClass.ORIGINAL_SIZE           17A8h
+%define HouseClass.NEW_SIZE                2C10h
 
 ; InfantryClass
 
@@ -73,13 +73,12 @@
 %define HouseTypeClass.ORIGINAL_COUNT      14h
 %define HouseTypeClass.NEW_COUNT           20h
 
-
 ; BuildingTypeClass                        0x0065DD70
 %define BuildingTypeClass.Count            0x0065DD7C
 %define BuildingTypeClass.Array            0x0065DDA4
 %define BuildingTypeClass.ORIGINAL_COUNT   57h
 %define BuildingTypeClass.ORIGINAL_SIZE    207h
-%define BuildingTypeClass.NEW_SIZE         307h
+%define BuildingTypeClass.NEW_SIZE         2C2h
 
 ; AircraftTypeClass                        0x0065DDBC
 %define AircraftTypeClass.Count            0x0065DDC8
@@ -93,14 +92,14 @@
 %define InfantryTypeClass.Array            0x0065DE3C
 %define InfantryTypeClass.ORIGINAL_COUNT   1Ah
 %define InfantryTypeClass.ORIGINAL_SIZE    1A2h
-%define InfantryTypeClass.NEW_SIZE         3F0h
+%define InfantryTypeClass.NEW_SIZE         3A8h
 
 ; BulletTypeClass                          0x0065DE54
 %define BulletTypeClass.Count              0x0065DE60
 %define BulletTypeClass.Array              0x0065DE88
 %define BulletTypeClass.ORIGINAL_COUNT     12h
 %define BulletTypeClass.ORIGINAL_SIZE      146h
-%define BulletTypeClass.NEW_SIZE           146h ; size change not implemented
+%define BulletTypeClass.NEW_SIZE           146h ; size change not yet implemented
 
 ; AnimTypeClass                            0x0065DEA0
 %define AnimTypeClass.Count                0x0065DEAC
@@ -114,14 +113,14 @@
 %define UnitTypeClass.Array                0x0065DF20
 %define UnitTypeClass.ORIGINAL_COUNT       16h
 %define UnitTypeClass.ORIGINAL_SIZE        19Eh
-%define UnitTypeClass.NEW_SIZE             2A0h
+%define UnitTypeClass.NEW_SIZE             28Fh
 
 ; VesselTypeClass                          0x0065DF38
 %define VesselTypeClass.Count              0x0065DF44
 %define VesselTypeClass.Array              0x0065DF6C
 %define VesselTypeClass.ORIGINAL_COUNT     7h
 %define VesselTypeClass.ORIGINAL_SIZE      19Eh
-%define VesselTypeClass.NEW_SIZE           2A0h
+%define VesselTypeClass.NEW_SIZE           2A2h
 
 ; TemplateTypeClass
 

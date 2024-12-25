@@ -254,7 +254,7 @@
 %define HouseClass.Offset.NewIQuantity           0x2010   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewAQuantity           0x2410   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewVQuantity           0x2810   ; should be 256 * 4 bytes
-
+; 0x2C10
 
 ; building in progress
 ; INI String controls
