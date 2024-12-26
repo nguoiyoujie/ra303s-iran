@@ -1,5 +1,18 @@
-CHanges to ra95.dat from 3.03p original
+CHanges to ra95.dat from 3.03 original
 
 1. Trimmed PE by removing .reloc and .edata section
 2. Use Resource Hacker to transfer icons and version info to result
-3. Adjust offsets accordingly
+3. Apply the applicable fix to remove mpgdll.dll dependency from the base 3.03 patch
+	https://forums.cncnz.com/topic/17398-tutorial-how-to-remove-the-303-mpgdlldll-dependency/ (thanks Iran)
+	
+	- Download PEditor: http://www.softpedia.com/progDownload/PEditor-Download-28.html
+	- Unextract the files in the ZIP file to a folder.
+	- Run PEditor.exe.
+	- Click the 'browse' button in the top right of the program and select ra95.exe or ra95.dat, whatever contains the actual game binary.
+	- Click the 'directory' button in the center bottom.
+	- In the window that pops up, in the right corner click the 'Imports' button.
+	- Right click the row with 'mpgdll.dll' in it in the new window that pops up.
+	- Click on the option 'delete ImageImportDescriptor' after right clicking.
+	- The row should now disappear. Close the program and test the binary without having a mpgdll.dll file in your folder.
+	
+4. Adjust offsets on main.asm accordingly
