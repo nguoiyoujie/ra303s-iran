@@ -113,7 +113,7 @@ _BuildingTypeClass__Read_INI_Extended:
     ObjectTypeClass.IsInsignificant.Get(esi,dl)
     mov  ebx,[esi+AbstractTypeClass.Offset.Index]
     mov  ecx,ebx
-    sar  ebx,3
+    shr  ebx,3
     and  ecx,7
     test dl,dl
     je   .SetSignificantScan

@@ -120,7 +120,7 @@ _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3:
     shl  esi,5
     add  ebx,esi
     mov  esi,ecx
-    sar  esi,3
+    shr  esi,3
     add  ebx,esi
     and  ecx,7
     mov  al, 1
@@ -289,7 +289,7 @@ _TEventClass__Operator_BuildingExists_Check:
     lea  eax,[Houses.BScan + eax] ; eax is now pointer to start of the house's new BScan fields
     shr  ecx,18h
     mov  edx,ecx 
-    sar  edx,3
+    shr  edx,3
     mov  eax,dword [eax + edx] ;e.g. ecx=100=8*12+4 -> check the 4th bit of [Houses.BScan + eax + 12]
     and  ecx,0x7
     mov  edx,1

@@ -136,7 +136,7 @@ _GetPrerequisiteExtendedFromString:
     push edx
     push ecx
     push ebx
-     xor  edi,edi
+    xor  edi,edi
     TechnoTypeClass.ExtPrerequisiteOffset.Get(esi,di)
     cmp  di,0
     je  .Retn ; just return 0
@@ -175,7 +175,7 @@ _GetPrerequisiteExtendedFromString:
     lea  edx,[esi + edi]
     xor  ecx,ecx
     mov  cl,al
-    sar  cl,3
+    shr  cl,3
     add  edx,ecx
     mov  cl,al
     and  cl,7
@@ -195,7 +195,7 @@ _GetPrerequisiteExtendedFromString:
     lea  edx,[esi + edi]
     xor  ecx,ecx
     mov  cl,al
-    sar  cl,3
+    shr  cl,3
     add  edx,ecx
     mov  cl,al
     and  cl,7
