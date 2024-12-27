@@ -77,6 +77,7 @@ _str_version: db"3.03s-v01-20241225",0
 
 ;loading code
 %include "src/loading.asm" ; now empty, split to features/loading/
+%include "src/features/ini_load_longer_lines.asm"
 %include "src/features/loading/loading_redalert.asm"
 %include "src/features/loading/loading_spawn.asm"
 %include "src/features/loading/loading_rules.asm"
