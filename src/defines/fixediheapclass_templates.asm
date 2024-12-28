@@ -25,47 +25,108 @@
 ;        int GrowthStep 
 
 ; GLOBALS.CPP
-; AircraftClass
+; AircraftClass                            0x0065D818
+%define AircraftClass.Count                0x0065D824
+%define AircraftClass.Array                0x0065D84C
+%define AircraftClass.ORIGINAL_SIZE        15Fh
+; Count controlled by [Maximums]
 
-; AnimClass
+; AnimClass                                0x0065D864
+%define AnimClass.Count                    0x0065D870
+%define AnimClass.Array                    0x0065D898
+%define AnimClass.ORIGINAL_SIZE            4Ch
+; Count controlled by [Maximums]
 
-; BuildingClass
+; BuildingClass                            0x0065D8B0
+%define BuildingClass.Count                0x0065D8BC
+%define BuildingClass.Array                0x0065D8E4
+%define BuildingClass.ORIGINAL_SIZE        FBh
+; Count controlled by [Maximums]
 
-; BulletClass
+; BulletClass                              0x0065D8FC
+%define BulletClass.Count                  0x0065D908
+%define BulletClass.Array                  0x0065D930
+%define BulletClass.ORIGINAL_SIZE          4Bh
+; Count controlled by [Maximums]
 
-; FactoryClass
+; FactoryClass                             0x0065D948
+%define FactoryClass.Count                 0x0065D954
+%define FactoryClass.Array                 0x0065DA7C
+%define FactoryClass.ORIGINAL_SIZE         2Eh
+; Count controlled by [Maximums]
 
-; HouseClass
+; HouseClass                               0x0065D994
+%define HouseClass.Count                   0x0065D9A0
+%define HouseClass.Array                   0x0065DAC8
 %define HouseClass.ORIGINAL_SIZE           17A8h
 %define HouseClass.NEW_SIZE                2C10h
+; Count controlled by [Maximums]
 
-; InfantryClass
+; InfantryClass                            0x0065D9E0
+%define InfantryClass.Count                0x0065D9EC
+%define InfantryClass.Array                0x0065DA14
+%define InfantryClass.ORIGINAL_SIZE        154h
+; Count controlled by [Maximums]
 
-; OverlayClass
+; OverlayClass                             0x0065DA2C
+%define OverlayClass.Count                 0x0065DA38
+%define OverlayClass.Array                 0x0065DA60
+%define OverlayClass.ORIGINAL_SIZE         2Bh
+; Count controlled by [Maximums]
 
-; SmudgeClass
+; SmudgeClass                              0x0065DA78
+%define SmudgeClass.Count                  0x0065DA84
+%define SmudgeClass.Array                  0x0065DAAC
+%define SmudgeClass.ORIGINAL_SIZE          2Bh
+; Count controlled by [Maximums]
 
-; TeamClass
+; TeamClass                                0x0065DAC4
+%define TeamClass.Count                    0x0065DAD0
+%define TeamClass.Array                    0x0065DAF8
+%define TeamClass.ORIGINAL_SIZE            5Dh
+; Count controlled by [Maximums]
 
-; TeamTypeClass                            0x0065DBA8
-%define TeamTypeClass.Count                0x0065DBB4
-%define TeamTypeClass.Array                0x0065DBDC
+; TeamTypeClass                            0x0065DB10
+%define TeamTypeClass.Count                0x0065DB1C
+%define TeamTypeClass.Array                0x0065DB44
+%define TeamTypeClass.ORIGINAL_SIZE        D1h
+; Count controlled by [Maximums]
 
-; TemplateClass                            0x0065DBF4
-%define TemplateClass.Count                0x0065DC00
-%define TemplateClass.Array                0x0065DC28
+; TemplateClass                            0x0065DB5C
+%define TemplateClass.Count                0x0065DB68
+%define TemplateClass.Array                0x0065DB90
+%define TemplateClass.ORIGINAL_SIZE        2Bh
+; Count controlled by [Maximums]
 
-; TerrainClass                             0x0065DC40
-%define TerrainClass.Count                 0x0065DC4C
-%define TerrainClass.Array                 0x0065DC74
+; TerrainClass                             0x0065DBA8
+%define TerrainClass.Count                 0x0065DBB4
+%define TerrainClass.Array                 0x0065DBDC
+%define TerrainClass.ORIGINAL_SIZE         40h
+; Count controlled by [Maximums]
 
-; TriggerClass                             0x0065DC8C
-%define TriggerClass.Count                 0x0065DC98
-%define TriggerClass.Array                 0x0065DCC0
+; TriggerClass                             0x0065DBF4
+%define TriggerClass.Count                 0x0065DC00
+%define TriggerClass.Array                 0x0065DC28
+%define TriggerClass.ORIGINAL_SIZE         2Dh
+; Count controlled by [Maximums]
+
+; UnitClass                                0x0065DC40
+%define UnitClass.Count                    0x0065DC4C
+%define UnitClass.Array                    0x0065DC74
+%define UnitClass.ORIGINAL_SIZE            17Ah
+; Count controlled by [Maximums]
+
+; VesselClass                              0x0065DC8C
+%define VesselClass.Count                  0x0065DC98
+%define VesselClass.Array                  0x0065DCC0
+%define VesselClass.ORIGINAL_SIZE          178h
+; Count controlled by [Maximums]
 
 ; TriggerTypeClass                         0x0065DCD8
 %define TriggerTypeClass.Count             0x0065DCE4
 %define TriggerTypeClass.Array             0x0065DD0C
+%define TriggerTypeClass.ORIGINAL_SIZE     59h
+; Count controlled by [Maximums]
 
 ; HouseTypeClass                           0x0065DD24
 %define HouseTypeClass.Count               0x0065DD30
@@ -133,7 +194,6 @@
 
 ; SoundEffects
 %define SoundEffects.ORIGINAL_COUNT        165
-
 
 ; WarheadTypeClass in WARHEAD.CPP
 %define WarheadTypeClass.Count             0x0069160C
