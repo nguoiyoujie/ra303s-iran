@@ -282,9 +282,16 @@ Set_View_Port_Location:
     xor  esi,esi
     mov  word [temp_unkC],si
 
+    inc  dword [Globals___ScenarioInit] ; to snap immediately
     mov  edx,[temp_unkC]
     mov  eax,Globals___Map
     call 0x004D2BC0; HelpClass::Set_Tactical_Position(ulong)
+    dec  dword [Globals___ScenarioInit]
+
+    ; force template refresh
+    mov  edx,1
+    mov  eax,Globals___Map ; MouseClass Map
+    call GScreenClass__Flag_To_Redraw
 
 .Ret:
     Restore_Registers
@@ -1016,8 +1023,8 @@ Set_Map_Dimensions:
     call dword [edi + 0x5c]
 	
 	; iterate over all buildings to update IsLocked. Buildings that are within the play field have IsLocked set
-    mov  dword [What_Heap1],0x0065D8BC
-    mov  dword [What_Heap2],0x0065D8E4
+    mov  dword [What_Heap1],BuildingClass.Count
+    mov  dword [What_Heap2],BuildingClass.Array
     call Loop_Over_Object_Heap_And_Update_IsLocked
 	
     ; force radar refresh. Use a trick by toggling zoom mode twice.
@@ -1032,6 +1039,11 @@ Set_Map_Dimensions:
 	mov  eax,Globals___Map ; global RadarClass
     call 0x0052F294 ; RadarClass::Zoom_Mode
 	
+    ; force set position, in case the map is shrunk, we want to snap the map to the boundaries
+    mov  eax,Globals___Map
+    mov  edx,dword [Globals___Map + 0xc4a] ; TacticalCoord
+    call 0x004D2BC0; HelpClass::Set_Tactical_Position(ulong)
+
     ; force template refresh
     mov  edx,1
     mov  eax,Globals___Map ; MouseClass Map
@@ -1043,13 +1055,94 @@ Set_Map_Dimensions:
     call 0x004FF690 ; MapClass::Zone_Reset
 
     ; the old map bounds may have IsVisible set, that needs to be reverted to redraw the shroud creep at the map edge during DisplayClass::Redraw_Shadow
-    ; Explicitly clear IsVisible on all cells to force recalculation
+    ; Explicitly recalculate IsMapped on all cells based on IsVisible of neighbouring cells
     mov  edx,-1
 .Next_Iter:
     inc  edx
     cmp  edx,0x4000
     jge  .Done_Iter
 
+    xor  edi,edi
+    push edx
+    ; start check of neighbours
+.CheckVisibleW:
+    dec  edx
+    cmp  edx,0x4000
+    jae  .CheckVisibleNW
+    mov  al,dl
+    and  al,0x7F
+    cmp  al,0x7F
+    jz   .CheckVisibleNW
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleNW:
+    sub  edx,0x80
+    cmp  edx,0x4000
+    jae  .CheckVisibleN
+    mov  al,dl
+    and  al,0x7F
+    cmp  al,0x7F
+    jz   .CheckVisibleN
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleN:
+    inc  edx
+    cmp  edx,0x4000
+    jae  .CheckVisibleNE
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleNE:
+    inc  edx
+    cmp  edx,0x4000
+    jae  .CheckVisibleE
+    test edx,0x7F
+    jz   .CheckVisibleE
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleE:
+    add  edx,0x80
+    cmp  edx,0x4000
+    jae  .CheckVisibleSE
+    test edx,0x7F
+    jz   .CheckVisibleSE
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleSE:
+    add  edx,0x80
+    cmp  edx,0x4000
+    jge  .CheckVisibleS
+    test edx,0x7F
+    jz   .CheckVisibleS
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleS:
+    dec  edx
+    cmp  edx,0x4000
+    jae  .CheckVisibleSW
+    call GetCellIsVisible
+    test al,al
+    jnz  .CheckVisibleFound
+.CheckVisibleSW:
+    dec  edx
+    cmp  edx,0x4000
+    jae  .CheckDone
+    mov  al,dl
+    and  al,0x7F
+    cmp  al,0x7F
+    jz   .CheckDone
+    call GetCellIsVisible
+    test al,al
+    jz  .CheckDone
+.CheckVisibleFound:
+    mov  edi,1
+.CheckDone:
+    pop  edx ; restore cell
     mov  ebx,edx
     lea  ecx,[ebx*8+0]
     sub  ecx,ebx
@@ -1060,7 +1153,16 @@ Set_Map_Dimensions:
     add  eax,ecx ; Globals___Map_Array + 0x3a (CellClass size) * cell
     xor  ecx,ecx
     mov  cl,byte [eax+2h]
-    and  cl,~0x8 ; clear IsVisible
+    cmp  edi,1
+    je   .SetMapped
+.ClearMapped:
+    and  cl,~0x4 ; clear IsMapped
+    jmp  .MappedDone
+.SetMapped:
+    or   cl,0x4 ; set IsMapped
+.MappedDone:
+    ;xor  cl,0x8 ; toggle IsVisible
+    ;and  cl,~0x8 ; clear IsVisible
     mov  byte [eax+2h],cl 
     jmp  .Next_Iter
 
@@ -1070,10 +1172,28 @@ Set_Map_Dimensions:
     mov  eax,Globals___Map ; MouseClass Map
     call 0x0052DA14 ; RadarClass::Draw_It
 
-    
 .Ret:
     Restore_Registers
     retn
+
+
+GetCellIsVisible:
+    ; edx is the cell
+    mov  ebx,edx
+    lea  ecx,[ebx*8+0]
+    sub  ecx,ebx
+    shl  ecx,2
+    add  ecx,ebx
+    mov  eax,dword [Globals___Map_Array]
+    add  ecx,ecx
+    add  eax,ecx ; Globals___Map_Array + 0x3a (CellClass size) * cell
+    xor  ecx,ecx
+    mov  cl,byte [eax+2h]
+    and  cl,0x8 ; get IsVisible
+    sar  cl,2
+    mov  eax,ecx ; if IsVisible, al is 1, otherwise 0
+    ret
+
 
 Loop_Over_Object_Heap_And_Update_IsLocked:
 .Setup_Buildings_Loop:
@@ -1090,7 +1210,7 @@ Loop_Over_Object_Heap_And_Update_IsLocked:
     mov  [Capture_Attached_unk68],ebx
     mov  [Capture_Attached_unk6C],ecx
 
-    .Buildings_Loop:
+.Buildings_Loop:
     mov  edi,[Capture_Attached_unk6C]
     mov  edx,[What_Heap1]
     mov  edx,[edx]
