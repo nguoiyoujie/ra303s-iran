@@ -39,6 +39,9 @@ _Init_Game_Set_VesselTypes_Heap_Count:
 
 _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes:
     Loop_Over_RULES_INI_Section_Entries str_VesselTypes,Init_VesslTypeClass
+    ;mov  edx,[VesselTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x00605A90],edx ; used by deconstructor
     call Init_Heap_OverrideExistingVesselTypes
 .Ret:
     lea  esp,[ebp-14h]
@@ -64,17 +67,22 @@ Init_VesslTypeClass:
     mov  edx,ebx
     add  edx,VesselTypeClass.ORIGINAL_COUNT ; VesselType
 
-    push 0Eh
-    push 8
-    push 1
-    push 1
-    push 0
-    push 0
-    push 0
-    push 0
-    push 0
-    push 0
-    push 0
+    ; mimic VesselType DD, but using Civilian text name
+    push 0Eh             ; int toffset
+    push 8               ; int rotation
+    push 1               ; bool is_turret_equipped
+    push 1               ; bool is_nominal
+    push 0               ; bool is_eight
+    push 0               ; int secondarylateral
+    push 0               ; int secondaryoffset
+    push 0               ; int primarylateral
+    push 0               ; int primaryoffset
+    push 0               ; int verticaloffset
+    push 0               ; AnimType exp
+    ; ecx: char const * ininame
+    ; ebx: int name
+    ; edx: VesselType type
+    ; eax: VesselTypeTypeClass object
 
     ; apply offset names
     push eax
@@ -87,8 +95,6 @@ Init_VesslTypeClass:
     mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
-
-    mov  dword [0x00605A90],1 ; __Vessel_Idx
     call VesselTypeClass_VesselTypeClass
 .Ret:
     retn

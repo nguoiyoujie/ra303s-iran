@@ -15,7 +15,7 @@
 @HOOK 0x004F40FA _Init_Game_Set_UnitTypes_Heap_Count
 @HOOK 0x00578950 _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes
 @HOOK 0x00578974 _UnitTypeClass__From_Name_Unhardcode_UnitTypes_Count
-@HOOK 0X00578ADB _UnitTypeClass__One_Time_UnhardCode_UnitTypes
+@HOOK 0x00578ADB _UnitTypeClass__One_Time_UnhardCode_UnitTypes
 
 
 _BuildingClass__Update_Buildables_UnhardCode_UnitTypes:
@@ -39,6 +39,9 @@ _Init_Game_Set_UnitTypes_Heap_Count:
 
 _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes:
     Loop_Over_RULES_INI_Section_Entries str_UnitTypes,Init_UnitTypeClass
+    ;mov  edx,[UnitTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x006057E4],edx ; used by deconstructor
     call Init_Heap_OverrideExistingUnitTypes
 .Ret:
     lea  esp,[ebp-14h]
@@ -64,28 +67,35 @@ Init_UnitTypeClass:
     mov  edx,ebx
     add  edx,UnitTypeClass.ORIGINAL_COUNT ; UnitType
 
-    push 0Eh
-    push 0
-    push 20h
-    push 0
-    push 0
-    push 0
-    push 1
-    push 0
-    push 0
-    push 0
-    push 1 ;is_turret_equipped,was 1
-    push 0
-    push 0
-    push 0
-    push 1
-    push 0
-    push 1
-    push 0
-    push 030h ;secondaryoffset,was 0C0h
-    push 0
-    push 030h ;primaryoffset,was 0C0h
-    push 30h ;verticaloffset
+    ; mimic UnitType 2TNK, but using Civilian text name
+    push MissionType.MISSION_HUNT ; MissionType order MISSION_HUNT
+    push 0               ; bool toffset
+    push 20h             ; bool rotation
+    push 0               ; bool is_gapper
+    push 0               ; bool is_jammer
+    push 0               ; bool is_animating
+    push 1               ; bool is_gigundo
+    push 0               ; bool is_lock_turret
+    push 0               ; bool is_fire_anim
+    push 0               ; bool is_radar_equipped
+    push 1               ; bool is_turret_equipped
+    push 0               ; bool is_insignificant
+    push 0               ; bool is_stealthy
+    push 0               ; bool is_harvest
+    push 1               ; bool is_crusher
+    push 0               ; bool is_nominal
+    push 1               ; bool is_goodie
+    push 0               ; int secondarylateral
+    push 0xC0            ; int secondaryoffset
+    push 0               ; int primarylateral
+    push 0xC0            ; int primaryoffset
+    push 30h             ; int verticaloffset
+    push 1               ; RemapType remap
+    push 2               ; AnimType exp
+    ; ecx: char const * ininame
+    ; ebx: int name
+    ; edx: UnitType type
+    ; eax: UnitTypeTypeClass object
 
     ; apply offset names
     push eax
@@ -98,10 +108,6 @@ Init_UnitTypeClass:
     mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
-	
-    push 1
-    mov  dword [0x006057E4],3 ; Turret Dir adjust
-    push 2
     call UnitTypeClass_UnitTypeClass
 .Ret:
     retn

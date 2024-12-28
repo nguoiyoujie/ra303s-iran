@@ -25,11 +25,13 @@
 @CLEAR 0x004566C9 0xB6 0x004566CA ; BuildingClass::AI ; convert movsx to movzx
 @CLEAR 0x004603B0 0xB6 0x004603B1 ; BuildingClass::Animation_AI ; convert movsx to movzx
 
+
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
-
     Loop_Over_RULES_INI_Section_Entries str_BuildingTypes,Init_BuildingTypeClass
+    ;mov  edx,[BuildingTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x005FE83C],edx ; used by deconstructor
     call Init_OverrideExistingBuildingTypes
-
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi
@@ -54,29 +56,35 @@ Init_BuildingTypeClass:
     mov  edx,ebx
     add  edx,BuildingTypeClass.ORIGINAL_COUNT ; BuildingType
 
-    push 0
-    push 0x005FEAF6 ; offset short const List22[]
-    push 0
-    push BSIZE_22 ;2x2 building size
-    push 0
-    push 0
-    push 1
-    push 0
-    push 0
-    push 0
-    push 1
-    push 1
-    push 0
-    push 1
-    push 0
-    push 0
-    push 1
-    push 0
-    push 0
-    push 0
-    push 0
-    push 2
-    push 0
+    ; mimic BuildingType ATEK, but using Civilian Building text name
+    push 0               ; short const * overlap
+    push 0x005FEAF6      ; short const * sizelist
+    push 0               ; short const * exitlist
+    push BSIZE_22        ; BSizeType size
+    push 0               ; DirType sframe
+    push 0               ; RTTIType tobuild
+    push 1               ; bool is_remappable
+    push 0               ; bool is_turret_equipped
+    push 0               ; bool is_theater
+    push 0               ; bool is_insignificant
+    push 1               ; bool is_legal_target
+    push 1               ; bool is_selectable
+    push 0               ; bool is_stealthy
+    push 1               ; bool is_simpledamage
+    push 0               ; bool is_wall
+    push 0               ; bool is_nominal
+    push 1               ; bool is_regulated
+    push 0               ; bool is_fake
+    push 0               ; int verticaloffset
+    push 0               ; int verticaloffset
+    push 0               ; int verticaloffset
+    push 2               ; RemapType remap
+    push 0               ; COORDINATE exitpoint
+    push -1             ; FacingType foundation
+    ; ecx: char const * ininame
+    ; ebx: int name
+    ; edx: BuildingType type
+    ; eax: BuildingTypeClass object
 
     ; apply offset names
     push eax
@@ -89,9 +97,6 @@ Init_BuildingTypeClass:
     mov  ebx,305 ; Civilian Building
 .Continue:
     pop  eax
-
-    mov  dword [0x005FE83C],6
-    push 0FFFFFFFFh
     call BuildingTypeClass__BuildingTypeClass
 .Ret:
     retn

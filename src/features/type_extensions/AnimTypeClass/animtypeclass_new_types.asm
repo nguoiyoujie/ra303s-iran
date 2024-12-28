@@ -33,12 +33,12 @@ Tracker_AnimDir           db    0
 FirstDirectionalAnim      db    0xFF
 %define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
 
-temp_AnimID               db    0
-temp_AnimStr              dd    0
-temp_AnimDirection        dd    0
-temp_AnimDirFrameStart    dd    0
-temp_AnimDirFrameBiggest  dd    0
-temp_animtypeclass_constructor_arg dd 0
+Temp.Anim.ID               db    0
+Temp.Anim.Str              dd    0
+Temp.Anim.Direction        dd    0
+Temp.Anim.DirFrameStart    dd    0
+Temp.Anim.DirFrameBiggest  dd    0
+Temp.Anim.typeclass_constructor_arg dd 0
 
 ; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
 
@@ -46,6 +46,9 @@ temp_animtypeclass_constructor_arg dd 0
 _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
     Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
     Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
+    ;mov  edx,[AnimTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x005FDF98],edx ; used by deconstructor
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi
@@ -72,61 +75,65 @@ Init_AnimTypeClass:
     add  edx,AnimTypesHeap.ORIGINAL_COUNT ; AnimType
     mov  ebx,ecx ; Name/ID
 
-    ; these settings were derived from ANIM_FBALL1 / FBALL1
-    push 0FFFFFFFFh      ; chainto (AnimType)
-    push 0FFFFFFFFh      ; soundid (VocType) (was 4Dh)
-    push 1               ; loops
-    push 0FFFFFFFFh      ; stages
-    push 0FFFFFFFFh      ; loopend
-    push 0               ; loopstart
-    push 0               ; start
-    push 1               ; delaytime
-    push temp_animtypeclass_constructor_arg               ; damage (fixed) (needs to be a reference)
-    push 0               ; isflame
-    push 0               ; istrans
-    push 0               ; ground
-    push 0               ; issticky (Sticks to unit in square?)
-    push 1               ; iscrater
-    push 0               ; isscorcher
-    push 0               ; iswhitetrans
-    push 1               ; isnormal
-    push 0               ; istheater 
-    mov  ecx,43h        ; size (max of width or height,to establish refresh area)
-    push 6               ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
-    mov  dword [0x005FDF98],edx ;0x15 ;????
+    ; mimic AnimType ANIM_FBALL1 / FBALL1, but muted
+    push -1             ; AnimType chainto
+    push -1           ; VocType soundid
+    push 1               ; int loops
+    push -1       ; int stages
+    push -1       ; int loopend
+    push 0               ; int loopstart
+    push 0               ; int start
+    push 1               ; int delaytime
+    push Temp.Anim.typeclass_constructor_arg ; fixed damage (needs to be a reference)
+    push 0               ; bool isflame
+    push 0               ; bool istrans
+    push 0               ; bool ground
+    push 0               ; bool issticky (Sticks to unit in square?)
+    push 1               ; bool iscrater
+    push 0               ; bool isscorcher
+    push 0               ; bool iswhitetrans
+    push 1               ; bool isnormal
+    push 0               ; bool istheater 
+    push 6               ; int biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
+    mov  ecx,43h         ; size (max of width or height,to establish refresh area)
+    ; ecx: size
+    ; ebx: int name
+    ; edx: BuildingType type
+    ; eax: BuildingTypeClass object
     call AnimTypeClass__AnimTypeClass
 .Ret:
     retn
 
 
+; for 8 direction animations
 Init_DirectionalAnimTypeClass:
-    mov  dword [temp_AnimDirection],0
-    mov  dword [temp_AnimDirFrameStart],0
-    mov  dword [temp_AnimDirFrameBiggest],4 ; ANIM_SAM_N
-    mov  dword [temp_AnimStr],edx
-    mov  byte [temp_AnimID],bl
+    mov  dword [Temp.Anim.Direction],0
+    mov  dword [Temp.Anim.DirFrameStart],0
+    mov  dword [Temp.Anim.DirFrameBiggest],4 ; ANIM_SAM_N
+    mov  dword [Temp.Anim.Str],edx
+    mov  byte [Temp.Anim.ID],bl
     ; edx should have the name of the INI section already
     jmp  .Create
 
 .Next:
     push eax
-    mov  eax,dword [temp_AnimDirection]
+    mov  eax,dword [Temp.Anim.Direction]
     cmp  eax,0
     jnz  .Next2
-    add  dword [temp_AnimDirFrameStart],AnimDirStageFrames * 8
-    add  dword [temp_AnimDirFrameBiggest],AnimDirStageFrames * 8
+    add  dword [Temp.Anim.DirFrameStart],AnimDirStageFrames * 8
+    add  dword [Temp.Anim.DirFrameBiggest],AnimDirStageFrames * 8
 
 .Next2:
     inc  eax
     cmp  eax,0x8
     jge  .RetPop
-    mov  dword [temp_AnimDirection],eax
-    mov  eax,dword [temp_AnimDirFrameStart]
+    mov  dword [Temp.Anim.Direction],eax
+    mov  eax,dword [Temp.Anim.DirFrameStart]
     sub  eax,AnimDirStageFrames
-    mov  dword [temp_AnimDirFrameStart],eax
-    mov  eax,dword [temp_AnimDirFrameBiggest]
+    mov  dword [Temp.Anim.DirFrameStart],eax
+    mov  eax,dword [Temp.Anim.DirFrameBiggest]
     sub  eax,AnimDirStageFrames
-    mov  dword [temp_AnimDirFrameBiggest],eax
+    mov  dword [Temp.Anim.DirFrameBiggest],eax
     pop  eax
 
 .Create:
@@ -136,45 +143,48 @@ Init_DirectionalAnimTypeClass:
     jz   .Ret
 
     push eax
-    mov  eax,dword [temp_AnimStr]
+    mov  eax,dword [Temp.Anim.Str]
     call __strdup
     mov  ecx,eax
     pop  eax
 
     xor  edx,edx
-    mov  dl,byte [temp_AnimID]
+    mov  dl,byte [Temp.Anim.ID]
     shl  dl,3 ; multiply by 8
     add  dl,byte [FirstDirectionalAnim] ; AnimType
-    add  edx,dword [temp_AnimDirection]
+    add  edx,dword [Temp.Anim.Direction]
     mov  ebx,ecx ; Name/ID
 
-    ; these settings were derived from ANIM_SAM_N / SAMFIRE
-    push 0FFFFFFFFh      ; chainto (AnimType)
-    push 0FFFFFFFFh      ; soundid (VocType)
-    push 0               ; loops
-    push AnimDirStageFrames      ; stages
-    push 0               ; loopend
-    push 0               ; loopstart
-    push dword [temp_AnimDirFrameStart]               ; start
-    push 1               ; delaytime
-    push temp_animtypeclass_constructor_arg               ; damage (fixed) (needs to be a reference)
-    push 0               ; isflame
-    push 0               ; istrans
-    push 0               ; ground
-    push 0               ; issticky (Sticks to unit in square?)
-    push 0               ; iscrater
-    push 0               ; isscorcher
-    push 0               ; iswhitetrans
-    push 0               ; isnormal
-    push 0               ; istheater 
-    mov  ecx,55         ; size (max of width or height,to establish refresh area)
-    push dword [temp_AnimDirFrameBiggest]               ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
+    ; mimic AnimType ANIM_SAM_N / SAMFIRE, but muted
+    push -1             ; AnimType chainto
+    push -1           ; VocType soundid
+    push 0               ; int loops
+    push AnimDirStageFrames ; int stages
+    push 0               ; int loopend
+    push 0               ; int loopstart
+    push dword [Temp.Anim.DirFrameStart] ; int start
+    push 1               ; int delaytime
+    push Temp.Anim.typeclass_constructor_arg ; fixed damage (needs to be a reference)
+    push 0               ; bool isflame
+    push 0               ; bool istrans
+    push 0               ; bool ground
+    push 0               ; bool issticky (Sticks to unit in square?)
+    push 0               ; bool iscrater
+    push 0               ; bool isscorcher
+    push 0               ; bool iswhitetrans
+    push 0               ; bool isnormal
+    push 0               ; bool istheater 
+    push dword [Temp.Anim.DirFrameBiggest] ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
+    mov  ecx,55          ; size (max of width or height,to establish refresh area)
+    ; ecx: size
+    ; ebx: int name
+    ; edx: BuildingType type
+    ; eax: BuildingTypeClass object
     call AnimTypeClass__AnimTypeClass
     jmp .Next
 
 .RetPop:
     pop  eax
-
 .Ret:
     retn
 

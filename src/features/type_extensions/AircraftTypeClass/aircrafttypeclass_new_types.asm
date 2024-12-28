@@ -19,9 +19,10 @@
 
 
 _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
-
     Loop_Over_RULES_INI_Section_Entries str_AircraftTypes,Init_AircraftTypeClass
-
+    ;mov  edx,[AircraftTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x005FDF74],edx ; used by deconstructor
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi
@@ -46,22 +47,27 @@ Init_AircraftTypeClass:
     mov  edx,ebx
     add  edx,AircraftTypeClass.ORIGINAL_COUNT
 
-    push 0Eh
-    push 20h
-    push 0FFh
-    push 0Eh
-    push 0
-    push 0
-    push 1
-    push 1
-    push 1
-    push 0
-    push 0
-    push 1
-    push 0
-    push 0
-    push 40h
-    push 0
+    ; mimic AircraftType HELI, but using Civilian text name
+    push MissionType.MISSION_HUNT ; MissionType order MISSION_HUNT
+    push 20h             ; bool rotation
+    push -1             ; int landingspeed
+    push BuildingType.HPAD ; StructType building
+    push 0               ; bool is_immune
+    push 0               ; bool is_insignificant
+    push 1               ; bool is_legal_target
+    push 1               ; bool is_selectable
+    push 1               ; bool is_stealthy
+    push 0               ; bool is_landable
+    push 0               ; bool is_rotorcustom
+    push 1               ; bool is_rotorequipped
+    push 0               ; bool is_fixedwing
+    push 0               ; int primarylateral
+    push 40h             ; int primaryoffset
+    push 0               ; int verticaloffset
+    ; ecx: char const * ininame
+    ; ebx: int name
+    ; edx: AircraftType type
+    ; eax: AircraftTypeClass object
 
     ; apply offset names
     push eax
@@ -74,10 +80,7 @@ Init_AircraftTypeClass:
     mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
-
-    mov  dword [0x005FDF74],5
     call AircraftTypeClass__AircraftTypeClass 
-
 .Ret:
     retn
 

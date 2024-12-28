@@ -27,6 +27,9 @@ _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
 
 _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes:
     Loop_Over_RULES_INI_Section_Entries str_InfantryTypes,Init_InfantryTypeClass
+    ;mov  edx,[InfantryTypeClass.Count]
+    ;dec  edx
+    ;mov  [0x006019C4],edx ; used by deconstructor
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi
@@ -51,18 +54,24 @@ Init_InfantryTypeClass:
     mov  edx,ebx
     add  edx,InfantryTypeClass.ORIGINAL_COUNT ; InfantryType
 
-    push 0               ; __int32
-    push 2               ; char
-    push 2               ; char
-    push 0x00601A4C      ; offset DoInfoStruct E1DoControls[] ; __int32
-    push 1               ; char
-    push 0               ; __int32
-    push 0               ; __int32
-    push 0               ; __int32
-    push 0               ; __int32
-    push 1               ; __int32
-    push 0               ; __int32
-    push 10h             ; __int32
+    ; mimic InfantryType E1, but using Civilian text name
+    push 0               ; unsigned char const * override_remap
+    push 2               ; int pronelaunch
+    push 2               ; int firelaunch
+    push 0x00601A4C      ; DoInfoStruct const * control
+    push 1               ; PipEnum pip
+    push 0               ; bool is_theater
+    push 0               ; bool is_nominal
+    push 0               ; bool is_remap_override
+    push 0               ; bool is_civilian
+    push 1               ; bool is_crawling
+    push 0               ; bool is_female
+    push 10h             ; int primaryoffset
+    push 35h             ; int verticaloffset
+    ; ecx: char const * ininame
+    ; ebx: int name
+    ; edx: InfantryType type
+    ; eax: InfantryTypeClass object
 
     ; apply offset names
     push eax
@@ -75,9 +84,6 @@ Init_InfantryTypeClass:
     mov  ebx,21 ; Civilian
 .Continue:
     pop  eax
-
-    push 35h             ; __int32
-    mov  dword [0x006019C4],1
     call InfantryTypeClass__InfantryTypeClass
 .Ret:
     retn
