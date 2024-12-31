@@ -53,7 +53,18 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.Response_Attack.Read(esi,edi,_GetUnitResponseAttackFromString)
     UnitTypeClass.AmmoImageCount.Read(esi,edi)  
     UnitTypeClass.AmmoTurretCount.Read(esi,edi)  
+    UnitTypeClass.IsWaterBound.Read(esi,edi)
     UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
+
+    ; update Speed and MZone based on IsWaterBound
+    push edx
+    UnitTypeClass.IsWaterBound.Get(esi,dl)
+    cmp  dl,1
+    jne  .Continue ; Reading "Tracked" earlier had already set the Speed to the appropriate land-based speed type
+    TechnoTypeClass.Speed.Set(esi,4) ; SPEED_FLOAT
+    TechnoTypeClass.MZone.Set(esi,3) ; MZONE_WATER
+.Continue:
+    pop  edx
 
     pop  esi
 .Ret:

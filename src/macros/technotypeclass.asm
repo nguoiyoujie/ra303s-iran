@@ -264,6 +264,12 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.Facings.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.Facings, value
 %define TechnoTypeClass.Facings.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadByte               ptr_type, ptr_rules, TechnoTypeClass.Offset.Facings, str.TechnoTypeClass.Facings
 
+%define TechnoTypeClass.MZone.Get(ptr_type,reg_output)                       ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.MZone, reg_output
+%define TechnoTypeClass.MZone.Set(ptr_type,value)                            ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.MZone, value
+
+%define TechnoTypeClass.Speed.Get(ptr_type,reg_output)                       ObjectTypeClass.GetByte                ptr_type, TechnoTypeClass.Offset.Speed, reg_output
+%define TechnoTypeClass.Speed.Set(ptr_type,value)                            ObjectTypeClass.SetByte                ptr_type, TechnoTypeClass.Offset.Speed, value
+
 %define TechnoTypeClass.MaxAmmo.Get(ptr_type,reg_output)                     ObjectTypeClass.GetInt                 ptr_type, TechnoTypeClass.Offset.MaxAmmo, reg_output
 %define TechnoTypeClass.MaxAmmo.Set(ptr_type,value)                          ObjectTypeClass.SetInt                 ptr_type, TechnoTypeClass.Offset.MaxAmmo, value
 %define TechnoTypeClass.MaxAmmo.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadInt                ptr_type, ptr_rules, TechnoTypeClass.Offset.MaxAmmo, str.TechnoTypeClass.MaxAmmo
