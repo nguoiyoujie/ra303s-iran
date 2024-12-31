@@ -13,6 +13,7 @@ UnitTypes represent vehicles, and are in essence play the second most major role
  - [Deploys To Building](#deploys-to-building) 
  - [Reload Logic](#reload-logic) 
  - [Custom Voices](#custom-voices) 
+ - [Visual Settings](#visual-settings) 
 
 
 -------
@@ -292,6 +293,66 @@ Each entry are as follows:
 |`ResponseSelect`  |Response when selected
 |`ResponseMove`    |Response when ordered to move to a location
 |`ResponseAttack`  |Response when ordered to attack a target
+
+</samp>
+</details></td></tr></table>
+
+
+<a href="#unittypes"><kbd>Top</kbd></a><br>
+-------
+### Visual Settings
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► HasAPCDoor
+
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set to true, the unit will use APC graphics sequences. In essence, 6 frames are added to the body frames for door animations. That is:
+ - Frames 0-31: Normal body
+ - Frames 32-35: NE door animation (the vehicle itself faces NE)
+ - Frames 36-38: NW door animation
+ - Frames 39-69: Turret (if turret is defined, such as [STNK])
+
+Defaults to yes for APC and STNK, no to every other unit.
+You are expected to supply the appropriate graphics to match.
+
+</samp>
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AmmoImageCount
+
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set, the unit will use additional body frames for depleted Ammo sequences. That means:
+ - If `AmmoImageCount`-`Ammo` is less than 0 (you defined more Ammo than image sequences), the body frame number is not incremented.
+ - The body frame number is incremented by 32 * (`AmmoImageCount`-`Ammo`).
+ - If `HasAPCDoor`=true, the body frame number is incremented by 38 * (`AmmoImageCount`-`Ammo`) instead.
+ - Turret images are similarly incremented - they will start after the body/door sequence
+
+Works best with `AmmoImageCount` matching `Ammo`.
+
+Defaults to 1 for V2RL, 0 to every other unit.
+You are expected to supply the appropriate graphics to match.
+
+</samp>
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AmmoTurretCount
+
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set, the unit will use additional turret frames for depleted Ammo sequences. That means:
+ - If `AmmoTurretCount`-`Ammo` is less than 0 (you defined more Ammo than image sequences), the turret frame number is not incremented.
+ - The turret frame number is incremented by 32 * (`AmmoTurretCount`-`Ammo`).
+
+Defaults to 0.
+This control can be use to emulate the C&C SSM unit, using `AmmoTurretCount`=2.
+You are expected to supply the appropriate graphics to match.
 
 </samp>
 </details></td></tr></table>

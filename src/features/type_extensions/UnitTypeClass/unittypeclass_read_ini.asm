@@ -51,6 +51,9 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.Response_Select.Read(esi,edi,_GetUnitResponseSelectFromString)
     UnitTypeClass.Response_Move.Read(esi,edi,_GetUnitResponseMoveFromString)
     UnitTypeClass.Response_Attack.Read(esi,edi,_GetUnitResponseAttackFromString)
+    UnitTypeClass.AmmoImageCount.Read(esi,edi)  
+    UnitTypeClass.AmmoTurretCount.Read(esi,edi)  
+    UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
 
     pop  esi
 .Ret:

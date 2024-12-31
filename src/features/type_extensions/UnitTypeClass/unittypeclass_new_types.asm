@@ -115,12 +115,18 @@ Init_UnitTypeClass:
 
 Init_Heap_OverrideExistingUnitTypes:
     ; explicit set default PrereqType values for compatibility
+    UnitTypeClass.FromIndex(UnitType.APC,edi)
+    UnitTypeClass.Anim_HasAPCDoor.Set(edi,1)
+
+    UnitTypeClass.FromIndex(UnitType.STNK,edi)
+    UnitTypeClass.Anim_HasAPCDoor.Set(edi,1)
 
     UnitTypeClass.FromIndex(UnitType.MCV,edi)
     UnitTypeClass.DeploysInto.Set(edi,BuildingType.FACT)
 
     UnitTypeClass.FromIndex(UnitType.V2RL,edi)
     UnitTypeClass.AmmoReloadRate.Set(edi,30)
+    UnitTypeClass.AmmoImageCount.Set(edi,1)
 
 	retn
 

@@ -58,7 +58,11 @@
 %define UnitTypeClass.Offset.TurretFrameStart              0x28A    ; word
 %define UnitTypeClass.Offset.TurretFrameCount              0x28C    ; word
 %define UnitTypeClass.Offset.DeploysInto                   0x28E    ; byte
-;0x28F
+%define UnitTypeClass.Offset.AmmoImageCount                0x28F    ; byte
+%define UnitTypeClass.Offset.AmmoTurretCount               0x290    ; byte
+%define UnitTypeClass.Offset.Anim_HasAPCDoor               0x291    ; BOOL
+%define UnitTypeClass.Bit.Anim_HasAPCDoor                  2   
+;0x292
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -88,6 +92,9 @@ str.UnitTypeClass.Response_Move                 db"ResponseMove",0              
 str.UnitTypeClass.Response_Attack               db"ResponseAttack",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadRate                db"AmmoReloadRate",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0            ;new ini feature
+str.UnitTypeClass.AmmoImageCount                db"AmmoImageCount",0              ;new ini feature
+str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0             ;new ini feature
+str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 %define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
@@ -201,4 +208,17 @@ str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0          
 %define UnitTypeClass.Response_Attack.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Attack, reg_output
 %define UnitTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Attack_Data, reg_output
 %define UnitTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Attack, str.UnitTypeClass.Response_Attack, function
+
+%define UnitTypeClass.AmmoImageCount.Get(ptr_type,reg_output)              ObjectTypeClass.GetByte                ptr_type, UnitTypeClass.Offset.AmmoImageCount, reg_output
+%define UnitTypeClass.AmmoImageCount.Set(ptr_type,value)                   ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.AmmoImageCount, value
+%define UnitTypeClass.AmmoImageCount.Read(ptr_type,ptr_rules)              ObjectTypeClass.ReadByte               ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoImageCount, str.UnitTypeClass.AmmoImageCount
+
+%define UnitTypeClass.AmmoTurretCount.Get(ptr_type,reg_output)             ObjectTypeClass.GetByte                ptr_type, UnitTypeClass.Offset.AmmoTurretCount, reg_output
+%define UnitTypeClass.AmmoTurretCount.Set(ptr_type,value)                  ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.AmmoTurretCount, value
+%define UnitTypeClass.AmmoTurretCount.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadByte               ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoTurretCount, str.UnitTypeClass.AmmoTurretCount
+
+%define UnitTypeClass.Anim_HasAPCDoor.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, reg_output
+%define UnitTypeClass.Anim_HasAPCDoor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, value
+%define UnitTypeClass.Anim_HasAPCDoor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, str.UnitTypeClass.Anim_HasAPCDoor
+
 

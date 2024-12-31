@@ -240,6 +240,8 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/aircraft_response.asm"
 %include "src/features/infantry_response.asm"
 %include "src/features/unit_vessel_response.asm"
+%include "src/features/units_apc_dehardcode.asm" 
+%include "src/features/units_v2rl_dehardcode.asm" 
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
