@@ -98,7 +98,7 @@ This is analogus to the Prerequisite Groups system implemented in Tiberian Sun a
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► PrerequisiteType
-</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Each building can be assigned one of several Prerequisite types. A total of 32 are supported, as below.
 
@@ -161,7 +161,7 @@ Defaults to the following values, depending on the building in question:
 
 <table><tr><td width="50"><a href="#"><img title="Modified Reference" src="./img/30x15/mod.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Prerequisite
-</samp></td><td width="120"><samp>String Array</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+</samp></td><td width="120"><samp>String Array</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Modified TechnoTypeClass->Prerequisite```
 

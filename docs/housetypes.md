@@ -1,7 +1,8 @@
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>HouseTypes</kbd></kbd><br>
 <h2 align="center">HouseTypes</h2>
 
-HouseTypes represent a player slot. There are originally a total of 20 Houses / HouseTypes, with 8 reserved for skirmish and multiplayer
+HouseTypes represent a player slot. There are originally a total of 20 Houses / HouseTypes, with 8 reserved for skirmish and multiplayer.
+The game actually maintains two forms of 'Houses' - HouseTypeClass and HouseClass. This is because a House can take on the base properties of another HouseType. This feature is prominent in Skirmish and Multiplayer where each Multi house acts like one of the major singleplayer HouseTypes.
 
 -------
 
