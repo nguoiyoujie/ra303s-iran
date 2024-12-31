@@ -81,8 +81,8 @@ _LoadTurretShapeFromString:
     push edx 
     push esi 
     push edi 
-    cmp  eax,0
-    je   .Retn
+    test eax,eax
+    jz   .Retn
     push 0x005E8EDE ; ".SHP"
     mov  ecx,eax
     lea  eax,[Buffer_VesselType]

@@ -330,9 +330,9 @@ str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0    
 %define BuildingTypeClass.CustomFoundationList.Set(ptr_type,value)                  ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.CustomFoundationList, value
 %define BuildingTypeClass.CustomFoundationList.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, BuildingTypeClass.Offset.CustomFoundationList, str.BuildingTypeClass.CustomFoundationList, function
 
-%define BuildingTypeClass.UndeploysInto.Get(ptr_type,reg_output)                 ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, reg_output
-%define BuildingTypeClass.UndeploysInto.Set(ptr_type,value)                      ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, value
-%define BuildingTypeClass.UndeploysInto.Read(ptr_type,ptr_rules, function)       ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.UndeploysInto, str.BuildingTypeClass.UndeploysInto, function
+%define BuildingTypeClass.UndeploysInto.Get(ptr_type,reg_output)                    ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, reg_output
+%define BuildingTypeClass.UndeploysInto.Set(ptr_type,value)                         ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.UndeploysInto, value
+%define BuildingTypeClass.UndeploysInto.Read(ptr_type,ptr_rules, function)          ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.UndeploysInto, str.BuildingTypeClass.UndeploysInto, function
 
 %define BuildingTypeClass.SpreadExplosionDamage.Get(ptr_type,reg_output)                 ObjectTypeClass.GetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionDamage, reg_output
 %define BuildingTypeClass.SpreadExplosionDamage.Set(ptr_type,value)                      ObjectTypeClass.SetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionDamage, value

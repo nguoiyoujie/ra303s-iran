@@ -146,22 +146,22 @@ _RulesClass__AI_Load:
     mov  [Rules.AI.HardAIGemValue],eax
 
     call_INIClass__Get_Bool esi,str_AI,str_BuildRadarWithoutAirThreatCheck,[Rules.AI.BuildRadarWithoutAirThreatCheck]
-    mov  [Rules.AI.BuildRadarWithoutAirThreatCheck],eax
+    mov  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],al
 
     call_INIClass__Get_Bool esi,str_AI,str_SingleplayerAIObeyPrerequisites,[Rules.AI.SingleplayerAIObeyPrerequisites]
-    mov  [Rules.AI.SingleplayerAIObeyPrerequisites],eax
+    mov  byte[Rules.AI.SingleplayerAIObeyPrerequisites],al
 
     call_INIClass__Get_Int esi,str_General,str_AtomRadius,-1
     mov  [Rules.General.AtomRadius],eax
     
     call_INIClass__Get_Bool esi,str_General,str_NoScreenShake, 0
-    mov  [Rules.General.NoScreenShake], al
+    mov  byte[Rules.General.NoScreenShake],al
 
     call_INIClass__Get_Bool esi,str_General,str_NoTeslaZapEffectDelay, 0
-    mov  [Rules.General.NoTeslaZapEffectDelay], al
+    mov  byte[Rules.General.NoTeslaZapEffectDelay],al
 
     call_INIClass__Get_Bool esi,str_General,str_BuildOffAlly, 0
-    mov  [Rules.General.BuildOffAlly], al
+    mov  byte[Rules.General.BuildOffAlly],al
 
 .Ret:
     Restore_Registers

@@ -82,7 +82,7 @@ str.UnitTypeClass.TurretAdjustX                 db"TurretAdjustX",0             
 str.UnitTypeClass.TurretAdjustY                 db"TurretAdjustY",0               ;new ini feature
 str.UnitTypeClass.TurretFrameStart              db"TurretFrameStart",0            ;new ini feature
 str.UnitTypeClass.TurretFrameCount              db"TurretFrameCount",0            ;new ini feature
-str.UnitTypeClass.DeploysInto                   db"DeploysInto",0              ;new ini feature
+str.UnitTypeClass.DeploysInto                   db"DeploysInto",0                 ;new ini feature
 str.UnitTypeClass.Response_Select               db"ResponseSelect",0              ;new ini feature
 str.UnitTypeClass.Response_Move                 db"ResponseMove",0                ;new ini feature
 str.UnitTypeClass.Response_Attack               db"ResponseAttack",0              ;new ini feature

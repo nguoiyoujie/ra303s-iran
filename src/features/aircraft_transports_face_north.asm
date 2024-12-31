@@ -21,7 +21,7 @@ _AircraftClass__PoseDir_HeliTransportsFaceNorth:
     cmp  al,0
     jnz  .IsNotHeliTransport
     TechnoTypeClass.MaxPassengers.Get(ebx,eax)
-    cmp  eax,0
+    test eax,eax
     jz   .IsNotHeliTransport
 
 .IsHeliTransport:

@@ -672,20 +672,14 @@ Iron_Curtain_Attached_Objects:
 
 Create_Building_At_Waypoint:
     mov  eax,[ebp+TActionClass_This]
-
     mov  dword ebx,[eax+9] ; Parameter 3, HouseType to create building for
     mov  dword ecx,[eax+5] ; Parameter 2, waypoint to create at
     mov  dword eax,[eax+1] ; Paramater 1, StructType to create
-
-    call 0x00453A6C     ; BuildingTypeClass & BuildingTypeClass::As_Reference(StructType)
-
+    call BuildingTypeClass__As_Reference
     xor  edx,edx
     lea  ecx,[ecx*2]
     mov  dx,[0x06678F7+ecx] ; Get cell location associated with waypoint
-
-
-    call 0x00453804     ; int const BuildingTypeClass::Create_And_Place(short,HousesType)
-
+    call BuildingTypeClass__Create_And_Place
     retn
 
 MissionToSet dd 0

@@ -111,8 +111,8 @@ _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor2:
 _BuildingClass_Draw_It_WeaponsFactoryDoor:
     movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
-    cmp  eax,0
-    je   0x0045541A
+    test eax,eax
+    jz   0x0045541A
     cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
     jz   .IsWarFactory ; is a war factory
     jmp  0x0045541A

@@ -108,4 +108,6 @@ strlist.PrereqTypes                            dd str.PrereqType.NONE, \
                                                   str.PrereqType.USER.28, \
                                                   str.PrereqType.USER.29, \
                                                   str.PrereqType.MISC, \
-                                                  str.PrereqType.CIVBUILDING,0   
+                                                  str.PrereqType.CIVBUILDING, \ 
+                                                  0
+   

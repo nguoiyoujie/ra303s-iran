@@ -119,6 +119,8 @@
 ; BDATA.CPP
 %define BuildingTypeClass__BuildingTypeClass                      0x00429CEC ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
 %define BuildingTypeClass__new                                    0x00429F0C ; BuildingTypeClass::operator new(uint)
+%define BuildingTypeClass__Create_And_Place                       0x00453804 ; int const BuildingTypeClass::Create_And_Place(short,HousesType)
+%define BuildingTypeClass__As_Reference                           0x00453A6C ; BuildingTypeClass & BuildingTypeClass::As_Reference(StructType type)
 %define BuildingTypeClass__Bib_And_Offset                         0x00453BB4 ; bool BuildingTypeClass::Bib_And_Offset(SmudgeType & bib, CELL & cell) const
 
 

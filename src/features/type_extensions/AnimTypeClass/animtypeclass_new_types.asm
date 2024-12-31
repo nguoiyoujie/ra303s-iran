@@ -118,7 +118,7 @@ Init_DirectionalAnimTypeClass:
 .Next:
     push eax
     mov  eax,dword [Temp.Anim.Direction]
-    cmp  eax,0
+    test eax,eax
     jnz  .Next2
     add  dword [Temp.Anim.DirFrameStart],AnimDirStageFrames * 8
     add  dword [Temp.Anim.DirFrameBiggest],AnimDirStageFrames * 8

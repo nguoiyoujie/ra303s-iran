@@ -59,15 +59,12 @@
 
 _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses:
     push eax
-
     cmp  dword [InCoopMode],0
     jz   .Normal_Code
-
     mov  eax,[eax+0x2D]
     sar  eax,18h
     call HouseClass__As_Pointer
-
-    cmp  eax,0 ; Check for NULL
+    test eax,eax ; Check for NULL
     jz   .Out
 
     test byte [eax+0x43],1 ; test if house is dead or spectator

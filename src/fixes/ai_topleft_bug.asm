@@ -50,7 +50,7 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
     call MapClass__Nearby_Location
     cmp  eax,-1 ; check for 0xFFFFFFFF cell
     jz   .DefaultToObjectCoord
-    cmp  eax,0 ; check for top-left cell
+    test eax,eax ; check for top-left cell
     jz   .DefaultToObjectCoord
     add  esp,4
     jmp  0x004DDA76

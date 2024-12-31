@@ -218,7 +218,7 @@ _SelectExitList:
     jge .Retn
 
 .Check_ExitPyle:
-    cmp  eax,0
+    test eax,eax
     jnz .Check_ExitSub
     mov  eax,d_ExitPyle
     jmp .Retn
@@ -470,8 +470,8 @@ _GetSpecialsFromString:
     push ecx
     push ebx
     xor  edi,edi
-    cmp  eax,0
-    je  .Retn ; just return 0
+    test eax,eax
+    jz  .Retn ; just return 0
     mov  ebx,eax
 
 .Read_Next:
@@ -520,78 +520,28 @@ _SelectSpecialTypeFromString:
     ;select SpecialType by performing string compare on eax
     push edx
     push ebx ; hold eax value for multiple checks
-    cmp  eax,0
-    je  .Retn ; just return 0
+    push edi
+    test eax,eax
+    je   .Retn ; just return 0
     mov  ebx,eax
-
-.Check.SONAR_PULSE:
-    mov  edx,str.SpecialType.SONAR_PULSE
+    xor  edi,edi
+.Repeat:
+    mov  edx,[strlist.SpecialTypes+edi*4]
+    test edx,edx
+    jz   .DefaultNull
     call _strcmpi
     test eax,eax
-    jnz  .Check.NUCLEAR_BOMB
-    mov  al,SpecialType.SONAR_PULSE
-    jmp  .Retn
-
-.Check.NUCLEAR_BOMB:
-    mov  edx,str.SpecialType.NUCLEAR_BOMB
+    jz   .Apply
+    inc  edi
     mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.CHRONOSPHERE
-    mov  al,SpecialType.NUCLEAR_BOMB
+    jmp  .Repeat
+.Apply:
+    mov  eax,edi
     jmp  .Retn
-
-.Check.CHRONOSPHERE:
-    mov  edx,str.SpecialType.CHRONOSPHERE
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.PARA_BOMB
-    mov  al,SpecialType.CHRONOSPHERE
-    jmp  .Retn
-
-.Check.PARA_BOMB:
-    mov  edx,str.SpecialType.PARA_BOMB
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.PARA_INFANTRY
-    mov  al,SpecialType.PARA_BOMB
-    jmp  .Retn
-
-.Check.PARA_INFANTRY:
-    mov  edx,str.SpecialType.PARA_INFANTRY
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.SPY_MISSION
-    mov  al,SpecialType.PARA_INFANTRY
-    jmp  .Retn
-
-.Check.SPY_MISSION:
-    mov  edx,str.SpecialType.SPY_MISSION
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.IRON_CURTAIN
-    mov  al,SpecialType.SPY_MISSION
-    jmp  .Retn
-
-.Check.IRON_CURTAIN:
-    mov  edx,str.SpecialType.IRON_CURTAIN
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .Check.GPS
-    mov  al,SpecialType.IRON_CURTAIN
-    jmp  .Retn
-
-.Check.GPS:
-    mov  edx,str.SpecialType.GPS
-    mov  eax,ebx
-    call _strcmpi
-    jnz  .DefaultNull
-    mov  al,SpecialType.GPS
-    jmp  .Retn
-
 .DefaultNull:
-    xor  eax,eax
-
+    xor  eax,eax  ; SpecialType.NONE
 .Retn:
+    pop edi
     pop ebx
     pop edx
     retn
@@ -604,8 +554,8 @@ _GetOverlayFromString:
     push edx 
     push esi 
     push edi 
-    cmp  eax,0
-    je   .Retn
+    test eax,eax
+    jz   .Retn
     push 0x005E8EDE ; ".SHP"
     mov  ecx,eax
     lea  eax,[Buffer_BuildingType]
@@ -614,7 +564,6 @@ _GetOverlayFromString:
     call 0x005B8BEE    ; _makepath
     lea  eax,[Buffer_BuildingType]
     call MFCD__Retrieve
-
 .Retn:
     pop edi
     pop esi
@@ -632,8 +581,8 @@ _CustomOccupyListFromString:
     push esi 
     push edi 
     ; check for null string
-    cmp  eax,0
-    je   .Retn
+    test eax,eax
+    jz   .Retn
     
     ;; Rules
     ;

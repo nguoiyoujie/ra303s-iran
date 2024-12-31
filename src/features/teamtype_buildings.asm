@@ -20,7 +20,7 @@ _TeamTypeClass__Read_Add_BuildingTypes_Reading:
 	cmp     al, 0FFh
 	jz      .Read_AircraftType
 	movzx   eax, al
-	call    0x00453A6C   ;  BuildingTypeClass & BuildingTypeClass::As_Reference(StructType) proc near
+	call    BuildingTypeClass__As_Reference
 	jmp     0x005606C4
 
 .Read_AircraftType:

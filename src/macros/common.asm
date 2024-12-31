@@ -155,8 +155,8 @@ Loop_Over_RULES_INI_Section_Entries_:
     push ecx
     push ebx
     xor  edi,edi
-    cmp  eax,0
-    je   %%Retn ; just return 0
+    test eax,eax
+    jz   %%Retn ; just return 0
     mov  ebx,eax
 
   %%Read_Next:
