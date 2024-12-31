@@ -353,6 +353,8 @@ str_BuildRadarWithoutAirThreatCheck               db"BuildRadarWithoutAirThreatC
 str_FixAISendingTanksTopLeft                      db"FixAISendingTanksTopLeft",0
 str_ComputerParanoidForceDisabledSkirmish         db"ComputerParanoidForceDisabledSkirmish",0
 str_SingleplayerAIObeyPrerequisites               db"SingleplayerAIObeyPrerequisites",0
+str_UseNewBuildingAI                              db"UseNewBuildingAI",0
+str_ForceSingleTileClearing                       db"ForceSingleTileClearing",0
 
 ; Rules.ini new instance lists
 str_AircraftTypes                                 db"AircraftTypes",0

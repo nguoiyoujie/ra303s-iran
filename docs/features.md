@@ -35,6 +35,7 @@ In the meantime, you may refer to the below for information.
 
 
 <b>Command-line Arguments</b>
+
  - [Command-line Arguments](./cmd_arguments.md)
 
 
@@ -71,7 +72,14 @@ In the meantime, you may refer to the below for information.
 </samp></details>
 
 
+<details><summary>Rules Options</summary><samp>
+
+ - [AI](./ai.md) 
+</samp></details>
+
+
 <b>Modding Extensions</b>
+
  - [TechnoTypes](./technotypes.md)
    - [BuildingTypes](./buildingtypes.md)
    - [InfantryTypes](./infantrytypes.md)
@@ -96,6 +104,7 @@ In the meantime, you may refer to the below for information.
 </samp></details>
 
 <b></b>
+
  - [Trigger Actions](./trigger_actions.md)
  
  

@@ -17,6 +17,7 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
  - [Jamming Buildings](#jamming-buildings) 
  - [Superweapons](#superweapons) 
  - [Unpacking Buildings](#unpacking-buildings) 
+ - [AI AutoBase Controls](#ai-autobase-controls) 
 
 
 -------
@@ -470,6 +471,65 @@ If defined, causes the building to explode like a Barrel, producing secondary ex
 The barrel uses 200 damage / Fire warhead.
 
 Note that the explosion center uses cell coordinates, which means a 2x2 building may generate the explosions around the top-left cell.
+</details></td></tr></table>
+
+
+<a href="#buildingtypes"><kbd>Top</kbd></a><br>
+-------
+### AI AutoBase Controls
+<br>
+
+Each of the AutoBase controls are only effective the new AutoBase AI is enabled.
+Enable it using [AI] ► UseNewBuildingAI. See <a href="./ai.md#base-building">AI Base Building</a> for more information
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► AIBuildType
+</samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Each building can be assigned one of several Prerequisite types. A total of 32 are supported, as below.
+
+ > 0 = NONE\
+ > 1 = POWER\
+ > 2 = REFINERY\
+ > 3 = BARRACKS\
+ > 4 = WARFACTORY\
+ > 5 = TECH\
+ > 6 = DEFENSE\
+ > 7 = ADV.DEFENSE\
+ > 8 = AA.DEFENSE\
+ > 9 = AIRSTRIP\
+ > 10 = HELIPAD\
+ > 11 = GENERIC
+
+NONE effectively excludes the building from being considered by the new autobase AI
+
+Defaults to the following values, depending on the building in question:
+ > POWER: [POWR], [APWR]\
+ > REFINERY: [PROC]\
+ > BARRACKS: [BARR], [TENT]\
+ > WARFACTORY: [WEAP]\
+ > DEFENSE: [PBOX], [HBOX], [GUN], [FTUR]\
+ > ADV.DEFENSE: [TSLA]\
+ > AA.DEFENSE: [AGUN], [SAM]\
+ > TECH: [KENN], [DOME], [FIX], [ATEK], [STEK], [GAP], [IRON], [PDOX], [MSLO]\
+ > AIRSTRIP: [AFLD]\
+ > HELIPAD: [HPAD]\
+ > GENERIC: [SILO]\
+ > NONE: All other buildings
+</details></td></tr></table>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► AIBuildLimit
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Determines the maximum number of building instances that the new AutoBase AI can build, after accounting for all other checks (i.e. Limit / Ratio) 
+Defaults to 10 for [SILO], 0 for all else.
+If the value is 0, the AutoBase AI will treat the value as:
+ - 1 (for `AIBuildType`=TECH)
+ - Unlimited otherwise
+
+To disable the building from being built by the AutoBase AI, use `AIBuildType`=NONE instead
+
 </details></td></tr></table>
 
 

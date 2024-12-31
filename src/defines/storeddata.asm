@@ -80,6 +80,8 @@ Rules.AI.FixAISendingTanksTopLeft db 0
 Rules.AI.FixAIParanoid db 0
 Rules.AI.FixAIAlly db 0
 Rules.AI.SingleplayerAIObeyPrerequisites db 0
+Rules.AI.UseNewBuildingAI db 0
+Rules.AI.ForceSingleTileClearing db 0
 
 ; [StringTableOffset]
 Rules.StringTableOffsets.InfantryTypes  dd -1

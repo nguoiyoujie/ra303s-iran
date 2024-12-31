@@ -43,6 +43,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/defines/prereqtypes.asm"
 %include "src/defines/specialtypes.asm"
 %include "src/defines/tracktypes.asm"
+%include "src/defines/aibuildtypes.asm"
 %include "src/defines/functions.asm"
 %include "src/defines/fixediheapclass_templates.asm"
 
@@ -142,6 +143,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/ai_vessels.asm" ;probably desyncs online with 3.03
 %include "src/features/ai_units.asm" 
 %include "src/features/ai_infantry.asm" 
+%include "src/features/ai_building.asm" 
 
 ;feature: new prerequisite system
 %include "src/features/new_prerequisite_system.asm" 

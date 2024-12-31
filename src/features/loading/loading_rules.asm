@@ -151,6 +151,12 @@ _RulesClass__AI_Load:
     call_INIClass__Get_Bool esi,str_AI,str_SingleplayerAIObeyPrerequisites,[Rules.AI.SingleplayerAIObeyPrerequisites]
     mov  byte[Rules.AI.SingleplayerAIObeyPrerequisites],al
 
+    call_INIClass__Get_Bool esi,str_AI,str_UseNewBuildingAI,[Rules.AI.UseNewBuildingAI]
+    mov  byte[Rules.AI.UseNewBuildingAI],al
+
+    call_INIClass__Get_Bool esi,str_AI,str_ForceSingleTileClearing,[Rules.AI.ForceSingleTileClearing]
+    mov  byte[Rules.AI.ForceSingleTileClearing],al
+
     call_INIClass__Get_Int esi,str_General,str_AtomRadius,-1
     mov  [Rules.General.AtomRadius],eax
     

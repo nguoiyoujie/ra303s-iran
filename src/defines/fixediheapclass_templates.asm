@@ -139,7 +139,7 @@
 %define BuildingTypeClass.Array            0x0065DDA4
 %define BuildingTypeClass.ORIGINAL_COUNT   57h
 %define BuildingTypeClass.ORIGINAL_SIZE    207h
-%define BuildingTypeClass.NEW_SIZE         2C2h
+%define BuildingTypeClass.NEW_SIZE         2C7h
 
 ; AircraftTypeClass                        0x0065DDBC
 %define AircraftTypeClass.Count            0x0065DDC8

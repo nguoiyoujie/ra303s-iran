@@ -104,6 +104,8 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.UndeploysInto.Read(esi,edi,_GetUnitTypeIDFromString)
     BuildingTypeClass.SpreadExplosionDamage.Read(esi,edi)
     BuildingTypeClass.SpreadExplosionWarhead.Read(esi,edi,_GetWarheadTypeIDFromString)
+    BuildingTypeClass.AIBuildLimit.Read(esi,edi)
+    BuildingTypeClass.AIBuildType.Read(esi,edi,_GetAIBuildTypeFromString)
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx
@@ -709,3 +711,35 @@ _GetWarheadTypeIDFromString:
 .Retn:
     pop ebx
     retn
+
+
+_GetAIBuildTypeFromString:
+    ;select AIBuildType by performing string compare on eax
+    push edx
+    push ebx ; hold eax value for multiple checks
+    push edi
+    test eax,eax
+    jz  .Retn ; just return 0
+    mov  ebx,eax
+    xor  edi,edi
+.Repeat:
+    mov  edx,[strlist.AIBuildTypes+edi*4]
+    test edx,edx
+    jz   .DefaultNull
+    call _strcmpi
+    test eax,eax
+    jz   .Apply
+    inc  edi
+    mov  eax,ebx
+    jmp  .Repeat
+.Apply:
+    mov  eax,edi
+    jmp  .Retn
+.DefaultNull:
+    xor  eax,eax  ; PrereqType.NONE
+.Retn:
+    pop edi
+    pop ebx
+    pop edx
+    retn
+

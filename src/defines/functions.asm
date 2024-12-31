@@ -90,6 +90,8 @@
 %define HouseTypeClass__From_Name                                 0x004CD0E4 ; HousesType HouseTypeClass::From_Name(char const * name)
 %define HouseTypeClass__Read_INI                                  0x004CD174 ; bool HouseTypeClass::Read_INI(CCINIClass & ini)
 
+%define FixedIHeapClass__Allocate                                 0x004CD818 
+
 ; HOUSE.CPP
 %define HouseClass__HousesType                                    0x004D2C48 ; HouseClass::operator HousesType(void) const
 %define HouseClass__As_Pointer                                    0x004D2CB0 ; HouseClass * HouseClass::As_Pointer(HousesType house)
@@ -122,7 +124,6 @@
 %define BuildingTypeClass__Create_And_Place                       0x00453804 ; int const BuildingTypeClass::Create_And_Place(short,HousesType)
 %define BuildingTypeClass__As_Reference                           0x00453A6C ; BuildingTypeClass & BuildingTypeClass::As_Reference(StructType type)
 %define BuildingTypeClass__Bib_And_Offset                         0x00453BB4 ; bool BuildingTypeClass::Bib_And_Offset(SmudgeType & bib, CELL & cell) const
-
 
 ; TYPE.H
 %define BulletTypeClass__BulletTypeClass                          0x00426A20 ; BulletTypeClass::BulletTypeClass(char *)
@@ -235,6 +236,7 @@
 %define TechnoClass__Combat_Damage                                0x00560CBC ; int TechnoClass::Combat_Damage(int which) 
 %define TechnoClass__Owner                                        0x00564358 ; HouseType TechnoClass::Owner(void)  
 %define TechnoTypeClass__Read_INI                                 0x00569914 ;
+%define TechnoTypeClass__Legal_Placement                          0x00569E30 ;
 
 ; TRIGGER.CPP
 %define TriggerClass__Spring                                      0x0056CC54 ; bool TriggerClass::Spring(TEventType event, ObjectClass * obj, CELL cell, bool forced)

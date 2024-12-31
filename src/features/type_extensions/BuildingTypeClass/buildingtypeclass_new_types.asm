@@ -107,103 +107,136 @@ Init_OverrideExistingBuildingTypes:
 
     BuildingTypeClass.FromIndex(BuildingType.ATEK,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.TECH)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.IRON,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.WEAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.WARFACTORY)
     BuildingTypeClass.WarFactoryOverlayAnim.Set(edi,-1)
     BuildingTypeClass.WarFactoryOverlayFrames.Set(edi,4)
     BuildingTypeClass.WarFactoryOverlayRate.Set(edi,8)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.WARFACTORY)
 
     BuildingTypeClass.FromIndex(BuildingType.PDOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.PBOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.HBOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.DOME,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.RADAR)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.GAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.GUN,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.AGUN,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AA.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.AA.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.FTUR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.FACT,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.CONYARD)
     BuildingTypeClass.UndeploysInto.Set(edi,UnitType.MCV)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.PROC,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REFINERY)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.REFINERY)
 
     BuildingTypeClass.FromIndex(BuildingType.SILO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ORESILO)
+    BuildingTypeClass.AIBuildLimit.Set(edi,4)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.GENERIC)
 
     BuildingTypeClass.FromIndex(BuildingType.HPAD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.HELIPAD)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.HELIPAD)
 
     BuildingTypeClass.FromIndex(BuildingType.SAM,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AA.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.AA.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.AFLD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AIRSTRIP)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.AIRSTRIP)
 
     BuildingTypeClass.FromIndex(BuildingType.POWR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.POWER)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.POWER)
 
     BuildingTypeClass.FromIndex(BuildingType.APWR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.POWER)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.POWER)
 
     BuildingTypeClass.FromIndex(BuildingType.STEK,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.TECH)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.HOSP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.BARR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.BARRACKS)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.BARRACKS)
 
     BuildingTypeClass.FromIndex(BuildingType.TENT,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.BARRACKS)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.BARRACKS)
 
     BuildingTypeClass.FromIndex(BuildingType.KENN,edi)
-    TechnoTypeClass.PrereqType.Set(edi,PrereqType.BARRACKS)
+    TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.FIX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REPAIR)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.BIO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.MISS,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.SYRD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.SHIPYARD)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.SPEN,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.SHIPYARD)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.MSLO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON2)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
 
     BuildingTypeClass.FromIndex(BuildingType.FCOM,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
 
     BuildingTypeClass.FromIndex(BuildingType.TSLA,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.DEFENSE)
+    BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.ADV.DEFENSE)
 
     BuildingTypeClass.FromIndex(BuildingType.WEAF,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.FAKES)

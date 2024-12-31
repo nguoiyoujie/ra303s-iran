@@ -92,6 +92,9 @@
 %define BuildingTypeClass.Offset.SpreadExplosionDamage     0x2BA    ; INT
 %define BuildingTypeClass.Offset.SpreadExplosionWarhead    0x2BE    ; INT PTR
 ;0x2C2
+%define BuildingTypeClass.Offset.AIBuildLimit              0x2C2    ; INT
+%define BuildingTypeClass.Offset.AIBuildType               0x2C6    ; byte (enum)
+;0x2C7
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -148,6 +151,8 @@ str.BuildingTypeClass.CustomFoundationList      db"CustomFoundationList",0      
 str.BuildingTypeClass.UndeploysInto             db"UndeploysInto",0               ;new ini feature
 str.BuildingTypeClass.SpreadExplosionDamage     db"SpreadExplosionDamage",0       ;new ini feature
 str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0      ;new ini feature
+str.BuildingTypeClass.AIBuildLimit              db"AIBuildLimit",0                ;new ini feature
+str.BuildingTypeClass.AIBuildType               db"AIBuildType",0                 ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
@@ -341,6 +346,14 @@ str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0    
 %define BuildingTypeClass.SpreadExplosionWarhead.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionWarhead, reg_output
 %define BuildingTypeClass.SpreadExplosionWarhead.Set(ptr_type,value)                     ObjectTypeClass.SetInt           ptr_type, BuildingTypeClass.Offset.SpreadExplosionWarhead, value
 %define BuildingTypeClass.SpreadExplosionWarhead.Read(ptr_type,ptr_rules, function)      ObjectTypeClass.ReadStringExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.SpreadExplosionWarhead, str.BuildingTypeClass.SpreadExplosionWarhead, function
+
+%define BuildingTypeClass.AIBuildLimit.Get(ptr_type,reg_output)                     ObjectTypeClass.GetInt                ptr_type, BuildingTypeClass.Offset.AIBuildLimit, reg_output
+%define BuildingTypeClass.AIBuildLimit.Set(ptr_type,value)                          ObjectTypeClass.SetInt                ptr_type, BuildingTypeClass.Offset.AIBuildLimit, value
+%define BuildingTypeClass.AIBuildLimit.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadInt               ptr_type, ptr_rules, BuildingTypeClass.Offset.AIBuildLimit, str.BuildingTypeClass.AIBuildLimit
+
+%define BuildingTypeClass.AIBuildType.Get(ptr_type,reg_output)                      ObjectTypeClass.GetByte               ptr_type, BuildingTypeClass.Offset.AIBuildType, reg_output
+%define BuildingTypeClass.AIBuildType.Set(ptr_type,value)                           ObjectTypeClass.SetByte               ptr_type, BuildingTypeClass.Offset.AIBuildType, value
+%define BuildingTypeClass.AIBuildType.Read(ptr_type,ptr_rules, function)            ObjectTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, BuildingTypeClass.Offset.AIBuildType, str.BuildingTypeClass.AIBuildType, function
 
 
 
