@@ -157,6 +157,9 @@ _RulesClass__AI_Load:
     call_INIClass__Get_Bool esi,str_AI,str_ForceSingleTileClearing,[Rules.AI.ForceSingleTileClearing]
     mov  byte[Rules.AI.ForceSingleTileClearing],al
 
+    call_INIClass__Get_Bool esi,str_AI,str_GuardAreaLoadTransportsInSingleplayer,[Rules.AI.GuardAreaLoadTransportsInSingleplayer]
+    mov  byte[Rules.AI.GuardAreaLoadTransportsInSingleplayer],al
+
     call_INIClass__Get_Int esi,str_General,str_AtomRadius,-1
     mov  [Rules.General.AtomRadius],eax
     
