@@ -23,11 +23,11 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 <br>
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules/Map}</code> ► [AI]  ► EasyAIGoldValue
-<code>{Rules/Map}</code> ► [AI]  ► EasyAIGemValue
-<code>{Rules/Map}</code> ► [AI]  ► NormalAIGoldValue
-<code>{Rules/Map}</code> ► [AI]  ► NormalAIGemValue
-<code>{Rules/Map}</code> ► [AI]  ► HardAIGoldValue
+<code>{Rules/Map}</code> ► [AI]  ► EasyAIGoldValue<br>
+<code>{Rules/Map}</code> ► [AI]  ► EasyAIGemValue<br>
+<code>{Rules/Map}</code> ► [AI]  ► NormalAIGoldValue<br>
+<code>{Rules/Map}</code> ► [AI]  ► NormalAIGemValue<br>
+<code>{Rules/Map}</code> ► [AI]  ► HardAIGoldValue<br>
 <code>{Rules/Map}</code> ► [AI]  ► HardAIGemValue
 </samp></td><td width="120"><samp>Integer<br>Integer<br>Integer<br>Integer<br>Integer<br>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
