@@ -111,6 +111,18 @@ This options re-enables the same behavior in Singleplayer mode. This may break m
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [AI]  ► RepairConstructedBuildingsInSingleplayer
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Singleplayer AI never repairs newly constructed buildings, even if [IQ] ► RepairSell values are met.
+This key enables this behavior. Note that other checks still need to be fulfilled (RepairSell, credits above CreditsReserve) in order for repair to actually occur.
+
+Note that enabling this will override the repair setting on preplaced buildings, unless you use a Map Action to manipulate IQ value to toggle this behavior.
+
+</details></td></tr></table>
+
+
 <a href="#ai-controls"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AI Controls</kbd></kbd><br>
