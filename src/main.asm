@@ -246,6 +246,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/units_apc_dehardcode.asm" 
 %include "src/features/units_v2rl_dehardcode.asm" 
 %include "src/features/ai_load_infantry_to_any_transport.asm" 
+%include "src/features/ai_repair_singleplayer.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

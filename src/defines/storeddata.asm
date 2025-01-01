@@ -83,6 +83,7 @@ Rules.AI.SingleplayerAIObeyPrerequisites db 0
 Rules.AI.UseNewBuildingAI db 0
 Rules.AI.ForceSingleTileClearing db 0
 Rules.AI.GuardAreaLoadTransportsInSingleplayer db 0
+Rules.AI.RepairConstructedBuildingsInSingleplayer db 0
 
 ; [StringTableOffset]
 Rules.StringTableOffsets.InfantryTypes  dd -1

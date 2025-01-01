@@ -37,8 +37,6 @@
 @HOOK 0x00567E58 _TechnoClass__Base_Is_Attacked_Single_Player_Logic3
 @HOOK 0x00567BC6 _TechnoClass__Base_Is_Attacked_Single_Player_Logic2
 @HOOK 0x0056787B _TechnoClass__Base_Is_Attacked_Single_Player_Logic1
-@HOOK 0x0045FF34 _BuildingClass__Repair_AI_Use_Single_Player_Logic2
-@HOOK 0x0045FF34 _BuildingClass__Repair_AI_Use_Single_Player_Logic1
 @HOOK 0x0053E0EC _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2
 @HOOK 0x004AB659 _Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode
 
@@ -360,28 +358,6 @@ _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2:
     jz   0x0053E0FE
 
     jmp  0x0053E0F1
-
-
-_BuildingClass__Repair_AI_Use_Single_Player_Logic1:
-    cmp  dword [InCoopMode],1
-    jz   0x00460176
-
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
-    jz   0x00460176
-
-    jmp  0x0045FF41
-
-
-
-_BuildingClass__Repair_AI_Use_Single_Player_Logic2:
-    cmp  dword [InCoopMode],1
-    jz   .Ret
-
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
-    jnz  0x00460089
-
-.Ret:
-    jmp  0x0046007C
 
 
 
