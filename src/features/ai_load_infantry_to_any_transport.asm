@@ -14,7 +14,7 @@
 @HOOK 0x00581A28 _UnitClass__Mission_Guard_Area_Check_Passengers
 
 _UnitClass__Mission_Guard_Area_Enable_For_Singleplayer:
-    cmp  byte[0x0067F2B4],0
+    cmp  byte[Globals___Session_Type],0
     jz   .CheckRulesAI
     jmp  0x00581A02
 .CheckRulesAI:
