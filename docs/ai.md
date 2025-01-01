@@ -111,7 +111,7 @@ This options re-enables the same behavior in Singleplayer mode. This may break m
 </details></td></tr></table>
 
 
-<a href="#housetypes"><kbd>Top</kbd></a><br>
+<a href="#ai-controls"><kbd>Top</kbd></a><br>
 -------
-<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>HouseTypes</kbd></kbd><br>
+<a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AI Controls</kbd></kbd><br>
 

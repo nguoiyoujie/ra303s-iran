@@ -131,7 +131,7 @@ Determines the turret to be drawn. Defaults to MGUN for the Gunboat, SSAM for th
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretOffset
 </samp></td><td width="120"><samp>Signed Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-```Exposed UnitTypeClass->TurretOffset```
+```Exposed VesselTypeClass->TurretOffset```
 
 Determines the offset of the turret, in pixels, towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret
 </details></td></tr></table>
