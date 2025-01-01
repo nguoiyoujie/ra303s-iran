@@ -11,6 +11,7 @@ InfantryTypes represent infantry and creatures that are occupy a subspace of a c
  - [General Settings](#general-settings) 
  - [Infantry Animations](#infantry-animations)
  - [Custom Voices](#custom-voices) 
+ - [AI AutoBase Controls](#ai-autobase-controls) 
 
 
 -------
@@ -431,6 +432,49 @@ Death with Warhead ► InfDeath=X (`Dog`)
 |`[General]  ► DogDeathReport`     
 |Default Dog whine 
 </samp>
+
+</details></td></tr></table>
+
+
+<a href="#infantrytypes"><kbd>Top</kbd></a><br>
+-------
+### AI AutoBase Controls
+<br>
+
+Auto AI production now take into account new technotypes. Additional controls are provided below.
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► AIBuildWeight
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Determines the weightage given to this infantry when the AI wishes to build a new unit. The higher the number, the more likely AI will build it.
+Defaults to the following values:
+
+ > [E1]: 3 \
+ > [E2] and [E4]: 5 \
+ > [E3]: 2 \
+ > [E6] and [E7]: 1 \
+ > All other infantry: 0 (will not be built)
+
+To disable the unit from being built by the AutoBase AI, use `AIBuildWeight`=0.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► AIBuildLimit
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Determines the maximum number of infantry instances that the new AutoBase AI can build.
+If the value is 0, the AutoBase AI will treat the value as unlimited (no limit).
+Defaults to the following values:
+
+ > [E6] and [E7]: 1 \
+ > All other infantry: 0 (unlimited)
+
+To disable the unit from being built by the AutoBase AI, use `AIBuildWeight`=0 instead.
+
+Note that the AI might surpass the limit if it has multiple factories.
 
 </details></td></tr></table>
 

@@ -55,6 +55,8 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.AmmoTurretCount.Read(esi,edi)  
     UnitTypeClass.IsWaterBound.Read(esi,edi)
     UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
+    UnitTypeClass.AIBuildLimit.Read(esi,edi)
+    UnitTypeClass.AIBuildWeight.Read(esi,edi)
 
     ; update Speed and MZone based on IsWaterBound
     push edx

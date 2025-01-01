@@ -30,6 +30,7 @@ _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes:
     ;mov  edx,[InfantryTypeClass.Count]
     ;dec  edx
     ;mov  [0x006019C4],edx ; used by deconstructor
+    call Init_Heap_OverrideExistingInfantryTypes
 .Ret:
     lea  esp,[ebp-14h]
     pop  edi
@@ -87,6 +88,30 @@ Init_InfantryTypeClass:
     call InfantryTypeClass__InfantryTypeClass
 .Ret:
     retn
+
+
+Init_Heap_OverrideExistingInfantryTypes:
+    InfantryTypeClass.FromIndex(InfantryType.E1,edi)
+    InfantryTypeClass.AIBuildWeight.Set(edi,3)
+
+    InfantryTypeClass.FromIndex(InfantryType.E2,edi)
+    InfantryTypeClass.AIBuildWeight.Set(edi,5)
+
+    InfantryTypeClass.FromIndex(InfantryType.E3,edi)
+    InfantryTypeClass.AIBuildWeight.Set(edi,2)
+
+    InfantryTypeClass.FromIndex(InfantryType.E4,edi)
+    InfantryTypeClass.AIBuildWeight.Set(edi,5)
+
+    InfantryTypeClass.FromIndex(InfantryType.E6,edi)
+    InfantryTypeClass.AIBuildLimit.Set(edi,1)
+    InfantryTypeClass.AIBuildWeight.Set(edi,1)
+
+    InfantryTypeClass.FromIndex(InfantryType.E7,edi)
+    InfantryTypeClass.AIBuildLimit.Set(edi,1)
+    InfantryTypeClass.AIBuildWeight.Set(edi,1)
+
+	retn
 
 
 _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count:

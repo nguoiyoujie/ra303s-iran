@@ -153,7 +153,7 @@
 %define InfantryTypeClass.Array            0x0065DE3C
 %define InfantryTypeClass.ORIGINAL_COUNT   1Ah
 %define InfantryTypeClass.ORIGINAL_SIZE    1A2h
-%define InfantryTypeClass.NEW_SIZE         3A8h
+%define InfantryTypeClass.NEW_SIZE         3B0h
 
 ; BulletTypeClass                          0x0065DE54
 %define BulletTypeClass.Count              0x0065DE60
@@ -174,7 +174,7 @@
 %define UnitTypeClass.Array                0x0065DF20
 %define UnitTypeClass.ORIGINAL_COUNT       16h
 %define UnitTypeClass.ORIGINAL_SIZE        19Eh
-%define UnitTypeClass.NEW_SIZE             292h
+%define UnitTypeClass.NEW_SIZE             29Ah
 
 ; VesselTypeClass                          0x0065DF38
 %define VesselTypeClass.Count              0x0065DF44

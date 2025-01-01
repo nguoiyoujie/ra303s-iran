@@ -14,6 +14,7 @@ UnitTypes represent vehicles, and are in essence play the second most major role
  - [Reload Logic](#reload-logic) 
  - [Custom Voices](#custom-voices) 
  - [Visual Settings](#visual-settings) 
+ - [AI AutoBase Controls](#ai-autobase-controls) 
 
 
 -------
@@ -187,6 +188,18 @@ Determines if this unit acts like the Mobile Gap Generator and produces shroud a
 ### Turret Adjustments
 <br>
 
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► TurretOffset
+</samp></td><td width="120"><samp>Signed Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Exposed UnitTypeClass->TurretOffset```
+
+Determines the offset of the turret, in pixels, towards the front of the unit. Negative values will move the turret backwards, like the Destroyer's turret.
+
+Note that the firing offsets are not yet adjusted.
+</details></td></tr></table>
+
+
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► TurretAdjustX
 </samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -355,6 +368,44 @@ This control can be use to emulate the C&C SSM unit, using `AmmoTurretCount`=2.
 You are expected to supply the appropriate graphics to match.
 
 </samp>
+</details></td></tr></table>
+
+
+<a href="#unittypes"><kbd>Top</kbd></a><br>
+-------
+### AI AutoBase Controls
+<br>
+
+Auto AI production now take into account new technotypes. Additional controls are provided below.
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AIBuildWeight
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Determines the weightage given to this unittype when the AI wishes to build a new unit. The higher the number, the more likely AI will build it.
+Defaults to 20 for units with weapons, 1 for all else.
+
+The Harvester has special logic and will disregard these settings.
+
+To disable the unit from being built by the AutoBase AI, use `AIBuildWeight`=0.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AIBuildLimit
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Determines the maximum number of unittype instances that the new AutoBase AI can build.
+If the value is 0, the AutoBase AI will treat the value as unlimited (no limit).
+Defaults to 0 (unlimited).
+
+The Harvester has special logic and will disregard these settings.
+
+To disable the unit from being built by the AutoBase AI, use `AIBuildWeight`=0 instead.
+
+Note that the AI might surpass the limit if it has multiple factories.
+
 </details></td></tr></table>
 
 

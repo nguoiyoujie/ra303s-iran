@@ -120,6 +120,9 @@
 %define InfantryTypeClass.Offset.DeathReport                       0x384    ; INT
 %define InfantryTypeClass.Offset.DeathReport_Data                  0x388    ; word x16
 ;0x3A8
+%define InfantryTypeClass.Offset.AIBuildLimit                      0x3A8    ; INT
+%define InfantryTypeClass.Offset.AIBuildWeight                     0x3AC    ; INT
+;0x3B0
 
 
 ; INI String controls
@@ -210,7 +213,8 @@ str.InfantryTypeClass.DeathReport3                  db"DeathReport3",0
 str.InfantryTypeClass.DeathReport4                  db"DeathReport4",0         
 str.InfantryTypeClass.DeathReport5                  db"DeathReport5",0         
 str.InfantryTypeClass.DeathReport                   db"DeathReport",0         
-
+str.InfantryTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
+str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0         
 
 %define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
 %define InfantryTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
@@ -564,4 +568,15 @@ str.InfantryTypeClass.DeathReport                   db"DeathReport",0
 %define InfantryTypeClass.DeathReport5.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.DeathReport5, reg_output
 %define InfantryTypeClass.DeathReport5_Data.Get(ptr_type,reg_output)           ObjectTypeClass.GetWord                ptr_type, InfantryTypeClass.Offset.DeathReport5_Data, reg_output
 %define InfantryTypeClass.DeathReport5.Read(ptr_type,ptr_rules,function)       ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, InfantryTypeClass.Offset.DeathReport5, str.InfantryTypeClass.DeathReport5, function
+
+%define InfantryTypeClass.AIBuildLimit.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.AIBuildLimit, reg_output
+%define InfantryTypeClass.AIBuildLimit.Set(ptr_type,value)                     ObjectTypeClass.SetInt                 ptr_type, InfantryTypeClass.Offset.AIBuildLimit, value
+%define InfantryTypeClass.AIBuildLimit.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadInt                ptr_type, ptr_rules, InfantryTypeClass.Offset.AIBuildLimit, str.InfantryTypeClass.AIBuildLimit
+
+%define InfantryTypeClass.AIBuildWeight.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, InfantryTypeClass.Offset.AIBuildWeight, reg_output
+%define InfantryTypeClass.AIBuildWeight.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, InfantryTypeClass.Offset.AIBuildWeight, value
+%define InfantryTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, InfantryTypeClass.Offset.AIBuildWeight, str.InfantryTypeClass.AIBuildWeight
+	
+	
+
 

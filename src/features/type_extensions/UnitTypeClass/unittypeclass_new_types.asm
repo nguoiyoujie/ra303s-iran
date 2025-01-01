@@ -128,6 +128,21 @@ Init_Heap_OverrideExistingUnitTypes:
     UnitTypeClass.AmmoReloadRate.Set(edi,30)
     UnitTypeClass.AmmoImageCount.Set(edi,1)
 
+    ; iterate over all unit types
+    xor  edx,edx
+.Repeat:
+    UnitTypeClass.FromIndex(edx,edi)
+    TechnoTypeClass.PrimaryWeapon.Get(edi,eax)
+    test eax,eax
+    jz   .NoWeapon
+    UnitTypeClass.AIBuildWeight.Set(edi,20)
+    jmp  .Next
+.NoWeapon:
+    UnitTypeClass.AIBuildWeight.Set(edi,1)
+.Next:
+    inc  edx
+    cmp  edx,[UnitTypeClass.Count]
+    jl   .Repeat
 	retn
 
 

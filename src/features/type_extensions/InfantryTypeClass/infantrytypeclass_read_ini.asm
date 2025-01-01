@@ -146,6 +146,8 @@ _InfantryTypeClass__Read_INI_Extended:
     InfantryTypeClass.DeathReport4.Read(esi,edi,_GetDeathReport4FromString)
     InfantryTypeClass.DeathReport5.Read(esi,edi,_GetDeathReport5FromString)
     InfantryTypeClass.DeathReport.Read(esi,edi,_GetDeathReportFromString)
+    InfantryTypeClass.AIBuildLimit.Read(esi,edi)
+    InfantryTypeClass.AIBuildWeight.Read(esi,edi)
 
     pop  edi
     pop  esi

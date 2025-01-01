@@ -65,6 +65,9 @@
 %define UnitTypeClass.Offset.Anim_HasAPCDoor               0x291    ; BOOL
 %define UnitTypeClass.Bit.Anim_HasAPCDoor                  2   
 ;0x292
+%define UnitTypeClass.Offset.AIBuildLimit                  0x292    ; INT
+%define UnitTypeClass.Offset.AIBuildWeight                 0x296    ; INT
+;0x29A
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -98,6 +101,8 @@ str.UnitTypeClass.AmmoImageCount                db"AmmoImageCount",0            
 str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0             ;new ini feature
 str.UnitTypeClass.IsWaterBound                  db"WaterBound",0                  ;new ini feature
 str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
+str.UnitTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
+str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0     
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 %define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
@@ -228,4 +233,12 @@ str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                
 %define UnitTypeClass.Anim_HasAPCDoor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, value
 %define UnitTypeClass.Anim_HasAPCDoor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, str.UnitTypeClass.Anim_HasAPCDoor
 
+%define UnitTypeClass.AIBuildLimit.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AIBuildLimit, reg_output
+%define UnitTypeClass.AIBuildLimit.Set(ptr_type,value)                     ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AIBuildLimit, value
+%define UnitTypeClass.AIBuildLimit.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AIBuildLimit, str.UnitTypeClass.AIBuildLimit
+
+%define UnitTypeClass.AIBuildWeight.Get(ptr_type,reg_output)               ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AIBuildWeight, reg_output
+%define UnitTypeClass.AIBuildWeight.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AIBuildWeight, value
+%define UnitTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AIBuildWeight, str.UnitTypeClass.AIBuildWeight
+	
 
