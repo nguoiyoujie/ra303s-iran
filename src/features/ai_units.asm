@@ -25,8 +25,10 @@
 @HOOK 0x004DBCAE _HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
 
-; hold in reserve - it is known in AI_Vessels and AI_Infantry that the house point (eax) may be corrupted
-UnitAIHouseClassPointer dd 0
+; we should rewrite the income check to accomodate additional refinery types
+; unhardcode Harvester first 
+@SETD 0x004DB83B HouseClass.Offset.NewBQuantity_Refinery ; Refinery
+@SETD 0x004DB841 HouseClass.Offset.NewUQuantity_Harvester ; Harvester
 
 ; Warning stack manipulation!
 @SETD 0x004DB7F6 0x2e8 ; was 0xE8, add 500h to hold counter[UNIT_COUNT] (0xfffffc04) (200h) and bestlist[UNIT_COUNT] (0xfffffa04) (200h)

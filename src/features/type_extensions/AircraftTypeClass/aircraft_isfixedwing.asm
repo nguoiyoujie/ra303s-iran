@@ -4,7 +4,6 @@
 ; Dehardcodes certain YAK/MIG checks to check for IsFixedWing=yes instead. This includes assignments of aircraft to Airfields.
 ; 
 ; This function is enabled by default and is not configurable.
-; 
 ; No compatibility issues is expected as this is intended to allow new units to achieve the same behaviors for YAK/MIG. 
 ;
 ;----------------------------------------------------------------
@@ -15,6 +14,7 @@
 ; // Reinf::_Need_To_Take
 @HOOK 0x004DE09E _HouseClass_Is_No_YakMig_UseFixedWing
 @HOOK 0x004DE15C _HouseClass_Is_Hack_Prevented_UseFixedWing
+@SETD 0x004DE13E HouseClass.Offset.NewBQuantity_Airfield
 
 AircraftFixedWingSelectableCount                    dd    0
 
@@ -42,10 +42,10 @@ _HouseClass_Is_No_YakMig_UseFixedWing:
     test cl,cl
     jz   .NoAddCount
 .AddCount:
-    ; AQuantity[<aircraftTypeID>] = eax + 0x4ee + 4 * <aircraftTypeID>
+    ; NewAQuantity[<aircraftTypeID>] = eax + HouseClass.Offset.NewAQuantity + 4 * <aircraftTypeID>
     mov  edx,edi
     shl  edx,2
-    add  edx,0x4ee
+    add  edx,HouseClass.Offset.NewAQuantity
     add  edx,eax
     mov  ebx,dword [AircraftFixedWingSelectableCount]
     add  ebx,dword [edx]

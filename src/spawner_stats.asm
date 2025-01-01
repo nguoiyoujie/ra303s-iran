@@ -15,16 +15,7 @@
 @HOOK 0x005B74FD _Send_Statistics_Packet_Fix_PLLx_Info
 @HOOK 0x005B756B _Send_Statistics_Packet_Fix_VSLx_Info
 @HOOK 0x00566C09 _TechnoClass__Record_The_Kill_Vessels_Killed_Fix
-@HOOK 0x004DCDD2 _HouseClass__Tracking_Add_New_Vehicle_Tracking
-@HOOK 0x004DCBD1 _HouseClass__Tracking_Remove_New_Vehicle_Tracking
-@HOOK 0x004DCE40 _HouseClass__Tracking_Add_New_Vessels_Tracking
-@HOOK 0x004DCBFB _HouseClass__Tracking_Remove_New_Vessels_Tracking
-@HOOK 0x004DCCF8 _HouseClass__Tracking_Add_New_Planes_Tracking
-@HOOK 0x004DCB79 _HouseClass__Tracking_Remove_New_Planes_Tracking
-@HOOK 0x004DCD5B _HouseClass__Tracking_Add_New_Infantry_Tracking
-@HOOK 0x004DCBA7 _HouseClass__Tracking_Remove_New_Infantry_Tracking
-@HOOK 0x004DCC8F _HouseClass__Tracking_Add_New_Building_Tracking
-@HOOK 0x004DCB58 _HouseClass__Tracking_Remove_New_Building_Tracking
+
 ;@HOOK 0x005B712F _Send_Statistics_Packet_Skip_Clear_Unit_Total
 @HOOK 0x005B6544 _Send_Statistics_Packet_Send_Only_Once
 @HOOK 0x005B7754 _Send_Statistics_Packet_New_Per_Player_Fields
@@ -258,63 +249,6 @@ _Send_Statistics_Packet_Skip_Clear_Unit_Total:
 
     jmp  0x005B716A
 
-_HouseClass__Tracking_Remove_New_Building_Tracking:
-    shr  eax, 18h
-    dec  dword [ebx+eax*4+HouseClass.Offset.NewBQuantity]
-    dec  dword [ebx+eax*4+HouseClass.Offset.BQuantity]
-    jmp  0x004DCB62
-
-_HouseClass__Tracking_Add_New_Building_Tracking:
-    inc  dword [esi+HouseClass.Offset.NewBQuantity]
-    inc  dword [esi+HouseClass.Offset.BQuantity]
-    jmp  0x004DCC95
-
-_HouseClass__Tracking_Remove_New_Infantry_Tracking:
-    shr  eax, 18h
-    dec  dword [ebx+eax*4+HouseClass.Offset.NewIQuantity]
-    cmp  eax, 18h
-    jmp  0x004DCBAD
-
-_HouseClass__Tracking_Add_New_Infantry_Tracking:
-    movzx eax, cl
-    inc  dword [ebx+eax*4+HouseClass.Offset.NewIQuantity]
-    cmp  eax, 18h
-    jmp  0x004DCD61
-
-_HouseClass__Tracking_Remove_New_Planes_Tracking:
-    shr  eax, 18h
-    dec  dword [ebx+eax*4+HouseClass.Offset.NewAQuantity]
-    dec  dword [ebx+eax*4+4EEh]
-    jmp  0x004DCB83
-
-_HouseClass__Tracking_Add_New_Planes_Tracking:
-    inc  dword [esi+HouseClass.Offset.NewAQuantity]
-    inc  dword [esi+4EEh]
-    jmp  0x004DCCFE
-
-_HouseClass__Tracking_Remove_New_Vessels_Tracking:
-    shr  eax, 18h
-    dec  dword [ebx+eax*4+HouseClass.Offset.NewVQuantity]
-    cmp  eax, 5
-    jmp  0x004DCC01
-
-_HouseClass__Tracking_Add_New_Vessels_Tracking:
-    movsx eax, cl
-    inc  dword [ebx+eax*4+HouseClass.Offset.NewVQuantity]
-    cmp  eax, 5
-    jmp  0x004DCE46
-
-_HouseClass__Tracking_Remove_New_Vehicle_Tracking:
-    shr  eax, 18h
-    dec  dword [ebx+eax*4+HouseClass.Offset.NewUQuantity]
-    cmp  eax, 11h
-    jmp  0x004DCBD7
-
-_HouseClass__Tracking_Add_New_Vehicle_Tracking:
-    movzx eax, cl
-    inc  dword [ebx+eax*4+HouseClass.Offset.NewUQuantity]
-    cmp  eax, 11h
-    jmp  0x004DCDD8
 
 ; consider expanding to support 256 items
 _Send_Statistics_Packet_Fix_VSLx_Info:
