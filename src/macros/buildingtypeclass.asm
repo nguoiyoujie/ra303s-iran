@@ -223,6 +223,14 @@ str.BuildingTypeClass.AIBuildType               db"AIBuildType",0               
 %define BuildingTypeClass.ExitList.Set(ptr_type,value)                         ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.ExitList, value
 %define BuildingTypeClass.ExitList.Read(ptr_type,ptr_rules,function)           ObjectTypeClass.ReadIntExt             ptr_type, ptr_rules, BuildingTypeClass.Offset.ExitList, str.BuildingTypeClass.ExitList, function
 
+%define BuildingTypeClass.Power.Get(ptr_type,reg_output)                       ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.Power, reg_output
+%define BuildingTypeClass.Power.Set(ptr_type,value)                            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.Power, value
+%define BuildingTypeClass.Power.Read(ptr_type,ptr_rules)                       ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.Power, str.BuildingTypeClass.Power
+
+%define BuildingTypeClass.Drain.Get(ptr_type,reg_output)                       ObjectTypeClass.GetInt                 ptr_type, BuildingTypeClass.Offset.Drain, reg_output
+%define BuildingTypeClass.Drain.Set(ptr_type,value)                            ObjectTypeClass.SetInt                 ptr_type, BuildingTypeClass.Offset.Drain, value
+%define BuildingTypeClass.Drain.Read(ptr_type,ptr_rules)                       ObjectTypeClass.ReadInt                ptr_type, ptr_rules, BuildingTypeClass.Offset.Drain, str.BuildingTypeClass.Drain
+
 ; byte enum, valid values 0-8, BSIZE_11, BSIZE_21, BSIZE_12, BSIZE_22, BSIZE_23, BSIZE_32, BSIZE_33, BSIZE_42, BSIZE_55
 %define BuildingTypeClass.BSize.Get(ptr_type,reg_output)                       ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.BSize, reg_output
 %define BuildingTypeClass.BSize.Set(ptr_type,value)                            ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.BSize, value
