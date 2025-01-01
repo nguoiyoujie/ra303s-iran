@@ -34,7 +34,7 @@ _UnitTypeClass__Read_INI_Extended:
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     ;UnitTypeClass.Type.Read(esi,edi)
-    ;UnitTypeClass.TurretOffset.Read(esi,edi)
+    UnitTypeClass.TurretOffset.Read(esi,edi)
     ;UnitTypeClass.DefaultMission.Read(esi,edi)
     ;UnitTypeClass.Explosion.Read(esi,edi)
     ;UnitTypeClass.MaxSize.Read(esi,edi)

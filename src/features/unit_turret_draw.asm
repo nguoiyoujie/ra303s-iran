@@ -60,15 +60,36 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     mov  al,byte [eax + 0x196]
     ; eax is the unit id
     push eax
+    push edx
     push esi
     push edi
     movzx eax,al
     mov  edi,ebx
+    mov  edx,esi
     mov  esi,ecx
     xor  ecx,ecx
     UnitTypeClass.FromIndex(eax,ebx)
     xor  eax,eax
+.CheckOffset:
+    xor  ecx,ecx
+    UnitTypeClass.TurretOffset.Get(ebx,cl)
+    test cl,cl
+    jz   .CheckX
+    test cl,0x80 ; negative number check
+    jz   .ForwardOffset
+.BackwardOffset:
+    add  al,0x80
+    neg  cl
+.ForwardOffset:
+    push ebx
+    add  al,byte[edx+0xba]
+    movzx ebx,al ; DirType PrimaryFacing
+    lea  edx,[esi] ; y
+    lea  eax,[edi] ; x
+    call 0x004AC870 ; Normal_Move_Point
+    pop  ebx
 .CheckX:
+    xor  eax,eax
     UnitTypeClass.TurretAdjustX.Get(ebx,ecx)
     push ecx ; X
     test ecx,ecx
@@ -89,6 +110,7 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     mov  ecx,esi
     pop  edi
     pop  esi
+    pop  edx
     pop  eax
 	jmp  0x00578CE7
 .Apply:
@@ -101,6 +123,7 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     add  dword [ebx], edx
     pop  edi
     pop  esi
+    pop  edx
     pop  eax
     jmp  0x00578CF1
 
