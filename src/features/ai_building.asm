@@ -309,7 +309,7 @@ _HouseClass__AI_Building_Choose:
     push eax
     mov  ebx,dword[ecx+HouseClass.Offset.CurBuildings]
     xor  eax,eax
-    mov  ax,word[0x00666710] ; Rule.AirstripRatio (fixed)
+    mov  ax,word[0x00666712] ; Rule.AirstripRatio (fixed)
     imul ebx
     sar  eax,8
     shl  edx,18h
