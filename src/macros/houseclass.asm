@@ -256,50 +256,8 @@
 %define HouseClass.Offset.NewVQuantity           0x2810   ; should be 256 * 4 bytes
 ; 0x2C10
 
-; building in progress
 ; INI String controls
-;str.TechnoTypeClass.IsDoubleOwned             db"DoubleOwned",0                 ;existing feature
-;str.TechnoTypeClass.IsInvisible               db"Invisible",0                   ;existing feature
-;str.TechnoTypeClass.IsLeader                  db"Leader",0                      ;internal feature
-;str.TechnoTypeClass.IsScanner                 db"Sensors",0                     ;existing feature
-;str.TechnoTypeClass.IsNominal                 db"Nominal",0                     ;new ini feature
-;str.TechnoTypeClass.IsTheater                 db"IsTheater",0                   ;new ini feature
-;str.TechnoTypeClass.HasTurret                 db"HasTurret",0                   ;new ini feature
-;str.TechnoTypeClass.IsRepairable              db"Repairable",0                  ;new ini feature
-;str.TechnoTypeClass.IsCrew                    db"Crewed",0                      ;existing feature
-;str.TechnoTypeClass.IsRemappable              db"IsRemappable",0                ;internal feature
-;str.TechnoTypeClass.IsCloakable               db"Cloakable",0                   ;existing feature
-;str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 ;existing feature
-;str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
-;
-;str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0                  ;new feature
-;
-;str.TechnoTypeClass.MZone                     db"MovementZone",0                ;internal feature
-;str.TechnoTypeClass.ThreatRange               db"GuardRange",0                  ;existing feature
-;str.TechnoTypeClass.MaxPassengers             db"Passengers",0                  ;existing feature
-;str.TechnoTypeClass.SightRange                db"Sight",0                       ;existing feature
-;str.TechnoTypeClass.Cost                      db"Cost",0                        ;existing feature
-;str.TechnoTypeClass.Level                     db"TechLevel",0                   ;existing feature
-;str.TechnoTypeClass.Prerequisite              db"Prerequisite",0                ;existing feature
-;str.TechnoTypeClass.Risk                      db"Points",0                      ;existing feature
-;str.TechnoTypeClass.Reward                    db"Points",0                      ;existing feature
-;str.TechnoTypeClass.MaxSpeed                  db"Speed",0                       ;existing feature
-;str.TechnoTypeClass.Speed                     db"Speed",0                       ;existing feature
-;str.TechnoTypeClass.MaxAmmo                   db"Ammo",0                        ;existing feature
-;str.TechnoTypeClass.Ownable                   db"Owner",0                       ;existing feature
-;
-;str.TechnoTypeClass.Facings                   db"Facings",0                     ;new ini feature
-;str.TechnoTypeClass.ROT                       db"ROT",0                         ;existing feature
-;str.TechnoTypeClass.PrimaryWeapon             db"Primary",0                     ;existing feature
-;str.TechnoTypeClass.SecondaryWeapon           db"Secondary",0                   ;existing feature
-;str.TechnoTypeClass.VerticalOffset            db"VerticalOffset",0              ;new ini feature
-;str.TechnoTypeClass.PrimaryOffset             db"PrimaryOffset",0               ;new ini feature
-;str.TechnoTypeClass.PrimaryLateral            db"PrimaryLateral",0              ;new ini feature
-;str.TechnoTypeClass.SecondaryOffset           db"SecondaryOffset",0             ;new ini feature
-;str.TechnoTypeClass.SecondaryLateral          db"SecondaryLateral",0            ;new ini feature
-;str.TechnoTypeClass.Points                    db"Points",0                      ;existing feature
-;
-;str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                     ;existing feature
+
 
 %macro HouseTypeClass.new    2
     mov  eax,HouseTypeClass.NEW_SIZE ; size
