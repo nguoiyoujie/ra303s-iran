@@ -186,14 +186,14 @@ Defaults to true for the Service Depot, false for all other buildings.
 </details></td></tr></table>
 
 
-<i>Work in progress</i>
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsKennel
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
+<i>Work in progress</i>
 Indicates that this building is a kennel.
 
-This is indended to be used for `IsDog` infantry. However, this implementat is a work in progress
+This is indended to be used for `IsDog` infantry. However, this implementation is a work in progress
 
 Defaults to true for the Kennel, false for all other buildings.  
 

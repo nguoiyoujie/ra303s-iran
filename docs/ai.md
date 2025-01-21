@@ -59,8 +59,7 @@ For both Infantry and Unit production, priority is given as follows:
 |Step          |Condition                                                                   |Comments                                                  
 :--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
 |BaseNodes     |If any base node needs to be built                                          |Prerequisite and owner checks are ignored
-|Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
-|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
+|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only buildings fulfilling prerequisite checks are respected
 
 See this <a href="#base-building">section</a> for AI autobase controls.
 
@@ -166,7 +165,7 @@ The default value is 400.
 <code>{Rules/Map}</code> ► [AI]  ► ForceSingleTileClearing
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-If set to true, the AutoBase AI will ensure a 3x3 clearing when placing a 1x1 structure, by checking that the same structure can be placed in all 8 tiles. This effectively reduces clutter by forcing spacing between its small structures, and also biases them towards the edge of the bases due to the larger effective footprint.
+If set to true, the AutoBase AI will ensure a 3x3 clearing when placing a 1x1 structure, by checking that the same structure can be placed in all 8 surrounding tiles. This effectively reduces clutter by forcing spacing between its small structures, and also biases them towards the edge of the bases due to the larger effective footprint.
 
 This option is effective regardless of whether `UseNewBuildingAI` is enabled.
 
