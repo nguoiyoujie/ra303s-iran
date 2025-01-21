@@ -84,6 +84,8 @@ Rules.AI.UseNewBuildingAI db 0
 Rules.AI.ForceSingleTileClearing db 0
 Rules.AI.GuardAreaLoadTransportsInSingleplayer db 0
 Rules.AI.RepairConstructedBuildingsInSingleplayer db 0
+Rules.AI.PowerExcess dd -1
+Rules.AI.PowerEmergencyMinimum dd -1
 
 ; [StringTableOffset]
 Rules.StringTableOffsets.InfantryTypes  dd -1

@@ -58,22 +58,21 @@ This allows several modding improvements to the Skirmish/Multiplayer AI, and Sin
 
 Thw new BaseBuilding base plan is as follows:
 
- - If the number of Refineries (`AIBuildType`=REFINERY) is below [AI] ► `RefineryLimit` and below [AI] ► `RefineryRatio` fraction of total base buildings, consider a random Reinfery.
- - If there is no Refinery, building a new Refinery takes high priority. Otherwise, it takes normal priority.
- - If the base is at low power, consider a random power plant (`AIBuildType`=POWER) at high priority
- - If the base has excess power less than [AI] ► `PowerSurplus`, consider a random power plant (`AIBuildType`=POWER) at normal priority. If there is no Refinery, power plant priority is dropped to low.
- - If the number of Barracks (`AIBuildType`=BARRACKS) is below [AI] ► `BarracksLimit` and below [AI] ► `BarracksRatio` fraction of total base buildings, consider a random Barracks.
- - If there is no Barracks, building a new Barracks takes normal priority. Otherwise, it takes low priority.
- - If the number of War Factory (`AIBuildType`=WARFACTORY) is below [AI] ► `WarLimit` and below [AI] ► `WarRatio` fraction of total base buildings, consider a random War Factory.
- - If there is no War Factory, building a new War Factory takes normal priority. Otherwise, it takes low priority.
- - If the number of defense buildings (`AIBuildType`=DEFENSE) is below [AI] ► `DefenseLimit` and below [AI] ► `DefenseRatio` fraction of total base buildings, consider a random defense at normal priority.
- - If the number of AA defense buildings (`AIBuildType`=AA.DEFENSE) is below [AI] ► `AALimit` and below [AI] ► `AARatio` fraction of total base buildings, consider a random defense at normal priority.
- - If AI has considered an enemy house, and the enemy has more Aircraft than this AI has AA defenses, building a new AA defense takes high priority. Otherwise, it takes normal priority.
- - If the number of advanced defense buildings (`AIBuildType`=ADV.DEFENSE) is below [AI] ► `TeslaLimit` and below [AI] ► `TeslaRatio` fraction of total base buildings, consider a random advanced defense at normal priority.
- - If there is a Tech building available that has not yet being built (`AIBuildType`=TECH), consider building it at normal priority.
- - If the number of helipads (`AIBuildType`=HELIPAD) is below [AI] ► `HelipadLimit` and below [AI] ► `HelipadRatio` fraction of total base buildings, consider a random helipad at normal priority.
- - If the number of airstrip (`AIBuildType`=AIRSTRIP) is below [AI] ► `AirstripLimit` and below [AI] ► `AirstripRatio` fraction of total base buildings, consider a random airstrip at normal priority.
- - Consider building any other applicable building (`AIBuildType`=GENERIC) at normal priority.
+|Step              |Condition                                                                                     |Build                                              |Priority
+:------------------|:---------------------------------------------------------------------------------------------|:--------------------------------------------------|:--------------------------------------------------
+|Refinery          |Number of refineries below [AI] ► `RefineryLimit` and below [AI] ► `RefineryRatio`            |Any Refinery (`AIBuildType`=REFINERY)              |If no refinery, `HIGH`. Otherwise, `NORMAL`
+|Low Power         |Base at low power                                                                             |Any Power (`AIBuildType`=POWER)                    |`HIGH`
+|Power             |Base excess power below [AI] ► `PowerSurplus`                                                 |Any Power (`AIBuildType`=POWER)                    |If no refinery, `LOW`. Otherwise, `NORMAL`
+|Barracks          |Number of barracks below [AI] ► `BarracksLimit` and below [AI] ► `BarracksRatio`              |Any Barracks (`AIBuildType`=BARRACKS)              |If no barracks, `NORMAL`. Otherwise, `LOW`
+|War Factory       |Number of war factories below [AI] ► `WarLimit` and below [AI] ► `WarRatio`                   |Any War Factory (`AIBuildType`=WARFACTORY)         |If no factory, `NORMAL`. Otherwise, `LOW`
+|Base Defenses     |Number of defenses below [AI] ► `DefenseLimit` and below [AI] ► `DefenseRatio`                |Any Defense (`AIBuildType`=DEFENSE)                |`NORMAL`
+|AA Defenses       |Number of AA defenses below [AI] ► `AALimit` and below [AI] ► `AARatio`                       |Any AA Defense (`AIBuildType`=AA.DEFENSE)          |If enemy house aircraft > defenses, `HIGH`. Otherwise, `NORMAL`
+|Adv. Defenses     |Number of adv. defenses below [AI] ► `TeslaRatio` and below [AI] ► `TeslaLimit`               |Any Advanced Defense (`AIBuildType`=ADV.DEFENSE)   |`NORMAL`
+|Tech              |A tech building is available                                                                  |Any Tech (`AIBuildType`=TECH)                      |`NORMAL`
+|Helipads          |Number of barracks below [AI] ► `HelipadLimit` and below [AI] ► `HelipadRatio`                |Any Barracks (`AIBuildType`=HELIPAD)               |`NORMAL`
+|Airstrips         |Number of barracks below [AI] ► `AirstripLimit` and below [AI] ► `AirstripRatio`              |Any Barracks (`AIBuildType`=AIRSTRIP)              |`NORMAL`
+|Generic           |Any remaining buildings                                                                       |Any Generic (`AIBuildType`=GENERIC)                |`NORMAL`
+
  - Amongst all considerations, the first category with the highest priority will be selected for construction.
 
  - Building types with `AIBuildType`=NONE are never considered for base building. Use it to disable such buildings from the roster.
@@ -85,6 +84,31 @@ Note: The AI begins considering a new building right after placing that building
 Note2: The AI will not cancel its building even if prerequisites can no longer be met during the 'building' phase.
 
 </details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [AI]  ► PowerExcess
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+The AI will start selling power plants if the base has net power supply above this value. It is intended to provide the AI with some cash flow to help with the defense. 
+Original Red Alert AI will only sell Power Plant (`POWR`) and Advanced Power Plant (`APWR`). The AI will now consider any building that has net positive power generation and is not a factory. 
+
+The default value is 300.
+
+</details></td></tr></table>
+
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [AI]  ► PowerEmergencyMinimum
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+The AI has a hidden condition within its `PowerEmergency` logic. In addition to the base power below the `PowerEmergency` percentage value, the power deficit must also be more than this value in order to trigger the AI to start selling structures to restore power.
+
+The default value is 400.
+
+</details></td></tr></table>
+
 
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>

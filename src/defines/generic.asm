@@ -357,6 +357,8 @@ str_UseNewBuildingAI                              db"UseNewBuildingAI",0
 str_ForceSingleTileClearing                       db"ForceSingleTileClearing",0
 str_GuardAreaLoadTransportsInSingleplayer         db"GuardAreaLoadTransportsInSingleplayer",0
 str_RepairConstructedBuildingsInSingleplayer      db"RepairConstructedBuildingsInSingleplayer",0
+str_PowerExcess                                   db"PowerExcess",0
+str_PowerEmergencyMinimum                         db"PowerEmergencyMinimum",0
 
 ; Rules.ini new instance lists
 str_AircraftTypes                                 db"AircraftTypes",0

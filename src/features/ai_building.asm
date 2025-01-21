@@ -17,6 +17,9 @@
 ; 
 ;----------------------------------------------------------------
 
+@HOOK 0x004D9D3D _HouseClass__Check_Lower_Power__Override
+@HOOK 0x004D9D90 _HouseClass__Check_Raise_Power__Override
+@HOOK 0x004DA18B _HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building
 @HOOK 0x004DA2EB _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
 @HOOK 0x004DA348 _HouseClass__AI_Building_CheckIncome
 @HOOK 0x004DA391 _HouseClass__AI_Building_Choose
@@ -39,6 +42,60 @@ Temp.AIBuilding.AirThreat        dd 0
 %define UrgencyType.NORMAL                     2
 %define UrgencyType.HIGH                       3
 %define UrgencyType.CRITICAL                   4
+
+
+_HouseClass__Check_Lower_Power__Override:
+    cmp  dword[Rules.AI.PowerExcess],-1
+    jle  .OrginalCode
+.Override:
+    add  edx,dword[Rules.AI.PowerExcess]
+    jmp  0x004D9D43
+.OrginalCode:
+    add  edx,0x12C ; 300
+    jmp  0x004D9D43
+
+
+_HouseClass__Check_Raise_Power__Override:
+    cmp  dword[Rules.AI.PowerEmergencyMinimum],-1
+    jle  .OrginalCode
+.Override:
+    sub  eax,dword[Rules.AI.PowerEmergencyMinimum]
+    jmp  0x004D9D95
+.OrginalCode:
+    sub  eax,0x190 ; 400
+    jmp  0x004D9D95
+
+
+_HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building:
+    push edi
+    xor  edi,edi
+.Repeat:    
+    mov  eax,edi
+    call BuildingTypeClass__As_Reference
+    test eax,eax
+    jz   .Done ; we reached the end of the list
+    mov  dl,byte[eax+BuildingTypeClass.Offset.FactoryType] ; never consider any Factory for selling power plants
+    test dl,dl
+    jnz  .Next
+    mov  edx,dword[eax+BuildingTypeClass.Offset.Power] ; check BuildType
+    cmp  edx,0
+    jle  .Next
+    mov  eax,ecx
+    mov  edx,edi
+    mov  ebx,-1
+    call HouseClass__Find_Building
+    test eax,eax
+    jnz  0x004DA1B3
+.Next:
+    inc  edi
+    mov  eax,[BuildingTypeClass.Count]
+    cmp  edi,eax
+    jb   .Repeat
+.Done:
+    pop  edi
+    jmp  0x004DA1C6
+
+
 
 _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building:
 ; If there is Base and AutoBase, Base takes priority

@@ -163,16 +163,22 @@ _RulesClass__AI_Load:
     call_INIClass__Get_Bool esi,str_AI,str_RepairConstructedBuildingsInSingleplayer,[Rules.AI.RepairConstructedBuildingsInSingleplayer]
     mov  byte[Rules.AI.RepairConstructedBuildingsInSingleplayer],al
 
-    call_INIClass__Get_Int esi,str_General,str_AtomRadius,-1
+    call_INIClass__Get_Int esi,str_AI,str_PowerExcess,[Rules.AI.PowerExcess]
+    mov  [Rules.AI.PowerExcess],eax
+
+    call_INIClass__Get_Int esi,str_AI,str_PowerEmergencyMinimum,[Rules.AI.PowerEmergencyMinimum]
+    mov  [Rules.AI.PowerEmergencyMinimum],eax
+
+    call_INIClass__Get_Int esi,str_General,str_AtomRadius,[Rules.General.AtomRadius]
     mov  [Rules.General.AtomRadius],eax
     
-    call_INIClass__Get_Bool esi,str_General,str_NoScreenShake, 0
+    call_INIClass__Get_Bool esi,str_General,str_NoScreenShake,[Rules.General.NoScreenShake]
     mov  byte[Rules.General.NoScreenShake],al
 
-    call_INIClass__Get_Bool esi,str_General,str_NoTeslaZapEffectDelay, 0
+    call_INIClass__Get_Bool esi,str_General,str_NoTeslaZapEffectDelay,[Rules.General.NoTeslaZapEffectDelay]
     mov  byte[Rules.General.NoTeslaZapEffectDelay],al
 
-    call_INIClass__Get_Bool esi,str_General,str_BuildOffAlly, 0
+    call_INIClass__Get_Bool esi,str_General,str_BuildOffAlly,[Rules.General.BuildOffAlly]
     mov  byte[Rules.General.BuildOffAlly],al
 
 .Ret:
