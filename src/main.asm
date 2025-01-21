@@ -105,6 +105,8 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_heap_size.asm"
 %include "src/features/type_extensions/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/type_extensions/WeaponTypeClass/extended_weapontypeclass_loading.asm"
+%include "src/features/type_extensions/HouseTypeClass/housetypeclass_heap_size.asm"
+%include "src/features/type_extensions/HouseClass/houseclass_heap_size.asm"
 
 %include "src/features/type_extensions/CellClass/mapclass_array_cellclass_heap_size.asm"
 
@@ -115,9 +117,11 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/type_extensions/TechnoTypeClass/technotypeclass_read_ini.asm"
 %include "src/features/type_extensions/UnitTypeClass/unittypeclass_read_ini.asm"
 %include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_read_ini.asm"
+%include "src/features/type_extensions/HouseTypeClass/housetypeclass_read_ini.asm"
+%include "src/features/type_extensions/HouseClass/houseclass_read_ini.asm"
 
-%include "src/features/type_extensions/extended_houseclass.asm"
-%include "src/features/type_extensions/extended_housetypeclass.asm"
+;%include "src/features/type_extensions/extended_houseclass.asm"
+;%include "src/features/type_extensions/extended_housetypeclass.asm"
 %include "src/features/type_extensions/extended_buildingclass.asm"
 %include "src/features/type_extensions/extended_technoclass.asm"
 %include "src/features/type_extensions/extended_footclass.asm"
@@ -134,9 +138,13 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/type_extensions/InfantryTypeClass/infantrytypeclass_new_types.asm"
 %include "src/features/type_extensions/UnitTypeClass/unittypeclass_new_types.asm"
 %include "src/features/type_extensions/VesselTypeClass/vesseltypeclass_new_types.asm"
+%include "src/features/type_extensions/HouseTypeClass/housetypeclass_new_types.asm"
+%include "src/features/type_extensions/HouseClass/houseclass_new_types.asm"
+
 %include "src/features/type_extensions/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
 %include "src/features/type_extensions/WeaponTypeClass/weapontypeclass_unhardcode.asm"
 %include "src/features/type_extensions/SoundEffectName/soundeffectslist_unhardcode.asm"
+
 
 ;feature: AI enhancements to use extended classes
 %include "src/features/ai_obeyprereq.asm" ; added by lovalmidas
