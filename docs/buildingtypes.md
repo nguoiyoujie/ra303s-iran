@@ -9,11 +9,11 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
  - [New Type Extensions](#new-type-extensions) 
  - [TechnoTypes](#technotypes) 
  - [General Settings](#general-settings) 
+ - [Special Buildings](#special-buildings) 
  - [Factory Production](#factory-production)
  - [War Factory Settings](#war-factory-settings)
  - [Building Foundations](#building-foundations)
  - [Building Animations](#building-animations) 
- - [Radar Buildings](#radar-buildings) 
  - [Jamming Buildings](#jamming-buildings) 
  - [Superweapons](#superweapons) 
  - [Unpacking Buildings](#unpacking-buildings) 
@@ -115,6 +115,117 @@ Determines if the building plays its animation throughout its operation. The bui
 Determines the exit coordinates, in leptons, from the top-left corner of the building.
 </details></td></tr></table>
 
+
+<a href="#buildingtypes"><kbd>Top</kbd></a><br>
+-------
+### Special Buildings
+<br>
+
+Some buildings are hardcoded to provide special logic. Some of them are unlocked here
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRefinery
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is a refinery and can be docked by Harvesters. The docking position is strictly the center cell of the building, with non-integer cell values rounded down, dictated by the `BSize` value. For example, the ore refinery center is the 2nd column, 2nd row of the building. Ensure the Harvester can reach this cell, otherwise the docking does not work.
+
+Pips will also be drawn for player-owned, allied, or spied buildings to indicate the overall ore level relative to capacity.
+
+Defaults to true for the Ore Refinery, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsSilo
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is a silo. It will use 5 frames per building state (Normal, Damaged) to indicate its richness in ore visually. Because this has specific usage of frames, combining this with building animations is not supported. 
+
+Pips will also be drawn for player-owned, allied, or spied buildings to indicate the overall ore level relative to capacity.
+
+Defaults to true for the Ore Silo, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsHelipad
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is a helipad and can be docked by non-fixed wing aircrafts. The docking position is strictly the center of the building, dictated by the `BSize` value. For example, the ore refinery center is the 2nd column, 2nd row of the building.
+
+The helipad will use the Active state to animate its loading and unloading of aircraft. See this <a href="#building-animations">section</a><br> for animation controls.
+
+Defaults to true for the Helipad, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsAirfield
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is an airfield and can be docked by fixed wing aircrafts. The docking position is strictly the center of the building, dictated by the `BSize` value. For example, the ore refinery center is the 2nd column, 2nd row of the building.
+
+Defaults to true for the Airfield, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRepairPad
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is a repair pad and can be docked by vehicles and aircraft. The docking position is strictly the center of the building, dictated by the `BSize` value. For example, the ore refinery center is the 2nd column, 2nd row of the building.
+
+The repair pad will use the Active state to animate its loading and unloading of aircraft. See this <a href="#building-animations">section</a><br> for animation controls.
+
+Defaults to true for the Service Depot, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<i>Work in progress</i>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsKennel
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that this building is a kennel.
+
+This is indended to be used for `IsDog` infantry. However, this implementat is a work in progress
+
+Defaults to true for the Kennel, false for all other buildings.  
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRadar
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Allows a building to provide Radar capabilities to the player, given sufficient power. 
+If combined with `IsJammable=true`, will also generate the static jam effect when a jammer unit is close to it.
+
+This logic can be combined with other features (e.g. IsRefinery) without conflicting logic.
+
+Defaults to true for the Radar Dome, false for all other buildings. 
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► FreeUnit
+</samp></td><td width="120"><samp>String: UnitType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+When the building is built, a free unit will be spawned at its center.
+When the building is sold, the cost of the free unit will be removed from the solyent value refunded to you.
+
+Note: The Mammoth Tank (`4TNK`) has ID 0, and will be treated as NONE.
+
+Defaults to the Ore Truck (`HARV`) for the Ore Refinery, NONE for all other buildings.  
+
+</details></td></tr></table>
 
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
@@ -370,19 +481,6 @@ The stages are as follows:
 |`Full`          |Used only by the C&C Refinery when docked with a Harvester. Has no use in Red Alert.
 |`Aux1` / `Aux2` |Alternative sequences, used only by the Missile Silo.<br>The Missile Silo uses <li>`Active` for its door opening animation, </li><li>`Aux1` for the launch, and </li><li>`Aux2` for the closing of the door.</li>
 </samp>
-</details></td></tr></table>
-
-
-<a href="#buildingtypes"><kbd>Top</kbd></a><br>
--------
-### Radar Buildings
-<br>
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► IsRadar
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-
-Allows a building to provide Radar capabilities to the player, given sufficient power. If combined with `IsJammable=true`, will also generate the static jam effect when a jammer unit is close to it.
 </details></td></tr></table>
 
 

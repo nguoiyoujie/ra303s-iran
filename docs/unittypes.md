@@ -102,12 +102,13 @@ Determines if this unit can crush infantry that does not have `Crushable` set. B
 
 
 <table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
-<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsToHarvest
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► IsHarvester
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 ```Exposed UnitTypeClass->IsToHarvest```
 
-Determines if this unit performs harvesting operations when over an ore patch. *The harvester behavior overrides have not yet been fully dehardcoded, so this switch does not have much use.*
+Determines if this unit performs harvesting operations when over an ore patch.
+The harvester will interact with any building with `IsRefinery`=true for undocking operations. It faces west when unloading the ore.
 </details></td></tr></table>
 
 
@@ -182,6 +183,7 @@ Determines if this unit acts like the Radar Jammer and can jam nearby radar dome
 
 Determines if this unit acts like the Mobile Gap Generator and produces shroud around its vicinity.
 </details></td></tr></table>
+
 
 <a href="#unittypes"><kbd>Top</kbd></a><br>
 -------

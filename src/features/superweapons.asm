@@ -337,7 +337,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     mov  ebx,0xffffffff
     mov  edx,esi
     mov  eax,dword [ebp-0x28]
-    call 0x004D8F34 ; HouseClass::Find_Building
+    call HouseClass__Find_Building
     mov  ebx,eax
     test eax,eax
     jnz  0x004D6BA1 ;.Found

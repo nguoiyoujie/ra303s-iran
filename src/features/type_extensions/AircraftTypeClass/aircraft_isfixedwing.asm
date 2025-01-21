@@ -13,50 +13,82 @@
 ; // HouseClass::Is_Hack_Prevented
 ; // Reinf::_Need_To_Take
 @HOOK 0x004DE09E _HouseClass_Is_No_YakMig_UseFixedWing
+@HOOK 0x004DE103 _HouseClass_Is_No_YakMig_UseFixedWing2
+@HOOK 0x004DE13C _HouseClass_Is_No_YakMig_CountAirfield
 @HOOK 0x004DE15C _HouseClass_Is_Hack_Prevented_UseFixedWing
-@SETD 0x004DE13E HouseClass.Offset.NewBQuantity_Airfield
+;@SETD 0x004DE13E HouseClass.Offset.NewBQuantity_Airfield
 
-AircraftFixedWingSelectableCount                    dd    0
+;Temp.FixedWingAircraftCount                    dd    0
 
 _HouseClass_Is_No_YakMig_UseFixedWing:
-    xor  edi,edi ;begin from ID 0
-    xor  ebx,ebx 
-	xor  ecx,ecx
-    mov  dword [AircraftFixedWingSelectableCount],0 ;initial count 0
-
-.Check:
-    cmp  edi,[AircraftTypeClass.Count]
-    jge  .Done
-.Loop:
-    push eax
     push edi
-    AircraftTypeClass.FromIndex(edi,ebx)
-    AircraftTypeClass.IsFixedWing.Get(ebx,cl) ; check if aircraft is fixed wing
-    pop  edi
-    pop  eax
-    test cl,cl
-    jz   .NoAddCount
     push eax
-    ObjectTypeClass.IsSelectable.Get(ebx,cl) ; exclude unselectable aircrafts such as the spy plane and badger bomber,as those do not return to the airfield
-    pop  eax
-    test cl,cl
-    jz   .NoAddCount
-.AddCount:
-    ; NewAQuantity[<aircraftTypeID>] = eax + HouseClass.Offset.NewAQuantity + 4 * <aircraftTypeID>
-    mov  edx,edi
-    shl  edx,2
-    add  edx,HouseClass.Offset.NewAQuantity
-    add  edx,eax
-    mov  ebx,dword [AircraftFixedWingSelectableCount]
-    add  ebx,dword [edx]
-    mov  dword [AircraftFixedWingSelectableCount],ebx
-.NoAddCount:
+    xor  edi,edi ;begin from ID 0
+    xor  edx,edx 
+	xor  ecx,ecx
+    ;mov  dword [Temp.FixedWingAircraftCount],0 ;initial count 0
+.Repeat:
+    mov  eax,edi
+    AircraftTypeClass.FromIndex(eax,edx)
+    AircraftTypeClass.IsFixedWing.Get(edx,al) ; check if aircraft is fixed wing
+    test al,al
+    jz   .Next
+    ObjectTypeClass.IsSelectable.Get(edx,al) ; exclude unselectable aircrafts such as the spy plane and badger bomber,as those do not return to the airfield
+    test al,al
+    jz   .Next
+.Found:
+    pop  eax ; HouseClass
+    push eax
+    add  ecx,dword[eax+edi*4+HouseClass.Offset.NewAQuantity] ;[edx]
+.Next:
     inc  edi
-	jmp  .Check
+    mov  eax,[AircraftTypeClass.Count]
+    cmp  edi,eax
+    jb   .Repeat
 .Done:
-    mov  ecx,dword [AircraftFixedWingSelectableCount]
-    mov  ebx,eax
+    pop  eax
+    pop  edi
     jmp  0x004DE0AC
+
+
+_HouseClass_Is_No_YakMig_UseFixedWing2:
+    movzx eax,al
+    push edi
+    AircraftTypeClass.FromIndex(eax,edi)
+    AircraftTypeClass.IsFixedWing.Get(edi,al)
+    test al,al
+    pop  edi
+.FixedWing:
+    jnz  0x004DE13B
+.NotFixedWing:
+    jmp  0x004DE13C
+
+
+_HouseClass_Is_No_YakMig_CountAirfield:
+; edx is not used. ebx is HouseClass
+    push edi
+    push esi
+    push eax
+    xor  edi,edi
+    xor  esi,esi
+.Repeat:
+    mov  eax,edi
+    BuildingTypeClass.FromIndex(eax,edx)
+    BuildingTypeClass.IsAirfield.Get(edx,al)
+    test al,al
+    jz   .Next
+    add  esi,dword[ebx+4*edi+HouseClass.Offset.NewBQuantity]
+.Next:
+    inc  edi
+    mov  eax,[BuildingTypeClass.Count]
+    cmp  edi,eax
+    jb   .Repeat
+.Done:
+    cmp  ecx,esi
+    pop  eax
+    pop  esi
+    pop  edi
+    jmp  0x004DE142
 
 
 _HouseClass_Is_Hack_Prevented_UseFixedWing:

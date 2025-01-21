@@ -18,14 +18,15 @@
 ;----------------------------------------------------------------
 
 @HOOK 0x004DA2EB _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
+@HOOK 0x004DA348 _HouseClass__AI_Building_CheckIncome
 @HOOK 0x004DA391 _HouseClass__AI_Building_Choose
 @HOOK 0x004DE86C _HouseClass__Find_Cell_In_Zone_Detect_SingleCell
 @HOOK 0x004DE966 _HouseClass__Find_Cell_In_Zone_Force_Clearance
 
 ; we should rewrite the income check to accomodate additional refinery types
 ; unhardcode Harvester first 
-@SETD 0x004DA34A HouseClass.Offset.NewBQuantity_Refinery ; Refinery
-@SETD 0x004DA35C HouseClass.Offset.NewUQuantity_Harvester ; Harvester
+;@SETD 0x004DA34A HouseClass.Offset.NewBQuantity_Refinery ; Refinery
+;@SETD 0x004DA35C HouseClass.Offset.NewUQuantity_Harvester ; Harvester
 
 Temp.AIBuilding.Array            times 256 db 0 ; we will not have more than 256 BuildingTypes
 Temp.AIBuilding.Count            db 0
@@ -43,6 +44,57 @@ _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building:
 ; If there is Base and AutoBase, Base takes priority
     mov  byte[ecx+HouseClass.Offset.BuildStructure],al
     jmp  0x04DB7D9 ; skip AutoBuilding
+
+
+_HouseClass__AI_Building_CheckIncome:
+    ; ECX = HouseClass
+    ; set EDI to 1 if there is income, 0 otherwise
+    mov  esi,eax
+    test byte[ecx+0x43],0x80
+    jnz  0x004DA36A
+    push esi
+    push edx
+    push eax
+    xor  esi,esi
+    xor  edi,edi
+.CheckRefn.Repeat:
+    mov  eax,esi
+    BuildingTypeClass.FromIndex(eax,edx)
+    BuildingTypeClass.IsRefinery.Get(edx,al)
+    test al,al
+    jz   .CheckRefn.Next
+    cmp  dword[ecx+4*esi+HouseClass.Offset.NewBQuantity],0
+    jle  .CheckRefn.Next
+.CheckRefn.Found:
+    xor  esi,esi
+    jmp  .CheckHarv.Repeat
+.CheckRefn.Next:
+    inc  esi
+    mov  eax,[BuildingTypeClass.Count]
+    cmp  esi,eax
+    jb   .CheckRefn.Repeat
+    jmp  .Done
+.CheckHarv.Repeat:
+    mov  eax,esi
+    UnitTypeClass.FromIndex(eax,edx)
+    UnitTypeClass.IsToHarvest.Get(edx,al)
+    test al,al
+    jz   .CheckHarv.Next
+    cmp  dword[ecx+4*esi+HouseClass.Offset.NewUQuantity],0
+    jle  .CheckHarv.Next
+.CheckHarv.Found:
+    mov  edi,1
+    jmp  .Done
+.CheckHarv.Next:
+    inc  esi
+    mov  eax,[UnitTypeClass.Count]
+    cmp  esi,eax
+    jb   .CheckHarv.Repeat
+.Done:
+    pop  eax
+    pop  edx
+    pop  esi
+    jmp  0x004DA36C
 
 
 _HouseClass__AI_Building_Choose:

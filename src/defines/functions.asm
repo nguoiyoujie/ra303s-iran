@@ -101,6 +101,7 @@
 %define HouseClass__Is_Ally                                       0x004D5FC8 ; bool HouseClass::Is_Ally(HousesType house)
 %define HouseClass__Make_Ally                                     0x004D6060 ; void HouseClass::Make_Ally(HousesType house)
 %define HouseClass__MPlayer_Defeated                              0x004D8270 ; void HouseClass::MPlayer_Defeated(void)
+%define HouseClass__Find_Building                                 0x004D8F34 ; BuildingClass * HouseClass::Find_Building(StructType type, ZoneType zone) const
 %define HouseClass__Flag_To_Die                                   0x004D8B40 ; bool HouseClass::Flag_To_Die(void)
 %define HouseClass__Where_To_Go                                   0x004DD9FC ; CELL HouseClass::Where_To_Go(FootClass const * object)
 %define HouseClass__Fetch_Factory                                 0x004DDBD0 ; FactoryClass * HouseClass::Fetch_Factory(RTTIType rtti) const
@@ -108,6 +109,8 @@
 %define HouseClass__Write_INI                                     0x004DDEB0 ; void HouseClass::Write_INI(CCINIClass & ini)
 %define HouseClass__Is_No_YakMig                                  0x004DE094 ; bool HouseClass::Is_No_YakMig(void) const
 %define HouseClass__Computer_Paranoid                             0x004DE640 ; void HouseClass::Computer_Paranoid(void)
+
+
 
 ; ADATA.CPP
 %define AnimTypeClass__AnimTypeClass                              0x00407388 ; AnimTypeClass::AnimTypeClass(AnimType,char                *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)

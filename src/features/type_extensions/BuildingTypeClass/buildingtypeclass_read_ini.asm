@@ -69,6 +69,13 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.IsRegulated.Read(esi,edi)
     BuildingTypeClass.IsJammable.Read(esi,edi)
     BuildingTypeClass.IsRadar.Read(esi,edi)
+    BuildingTypeClass.IsRefinery.Read(esi,edi)
+    BuildingTypeClass.IsSilo.Read(esi,edi)
+    BuildingTypeClass.IsHelipad.Read(esi,edi)
+    BuildingTypeClass.IsAirfield.Read(esi,edi)
+    BuildingTypeClass.IsRepairPad.Read(esi,edi)
+    BuildingTypeClass.IsKennel.Read(esi,edi)
+
     BuildingTypeClass.FactoryType.Read(esi,edi,_SelectFactoryType)
     BuildingTypeClass.ExitCoordX.Read(esi,edi)
     BuildingTypeClass.ExitCoordY.Read(esi,edi)
@@ -106,6 +113,7 @@ _BuildingTypeClass__Read_INI_Extended:
     BuildingTypeClass.SpreadExplosionWarhead.Read(esi,edi,_GetWarheadTypeIDFromString)
     BuildingTypeClass.AIBuildLimit.Read(esi,edi)
     BuildingTypeClass.AIBuildType.Read(esi,edi,_GetAIBuildTypeFromString)
+    BuildingTypeClass.FreeUnit.Read(esi,edi,_GetUnitTypeIDFromString)
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

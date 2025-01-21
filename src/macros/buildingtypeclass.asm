@@ -40,7 +40,19 @@
 %define BuildingTypeClass.Bit.IsJammable                   2
 %define BuildingTypeClass.Offset.IsRadar                   0x193    ; BOOL // 
 %define BuildingTypeClass.Bit.IsRadar                      3
-%define BuildingTypeClass.Offset.SpecialWeapons            0x194    ; word, SpecialType flags, up to 16 values
+%define BuildingTypeClass.Offset.IsRefinery                0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsRefinery                   4
+%define BuildingTypeClass.Offset.IsSilo                    0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsSilo                       5
+%define BuildingTypeClass.Offset.IsKennel                  0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsKennel                     6
+%define BuildingTypeClass.Offset.IsAirfield                0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsAirfield                   7
+%define BuildingTypeClass.Offset.IsHelipad                 0x193    ; BOOL // 
+%define BuildingTypeClass.Bit.IsHelipad                    8
+%define BuildingTypeClass.Offset.IsRepairPad               0x194    ; BOOL // 
+%define BuildingTypeClass.Bit.IsRepairPad                  1
+
 
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; byte, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
@@ -95,6 +107,9 @@
 %define BuildingTypeClass.Offset.AIBuildLimit              0x2C2    ; INT
 %define BuildingTypeClass.Offset.AIBuildType               0x2C6    ; byte (enum)
 ;0x2C7
+%define BuildingTypeClass.Offset.SpecialWeapons            0x2C7    ; word, SpecialType flags, up to 16 values
+%define BuildingTypeClass.Offset.FreeUnit                  0x2C9    ; byte
+;0x2CA
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -108,9 +123,15 @@ str.BuildingTypeClass.IsPowered                 db"Powered",0                   
 str.BuildingTypeClass.IsUnsellable              db"Unsellable",0                  ;existing feature
 str.BuildingTypeClass.IsJammable                db"IsJammable",0                  ;new feature
 str.BuildingTypeClass.IsRadar                   db"IsRadar",0                     ;new feature
+str.BuildingTypeClass.IsRefinery                db"IsRefinery",0                  ;new feature
+str.BuildingTypeClass.IsSilo                    db"IsSilo",0                      ;new feature
+str.BuildingTypeClass.IsKennel                  db"IsKennel",0                    ;new feature
+str.BuildingTypeClass.IsAirfield                db"IsAirfield",0                  ;new feature
+str.BuildingTypeClass.IsHelipad                 db"IsHelipad",0                   ;new feature
+str.BuildingTypeClass.IsRepairPad               db"IsRepairPad",0                 ;new feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
-str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0                ;new ini feature
+str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0              ;new ini feature
 str.BuildingTypeClass.FactoryType               db"FactoryType",0                 ;new ini feature
 str.BuildingTypeClass.ExitCoordX                db"ExitCoordX",0                  ;new ini feature
 str.BuildingTypeClass.ExitCoordY                db"ExitCoordY",0                  ;new ini feature
@@ -153,6 +174,7 @@ str.BuildingTypeClass.SpreadExplosionDamage     db"SpreadExplosionDamage",0     
 str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0      ;new ini feature
 str.BuildingTypeClass.AIBuildLimit              db"AIBuildLimit",0                ;new ini feature
 str.BuildingTypeClass.AIBuildType               db"AIBuildType",0                 ;new ini feature
+str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                    ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
@@ -199,6 +221,30 @@ str.BuildingTypeClass.AIBuildType               db"AIBuildType",0               
 %define BuildingTypeClass.IsRadar.Get(ptr_type,reg_output)                     ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, reg_output
 %define BuildingTypeClass.IsRadar.Set(ptr_type,value)                          ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, value
 %define BuildingTypeClass.IsRadar.Read(ptr_type,ptr_rules)                     ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRadar, BuildingTypeClass.Bit.IsRadar, str.BuildingTypeClass.IsRadar
+
+%define BuildingTypeClass.IsRefinery.Get(ptr_type,reg_output)                  ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRefinery, BuildingTypeClass.Bit.IsRefinery, reg_output
+%define BuildingTypeClass.IsRefinery.Set(ptr_type,value)                       ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRefinery, BuildingTypeClass.Bit.IsRefinery, value
+%define BuildingTypeClass.IsRefinery.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRefinery, BuildingTypeClass.Bit.IsRefinery, str.BuildingTypeClass.IsRefinery
+
+%define BuildingTypeClass.IsSilo.Get(ptr_type,reg_output)                      ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsSilo, BuildingTypeClass.Bit.IsSilo, reg_output
+%define BuildingTypeClass.IsSilo.Set(ptr_type,value)                           ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsSilo, BuildingTypeClass.Bit.IsSilo, value
+%define BuildingTypeClass.IsSilo.Read(ptr_type,ptr_rules)                      ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsSilo, BuildingTypeClass.Bit.IsSilo, str.BuildingTypeClass.IsSilo
+
+%define BuildingTypeClass.IsKennel.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsKennel, BuildingTypeClass.Bit.IsKennel, reg_output
+%define BuildingTypeClass.IsKennel.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsKennel, BuildingTypeClass.Bit.IsKennel, value
+%define BuildingTypeClass.IsKennel.Read(ptr_type,ptr_rules)                    ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsKennel, BuildingTypeClass.Bit.IsKennel, str.BuildingTypeClass.IsKennel
+
+%define BuildingTypeClass.IsAirfield.Get(ptr_type,reg_output)                  ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsAirfield, BuildingTypeClass.Bit.IsAirfield, reg_output
+%define BuildingTypeClass.IsAirfield.Set(ptr_type,value)                       ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsAirfield, BuildingTypeClass.Bit.IsAirfield, value
+%define BuildingTypeClass.IsAirfield.Read(ptr_type,ptr_rules)                  ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsAirfield, BuildingTypeClass.Bit.IsAirfield, str.BuildingTypeClass.IsAirfield
+
+%define BuildingTypeClass.IsHelipad.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsHelipad, BuildingTypeClass.Bit.IsHelipad, reg_output
+%define BuildingTypeClass.IsHelipad.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsHelipad, BuildingTypeClass.Bit.IsHelipad, value
+%define BuildingTypeClass.IsHelipad.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsHelipad, BuildingTypeClass.Bit.IsHelipad, str.BuildingTypeClass.IsHelipad
+
+%define BuildingTypeClass.IsRepairPad.Get(ptr_type,reg_output)                 ObjectTypeClass.GetBool                ptr_type, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, reg_output
+%define BuildingTypeClass.IsRepairPad.Set(ptr_type,value)                      ObjectTypeClass.SetBool                ptr_type, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, value
+%define BuildingTypeClass.IsRepairPad.Read(ptr_type,ptr_rules)                 ObjectTypeClass.ReadBool               ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, str.BuildingTypeClass.IsRepairPad
 
 %define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              ObjectTypeClass.GetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
 %define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   ObjectTypeClass.SetWord                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
@@ -363,6 +409,9 @@ str.BuildingTypeClass.AIBuildType               db"AIBuildType",0               
 %define BuildingTypeClass.AIBuildType.Set(ptr_type,value)                           ObjectTypeClass.SetByte               ptr_type, BuildingTypeClass.Offset.AIBuildType, value
 %define BuildingTypeClass.AIBuildType.Read(ptr_type,ptr_rules, function)            ObjectTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, BuildingTypeClass.Offset.AIBuildType, str.BuildingTypeClass.AIBuildType, function
 
+%define BuildingTypeClass.FreeUnit.Get(ptr_type,reg_output)                         ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.FreeUnit, reg_output
+%define BuildingTypeClass.FreeUnit.Set(ptr_type,value)                              ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.FreeUnit, value
+%define BuildingTypeClass.FreeUnit.Read(ptr_type,ptr_rules,function)                ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.FreeUnit, str.BuildingTypeClass.FreeUnit, function
 
 
 

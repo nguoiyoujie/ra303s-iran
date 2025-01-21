@@ -160,15 +160,19 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.PROC,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REFINERY)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.REFINERY)
+    BuildingTypeClass.IsRefinery.Set(edi,1)
+    BuildingTypeClass.FreeUnit.Set(edi,UnitType.HARV)
 
     BuildingTypeClass.FromIndex(BuildingType.SILO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ORESILO)
     BuildingTypeClass.AIBuildLimit.Set(edi,4)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.GENERIC)
+    BuildingTypeClass.IsSilo.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.HPAD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.HELIPAD)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.HELIPAD)
+    BuildingTypeClass.IsHelipad.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.SAM,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AA.DEFENSE)
@@ -177,6 +181,7 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.AFLD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AIRSTRIP)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.AIRSTRIP)
+    BuildingTypeClass.IsAirfield.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.POWR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.POWER)
@@ -205,10 +210,12 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.KENN,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.IsKennel.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.FIX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REPAIR)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.IsRepairPad.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.BIO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)

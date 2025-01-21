@@ -12,7 +12,7 @@
 
 @HOOK 0x0057A7A3 _UnitClass__Receive_Message_Door_Open_And_Close
 @HOOK 0x0057A863 _UnitClass__Receive_Message_PromptPassenger
-@HOOK 0x0057D3C2 _UnitClass__Mission_Unload_CheckAPCDoor
+;@HOOK 0x0057D3C2 _UnitClass__Mission_Unload_CheckAPCDoor ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 @HOOK 0x0057CC5F _UnitClass__Draw_It_Offset_Turrets
 
 _UnitClass__Receive_Message_Door_Open_And_Close:
@@ -47,22 +47,23 @@ _UnitClass__Receive_Message_PromptPassenger:
     jmp  0x0057A8B1 ; bail
 
 
-_UnitClass__Mission_Unload_CheckAPCDoor:
-    mov  al,byte[eax+0x196]
-    push eax
-    push ebx
-    push edx
-    push edi
-    movzx eax,al
-    UnitTypeClass.FromIndex(eax,edi)
-    UnitTypeClass.Anim_HasAPCDoor.Get(edi,dl) 
-    cmp  dl,1
-    pop  edi
-    pop  edx
-    pop  ebx
-    pop  eax
-    je   0x0057D96C ; enter
-    jmp  0x0057D3C8 ; bail
+; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
+;_UnitClass__Mission_Unload_CheckAPCDoor:
+;    mov  al,byte[eax+0x196]
+;    push eax
+;    push ebx
+;    push edx
+;    push edi
+;    movzx eax,al
+;    UnitTypeClass.FromIndex(eax,edi)
+;    UnitTypeClass.Anim_HasAPCDoor.Get(edi,dl) 
+;    cmp  dl,1
+;    pop  edi
+;    pop  edx
+;    pop  ebx
+;    pop  eax
+;    je   0x0057D96C ; enter
+;    jmp  0x0057D3C8 ; bail
 
 
 _UnitClass__Draw_It_Offset_Turrets:

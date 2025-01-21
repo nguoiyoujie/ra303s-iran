@@ -22,7 +22,7 @@
 
 @HOOK 0x0057D9A6 _UnitClass_Mission_Unload_IsRotating_IsDriving_Check
 @HOOK 0x0057DA64 _UnitClass_Mission_Unload_DeploysInto_Status2_Check
-@HOOK 0x0057D3C8 _UnitClass_Mission_Unload_MCVUnhardcode
+;@HOOK 0x0057D3C8 _UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 
 ; TO-DO: MCV check on Mission_Hunt
 ; TO-DO: MCV check on TeamClass::TMission_Deploy
@@ -96,18 +96,19 @@ _UnitClass_Mission_Unload_DeploysInto_Status2_Check:
     jmp  0x0057DAB0
 
 
+; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 ;Replaces the MCV check with a DeploysInto=xx check
-_UnitClass_Mission_Unload_MCVUnhardcode:
-    push eax
-    movzx eax,al
-    UnitTypeClass.FromIndex(eax,eax)
-    mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
-    ;mov  byte [Cache_UnitType_DeploysInto], al
-    cmp  al, 0
-    pop  eax
-    jg   0x0057DA83
-    cmp  al, UnitType.MCV
-    jc   0x0057E246
-    jmp  0x0057D3D0
+;_UnitClass_Mission_Unload_MCVUnhardcode:
+;    push eax
+;    movzx eax,al
+;    UnitTypeClass.FromIndex(eax,eax)
+;    mov  al, byte [eax + UnitTypeClass.Offset.DeploysInto]
+;    ;mov  byte [Cache_UnitType_DeploysInto], al
+;    cmp  al, 0
+;    pop  eax
+;    jg   0x0057DA83
+;    cmp  al, UnitType.MCV
+;    jc   0x0057E246
+;    jmp  0x0057D3D0
 
 

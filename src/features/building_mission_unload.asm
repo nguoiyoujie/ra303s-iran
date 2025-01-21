@@ -17,7 +17,7 @@
 @HOOK 0x00455442 _BuildingClass_Draw_It_WeaponsFactoryDoorFake
 @HOOK 0x00455477 _BuildingClass_Draw_It_WeaponsFactoryDoor2
 @HOOK 0x00455491 _BuildingClass_Draw_It_WeaponsFactoryDoor3
-@HOOK 0x00458DCD _BuildingClass_ExitObject_Factories
+;@HOOK 0x00458DCD _BuildingClass_ExitObject_Factories
 @HOOK 0x00458F42 _BuildingClass_ExitObject_Factories2
 @HOOK 0x00459004 _BuildingClass_ExitObject_FactoriesSetFacing
 
@@ -134,7 +134,7 @@ _BuildingClass_Draw_It_WeaponsFactoryDoorFake:
     ;BuildingTypeClass.FromIndex(eax,eax)
     ;push ebx
     ;xor ebx,ebx
-    ;BuildingTypeClass.IsFake.Get(eax,bl)
+    ;BuildingTypeClass.IsFake.Get(eax,bl) ; don't use eax here
     ;cmp  bl,0
     ;pop  ebx
     ;je  0x0045549E ; not a fake
@@ -186,25 +186,23 @@ _BuildingClass_Draw_It_WeaponsFactoryDoor3:
 
 
 
-
-_BuildingClass_ExitObject_Factories:
-    cmp  al,0xC
-    jz   0x00458DEC ; is a refinery
-
-    push  eax
-    movzx eax,al
-    BuildingTypeClass.FromIndex(eax,eax)
-    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.InfantryType 
-    pop  eax
-    jz   0x004590B8 ; is a barracks
-    
-    push  eax
-    movzx eax,al
-    BuildingTypeClass.FromIndex(eax,eax)
-    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
-    pop  eax
-    jz   0x00458EC7 ; is a war factory
-    jmp  0x004592BC
+; revised with _BuildingClass__Exit_Object_InfantryUnit_Unhardcode
+;_BuildingClass_ExitObject_Factories:
+;    cmp  al,0xC
+;    jz   0x00458DEC ; is a refinery
+;    push  eax
+;    movzx eax,al
+;    BuildingTypeClass.FromIndex(eax,eax)
+;    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.InfantryType 
+;    pop  eax
+;    jz   0x004590B8 ; is a barracks  
+;    push  eax
+;    movzx eax,al
+;    BuildingTypeClass.FromIndex(eax,eax)
+;    cmp  byte [eax + BuildingTypeClass.Offset.FactoryType],RTTIType.UnitType 
+;    pop  eax
+;    jz   0x00458EC7 ; is a war factory
+;    jmp  0x004592BC
 
 
 

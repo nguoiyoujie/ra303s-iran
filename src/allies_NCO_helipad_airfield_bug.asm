@@ -4,4 +4,16 @@
 
 ; Fix will desync online with 3.03 most likely in the very rare occasion that this situation occurs. That's because Hind and Transport Helicopter will spawn for players with this fix but without those two helicopters won't spawn because both the Helipad and Airfield aren't considered valid factories for those two helicopters in this situation.
 
-@CLEAR 0x0051EBBD 0x90 0x0051EBC2
+;@CLEAR 0x0051EBBD 0x90 0x0051EBC2
+
+; Checks are failing because of building ownership/ActLike checks. Aircrafts can dock in airstrips that cannot build them.
+; This change has a side-effect where you no longer lose captured aircraft tech unless all airfields / helipads are destroyed.
+@HOOK 0x0051EA31 _ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType
+
+_ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType:
+    cmp  byte[edi],RTTIType.AircraftType
+    je   0x0051EA94 ; skip prereq checks
+    mov  edx,dword[edi+0x21]
+    mov  eax,edi
+    jmp  0x0051EA36
+

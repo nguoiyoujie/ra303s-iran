@@ -16,6 +16,8 @@
 ;added by lovalmidas
 ; hook into AI_Unit() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original UNIT_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
+@HOOK 0x004DB839 _HouseClass__AI_Unit_CheckHarvester
+@HOOK 0x004DB84D _HouseClass__AI_Unit_PickHarvester
 @HOOK 0x004DBBB6 _HouseClass__AI_Unit_Extend_BestList_1
 @HOOK 0x004DBBE4 _HouseClass__AI_Unit_Extend_BestList_2
 @HOOK 0x004DBB6A _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
@@ -27,8 +29,8 @@
 
 ; we should rewrite the income check to accomodate additional refinery types
 ; unhardcode Harvester first 
-@SETD 0x004DB83B HouseClass.Offset.NewBQuantity_Refinery ; Refinery
-@SETD 0x004DB841 HouseClass.Offset.NewUQuantity_Harvester ; Harvester
+;@SETD 0x004DB83B HouseClass.Offset.NewBQuantity_Refinery ; Refinery
+;@SETD 0x004DB841 HouseClass.Offset.NewUQuantity_Harvester ; Harvester
 
 ; Warning stack manipulation!
 @SETD 0x004DB7F6 0x5e8 ; was 0xE8, add 200h to hold counter[UNIT_COUNT] (400h) and bestlist[UNIT_COUNT] (100h)
@@ -50,8 +52,104 @@
 @SETD 0x004DBC7B -1276
 @SETD 0x004DBCE2 -1276
 
-
 @HOOK 0x004DBC37 _HouseClass__AI_Unit_Set_Weight
+
+Temp.AIUnit.Harvester db 0
+
+_HouseClass__AI_Unit_CheckHarvester:
+    ; EDX = HouseClass
+    ; set EDI to 1 if there is income, 0 otherwise
+    push edi
+    push esi
+    push ebx
+    push eax
+    xor  esi,esi
+    xor  edi,edi
+.CheckRefn.Repeat:
+    mov  eax,esi
+    BuildingTypeClass.FromIndex(eax,ebx)
+    BuildingTypeClass.IsRefinery.Get(ebx,al)
+    test al,al
+    jz   .CheckRefn.Next
+    add  edi,dword[edx+4*esi+HouseClass.Offset.NewBQuantity]
+.CheckRefn.Next:
+    inc  esi
+    mov  eax,[BuildingTypeClass.Count]
+    cmp  esi,eax
+    jb   .CheckRefn.Repeat
+    xor  esi,esi
+.CheckHarv.Repeat:
+    mov  eax,esi
+    UnitTypeClass.FromIndex(eax,ebx)
+    UnitTypeClass.IsToHarvest.Get(ebx,al)
+    test al,al
+    jz   .CheckHarv.Next
+    sub  edi,dword[edx+4*esi+HouseClass.Offset.NewUQuantity]
+.CheckHarv.Next:
+    inc  esi
+    mov  eax,[UnitTypeClass.Count]
+    cmp  esi,eax
+    jb   .CheckHarv.Repeat
+.Done:
+    pop  eax
+    pop  ebx
+    pop  esi
+    cmp  edi,0
+    pop  edi
+    jmp  0x004DB845
+
+
+_HouseClass__AI_Unit_PickHarvester:
+    ; edx: House class
+    ; cycle through all units
+    ; pick the first unit that is buildable
+    push edi
+    push esi
+    push ebx
+    xor  edi,edi
+.Repeat:
+    mov  eax,edi
+    UnitTypeClass.FromIndex(eax,ebx)
+    UnitTypeClass.IsToHarvest.Get(ebx,al)
+	test eax,eax
+    jz   .Next
+    push ebx
+    push ecx
+    push edx
+    mov  ecx,ebx
+    mov  bl,byte[edx+HouseClass.Offset.ActLike]
+    movzx ebx,bl
+    mov  eax,edx
+    mov  edx,ecx
+    call HouseClass__Can_Build
+    pop  edx
+    pop  ecx
+    pop  ebx
+    test eax,eax
+    jz   .Next
+.SelectHarv:
+    mov  eax,edi
+    jmp  .Done
+.Next:
+    inc  edi
+    mov  eax,[UnitTypeClass.Count]
+    cmp  edi,eax
+    jb   .Repeat
+    jmp  0x004DB873
+.Done:
+    pop  ebx
+    pop  esi
+    pop  edi
+    push eax
+    call UnitTypeClass__As_Reference
+    mov  eax,dword[eax+0x14C]
+    cmp  eax,dword[edx+0x20]
+    pop  eax
+    ja   0x004DB873
+    mov  byte[edx+HouseClass.Offset.BuildUnit],al
+    mov  eax,0xf
+    jmp  0x004DB86E
+
 
 _HouseClass__AI_Unit_Extend_BestList_1:
     mov  al,byte [ebp + -0x18]

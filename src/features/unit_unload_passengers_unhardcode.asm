@@ -11,7 +11,7 @@
 ;----------------------------------------------------------------
 
 ;@HOOK 0x0057E23C _UnitClass_Mission_Unload_PassengerUnhardcode
-@HOOK 0x0057D3D6 _UnitClass_Mission_Unload_PassengerUnhardcode
+@HOOK 0x0057D3C2 _UnitClass_Mission_Unload_PassengerUnhardcode
 
 ;Replaces the Supply Truck check with a Passengers=xx check
 ;_UnitClass_Mission_Unload_PassengerUnhardcode:
@@ -26,14 +26,46 @@
 
 ; For Unit IDs >= 0x11
 _UnitClass_Mission_Unload_PassengerUnhardcode:
-    push eax
+    mov  al,byte[eax+0x196]
     movzx eax,al
-    UnitTypeClass.FromIndex(eax,eax)
-    TechnoTypeClass.MaxPassengers.Get(eax,eax)
-    cmp  eax, 0
+    push eax
+    push edx
+    UnitTypeClass.FromIndex(eax,edx)
+    TechnoTypeClass.MaxPassengers.Get(edx,eax)
+    cmp  eax,0
+    jg   .Passengers
+    UnitTypeClass.IsToHarvest.Get(edx,al)
+    test al,al
+    jnz  .Harvester
+    UnitTypeClass.DeploysInto.Get(edx,al)
+    cmp  al,0
+    jg   .Deployer
+    pop  edx
     pop  eax
-    jg   0x0057D6E1
-    cmp  al,0x11
-    jc   0x0057E23C
-    jbe  0x0057E1BC
-    jmp  0x0057D3E4
+    cmp  al,UnitType.MNLY
+    jz   0x0057DE04
+    cmp  al,UnitType.QTNK
+    jz   0x0057DE1B
+    cmp  al,UnitType.CTNK
+    jz   0x0057E1BC
+    jmp  0x0057E262
+.Passengers:
+    UnitTypeClass.Anim_HasAPCDoor.Get(edx,al)
+    test al,al
+    jnz  .APC
+.Truck:
+    pop  edx
+    pop  eax
+    jmp  0x0057D6E1
+.APC:
+    pop  edx
+    pop  eax
+    jmp  0x0057D96C
+.Deployer:
+    pop  edx
+    pop  eax
+    jmp  0x0057DA83
+.Harvester:
+    pop  edx
+    pop  eax
+    jmp  0x0057D3F9
