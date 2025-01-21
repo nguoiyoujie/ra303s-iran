@@ -23,6 +23,7 @@
 @HOOK 0x004DBB6A _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
 ; extends the check to new unittypeclass
 @HOOK 0x004DBBC5 _HouseClass__AI_Unit_Expand
+@HOOK 0x004DBC32 _HouseClass__AI_Unit_Ignore_Harvesters
 @HOOK 0x004DBC89 _HouseClass__AI_Unit_Expand_Choice
 @HOOK 0x004DBCAE _HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
@@ -111,7 +112,7 @@ _HouseClass__AI_Unit_PickHarvester:
     mov  eax,edi
     UnitTypeClass.FromIndex(eax,ebx)
     UnitTypeClass.IsToHarvest.Get(ebx,al)
-	test eax,eax
+	test al,al
     jz   .Next
     push ebx
     push ecx
@@ -178,6 +179,18 @@ _HouseClass__AI_Unit_Expand_Choice_2:
     cmp  byte dh,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBCD6
     jmp  0x004DBCB3
+
+
+_HouseClass__AI_Unit_Ignore_Harvesters:
+    movzx eax,al
+    push ebx
+    UnitTypeClass.FromIndex(eax,ebx)
+    UnitTypeClass.IsToHarvest.Get(ebx,al)
+    pop  ebx
+	test al,al
+    jnz  0x004DBC65 ; harvester
+    jmp  0x004DBC37
+
 
 _HouseClass__AI_Unit_Set_Weight:
     mov  eax,dword[ebp-0x1f]
