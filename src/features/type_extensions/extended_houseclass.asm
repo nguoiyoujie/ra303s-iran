@@ -134,9 +134,7 @@ allyneutral db 1
 
 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
     Clear_Extended_Class_Memory_For_Old_Saves esi,HouseClass.NEW_SIZE,HouseClass.ORIGINAL_SIZE
-
     mov  byte [esi+HouseClass.Offset.SecondaryColorScheme],0xFF
-
 .Ret:
     mov  ebx,0x005F6538
     jmp  0x004CEE15

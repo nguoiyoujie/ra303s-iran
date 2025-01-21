@@ -3,10 +3,52 @@
 ;@CLEAR 0x004F4095 HouseTypeClass.NEW_COUNT 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
 @HOOK 0x00537513 _RulesClass__Objects_ReadIni_Fix
 
+;_HouseTypeClass__Init_Heap_NewSize
+@SETD 0x004CB854 HouseTypeClass.NEW_SIZE
+@SETD 0x004CB98E HouseTypeClass.NEW_SIZE
+@SETD 0x004CBAC8 HouseTypeClass.NEW_SIZE
+@SETD 0x004CBC02 HouseTypeClass.NEW_SIZE
+@SETD 0x004CBD3C HouseTypeClass.NEW_SIZE
+@SETD 0x004CBE76 HouseTypeClass.NEW_SIZE
+@SETD 0x004CBFB0 HouseTypeClass.NEW_SIZE
+@SETD 0x004CC0EA HouseTypeClass.NEW_SIZE
+@SETD 0x004CC224 HouseTypeClass.NEW_SIZE
+@SETD 0x004CC35E HouseTypeClass.NEW_SIZE
+@SETD 0x004CC498 HouseTypeClass.NEW_SIZE
+@SETD 0x004CC5D2 HouseTypeClass.NEW_SIZE
+@SETD 0x004CC70C HouseTypeClass.NEW_SIZE
+@SETD 0x004CC846 HouseTypeClass.NEW_SIZE
+@SETD 0x004CC980 HouseTypeClass.NEW_SIZE
+@SETD 0x004CCABA HouseTypeClass.NEW_SIZE
+@SETD 0x004CCBF4 HouseTypeClass.NEW_SIZE
+@SETD 0x004CCD2E HouseTypeClass.NEW_SIZE
+@SETD 0x004CCE68 HouseTypeClass.NEW_SIZE
+@SETD 0x004CCFA2 HouseTypeClass.NEW_SIZE
+
+;TFixedIHeapClass_HouseTypeClass___Constructor
+@SETD 0x004C9026 HouseTypeClass.NEW_SIZE
+
+;TFixedIHeapClass_HouseTypeClass___Save()
+@SETD 0x004D0764 HouseTypeClass.NEW_SIZE
+
+;TFixedIHeapClass_HouseTypeClass___Load()
+@SETD 0x004D0846 HouseTypeClass.NEW_SIZE
+
+
+@HOOK 0x004D0860 _TFixedIHeapClass__HouseTypeClass__Load_Clear_Memory
+
+_TFixedIHeapClass__HouseTypeClass__Load_Clear_Memory:
+    Clear_Extended_Class_Memory_For_Old_Saves ecx,HouseTypeClass.NEW_SIZE,HouseTypeClass.ORIGINAL_SIZE
+.Ret:
+    mov  dword[esi+0x21],0x005FA8A8
+    jmp  0x004D0867
+
+
 _RulesClass__Objects_ReadIni_Fix:
     mov  edx,ebx
     call HouseTypeClass__Read_INI
     jmp  0x00537518
+
 
 _HouseTypeClass__AddNewHouseTypes:
 ;Multi9

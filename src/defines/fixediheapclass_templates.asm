@@ -133,6 +133,8 @@
 %define HouseTypeClass.Array               0x0065DD58
 %define HouseTypeClass.ORIGINAL_COUNT      14h
 %define HouseTypeClass.NEW_COUNT           20h
+%define HouseTypeClass.ORIGINAL_SIZE       13Ah
+%define HouseTypeClass.NEW_SIZE            14Ah
 
 ; BuildingTypeClass                        0x0065DD70
 %define BuildingTypeClass.Count            0x0065DD7C

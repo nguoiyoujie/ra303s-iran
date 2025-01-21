@@ -65,8 +65,8 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/macros/vesseltypeclass.asm"
 %include "src/macros/warheadtypeclass.asm"
 %include "src/macros/weapontypeclass.asm"
-%include "src/macros/houseclass.asm" ;wip
-;%include "src/macros/housetypeclass.asm" ;wip
+%include "src/macros/houseclass.asm"
+%include "src/macros/housetypeclass.asm"
 ;%include "src/macros/animtypeclass.asm" ;wip
 
 %ifdef USE_HIRES

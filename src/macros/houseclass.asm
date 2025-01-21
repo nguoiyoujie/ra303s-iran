@@ -302,7 +302,7 @@
 ;str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                     ;existing feature
 
 %macro HouseTypeClass.new    2
-    mov  eax,0x13a ; size
+    mov  eax,HouseTypeClass.NEW_SIZE ; size
     call HouseTypeClass__new
     test eax,eax
     jz   %%skip
@@ -318,52 +318,52 @@
     mov  edx,dword [%1 + 0x1d]
     mov  ecx,0x40
     mov  dword [eax-0x10b],0x005F6468
-    mov  esi,%1 + 0x26
+    mov  esi,%1 + HouseTypeClass.Offset.Suffix
     mov  dword [eax-0x10f],edx
-    mov  dl,byte [%1 + 0x25]
+    mov  dl,byte [%1 + HouseTypeClass.Offset.House]
     lea  edi,[eax-0x106]
     mov  byte [eax-0x107],dl
     mov  edx,[%1 + 0x126]
     rep movsd 
     mov  dword [eax-6],edx
-    mov  dl,byte [%1 + 0x12A]
+    mov  dl,byte [%1 + HouseTypeClass.Offset.RemapColor]
     mov  byte [eax-2],dl
-    mov  dl,byte [%1 + 0x12B]
+    mov  dl,byte [%1 + HouseTypeClass.Offset.Prefix]
     mov  byte [eax-1],dl
-    mov  edx,%1 + 0x12C
+    mov  edx,%1 + HouseTypeClass.Offset.FirepowerBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x12C]
+    mov  dx,word [%1 + HouseTypeClass.Offset.FirepowerBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x12E
+    mov  edx,%1 + HouseTypeClass.Offset.GroundspeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x12E]
+    mov  dx,word [%1 + HouseTypeClass.Offset.GroundspeedBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x130
+    mov  edx,%1 + HouseTypeClass.Offset.AirspeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x130]
+    mov  dx,word [%1 + HouseTypeClass.Offset.AirspeedBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x132
+    mov  edx,%1 + HouseTypeClass.Offset.ArmorBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x132]
+    mov  dx,word [%1 + HouseTypeClass.Offset.ArmorBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x134
+    mov  edx,%1 + HouseTypeClass.Offset.ROFBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x134]
+    mov  dx,word [%1 + HouseTypeClass.Offset.ROFBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x136
+    mov  edx,%1 + HouseTypeClass.Offset.CostBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + 0x136]
+    mov  dx,word [%1 + HouseTypeClass.Offset.CostBias]
     mov  word [eax-2],dx
-    mov  edx,%1 + 0x138
+    mov  edx,%1 +  HouseTypeClass.Offset.BuildSpeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     sub  eax,0x138
-    mov  dx,word [%1 + 0x138]
+    mov  dx,word [%1 + HouseTypeClass.Offset.BuildSpeedBias]
     mov  word [eax+0x138],dx
     mov  dword [eax+0x21],0x005FA8A8
     ;mov  dword [HouseTypeClass.DestructorPtrs-0x14*8+%2*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
