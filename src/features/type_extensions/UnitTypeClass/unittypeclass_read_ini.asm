@@ -51,6 +51,9 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.Response_Select.Read(esi,edi,_GetUnitResponseSelectFromString)
     UnitTypeClass.Response_Move.Read(esi,edi,_GetUnitResponseMoveFromString)
     UnitTypeClass.Response_Attack.Read(esi,edi,_GetUnitResponseAttackFromString)
+    UnitTypeClass.Response_Harvest.Read(esi,edi,_GetUnitResponseHarvestFromString)
+    UnitTypeClass.Response_Enter.Read(esi,edi,_GetUnitResponseEnterFromString)
+    UnitTypeClass.Response_Deploy.Read(esi,edi,_GetUnitResponseDeployFromString)
     UnitTypeClass.AmmoImageCount.Read(esi,edi)  
     UnitTypeClass.AmmoTurretCount.Read(esi,edi)  
     UnitTypeClass.IsWaterBound.Read(esi,edi)
@@ -104,4 +107,16 @@ _GetUnitResponseMoveFromString:
 
 _GetUnitResponseAttackFromString:
     GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Attack_Data,16
+    retn
+
+_GetUnitResponseHarvestFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Harvest_Data,16
+    retn
+
+_GetUnitResponseEnterFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Enter_Data,16
+    retn
+
+_GetUnitResponseDeployFromString:
+    GetVocArrayFromString esi+UnitTypeClass.Offset.Response_Deploy_Data,16
     retn

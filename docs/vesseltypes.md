@@ -181,9 +181,14 @@ Determines the upward offset of the firing animation, in leptons, relative to th
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseSelect<br>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseMove<br>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseHarvest<br>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseEnter<br>
+<code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseDeploy<br>
 <code>{Rules/Map}</code> ► [&lt;VesselType&gt;]  ► ResponseAttack
 
 </samp></td><td width="120"><samp>List<br>
+List<br>
+List<br>
 List<br>
 List
 </a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
@@ -200,6 +205,9 @@ Each entry are as follows:
 :------------------|:------------
 |`ResponseSelect`  |Response when selected
 |`ResponseMove`    |Response when ordered to move to a location
+|`ResponseHarvest` |Response when ordered to harvest.<br>If not defined, falls back to `ResponseMove`
+|`ResponseEnter`   |Response when ordered to enter a building (Refinery, Service Depot), or a transport.<br>If not defined, falls back to `ResponseMove`
+|`ResponseDeploy`  |Response when ordered to unload (passengers, or a mine), or deploy into a building.<br>If not defined, falls back to `ResponseMove`
 |`ResponseAttack`  |Response when ordered to attack a target
 
 </samp>

@@ -28,13 +28,19 @@
 %define VesselTypeClass.Offset.Response_Move_Data            0x24E    ; word x16
 %define VesselTypeClass.Offset.Response_Attack               0x26E    ; INT
 %define VesselTypeClass.Offset.Response_Attack_Data          0x272    ; word x16
-;0x292
+%define VesselTypeClass.Offset.Response_Harvest              0x292    ; INT
+%define VesselTypeClass.Offset.Response_Harvest_Data         0x296    ; word x16
+%define VesselTypeClass.Offset.Response_Enter                0x2B6    ; INT
+%define VesselTypeClass.Offset.Response_Enter_Data           0x2BA    ; word x16
+%define VesselTypeClass.Offset.Response_Deploy               0x2DA    ; INT
+%define VesselTypeClass.Offset.Response_Deploy_Data          0x2DE    ; word x16
+;0x2FE
 ; unique space
-%define VesselTypeClass.Offset.TurretName                    0x292    ; int ptr to string
-%define VesselTypeClass.Offset.TurretShape                   0x296    ; int ptr to SHP file memory
-%define VesselTypeClass.Offset.TurretFireOffset              0x29A    ; INT
-%define VesselTypeClass.Offset.TurretAdjustY                 0x29E    ; INT
-;0x2A2
+%define VesselTypeClass.Offset.TurretName                    0x2FE    ; int ptr to string
+%define VesselTypeClass.Offset.TurretShape                   0x302    ; int ptr to SHP file memory
+%define VesselTypeClass.Offset.TurretFireOffset              0x306    ; INT
+%define VesselTypeClass.Offset.TurretAdjustY                 0x30A    ; INT
+;0x30E
 
 
 ; INI String controls
@@ -51,6 +57,9 @@ str.VesselTypeClass.TurretAdjustY             db"TurretAdjustY",0               
 str.VesselTypeClass.Response_Select           db"ResponseSelect",0              ;new ini feature
 str.VesselTypeClass.Response_Move             db"ResponseMove",0                ;new ini feature
 str.VesselTypeClass.Response_Attack           db"ResponseAttack",0              ;new ini feature
+str.VesselTypeClass.Response_Harvest          db"ResponseHarvest",0             ;new ini feature
+str.VesselTypeClass.Response_Enter            db"ResponseEnter",0               ;new ini feature
+str.VesselTypeClass.Response_Deploy           db"ResponseDeploy",0              ;new ini feature
 str.VesselTypeClass.AmmoReloadRate            db"AmmoReloadRate",0              ;new ini feature
 str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            ;new ini feature
 
@@ -122,5 +131,14 @@ str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            
 %define VesselTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, VesselTypeClass.Offset.Response_Attack_Data, reg_output
 %define VesselTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Attack, str.VesselTypeClass.Response_Attack, function
 
+%define VesselTypeClass.Response_Harvest.Get(ptr_type,reg_output)            ObjectTypeClass.GetInt                 ptr_type, VesselTypeClass.Offset.Response_Harvest, reg_output
+%define VesselTypeClass.Response_Harvest_Data.Get(ptr_type,reg_output)       ObjectTypeClass.GetWord                ptr_type, VesselTypeClass.Offset.Response_Harvest_Data, reg_output
+%define VesselTypeClass.Response_Harvest.Read(ptr_type,ptr_rules,function)   ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Harvest, str.VesselTypeClass.Response_Harvest, function
 
+%define VesselTypeClass.Response_Enter.Get(ptr_type,reg_output)              ObjectTypeClass.GetInt                 ptr_type, VesselTypeClass.Offset.Response_Enter, reg_output
+%define VesselTypeClass.Response_Enter_Data.Get(ptr_type,reg_output)         ObjectTypeClass.GetWord                ptr_type, VesselTypeClass.Offset.Response_Enter_Data, reg_output
+%define VesselTypeClass.Response_Enter.Read(ptr_type,ptr_rules,function)     ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Enter, str.VesselTypeClass.Response_Enter, function
 
+%define VesselTypeClass.Response_Deploy.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, VesselTypeClass.Offset.Response_Deploy, reg_output
+%define VesselTypeClass.Response_Deploy_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, VesselTypeClass.Offset.Response_Deploy_Data, reg_output
+%define VesselTypeClass.Response_Deploy.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Deploy, str.VesselTypeClass.Response_Deploy, function

@@ -20,19 +20,13 @@
 @HOOK 0x004EF92B _InfantryClass__Response_Attack_CustomVoice
 
 Temp.DeathInfantryID db 0
-Temp.UseResponseInvade db 0
+;Temp.UseResponseInvade db 0
+Temp.ResponseMission db 0
 
-
+; used for Infantry, Unit and Vessel
 _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate:
-    mov  byte[Temp.UseResponseInvade],0
-    cmp  byte[ebp-0xc],MissionType.MISSION_CAPTURE
-    je   .SetInvade
-    cmp  byte[ebp-0xc],MissionType.MISSION_SABOTAGE
-    je   .SetInvade
-    jmp  .Retn
-.SetInvade:
-    mov  byte[Temp.UseResponseInvade],1
-.Retn:
+    mov  dl,byte[ebp-0xc]
+    mov  byte[Temp.ResponseMission],dl
     mov  edx,dword[esi+0x11]
     mov  eax,esi
     jmp  0x00565872
@@ -186,7 +180,9 @@ _InfantryClass__Response_Move_CustomVoice:
     mov  al,byte[eax+0x196] ; ID
     movzx eax,al
     InfantryTypeClass.FromIndex(eax,edx) 
-    cmp  byte[Temp.UseResponseInvade],1
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_CAPTURE
+    je   .UseInvade
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_SABOTAGE
     jne  .UseMove
 
 .UseInvade:

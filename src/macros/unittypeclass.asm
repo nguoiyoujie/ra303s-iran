@@ -31,8 +31,10 @@
 %define UnitTypeClass.Bit.IsNoFireWhileMoving              3    
 %define UnitTypeClass.Offset.IsNoSmoke                     0x193    ; BOOL
 %define UnitTypeClass.Bit.IsNoSmoke                        4    
-;%define UnitTypeClass.Offset.IsAmmoLauncher                0x193    ; BOOL
-;%define UnitTypeClass.Bit.IsAmmoLauncher                   5    
+%define UnitTypeClass.Offset.IsWaterBound                  0x193    ; BOOL
+%define UnitTypeClass.Bit.IsWaterBound                     5    
+%define UnitTypeClass.Offset.Anim_HasAPCDoor               0x193    ; BOOL
+%define UnitTypeClass.Bit.Anim_HasAPCDoor                  6   
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -51,23 +53,26 @@
 %define UnitTypeClass.Offset.Response_Move_Data            0x24E    ; word x16
 %define UnitTypeClass.Offset.Response_Attack               0x26E    ; INT
 %define UnitTypeClass.Offset.Response_Attack_Data          0x272    ; word x16
-;0x282
+%define UnitTypeClass.Offset.Response_Harvest              0x292    ; INT
+%define UnitTypeClass.Offset.Response_Harvest_Data         0x296    ; word x16
+%define UnitTypeClass.Offset.Response_Enter                0x2B6    ; INT
+%define UnitTypeClass.Offset.Response_Enter_Data           0x2BA    ; word x16
+%define UnitTypeClass.Offset.Response_Deploy               0x2DA    ; INT
+%define UnitTypeClass.Offset.Response_Deploy_Data          0x2DE    ; word x16
+;0x2FE
 ; unique space
-%define UnitTypeClass.Offset.TurretAdjustX                 0x282    ; INT
-%define UnitTypeClass.Offset.TurretAdjustY                 0x286    ; INT
-%define UnitTypeClass.Offset.TurretFrameStart              0x28A    ; word
-%define UnitTypeClass.Offset.TurretFrameCount              0x28C    ; word
-%define UnitTypeClass.Offset.DeploysInto                   0x28E    ; byte
-%define UnitTypeClass.Offset.AmmoImageCount                0x28F    ; byte
-%define UnitTypeClass.Offset.AmmoTurretCount               0x290    ; byte
-%define UnitTypeClass.Offset.IsWaterBound                  0x291    ; BOOL
-%define UnitTypeClass.Bit.IsWaterBound                     1    
-%define UnitTypeClass.Offset.Anim_HasAPCDoor               0x291    ; BOOL
-%define UnitTypeClass.Bit.Anim_HasAPCDoor                  2   
-;0x292
-%define UnitTypeClass.Offset.AIBuildLimit                  0x292    ; INT
-%define UnitTypeClass.Offset.AIBuildWeight                 0x296    ; INT
-;0x29A
+%define UnitTypeClass.Offset.TurretAdjustX                 0x2FE    ; INT
+%define UnitTypeClass.Offset.TurretAdjustY                 0x302    ; INT
+%define UnitTypeClass.Offset.TurretFrameStart              0x306    ; word
+%define UnitTypeClass.Offset.TurretFrameCount              0x308    ; word
+%define UnitTypeClass.Offset.DeploysInto                   0x30A    ; byte
+%define UnitTypeClass.Offset.AmmoImageCount                0x30B    ; byte
+%define UnitTypeClass.Offset.AmmoTurretCount               0x30C    ; byte
+;0x30D
+
+%define UnitTypeClass.Offset.AIBuildLimit                  0x30E    ; INT
+%define UnitTypeClass.Offset.AIBuildWeight                 0x312    ; INT
+;0x316
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -82,6 +87,8 @@ str.UnitTypeClass.IsJammer                      db"IsJammer",0                  
 str.UnitTypeClass.IsGapper                      db"IsGapGenerator",0              ;new ini feature
 str.UnitTypeClass.IsNoFireWhileMoving           db"IsNoFireWhileMoving",0         ;new ini feature
 str.UnitTypeClass.IsNoSmoke                     db"IsNoSmoke",0                   ;new ini feature
+str.UnitTypeClass.IsWaterBound                  db"WaterBound",0                  ;new ini feature
+str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
@@ -95,12 +102,14 @@ str.UnitTypeClass.DeploysInto                   db"DeploysInto",0               
 str.UnitTypeClass.Response_Select               db"ResponseSelect",0              ;new ini feature
 str.UnitTypeClass.Response_Move                 db"ResponseMove",0                ;new ini feature
 str.UnitTypeClass.Response_Attack               db"ResponseAttack",0              ;new ini feature
+str.UnitTypeClass.Response_Harvest              db"ResponseHarvest",0             ;new ini feature
+str.UnitTypeClass.Response_Enter                db"ResponseEnter",0               ;new ini feature
+str.UnitTypeClass.Response_Deploy               db"ResponseDeploy",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadRate                db"AmmoReloadRate",0              ;new ini feature
 str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0            ;new ini feature
 str.UnitTypeClass.AmmoImageCount                db"AmmoImageCount",0              ;new ini feature
 str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0             ;new ini feature
-str.UnitTypeClass.IsWaterBound                  db"WaterBound",0                  ;new ini feature
-str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
+
 str.UnitTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0     
 
@@ -156,6 +165,14 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.IsNoSmoke.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, reg_output
 %define UnitTypeClass.IsNoSmoke.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, value
 %define UnitTypeClass.IsNoSmoke.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsNoSmoke, UnitTypeClass.Bit.IsNoSmoke, str.UnitTypeClass.IsNoSmoke
+
+%define UnitTypeClass.IsWaterBound.Get(ptr_type,reg_output)                ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, reg_output
+%define UnitTypeClass.IsWaterBound.Set(ptr_type,value)                     ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, value
+%define UnitTypeClass.IsWaterBound.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, str.UnitTypeClass.IsWaterBound
+
+%define UnitTypeClass.Anim_HasAPCDoor.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, reg_output
+%define UnitTypeClass.Anim_HasAPCDoor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, value
+%define UnitTypeClass.Anim_HasAPCDoor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, str.UnitTypeClass.Anim_HasAPCDoor
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.Type, value
@@ -217,6 +234,18 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Attack_Data, reg_output
 %define UnitTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Attack, str.UnitTypeClass.Response_Attack, function
 
+%define UnitTypeClass.Response_Harvest.Get(ptr_type,reg_output)            ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Harvest, reg_output
+%define UnitTypeClass.Response_Harvest_Data.Get(ptr_type,reg_output)       ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Harvest_Data, reg_output
+%define UnitTypeClass.Response_Harvest.Read(ptr_type,ptr_rules,function)   ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Harvest, str.UnitTypeClass.Response_Harvest, function
+
+%define UnitTypeClass.Response_Enter.Get(ptr_type,reg_output)              ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Enter, reg_output
+%define UnitTypeClass.Response_Enter_Data.Get(ptr_type,reg_output)         ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Enter_Data, reg_output
+%define UnitTypeClass.Response_Enter.Read(ptr_type,ptr_rules,function)     ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Enter, str.UnitTypeClass.Response_Enter, function
+
+%define UnitTypeClass.Response_Deploy.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Response_Deploy, reg_output
+%define UnitTypeClass.Response_Deploy_Data.Get(ptr_type,reg_output)        ObjectTypeClass.GetWord                ptr_type, UnitTypeClass.Offset.Response_Deploy_Data, reg_output
+%define UnitTypeClass.Response_Deploy.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, UnitTypeClass.Offset.Response_Deploy, str.UnitTypeClass.Response_Deploy, function
+
 %define UnitTypeClass.AmmoImageCount.Get(ptr_type,reg_output)              ObjectTypeClass.GetByte                ptr_type, UnitTypeClass.Offset.AmmoImageCount, reg_output
 %define UnitTypeClass.AmmoImageCount.Set(ptr_type,value)                   ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.AmmoImageCount, value
 %define UnitTypeClass.AmmoImageCount.Read(ptr_type,ptr_rules)              ObjectTypeClass.ReadByte               ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoImageCount, str.UnitTypeClass.AmmoImageCount
@@ -224,14 +253,6 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.AmmoTurretCount.Get(ptr_type,reg_output)             ObjectTypeClass.GetByte                ptr_type, UnitTypeClass.Offset.AmmoTurretCount, reg_output
 %define UnitTypeClass.AmmoTurretCount.Set(ptr_type,value)                  ObjectTypeClass.SetByte                ptr_type, UnitTypeClass.Offset.AmmoTurretCount, value
 %define UnitTypeClass.AmmoTurretCount.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadByte               ptr_type, ptr_rules, UnitTypeClass.Offset.AmmoTurretCount, str.UnitTypeClass.AmmoTurretCount
-
-%define UnitTypeClass.IsWaterBound.Get(ptr_type,reg_output)                ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, reg_output
-%define UnitTypeClass.IsWaterBound.Set(ptr_type,value)                     ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, value
-%define UnitTypeClass.IsWaterBound.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.IsWaterBound, UnitTypeClass.Bit.IsWaterBound, str.UnitTypeClass.IsWaterBound
-
-%define UnitTypeClass.Anim_HasAPCDoor.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, reg_output
-%define UnitTypeClass.Anim_HasAPCDoor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, value
-%define UnitTypeClass.Anim_HasAPCDoor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, str.UnitTypeClass.Anim_HasAPCDoor
 
 %define UnitTypeClass.AIBuildLimit.Get(ptr_type,reg_output)                ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.AIBuildLimit, reg_output
 %define UnitTypeClass.AIBuildLimit.Set(ptr_type,value)                     ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AIBuildLimit, value

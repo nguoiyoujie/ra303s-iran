@@ -70,10 +70,36 @@ _DriveClass__Response_Move_CustomVoice:
     mov  al,byte[ecx+0x15C] ; ID
     movzx eax,al
     UnitTypeClass.FromIndex(eax,edx) 
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_ENTER
+    je   .Unit.UseEnter
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_UNLOAD
+    je   .Unit.UseDeploy
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_HARVEST
+    jne  .Unit.UseMove
+.Unit.UseHarvest:
+    UnitTypeClass.Response_Harvest.Get(edx,eax)
+    test eax,eax
+    jz   .Unit.UseMove
+    lea  ecx,[edx+UnitTypeClass.Offset.Response_Harvest_Data]
+    jmp  .Unit.Rand
+.Unit.UseEnter:
+    UnitTypeClass.Response_Enter.Get(edx,eax)
+    test eax,eax
+    jz   .Unit.UseMove
+    lea  ecx,[edx+UnitTypeClass.Offset.Response_Enter_Data]
+    jmp  .Unit.Rand
+.Unit.UseDeploy:
+    UnitTypeClass.Response_Deploy.Get(edx,eax)
+    test eax,eax
+    jz   .Unit.UseMove
+    lea  ecx,[edx+UnitTypeClass.Offset.Response_Deploy_Data]
+    jmp  .Unit.Rand
+.Unit.UseMove:
     UnitTypeClass.Response_Move.Get(edx,eax)
     test eax,eax
     jz   .Retn
     lea  ecx,[edx+UnitTypeClass.Offset.Response_Move_Data]
+.Unit.Rand:
     lea  ebx,[eax-1]
     mov  eax,Globals___NonCriticalRandomNumber
     xor  edx,edx
@@ -85,10 +111,37 @@ _DriveClass__Response_Move_CustomVoice:
     mov  al,byte[ecx+0x15C] ; ID
     movzx eax,al
     VesselTypeClass.FromIndex(eax,edx) 
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_ENTER
+    je   .Unit.UseEnter
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_UNLOAD
+    je   .Unit.UseDeploy
+    cmp  byte[Temp.ResponseMission],MissionType.MISSION_HARVEST
+    jne  .Unit.UseMove
+.Vessel.UseHarvest:
+; normally Vessels cannot harvest, but the code will be ready if they do
+    VesselTypeClass.Response_Harvest.Get(edx,eax)
+    test eax,eax
+    jz   .Vessel.UseMove
+    lea  ecx,[edx+VesselTypeClass.Offset.Response_Harvest_Data]
+    jmp  .Vessel.Rand
+.Vessel.UseEnter:
+    VesselTypeClass.Response_Enter.Get(edx,eax)
+    test eax,eax
+    jz   .Vessel.UseMove
+    lea  ecx,[edx+VesselTypeClass.Offset.Response_Enter_Data]
+    jmp  .Vessel.Rand
+.Vessel.UseDeploy:
+    VesselTypeClass.Response_Deploy.Get(edx,eax)
+    test eax,eax
+    jz   .Vessel.UseMove
+    lea  ecx,[edx+VesselTypeClass.Offset.Response_Deploy_Data]
+    jmp  .Vessel.Rand
+.Vessel.UseMove:
     VesselTypeClass.Response_Move.Get(edx,eax)
     test eax,eax
     jz   .Retn
     lea  ecx,[edx+VesselTypeClass.Offset.Response_Move_Data]
+.Vessel.Rand:
     lea  ebx,[eax-1]
     mov  eax,Globals___NonCriticalRandomNumber
     xor  edx,edx

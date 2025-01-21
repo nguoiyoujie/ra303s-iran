@@ -62,7 +62,10 @@ VesselTypes_Read_INI:
     VesselTypeClass.Response_Select.Read(esi,edi,_GetVesselResponseSelectFromString)
     VesselTypeClass.Response_Move.Read(esi,edi,_GetVesselResponseMoveFromString)
     VesselTypeClass.Response_Attack.Read(esi,edi,_GetVesselResponseAttackFromString)         
-
+    VesselTypeClass.Response_Harvest.Read(esi,edi,_GetVesselResponseHarvestFromString)
+    VesselTypeClass.Response_Enter.Read(esi,edi,_GetVesselResponseEnterFromString)
+    VesselTypeClass.Response_Deploy.Read(esi,edi,_GetVesselResponseDeployFromString)
+    
     pop  edi
     pop  esi
 
@@ -116,4 +119,16 @@ _GetVesselResponseMoveFromString:
 
 _GetVesselResponseAttackFromString:
     GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Attack_Data,16
+    retn
+
+_GetVesselResponseHarvestFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Harvest_Data,16
+    retn
+
+_GetVesselResponseEnterFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Enter_Data,16
+    retn
+
+_GetVesselResponseDeployFromString:
+    GetVocArrayFromString esi+VesselTypeClass.Offset.Response_Deploy_Data,16
     retn
