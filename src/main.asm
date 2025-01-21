@@ -275,6 +275,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/fixes/animate_score_objects_crash_fix.asm"
 %include "src/fixes/building_crew_impassable_terrain_fix.asm"
 %include "src/fixes/building_power_clear_drain.asm" 
+%include "src/fixes/building_limbo_storage_fix.asm"
 %include "src/fixes/cancel_network_join_menu_lag_fix.asm"
 %include "src/fixes/cell_occupier_multi_buildings.asm"
 %include "src/fixes/cloaked_units_shadow_fix.asm"
