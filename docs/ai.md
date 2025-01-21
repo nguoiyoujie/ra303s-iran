@@ -109,20 +109,20 @@ This allows several modding improvements to the Skirmish/Multiplayer AI, and Sin
 
 The new BaseBuilding base plan is as follows:
 
-|Step              |Condition                                                                                     |Build                                              |Priority
-:------------------|:---------------------------------------------------------------------------------------------|:--------------------------------------------------|:--------------------------------------------------
-|Refinery          |Number of refineries below [AI] ► `RefineryLimit` <br>and below [AI] ► `RefineryRatio`        |Any Refinery (`AIBuildType`=REFINERY)              |If no refinery, `HIGH`. <br>Otherwise, `NORMAL`
-|Low Power         |Base at low power                                                                             |Any Power (`AIBuildType`=POWER)                    |`HIGH`
-|Power             |Base excess power below [AI] ► `PowerSurplus`                                                 |Any Power (`AIBuildType`=POWER)                    |If no refinery, `LOW`. <br>Otherwise, `NORMAL`
-|Barracks          |Number of barracks below [AI] ► `BarracksLimit` <br>and below [AI] ► `BarracksRatio`          |Any Barracks (`AIBuildType`=BARRACKS)              |If no barracks, `NORMAL`. <br>Otherwise, `LOW`
-|War Factory       |Number of war factories below [AI] ► `WarLimit` <br>and below [AI] ► `WarRatio`               |Any War Factory (`AIBuildType`=WARFACTORY)         |If no factory, `NORMAL`. <br>Otherwise, `LOW`
-|Base Defenses     |Number of defenses below [AI] ► `DefenseLimit` <br>and below [AI] ► `DefenseRatio`            |Any Defense (`AIBuildType`=DEFENSE)                |`NORMAL`
-|AA Defenses       |Number of AA defenses below [AI] ► `AALimit` <br>and below [AI] ► `AARatio`                   |Any AA Defense (`AIBuildType`=AA.DEFENSE)          |If enemy house aircraft > defenses, `HIGH`. <br>Otherwise, `NORMAL`
-|Adv. Defenses     |Number of adv. defenses below [AI] ► `TeslaRatio` <br>and below [AI] ► `TeslaLimit`           |Any Advanced Defense (`AIBuildType`=ADV.DEFENSE)   |`NORMAL`
-|Tech              |A tech building is available                                                                  |Any Tech (`AIBuildType`=TECH)                      |`NORMAL`
-|Helipads          |Number of barracks below [AI] ► `HelipadLimit` <br>and below [AI] ► `HelipadRatio`            |Any Barracks (`AIBuildType`=HELIPAD)               |`NORMAL`
-|Airstrips         |Number of barracks below [AI] ► `AirstripLimit` <br>and below [AI] ► `AirstripRatio`          |Any Barracks (`AIBuildType`=AIRSTRIP)              |`NORMAL`
-|Generic           |Any remaining buildings                                                                       |Any Generic (`AIBuildType`=GENERIC)                |`NORMAL`
+|Step              |Condition                                                                                     |Build (`AIBuildType`)    |Priority
+:------------------|:---------------------------------------------------------------------------------------------|:------------------------|:--------------------------------------------------
+|Refinery          |Number of refineries below [AI] ► `RefineryLimit` <br>and below [AI] ► `RefineryRatio`        |REFINERY                 |If no refinery, `HIGH`. <br>Otherwise, `NORMAL`
+|Low Power         |Base at low power                                                                             |POWER                    |`HIGH`
+|Power             |Base excess power below [AI] ► `PowerSurplus`                                                 |POWER                    |If no refinery, `LOW`. <br>Otherwise, `NORMAL`
+|Barracks          |Number of barracks below [AI] ► `BarracksLimit` <br>and below [AI] ► `BarracksRatio`          |BARRACKS                 |If no barracks, `NORMAL`. <br>Otherwise, `LOW`
+|War Factory       |Number of war factories below [AI] ► `WarLimit` <br>and below [AI] ► `WarRatio`               |WARFACTORY               |If no factory, `NORMAL`. <br>Otherwise, `LOW`
+|Base Defenses     |Number of defenses below [AI] ► `DefenseLimit` <br>and below [AI] ► `DefenseRatio`            |DEFENSE                  |`NORMAL`
+|AA Defenses       |Number of AA defenses below [AI] ► `AALimit` <br>and below [AI] ► `AARatio`                   |AA.DEFENSE               |If enemy house aircraft > defenses, `HIGH`. <br>Otherwise, `NORMAL`
+|Adv. Defenses     |Number of adv. defenses below [AI] ► `TeslaRatio` <br>and below [AI] ► `TeslaLimit`           |ADV.DEFENSE              |`NORMAL`
+|Tech              |A tech building is available                                                                  |TECH                     |`NORMAL`
+|Helipads          |Number of barracks below [AI] ► `HelipadLimit` <br>and below [AI] ► `HelipadRatio`            |HELIPAD                  |`NORMAL`
+|Airstrips         |Number of barracks below [AI] ► `AirstripLimit` <br>and below [AI] ► `AirstripRatio`          |AIRSTRIP                 |`NORMAL`
+|Generic           |Any remaining buildings                                                                       |GENERIC                  |`NORMAL`
 
  - Amongst all considerations, the first category with the highest priority will be selected for construction.
 
