@@ -15,37 +15,38 @@ _Init_Game_Hook_Load:
     push eax
 
     call_INIClass__Get_Bool Globals___RuleINI,str_Aftermath,str_AftermathFastBuildSpeed,0
-    mov  [Rules.Aftermath.AftermathFastBuildSpeed],al
+    mov  byte[Rules.Aftermath.AftermathFastBuildSpeed],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_FixFormationSpeed,0
-    mov  [Rules.General.FixFormationSpeed],al
+    mov  byte[Rules.General.FixFormationSpeed],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_ParabombsInMultiplayer,0
-    mov  [Rules.General.ParabombsInMultiplayer],al
+    mov  byte[Rules.General.ParabombsInMultiplayer],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_EvacInMP,1
-    mov  [Rules.General.EvacInMP],al
+    mov  byte[Rules.General.EvacInMP],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_RemapJammedBuildings,0
-    mov  [Rules.General.RemapJammedBuildings],al
+    mov  byte[Rules.General.RemapJammedBuildings],al
     
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_FixWideAreaDamage,0
-    mov  [Rules.General.FixWideAreaDamage],al
+    mov  byte[Rules.General.FixWideAreaDamage],al
+
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_ScalePowerBar,0
     mov  byte[Rules.General.ScalePowerBar],al
 
     ; move to _RulesClass__AI_Load?
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIParanoid,0
-    mov  [Rules.AI.FixAIParanoid],al
+    mov  byte[Rules.AI.FixAIParanoid],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIAlly,0
-    mov  [Rules.AI.FixAIAlly],al
+    mov  byte[Rules.AI.FixAIAlly],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAISendingTanksTopLeft,0
-    mov  [Rules.AI.FixAISendingTanksTopLeft],al
+    mov  byte[Rules.AI.FixAISendingTanksTopLeft],al
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_ComputerParanoidForceDisabledSkirmish,1
-    mov  [Rules.AI.ComputerParanoidForceDisabledSkirmish],al
+    mov  byte[Rules.AI.ComputerParanoidForceDisabledSkirmish],al
 
     call _InitializeExtendedColors
 

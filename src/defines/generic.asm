@@ -221,9 +221,7 @@ str_SecondaryColorScheme                          db"SecondaryColorScheme",0
 str_VideoInterlaceMode                            db"VideoInterlaceMode",0
 str_SkipScoreScreen                               db"SkipScoreScreen",0
 str_RandomStartingSong                            db"RandomStartingSong",0
-str_RemoveAITechupCheck                           db"RemoveAITechupCheck",0
 str_FixAIParanoid                                 db"FixAIParanoid",0
-; str_FixAIAlly
 str_GameLanguage                                  db"GameLanguage",0
 str_DebugLogging                                  db"DebugLogging",0
 str_AftermathEnabled                              db"AftermathEnabled",0
