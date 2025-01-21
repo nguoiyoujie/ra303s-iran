@@ -1,13 +1,14 @@
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AI Controls</kbd></kbd><br>
-<h2 align="center">AI Controls</h2>
+<h2 align="center">Rules General Controls</h2>
 
-The computer plays along a script to offer some challenge against the player.
+General configuration
 
 -------
 
  - [Documentation Guide](#documentation-guide)
- - [AI Production Enhancements](#ai-production-enhancements) 
- - [AI Settings](#ai-settings) 
+ - [Gamemode Controls](#gamemode-controls)
+ - [Audio Visual Enhancements](#audio-visual-enhancements) 
+ - [Fix Toggles](#fix-toggles) 
  - [Base Building](#base-building) 
 
 
@@ -18,78 +19,168 @@ The computer plays along a script to offer some challenge against the player.
 A guide on how to interpret the information is available [here](./dockeys.md).
 
 
-<a href="#ai-controls"><kbd>Top</kbd></a><br>
+<a href="#rules-general-controls"><kbd>Top</kbd></a><br>
 -------
-### AI Production Enhancements
+### Gamemode Controls
 <br>
 
-The AI production functions have been enchanced significantly to allow the AI player to use the new features in this engine modification.
-For Buildings, the features are listed in a separate <a href="#ai-controls">section</a>.
 
-<details><summary><b>Infantry / Unit production</b></summary>
- 
-For both Infantry and Unit production, priority is given as follows:
+<table><tr><td width="1012"><samp>
+Capture the Flag
+</samp></td></tr><tr><td><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
 
-|Step          |Condition                                                                   |Comments                                                  
-:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
-|Teams         |If any team member needs to be built                                        |Prerequisite and owner checks are ignored
-|Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
-|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
-
-See <a href="./infantrytypes.md/#ai-autobase-controls">InfantryType</a> and <a href="./unittypes.md/#ai-autobase-controls">UnitType</a> AI autobase controls.
-
-</details>
-
-
-<details><summary><b>Aircraft production</b></summary>
- 
-For both Infantry and Unit production, priority is given as follows:
-
-|Step          |Condition                                                                   |Comments                                                  
-:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
-|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected, selected randomly. AI will build helis before airfield-bound aircraft
-
-</details>
-
-
-<details><summary><b>Building production</b></summary>
- 
-For both Infantry and Unit production, priority is given as follows:
-
-|Step          |Condition                                                                   |Comments                                                  
-:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
-|BaseNodes     |If any base node needs to be built                                          |Prerequisite and owner checks are ignored
-|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only buildings fulfilling prerequisite checks are respected
-
-See this <a href="#base-building">section</a> for AI autobase controls.
-
-</details>
-
-
-
-<a href="#ai-controls"><kbd>Top</kbd></a><br>
--------
-### AI Settings
-<br>
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules/Map}</code> ► [AI]  ► EasyAIGoldValue<br>
-<code>{Rules/Map}</code> ► [AI]  ► EasyAIGemValue<br>
-<code>{Rules/Map}</code> ► [AI]  ► NormalAIGoldValue<br>
-<code>{Rules/Map}</code> ► [AI]  ► NormalAIGemValue<br>
-<code>{Rules/Map}</code> ► [AI]  ► HardAIGoldValue<br>
-<code>{Rules/Map}</code> ► [AI]  ► HardAIGemValue
-</samp></td><td width="120"><samp>Integer<br>Integer<br>Integer<br>Integer<br>Integer<br>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
- 
-```New Logic```
-
-When an Ore Truck belonging to an AI dumps its ore into a Refinery, the value received are replaced by these amount.
-If not specified, reverts to [General] ► `GoldValue` and `GemValue`.
-
+Capture the flag can now be enabled for skirmish. Westwood added specific checks to disable this game mode for skirmish, but I don't know why. Be warned.
 </details></td></tr></table>
 
 
-<a href="#ai-controls"><kbd>Top</kbd></a><br>
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [Aftermath] ► AftermathFastBuildSpeed
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Inherited from iran's r-series```
+
+New **RULES.INI** `AftermathFastBuildSpeed`= yes/no keyword under the section [Aftermath], with this enabled there won't be a cap for build speed increase when you buy additional production facilities of the same type (e.g. more than two Barracks)and the Aftermath expansion is installed. If you want to use this online you need to play versus other players running this patch and the "Force AM fast build speed" RULES.INI file (this is also available as a RedAlertConfig.exe option).
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► ParabombsInMultiplayer
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
+
+When enabled it will make parabombs available in multiplayer.
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► EvacInMP
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
+
+When enabled, the infantry `GNRL` and `EINSTEIN` get evacuated if they enter a Chinook in multiplayer. Enabled by default.
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► BuildOffAlly
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
+
+Allows the player to build off ally buildings.
+</details></td></tr></table>
+
+
+<a href="#rules-general-controls"><kbd>Top</kbd></a><br>
+-------
+### Audio Visual Enhancements
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► NoTeslaZapEffectDelay
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
+
+Suppresses the tesla zap drawing effect, removing artificial latency from the rendering. This may cause tesla bolts to be invisible.
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► NoScreenShake
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from iran's r-series```
+
+Suppresses full screen shake, removing artificial latency from the rendering, especially if there are several explosions happening at once. 
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► ScalePowerBar
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+Changes in the power meter is hardly seen when the player does above 1600 power.
+If enabled, the power bar will scale with increased power generation and consumption. 
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [General]  ► TanyaDeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DogDeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport1<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport2<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport3<br>
+<code>{Rules/Map}</code> ► [General]  ► DeathReport4
+
+</samp></td><td width="120"><samp>List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List<br>
+List
+</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```New Logic```
+
+Replaces defaults for the infantry responses. See <a href="./infantrytypes.md/#custom-voices">InfantryTypes</a> for more details.
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [General] ► RemapJammedBuildings
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set to true, remaps jammed buildings using the Shade remap. See <a href="./buildingtypes.md/#jamming-buildings">BuildingTypes</a> for more details. 
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [General]  ► UseAtomWhiteScreenEffectInMP<br>
+[General]  ► UseSinglePlayerAtomDamage<br>
+[General]  ► AtomRadius
+</samp></td><td width="120"><samp>Boolean<br>Boolean<br>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Inherited from iran's r-series)```
+
+Atomic weapon controls. See <a href="./warheads.md/#atomic-weapons">Warheads</a> for more details. 
+</details></td></tr></table>
+
+
+<a href="#rules-general-controls"><kbd>Top</kbd></a><br>
+-------
+### Fix Toggles
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [General] ► FixFormationSpeed
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+```Inherited from AlexB's Arda / iran's r-series```
+
+Optional fix for the formation exploit, the slowest unit speed is used now as formation speed when this fix is enabled. This fix is applied by default for skirmish and single player, but not in multiplayer.
+</details></td></tr></table>
+
+
+<table><tr><td width="892"><samp>
+<code>{Rules}</code> ► [General]  ► FixWideAreaDamage
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="2"><details><summary><b>View</b></summary>
+
+Large explosions with a very large area of effect (Nuke, Monster Tank explosions) had their damage values calculated incorrectly - the damage increases the further it is from the epicenter.
+
+This fix inverts the relationship so that the epicenter receives the maximum damage, and the radial edge receives 0 damage. 
+</details></td></tr></table>
+
+
+
+<a href="#rules-general-controls"><kbd>Top</kbd></a><br>
 -------
 ### Base Building
 <br>
@@ -197,7 +288,7 @@ Note that enabling this will override the repair setting on preplaced buildings,
 </details></td></tr></table>
 
 
-<a href="#ai-controls"><kbd>Top</kbd></a><br>
+<a href="#rules-general-controls"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>AI Controls</kbd></kbd><br>
 

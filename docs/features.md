@@ -72,9 +72,10 @@ In the meantime, you may refer to the below for information.
 </samp></details>
 
 
-<details><summary>Rules Options</summary><samp>
+<details><summary>Rules Options (open for section details)</summary><samp>
 
- - [AI](./ai.md) 
+ - [General](./rules_ini_general.md) 
+ - [AI](./rules_ini_ai.md) 
 </samp></details>
 
 
@@ -127,7 +128,6 @@ In the meantime, you may refer to the below for information.
  - [Gameplay Corrections](./fixes.md#gameplay-corrections) 
    - Overriding Building Power Supply/Drain
    - Resign Fix
-   - <code>{Rules}</code> ► [AI]  ► FixAISendingTanksTopLeft
    - Engineer Q Move Fix
    - Ore Mine Foundation Fix
    - Persistent Chrono Vortex Fix
@@ -170,14 +170,6 @@ In the meantime, you may refer to the below for information.
  - [Gamemode Changes](./other_changes.md#gamemode-changes)
    - Capture the Flag
    - Enable Greece, Spain and Turkey in Multiplayer
-   - <code>{Rules}</code> ► [Aftermath] ► AftermathFastBuildSpeed
-   - <code>{Rules}</code> ► [AI] ► RemoveAITechupCheck
-   - <code>{Rules}</code> ► [AI] ► FixAIParanoid
-   - <code>{Rules}</code> ► [AI] ► FixAIAlly
-   - <code>{Rules}</code> ► [AI] ► ComputerParanoidForceDisabledSkirmish
-   - <code>{Rules}</code> ► [General] ► FixFormationSpeed
-   - <code>{Rules}</code> ► [General] ► ParabombsInMultiplayer
-   - <code>{Rules}</code> ► [General] ► EvacInMP
    - Include Maps from Expansions
    - Allied Victory with AI
 

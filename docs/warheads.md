@@ -109,7 +109,7 @@ Atom damage is generally reduced in multiplayer battles. Toggle this on to use s
 
 The radial range of nuclear warheards in the scenario, not including the center cell. Effectively the blast covers a square area of `AtomRadius * 2 + 1`. 
 
-Note that due to a bug in the original game, damage decreases in strength closer to the center; the lack of smudges will become apparent above range 40.
+Note that due to a bug in the original game, damage decreases in strength closer to the center; the lack of smudges will become apparent above range 40. Use [General]  ► `FixWideAreaDamage` to fix this bug.
 </details></td></tr></table>
 
 

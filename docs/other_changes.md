@@ -14,14 +14,6 @@ This section covers changes that are not part of other sections. Usually these h
  - [Gamemode Changes](#gamemode-changes)
    - Capture the Flag
    - Enable Greece, Spain and Turkey in Multiplayer
-   - <code>{Rules}</code> ► [Aftermath] ► AftermathFastBuildSpeed
-   - <code>{Rules}</code> ► [AI] ► RemoveAITechupCheck
-   - <code>{Rules}</code> ► [AI] ► FixAIParanoid
-   - <code>{Rules}</code> ► [AI] ► FixAIAlly
-   - <code>{Rules}</code> ► [AI] ► ComputerParanoidForceDisabledSkirmish
-   - <code>{Rules}</code> ► [General] ► FixFormationSpeed
-   - <code>{Rules}</code> ► [General] ► ParabombsInMultiplayer
-   - <code>{Rules}</code> ► [General] ► EvacInMP
    - Include Maps from Expansions
    - Allied Victory with AI
 
@@ -109,102 +101,12 @@ Ensure the [Basic] section of the map is at the top, or the game might not read 
 <br>
 
 <table><tr><td width="1012"><samp>
-Capture the Flag
-</samp></td></tr><tr><td><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Capture the flag can now be enabled for skirmish. Westwood added specific checks to disable this game mode for skirmish, but I don't know why. Be warned.
-</details></td></tr></table>
-
-
-<table><tr><td width="1012"><samp>
 Enable Greece, Spain and Turkey in Multiplayer
 </samp></td></tr><tr><td><details><summary><b>View</b></summary>
   
 ```Inherited from iran's r-series```
 
 Greece, Spain and Turkey are now all selectable in multiplayer.
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [Aftermath] ► AftermathFastBuildSpeed
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-
-```Inherited from iran's r-series```
-
-New **RULES.INI** `AftermathFastBuildSpeed`= yes/no keyword under the section [Aftermath], with this enabled there won't be a cap for build speed increase when you buy additional production facilities of the same type (e.g. more than two Barracks)and the Aftermath expansion is installed. If you want to use this online you need to play versus other players running this patch and the "Force AM fast build speed" RULES.INI file (this is also available as a RedAlertConfig.exe option).
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [AI] ► RemoveAITechupCheck
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Added a new **RULES.INI** keyword `RemoveAITechupCheck`= (yes/no) under the [AI] section, when set to yes the AI will tech up to Radar Dome and beyond even when there are no Helipads or Airfields on the map. This fix is always enabled in skirmish.
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [AI] ► FixAIParanoid
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Added a keyword `FixAIParanoid`= (yes/no) under the [AI] section of **RULES.INI**, when set to yes the Paranoid= setting will be fixed. This Paranoid= setting controls whether all the AI should ally among themselves to fight you when one player is defeated. Paranoid=yes enables this, but this was broken in patch 3.03. This fix is always enabled in skirmish.
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [AI] ► FixAIAlly
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Added a keyword `FixAIAlly`= (yes/no) under the [AI] section of **RULES.INI**, when set to yes you can ally with AI players. This fix is always enabled in skirmish.
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [AI] ► ComputerParanoidForceDisabledSkirmish
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-The "computer paranoid" setting has been forced off in skirmish. To disable this, under the [AI] section of RULES.INI set ComputerParanoidForceDisabledSkirmish=no. This keyword is only read at startup from RULES.INI (aka globally).
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [General] ► FixFormationSpeed
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Optional fix for the formation exploit, the slowest unit speed is used now as formation speed when this fix is enabled. The RULES.INI keyword FixFormationSpeed= (yes/no) keyword under the [General] section controls whether this fix is on or off, it's off when this keyword is missing. This fix is applied by default for skirmish and single player, but not online to stay compatible with 3.03 online. (Taken from Arda.dll.inj by AlexB)
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [General] ► ParabombsInMultiplayer
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Added a new RULES.INI keyword ParabombsInMultiplayer= (yes/no) under the [General] section, when enabled it will make parabombs available in multiplayer (by default after an Airfield is bought).
-</details></td></tr></table>
-
-
-<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
-<code>{Rules}</code> ► [General] ► EvacInMP
-</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
-  
-```Inherited from iran's r-series```
-
-Added a new global **RULES.INI** keyword `EvacInMP`= (yes/no) under the [General] section , when enabled GNRL and EINSTEIN get evacuated if they enter a Chinook in multiplayer. If disabled this doesn't happen. Enabled by default to stay compatible with 3.03 online.
 </details></td></tr></table>
 
 
