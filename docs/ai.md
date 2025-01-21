@@ -24,14 +24,14 @@ A guide on how to interpret the information is available [here](./dockeys.md).
 <br>
 
 The AI production functions have been enchanced significantly to allow the AI player to use the new features in this engine modification.
-For Buildings, the features are listed in a separate <a href="#ai-controls">section</a><br>.
+For Buildings, the features are listed in a separate <a href="#ai-controls">section</a>.
 
 <details><summary><b>Infantry / Unit production</b></summary>
  
 For both Infantry and Unit production, priority is given as follows:
 
 |Step          |Condition                                                                   |Comments                                                  
-:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
 |Teams         |If any team member needs to be built                                        |Prerequisite and owner checks are ignored
 |Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
 |Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
@@ -46,7 +46,7 @@ See <a href="./infantrytypes.md/#ai-autobase-controls">InfantryType</a> and <a h
 For both Infantry and Unit production, priority is given as follows:
 
 |Step          |Condition                                                                   |Comments                                                  
-:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
 |Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected, selected randomly. AI will build helis before airfield-bound aircraft
 
 </details>
@@ -57,7 +57,7 @@ For both Infantry and Unit production, priority is given as follows:
 For both Infantry and Unit production, priority is given as follows:
 
 |Step          |Condition                                                                   |Comments                                                  
-:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+:--------------|:---------------------------------------------------------------------------|:------------------------------------------------------
 |BaseNodes     |If any base node needs to be built                                          |Prerequisite and owner checks are ignored
 |Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
 |Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
@@ -107,21 +107,21 @@ This allows several modding improvements to the Skirmish/Multiplayer AI, and Sin
  - The AI no longer builds buildings that it is not an Owner of (unless DoubleOwned is in play). This allows you to use faction-specific replacements, and the AI can build them instead of the original. 
  - Muitlple buildings can be sloted into the same `AIBuildType` category. You are no longer stuck with hardcoded structures like Ore Refinery, Barracks, War Factory, Tesla Coil, Helipad, Airfield checks  
 
-Thw new BaseBuilding base plan is as follows:
+The new BaseBuilding base plan is as follows:
 
 |Step              |Condition                                                                                     |Build                                              |Priority
 :------------------|:---------------------------------------------------------------------------------------------|:--------------------------------------------------|:--------------------------------------------------
-|Refinery          |Number of refineries below [AI] ► `RefineryLimit` and below [AI] ► `RefineryRatio`            |Any Refinery (`AIBuildType`=REFINERY)              |If no refinery, `HIGH`. Otherwise, `NORMAL`
+|Refinery          |Number of refineries below [AI] ► `RefineryLimit` <br>and below [AI] ► `RefineryRatio`        |Any Refinery (`AIBuildType`=REFINERY)              |If no refinery, `HIGH`. <br>Otherwise, `NORMAL`
 |Low Power         |Base at low power                                                                             |Any Power (`AIBuildType`=POWER)                    |`HIGH`
-|Power             |Base excess power below [AI] ► `PowerSurplus`                                                 |Any Power (`AIBuildType`=POWER)                    |If no refinery, `LOW`. Otherwise, `NORMAL`
-|Barracks          |Number of barracks below [AI] ► `BarracksLimit` and below [AI] ► `BarracksRatio`              |Any Barracks (`AIBuildType`=BARRACKS)              |If no barracks, `NORMAL`. Otherwise, `LOW`
-|War Factory       |Number of war factories below [AI] ► `WarLimit` and below [AI] ► `WarRatio`                   |Any War Factory (`AIBuildType`=WARFACTORY)         |If no factory, `NORMAL`. Otherwise, `LOW`
-|Base Defenses     |Number of defenses below [AI] ► `DefenseLimit` and below [AI] ► `DefenseRatio`                |Any Defense (`AIBuildType`=DEFENSE)                |`NORMAL`
-|AA Defenses       |Number of AA defenses below [AI] ► `AALimit` and below [AI] ► `AARatio`                       |Any AA Defense (`AIBuildType`=AA.DEFENSE)          |If enemy house aircraft > defenses, `HIGH`. Otherwise, `NORMAL`
-|Adv. Defenses     |Number of adv. defenses below [AI] ► `TeslaRatio` and below [AI] ► `TeslaLimit`               |Any Advanced Defense (`AIBuildType`=ADV.DEFENSE)   |`NORMAL`
+|Power             |Base excess power below [AI] ► `PowerSurplus`                                                 |Any Power (`AIBuildType`=POWER)                    |If no refinery, `LOW`. <br>Otherwise, `NORMAL`
+|Barracks          |Number of barracks below [AI] ► `BarracksLimit` <br>and below [AI] ► `BarracksRatio`          |Any Barracks (`AIBuildType`=BARRACKS)              |If no barracks, `NORMAL`. <br>Otherwise, `LOW`
+|War Factory       |Number of war factories below [AI] ► `WarLimit` <br>and below [AI] ► `WarRatio`               |Any War Factory (`AIBuildType`=WARFACTORY)         |If no factory, `NORMAL`. <br>Otherwise, `LOW`
+|Base Defenses     |Number of defenses below [AI] ► `DefenseLimit` <br>and below [AI] ► `DefenseRatio`            |Any Defense (`AIBuildType`=DEFENSE)                |`NORMAL`
+|AA Defenses       |Number of AA defenses below [AI] ► `AALimit` <br>and below [AI] ► `AARatio`                   |Any AA Defense (`AIBuildType`=AA.DEFENSE)          |If enemy house aircraft > defenses, `HIGH`. <br>Otherwise, `NORMAL`
+|Adv. Defenses     |Number of adv. defenses below [AI] ► `TeslaRatio` <br>and below [AI] ► `TeslaLimit`           |Any Advanced Defense (`AIBuildType`=ADV.DEFENSE)   |`NORMAL`
 |Tech              |A tech building is available                                                                  |Any Tech (`AIBuildType`=TECH)                      |`NORMAL`
-|Helipads          |Number of barracks below [AI] ► `HelipadLimit` and below [AI] ► `HelipadRatio`                |Any Barracks (`AIBuildType`=HELIPAD)               |`NORMAL`
-|Airstrips         |Number of barracks below [AI] ► `AirstripLimit` and below [AI] ► `AirstripRatio`              |Any Barracks (`AIBuildType`=AIRSTRIP)              |`NORMAL`
+|Helipads          |Number of barracks below [AI] ► `HelipadLimit` <br>and below [AI] ► `HelipadRatio`            |Any Barracks (`AIBuildType`=HELIPAD)               |`NORMAL`
+|Airstrips         |Number of barracks below [AI] ► `AirstripLimit` <br>and below [AI] ► `AirstripRatio`          |Any Barracks (`AIBuildType`=AIRSTRIP)              |`NORMAL`
 |Generic           |Any remaining buildings                                                                       |Any Generic (`AIBuildType`=GENERIC)                |`NORMAL`
 
  - Amongst all considerations, the first category with the highest priority will be selected for construction.
