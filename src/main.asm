@@ -144,6 +144,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/ai_units.asm" 
 %include "src/features/ai_infantry.asm" 
 %include "src/features/ai_building.asm" 
+%include "src/features/ai_aircrafts.asm" 
 
 ;feature: new prerequisite system
 %include "src/features/new_prerequisite_system.asm" 

@@ -6,6 +6,7 @@ The computer plays along a script to offer some challenge against the player.
 -------
 
  - [Documentation Guide](#documentation-guide)
+ - [AI Production Enhancements](#ai-production-enhancements) 
  - [AI Settings](#ai-settings) 
  - [Base Building](#base-building) 
 
@@ -15,6 +16,56 @@ The computer plays along a script to offer some challenge against the player.
 <br>
 
 A guide on how to interpret the information is available [here](./dockeys.md).
+
+
+<a href="#ai-controls"><kbd>Top</kbd></a><br>
+-------
+### AI Production Enhancements
+<br>
+
+The AI production functions have been enchanced significantly to allow the AI player to use the new features in this engine modification.
+For Buildings, the features are listed in a separate <a href="#ai-controls">section</a><br>.
+
+<details><summary><b>Infantry / Unit production</b></summary>
+ 
+For both Infantry and Unit production, priority is given as follows:
+
+|Step          |Condition                                                                   |Comments                                                  
+:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+|Teams         |If any team member needs to be built                                        |Prerequisite and owner checks are ignored
+|Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
+|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
+
+See <a href="./infantrytypes.md/#ai-autobase-controls">InfantryType</a> and <a href="./unittypes.md/#ai-autobase-controls">UnitType</a> AI autobase controls.
+
+</details>
+
+
+<details><summary><b>Aircraft production</b></summary>
+ 
+For both Infantry and Unit production, priority is given as follows:
+
+|Step          |Condition                                                                   |Comments                                                  
+:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected, selected randomly. AI will build helis before airfield-bound aircraft
+
+</details>
+
+
+<details><summary><b>Building production</b></summary>
+ 
+For both Infantry and Unit production, priority is given as follows:
+
+|Step          |Condition                                                                   |Comments                                                  
+:--------------|:----------------------------------------------- ---------------------------|:------------------------------------------------------
+|BaseNodes     |If any base node needs to be built                                          |Prerequisite and owner checks are ignored
+|Harvester     |If house AI is above [AI] ► `Harvester`                                     |Only harvesters fulfilling prerequisite checks are respected
+|Autobase      |If house AI is above [AI] ► `Production` or Autobase AI is enabled          |Only units fulfilling prerequisite checks are respected
+
+See this <a href="#base-building">section</a> for AI autobase controls.
+
+</details>
+
 
 
 <a href="#ai-controls"><kbd>Top</kbd></a><br>
