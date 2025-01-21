@@ -31,6 +31,8 @@ _Init_Game_Hook_Load:
     
     call_INIClass__Get_Bool Globals___RuleINI,str_General,str_FixWideAreaDamage,0
     mov  [Rules.General.FixWideAreaDamage],al
+    call_INIClass__Get_Bool Globals___RuleINI,str_General,str_ScalePowerBar,0
+    mov  byte[Rules.General.ScalePowerBar],al
 
     ; move to _RulesClass__AI_Load?
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_FixAIParanoid,0

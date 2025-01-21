@@ -46,6 +46,7 @@ Rules.General.EvacInMP db 1
 Rules.General.RemapJammedBuildings db 0
 Rules.General.FixFormationSpeed db 0
 Rules.General.FixWideAreaDamage db 0
+Rules.General.ScalePowerBar db 0
 Rules.General.NoTeslaZapEffectDelay db 0
 Rules.General.NoScreenShake db 0
 Rules.General.BuildOffAlly db 0

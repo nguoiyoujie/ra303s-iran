@@ -252,6 +252,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/building_powerplant_pips.asm"
 %include "src/features/building_specialized_unhardcode.asm"
 %include "src/features/type_extensions/AircraftTypeClass/aircraft_isfixedwing.asm"
+%include "src/features/power_autoscale.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

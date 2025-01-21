@@ -307,6 +307,7 @@ str_FixMagicBuild                                 db"FixMagicBuild",0
 ; str_ParabombsInMultiplayer (multi-use)
 ; str_FixAIAlly 
 str_FixWideAreaDamage                             db"FixWideAreaDamage",0
+str_ScalePowerBar                                 db"ScalePowerBar",0
 %define str_MCVUndeploy                           0x005EF831 ; "MCVUndeploy"
 %define str_AllyReveal                            0x005EF81A ; "AllyReveal"
 str_ForcedAlliances                               db"ForcedAlliances",0
