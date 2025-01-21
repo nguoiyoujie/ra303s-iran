@@ -35,6 +35,8 @@
 %define UnitTypeClass.Bit.IsWaterBound                     5    
 %define UnitTypeClass.Offset.Anim_HasAPCDoor               0x193    ; BOOL
 %define UnitTypeClass.Bit.Anim_HasAPCDoor                  6   
+%define UnitTypeClass.Offset.UsePrimaryColor               0x193    ; BOOL
+%define UnitTypeClass.Bit.UsePrimaryColor                  7    
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -89,6 +91,7 @@ str.UnitTypeClass.IsNoFireWhileMoving           db"IsNoFireWhileMoving",0       
 str.UnitTypeClass.IsNoSmoke                     db"IsNoSmoke",0                   ;new ini feature
 str.UnitTypeClass.IsWaterBound                  db"WaterBound",0                  ;new ini feature
 str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
+str.UnitTypeClass.UsePrimaryColor               db"UsePrimaryColor",0             ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
@@ -173,6 +176,10 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.Anim_HasAPCDoor.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, reg_output
 %define UnitTypeClass.Anim_HasAPCDoor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, value
 %define UnitTypeClass.Anim_HasAPCDoor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.Anim_HasAPCDoor, UnitTypeClass.Bit.Anim_HasAPCDoor, str.UnitTypeClass.Anim_HasAPCDoor
+
+%define UnitTypeClass.UsePrimaryColor.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, reg_output
+%define UnitTypeClass.UsePrimaryColor.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, value
+%define UnitTypeClass.UsePrimaryColor.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, str.UnitTypeClass.UsePrimaryColor
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        ObjectTypeClass.GetInt                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.Type, value

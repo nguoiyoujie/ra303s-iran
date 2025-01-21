@@ -40,12 +40,17 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
     call 0x00580854 ; ObjectTypeClass & const UnitClass::Class_Of(void)
     mov  edi,eax
     mov  eax,[edi+0x196]
-    cmp  byte al,0x0B ; Is MCV?
-    jz   .Normal_Code
-    cmp  byte al,0x07 ; Is Ore Truck?
-    jz   .Normal_Code
-
-    ; just to be sure
+    push eax
+    movzx eax,al
+    push edi
+    UnitTypeClass.FromIndex(eax,edi)
+    UnitTypeClass.UsePrimaryColor.Get(edi,al)
+    test al,al
+    pop  edi
+    pop  eax
+.UsePrimaryColor:
+    jnz  .Normal_Code
+.UseSecondaryColor:
     jmp  .Draw_Secondary_Color_Scheme
 
 .Normal_Code:

@@ -328,6 +328,18 @@ Each entry are as follows:
 <br>
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► UsePrimaryColor
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set to true, the unit will retain the use of the Primary color when [HouseType]  ► `SecondaryColor` is used.
+
+Defaults to yes for the Ore Truck and MCV, no to every other unit.
+
+</samp>
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► HasAPCDoor
 
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>

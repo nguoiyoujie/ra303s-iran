@@ -118,11 +118,15 @@ Init_Heap_OverrideExistingUnitTypes:
     UnitTypeClass.FromIndex(UnitType.APC,edi)
     UnitTypeClass.Anim_HasAPCDoor.Set(edi,1)
 
+    UnitTypeClass.FromIndex(UnitType.HARV,edi)
+    UnitTypeClass.UsePrimaryColor.Set(edi,1)
+
     UnitTypeClass.FromIndex(UnitType.STNK,edi)
     UnitTypeClass.Anim_HasAPCDoor.Set(edi,1)
 
     UnitTypeClass.FromIndex(UnitType.MCV,edi)
     UnitTypeClass.DeploysInto.Set(edi,BuildingType.FACT)
+    UnitTypeClass.UsePrimaryColor.Set(edi,1)
 
     UnitTypeClass.FromIndex(UnitType.V2RL,edi)
     UnitTypeClass.AmmoReloadRate.Set(edi,30)

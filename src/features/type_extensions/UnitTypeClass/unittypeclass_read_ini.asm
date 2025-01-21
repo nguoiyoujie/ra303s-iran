@@ -31,6 +31,9 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.IsJammer.Read(esi,edi)
     UnitTypeClass.IsGapper.Read(esi,edi)
     UnitTypeClass.IsNoSmoke.Read(esi,edi)
+    UnitTypeClass.IsWaterBound.Read(esi,edi)
+    UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
+    UnitTypeClass.UsePrimaryColor.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     ;UnitTypeClass.Type.Read(esi,edi)
@@ -56,8 +59,7 @@ _UnitTypeClass__Read_INI_Extended:
     UnitTypeClass.Response_Deploy.Read(esi,edi,_GetUnitResponseDeployFromString)
     UnitTypeClass.AmmoImageCount.Read(esi,edi)  
     UnitTypeClass.AmmoTurretCount.Read(esi,edi)  
-    UnitTypeClass.IsWaterBound.Read(esi,edi)
-    UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
+
     UnitTypeClass.AIBuildLimit.Read(esi,edi)
     UnitTypeClass.AIBuildWeight.Read(esi,edi)
 
