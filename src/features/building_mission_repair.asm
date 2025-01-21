@@ -8,6 +8,7 @@
 ;----------------------------------------------------------------
 @HOOK 0x0045CF1B _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck
 @HOOK 0x0045CF94 _BuildingClass_Mission_Repair_RepairBay_Unhardcode
+@HOOK 0x0045D376 _BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode
 
 ;Overrides the structure type check with a FactoryType=xx check
 _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck:
@@ -28,3 +29,21 @@ _BuildingClass_Mission_Repair_RepairBay_Unhardcode:
     jnz  0x0045D2FF
 .NotARepairPad:
     jmp  0x0045CFA0
+
+
+_BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode:
+    movzx eax,al
+    push edi
+    BuildingTypeClass.FromIndex(eax,edi)
+    BuildingTypeClass.IsHelipad.Get(edi,al)
+    test al,al
+    jnz  .CanReload
+    BuildingTypeClass.IsAirfield.Get(edi,al)
+    test al,al
+    jz   .Normal
+.CanReload:
+    pop  edi
+    jmp  0x0045D6C8
+.Normal:
+    pop  edi
+    jmp  0x0045D3B5
