@@ -8,11 +8,11 @@ _BuildingClass__Building_Crew_House_NoBuildingCrew:
     Save_Registers
 
     mov  edx,[eax+0x11]  ; vtable
-    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+HouseClass.Offset.NoBuildingCrew],1
+    test byte[eax+HouseClass.Offset.NoBuildingCrew],0x10 ; offset 5
     Restore_Registers
-    jz   .No_Building_Crew
+    jnz  .No_Building_Crew
 
 .Ret:
     mov  edx,[eax+0CDh]
@@ -27,11 +27,11 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
 
     mov  eax,edi ; make sure eax has this pointer
     mov  edx,[eax+0x11]  ; vtable
-    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+HouseClass.Offset.InstantCapture],1
+    test byte[eax+HouseClass.Offset.InstantCapture],0x8 ; offset 4
     Restore_Registers
-    jz   .Capture_Building
+    jnz  .Capture_Building
 
 .Normal_Code:
     and  eax,0FFh
@@ -46,11 +46,11 @@ _InfantryClass__What_Action_House_Instant_Capture:
 
     mov  eax,ebx ; make sure eax has this pointer
     mov  edx,[eax+0x11]  ; vtable
-    call dword [edx+8] ; HousesType const TechnoClass::Owner(void)
+    call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    cmp  byte [eax+HouseClass.Offset.InstantCapture],1
+    test byte[eax+HouseClass.Offset.InstantCapture],0x8 ; offset 4
     Restore_Registers
-    jz   .Capture_Building
+    jnz  .Capture_Building
 
 .Normal_Code:
     mov  bx,[Globals___EngineerCaptureLevel] ; EngineerCaptureLevel

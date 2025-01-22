@@ -121,5 +121,50 @@ _Replace_HouseTriggers_53AB84:
 @SETB 0x0053AA2F 0x20 ; void Fill_In_Data(void)
 @SETB 0x0053AB99 0x20 ; void Clear_Scenario(void)
 
+@HOOK 0x004D38FA _HouseClass__HouseClass_Reset_NewData
+@HOOK 0x004D8CAE _HouseClass__Init_Data_Reset_NewData ; for multiplayer, might not be necessary due to above hook to constructor
 
+_HouseClass__HouseClass_Reset_NewData:
+; edx is the house
+    mov  edi,dword[eax-0x1781]
+    push eax
+    HouseClass.SecondaryColorScheme.Set(edx,0xFF) 
+    HouseClass.InstantCapture.Set(edx,0) 
+    HouseClass.NoBuildingCrew.Set(edx,0) 
+    HouseClass.AllyTheNeutralHouse.Set(edx,0) 
+
+    pop  eax
+    jmp  0x004D3900
+
+
+_HouseClass__Init_Data_Reset_NewData: ; for multiplayer
+; esi is the house
+; bl is the actlike housetype
+; trnasfer data
+; Warning: this works only if you do not populate Multi1-8 houses with singleplayer data
+
+    cmp  dword [InCoopMode],1
+    jz   .Next
+    mov  dword[eax+0x197],ecx ; Credits
+.Next:
+    push eax
+    push edi
+    push esi
+    push ebx
+    mov  esi,edi
+    movzx ebx,bl
+    HouseClass.FromIndex(ebx,edi)
+    HouseClass.SecondaryColorScheme.Get(edi,bl) 
+    HouseClass.SecondaryColorScheme.Set(esi,bl) 
+    HouseClass.InstantCapture.Get(edi,bl) 
+    HouseClass.InstantCapture.Set(esi,bl) 
+    HouseClass.NoBuildingCrew.Get(edi,bl)
+    HouseClass.NoBuildingCrew.Set(esi,bl) 
+    HouseClass.AllyTheNeutralHouse.Get(edi,bl) 
+    HouseClass.AllyTheNeutralHouse.Set(esi,bl) 
+    pop  ebx
+    pop  esi
+    pop  edi
+    pop  eax
+    jmp  0x004D8CB4
 

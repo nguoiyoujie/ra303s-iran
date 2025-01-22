@@ -36,4 +36,53 @@
 ;%define HouseTypeClass.HeliUnit.Get(ptr_type,reg_output)                   ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, reg_output
 ;%define HouseTypeClass.HeliUnit.Set(ptr_type,value)                        ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, value
 ;%define HouseTypeClass.HeliUnit.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadByte               ptr_type, ptr_rules, HouseTypeClass.Offset.HeliUnit, str.HouseTypeClass.HeliUnit
+_GetHouseTypeIDFromString:
+    ;select HouseType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    HouseTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn
 
+
+_GetHouseTypeIDFromIntOrString:
+    ;select HouseType by performing string compare on eax
+    push ebx
+    push edx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    ; check that it is zero string value
+    mov  ebx,eax
+    mov  edx,str_Zero
+    call _strcmpi
+    test eax,eax
+    jz   .Retn ; match
+.IntegerCheck:
+    ; check if it is a positive integer value
+    mov  eax,ebx
+    call 0x005BC8B7 ; _atoi
+    test eax,eax
+    jz   .StringCheck
+    cmp  eax,[HouseTypeClass.Count]
+    jbe  .Retn
+.StringCheck:
+    mov  eax,ebx
+    HouseTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop  edx
+    pop  ebx
+    retn

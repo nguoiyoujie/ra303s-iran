@@ -55,19 +55,20 @@
 Statistics_Packet_Sent: db    0
 
 _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event:
-    mov  byte[eax+HouseClass.Offset.Resigned],1
+    or   byte[eax+HouseClass.Offset.Resigned],4 ; offset 3
     call HouseClass__Flag_To_Die
     jmp  0x004BD204
+
 
 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info:
     cmp  edx, 0
     jz   .Ret
-    mov  byte[eax+HouseClass.Offset.ConnectionLost],1 ; for connection lost
-
+    or   byte[eax+HouseClass.Offset.ConnectionLost],2 ; offset 2 for connection lost
 .Ret:
-    test byte[eax+42h],2
+    test byte[eax+HouseClass.Offset.IsHuman],2
     jz   0x00506837
     jmp  0x0050667C
+
 
 _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game:
     jmp  0x0052B916
@@ -122,6 +123,8 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  eax, 10h
     xor  ebx, ebx
     mov  bl, byte[esi+HouseClass.Offset.ConnectionLost]
+    and  bl,0x2
+    shr  bl,1
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .ConnectionLost_Field_Operator_New_Failed
@@ -141,6 +144,8 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  eax, 10h
     xor  ebx, ebx
     mov  bl, byte[esi+HouseClass.Offset.Resigned]
+    and  bl,0x4
+    shr  bl,2
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .Resigned_Field_Operator_New_Failed
@@ -198,7 +203,8 @@ _Send_Statistics_Packet_New_Per_Player_Fields:
 
     mov  eax, 10h
     xor  ebx,ebx
-    mov  bl, byte[esi+HouseClass.Offset.IsSpectator] ; Alliances bit field
+    mov  bl,byte[esi+HouseClass.Offset.IsSpectator] ; Alliances bit field
+    and  bl,1
     call 0x005BBF80 ; operator new(uint)
     test eax, eax
     jz   .IsSpectator_Field_Operator_New_Failed

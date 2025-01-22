@@ -14,103 +14,41 @@
 @HOOK 0x004DDE80 _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
 @HOOK 0x00540F20 _ScoreClass__Presentation_Proper_Country_Check
 
-allyneutral db 1
-
-
+    
 _HouseClass__Read_INI:
     call 0x004D33E4 ; HouseClass::HouseClass(HousesType)
     mov  [ebp-0x24],eax
 
-    Save_Registers
-    mov  esi,[ebp-0x24] ; HouseClass_This
-    mov  ecx,0xFF   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_Colour  ; key
-    call INIClass__Get_Int
-    cmp  byte al,0xFF
-    jz   .No_Custom_Colour
-    mov  [esi+HouseClass.Offset.RemapColor],al
+    push edx
+    push esi
+    push edi
+    ; HouseClass does not have an INI name. Instead of fetching from HouseTypeClass, grab the existing one in the function
+    mov  esi,eax ; HouseClass_This
+    mov  edx,edi ; section
+    mov  edi,[ebp-0x20] ; INI
 
-.No_Custom_Colour:
-    Restore_Registers
-    Save_Registers
-    mov  esi,[ebp-0x24] ; HouseClass_This
-    mov  ecx,0xFF   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_Color  ; key
-    call INIClass__Get_Int
-    cmp  byte al,0xFF
-    jz   .No_Custom_Color
-    mov  [esi+HouseClass.Offset.RemapColor],al
+    HouseClass.RemapColor.Read1(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.RemapColor.Read2(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.ActLike.Read(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.InstantCapture.Read(esi,edi,edx)
+    HouseClass.NoBuildingCrew.Read(esi,edi,edx)
+    HouseClass.AllyTheNeutralHouse.Read(esi,edi,edx)
+    ;HouseClass.SecondaryColorScheme.Set(esi,0xFF) ; reset color scheme, this completely nullifies reads from earlier INIs (e.g. rules.ini before map.ini...)
+    HouseClass.SecondaryColorScheme.Read(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
 
-.No_Custom_Color:
-    Restore_Registers
-    Save_Registers
-    mov  esi,[ebp-0x24] ; HouseClass_This
-    mov  ecx,0xFF   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_Country ; key
-    call INIClass__Get_Int
-    cmp  byte al,0xFF
-    jz   .No_Custom_Country
-    mov  [esi+0x41],al
-
-.No_Custom_Country:
-    Restore_Registers
-    Save_Registers
-    mov  ecx,0   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_BuildingsGetInstantlyCaptured  ; key
-    call INIClass__Get_Bool
-    mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+HouseClass.Offset.InstantCapture],al
-
-    Restore_Registers
-    Save_Registers
-    mov  ecx,0   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_NoBuildingCrew  ; key
-    call INIClass__Get_Bool
-    mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+HouseClass.Offset.NoBuildingCrew],al
-
-    Restore_Registers
-    Save_Registers
-    mov  ecx,0xFF   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_SecondaryColorScheme ; key
-    call INIClass__Get_Int
-    mov  ecx,[ebp-0x24] ; HouseClass this pointer
-    mov  [ecx+HouseClass.Offset.SecondaryColorScheme],al
-
-    Restore_Registers
-    Save_Registers
-    mov  ecx,1   ; default
-    mov  edx,edi    ; section
-    mov  dword eax,[ebp-20h] ; scenario INI
-    mov  ebx,str_AllyTheNeutralHouse  ; key
-    call INIClass__Get_Int
-
-    mov  byte [allyneutral],al
-
-    Restore_Registers
-    jmp  0x004DDD36
+    pop  edi
+    pop  esi
+    pop  edx
+    jmp  0x004DDD39
 
 
 _HouseClass__Read_INI_Optional_House_Neutral_Ally:
     mov  edx,0Ah
     mov  eax,esi
-    cmp  byte [allyneutral],0
+    test byte[esi+HouseClass.Offset.AllyTheNeutralHouse],1 ; offset 1
     jz   .Ret
     call HouseClass__Make_Ally
 .Ret:
-    mov  byte [allyneutral],1
     jmp  0x004DDE62
 
 

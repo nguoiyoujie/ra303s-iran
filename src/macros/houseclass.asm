@@ -240,14 +240,23 @@
 
 ; Extended
 %define HouseClass.Offset.BPreGroupScan          0x17A8   ; INT (32 bit-field)
-; some empty space 0x17AC-0x17AF
-%define HouseClass.Offset.IsSpectator            0x17B0   ; byte (should be BOOL)
-%define HouseClass.Offset.SpawnLocation          0x17B4   ; word
-%define HouseClass.Offset.ConnectionLost         0x17B8   ; byte (should be BOOL)
-%define HouseClass.Offset.Resigned               0x17BC   ; byte (should be BOOL)
-%define HouseClass.Offset.InstantCapture         0x1800   ; byte (should be BOOL)
-%define HouseClass.Offset.NoBuildingCrew         0x1801   ; byte (should be BOOL)
-%define HouseClass.Offset.SecondaryColorScheme   0x1802   ; byte
+
+%define HouseClass.Offset.IsSpectator            0x17AC   ; byte (should be BOOL)
+%define HouseClass.Bit.IsSpectator               1  
+%define HouseClass.Offset.ConnectionLost         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Bit.ConnectionLost            2
+%define HouseClass.Offset.Resigned               0x17AC   ; byte (should be BOOL)
+%define HouseClass.Bit.Resigned                  3  
+%define HouseClass.Offset.InstantCapture         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Bit.InstantCapture            4  
+%define HouseClass.Offset.NoBuildingCrew         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Bit.NoBuildingCrew            5  
+%define HouseClass.Offset.AllyTheNeutralHouse    0x17AC    ; BOOL
+%define HouseClass.Bit.AllyTheNeutralHouse       6  
+
+; some empty space 0x17AD-0x17AF
+%define HouseClass.Offset.SpawnLocation          0x17B0   ; word
+%define HouseClass.Offset.SecondaryColorScheme   0x17B2   ; byte
 ; some empty space 0x1803-0x180F
 %define HouseClass.Offset.NewBQuantity           0x1810   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewUQuantity           0x1C10   ; should be 256 * 4 bytes
@@ -257,6 +266,98 @@
 ; 0x2C10
 
 ; INI String controls
+str.HouseClass.RemapColor1                       db"Colour",0                          ;new ini feature
+str.HouseClass.RemapColor2                       db"Color",0                           ;new ini feature
+str.HouseClass.ActLike                           db"Country",0                         ;new ini feature
+str.HouseClass.InstantCapture                    db"BuildingsGetInstantlyCaptured",0   ;new ini feature
+str.HouseClass.NoBuildingCrew                    db"NoBuildingCrew",0                  ;new ini feature
+str.HouseClass.SecondaryColorScheme              db"SecondaryColorScheme",0            ;new ini feature
+str.HouseClass.AllyTheNeutralHouse               db"AllyTheNeutralHouse",0             ;new ini feature
+
+
+
+%define HouseClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex            d_index, HouseClass.Count, HouseClass.Array, reg_output
+;%define HouseClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID               d_index, HouseClass.Count, HouseClass.Array, reg_output
+
+;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
+
+%define HouseClass.RemapColor.Get(ptr_type,reg_output)                             ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.RemapColor, reg_output
+%define HouseClass.RemapColor.Set(ptr_type,value)                                  ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.RemapColor, value
+%define HouseClass.RemapColor.Read1(ptr_type,ptr_rules,str_section,function)       HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.RemapColor, str_section, str.HouseClass.RemapColor1, function
+%define HouseClass.RemapColor.Read2(ptr_type,ptr_rules,str_section,function)       HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.RemapColor, str_section, str.HouseClass.RemapColor2, function
+
+%define HouseClass.ActLike.Get(ptr_type,reg_output)                                ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.ActLike, reg_output
+%define HouseClass.ActLike.Set(ptr_type,value)                                     ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.ActLike, value
+%define HouseClass.ActLike.Read(ptr_type,ptr_rules,str_section,function)           HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.ActLike, str_section, str.HouseClass.ActLike, function
+
+%define HouseClass.InstantCapture.Get(ptr_type,reg_output)                         ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, reg_output
+%define HouseClass.InstantCapture.Set(ptr_type,value)                              ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, value
+%define HouseClass.InstantCapture.Read(ptr_type,ptr_rules,str_section)             HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, str_section, str.HouseClass.InstantCapture
+
+%define HouseClass.NoBuildingCrew.Get(ptr_type,reg_output)                         ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, reg_output
+%define HouseClass.NoBuildingCrew.Set(ptr_type,value)                              ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, value
+%define HouseClass.NoBuildingCrew.Read(ptr_type,ptr_rules,str_section)             HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, str_section, str.HouseClass.NoBuildingCrew
+
+%define HouseClass.SecondaryColorScheme.Get(ptr_type,reg_output)                      ObjectTypeClass.GetByte             ptr_type, HouseClass.Offset.SecondaryColorScheme, reg_output
+%define HouseClass.SecondaryColorScheme.Set(ptr_type,value)                           ObjectTypeClass.SetByte             ptr_type, HouseClass.Offset.SecondaryColorScheme, value
+%define HouseClass.SecondaryColorScheme.Read(ptr_type,ptr_rules,str_section,function) HouseClass.ReadStringToByteExt      ptr_type, ptr_rules, HouseClass.Offset.SecondaryColorScheme, str_section, str.HouseClass.SecondaryColorScheme, function
+
+%define HouseClass.AllyTheNeutralHouse.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, reg_output
+%define HouseClass.AllyTheNeutralHouse.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, value
+%define HouseClass.AllyTheNeutralHouse.Read(ptr_type,ptr_rules,str_section)        HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, str_section, str.HouseClass.AllyTheNeutralHouse
+
+; <ptr_type>, <ptr_rules>, <data_offset>, <data_bit>, <section>, <key>
+%macro HouseClass.ReadBool    6
+    push edx
+    push ecx
+    Get_Bit byte[%1+%3],%4
+    xor  ecx,ecx
+    mov  cl,al
+    call_INIClass__Get_Bool %2, %5, %6, ecx
+    Set_Bit_Byte [%1+%3], %4, al
+    pop  ecx
+    pop  edx
+%endmacro
+
+
+; <ptr_type>, <ptr_rules>, <data_offset>, <section>, <key>
+%macro HouseClass.ReadByte    5
+    push edx
+    push ecx
+    xor  ecx,ecx
+    mov  byte cl,[%1+%3]
+    call_INIClass__Get_Int %2, %4, %5, ecx
+    mov  byte [%1+%3],al
+    pop  ecx
+    pop  edx
+%endmacro
+
+; <ptr_type>, <ptr_rules>, <data_offset>, <section>, <key>, <function>
+%macro HouseClass.ReadStringToByteExt    6
+    push edx
+    push ecx
+    xor  ecx,ecx
+    mov  byte cl,[%1+%3]
+    mov  byte [ObjectTypeClass.ValueBuffer], cl
+    xor  ecx, ecx
+    call_INIClass__Get_String %2, %4, %5, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al, al
+    jz   %%null_string
+  %%valid_string:
+    mov  eax, ObjectTypeClass.StringBuffer
+    call %6
+    mov  byte [%1+%3], al
+    jmp  %%done
+  %%null_string:
+    ;mov  byte al, [ObjectTypeClass.ValueBuffer]
+    ;mov  byte [%1+%3], al
+  %%done:
+    mov  dword [ObjectTypeClass.ValueBuffer], 0
+    pop  ecx
+    pop  edx
+%endmacro
+
 
 
 %macro HouseTypeClass.new    2
