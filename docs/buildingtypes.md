@@ -241,6 +241,8 @@ Defaults to the Ore Truck (`HARV`) for the Ore Refinery, NONE for all other buil
 
 Determines if the building is a factory for a certain techno class. If BuildingType is used, the building will also play its Active animation (if defined) when a building is constructed and this building is the primary building.
 
+When the Home key is pressed, the game will attempt tocenter around a Construction Yard (`FactoryType`=BuildingType), if any.
+
 Note: The Map Trigger Event [Destroyed, All Factories] as well as the Skirmish AI Fire Sale check does not check for FactoryType. But checks for the PrerequisiteType= attribute. See [TechnoTypes ► Prerequisite System](./technotypes.md#prerequisite-system).
 </details></td></tr></table>
 

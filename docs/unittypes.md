@@ -247,6 +247,8 @@ Allows the unit to unpack into the indicated structure. Also enables the deploy 
 
 The created building will be offset at the cell -1,-1 (directly north-west) from the unit's location. This may change in the future towards an automatic centering.
 
+When the Home key is pressed and the player does not have a construction yard, any unit with this deploy function may be centered by this key.
+
 For the moment, teams with units with this modified characteristic may use the Undeploy mission to deploy.
 
 Interactions with other deploy logic (such as unloading passengers) are not presently known.

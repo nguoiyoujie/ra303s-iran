@@ -269,6 +269,7 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/houses_heliunit.asm"
 %include "src/features/houses_mcvunit.asm"
 %include "src/features/building_freeunit.asm"
+%include "src/features/building_construction_yard_unhardcode.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

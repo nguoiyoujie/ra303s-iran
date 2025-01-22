@@ -9,6 +9,7 @@
 @HOOK 0x00458DCD _BuildingClass__Exit_Object_InfantryUnit_Unhardcode
 @HOOK 0x00458C8F _BuildingClass__Exit_Object_Vessel_Unhardcode
 @HOOK 0x0045C0BA _BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode
+@HOOK 0x0045E457 _BuildingClass__Crew_Type_Unhardcode
 
 
 _BuildingClass__Exit_Object_InfantryUnit_Unhardcode:
@@ -65,4 +66,36 @@ _BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045C176
+
+
+_BuildingClass__Crew_Type_Unhardcode:
+    movzx eax,al
+    push edi
+    BuildingTypeClass.FromIndex(eax,edi)
+    BuildingTypeClass.IsSilo.Get(edi,al) ; Silo
+    test al,al
+    jnz  .Silo
+    BuildingTypeClass.IsKennel.Get(edi,al) ; Kennel
+    test al,al
+    jnz  .Kennel
+    BuildingTypeClass.FactoryType.Get(edi,al) ; Barracks / Construction Yard
+    cmp  al,RTTIType.InfantryType
+    je   .Barracks
+    cmp  al,RTTIType.BuildingType
+    jne  .Normal
+.Yard:
+    pop  edi
+    jmp  0x0045E4B1
+.Silo:
+    pop  edi
+    jmp  0x0045E47E
+.Kennel:
+    pop  edi
+    jmp  0x0045E516
+.Barracks:
+    pop  edi
+    jmp  0x0045E550
+.Normal:
+    pop  edi
+    jmp  0x0045E566
 

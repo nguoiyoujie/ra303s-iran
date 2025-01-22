@@ -37,10 +37,15 @@ _BuildingClass_Active_Click_With_ConYardUnhardcode:
 _BuildingClass_What_Action_ConYardUnhardcode:
     ; note: preserve FACT's interaction with Is_MCV_Deploy()
     movzx edx,ah
-    cmp   edx,BuildingType.FACT
-    jnz   .Continue
+    push edi
+    BuildingTypeClass.FromIndex(edx,edi)
+    BuildingTypeClass.FactoryType.Get(edi,dl)
+    cmp  dl,RTTIType.BuildingType
+    pop  edi    
+    ;cmp  edx,BuildingType.FACT
+    jnz  .Continue
 .Check_Is_MCV_Deploy:
-    test  byte [Globals___Rule_IsMCVDeploy_Address],Globals___Rule_IsMCVDeploy_BitMask
+    test byte [Globals___Rule_IsMCVDeploy_Address],Globals___Rule_IsMCVDeploy_BitMask
     jz   0x0045A723
 .Continue:
     BuildingTypeClass.FromIndex(edx,edx)
