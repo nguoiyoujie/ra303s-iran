@@ -27,14 +27,14 @@ _HouseClass__Read_INI:
     mov  edx,edi ; section
     mov  edi,[ebp-0x20] ; INI
 
-    HouseClass.RemapColor.Read1(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
-    HouseClass.RemapColor.Read2(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.RemapColor.Read1(esi,edi,edx,_GetPlayerColorTypeFromIntOrString)
+    HouseClass.RemapColor.Read2(esi,edi,edx,_GetPlayerColorTypeFromIntOrString)
     HouseClass.ActLike.Read(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
     HouseClass.InstantCapture.Read(esi,edi,edx)
     HouseClass.NoBuildingCrew.Read(esi,edi,edx)
     HouseClass.AllyTheNeutralHouse.Read(esi,edi,edx)
     ;HouseClass.SecondaryColorScheme.Set(esi,0xFF) ; reset color scheme, this completely nullifies reads from earlier INIs (e.g. rules.ini before map.ini...)
-    HouseClass.SecondaryColorScheme.Read(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.SecondaryColorScheme.Read(esi,edi,edx,_GetPlayerColorTypeFromIntOrString)
     HouseClass.HeliUnit.Read(esi,edi,edx,_GetAircraftTypeIDFromString)
     HouseClass.MCVUnit.Read(esi,edi,edx,_GetUnitTypeIDFromString)
 

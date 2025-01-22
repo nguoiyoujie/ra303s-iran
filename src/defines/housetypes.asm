@@ -43,4 +43,51 @@
 %define HouseType.Multi20                  31
 
 
+;PlayerColorType
+%define PlayerColorType.YELLOW             0
+%define PlayerColorType.LTBLUE             1
+%define PlayerColorType.RED                2
+%define PlayerColorType.GREEN              3
+%define PlayerColorType.ORANGE             4
+%define PlayerColorType.GREY               5
+%define PlayerColorType.BLUE               6
+%define PlayerColorType.BROWN              7
+%define PlayerColorType.WHITE              8
+%define PlayerColorType.BLACK              9
+%define PlayerColorType.FLAMING_BLUE       10
+%define PlayerColorType.TRUE_GREY          11
+%define PlayerColorType.DIRTY_GREEN        12
+
+%define PlayerColorType.MAX                12
+
+str.PlayerColorType.YELLOW             db"YELLOW",0
+str.PlayerColorType.LTBLUE             db"LTBLUE",0
+str.PlayerColorType.RED                db"RED",0
+str.PlayerColorType.GREEN              db"GREEN",0
+str.PlayerColorType.ORANGE             db"ORANGE",0
+str.PlayerColorType.GREY               db"GREY",0
+str.PlayerColorType.BLUE               db"BLUE",0
+str.PlayerColorType.BROWN              db"BROWN",0
+str.PlayerColorType.WHITE              db"WHITE",0
+str.PlayerColorType.BLACK              db"BLACK",0
+str.PlayerColorType.FLAMING_BLUE       db"FLAMING_BLUE",0
+str.PlayerColorType.TRUE_GREY          db"TRUE_GREY",0
+str.PlayerColorType.DIRTY_GREEN        db"DIRTY_GREEN",0
+
+strlist.PlayerColorTypes			 dd str.PlayerColorType.YELLOW, \
+										str.PlayerColorType.LTBLUE, \
+										str.PlayerColorType.RED, \
+										str.PlayerColorType.GREEN, \
+										str.PlayerColorType.ORANGE, \
+										str.PlayerColorType.GREY, \
+										str.PlayerColorType.BLUE, \
+										str.PlayerColorType.BROWN, \
+										str.PlayerColorType.WHITE, \
+										str.PlayerColorType.BLACK, \
+										str.PlayerColorType.FLAMING_BLUE, \
+										str.PlayerColorType.TRUE_GREY, \
+										str.PlayerColorType.DIRTY_GREEN, \
+										0
+
+
 

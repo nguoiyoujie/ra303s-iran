@@ -33,14 +33,16 @@ The full list of houses are available <a href="./defines.md#housetypes">here</a>
 
 <table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;HouseType&gt;]  ► Color
-<code>{Rules/Map}</code> ► [&lt;HouseType&gt;]  ► SecondaryColor
+<code>{Rules/Map}</code> ► [&lt;HouseType&gt;]  ► SecondaryColorScheme
 </samp></td><td width="120"><samp><a href="./defines.md#housecolortypes">HouseColorType</a><br><a href="./defines.md#housecolortypes">HouseColorType</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
  
 ```Exposed HouseClass->RemapColor```
 
-Determines the color of units and structures representing the house. `Color` is used for units, and `SecondaryColor` is used for buildings, the Ore Truck, and the MCV.
+Determines the color of units and structures representing the house. `Color` is used for units, and `SecondaryColorScheme` is used for buildings, the Ore Truck, and the MCV.
 
-If `SecondaryColor` is not specified, `Color` is used for both colorizations. If both are not specified, defaults to the default colors used by `Country`.
+If `SecondaryColorScheme` is not specified, `Color` is used for both colorizations. If both are not specified, defaults to the default colors used by `Country`.
+
+Both numeric values (e.g. 1) or their text representations (e.g. 'LTBLUE') are accepted.
 </details></td></tr></table>
 
 
@@ -53,6 +55,8 @@ If `SecondaryColor` is not specified, `Color` is used for both colorizations. If
 Overrides the housetype this house represents, in the same way countries are written for skirmish. This allows multiple slots to act like the USSR country.
 
 In Singleplayer, when playing as a country greated than the norm of 9 ('Special'), certain functions (such as the radar logo) will default to Allied versions.
+
+Both numeric values (e.g. 1) or the house names (e.g. 'Greece') are accepted.
 </details></td></tr></table>
 
 
