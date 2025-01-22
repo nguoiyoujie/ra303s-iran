@@ -257,6 +257,8 @@
 ; some empty space 0x17AD-0x17AF
 %define HouseClass.Offset.SpawnLocation          0x17B0   ; word
 %define HouseClass.Offset.SecondaryColorScheme   0x17B2   ; byte
+%define HouseClass.Offset.HeliUnit               0x17B3   ; byte
+%define HouseClass.Offset.MCVUnit                0x17B4   ; byte
 ; some empty space 0x1803-0x180F
 %define HouseClass.Offset.NewBQuantity           0x1810   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewUQuantity           0x1C10   ; should be 256 * 4 bytes
@@ -264,6 +266,7 @@
 %define HouseClass.Offset.NewAQuantity           0x2410   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewVQuantity           0x2810   ; should be 256 * 4 bytes
 ; 0x2C10
+; 0x2C11
 
 ; INI String controls
 str.HouseClass.RemapColor1                       db"Colour",0                          ;new ini feature
@@ -273,6 +276,8 @@ str.HouseClass.InstantCapture                    db"BuildingsGetInstantlyCapture
 str.HouseClass.NoBuildingCrew                    db"NoBuildingCrew",0                  ;new ini feature
 str.HouseClass.SecondaryColorScheme              db"SecondaryColorScheme",0            ;new ini feature
 str.HouseClass.AllyTheNeutralHouse               db"AllyTheNeutralHouse",0             ;new ini feature
+str.HouseClass.HeliUnit                          db"HeliUnit",0                        ;new ini feature
+str.HouseClass.MCVUnit                           db"MCVUnit",0                         ;new ini feature
 
 
 
@@ -305,6 +310,15 @@ str.HouseClass.AllyTheNeutralHouse               db"AllyTheNeutralHouse",0      
 %define HouseClass.AllyTheNeutralHouse.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, reg_output
 %define HouseClass.AllyTheNeutralHouse.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, value
 %define HouseClass.AllyTheNeutralHouse.Read(ptr_type,ptr_rules,str_section)        HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, str_section, str.HouseClass.AllyTheNeutralHouse
+
+%define HouseClass.HeliUnit.Get(ptr_type,reg_output)                               ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.HeliUnit, reg_output
+%define HouseClass.HeliUnit.Set(ptr_type,value)                                    ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.HeliUnit, value
+%define HouseClass.HeliUnit.Read(ptr_type,ptr_rules,str_section,function)          HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.HeliUnit, str_section, str.HouseClass.HeliUnit, function
+
+%define HouseClass.MCVUnit.Get(ptr_type,reg_output)                                ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.MCVUnit, reg_output
+%define HouseClass.MCVUnit.Set(ptr_type,value)                                     ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.MCVUnit, value
+%define HouseClass.MCVUnit.Read(ptr_type,ptr_rules,str_section,function)           HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.MCVUnit, str_section, str.HouseClass.MCVUnit, function
+
 
 ; <ptr_type>, <ptr_rules>, <data_offset>, <data_bit>, <section>, <key>
 %macro HouseClass.ReadBool    6

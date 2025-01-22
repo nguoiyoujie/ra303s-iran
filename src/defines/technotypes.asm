@@ -151,5 +151,11 @@
 %define        InfantryType.MECH       25
 
 ; AircraftType
-
+%define        AircraftType.TRAN       0
+%define        AircraftType.BADR       1
+%define        AircraftType.U2         2
+%define        AircraftType.MIG        3
+%define        AircraftType.YAK        4
+%define        AircraftType.HELI       5
+%define        AircraftType.HIND       6
 

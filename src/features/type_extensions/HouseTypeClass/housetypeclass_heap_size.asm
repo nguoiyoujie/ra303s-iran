@@ -32,6 +32,9 @@
 @SETD 0x004CCE68 0x14A
 @SETD 0x004CCFA2 0x14A
 
+;fn_Init
+@SETD 0x004C73B4 0x14A
+
 ;TFixedIHeapClass_HouseTypeClass___Constructor
 @SETD 0x004C9026 0x14A
 

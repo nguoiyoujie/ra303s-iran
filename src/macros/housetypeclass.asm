@@ -22,20 +22,28 @@
 %define HouseTypeClass.Offset.CostBias           0x136    ; word (Fixed)
 %define HouseTypeClass.Offset.BuildSpeedBias     0x138    ; word (Fixed)
 ;0x13A (original)
-;%define HouseTypeClass.Offset.HeliUnit           0x13A    ; byte
+%define HouseTypeClass.Offset.HeliUnit           0x13A    ; byte
+%define HouseTypeClass.Offset.MCVUnit            0x13B    ; byte
+;0x13B
 
-
-; INI String controls
-;str.HouseTypeClass.HeliUnit                      db"HeliUnit",0               ;new ini feature
+; INI String controls ; this is for multiplayer storage
+str.HouseTypeClass.HeliUnit                      db"HeliUnit",0             ;new ini feature
+str.HouseTypeClass.MCVUnit                       db"MCVUnit",0              ;new ini feature
 
 %define HouseTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex            d_index, HouseTypeClass.Count, HouseTypeClass.Array, reg_output
 %define HouseTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID               d_index, HouseTypeClass.Count, HouseTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define HouseTypeClass.HeliUnit.Get(ptr_type,reg_output)                   ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, reg_output
-;%define HouseTypeClass.HeliUnit.Set(ptr_type,value)                        ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, value
-;%define HouseTypeClass.HeliUnit.Read(ptr_type,ptr_rules)                   ObjectTypeClass.ReadByte               ptr_type, ptr_rules, HouseTypeClass.Offset.HeliUnit, str.HouseTypeClass.HeliUnit
+%define HouseTypeClass.HeliUnit.Get(ptr_type,reg_output)                    ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, reg_output
+%define HouseTypeClass.HeliUnit.Set(ptr_type,value)                         ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, value
+%define HouseTypeClass.HeliUnit.Read(ptr_type,ptr_rules,function)           ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, HouseTypeClass.Offset.HeliUnit, str.HouseTypeClass.HeliUnit, function
+
+%define HouseTypeClass.MCVUnit.Get(ptr_type,reg_output)                     ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.MCVUnit, reg_output
+%define HouseTypeClass.MCVUnit.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.MCVUnit, value
+%define HouseTypeClass.MCVUnit.Read(ptr_type,ptr_rules,function)            ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, HouseTypeClass.Offset.MCVUnit, str.HouseTypeClass.MCVUnit, function
+
+
 _GetHouseTypeIDFromString:
     ;select HouseType by performing string compare on eax
     push ebx

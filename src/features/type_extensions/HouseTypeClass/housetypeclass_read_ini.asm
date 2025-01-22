@@ -16,6 +16,11 @@ _HouseTypeClass__Read_INI_Extended:
     push esi
     push edi
     push eax
+    mov  edi,esi
+    mov  esi,[ebp-0x4C] ; HouseTypeClass
+
+    HouseTypeClass.HeliUnit.Read(esi,edi,_GetAircraftTypeIDFromString)
+    HouseTypeClass.MCVUnit.Read(esi,edi,_GetUnitTypeIDFromString)
 
     pop  eax
     pop  edi
@@ -27,3 +32,4 @@ _HouseTypeClass__Read_INI_Extended:
     pop  esi
     pop  ecx
     jmp  0x004CD375
+

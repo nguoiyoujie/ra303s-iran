@@ -35,6 +35,8 @@ _HouseClass__Read_INI:
     HouseClass.AllyTheNeutralHouse.Read(esi,edi,edx)
     ;HouseClass.SecondaryColorScheme.Set(esi,0xFF) ; reset color scheme, this completely nullifies reads from earlier INIs (e.g. rules.ini before map.ini...)
     HouseClass.SecondaryColorScheme.Read(esi,edi,edx,_GetHouseTypeIDFromIntOrString)
+    HouseClass.HeliUnit.Read(esi,edi,edx,_GetAircraftTypeIDFromString)
+    HouseClass.MCVUnit.Read(esi,edi,edx,_GetUnitTypeIDFromString)
 
     pop  edi
     pop  esi

@@ -31,7 +31,7 @@
 @HOOK 0x004D406A _HouseClass__Use_Single_Player_Logic
 @HOOK 0x00568267 _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic
 @HOOK 0x0053DDEB _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop
-@HOOK 0x004D8CAE _HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode
+;@HOOK 0x004D8CAE _HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode ; combined with _HouseClass__Init_Data_Reset_NewData
 @HOOK 0x0053DFDD _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode
 @HOOK 0x0053E0CB _Assign_Houses__Dont_Set_IQ_Level_In_Coop_Mode
 @HOOK 0x00567E58 _TechnoClass__Base_Is_Attacked_Single_Player_Logic3
@@ -312,18 +312,6 @@ _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop:
 
 ;004D8CAE NOP CREDITS
 
-
-
-_HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode:
-    cmp  dword [InCoopMode],1
-    jz   .Ret
-
-    mov  [eax+197h],ecx ; Credits
-
-.Ret:
-    jmp  0x004D8CB4
-
-;0053DFEC NOP BUILDLEVEL
 
 
 

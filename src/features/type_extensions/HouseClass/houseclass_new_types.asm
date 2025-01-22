@@ -133,6 +133,32 @@ _HouseClass__HouseClass_Reset_NewData:
     HouseClass.NoBuildingCrew.Set(edx,0) 
     HouseClass.AllyTheNeutralHouse.Set(edx,0) 
 
+    push edi
+    mov  eax,dword[edx+HouseClass.Offset.ID]
+    HouseTypeClass.FromIndex(eax,edi)
+    HouseTypeClass.HeliUnit.Get(edi,al)
+    HouseClass.HeliUnit.Set(edx,al)
+    HouseTypeClass.MCVUnit.Get(edi,al)
+    HouseClass.MCVUnit.Set(edx,al)
+
+;    mov  eax,dword[edx+HouseClass.Offset.ID]
+;    cmp  eax,HouseType.USSR
+;    je   .SovietHind
+;    cmp  eax,HouseType.Ukraine
+;    je   .SovietHind
+;    cmp  eax,HouseType.BadGuy
+;    je   .SovietHind
+;.AlliedHeli:
+;    mov  al,AircraftType.HELI
+;    jmp  .ApplyHeli
+;.SovietHind:
+;    mov  al,AircraftType.HIND
+;.ApplyHeli:
+;    HouseClass.HeliUnit.Set(edx,al)
+
+;    HouseClass.MCVUnit.Set(edx,UnitType.MCV)
+
+    pop  edi
     pop  eax
     jmp  0x004D3900
 
@@ -162,6 +188,14 @@ _HouseClass__Init_Data_Reset_NewData: ; for multiplayer
     HouseClass.NoBuildingCrew.Set(esi,bl) 
     HouseClass.AllyTheNeutralHouse.Get(edi,bl) 
     HouseClass.AllyTheNeutralHouse.Set(esi,bl) 
+    pop  ebx
+    push ebx
+    movzx ebx,bl
+    HouseTypeClass.FromIndex(ebx,edi)    
+    HouseTypeClass.HeliUnit.Get(edi,bl) 
+    HouseClass.HeliUnit.Set(esi,bl) 
+    HouseTypeClass.MCVUnit.Get(edi,bl) 
+    HouseClass.MCVUnit.Set(esi,bl) 
     pop  ebx
     pop  esi
     pop  edi

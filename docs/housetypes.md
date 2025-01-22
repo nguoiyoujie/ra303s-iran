@@ -107,6 +107,28 @@ NoBuildingCrew=yes
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;HouseType&gt;]  ► HeliUnit
+</samp></td><td width="120"><samp>AircraftType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+```New Logic```
+
+Determines the helicopter unit that spawns when this House builds a Helipad. 
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;HouseType&gt;]  ► MCVUnit
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+```New Logic```
+
+Determines the MCV unit that spawns at the start of a skirmish / multiplayer session. 
+
+</details></td></tr></table>
+
+
 <a href="#housetypes"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>HouseTypes</kbd></kbd><br>

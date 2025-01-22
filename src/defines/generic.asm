@@ -20,6 +20,7 @@
 ; Generic Text
 %define str_EmptyString                           0x005EC01F ; ""
 %define str_Comma                                 0x005E82C5 ; ","
+str_Zero                                          db"0",0
 
 %define str_Name                                  0x005EFFB2 ; "Name"
 %define str_Side                                  0x005F028D ; "Side"

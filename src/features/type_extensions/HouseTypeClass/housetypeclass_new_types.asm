@@ -193,6 +193,7 @@ _HouseTypeClass__AddNewHouseTypes:
 
     mov  dword[0x006018B0],HouseTypeClass.DestructorPtrs
     mov  dword[0x006018B4],HouseTypeClass.NEW_COUNT 
+
     jmp  0x004CB76A
 
 
@@ -209,6 +210,7 @@ _HouseTypeClass__Init_Heap_AddNewHouseTypes:
     HouseTypeClass.new HouseTypeClass.Multi18,0x1D
     HouseTypeClass.new HouseTypeClass.Multi19,0x1E
     HouseTypeClass.new HouseTypeClass.Multi20,0x1F
+    call Init_OverrideExistingHouseTypes
 .Ret:
     lea  esp,[ebp-0x10]
     pop  edi
@@ -216,3 +218,133 @@ _HouseTypeClass__Init_Heap_AddNewHouseTypes:
     jmp  0x004CD0E0
 
 
+Init_OverrideExistingHouseTypes:
+
+    HouseTypeClass.FromIndex(HouseType.Spain,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Greece,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.USSR,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.England,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Ukraine,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Germany,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.France,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Turkey,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.GoodGuy,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.BadGuy,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+	HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Neutral,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Special,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi1,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi2,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi3,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi4,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi5,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi6,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi7,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi8,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi9,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi10,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi11,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi12,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi13,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi14,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi15,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi16,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi17,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi18,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi19,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi20,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+    retn

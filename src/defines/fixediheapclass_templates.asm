@@ -57,9 +57,9 @@
 
 ; HouseClass                               0x0065D994
 %define HouseClass.Count                   0x0065D9A0
-%define HouseClass.Array                   0x0065DAC8
+%define HouseClass.Array                   0x0065D9C8
 %define HouseClass.ORIGINAL_SIZE           17A8h
-%define HouseClass.NEW_SIZE                2C10h
+%define HouseClass.NEW_SIZE                2C11h
 ; Count controlled by [Maximums]
 
 ; InfantryClass                            0x0065D9E0

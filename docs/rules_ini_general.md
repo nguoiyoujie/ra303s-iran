@@ -104,7 +104,7 @@ Suppresses full screen shake, removing artificial latency from the rendering, es
 <code>{Rules}</code> ► [General] ► ScalePowerBar
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   
-Changes in the power meter is hardly seen when the player does above 1600 power.
+Changes in the power meter is hardly seen when the player has above 1600 power or drain.
 If enabled, the power bar will scale with increased power generation and consumption. 
 </details></td></tr></table>
 
