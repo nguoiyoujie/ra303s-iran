@@ -115,77 +115,7 @@ str.TechnoTypeClass.SecondaryOffset           db"SecondaryOffset",0             
 str.TechnoTypeClass.SecondaryLateral          db"SecondaryLateral",0            ;new ini feature
 str.TechnoTypeClass.Points                    db"Points",0                      ;existing feature
 
-str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                     ;existing feature
-
-
-; args <Numerical index of type class>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %4 must not be esi
-; return <output>: the type class pointer, or 0 / NULL if invalid
-%macro TechnoTypeClass.FromIndex    4
-    push esi
-    push edi
-    mov  esi, [%2] 
-    mov  edi, %1
-    cmp  edi, esi
-    jae  %%invalid_type
-
-    mov  esi, [%3] 
-    shl  edi, 2
-    add  esi, edi
-    pop  edi
-    mov  %4, [esi] 
-    jmp  %%done
-
-  %%invalid_type:
-    pop  edi
-    mov  %4, 0
-  %%done:
-    pop  esi
-%endmacro
-
-; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %4 must not be esi, edi or edx
-; return <output>: the type class pointer, or 0 / NULL if invalid
-%macro TechnoTypeClass.FromID    4
-    push esi
-    push edi
-    push eax
-    push edx
-
-    mov  edx, 0
-    mov  eax, %1
-
-  %%loop:
-    TechnoTypeClass.FromIndex  edx,%2,%3,edi
-    push eax
-    push edx
-    push edi
-    ObjectTypeClass.ID  edi,edx
-    call _strcmpi
-    pop  edi
-    pop  edx
-    test eax, eax
-    pop  eax
-    jnz  %%next
-
-    mov  %4, edi
-    jmp  %%done
-
-  %%next:
-    inc  edx
-    cmp  edx, [%2] 
-    jae  %%done_no_match
-    jmp  %%loop
-
-  %%done_no_match:
-    mov  %4, 0
-
-  %%done:
-    pop  edx
-    pop  eax
-    pop  edi
-    pop  esi
-%endmacro
+str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 ;existing feature
 
 
 %define TechnoTypeClass.IsDoubleOwned.Get(ptr_type,reg_output)               ObjectTypeClass.GetBool                ptr_type, TechnoTypeClass.Offset.IsDoubleOwned, TechnoTypeClass.Bit.IsDoubleOwned, reg_output

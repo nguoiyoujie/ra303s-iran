@@ -82,21 +82,7 @@ _UnitTypeClass__Read_INI_Extended:
     jmp  0x00578DD4
 
 
-_GetBuildingTypeIDFromString:
-    ;select BuildingType by performing string compare on eax
-    push ebx
-    cmp  eax,0
-    jle  .Retn ; just return 0
-    BuildingTypeClass.FromID(eax,ebx)
-    ;in case the ID was invalid...
-    test ebx,ebx
-    jz   .Retn ; just return 0
-    mov  ebx,dword [ebx+1]; index
-	;ObjectTypeClass.ID ebx,ebx
-    mov  eax,ebx
-.Retn:
-    pop ebx
-    retn
+
 
 
 _GetUnitResponseSelectFromString:

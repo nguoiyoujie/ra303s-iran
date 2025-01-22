@@ -43,8 +43,8 @@ str.AircraftTypeClass.Response_Select           db"ResponseSelect",0            
 str.AircraftTypeClass.Response_Move             db"ResponseMove",0                ;new ini feature
 str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0              ;new ini feature
 
-%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
-%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
+%define AircraftTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
+%define AircraftTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -93,6 +93,18 @@ str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0            
 %define AircraftTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    ObjectTypeClass.ReadStringExt          ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Attack, str.AircraftTypeClass.Response_Attack, function
 
 
-
-
-
+_GetAircraftTypeIDFromString:
+    ;select UnitType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    AircraftTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn

@@ -63,8 +63,8 @@
 %define str.AnimTypeClass.ChainTo               db"ChainTo",0                      ;internal feature
 
 
-;%define AnimTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AircraftTypeClass.Array, reg_output
-;%define AnimTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AircraftTypeClass.Array, reg_output
+;%define AnimTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, AircraftTypeClass.Array, reg_output
+;%define AnimTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, AircraftTypeClass.Count, ;%define AircraftTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, AircraftTypeClass.Array, reg_output
 ;
 ;;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 ;

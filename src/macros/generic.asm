@@ -302,3 +302,6 @@ ObjectTypeClass.ValueBuffer                      dd 0
     pop  ecx
     pop  edx
 %endmacro
+
+
+

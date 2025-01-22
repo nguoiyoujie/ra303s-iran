@@ -46,7 +46,7 @@ str.WeaponTypeClass.Anim                      db"Anim",0                ;existin
 str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 
-%define WeaponTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, WeaponTypeClass.Count, WeaponTypeClass.Array, reg_output
+%define WeaponTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, WeaponTypeClass.Count, WeaponTypeClass.Array, reg_output
 %define WeaponTypeClass.FromID(d_index,reg_output)                           WeaponTypeClass.FromIDInner            d_index, WeaponTypeClass.Count, WeaponTypeClass.Array, reg_output
 
 ; WeaponType class is NOT derived from ObjectTypeClass!
@@ -64,7 +64,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
   %%loop:
     push edx
-    TechnoTypeClass.FromIndex  edx, %2, %3, edi
+    AbstractTypeClass.FromIndex  edx, %2, %3, edi
     push eax
 	mov  edx, [edi+WeaponTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WeaponTypeClass is a pointer instead of a buffer
     call _strcmpi

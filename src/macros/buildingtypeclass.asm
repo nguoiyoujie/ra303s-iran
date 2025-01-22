@@ -177,8 +177,8 @@ str.BuildingTypeClass.AIBuildType               db"AIBuildType",0               
 str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                    ;new ini feature
 
 
-%define BuildingTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
-%define BuildingTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
+%define BuildingTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
+%define BuildingTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -414,4 +414,18 @@ str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                  
 %define BuildingTypeClass.FreeUnit.Read(ptr_type,ptr_rules,function)                ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.FreeUnit, str.BuildingTypeClass.FreeUnit, function
 
 
-
+_GetBuildingTypeIDFromString:
+    ;select BuildingType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    BuildingTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn

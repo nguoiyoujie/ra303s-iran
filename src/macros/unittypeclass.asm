@@ -116,8 +116,8 @@ str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0           
 str.UnitTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0     
 
-%define UnitTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
-%define UnitTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
+%define UnitTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
+%define UnitTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -269,4 +269,19 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.AIBuildWeight.Set(ptr_type,value)                    ObjectTypeClass.SetInt                 ptr_type, UnitTypeClass.Offset.AIBuildWeight, value
 %define UnitTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               ObjectTypeClass.ReadInt                ptr_type, ptr_rules, UnitTypeClass.Offset.AIBuildWeight, str.UnitTypeClass.AIBuildWeight
 	
-
+    
+_GetUnitTypeIDFromString:
+    ;select UnitType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    UnitTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx+1]; index
+	;ObjectTypeClass.ID ebx,ebx
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn

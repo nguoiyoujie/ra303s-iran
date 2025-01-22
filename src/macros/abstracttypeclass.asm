@@ -17,8 +17,6 @@ str.AbstractTypeClass.RTTI                      db"RTTI",0                ;inter
 str.AbstractTypeClass.Index                     db"Index",0               ;internal feature
 str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;internal feature
 
-%define AbstractTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, AbstractTypeClass.Count, AbstractTypeClass.Array, reg_output
-%define AbstractTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, AbstractTypeClass.Count, AbstractTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
@@ -35,7 +33,74 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
 ;%define AbstractTypeClass.StringTableName.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadInt                ptr_type, ptr_rules, AbstractTypeClass.Offset.StringTableName, str.AbstractTypeClass.StringTableName
 
 
+; args <Numerical index of type class>,<pointer to type count>,<pointer to type array>,<register to output the result to>
+; %4 must not be esi
+; return <output>: the type class pointer, or 0 / NULL if invalid
+%macro AbstractTypeClass.FromIndex    4
+    push esi
+    push edi
+    mov  esi, [%2] 
+    mov  edi, %1
+    cmp  edi, esi
+    jae  %%invalid_type
 
+    mov  esi, [%3] 
+    shl  edi, 2
+    add  esi, edi
+    pop  edi
+    mov  %4, [esi] 
+    jmp  %%done
+
+  %%invalid_type:
+    pop  edi
+    mov  %4, 0
+  %%done:
+    pop  esi
+%endmacro
+
+; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
+; %4 must not be esi, edi or edx
+; return <output>: the type class pointer, or 0 / NULL if invalid
+%macro AbstractTypeClass.FromID    4
+    push esi
+    push edi
+    push eax
+    push edx
+
+    mov  edx, 0
+    mov  eax, %1
+
+  %%loop:
+    AbstractTypeClass.FromIndex  edx,%2,%3,edi
+    push eax
+    push edx
+    push edi
+    ObjectTypeClass.ID  edi,edx
+    call _strcmpi
+    pop  edi
+    pop  edx
+    test eax, eax
+    pop  eax
+    jnz  %%next
+
+    mov  %4, edi
+    jmp  %%done
+
+  %%next:
+    inc  edx
+    cmp  edx, [%2] 
+    jae  %%done_no_match
+    jmp  %%loop
+
+  %%done_no_match:
+    mov  %4, 0
+
+  %%done:
+    pop  edx
+    pop  eax
+    pop  edi
+    pop  esi
+%endmacro
 
 
 

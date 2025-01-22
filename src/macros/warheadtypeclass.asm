@@ -50,7 +50,7 @@ str.WarheadTypeClass.ExplosionSet              db"Explosion",0              ;exi
 str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;existing ini
 
 
-%define WarheadTypeClass.FromIndex(d_index,reg_output)                         TechnoTypeClass.FromIndex              d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
+%define WarheadTypeClass.FromIndex(d_index,reg_output)                         AbstractTypeClass.FromIndex              d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
 %define WarheadTypeClass.FromID(d_index,reg_output)                            WarheadTypeClass.FromIDInner           d_index, WarheadTypeClass.Count, WarheadTypeClass.Array, reg_output
 
 ; WarheadType class is NOT derived from ObjectTypeClass!
@@ -68,7 +68,7 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
   %%loop:
     push edx
-    TechnoTypeClass.FromIndex  edx, %2, %3, edi
+    AbstractTypeClass.FromIndex  edx, %2, %3, edi
     push eax
 	mov  edx, [edi+WarheadTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WarheadTypeClass is a pointer instead of a buffer
     call _strcmpi
@@ -167,3 +167,20 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
   %%done:
     pop  edx
 %endmacro
+
+
+_GetWarheadTypeIDFromString:
+    ;select WarheadType by performing string compare on eax
+    push ebx
+    cmp  eax,0
+    jle  .Retn ; just return 0
+    WarheadTypeClass.FromID(eax,ebx)
+    ;in case the ID was invalid...
+    test ebx,ebx
+    jz   .Retn ; just return 0
+    mov  ebx,dword [ebx]; index
+    mov  eax,ebx
+.Retn:
+    pop ebx
+    retn
+  

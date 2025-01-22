@@ -216,8 +216,8 @@ str.InfantryTypeClass.DeathReport                   db"DeathReport",0
 str.InfantryTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0         
 
-%define InfantryTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
-%define InfantryTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
+%define InfantryTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
+%define InfantryTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

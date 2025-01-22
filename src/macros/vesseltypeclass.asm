@@ -63,8 +63,8 @@ str.VesselTypeClass.Response_Deploy           db"ResponseDeploy",0              
 str.VesselTypeClass.AmmoReloadRate            db"AmmoReloadRate",0              ;new ini feature
 str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            ;new ini feature
 
-%define VesselTypeClass.FromIndex(d_index,reg_output)                        TechnoTypeClass.FromIndex              d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
-%define VesselTypeClass.FromID(d_index,reg_output)                           TechnoTypeClass.FromID                 d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
+%define VesselTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
+%define VesselTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
