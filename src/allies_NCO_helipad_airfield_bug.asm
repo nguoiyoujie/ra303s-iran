@@ -9,6 +9,8 @@
 ; Checks are failing because of building ownership/ActLike checks. Aircrafts can dock in airstrips that cannot build them.
 ; This change has a side-effect where you no longer lose captured aircraft tech unless all airfields / helipads are destroyed.
 @HOOK 0x0051EA31 _ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType
+@HOOK 0x0051EBBA _ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode
+@HOOK 0x0051EBF2 _ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode
 
 _ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType:
     cmp  byte[edi],RTTIType.AircraftType
@@ -16,4 +18,31 @@ _ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType:
     mov  edx,dword[edi+0x21]
     mov  eax,edi
     jmp  0x0051EA36
+
+
+; Avoid NCO bug (allies_NCO_helipad_bug.asm)
+_ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode:
+    movzx eax,al
+    push edi
+    BuildingTypeClass.FromIndex(eax,edi)
+    BuildingTypeClass.IsHelipad.Get(edi,al)
+    test al,al
+    pop  edi
+.Helipad:
+    jnz  0x0051EBC2
+.NotAHelipad:
+    jmp  0x0051EBCB
+
+
+_ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode:
+    movzx eax,al
+    push edi
+    BuildingTypeClass.FromIndex(eax,edi)
+    BuildingTypeClass.IsAirfield.Get(edi,al)
+    test al,al
+    pop  edi
+.Airfield:
+    jnz  0x0051EBFE
+.NotAnAirfield:
+    jmp  0x0051EB02
 

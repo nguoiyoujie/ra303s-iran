@@ -258,13 +258,17 @@ _str_version: db"3.03s-v01-20241225",0
 %include "src/features/ai_repair_singleplayer.asm"
 %include "src/features/house_new_quantity_tracking_offsets.asm"
 %include "src/features/building_powerplant_pips.asm"
-%include "src/features/building_specialized_unhardcode.asm"
+%include "src/features/building_kennel_unhardcode.asm"
+%include "src/features/building_repairpad_unhardcode.asm"
+%include "src/features/building_silo_unhardcode.asm"
+%include "src/features/building_refinery_helipad_airfield_unhardcode.asm"
+%include "src/features/building_exit_unhardcode.asm"
+%include "src/features/unit_harvester_unhardcode.asm"
 %include "src/features/type_extensions/AircraftTypeClass/aircraft_isfixedwing.asm"
 %include "src/features/power_autoscale.asm"
 %include "src/features/houses_heliunit.asm"
 %include "src/features/houses_mcvunit.asm"
-
-
+%include "src/features/building_freeunit.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
