@@ -18,10 +18,10 @@ Changelog entries built before 25 January 2025 are compiled from commit logs sin
 ### RA303s
 <br>
 
-The project is renamed RA3.03s to show a greater distinction from RA3.03p
+The project is renamed RA3.03s to show a greater distinction from RA3.03p<br>
 In-game, the version "303s r" and the GIT verision and commit number can still be seen on the main menu dialog.
 
-Primary: Lovalmidas
+Primary: Lovalmidas<br>
 Credits: See the <a href="../README.md/#credits">main page</a> for the full credit list 
 
 -------
@@ -158,7 +158,7 @@ Credits: See the <a href="../README.md/#credits">main page</a> for the full cred
 ### RA303p-fork
 <br>
 
-Iran's project was forked in 2022 July by lovalmidas, who continued the project, armed with the Remastered source code.
+Iran's project was forked in 2022 July by lovalmidas, who continued the project, armed with the Remastered source code.<br>
 In-game, the version "303p r" and the GIT verision and commit number can still be seen on the main menu dialog.
 
 Each build complete version is denoted by a 'Build' commit. Sections will be categorized by these commits
@@ -244,7 +244,7 @@ Primary: Lovalmidas
 ### RA303p-GIT
 <br>
 
-Version change on 2014-01-21, inherits RA303p-iB2.
+Version change on 2014-01-21, inherits RA303p-iB2.<br>
 In-game, the version "303p r" and the GIT verision and commit number can be seen on the main menu dialog.
 
 Primary: Iran
@@ -278,10 +278,10 @@ Primary: Iran
 ### RA303p-iB2
 <br>
 
-Version change on 2013-04-02, inherits RA303p-iB1v1.
+Version change on 2013-04-02, inherits RA303p-iB1v1.<br>
 In-game, the version "303p-i Beta2" can be seen on the main menu dialog.
 
-Primary: Iran
+Primary: Iran<br>
 Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 
 -------
@@ -310,10 +310,10 @@ Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 ### RA303p-iB1v1
 <br>
 
-Version change on 2013-02-13, inherits RA303p-iran. This marks the first time the version number is written into the game
+Version change on 2013-02-13, inherits RA303p-iran. This marks the first time the version number is written into the game<br>
 In-game, the version "303p-i Beta1v1" can be seen on the main menu dialog
 
-Primary: Iran
+Primary: Iran<br>
 Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 
 -------
@@ -363,7 +363,7 @@ Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 
 Iran initiated this project on 2012-11-10, forking from hifi's Red Alert 1's patch.
 
-Primary: Iran
+Primary: Iran<br>
 Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 
 -------
@@ -455,15 +455,15 @@ Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 -------
 2012-11-10
 
-- Initial fork from hifi's Red Alert 1's patch, with the following:
--- hires code
--- fence bugfix
--- max units bugfix
--- tag bugfix
--- no CD fix
--- savegame bugfix
--- expansion detection fix
--- multiplayer defaults
+- Initial fork from hifi's Red Alert 1's patch, with the following:<br>
+-- hires code<br>
+-- fence bugfix<br>
+-- max units bugfix<br>
+-- tag bugfix<br>
+-- no CD fix<br>
+-- savegame bugfix<br>
+-- expansion detection fix<br>
+-- multiplayer defaults<br>
 -- exception handler code
 - Allow the game to load additional MIX files
 
