@@ -25,7 +25,7 @@ Primary: Lovalmidas
 Credits: See the <a href="../README.md/#credits">main page</a> for the full credit list 
 
 -------
-2025-01-213
+2025-01-23
 
 - 2025-01-23: Pressing Home key will now center around any construction yard (`FactoryType`=BuildingTypes) or deployer unit (`DeploysInto`=), instead of just FACT or MCV
 - 2025-01-22: Enchanced [`HouseClass`] Country. The INI key now accepts both numerals and house names. (e.g. GREECE)
@@ -361,13 +361,14 @@ Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 ### RA303p-iran
 <br>
 
+Iran initiated this project on 2012-11-10, forking from hifi's Red Alert 1's patch.
+
 Primary: Iran
 Credits: hifi, CCHyper, FunkyFr3sh, Nyerguds, AlexB
 
 -------
 2013-02 
 
-On 2013-02-13, the version is updated to RA303p-iB1v1.
 - 2013-02-10: Implement random starting song
 - 2013-02-10: Revise hires for LAN dialog
 - 2013-02-10: Implement extra theater: DESERT
