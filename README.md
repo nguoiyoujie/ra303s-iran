@@ -3,15 +3,17 @@
 -------
 
  - [About the Project](#about-the-project)
+ - [I Just Want To Play](#i-just-want-to-play)
  - [Building the Project](#building-the-project)
  - [Features Documentation](#features-documentation) 
+ - [Changelog](#changelog) 
  - [Credits](#credits) 
 
 -------
 
 ### About the Project
 
-This is an extension of the "p"/"r" series by Iran, whose project this is forked
+This is an extension of the "p" series by Iran, whose project this is forked
 from. This extension contains several features made to extend the functions 
 available to a modder or mission writer.
 
@@ -19,6 +21,17 @@ Of note, addition of new technotypes are possible with decent functionality, as
 well as customization of properties in rules.ini normally locked behind code.
 
 [Link](./README_p.md) is the original Readme from the "p" series, for historicity.
+
+-------
+
+### I Just Want To Play
+
+A built version, with supporting mixes and content, are hosted in this [here](https://github.com/nguoiyoujie/Red-Alert-Modified-Executable). 
+The built mod is a test mod, hosted publicly if any one wants to look at the INI controls employed, or just have a game.
+
+There is also map editor support that caters specifically for the new logic introduced here. It is hosted [here](https://github.com/nguoiyoujie/Red-Alert-Mission-Editor).
+
+Enjoy. :)
 
 -------
 
@@ -45,6 +58,12 @@ You may find the features documentation [here](./docs/features.md).
 
 -------
 
+### Changelog
+
+You may find the changelog [here](./docs/changelog.md).
+
+-------
+
 ### Credits
 
 **Helpers of the current patch**
@@ -65,7 +84,7 @@ You may find the features documentation [here](./docs/features.md).
 *In alphabetical order*
 
  - hifi (3.03p)
- - iran (3.03r)
+ - iran (3.03p-iran)
  - sonarpulse
 
 **Helpers of the original patch**
