@@ -1,8 +1,6 @@
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <kbd><kbd>Changelog</kbd></kbd><br>
 <h2 align="center">Changelog</h2>
 
-This area 
-
 Changelog entries built before 25 January 2025 are compiled from commit logs since the creation of the RA3.03p patching project by Iran, so they may appear less organized.
 
 -------
