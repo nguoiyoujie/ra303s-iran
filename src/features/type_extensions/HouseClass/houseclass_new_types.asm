@@ -25,7 +25,7 @@
 @HOOK 0x0053AB84 _Replace_HouseTriggers_53AB84 ; Clear_Scenario
 
 _Replace_HouseTriggers_4C7966:
-    mov dword[0x005F99C0],Houses.HouseTriggers ; ugly hack
+    mov dword[0x005F99C0],Houses.HouseTriggers ; ugly hack to appease the deconstructor~
     mov eax,Houses.HouseTriggers
     ;mov dword[edx+8],ecx
     ;mov eax,0x0067F074
@@ -90,36 +90,36 @@ _Replace_HouseTriggers_53AB84:
 ; @SETB accepts only constants, not HouseTypeClass.NEW_COUNT
 
 ; TO-DO: check FlasherClass::FlashCountPerPlayer[HOUSE_COUNT] as well, it is possible FlashCountPerPlayer only exists in Remastered code
-@SETB 0x004C796F 0x20 ; init
-@SETB 0x004F77B0 0x21 ; static void Init_Heaps(void)
-@SETB 0x004633A5 0x20 ; CCINIClass::Put_Owners, was 0x14
-@SETB 0x004A0298 0x20 ;void CellClass::Adjust_Threat(HousesType house, int threat_value), was 0x14
+@SETB 0x004C796F HouseTypeClass.NEW_COUNT ; init
+@SETB 0x004F77B0 HouseTypeClass.NEW_COUNT_PLUS_ONE ; static void Init_Heaps(void)
+@SETB 0x004633A5 HouseTypeClass.NEW_COUNT ; CCINIClass::Put_Owners, was 0x14
+@SETB 0x004A0298 HouseTypeClass.NEW_COUNT ;void CellClass::Adjust_Threat(HousesType house, int threat_value), was 0x14
 ;@SETB 0x004AB65E 0x19 ; Conquer::Owner_From_Name, was 0x13; hooked by features/coop.asm
-;@SETB ??? 0x20 ??? ; Conquer::Shake_The_Screen, seems to exist only in Remastered
-@SETB 0x004CD0FE 0x20 ; HouseTypeClass::From_Name, was 0x14
-@SETB 0x004D4128 0x20 ; void HouseClass::Init(void), was 0x14
-@SETB 0x004D7E73 0x20 ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype), was 0x14
-@SETB 0x004D866B 0x20 ; void HouseClass::Tally_Score(void), was 0x14
-@SETB 0x004D880A 0x20 ; void HouseClass::Tally_Score(void), was 0x14
-@SETB 0x004D9814 0x20 ; int HouseClass::Expert_AI(void), was 0x14
-@SETB 0x004DA334 0x20 ; int HouseClass::AI_Building(void), was 0x14
-@SETB 0x004DB0EE 0x20 ; int HouseClass::AI_Building(void), was 0x14
-@SETB 0x004DDE8F 0x20 ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
-@SETB 0x004DDE9C 0x20 ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
-@SETB 0x004DDEF4 0x20 ; void HouseClass::Write_INI(CCINIClass & ini), was 0x14
-@SETB 0x004DE61E 0x20 ; bool HouseClass::Is_Allowed_To_Ally(HousesType house) const, was 0x14
-@SETB 0x004DE688 0x20 ; void HouseClass::Computer_Paranoid(void)
-@SETB 0x004DE6E2 0x20 ; void HouseClass::Computer_Paranoid(void)
-@SETB 0x004FE1F4 0x20 ; void LogicClass::AI(void), was 0x14
-@SETB 0x004FE220 0x20 ; void LogicClass::AI(void), was 0x14
-@SETB 0x004FFECE 0x20 ; bool MapClass::Base_Region(CELL cell, HousesType & house, ZoneType & zone), was 0x14
-@SETB 0x005321C3 0x20 ; bool RadarClass::Spy_Next_House(void)
-;@SETB 0x00532859 0x20 ; void RadarClass::Draw_Names(void) ; extend UnitsKilled / BuildingsKilled first
-@SETB 0x00537522 0x20 ; bool RulesClass::Objects(CCINIClass & ini)
-@SETB 0x005378AE 0x20 ; static void Put_All(Pipe & pipe, int save_net)
-@SETB 0x00538556 0x20 ; bool Load_Game(const char *file_name)
-@SETB 0x0053AA2F 0x20 ; void Fill_In_Data(void)
-@SETB 0x0053AB99 0x20 ; void Clear_Scenario(void)
+;@SETB ??? HouseTypeClass.NEW_COUNT ??? ; Conquer::Shake_The_Screen, seems to exist only in Remastered
+@SETB 0x004CD0FE HouseTypeClass.NEW_COUNT ; HouseTypeClass::From_Name, was 0x14
+@SETB 0x004D4128 HouseTypeClass.NEW_COUNT ; void HouseClass::Init(void), was 0x14
+@SETB 0x004D7E73 HouseTypeClass.NEW_COUNT ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype), was 0x14
+@SETB 0x004D866B HouseTypeClass.NEW_COUNT ; void HouseClass::Tally_Score(void), was 0x14
+@SETB 0x004D880A HouseTypeClass.NEW_COUNT ; void HouseClass::Tally_Score(void), was 0x14
+@SETB 0x004D9814 HouseTypeClass.NEW_COUNT ; int HouseClass::Expert_AI(void), was 0x14
+@SETB 0x004DA334 HouseTypeClass.NEW_COUNT ; int HouseClass::AI_Building(void), was 0x14
+@SETB 0x004DB0EE HouseTypeClass.NEW_COUNT ; int HouseClass::AI_Building(void), was 0x14
+@SETB 0x004DDE8F HouseTypeClass.NEW_COUNT ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
+@SETB 0x004DDE9C HouseTypeClass.NEW_COUNT ; void HouseClass::Read_INI(CCINIClass & ini), was 0x14
+@SETB 0x004DDEF4 HouseTypeClass.NEW_COUNT ; void HouseClass::Write_INI(CCINIClass & ini), was 0x14
+@SETB 0x004DE61E HouseTypeClass.NEW_COUNT ; bool HouseClass::Is_Allowed_To_Ally(HousesType house) const, was 0x14
+@SETB 0x004DE688 HouseTypeClass.NEW_COUNT ; void HouseClass::Computer_Paranoid(void)
+@SETB 0x004DE6E2 HouseTypeClass.NEW_COUNT ; void HouseClass::Computer_Paranoid(void)
+@SETB 0x004FE1F4 HouseTypeClass.NEW_COUNT ; void LogicClass::AI(void), was 0x14
+@SETB 0x004FE220 HouseTypeClass.NEW_COUNT ; void LogicClass::AI(void), was 0x14
+@SETB 0x004FFECE HouseTypeClass.NEW_COUNT ; bool MapClass::Base_Region(CELL cell, HousesType & house, ZoneType & zone), was 0x14
+@SETB 0x005321C3 HouseTypeClass.NEW_COUNT ; bool RadarClass::Spy_Next_House(void)
+;@SETB 0x00532859 HouseTypeClass.NEW_COUNT ; void RadarClass::Draw_Names(void) ; extend UnitsKilled / BuildingsKilled first
+@SETB 0x00537522 HouseTypeClass.NEW_COUNT ; bool RulesClass::Objects(CCINIClass & ini)
+@SETB 0x005378AE HouseTypeClass.NEW_COUNT ; static void Put_All(Pipe & pipe, int save_net)
+@SETB 0x00538556 HouseTypeClass.NEW_COUNT ; bool Load_Game(const char *file_name)
+@SETB 0x0053AA2F HouseTypeClass.NEW_COUNT ; void Fill_In_Data(void)
+@SETB 0x0053AB99 HouseTypeClass.NEW_COUNT ; void Clear_Scenario(void)
 
 @HOOK 0x004D38FA _HouseClass__HouseClass_Reset_NewData
 @HOOK 0x004D8CAE _HouseClass__Init_Data_Reset_NewData ; for multiplayer, might not be necessary due to above hook to constructor

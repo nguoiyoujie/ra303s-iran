@@ -10,9 +10,9 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004C7427 _TFixedIHeapClass__fn_init_AircraftTypes_Heap
-@HOOK 0x004D0B53 _TFixedIHeapClass__AircraftTypeClass__Save_New_Size
-@HOOK 0x004D0C36 _TFixedIHeapClass__AircraftTypeClass__Load_New_Size
+@SETD 0x004C7428 AircraftTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_AircraftTypes_Heap
+@SETD 0x004D0B54 AircraftTypeClass.NEW_SIZE ; _TFixedIHeapClass__AircraftTypeClass__Save_New_Size
+@SETD 0x004D0C37 AircraftTypeClass.NEW_SIZE ; _TFixedIHeapClass__AircraftTypeClass__Load_New_Size
 @HOOK 0x004D0C51 _TFixedIHeapClass__AircraftTypeClass__Load_Clear_Memory
 
 

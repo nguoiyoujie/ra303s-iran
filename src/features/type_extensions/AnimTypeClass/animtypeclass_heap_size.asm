@@ -10,31 +10,11 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004C74A2 _TFixedIHeapClass__fn_init_AnimTypes_Heap
-@HOOK 0x004C9575 _TFixedIHeapClass__AnimTypeClass__Constructor_New_Size
-@HOOK 0x004D1143 _TFixedIHeapClass__AnimTypeClass__Save_New_Size
-@HOOK 0x004D1225 _TFixedIHeapClass__AnimTypeClass__Load_New_Size
+@SETD 0x004C74A3 AnimTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_AnimTypes_Heap
+@SETD 0x004C9576 AnimTypeClass.NEW_SIZE ; _TFixedIHeapClass__AnimTypeClass__Constructor_New_Size
+@SETD 0x004D1144 AnimTypeClass.NEW_SIZE ; _TFixedIHeapClass__AnimTypeClass__Save_New_Size
+@SETD 0x004D1226 AnimTypeClass.NEW_SIZE ; _TFixedIHeapClass__AnimTypeClass__Load_New_Size
 @HOOK 0x004D1240 _TFixedIHeapClass__AnimTypeClass__Load_Clear_Memory
-
-
-_TFixedIHeapClass__fn_init_AnimTypes_Heap:
-    mov  edx,AnimTypeClass.NEW_SIZE
-    jmp  0x004C74A7
-
-
-_TFixedIHeapClass__AnimTypeClass__Constructor_New_Size:
-    mov  edx,AnimTypeClass.NEW_SIZE
-    jmp  0x004C957A
-
-
-_TFixedIHeapClass__AnimTypeClass__Save_New_Size:
-    mov  ebx,AnimTypeClass.NEW_SIZE
-    jmp  0x004D1148
-
-
-_TFixedIHeapClass__AnimTypeClass__Load_New_Size:
-    mov  ebx,AnimTypeClass.NEW_SIZE
-    jmp  0x004D122A
 
 
 _TFixedIHeapClass__AnimTypeClass__Load_Clear_Memory:

@@ -7,23 +7,23 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 @HOOK 0x004B0655 _DisplayClass__Refresh_Cells__Bounds_Check_Fix
+@CLEAR 0x004B065A 0x90 0x004B065B ; nop over debris after jmp
 @HOOK 0x004B065B _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2
-@CLEAR 0x004B065A 0x90 0x004B065B
 
-RefreshCells_Tracker db 0
+Temp.RefreshCells_Tracker db 0
 
 _DisplayClass__Refresh_Cells__Bounds_Check_Fix:
-    mov   byte [RefreshCells_Tracker],24h ; short tlist[36]
+    mov   byte [Temp.RefreshCells_Tracker],24h ; short tlist[36]
     lea   ebx,[ebp-58h]  
     mov   dword [ebp-10h],eax
     jmp   0x004B065B
 
 _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2:
     push  eax
-    mov   al,byte [RefreshCells_Tracker]
+    mov   al,byte [Temp.RefreshCells_Tracker]
     test  al,al
     dec   al
-    mov   byte [RefreshCells_Tracker],al
+    mov   byte [Temp.RefreshCells_Tracker],al
     pop   eax
     jz    0x004B03AA
 

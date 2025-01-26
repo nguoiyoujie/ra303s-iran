@@ -10,25 +10,10 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004C73ED _TFixedIHeapClass__fn_init_BuildingTypes_Heap
-@HOOK 0x004D0953 _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
-@HOOK 0x004D0A36 _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
+@SETD 0x004C73EE BuildingTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_BuildingTypes_Heap
+@SETD 0x004D0954 BuildingTypeClass.NEW_SIZE ; _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
+@SETD 0x004D0A37 BuildingTypeClass.NEW_SIZE ; _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
 @HOOK 0x004D0A51 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory
-
-
-_TFixedIHeapClass__fn_init_BuildingTypes_Heap:
-    mov  edx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004C73F2
-
-
-_TFixedIHeapClass__BuildingTypeClass__Save_New_Size:
-    mov  ebx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004D0958
-    
-    
-_TFixedIHeapClass__BuildingTypeClass__Load_New_Size:
-    mov  ebx,BuildingTypeClass.NEW_SIZE
-    jmp  0x004D0A3B
 
 
 _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:

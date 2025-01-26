@@ -29,6 +29,8 @@
 
 @HOOK 0x0058109D _UnitClass__Read_INI_Use_Single_Player_Logic
 @HOOK 0x004D406A _HouseClass__Use_Single_Player_Logic
+@CLEAR 0x004D406F 0x90 0x004D4070 ; nop over debris after jmp
+
 @HOOK 0x00568267 _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic
 @HOOK 0x0053DDEB _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop
 ;@HOOK 0x004D8CAE _HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode ; combined with _HouseClass__Init_Data_Reset_NewData
@@ -42,7 +44,6 @@
 
 @HOOK 0x00533180 _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses
 
-@CLEAR 0x004D406F 0x90 0x004D4070
 
 ; Crates stuff?
 

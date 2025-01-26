@@ -8,7 +8,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@CLEAR 0x00405E90 0x00 0x00405E91
+@SETB 0x00405E90 0x00
 
 ; old solution
 ;@HOOK 0x00405E8B _AnimTypeClass__fn_init_FRAG1_Constructor

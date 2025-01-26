@@ -23,11 +23,11 @@
 @HOOK 0x00506676 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info
 @HOOK 0x004BD1FF _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event
 
-@CLEAR 0x004DCC7D 0xB6 0x004DCC7E ; HouseClass::Tracking_Add ; convert movsx to movzx
-@CLEAR 0x004DCC86 0xB6 0x004DCC87 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@CLEAR 0x004DCCE6 0xB6 0x004DCCE7 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@CLEAR 0x004DCCEF 0xB6 0x004DCCF0 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@CLEAR 0x004DCDA3 0xB6 0x004DCDA4 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@SETB 0x004DCC7D 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@SETB 0x004DCC86 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@SETB 0x004DCCE6 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@SETB 0x004DCCEF 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
+@SETB 0x004DCDA3 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
 
 @JMP  0x005B654A 0x005B6557 ; jump over pWOLobject == NULL check
 @JMP  0x005B6574 0x005B659C ; jump over SDFX WOL code

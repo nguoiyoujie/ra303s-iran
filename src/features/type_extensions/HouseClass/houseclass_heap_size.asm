@@ -9,27 +9,12 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004C7175 _TFixedHeapClass_fn_init_HouseClass
-@HOOK 0x004C8365 _TFixedHeapClass__HouseClass__Constructor_HouseClass
-@HOOK 0x004CED13 _TFixedHeapClass__HouseClass__Save_HouseClass
+@SETD 0x004C7176 HouseClass.NEW_SIZE ; _TFixedHeapClass_fn_init_HouseClass
+@SETD 0x004C8366 HouseClass.NEW_SIZE ; _TFixedHeapClass__HouseClass__Constructor_HouseClass
+@SETD 0x004CED14 HouseClass.NEW_SIZE ; _TFixedHeapClass__HouseClass__Save_HouseClass
 @HOOK 0x004CEDF5 _TFixedHeapClass__HouseClass__Load_HouseClass
 @HOOK 0x004CEE10 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames
-@HOOK 0x004DDD1D _HouseClass__Read_INI_HouseClass_Size
-
-
-_TFixedHeapClass_fn_init_HouseClass:
-    mov  edx,HouseClass.NEW_SIZE
-    jmp  0x004C717A
-
-
-_TFixedHeapClass__HouseClass__Constructor_HouseClass:
-    mov  edx,HouseClass.NEW_SIZE
-    jmp  0x004C836A
-
-
-_TFixedHeapClass__HouseClass__Save_HouseClass:
-    mov  ebx,HouseClass.NEW_SIZE
-    jmp  0x004CED18
+@SETD 0x004DDD1E HouseClass.NEW_SIZE ; _HouseClass__Read_INI_HouseClass_Size
 
 
 _TFixedHeapClass__HouseClass__Load_HouseClass:
@@ -48,11 +33,5 @@ _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames:
 .Ret:
     mov  ebx,0x005F6538
     jmp  0x004CEE15
-
-
-_HouseClass__Read_INI_HouseClass_Size:
-    mov  edx,HouseClass.NEW_SIZE
-    jmp  0x004DDD22
-
 
 

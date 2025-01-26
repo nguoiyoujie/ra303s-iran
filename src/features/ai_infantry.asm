@@ -46,7 +46,7 @@
 @SETD 0x004DC748 -1468
 @SETD 0x004DC756 -1469 ; -1
 
-@CLEAR 0x004DC5C0 0xE8 0x004DC5C1 ; convert sar eax,18 to shr eax,18
+@SETB 0x004DC5C0 0xE8 ; convert sar eax,18 to shr eax,18
 @CLEAR 0x004DC5C5 0x90 0x004DC5CA ; don't reduce by INFANTRY_RA_COUNT
 @SETD 0x004DC5D9 HouseClass.Offset.NewIQuantity
 @SETD 0x004DC5E0 HouseClass.Offset.NewIQuantity

@@ -10,31 +10,11 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004C7445 _TFixedIHeapClass__fn_init_InfantryTypes_Heap
-@HOOK 0x004C935A _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size
-@HOOK 0x004D0D53 _TFixedIHeapClass__InfantryTypeClass__Save_New_Size
-@HOOK 0x004D0E36 _TFixedIHeapClass__InfantryTypeClass__Load_New_Size
+@SETD 0x004C7446 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_InfantryTypes_Heap
+@SETD 0x004C935B InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size
+@SETD 0x004D0D54 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Save_New_Size
+@SETD 0x004D0E37 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Load_New_Size
 @HOOK 0x004D0E51 _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory
-
-
-_TFixedIHeapClass__fn_init_InfantryTypes_Heap:
-    mov  edx,InfantryTypeClass.NEW_SIZE
-    jmp  0x004C744A
-
-
-_TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size:
-    mov  edx,InfantryTypeClass.NEW_SIZE
-    jmp  0x004C935F
-
-
-_TFixedIHeapClass__InfantryTypeClass__Save_New_Size:
-    mov  ebx,InfantryTypeClass.NEW_SIZE
-    jmp  0x004D0D58
-
-
-_TFixedIHeapClass__InfantryTypeClass__Load_New_Size:
-    mov  ebx,InfantryTypeClass.NEW_SIZE
-    jmp  0x004D0E3B
 
 
 _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory:

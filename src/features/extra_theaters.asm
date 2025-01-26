@@ -30,7 +30,7 @@
 @HOOK 0x004A7AEB _Theater_From_Name_New_Theaters_Array
 @HOOK 0x004A7AD4 _Theater_From_Name_New_Theaters_Counter_Check
 ; If no match is found, revert to TEMPERATE instead of crashing the game
-@CLEAR 0x004A7B00 0x01 0x004A7B01
+@SETB 0x004A7B00 0x01
 
 %define THEATERS_COUNT 12 ; was 3
 

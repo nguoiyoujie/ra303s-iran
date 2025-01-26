@@ -17,13 +17,13 @@
 @HOOK 0x004596B3 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
 @HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
 
-@CLEAR 0x00429D43 0xEA 0x00429D44 ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr edx,18
-@CLEAR 0x00429D4B 0xEA 0x00429D4C
-@CLEAR 0x00453A77 0xB6 0x00453A78 ; BuildingTypeClass::As_Reference ; convert movsx to movzx
-@CLEAR 0x00457EB8 0xE9 0x00457EB9 ; TFixedIHeapClass<BuildingTypeClass>::Ptr ; convert sar ecx,18 to shr ecx,18
-@CLEAR 0x00457ED7 0xE9 0x00457ED8
-@CLEAR 0x004566C9 0xB6 0x004566CA ; BuildingClass::AI ; convert movsx to movzx
-@CLEAR 0x004603B0 0xB6 0x004603B1 ; BuildingClass::Animation_AI ; convert movsx to movzx
+@SETB 0x00429D43 0xEA ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr edx,18
+@SETB 0x00429D4B 0xEA 
+@SETB 0x00453A77 0xB6 ; BuildingTypeClass::As_Reference ; convert movsx to movzx
+@SETB 0x00457EB8 0xE9 ; TFixedIHeapClass<BuildingTypeClass>::Ptr ; convert sar ecx,18 to shr ecx,18
+@SETB 0x00457ED7 0xE9 
+@SETB 0x004566C9 0xB6 ; BuildingClass::AI ; convert movsx to movzx
+@SETB 0x004603B0 0xB6 ; BuildingClass::Animation_AI ; convert movsx to movzx
 
 
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:

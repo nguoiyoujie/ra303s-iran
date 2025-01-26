@@ -10,9 +10,9 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004C750C _TFixedIHeapClass__fn_init_VesselTypes_Heap
-@HOOK 0x004D1533 _TFixedIHeapClass__VesselTypeClass__Save_New_Size
-@HOOK 0x004D1616 _TFixedIHeapClass__VesselTypeClass__Load_New_Size
+@SETD 0x004C750D VesselTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_VesselTypes_Heap
+@SETD 0x004D1534 VesselTypeClass.NEW_SIZE ; _TFixedIHeapClass__VesselTypeClass__Save_New_Size
+@SETD 0x004D1617 VesselTypeClass.NEW_SIZE ; _TFixedIHeapClass__VesselTypeClass__Load_New_Size
 @HOOK 0x004D1631 _TFixedIHeapClass__VesselTypeClass__Load_Clear_Memory
 
 
