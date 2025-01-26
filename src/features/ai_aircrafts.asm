@@ -10,6 +10,28 @@
 ; 
 ;----------------------------------------------------------------
 
+; for old AI_Aircraft implementation, in case we need to restore it. 
+; this corrects the quantity offsets to use the new HouseClass offsets
+%define HouseClass.Offset.NewBQuantity_Helipad 0x1848
+%define HouseClass.Offset.NewBQuantity_Airfield 0x1850
+%define HouseClass.Offset.NewAQuantity_Mig 0x241C
+%define HouseClass.Offset.NewAQuantity_Yak 0x2420
+%define HouseClass.Offset.NewAQuantity_Longbow 0x2424
+%define HouseClass.Offset.NewAQuantity_Hind 0x2428
+
+@SETD 0x004DC7E3 HouseClass.Offset.NewAQuantity_Longbow ; Longbow
+@SETD 0x004DC7E9 HouseClass.Offset.NewAQuantity_Hind ; Hind
+@SETD 0x004DC7EF HouseClass.Offset.NewBQuantity_Helipad ; Helipad
+@SETD 0x004DC83E HouseClass.Offset.NewAQuantity_Longbow ; Longbow
+@SETD 0x004DC844 HouseClass.Offset.NewAQuantity_Hind ; Hind
+@SETD 0x004DC84A HouseClass.Offset.NewBQuantity_Helipad ; Helipad
+@SETD 0x004DC89E HouseClass.Offset.NewAQuantity_Mig ; Mig
+@SETD 0x004DC8A4 HouseClass.Offset.NewAQuantity_Yak ; Yak
+@SETD 0x004DC8AA HouseClass.Offset.NewBQuantity_Airfield ; Airfield
+@SETD 0x004DC8FE HouseClass.Offset.NewAQuantity_Mig ; Mig
+@SETD 0x004DC904 HouseClass.Offset.NewAQuantity_Yak ; Yak
+@SETD 0x004DC90A HouseClass.Offset.NewBQuantity_Airfield ; Airfield
+
 @HOOK 0x004DC7AF _HouseClass__AI_Aircraft_Implementation
 
 Temp.AIAircraft.Airfields        dd 0

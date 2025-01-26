@@ -26,11 +26,6 @@
 @HOOK 0x004DE86C _HouseClass__Find_Cell_In_Zone_Detect_SingleCell
 @HOOK 0x004DE966 _HouseClass__Find_Cell_In_Zone_Force_Clearance
 
-; we should rewrite the income check to accomodate additional refinery types
-; unhardcode Harvester first 
-;@SETD 0x004DA34A HouseClass.Offset.NewBQuantity_Refinery ; Refinery
-;@SETD 0x004DA35C HouseClass.Offset.NewUQuantity_Harvester ; Harvester
-
 Temp.AIBuilding.Array            times 256 db 0 ; we will not have more than 256 BuildingTypes
 Temp.AIBuilding.Count            db 0
 

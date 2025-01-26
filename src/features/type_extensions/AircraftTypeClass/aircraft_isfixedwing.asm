@@ -16,9 +16,6 @@
 @HOOK 0x004DE103 _HouseClass_Is_No_YakMig_UseFixedWing2
 @HOOK 0x004DE13C _HouseClass_Is_No_YakMig_CountAirfield
 @HOOK 0x004DE15C _HouseClass_Is_Hack_Prevented_UseFixedWing
-;@SETD 0x004DE13E HouseClass.Offset.NewBQuantity_Airfield
-
-;Temp.FixedWingAircraftCount                    dd    0
 
 _HouseClass_Is_No_YakMig_UseFixedWing:
     push edi
@@ -26,7 +23,6 @@ _HouseClass_Is_No_YakMig_UseFixedWing:
     xor  edi,edi ;begin from ID 0
     xor  edx,edx 
 	xor  ecx,ecx
-    ;mov  dword [Temp.FixedWingAircraftCount],0 ;initial count 0
 .Repeat:
     mov  eax,edi
     AircraftTypeClass.FromIndex(eax,edx)

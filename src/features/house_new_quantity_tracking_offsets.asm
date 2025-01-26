@@ -7,18 +7,6 @@
 ; A good deal of testing is needed to check for compatibility issues, as many things are tied to the affected values
 ;----------------------------------------------------------------
 
-; @SETD can't deal with arthimetric...
-; in any case, these are hardcoded offsets. Consumer code should be written.
-%define HouseClass.Offset.NewBQuantity_Refinery 0x1840
-%define HouseClass.Offset.NewBQuantity_Helipad 0x1848
-%define HouseClass.Offset.NewBQuantity_Airfield 0x1850
-%define HouseClass.Offset.NewUQuantity_Harvester 0x1C2C
-%define HouseClass.Offset.NewAQuantity_Mig 0x241C
-%define HouseClass.Offset.NewAQuantity_Yak 0x2420
-%define HouseClass.Offset.NewAQuantity_Longbow 0x2424
-%define HouseClass.Offset.NewAQuantity_Hind 0x2428
-
-
 @HOOK 0x004DCC8F _HouseClass__Tracking_Add_New_Building_Tracking
 @HOOK 0x004DCCF8 _HouseClass__Tracking_Add_New_Planes_Tracking
 @HOOK 0x004DCDD2 _HouseClass__Tracking_Add_New_Vehicle_Tracking
@@ -31,20 +19,6 @@
 @HOOK 0x004DCBFB _HouseClass__Tracking_Remove_New_Vessels_Tracking
 
 ;Temp
-; for AI_Aircraft ; we should rewrite the aircraft logic
-@SETD 0x004DC7E3 HouseClass.Offset.NewAQuantity_Longbow ; Longbow
-@SETD 0x004DC7E9 HouseClass.Offset.NewAQuantity_Hind ; Hind
-@SETD 0x004DC7EF HouseClass.Offset.NewBQuantity_Helipad ; Helipad
-@SETD 0x004DC83E HouseClass.Offset.NewAQuantity_Longbow ; Longbow
-@SETD 0x004DC844 HouseClass.Offset.NewAQuantity_Hind ; Hind
-@SETD 0x004DC84A HouseClass.Offset.NewBQuantity_Helipad ; Helipad
-@SETD 0x004DC89E HouseClass.Offset.NewAQuantity_Mig ; Mig
-@SETD 0x004DC8A4 HouseClass.Offset.NewAQuantity_Yak ; Yak
-@SETD 0x004DC8AA HouseClass.Offset.NewBQuantity_Airfield ; Airfield
-@SETD 0x004DC8FE HouseClass.Offset.NewAQuantity_Mig ; Mig
-@SETD 0x004DC904 HouseClass.Offset.NewAQuantity_Yak ; Yak
-@SETD 0x004DC90A HouseClass.Offset.NewBQuantity_Airfield ; Airfield
-
 ; CellClass::GoodieCheck
 ;@SETD 0x004A0781 HouseClass.Offset.NewUQuantity 
 @HOOK 0x004A08AA _CellClass__GoodieCheck_Replace_Quantity

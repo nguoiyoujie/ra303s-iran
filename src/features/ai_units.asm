@@ -28,10 +28,6 @@
 @HOOK 0x004DBCAE _HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
 
-; we should rewrite the income check to accomodate additional refinery types
-; unhardcode Harvester first 
-;@SETD 0x004DB83B HouseClass.Offset.NewBQuantity_Refinery ; Refinery
-;@SETD 0x004DB841 HouseClass.Offset.NewUQuantity_Harvester ; Harvester
 
 ; Warning stack manipulation!
 @SETD 0x004DB7F6 0x5e8 ; was 0xE8, add 200h to hold counter[UNIT_COUNT] (400h) and bestlist[UNIT_COUNT] (100h)
