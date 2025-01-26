@@ -110,6 +110,9 @@
 %define BuildingTypeClass.Offset.SpecialWeapons            0x2C7    ; word, SpecialType flags, up to 16 values
 %define BuildingTypeClass.Offset.FreeUnit                  0x2C9    ; byte
 ;0x2CA
+%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x2CA    ; byte
+%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x2CB    ; byte
+;0x2CC
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -175,6 +178,8 @@ str.BuildingTypeClass.SpreadExplosionWarhead    db"SpreadExplosionWarhead",0    
 str.BuildingTypeClass.AIBuildLimit              db"AIBuildLimit",0                ;new ini feature
 str.BuildingTypeClass.AIBuildType               db"AIBuildType",0                 ;new ini feature
 str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                    ;new ini feature
+str.BuildingTypeClass.AILowPowerSellPriority    db"AILowPowerSellPriority",0      ;new ini feature
+str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0      ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
@@ -412,6 +417,14 @@ str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                  
 %define BuildingTypeClass.FreeUnit.Get(ptr_type,reg_output)                         ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.FreeUnit, reg_output
 %define BuildingTypeClass.FreeUnit.Set(ptr_type,value)                              ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.FreeUnit, value
 %define BuildingTypeClass.FreeUnit.Read(ptr_type,ptr_rules,function)                ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.FreeUnit, str.BuildingTypeClass.FreeUnit, function
+
+%define BuildingTypeClass.AILowPowerSellPriority.Get(ptr_type,reg_output)         ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.AILowPowerSellPriority, reg_output
+%define BuildingTypeClass.AILowPowerSellPriority.Set(ptr_type,value)              ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.AILowPowerSellPriority, value
+%define BuildingTypeClass.AILowPowerSellPriority.Read(ptr_type,ptr_rules)         ObjectTypeClass.ReadByte               ptr_type, ptr_rules, BuildingTypeClass.Offset.AILowPowerSellPriority, str.BuildingTypeClass.AILowPowerSellPriority
+
+%define BuildingTypeClass.AILowMoneySellPriority.Get(ptr_type,reg_output)         ObjectTypeClass.GetByte                ptr_type, BuildingTypeClass.Offset.AILowMoneySellPriority, reg_output
+%define BuildingTypeClass.AILowMoneySellPriority.Set(ptr_type,value)              ObjectTypeClass.SetByte                ptr_type, BuildingTypeClass.Offset.AILowMoneySellPriority, value
+%define BuildingTypeClass.AILowMoneySellPriority.Read(ptr_type,ptr_rules)         ObjectTypeClass.ReadByte               ptr_type, ptr_rules, BuildingTypeClass.Offset.AILowMoneySellPriority, str.BuildingTypeClass.AILowMoneySellPriority
 
 
 _GetBuildingTypeIDFromString:

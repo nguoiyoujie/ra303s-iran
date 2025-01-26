@@ -255,11 +255,13 @@
 %define HouseClass.Bit.AllyTheNeutralHouse       6  
 
 ; some empty space 0x17AD-0x17AF
-%define HouseClass.Offset.SpawnLocation          0x17B0   ; word
-%define HouseClass.Offset.SecondaryColorScheme   0x17B2   ; byte
-%define HouseClass.Offset.HeliUnit               0x17B3   ; byte
-%define HouseClass.Offset.MCVUnit                0x17B4   ; byte
-; some empty space 0x1803-0x180F
+%define HouseClass.Offset.HouseTriggers          0x17B0   ; 24 bytes
+
+%define HouseClass.Offset.SpawnLocation          0x17C8   ; word
+%define HouseClass.Offset.SecondaryColorScheme   0x17CA   ; byte
+%define HouseClass.Offset.HeliUnit               0x17CB   ; byte
+%define HouseClass.Offset.MCVUnit                0x17CC   ; byte
+; some empty space 0x17CD-0x180F
 %define HouseClass.Offset.NewBQuantity           0x1810   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewUQuantity           0x1C10   ; should be 256 * 4 bytes
 %define HouseClass.Offset.NewIQuantity           0x2010   ; should be 256 * 4 bytes
