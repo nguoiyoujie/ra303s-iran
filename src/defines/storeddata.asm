@@ -142,7 +142,7 @@ Spawn.Settings.SouthAdvantageFix db 0
 Spawn.Settings.TechCenterBugFix db 0
 
 ; Color remaps
-%define RemapControlType.SIZE              282
+%assign RemapControlType.SIZE              282
 ColorRemaps.ExtendedColors                 times RemapControlType.SIZE * 5 db 0 ; 3600
 
 %define ColorRemaps.White.Offset           0

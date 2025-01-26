@@ -28,14 +28,14 @@ strlist.ArmorTypes            dd str.ArmorType.None,str.ArmorType.Wood,str.Armor
 
 str.ArmorDefault              db"100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%",0
 
-%define ArmorType.None        0
-%define ArmorType.Wood        1
-%define ArmorType.Light       2
-%define ArmorType.Heavy       3
-%define ArmorType.Concrete    4
-%define ArmorType.Flak        5
-%define ArmorType.Plate       6
-%define ArmorType.Medium      7
-%define ArmorType.Steel       8
-%define ArmorType.Special_1   9
-%define ArmorType.Special_2   10
+%assign ArmorType.None        0
+%assign ArmorType.Wood        1
+%assign ArmorType.Light       2
+%assign ArmorType.Heavy       3
+%assign ArmorType.Concrete    4
+%assign ArmorType.Flak        5
+%assign ArmorType.Plate       6
+%assign ArmorType.Medium      7
+%assign ArmorType.Steel       8
+%assign ArmorType.Special_1   9
+%assign ArmorType.Special_2   10

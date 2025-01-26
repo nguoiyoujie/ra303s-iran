@@ -10,24 +10,24 @@
 ; New track types
 ; RA defines up to 13 TrackTypes and 67 TurnTrackTypes. To truly implement C&C Weapons Factory, a new set should be defined as it is distinct from any other
 
-%define TrackTypes.OriginalCount                  13
-%define TurnTrackTypes.OriginalCount              67
+%assign TrackTypes.OriginalCount                  13
+%assign TurnTrackTypes.OriginalCount              67
 
 ;DriveClass::TrackControl[67]                     0x006010cc - 0x006011d7
 ;DriveClass::RawTracks[13]                        0x00600ffc - 0x006010cb
-;%define TrackType.Track01                       0x00600750
-;%define TrackType.Track02                       0x006007c8
-;%define TrackType.Track03                       0x00600868
-;%define TrackType.Track04                       0x0060097c
-;%define TrackType.Track05                       0x00600a40
-;%define TrackType.Track06                       0x00600b78
-;%define TrackType.Track07                       0x00600c98
-;%define TrackType.Track08                       0x00600d24
-;%define TrackType.Track09                       0x00600d94
-;%define TrackType.Track00                       0x00600e30
-;%define TrackType.Track11                       0x00600ebc
-;%define TrackType.Track12                       0x00600f04
-;%define TrackType.Track13                       0x00600f48
+;%assign TrackType.Track01                       0x00600750
+;%assign TrackType.Track02                       0x006007c8
+;%assign TrackType.Track03                       0x00600868
+;%assign TrackType.Track04                       0x0060097c
+;%assign TrackType.Track05                       0x00600a40
+;%assign TrackType.Track06                       0x00600b78
+;%assign TrackType.Track07                       0x00600c98
+;%assign TrackType.Track08                       0x00600d24
+;%assign TrackType.Track09                       0x00600d94
+;%assign TrackType.Track00                       0x00600e30
+;%assign TrackType.Track11                       0x00600ebc
+;%assign TrackType.Track12                       0x00600f04
+;%assign TrackType.Track13                       0x00600f48
 
 TrackType.NewTurnTracks   db \
                          14, 14, 0xa0, 0

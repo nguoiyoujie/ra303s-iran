@@ -9,38 +9,38 @@
 ;----------------------------------------------------------------
 
 ; PrereqTypes
-%define PrereqType.NONE                        0
-%define PrereqType.CONYARD                     1
-%define PrereqType.POWER                       2
-%define PrereqType.ADV.POWER                   3
-%define PrereqType.REFINERY                    4
-%define PrereqType.ORESILO                     5
-%define PrereqType.BARRACKS                    6
-%define PrereqType.WARFACTORY                  7
-%define PrereqType.RADAR                       8
-%define PrereqType.REPAIR                      9
-%define PrereqType.DEFENSE                     10
-%define PrereqType.ADV.DEFENSE                 11
-%define PrereqType.AA.DEFENSE                  12
-%define PrereqType.TECH                        13
-%define PrereqType.AIRSTRIP                    14
-%define PrereqType.HELIPAD                     15
-%define PrereqType.SHIPYARD                    16
-%define PrereqType.LAB                         17
-%define PrereqType.ADV.LAB                     18
-%define PrereqType.ADV.WEAPON1                 19
-%define PrereqType.ADV.WEAPON2                 20
-%define PrereqType.FAKES                       21
-%define PrereqType.USER.22                     22
-%define PrereqType.USER.23                     23
-%define PrereqType.USER.24                     24
-%define PrereqType.USER.25                     25
-%define PrereqType.USER.26                     26
-%define PrereqType.USER.27                     27
-%define PrereqType.USER.28                     28
-%define PrereqType.USER.29                     29
-%define PrereqType.MISC                        30
-%define PrereqType.CIVBUILDING                 31
+%assign PrereqType.NONE                        0
+%assign PrereqType.CONYARD                     1
+%assign PrereqType.POWER                       2
+%assign PrereqType.ADV.POWER                   3
+%assign PrereqType.REFINERY                    4
+%assign PrereqType.ORESILO                     5
+%assign PrereqType.BARRACKS                    6
+%assign PrereqType.WARFACTORY                  7
+%assign PrereqType.RADAR                       8
+%assign PrereqType.REPAIR                      9
+%assign PrereqType.DEFENSE                     10
+%assign PrereqType.ADV.DEFENSE                 11
+%assign PrereqType.AA.DEFENSE                  12
+%assign PrereqType.TECH                        13
+%assign PrereqType.AIRSTRIP                    14
+%assign PrereqType.HELIPAD                     15
+%assign PrereqType.SHIPYARD                    16
+%assign PrereqType.LAB                         17
+%assign PrereqType.ADV.LAB                     18
+%assign PrereqType.ADV.WEAPON1                 19
+%assign PrereqType.ADV.WEAPON2                 20
+%assign PrereqType.FAKES                       21
+%assign PrereqType.USER.22                     22
+%assign PrereqType.USER.23                     23
+%assign PrereqType.USER.24                     24
+%assign PrereqType.USER.25                     25
+%assign PrereqType.USER.26                     26
+%assign PrereqType.USER.27                     27
+%assign PrereqType.USER.28                     28
+%assign PrereqType.USER.29                     29
+%assign PrereqType.MISC                        30
+%assign PrereqType.CIVBUILDING                 31
 
 
 ; PrerequisiteType_Enums

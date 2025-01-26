@@ -8,38 +8,38 @@
 ;----------------------------------------------------------------
 
 ; RTTITypes
-%define RTTIType.None                        0
-%define RTTIType.Aircraft                    1
-%define RTTIType.AircraftType                2
-%define RTTIType.Anim                        3
-%define RTTIType.AnimType                    4
-%define RTTIType.Building                    5
-%define RTTIType.BuildingType                6
-%define RTTIType.Bullet                      7
-%define RTTIType.BulletType                  8
-%define RTTIType.Cell                        9
-%define RTTIType.Factory                     10
-%define RTTIType.House                       11
-%define RTTIType.HouseType                   12
-%define RTTIType.Infantry                    13
-%define RTTIType.InfantryType                14
-%define RTTIType.Overlay                     15
-%define RTTIType.OverlayType                 16
-%define RTTIType.Smudge                      17
-%define RTTIType.SmudgeType                  18
-%define RTTIType.Special                     19
-%define RTTIType.Team                        20
-%define RTTIType.TeamType                    21
-%define RTTIType.Template                    22
-%define RTTIType.TemplateType                23
-%define RTTIType.Terrain                     24
-%define RTTIType.TerrainType                 25
-%define RTTIType.Trigger                     26
-%define RTTIType.TriggerType                 27
-%define RTTIType.Unit                        28
-%define RTTIType.UnitType                    29
-%define RTTIType.Vessel                      30
-%define RTTIType.VesselType                  31
+%assign RTTIType.None                        0
+%assign RTTIType.Aircraft                    1
+%assign RTTIType.AircraftType                2
+%assign RTTIType.Anim                        3
+%assign RTTIType.AnimType                    4
+%assign RTTIType.Building                    5
+%assign RTTIType.BuildingType                6
+%assign RTTIType.Bullet                      7
+%assign RTTIType.BulletType                  8
+%assign RTTIType.Cell                        9
+%assign RTTIType.Factory                     10
+%assign RTTIType.House                       11
+%assign RTTIType.HouseType                   12
+%assign RTTIType.Infantry                    13
+%assign RTTIType.InfantryType                14
+%assign RTTIType.Overlay                     15
+%assign RTTIType.OverlayType                 16
+%assign RTTIType.Smudge                      17
+%assign RTTIType.SmudgeType                  18
+%assign RTTIType.Special                     19
+%assign RTTIType.Team                        20
+%assign RTTIType.TeamType                    21
+%assign RTTIType.Template                    22
+%assign RTTIType.TemplateType                23
+%assign RTTIType.Terrain                     24
+%assign RTTIType.TerrainType                 25
+%assign RTTIType.Trigger                     26
+%assign RTTIType.TriggerType                 27
+%assign RTTIType.Unit                        28
+%assign RTTIType.UnitType                    29
+%assign RTTIType.Vessel                      30
+%assign RTTIType.VesselType                  31
 
 ; FactoryType_Enums
 str.RTTIType.None                            db"None",0

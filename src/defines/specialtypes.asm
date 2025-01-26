@@ -7,15 +7,15 @@
 ;----------------------------------------------------------------
 
 ; SpecialTypes (0-15)
-%define SpecialType.NONE                          0
-%define SpecialType.SONAR_PULSE                   1 ; Sonar pulse checks not implemented
-%define SpecialType.NUCLEAR_BOMB                  2
-%define SpecialType.CHRONOSPHERE                  3
-%define SpecialType.PARA_BOMB                     4
-%define SpecialType.PARA_INFANTRY                 5
-%define SpecialType.SPY_MISSION                   6
-%define SpecialType.IRON_CURTAIN                  7
-%define SpecialType.GPS                           8
+%assign SpecialType.NONE                          0
+%assign SpecialType.SONAR_PULSE                   1 ; Sonar pulse checks not implemented
+%assign SpecialType.NUCLEAR_BOMB                  2
+%assign SpecialType.CHRONOSPHERE                  3
+%assign SpecialType.PARA_BOMB                     4
+%assign SpecialType.PARA_INFANTRY                 5
+%assign SpecialType.SPY_MISSION                   6
+%assign SpecialType.IRON_CURTAIN                  7
+%assign SpecialType.GPS                           8
 
 str.SpecialType.NONE                              db"NONE",0
 str.SpecialType.SONAR_PULSE                       db"SONARPULSE",0

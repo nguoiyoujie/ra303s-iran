@@ -18,47 +18,47 @@
 ; Try to use Title case for string names.
 
 ; Generic Text
-%define str_EmptyString                           0x005EC01F ; ""
-%define str_Comma                                 0x005E82C5 ; ","
+%assign str_EmptyString                           0x005EC01F ; ""
+%assign str_Comma                                 0x005E82C5 ; ","
 str_Zero                                          db"0",0
 
-%define str_Name                                  0x005EFFB2 ; "Name"
-%define str_Side                                  0x005F028D ; "Side"
-%define str_Color                                 0x005EDE7A ; "Color"
+%assign str_Name                                  0x005EFFB2 ; "Name"
+%assign str_Side                                  0x005F028D ; "Side"
+%assign str_Color                                 0x005EDE7A ; "Color"
 
-%define str_NewINIFormat                          0x005F000E ; "NewINIFormat"
-%define str_Intro                                 0x005EFFB7 ; "Intro"
-%define str_Brief                                 0x005EFFBD ; "Brief"
-%define str_Win                                   0x005EFFC3 ; "Win"
-%define str_Lose                                  0x005EFFC7 ; "Lose"
-%define str_Action                                0x005EFFCC ; "Action"
-%define str_ToCarryOver                           0x005EFFD3 ; "ToCarryOver"
-%define str_IsToInherit                           0x005EFFDF ; "IsToInherit"
-%define str_TimerInherit                          0x005EFFE9 ; "TimerInherit"
-%define str_EndOfGame                             0x005EFFF6 ; "EndOfGame"
-%define str_CivEvac                               0x005F0000 ; "CivEvac"
-%define str_Theme                                 0x005F0008 ; "Theme"
-%define str_CarryOverMoney                        0x005F001B ; "CarryOverMoney"
-%define str_CarryOverCap                          0x005F002A ; "CarryOverCap"
+%assign str_NewINIFormat                          0x005F000E ; "NewINIFormat"
+%assign str_Intro                                 0x005EFFB7 ; "Intro"
+%assign str_Brief                                 0x005EFFBD ; "Brief"
+%assign str_Win                                   0x005EFFC3 ; "Win"
+%assign str_Lose                                  0x005EFFC7 ; "Lose"
+%assign str_Action                                0x005EFFCC ; "Action"
+%assign str_ToCarryOver                           0x005EFFD3 ; "ToCarryOver"
+%assign str_IsToInherit                           0x005EFFDF ; "IsToInherit"
+%assign str_TimerInherit                          0x005EFFE9 ; "TimerInherit"
+%assign str_EndOfGame                             0x005EFFF6 ; "EndOfGame"
+%assign str_CivEvac                               0x005F0000 ; "CivEvac"
+%assign str_Theme                                 0x005F0008 ; "Theme"
+%assign str_CarryOverMoney                        0x005F001B ; "CarryOverMoney"
+%assign str_CarryOverCap                          0x005F002A ; "CarryOverCap"
 
-%define str_NoSpyPlane                            0x005F0037 ; "NoSpyPlane"
-%define str_SkipScore                             0x005F0042 ; "SkipScore"
-%define str_OneTimeOnly                           0x005F004C ; "OneTimeOnly"
-%define str_SkipMapSelect                         0x005F0058 ; "SkipMapSelect"
-%define str_TruckCrate                            0x005F0066 ; "TruckCrate"
-%define str_FillSilos                             0x005F0071 ; "FillSilos"
-%define str_Percent                               0x005F007B ; "Percent"
-;%define str_Official                              0x005F009F ; "Official"
+%assign str_NoSpyPlane                            0x005F0037 ; "NoSpyPlane"
+%assign str_SkipScore                             0x005F0042 ; "SkipScore"
+%assign str_OneTimeOnly                           0x005F004C ; "OneTimeOnly"
+%assign str_SkipMapSelect                         0x005F0058 ; "SkipMapSelect"
+%assign str_TruckCrate                            0x005F0066 ; "TruckCrate"
+%assign str_FillSilos                             0x005F0071 ; "FillSilos"
+%assign str_Percent                               0x005F007B ; "Percent"
+;%assign str_Official                              0x005F009F ; "Official"
 
-%define str_Player                                0x005F0083 ; "Player"
+%assign str_Player                                0x005F0083 ; "Player"
 
-%define str_Basic                                 0x005EFFA5 ; "Basic"
-%define str_General                               0x005EF3EE ; "General"
-%define str_AI                                    0x005EFC29 ; "AI"
-%define str_Aftermath                             0x005EF3F6 ; "Aftermath"
+%assign str_Basic                                 0x005EFFA5 ; "Basic"
+%assign str_General                               0x005EF3EE ; "General"
+%assign str_AI                                    0x005EFC29 ; "AI"
+%assign str_Aftermath                             0x005EF3F6 ; "Aftermath"
 str_SetProcessAffinityMask                        db"SetProcessAffinityMask",0
 
-%define str_Weapons                               0x005EFE41 ; "Super"^"Weapons"
+%assign str_Weapons                               0x005EFE41 ; "Super"^"Weapons"
 
 str_Skirmish                                      db"Skirmish",0
 str_Multi1                                        db"Multi1",0
@@ -109,11 +109,11 @@ str_FixFormationSpeed                             db"FixFormationSpeed",0       
 str_FixAIAlly                                     db"FixAIAlly",0                              ; Rules.ini > [General] and Spawn.ini > [Settings]
 
 ; TechnoType Names
-%define str_Aircraft                              0x005EFA03 ; "Aircraft"
-%define str_Building                              0x005EFA11 ; "Building"
-%define str_Infantry                              0x005EFA29 ; "Infantry"
-%define str_Unit                                  0x005EFA68 ; "Unit"
-%define str_Vessel                                0x005EFA6D ; "Vessel"
+%assign str_Aircraft                              0x005EFA03 ; "Aircraft"
+%assign str_Building                              0x005EFA11 ; "Building"
+%assign str_Infantry                              0x005EFA29 ; "Infantry"
+%assign str_Unit                                  0x005EFA68 ; "Unit"
+%assign str_Vessel                                0x005EFA6D ; "Vessel"
 
 
 
@@ -158,15 +158,15 @@ str_mix_DOSInterfaceMod                           db"dosinterfacemod.MIX",0
 
 
 ; INI file references
-%define str_ini_RedAlert                          0x005EDE12 ; "REDALERT.INI"
-%define str_ini_Rules                             0x005EBB3B ; "RULES.INI"
+%assign str_ini_RedAlert                          0x005EDE12 ; "REDALERT.INI"
+%assign str_ini_Rules                             0x005EBB3B ; "RULES.INI"
 str_ini_AI                                        db"AI.INI",0
 str_ini_OOSFix                                    db"OOS-FIX.INI",0
 str_ini_Spawn                                     db"SPAWN.INI",0
 
 
 ; DLL file references
-%define str_dll_Kernel32                          0x005E6947 ; "KERNEL32.DLL"
+%assign str_dll_Kernel32                          0x005E6947 ; "KERNEL32.DLL"
 
 
 ; DMP file references
@@ -179,7 +179,7 @@ str_xdp_Spawnam                                   db"SPAWNAM.XDP",0
 
 
 ; file extension references
-%define str_ext_mpr                               0x005F0798 ; ".MPR"
+%assign str_ext_mpr                               0x005F0798 ; ".MPR"
 str_ext_mmm                                       db".MMM",0
 
 ; command line arguments
@@ -207,8 +207,8 @@ str_arg_Hard                                      db"-HARD",0           ; Diffic
 
 ; RedAlert.ini -----------------------------------------------------------------------------------------------
 ; RedAlert.ini Sections
-%define str_Options                               0x005EDE1F ; "Options"
-%define str_WinHotkeys                            0x005EE3E4 ; "WinHotkeys"
+%assign str_Options                               0x005EDE1F ; "Options"
+%assign str_WinHotkeys                            0x005EE3E4 ; "WinHotkeys"
 
 
 str_Colour                                        db"Colour",0 ; Used in lieu with [<House>] > Color
@@ -263,7 +263,7 @@ str_KeyMapSnapshot                                db"KeyMapSnapshot",0
 ; Spawn.ini -------------------------------------------------------------------------------------------------
 ; Spawn.ini Sections
 str_Tunnel                                        db"Tunnel",0
-%define str_Settings                              0x005F5BE0 ; "Settings"
+%assign str_Settings                              0x005F5BE0 ; "Settings"
 str_SpawnLocations                                db"SpawnLocations",0
 str_HouseColors                                   db"HouseColors",0
 str_HouseCountries                                db"HouseCountries",0
@@ -272,27 +272,27 @@ str_IsSpectator                                   db"IsSpectator",0
 
 ; Spawn.ini > [Tunnel]
 str_Ip                                            db"Ip",0
-%define str_Port                                  0x005F02F2 ; "Port"
+%assign str_Port                                  0x005F02F2 ; "Port"
 
 ; Spawn.ini > [Settings]
-%define str_Bases                                 0x005EF984 ; "Bases"
-%define str_Credits                               0x005EB940 ; "Credits"
+%assign str_Bases                                 0x005EF984 ; "Bases"
+%assign str_Credits                               0x005EB940 ; "Credits"
 str_OreRegenerates                                db"OreRegenerates",0
-%define str_Crates                                0x005EF993 ; "Crates"
+%assign str_Crates                                0x005EF993 ; "Crates"
 str_UnitCount                                     db"UnitCount",0
 str_AIPlayers                                     db"AIPlayers",0
 str_Seed                                          db"Seed",0
 str_SlowUnitBuild                                 db"SlowUnitBuild",0
-%define str_CaptureTheFlag                        0x005EF99A ; "CaptureTheFlag"
+%assign str_CaptureTheFlag                        0x005EF99A ; "CaptureTheFlag"
 str_ShroudRegrows                                 db"ShroudRegrows",0
-%define str_TechLevel                             0x005EF909 ; "TechLevel"
+%assign str_TechLevel                             0x005EF909 ; "TechLevel"
 str_AIDifficulty                                  db"AIDifficulty",0
 ; Aftermath (generic)
 ; Name (generic)
 ; Side (generic)
 ; Color (generic)
 str_fmt_Other                                     db"Other%d",0   ; formatting helper
-%define str_GameSpeed                             0x005EDE27 ; "GameSpeed"
+%assign str_GameSpeed                             0x005EDE27 ; "GameSpeed"
 str_NetworkVersionProtocol                        db"NetworkVersionProtocol",0
 str_MaxAhead                                      db"MaxAhead",0
 str_FrameSendRate                                 db"FrameSendRate",0
@@ -307,8 +307,8 @@ str_FixMagicBuild                                 db"FixMagicBuild",0
 ; str_FixAIAlly 
 str_FixWideAreaDamage                             db"FixWideAreaDamage",0
 str_ScalePowerBar                                 db"ScalePowerBar",0
-%define str_MCVUndeploy                           0x005EF831 ; "MCVUndeploy"
-%define str_AllyReveal                            0x005EF81A ; "AllyReveal"
+%assign str_MCVUndeploy                           0x005EF831 ; "MCVUndeploy"
+%assign str_AllyReveal                            0x005EF81A ; "AllyReveal"
 str_ForcedAlliances                               db"ForcedAlliances",0
 str_TechCenterBugFix                              db"TechCenterBugFix",0
 str_BuildOffAlly                                  db"BuildOffAlly",0
