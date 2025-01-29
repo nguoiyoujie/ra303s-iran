@@ -10,11 +10,11 @@
 ;----------------------------------------------------------------
 
 ; Extended memory size of the class, with save and load support
-@SETD 0x004C74D3 UnitTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_UnitTypes_Heap
-@SETD 0x004C9686 UnitTypeClass.NEW_SIZE ; _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size
-@SETD 0x004D1334 UnitTypeClass.NEW_SIZE ; _TFixedIHeapClass__UnitTypeClass__Save_New_Size
-@SETD 0x004D1417 UnitTypeClass.NEW_SIZE ; _TFixedIHeapClass__UnitTypeClass__Load_New_Size
-@HOOK 0x004D1431 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory
+@SET 0x004C74D2, {mov edx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_UnitTypes_Heap
+@SET 0x004C9685, {mov edx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size
+@SET 0x004D1333, {mov ebx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__UnitTypeClass__Save_New_Size
+@SET 0x004D1416, {mov ebx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__UnitTypeClass__Load_New_Size
+@LJMP 0x004D1431, _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory
 
 
 _TFixedIHeapClass__UnitTypeClass__Load_Clear_Memory:

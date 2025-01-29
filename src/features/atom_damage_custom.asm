@@ -11,9 +11,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x00425BA8 _AnimClass__Override_Atom_Range
-@HOOK 0x00425BC9 _AnimClass__Do_Atom_Damage
-@HOOK 0x00425C26 _AnimClass__Do_Atom_Damage2
+@LJMP 0x00425BA8, _AnimClass__Override_Atom_Range
+@LJMP 0x00425BC9, _AnimClass__Do_Atom_Damage
+@LJMP 0x00425C26, _AnimClass__Do_Atom_Damage2
 
 _AnimClass__Do_Atom_Damage2:
     cmp  dword [Map.Basic.UseAtomWhiteScreenEffectInMP],1

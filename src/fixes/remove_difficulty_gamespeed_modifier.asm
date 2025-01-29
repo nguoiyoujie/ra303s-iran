@@ -9,7 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004A7DE3 _Main_Loop_Modify_Game_Speed_Based_On_Difficulty
+@LJMP 0x004A7DE3, _Main_Loop_Modify_Game_Speed_Based_On_Difficulty
 
 _Main_Loop_Modify_Game_Speed_Based_On_Difficulty:
     mov  byte bh, 1

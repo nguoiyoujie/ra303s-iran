@@ -8,24 +8,26 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x004A5753 _Keyboard_Process_Home_Key_Overwrite
-@HOOK 0x0054D916 _Patch_Out_Erroneous_Sidebar_Activate_CALL
-@HOOK 0x004C9F46 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check
-@HOOK 0x004CAA29 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2
-@HOOK 0x004A6206 _UnhardCode_Keyboard_Key0
-@HOOK 0x004A61D3 _UnhardCode_Keyboard_Key9
-@HOOK 0x004A61A0 _UnhardCode_Keyboard_Key8
-@HOOK 0x004A616D _UnhardCode_Keyboard_Key7
-@HOOK 0x004A613A _UnhardCode_Keyboard_Key6
-@HOOK 0x004A6107 _UnhardCode_Keyboard_Key5
-@HOOK 0x004A60D4 _UnhardCode_Keyboard_Key4
-@HOOK 0x004A60A1 _UnhardCode_Keyboard_Key3
-@HOOK 0x004A606E _UnhardCode_Keyboard_Key2
-@HOOK 0x004A603E _UnhardCode_Keyboard_Key1
+@LJMP 0x004A5753, _Keyboard_Process_Home_Key_Overwrite
+@LJMP 0x0054D916, _Patch_Out_Erroneous_Sidebar_Activate_CALL
+@LJMP 0x004C9F46, _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check
+@LJMP 0x004CAA29, _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2
+@LJMP 0x004A6206, _UnhardCode_Keyboard_Key0
+@LJMP 0x004A61D3, _UnhardCode_Keyboard_Key9
+@LJMP 0x004A61A0, _UnhardCode_Keyboard_Key8
+@LJMP 0x004A616D, _UnhardCode_Keyboard_Key7
+@LJMP 0x004A613A, _UnhardCode_Keyboard_Key6
+@LJMP 0x004A6107, _UnhardCode_Keyboard_Key5
+@LJMP 0x004A60D4, _UnhardCode_Keyboard_Key4
+@LJMP 0x004A60A1, _UnhardCode_Keyboard_Key3
+@LJMP 0x004A606E, _UnhardCode_Keyboard_Key2
+@LJMP 0x004A603E, _UnhardCode_Keyboard_Key1
 
-
+[section .data] 
 ResignKeyPressed: dd 0
 
+
+[section .text] 
 _UnhardCode_Keyboard_Key1:
     jmp  0x004A6056
 

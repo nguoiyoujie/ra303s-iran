@@ -6,15 +6,18 @@
 ; This function can be enabled by supplying [<BuildingType>] > SpreadExplosionDamage and SpreadExplosionWarhead values
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x00457695 _BuildingClass_Take_Damage_CheckSpreadExplosionDamage ;66
-@HOOK 0x0045770D _BuildingClass_Take_Damage_ApplyDamage_N ;9
-@HOOK 0x00457755 _BuildingClass_Take_Damage_ApplyDamage_E ;9
-@HOOK 0x0045779E _BuildingClass_Take_Damage_ApplyDamage_S ;11
-@HOOK 0x004577E7 _BuildingClass_Take_Damage_ApplyDamage_W ;9
+@LJMP 0x00457695, _BuildingClass_Take_Damage_CheckSpreadExplosionDamage ;66
+@LJMP 0x0045770D, _BuildingClass_Take_Damage_ApplyDamage_N ;9
+@LJMP 0x00457755, _BuildingClass_Take_Damage_ApplyDamage_E ;9
+@LJMP 0x0045779E, _BuildingClass_Take_Damage_ApplyDamage_S ;11
+@LJMP 0x004577E7, _BuildingClass_Take_Damage_ApplyDamage_W ;9
 
+[section .data] 
 spread_explosion_damage dd 0
 spread_explosion_warhead dd 0
 
+
+[section .text] 
 _BuildingClass_Take_Damage_CheckSpreadExplosionDamage:
     ; al = ID
     movzx eax,al

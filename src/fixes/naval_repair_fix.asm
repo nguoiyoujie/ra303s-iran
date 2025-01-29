@@ -10,7 +10,7 @@
 ; Fixes repairing on enemy naval yard and repairing on the move
 ; Taken from AlexB's Arda, with AlexB's help
 
-@HOOK 0x004BD891 _EventClass__Execute_Vessel_Repair_Fixes
+@LJMP 0x004BD891, _EventClass__Execute_Vessel_Repair_Fixes
 
 %define        Event_Execute_NULL    0x004BDFED
 

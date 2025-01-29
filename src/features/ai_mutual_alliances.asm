@@ -17,12 +17,12 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004D6102 _HouseClass__Make_Ally_Computer_Paranoid_Call_Patch_Out
-@HOOK 0x004DE5D2 _HouseClass__Is_Allowed_To_Ally_AI_Player_Fix
-@HOOK 0x004BD1DD _EventClass__Execute_Make_Ally
-;@HOOK 0x004D84C4 _HouseClass__MPlayer_Defeated_Check_AI_Allies ; What does this do other than making skirmish games never end as long as AI exist?
-@HOOK 0x004DE640 _HouseClass__Computer_Paranoid_Force_Disabled_Skirmish
-@HOOK 0x004D62DD _HouseClass__Make_Ally_Show_Computer_Has_Allied
+@LJMP 0x004D6102, _HouseClass__Make_Ally_Computer_Paranoid_Call_Patch_Out
+@LJMP 0x004DE5D2, _HouseClass__Is_Allowed_To_Ally_AI_Player_Fix
+@LJMP 0x004BD1DD, _EventClass__Execute_Make_Ally
+;@LJMP 0x004D84C4, _HouseClass__MPlayer_Defeated_Check_AI_Allies ; What does this do other than making skirmish games never end as long as AI exist?
+@LJMP 0x004DE640, _HouseClass__Computer_Paranoid_Force_Disabled_Skirmish
+@LJMP 0x004D62DD, _HouseClass__Make_Ally_Show_Computer_Has_Allied
 
 
 ; Suppress IsHuman check, allowing AI alliances to be published to the in-game UI message system

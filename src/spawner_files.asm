@@ -1,7 +1,7 @@
-;@HOOK 0x004F4197 _Init_Game_RULES_File ; src/ext/early_rules_ini_load.asm should make it unneeded
-@HOOK 0x0054C013 _SessionClass__Read_Scenario_Descriptions_Map_Extension
-@HOOK 0x0053A3E8 _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active
-@HOOK 0x004F420D _Init_Game_AFTRMATH_INI_File
+;@LJMP 0x004F4197, _Init_Game_RULES_File ; src/ext/early_rules_ini_load.asm should make it unneeded
+@LJMP 0x0054C013, _SessionClass__Read_Scenario_Descriptions_Map_Extension
+@LJMP 0x0053A3E8, _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active
+@LJMP 0x004F420D, _Init_Game_AFTRMATH_INI_File
 
 
 _Init_Game_AFTRMATH_INI_File:

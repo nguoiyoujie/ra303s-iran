@@ -1,59 +1,81 @@
-@HOOK 0x004D3C95 _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner
-@HOOK 0x004D3E52 _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner
-@HOOK 0x0045AF9F _BuildingClass__Captured_Increment_Unit_Total
-@HOOK 0x004A0B00 _CellClass__Goodie_Check_Track_Crates_Spawner
-@HOOK 0x004A558F _Main_Game__Main_Loop_End_Spawner
-@HOOK 0x005B787D _Send_Statistics_Packet_Dump_Statistics
-@HOOK 0x00581C98 _UnitTrackerClass__Increment_Unit_Total_Skip_Singleplayer
-@HOOK 0x00581CA4 _UnitTrackerClass__Decrement_Unit_Total_Skip_Singleplayer
-@HOOK 0x005B6F3B _Send_Statistics_Packet_Fix_Color_Info
-@HOOK 0x005B7103 _Send_Statistics_Packet_Fix_VSLx_Byte_Order
-@HOOK 0x005B65EB _Send_Statistics_Packet_Fix_NUMP_Human_Player_Count
-@HOOK 0x005B7536 _Send_Statistics_Packet_FIX_BLLx_Info
-@HOOK 0x005B7493 _Send_Statistics_Packet_Fix_INLx_Info
-@HOOK 0x005B74C8 _Send_Statistics_Packet_Fix_UNLx_Info
-@HOOK 0x005B74FD _Send_Statistics_Packet_Fix_PLLx_Info
-@HOOK 0x005B756B _Send_Statistics_Packet_Fix_VSLx_Info
-@HOOK 0x00566C09 _TechnoClass__Record_The_Kill_Vessels_Killed_Fix
+@LJMP 0x004D3C95, _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner
+@LJMP 0x004D3E52, _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner
+@LJMP 0x0045AF9F, _BuildingClass__Captured_Increment_Unit_Total
+@LJMP 0x004A0B00, _CellClass__Goodie_Check_Track_Crates_Spawner
+@LJMP 0x004A558F, _Main_Game__Main_Loop_End_Spawner
+@LJMP 0x005B787D, _Send_Statistics_Packet_Dump_Statistics
+@LJMP 0x00581C98, _UnitTrackerClass__Increment_Unit_Total_Skip_Singleplayer
+@LJMP 0x00581CA4, _UnitTrackerClass__Decrement_Unit_Total_Skip_Singleplayer
+@LJMP 0x005B6F3B, _Send_Statistics_Packet_Fix_Color_Info
+@LJMP 0x005B7103, _Send_Statistics_Packet_Fix_VSLx_Byte_Order
+@LJMP 0x005B65EB, _Send_Statistics_Packet_Fix_NUMP_Human_Player_Count
+@LJMP 0x005B7536, _Send_Statistics_Packet_FIX_BLLx_Info
+@LJMP 0x005B7493, _Send_Statistics_Packet_Fix_INLx_Info
+@LJMP 0x005B74C8, _Send_Statistics_Packet_Fix_UNLx_Info
+@LJMP 0x005B74FD, _Send_Statistics_Packet_Fix_PLLx_Info
+@LJMP 0x005B756B, _Send_Statistics_Packet_Fix_VSLx_Info
+@LJMP 0x00566C09, _TechnoClass__Record_The_Kill_Vessels_Killed_Fix
 
-;@HOOK 0x005B712F _Send_Statistics_Packet_Skip_Clear_Unit_Total
-@HOOK 0x005B6544 _Send_Statistics_Packet_Send_Only_Once
-@HOOK 0x005B7754 _Send_Statistics_Packet_New_Per_Player_Fields
-@HOOK 0x0052B8F0 _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game
-@HOOK 0x00506676 _Destroy_Connection_Add_HouseClass_Connection_Lost_Info
-@HOOK 0x004BD1FF _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event
+;@LJMP 0x005B712F, _Send_Statistics_Packet_Skip_Clear_Unit_Total
+@LJMP 0x005B6544, _Send_Statistics_Packet_Send_Only_Once
+@LJMP 0x005B7754, _Send_Statistics_Packet_New_Per_Player_Fields
+@LJMP 0x0052B8F0, _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game
+@LJMP 0x00506676, _Destroy_Connection_Add_HouseClass_Connection_Lost_Info
+@LJMP 0x004BD1FF, _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event
 
-@SETB 0x004DCC7D 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@SETB 0x004DCC86 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@SETB 0x004DCCE6 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@SETB 0x004DCCEF 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
-@SETB 0x004DCDA3 0xB6 ; HouseClass::Tracking_Add ; convert movsx to movzx
+; HouseClass::Tracking_Add ; convert movsx to, movzx
+@SET 0x004DCC7C, {movzx ecx,al}
+@SET 0x004DCC85, {movzx ecx,al}
+@SET 0x004DCCE5, {movzx ecx,al}
+@SET 0x004DCCEE, {movzx ecx,al}
+@SET 0x004DCDA2, {movzx ecx,cl}
 
-@JMP  0x005B654A 0x005B6557 ; jump over pWOLobject == NULL check
-@JMP  0x005B6574 0x005B659C ; jump over SDFX WOL code
-@JMP  0x005B6636 0x005B666C ; jump over WOL code
-@JMP  0x005B6850 0x005B6862 ; jump into WOL code for addresses and ping stuff (might cause crashes in online mode)
-@JMP  0x005B6AD2 0x005B6AF0 ; jump over some WOL specific ping code
-@JMP  0x005B78DD 0x005B7925 ; jump to exit before WOL packet sending
+@SJMP  0x005B654A, 0x005B6557 ; jump over pWOLobject == NULL check
+@SJMP  0x005B6574, 0x005B659C ; jump over SDFX WOL code
+@SJMP  0x005B6636, 0x005B666C ; jump over WOL code
+@SJMP  0x005B6850, 0x005B6862 ; jump into WOL code for addresses and ping stuff (might cause crashes in online mode)
+@SJMP  0x005B6AD2, 0x005B6AF0 ; jump over some WOL specific ping code
+@SJMP  0x005B78DD, 0x005B7925 ; jump to exit before WOL packet sending
 
-@JMP  0x00566BB5 0x00566BBE ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x00566B44 0x00566B4D ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x00566AD4 0x00566ADD ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x00566A65 0x00566A6E ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x005669A3 0x005669AC ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x00566BB5, 0x00566BBE ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x00566B44, 0x00566B4D ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x00566AD4, 0x00566ADD ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x00566A65, 0x00566A6E ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x005669A3, 0x005669AC ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
-@JMP  0x004DCCA9 0x004DCCB2  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x004DCD12 0x004DCD1B  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x004DCD7E 0x004DCD87  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x004DCE04 0x004DCE0D  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@JMP  0x004DCE72 0x004DCE77  ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x004DCCA9, 0x004DCCB2 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x004DCD12, 0x004DCD1B ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x004DCD7E, 0x004DCD87 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x004DCE04, 0x004DCE0D ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
+@SJMP  0x004DCE72, 0x004DCE77 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
 ; PlanetWestwoodStartTime & PlanetWestwoodGameID are global int32 variables that probably need to be filled in by spawner code
 
 %define Stats_PacketClass_This    -0x6C
 
+[section .data] 
+Ally_Field db"ALY"
+Ally_Field_Player db 0x3F
+Ally_Field_Null db 0
+IsDead_Field db"DED"
+IsDead_Field_Player db 0x3F
+IsDead_Field_Null db 0
+IsSpectator_Field db"SPC"
+IsSpectator_Field_Player db 0x3F
+IsSpectator_Field_Null db 0
+SpawnLocation_Field db"SPA"
+SpawnLocation_Field_Player db 0x3F
+SpawnLocation_Field_Null db 0
+ConnectionLost_Field db"CON"
+ConnectionLost_Field_Player db 0x3F
+ConnectionLost_Field_Null db 0
+Resigned_Field db"RSG"
+Resigned_Field_Player db 0x3F
+Resigned_Field_Null db 0
 Statistics_Packet_Sent: db    0
 
+
+[section .text] 
 _EventClass__Execute_Set_HouseClass_Resign_On_DESTRUCT_Event:
     or   byte[eax+HouseClass.Offset.Resigned],4 ; offset 3
     call HouseClass__Flag_To_Die
@@ -73,29 +95,6 @@ _Destroy_Connection_Add_HouseClass_Connection_Lost_Info:
 _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game:
     jmp  0x0052B916
 
-Ally_Field db"ALY"
-Ally_Field_Player db 0x3F
-Ally_Field_Null db 0
-
-IsDead_Field db"DED"
-IsDead_Field_Player db 0x3F
-IsDead_Field_Null db 0
-
-IsSpectator_Field db"SPC"
-IsSpectator_Field_Player db 0x3F
-IsSpectator_Field_Null db 0
-
-SpawnLocation_Field db"SPA"
-SpawnLocation_Field_Player db 0x3F
-SpawnLocation_Field_Null db 0
-
-ConnectionLost_Field db"CON"
-ConnectionLost_Field_Player db 0x3F
-ConnectionLost_Field_Null db 0
-
-Resigned_Field db"RSG"
-Resigned_Field_Player db 0x3F
-Resigned_Field_Null db 0
 
 _Send_Statistics_Packet_New_Per_Player_Fields:
     mov  al, byte [ebp-0x48]

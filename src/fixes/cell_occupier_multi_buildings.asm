@@ -8,15 +8,18 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x0049F3B6 _CellClass__Occupy_Down_Check_BuildingAlreadyInList
-@HOOK 0x0049F4BF _CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings
-@HOOK 0x00455C43 _BuildingClass__Mark_MarkUp_RePlaceDown_Buildings
+@LJMP 0x0049F3B6, _CellClass__Occupy_Down_Check_BuildingAlreadyInList
+@LJMP 0x0049F4BF, _CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings
+@LJMP 0x00455C43, _BuildingClass__Mark_MarkUp_RePlaceDown_Buildings
 
 
+[section .data] 
 _occupier_building dd 0
 _bib_cell dd 0
 _bib_type dd 0
 
+
+[section .text] 
 _CellClass__Occupy_Down_Check_BuildingAlreadyInList:
     cmp  eax,ecx ; check is object is already in list
     jz   0x0049F3E6 ; skip the append to list if so

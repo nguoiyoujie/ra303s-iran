@@ -14,6 +14,17 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
+struc MINIDUMP_EXCEPTION_INFORMATION
+    .ThreadId           RESD 1
+    .ExceptionPointers  RESD 1
+    .ClientPointers     RESD 1
+endstruc
+
+struc EXCEPTION_POINTERS
+    .ExceptionRecord    RESD 1
+    .ContextRecord      RESD 1
+endstruc
+
 %define LoadLibraryA        0x005E5892
 %define FreeLibrary         0x005E65C0
 %define GetProcAddress      0x005E588C
@@ -31,14 +42,7 @@
 %define CREATE_ALWAYS           2
 %define FILE_ATTRIBUTE_NORMAL   128
 
-str_exception_title         db"Command & Conquer: Red Alert just crashed!",0
-str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to lovalmidas for debugging, thanks.",0
-str_exception_message2      db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to lovalmidas for debugging, thanks.",0
-str_dbghelp_dll             db"dbghelp.dll",0
-str_MiniDumpWriteDump       db"MiniDumpWriteDump",0
-str_dump_name               db"ra95crash.dmp",0
-str_memory_dump_name        db"ra95crash_memory.dmp",0
-
+[section .data]
 dbghelp_dll                 dd 0
 hFile                       dd 0
 hProcess                    dd 0
@@ -46,19 +50,7 @@ ProcessId                   dd 0
 ThreadId                    dd 0
 MiniDumpWriteDump           dd 0
 ExitCode                    dd 0
-
-CommandLineArg                dd 0 ; Fuck it just copy it, too many stack corruption issues
-
-struc MINIDUMP_EXCEPTION_INFORMATION
-    .ThreadId           RESD 1
-    .ExceptionPointers  RESD 1
-    .ClientPointers     RESD 1
-endstruc
-
-struc EXCEPTION_POINTERS
-    .ExceptionRecord    RESD 1
-    .ContextRecord      RESD 1
-endstruc
+CommandLineArg              dd 0 ; Fuck it just copy it, too many stack corruption issues
 
 exception_info:
     istruc MINIDUMP_EXCEPTION_INFORMATION
@@ -73,7 +65,18 @@ exception_pointers:
     at EXCEPTION_POINTERS.ContextRecord,    dd 0
     iend
 
-@HOOK 0x005DE62C _try_WinMain
+[section .rdata]
+str_exception_title         db"Command & Conquer: Red Alert just crashed!",0
+str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to lovalmidas for debugging, thanks.",0
+str_exception_message2      db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to lovalmidas for debugging, thanks.",0
+str_dbghelp_dll             db"dbghelp.dll",0
+str_MiniDumpWriteDump       db"MiniDumpWriteDump",0
+str_dump_name               db"ra95crash.dmp",0
+str_memory_dump_name        db"ra95crash_memory.dmp",0
+
+
+[section .text]
+@LJMP 0x005DE62C, _try_WinMain
 
 _try_WinMain:
 ;    mov        dword [CommandLineArg], [esp+4h]

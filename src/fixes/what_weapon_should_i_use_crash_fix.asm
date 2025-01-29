@@ -8,7 +8,7 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x00560B62 _TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check
+@LJMP 0x00560B62, _TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check
 
 _TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check:
     call 0x00555190 ; As_Object(long)

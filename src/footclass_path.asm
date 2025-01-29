@@ -1,4 +1,4 @@
-@HOOK 0x004C0A88 _FootClass__BasicPath_AlwaysPathToExactNavCom
+@LJMP 0x004C0A88, _FootClass__BasicPath_AlwaysPathToExactNavCom
 
 _FootClass__BasicPath_AlwaysPathToExactNavCom:
     ; BasicPath had a distance check against StrayDistance or CloseEnoughDistance. 

@@ -9,10 +9,10 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004DDD31 _HouseClass__Read_INI
-@HOOK 0x004DDE56 _HouseClass__Read_INI_Optional_House_Neutral_Ally
-@HOOK 0x004DDE80 _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
-@HOOK 0x00540F20 _ScoreClass__Presentation_Proper_Country_Check
+@LJMP 0x004DDD31, _HouseClass__Read_INI
+@LJMP 0x004DDE56, _HouseClass__Read_INI_Optional_House_Neutral_Ally
+@LJMP 0x004DDE80, _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
+@LJMP 0x00540F20, _ScoreClass__Presentation_Proper_Country_Check
 
     
 _HouseClass__Read_INI:

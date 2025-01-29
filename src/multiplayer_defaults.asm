@@ -10,6 +10,24 @@
 %define    Crates                                        0x0067F2C6
 %define Special                                        0x00669908
 
+[section .data]
+FirstLoad:            db 1
+FirstLoad2:            db 1
+FirstLoadLAN:        db 1
+FirstLoadPlayers:    db 1
+FirstLoadPlayers2:    db 1
+ConfigMapIndex:        dd 1
+bases:                db 1
+crates:                db 1
+oreregenerates:        db 1
+shroudregrows:        db 1
+ctf:                db 1
+; sizes not actually verified
+FileClass_this_  TIMES 128 db 0
+INIClass_this_   TIMES 64 db 0
+
+
+[section .rdata]
 redalert_ini   db"REDALERT.INI", 0
 multiplayer_defaults_str db"MultiplayerDefaults",0
 money_str db"Money",0
@@ -24,23 +42,8 @@ aidifficulty_str db"AIDifficulty",0
 aiplayers_str db"AIPlayers",0
 mapindex_str db"MapIndex",0
 
-FirstLoad:            db 1
-FirstLoad2:            db 1
-FirstLoadLAN:        db 1
-FirstLoadPlayers:    db 1
-FirstLoadPlayers2:    db 1
-ConfigMapIndex:        dd 1
 
-bases:                db 1
-crates:                db 1
-oreregenerates:        db 1
-shroudregrows:        db 1
-ctf:                db 1
-
-; sizes not actually verified
-FileClass_this_  TIMES 128 db 0
-INIClass_this_   TIMES 64 db 0
-
+[section .text]
 ; args: <section>, <key>, <default>
 %macro this__INI_Get_Bool 3
     call_INIClass__Get_Bool INIClass_this_, {%1}, {%2}, {%3}
@@ -51,24 +54,24 @@ INIClass_this_   TIMES 64 db 0
     call_INIClass__Get_Int INIClass_this_, {%1}, {%2}, {%3}
 %endmacro
 
-@HOOK 0x00535CE6 _RulesClass_Multiplayer_Defaults
-@HOOK 0x005136CE _Skirmish_Players_Slider3
-@HOOK 0x00513608 _Skirmish_UnitCount_Slider
-@HOOK 0x005138A0 _Skirmish_Selected_Map_Index
-@HOOK 0x00513163 _Skirmish_Set_AI_Difficulty
-@HOOK 0x00513480 _Skirmish_Unit_Count_Change
-@HOOK 0x00513554 _Skirmish_Check_Lists
-@HOOK 0x00513534 _Skirmish_Add_CTF_Check_List
-@HOOK 0x00514AA8 _Skirmish_Check_CTF_Check_List
+@LJMP 0x00535CE6, _RulesClass_Multiplayer_Defaults
+@LJMP 0x005136CE, _Skirmish_Players_Slider3
+@LJMP 0x00513608, _Skirmish_UnitCount_Slider
+@LJMP 0x005138A0, _Skirmish_Selected_Map_Index
+@LJMP 0x00513163, _Skirmish_Set_AI_Difficulty
+@LJMP 0x00513480, _Skirmish_Unit_Count_Change
+@LJMP 0x00513554, _Skirmish_Check_Lists
+@LJMP 0x00513534, _Skirmish_Add_CTF_Check_List
+@LJMP 0x00514AA8, _Skirmish_Check_CTF_Check_List
 
-@HOOK 0x0050BCDD _LAN_Check_Lists
-;@HOOK 0x0050C1AE _LAN_Players_Slider3
-@HOOK 0x0050CA4D _LAN_UnitCount_Slider
-@HOOK 0x0050BC36 _LAN_Unit_Count_Change
-@HOOK 0x0050BF87 _LAN_Selected_Map_Index
-@HOOK 0x005135AC _Skirmish_Check_CTF_Check_Item
-;@HOOK 0x00514854 _Skirmish_Check_CTF_Check_Item2 ; Doesn't work
-;@HOOK 0x0051491E _Skirmish_Check_CTF_Check_Item3 ; Doesn't work
+@LJMP 0x0050BCDD, _LAN_Check_Lists
+;@LJMP 0x0050C1AE, _LAN_Players_Slider3
+@LJMP 0x0050CA4D, _LAN_UnitCount_Slider
+@LJMP 0x0050BC36, _LAN_Unit_Count_Change
+@LJMP 0x0050BF87, _LAN_Selected_Map_Index
+@LJMP 0x005135AC, _Skirmish_Check_CTF_Check_Item
+;@LJMP 0x00514854, _Skirmish_Check_CTF_Check_Item2 ; Doesn't work
+;@LJMP 0x0051491E, _Skirmish_Check_CTF_Check_Item3 ; Doesn't work
 
 _Skirmish_Check_CTF_Check_Item3:
     jmp  0x0051485D

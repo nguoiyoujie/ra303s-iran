@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x00531207 _RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor
+@LJMP 0x00531207, _RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor
 
 _RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor:
     mov  ah, [ebp-0x10]

@@ -10,18 +10,21 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004588BB _BuildingClass_Active_Click_With_ConYardUnhardcode
-@HOOK 0x0045A712 _BuildingClass_What_Action_ConYardUnhardcode
-@HOOK 0x0045B991 _BuildingClass_Can_Enter_Cell_ConYardUnhardcode
+@LJMP 0x004588BB, _BuildingClass_Active_Click_With_ConYardUnhardcode
+@LJMP 0x0045A712, _BuildingClass_What_Action_ConYardUnhardcode
+@LJMP 0x0045B991, _BuildingClass_Can_Enter_Cell_ConYardUnhardcode
 
-@HOOK 0x0045C1F8 _BuildingClass_Mission_Deconstruct_MCVUnhardcode1
-@HOOK 0x0045C51C _BuildingClass_Mission_Deconstruct_MCVUnhardcode2
-@HOOK 0x0045c5BB _BuildingClass_Mission_Deconstruct_MCVUnhardcode3
+@LJMP 0x0045C1F8, _BuildingClass_Mission_Deconstruct_MCVUnhardcode1
+@LJMP 0x0045C51C, _BuildingClass_Mission_Deconstruct_MCVUnhardcode2
+@LJMP 0x0045c5BB, _BuildingClass_Mission_Deconstruct_MCVUnhardcode3
 
-@HOOK 0x0045EAEC _BuildingClass_Can_Player_Move_ConYardUnhardcode
+@LJMP 0x0045EAEC, _BuildingClass_Can_Player_Move_ConYardUnhardcode
 
+[section .data] 
 Cache_BuildingType_UndeploysInto       db 0
 
+
+[section .text] 
 ;Replaces the FACT check with a UndeploysInto=xx check
 _BuildingClass_Active_Click_With_ConYardUnhardcode:
     movzx eax,al

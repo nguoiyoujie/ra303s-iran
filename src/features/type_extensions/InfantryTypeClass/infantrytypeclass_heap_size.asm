@@ -10,11 +10,11 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@SETD 0x004C7446 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__fn_init_InfantryTypes_Heap
-@SETD 0x004C935B InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size
-@SETD 0x004D0D54 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Save_New_Size
-@SETD 0x004D0E37 InfantryTypeClass.NEW_SIZE ; _TFixedIHeapClass__InfantryTypeClass__Load_New_Size
-@HOOK 0x004D0E51 _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory
+@SET 0x004C7445, {mov edx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_InfantryTypes_Heap
+@SET 0x004C9355, {mov edx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size
+@SET 0x004D0D53, {mov ebx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__InfantryTypeClass__Save_New_Size
+@SET 0x004D0E36, {mov ebx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__InfantryTypeClass__Load_New_Size
+@LJMP 0x004D0E51, _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory
 
 
 _TFixedIHeapClass__InfantryTypeClass__Load_Clear_Memory:

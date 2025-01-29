@@ -43,8 +43,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x004F7E13 _Init_Bootstrap_Mixfiles__Preload_Mixes ; Called before other MIX files are loaded
-@HOOK 0x004F7F26 _Init_Bootstrap_Mixfiles__Postload_Mixes; Called AFTER REDALERT.MIX is loaded
+@LJMP 0x004F7E13, _Init_Bootstrap_Mixfiles__Preload_Mixes ; Called before other MIX files are loaded
+@LJMP 0x004F7F26, _Init_Bootstrap_Mixfiles__Postload_Mixes; Called AFTER REDALERT.MIX is loaded
 
 
 

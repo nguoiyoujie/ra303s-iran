@@ -11,19 +11,28 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004537C4 _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count
-@HOOK 0x0045359B _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes
-@HOOK 0x00453709 _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
-@HOOK 0x004596B3 _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
-@HOOK 0x004F40A5 _Init_Game_Set_BuildingTypes_Heap_Count
+@LJMP 0x004537C4, _BuildingTypeClass__From_Name_Unhardcode_BuildingTypes_Count
+@LJMP 0x0045359B, _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes
+@LJMP 0x00453709, _BuildingTypeClass__One_Time_UnhardCode_BuildingTypes
+@LJMP 0x004596B3, _BuildingClass__Update_Buildables_UnhardCode_BuildingTypes
+@LJMP 0x004F40A5, _Init_Game_Set_BuildingTypes_Heap_Count
 
-@SETB 0x00429D43 0xEA ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr edx,18
-@SETB 0x00429D4B 0xEA 
-@SETB 0x00453A77 0xB6 ; BuildingTypeClass::As_Reference ; convert movsx to movzx
-@SETB 0x00457EB8 0xE9 ; TFixedIHeapClass<BuildingTypeClass>::Ptr ; convert sar ecx,18 to shr ecx,18
-@SETB 0x00457ED7 0xE9 
-@SETB 0x004566C9 0xB6 ; BuildingClass::AI ; convert movsx to movzx
-@SETB 0x004603B0 0xB6 ; BuildingClass::Animation_AI ; convert movsx to movzx
+; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr, edx,18
+@SET 0x00429D42, {shr edx,0x18} 
+@SET 0x00429D4A, {shr edx,0x18}
+
+; BuildingTypeClass::As_Reference ; convert movsx to, movzx
+@SET 0x00453A76, {movzx eax,al} 
+
+; TFixedIHeapClass<BuildingTypeClass>::Ptr ; convert sar ecx,18 to shr, ecx,18
+@SET 0x00457EB7, {shr ecx,0x18}  
+@SET 0x00457ED6, {shr ecx,0x18}  
+
+; BuildingClass::AI ; convert movsx to, movzx
+@SET 0x004566C8, {movzx eax,al}  
+
+; BuildingClass::Animation_AI ; convert movsx to, movzx
+@SET 0x004603AF, {movzx eax,al} 
 
 
 _BuildingTypeClass__Init_Heap_UnhardCode_BuildingTypes:
@@ -49,7 +58,7 @@ Init_BuildingTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  ecx,eax
 
     pop  eax

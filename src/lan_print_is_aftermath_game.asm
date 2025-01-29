@@ -1,12 +1,16 @@
-@HOOK 0x0050C2B0 _LAN_New_Dialog_Aftermath_Text
-@HOOK 0x0050C748 _LAN_New_Dialog_Aftermath_Text2
-@HOOK 0x0050DB55 _LAN_New_Dialog_Aftermath_Text3
+@LJMP 0x0050C2B0, _LAN_New_Dialog_Aftermath_Text
+@LJMP 0x0050C748, _LAN_New_Dialog_Aftermath_Text2
+@LJMP 0x0050DB55, _LAN_New_Dialog_Aftermath_Text3
 
 %define    Fancy_Text_Print 0x004AE7FC
 %define bAftermathMultiplayer 0x00680538
 
+
+[section .data] 
 startedasam: db 0
 
+
+[section .text] 
 _LAN_New_Dialog_Aftermath_Text:
     call Fancy_Text_Print
     add  esp, 18h

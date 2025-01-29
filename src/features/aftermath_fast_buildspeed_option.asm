@@ -10,7 +10,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x005611F3 _Time_To_Build_NewUnitsEnabled_Check
+@LJMP 0x005611F3, _Time_To_Build_NewUnitsEnabled_Check
 
 _Time_To_Build_NewUnitsEnabled_Check:
 

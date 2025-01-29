@@ -4,8 +4,8 @@
 ; Load setting keys from savegames. 
 ;
 ;----------------------------------------------------------------
-@HOOK 0x00537E08 _Load_Game_Before_Hook ; For savegame loading stuff
-@HOOK 0x00538F07 _Load_Game_Late_Hook  ; For savegame loading stuff
+@LJMP 0x00537E08, _Load_Game_Before_Hook ; For savegame loading stuff
+@LJMP 0x00538F07, _Load_Game_Late_Hook  ; For savegame loading stuff
 
 
 _Load_Game_Late_Hook:

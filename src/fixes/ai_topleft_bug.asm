@@ -13,8 +13,8 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004DDA00 _HouseClass__Where_To_Go_Save_CurrentObject
-@HOOK 0x004DDA71 _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure
+@LJMP 0x004DDA00, _HouseClass__Where_To_Go_Save_CurrentObject
+@LJMP 0x004DDA71, _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure
 
 _HouseClass__Where_To_Go_Save_CurrentObject:
     cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
@@ -68,8 +68,8 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 
 
 ; 3.03p
-;@HOOK 0x004DDA00 _HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1
-;@HOOK 0x004DDA71 _HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2
+;@LJMP 0x004DDA00, _HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1
+;@LJMP 0x004DDA71, _HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2
 ;
 ;
 ;_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1:

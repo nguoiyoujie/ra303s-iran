@@ -11,7 +11,7 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x0054EBAC _SidebarClass__StripClass__Recalc_Can_Build_Check
+@LJMP 0x0054EBAC, _SidebarClass__StripClass__Recalc_Can_Build_Check
 
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>

@@ -24,7 +24,7 @@
 str_cncnet_org db"http://cncnet.org/", 0
 str_dot db".", 0
 
-@JMP 0x004F4D7E _Internet_Action
+@LJMP 0x004F4D7E, _Internet_Action
 
 _Internet_Action:
     cmp  byte [RedAlert.Options.EnableWOL], 1

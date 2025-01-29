@@ -8,9 +8,9 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004EF7B5 _InfantryClass__Response_Move_GNRL_Is_Soviet
-@HOOK 0x004EF554 _InfantryClass__Response_Select_GNRL_Is_Soviet
-@HOOK 0x004EFA1D _InfantryClass__Response_Attack_GNRL_Is_Soviet
+@LJMP 0x004EF7B5, _InfantryClass__Response_Move_GNRL_Is_Soviet
+@LJMP 0x004EF554, _InfantryClass__Response_Select_GNRL_Is_Soviet
+@LJMP 0x004EFA1D, _InfantryClass__Response_Attack_GNRL_Is_Soviet
 
 _InfantryClass__Response_Attack_GNRL_Is_Soviet:
     cmp  dl, 2

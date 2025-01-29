@@ -11,17 +11,17 @@
 
 ; original size 0x3a, new size 0x74?
 ;void MapClass::Alloc_Cells(void)
-@SETB 0x0058651A 0x74
-@SETB 0x00586529 0x74
+@SET 0x00586518, {imul ebx,eax,0x74}
+@SET 0x00586527, {add edx,0x74}
 
 ;void MapClass::Init_Cells(void)
-;@CLEAR 0x004FE40A 0x74 0x004FE40B
+;@CLEAR 0x004FE40A, 0x74, 0x004FE40B
 
 
 ;void DisplayClass::Shroud_Cell(CELL cell, HouseClass * house)
-;@CLEAR 0x004B50C8 0x74 0x004B50C9
+;@CLEAR 0x004B50C8, 0x74, 0x004B50C9
 
-;@HOOK 0x004B507C _DisplayClass__Shroud_Cell_Unhardcode_Size
+;@LJMP 0x004B507C, _DisplayClass__Shroud_Cell_Unhardcode_Size
 
 ;_DisplayClass__Shroud_Cell_Unhardcode_Size:
 ;    imul eax,0x74

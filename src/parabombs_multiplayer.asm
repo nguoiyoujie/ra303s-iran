@@ -1,4 +1,4 @@
-@HOOK 0x004D5B13 _Parabombs_Single_Player_Check
+@LJMP 0x004D5B13, _Parabombs_Single_Player_Check
 
 _Parabombs_Single_Player_Check:
     cmp  byte [Rules.General.ParabombsInMultiplayer],1

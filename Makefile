@@ -1,33 +1,53 @@
-# if you are on windows you can use build.bat instead of make
+#-include config.mk
 
-BUILD_DIR = .
-# should be tools repo
-TOOLS_DIR = ../nasm-patcher
+INPUT       = ra95.dat
+OUTPUT      = ra95_build.exe
+LDS         = patch.lds
 
-LINKER    = $(BUILD_DIR)/linker$(EXT)
-PETOOL    = $(BUILD_DIR)/petool$(EXT)
+LDFLAGS     = --subsystem windows 
+#LDFLAGS    += --major-os-version 1 
+#LDFLAGS    += --minor-os-version 11 
+LDFLAGS    += --disable-reloc-section 
+LDFLAGS    += --file-alignment=0x200 
+LDFLAGS    += --section-alignment=0x1000 
+LDFLAGS    += --enable-stdcall-fixup 
+#LDFLAGS    += --verbose
+LDFLAGS    += -nostdlib
 
-NASM     ?= nasm
-NFLAGS    = -I./include/
+NFLAGS      = -Iinc/ -f elf
+#CFLAGS      = -std=c99 -Iinc/
 
-default: ra95.exe
+OBJS        = res/res.o
+OBJS       += sym.o
+OBJS       += src/main.o
 
-%.exe: %.ext $(LINKER) src/main.asm
-	cp $< $@
-	$(LINKER) src/main.asm src/main.inc $@ $(NASM) $(NFLAGS)
+PETOOL      = petool
+NASM        = nasm
+STRIP       = strip
+WINDRES     = windres
 
-%.ext: %.dat $(PETOOL)
-	cp $< $@
-	$(PETOOL) $@ AUTO rwxc
-	$(PETOOL) $@ .patch rwxci 131072
+all: $(OUTPUT)
 
-%.dat:
-	@echo "You are missing the required orininal executable, \"$(@F)\""
-	@false
+rsrc.o: $(INPUT)
+	$(PETOOL) re2obj $(INPUT) $@
 
-clean: clean_tools
-	rm -f *.exe src/*.map src/*.bin src/*.inc
+%.o: %.asm
+	$(NASM) $(NFLAGS) -o $@ $<
 
-.PHONY: clean
+%.o: %.rc
+	$(WINDRES) $(WFLAGS) $< $@
 
-include $(TOOLS_DIR)/Makefile
+$(OUTPUT): $(LDS) $(INPUT) $(OBJS)
+	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(OBJS)
+	$(PETOOL) setsc $@ .text 0xE0000020 || ($(RM) $@ && exit 1)
+	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
+	sleep 1
+	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
+	sleep 1
+	$(PETOOL) setsc $@ .p_text 0xE0000020 || ($(RM) $@ && exit 1)
+	$(PETOOL) setsc $@ .p_rdata 0xE0000020 || ($(RM) $@ && exit 1)
+	$(PETOOL) dump $@
+	$(RM) $(OBJS)
+
+clean:
+	$(RM) $(OUTPUT) $(OBJS)

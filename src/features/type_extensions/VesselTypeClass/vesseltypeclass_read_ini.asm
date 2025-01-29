@@ -10,11 +10,13 @@
 ;----------------------------------------------------------------
 
 ;There is no Read_INI in VesselTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
-@HOOK 0x005374A2 _RulesClass_Objects_Replace_VesselTypes_Read_INI
+@LJMP 0x005374A2, _RulesClass_Objects_Replace_VesselTypes_Read_INI
 
+[section .data] 
 Buffer_VesselType           times 512 db 0 
 
 
+[section .text] 
 _RulesClass_Objects_Replace_VesselTypes_Read_INI:
     mov  dword eax,[ecx+eax]
     mov  edx,ebx

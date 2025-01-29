@@ -6,9 +6,9 @@
 ; This function is enabled by having more buildings with FactoryType=BuildingType. Remember to set the relevant animation frames
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0045CF1B _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck
-@HOOK 0x0045CF94 _BuildingClass_Mission_Repair_RepairBay_Unhardcode
-@HOOK 0x0045D376 _BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode
+@LJMP 0x0045CF1B, _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck
+@LJMP 0x0045CF94, _BuildingClass_Mission_Repair_RepairBay_Unhardcode
+@LJMP 0x0045D376, _BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode
 
 ;Overrides the structure type check with a FactoryType=xx check
 _BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck:

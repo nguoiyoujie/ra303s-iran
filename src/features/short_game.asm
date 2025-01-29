@@ -11,7 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004D4C79 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check
+@LJMP 0x004D4C79, _HouseClass__AI_Is_House_Multiplayer_Defeated_Check
 ; warning, this does not check for Insignificant=yes buildings
 
 _HouseClass__AI_Is_House_Multiplayer_Defeated_Check:

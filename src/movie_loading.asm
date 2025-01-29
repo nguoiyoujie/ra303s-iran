@@ -1,12 +1,13 @@
-@HOOK 0x004A8DE2 _Play_Movie
-@HOOK 0x004637FF _CCINIClass_Get_VQType
-;@HOOK 0x0053A1D3 _Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
-@HOOK 0x004F5061 _Extra_Sneak_Peaks
-@HOOK 0x004F4358 _Optional_Play_ENGLISHVQA_Intro
+@LJMP 0x004A8DE2, _Play_Movie
+@LJMP 0x004637FF, _CCINIClass_Get_VQType
+;@LJMP 0x0053A1D3, _Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
+@LJMP 0x004F5061, _Extra_Sneak_Peaks
+@LJMP 0x004F4358, _Optional_Play_ENGLISHVQA_Intro
 
 %define    _Play_Movie_                                0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
+[section .rdata] 
 ; TLF movies + sizzle3 and sizzle4
 derp_str db"derp",0
 ALLX1_str db"ALLX1",0
@@ -37,13 +38,17 @@ TANESCP_str db"TANESCP",0
 TESLATNK_str db"TESLATNK",0
 SIZZLE3_str db"SIZZLE3",0
 SIZZLE4_str db"SIZZLE4",0
-
 str_playenglishintro db"PlayEnglishIntro",0
 ;str_redalert_ini db"REDALERT.INI",0
 ;str_options2 db"Options",0
+
+
+[section .data] 
 FileClass_redalertini2  TIMES 128 db 0
 CCINIClass_redalertini2 TIMES 128 db 0
 
+
+[section .text] 
 ; args: <video name no extension>, <index to return>
 %macro Video_Name_To_Index 2
     lea  eax, [ebp-88h]

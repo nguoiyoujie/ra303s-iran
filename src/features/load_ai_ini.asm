@@ -5,7 +5,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0053D645 _Read_Scenario_INI_Load_AI_INI
+@LJMP 0x0053D645, _Read_Scenario_INI_Load_AI_INI
 
 _Read_Scenario_INI_Load_AI_INI:
     call 0x00537564

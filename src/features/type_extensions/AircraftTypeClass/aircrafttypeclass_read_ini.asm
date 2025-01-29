@@ -10,7 +10,7 @@
 ;----------------------------------------------------------------
 
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
-@HOOK 0x005374C5 _RulesClass_Objects_Replace_AircraftTypes_Read_INI
+@LJMP 0x005374C5, _RulesClass_Objects_Replace_AircraftTypes_Read_INI
 
 _RulesClass_Objects_Replace_AircraftTypes_Read_INI:
     mov  dword eax,[esi+eax]

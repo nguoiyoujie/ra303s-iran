@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x005672D9 _Green_Shadow_On_Cloaked_Units_Fix
+@LJMP 0x005672D9, _Green_Shadow_On_Cloaked_Units_Fix
 
 _Green_Shadow_On_Cloaked_Units_Fix:
 

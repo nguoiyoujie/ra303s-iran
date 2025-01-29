@@ -1,13 +1,16 @@
-@HOOK 0x00567383 _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units
-@HOOK 0x004D6542 _HouseClass__Remap_Table_Use_RemapType_Arg
-@HOOK 0x004D6538 _HouseClass__Remap_Table_Use_RemapType_Arg2
-@HOOK 0x005671D1 _Patch_Unit_Drawing
-@HOOK 0x00568596 _TechnoClass_Risk_UsePoints
-@HOOK 0x00567632 _TechnoClass_Value_UsePointsInsteadOfReward
-@HOOK 0x0046078A _BuildingClass_Value_UsePointsInsteadOfRiskOrReward
+@LJMP 0x00567383, _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units
+@LJMP 0x004D6542, _HouseClass__Remap_Table_Use_RemapType_Arg
+@LJMP 0x004D6538, _HouseClass__Remap_Table_Use_RemapType_Arg2
+@LJMP 0x005671D1, _Patch_Unit_Drawing
+@LJMP 0x00568596, _TechnoClass_Risk_UsePoints
+@LJMP 0x00567632, _TechnoClass_Value_UsePointsInsteadOfReward
+@LJMP 0x0046078A, _BuildingClass_Value_UsePointsInsteadOfRiskOrReward
 
+[section .rdata] 
 temp.fakes.fakeof db 2,11,27,28,6
 
+
+[section .text] 
 _Patch_Unit_Drawing:
     mov  eax,[Globals___PlayerPtr]
     xor  ebx,ebx

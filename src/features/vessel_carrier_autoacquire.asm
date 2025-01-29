@@ -9,8 +9,8 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x0058B862 _VesselClass__Greatest_Threat_Carrier_AutoAcquire
-@HOOK 0x00532FE4 _Reinf__Create_Group_EntitiesInTransports_AreNot_Loaners
+@LJMP 0x0058B862, _VesselClass__Greatest_Threat_Carrier_AutoAcquire
+@LJMP 0x00532FE4, _Reinf__Create_Group_EntitiesInTransports_AreNot_Loaners
 
 _VesselClass__Greatest_Threat_Carrier_AutoAcquire:
     ; Carrier considered all threat as zero. 

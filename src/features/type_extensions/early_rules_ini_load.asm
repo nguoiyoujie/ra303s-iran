@@ -8,8 +8,8 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004F4094 _Init_Game_Early_RULES_INI_Load
-@HOOK 0X004F419C _Init_Game_Patch_Out_Later_RULES_INI_Load
+@LJMP 0x004F4094, _Init_Game_Early_RULES_INI_Load
+@LJMP 0X004F419C, _Init_Game_Patch_Out_Later_RULES_INI_Load
 
 _Init_Game_Patch_Out_Later_RULES_INI_Load:
     mov  eax,1

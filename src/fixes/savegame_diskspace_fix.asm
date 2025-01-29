@@ -8,7 +8,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x004AB108 _Get_Disk_Space ; Not the function's real name
+@LJMP 0x004AB108, _Get_Disk_Space ; Not the function's real name
 
 _Get_Disk_Space:
     mov  eax, 800001h

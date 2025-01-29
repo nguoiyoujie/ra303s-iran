@@ -11,12 +11,15 @@
 ;----------------------------------------------------------------
 
 ; Intercepting void Check_For_Focus_Loss(void) in WINSTUB.CPP
-@HOOK 0x005B38DD _Mouse_Wheel_Sidebar_Scrolling
-;@HOOK 0x0054E3BB _SidebarClass_StripClass__AI_Scroll_Check
+@LJMP 0x005B38DD, _Mouse_Wheel_Sidebar_Scrolling
+;@LJMP 0x0054E3BB, _SidebarClass_StripClass__AI_Scroll_Check
 
+[section .data] 
 Scrolling db 0
 ProcessingSidebar dd 0
 
+
+[section .text] 
 _Mouse_Wheel_Sidebar_Scrolling:
     cmp  byte [RedAlert.Options.MouseWheelScrolling], 1
     jnz  .out

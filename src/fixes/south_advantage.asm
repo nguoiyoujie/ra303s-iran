@@ -10,10 +10,10 @@
 ;----------------------------------------------------------------
 
 
-@HOOK 0x0056277D _TechnoClass_In_Range_Long_Int_Distance_Check_Patched ; Check during actual firing
-@HOOK 0x005626EA _TechnoClass_In_Range_Long_Int_No_Building_Exception
-@HOOK 0x0056285C _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched ; For checking if your mouse turns into shooting cursor
-@HOOK 0x005627CA _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception
+@LJMP 0x0056277D, _TechnoClass_In_Range_Long_Int_Distance_Check_Patched ; Check during actual firing
+@LJMP 0x005626EA, _TechnoClass_In_Range_Long_Int_No_Building_Exception
+@LJMP 0x0056285C, _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched ; For checking if your mouse turns into shooting cursor
+@LJMP 0x005627CA, _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception
 
 ; args: <ObjectClass pointer to check facing for>, <ObjectClass pointer to check facing compared to>
 ; NOTE:

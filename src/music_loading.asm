@@ -1,53 +1,49 @@
-@HOOK 0x004F4B83 _Load_Game_Menu_Queue_Song_Call_Patch_Out
-@HOOK 0x00538EF0 _Load_Game_Queue_Song
-@HOOK 0x0056C15A _ThemeClass_Track_Length
-@HOOK 0x0056C439 _ThemClass_Scan
-@HOOK 0x0056C40C _ThemeClass_Scan_Jump_Over
-@HOOK 0x0056C115 _ThemeClass_File_Name
-@HOOK 0x0056BEA4 _ThemeClass_Full_Name
-@HOOK 0x0056BFC4 _ThemeClass_Next_Song_RNG
-@HOOK 0x0056BFF8 _ThemeClass_Next_Song_CMP
-@HOOK 0x0056BFA3 _ThemeClass_Next_Song_Cond_Jump
-@HOOK 0x0055066B _SoundControlsClass_Process
-@HOOK 0x0056C240 _ThemeClass_Is_Allowed
-@HOOK 0x0056BFEC _ThemeClass_Next_Song_BL_Register_Change
-@HOOK 0x0053A36F _Start_Scenario_Queue_Theme
-@HOOK 0x004C7798 _TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
-;@HOOK 0x00550668 _SoundControlClass_Process_Jump_Over_Looping_Themes
-@HOOK 0x0056C3FE _ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
-@HOOK 0x0056BF08 _ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
+@LJMP 0x004F4B83, _Load_Game_Menu_Queue_Song_Call_Patch_Out
+@LJMP 0x00538EF0, _Load_Game_Queue_Song
+@LJMP 0x0056C15A, _ThemeClass_Track_Length
+@LJMP 0x0056C439, _ThemClass_Scan
+@LJMP 0x0056C40C, _ThemeClass_Scan_Jump_Over
+@LJMP 0x0056C115, _ThemeClass_File_Name
+@LJMP 0x0056BEA4, _ThemeClass_Full_Name
+@LJMP 0x0056BFC4, _ThemeClass_Next_Song_RNG
+@LJMP 0x0056BFF8, _ThemeClass_Next_Song_CMP
+@LJMP 0x0056BFA3, _ThemeClass_Next_Song_Cond_Jump
+@LJMP 0x0055066B, _SoundControlsClass_Process
+@LJMP 0x0056C240, _ThemeClass_Is_Allowed
+@LJMP 0x0056BFEC, _ThemeClass_Next_Song_BL_Register_Change
+@LJMP 0x0053A36F, _Start_Scenario_Queue_Theme
+@LJMP 0x004C7798, _TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
+;@LJMP 0x00550668, _SoundControlClass_Process_Jump_Over_Looping_Themes
+@LJMP 0x0056C3FE, _ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
+@LJMP 0x0056BF08, _ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
 
+[section .data]
 SongsAvailable: dd 0
+FileClass_this3  TIMES 128 db 0
+INIClass_this3 TIMES 128 db 0
+FileClass_redalertini  TIMES 128 db 0
+CCINIClass_redalertini TIMES 128 db 0
+FileClass_Arazoid    TIMES 128 db 0
+sprintf_buffer   TIMES 64 db 0
+sprintf_buffer2   TIMES 64 db 0
+music_filenames_buffer TIMES 8192 db 0 ; 128 * 32 bytes
+FileClass_THEMEAVAILABLE  TIMES 128 db 0
+music_array TIMES 400h db 0
 
+
+[section .rdata]
 bigfoot_str db"outtakes.AUD",0
 musicini_str db"MUSIC.INI",0
-music_array TIMES 400h db 0
 str_filenames db"Filenames",0
 str_fullnames db"Fullnames",0
 str_tracklength db"Tracklength",0
 str_showallmusic db"ShowAllMusic",0
 str_options2 db"Options",0
 str_redalert_ini db"REDALERT.INI",0
-
-FileClass_this3  TIMES 128 db 0
-INIClass_this3 TIMES 128 db 0
-
-FileClass_redalertini  TIMES 128 db 0
-CCINIClass_redalertini TIMES 128 db 0
-
-FileClass_Arazoid    TIMES 128 db 0
 str_arazoidaud    db"ARAZOID.AUD",0
 str_araziodaud    db"ARAZIOD.AUD",0
-
 str_sprintf_format2 db"%d",0
-
-sprintf_buffer   TIMES 64 db 0
-
 str_sprintf_format db"%d",0
-
-sprintf_buffer2   TIMES 64 db 0
-music_filenames_buffer TIMES 8192 db 0 ; 128 * 32 bytes
-
 str_twincannonremix db"Twin Cannon (Remix)",0
 str_underlyingthoughts db"Underlying Thoughts",0
 str_voicerhythm2 db"Voice Rhythm 2",0
@@ -58,6 +54,7 @@ str_backstab db"Backstab",0
 str_twincannon db"Twin Cannon",0
 
 
+[section .text]
 ; args: <section>, <key>, <default>
 %macro this3_INI_Get_Int 3
     call_INIClass__Get_Int INIClass_this3, {%1}, {%2}, {%3}
@@ -176,7 +173,6 @@ _ThemeClass_Next_Song_BL_Register_Change:
     mov  [ebp-0CH], dl
     jmp  0x0056C013
 
-FileClass_THEMEAVAILABLE  TIMES 128 db 0
 
 _ThemeClass_Is_Allowed:
     Save_Registers

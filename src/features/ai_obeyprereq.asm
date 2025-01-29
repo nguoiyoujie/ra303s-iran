@@ -5,9 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
-;@HOOK 0x004D4064 _HouseClass_Can_Build_ComputerObeyPrereqInSP
+;@LJMP 0x004D4064, _HouseClass_Can_Build_ComputerObeyPrereqInSP
 
-;@CLEAR 0x004D4069 0x90 0x004D406A
+;@CLEAR 0x004D4069, 0x90, 0x004D406A
 ;_HouseClass_Can_Build_ComputerObeyPrereqInSP:
 ;    cmp  byte [Rules.AI.SingleplayerAIObeyPrerequisites], 1
 ;    jz   0x004D407D

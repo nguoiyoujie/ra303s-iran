@@ -1,6 +1,6 @@
 ; RedAlert.Options.SkipScoreScreen
-@HOOK 0x00540670 _Campaign_Do_Win_Score_Screen
-@HOOK 0x00546678 _Multiplayer_Score_Presentation_Start
+@LJMP 0x00540670, _Campaign_Do_Win_Score_Screen
+@LJMP 0x00546678, _Multiplayer_Score_Presentation_Start
 
 _Campaign_Do_Win_Score_Screen:
     cmp  byte [RedAlert.Options.SkipScoreScreen], 1

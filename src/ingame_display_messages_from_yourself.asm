@@ -1,4 +1,4 @@
-@HOOK 0x004A731C _Message_Input_Display_Message_After_Sending_To_Players
+@LJMP 0x004A731C, _Message_Input_Display_Message_After_Sending_To_Players
 
 _Message_Input_Display_Message_After_Sending_To_Players:
     Save_Registers

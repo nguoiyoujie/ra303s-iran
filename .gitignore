@@ -3,6 +3,9 @@ spawn.bat
 # temporary files due to linking
 /src/*.inc
 
+# temporary files from building
+/*.o
+
 # patched executables
 /*.exe
 

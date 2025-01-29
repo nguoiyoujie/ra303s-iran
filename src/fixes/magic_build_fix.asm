@@ -11,8 +11,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x004AFF0D _DisplayClass_Set_Cursor_Pos_Magic_Build_Fix
-@HOOK 0x004B31E9 _DisplayClass__TacticalClass__Action_Magic_Build_Fix
+@LJMP 0x004AFF0D, _DisplayClass_Set_Cursor_Pos_Magic_Build_Fix
+@LJMP 0x004B31E9, _DisplayClass__TacticalClass__Action_Magic_Build_Fix
 
 _DisplayClass_Set_Cursor_Pos_Magic_Build_Fix:
     cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH

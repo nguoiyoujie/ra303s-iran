@@ -8,18 +8,22 @@
 ; No compatibility issues is expected. To not use this logic, simply refrain from including NOICON.SHP.
 ;----------------------------------------------------------------
 
-@HOOK 0x00403FAE _AircraftTypeClass__One_Time__Load_NoIcon_SHP
-@HOOK 0x00453637 _BuildingTypeClass__One_Time__Load_NoIcon_SHP
-@HOOK 0x004EB12E _InfantryTypeClass__One_Time__Load_NoIcon_SHP
-@HOOK 0x0054DDBD _SideBarClass__One_Time__Load_NoIcon_SHP
-@HOOK 0x00578A24 _UnitTypeClass__One_Time__Load_NoIcon_SHP
-@HOOK 0x005849EB _VesselTypeClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x00403FAE, _AircraftTypeClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x00453637, _BuildingTypeClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x004EB12E, _InfantryTypeClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x0054DDBD, _SideBarClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x00578A24, _UnitTypeClass__One_Time__Load_NoIcon_SHP
+@LJMP 0x005849EB, _VesselTypeClass__One_Time__Load_NoIcon_SHP
 
+[section .rdata] 
 str_NoIcon_SHP       db"NOICON.SHP", 0
+
+[section .data] 
 chk_NoIcon_SHP       db 0
 obj_NoIcon_SHP       dd 0
 
 
+[section .text] 
 _AircraftTypeClass__One_Time__Load_NoIcon_SHP:
     ; eax is the Shape object loaded from <TypeName>ICON.SHP. It is NUL (0) if the icon does not exist.
     test eax,eax

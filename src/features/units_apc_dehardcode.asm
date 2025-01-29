@@ -10,10 +10,10 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0057A7A3 _UnitClass__Receive_Message_Door_Open_And_Close
-@HOOK 0x0057A863 _UnitClass__Receive_Message_PromptPassenger
-;@HOOK 0x0057D3C2 _UnitClass__Mission_Unload_CheckAPCDoor ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
-@HOOK 0x0057CC5F _UnitClass__Draw_It_Offset_Turrets
+@LJMP 0x0057A7A3, _UnitClass__Receive_Message_Door_Open_And_Close
+@LJMP 0x0057A863, _UnitClass__Receive_Message_PromptPassenger
+;@LJMP 0x0057D3C2, _UnitClass__Mission_Unload_CheckAPCDoor ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
+@LJMP 0x0057CC5F, _UnitClass__Draw_It_Offset_Turrets
 
 _UnitClass__Receive_Message_Door_Open_And_Close:
     push eax

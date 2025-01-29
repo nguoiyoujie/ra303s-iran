@@ -17,11 +17,11 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00425CB9 _Voc_From_Name_Add_Unhardcoded_Sound_Effects
-@HOOK 0x00425D0E _Voc_Name_Add_Unhardcoded_Sound_Effects
-@HOOK 0x00425FDF _Sound_Effect_Call_Where
-@HOOK 0x004260AB _Sound_Effect_Call_Voc_Name
-@HOOK 0x004260F5 _Sound_Effect_Call_Priority
+@LJMP 0x00425CB9, _Voc_From_Name_Add_Unhardcoded_Sound_Effects
+@LJMP 0x00425D0E, _Voc_Name_Add_Unhardcoded_Sound_Effects
+@LJMP 0x00425FDF, _Sound_Effect_Call_Where
+@LJMP 0x004260AB, _Sound_Effect_Call_Voc_Name
+@LJMP 0x004260F5, _Sound_Effect_Call_Priority
 
 _Sound_Effect_Call_Where:
 ; eax is the voc id
@@ -149,7 +149,7 @@ _Voc_From_Name_Add_Unhardcoded_Sound_Effects:
 Init_SoundEffect:
     ; edx should have the name of the INI section already
     mov  eax,edx
-    call __strdup
+    call _strdup
 
     ; follow SoundEffectNameStruct 9-byte structure, using a 4-byte structure could be a cause of the audio-bug and crash
     lea  ebx,[ebx*9]

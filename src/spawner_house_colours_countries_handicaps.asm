@@ -1,6 +1,7 @@
-@HOOK 0x0053E1BC _Assign_Houses_Epilogue
-@HOOK 0x0053E18F _Assign_Houses_Epilogue2
+@LJMP 0x0053E1BC, _Assign_Houses_Epilogue
+@LJMP 0x0053E18F, _Assign_Houses_Epilogue2
 
+[section .data] 
 Multi1_Colour:   db 0xFF
 Multi2_Colour:   db 0xFF
 Multi3_Colour:   db 0xFF
@@ -28,6 +29,8 @@ Multi6_Handicap:   db 0xFF
 Multi7_Handicap:   db 0xFF
 Multi8_Handicap:   db 0xFF
 
+
+[section .text] 
 ; args <HouseType for house>, <Colour to set>
 %macro Set_House_Colour 2
     mov  eax, %1

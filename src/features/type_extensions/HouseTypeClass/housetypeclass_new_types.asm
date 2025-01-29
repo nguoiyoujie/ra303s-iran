@@ -11,10 +11,10 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004CB760 _HouseTypeClass__AddNewHouseTypes
-@HOOK 0x004CD0DB _HouseTypeClass__Init_Heap_AddNewHouseTypes
-;@CLEAR 0x004F4095 HouseTypeClass.NEW_COUNT 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
-@HOOK 0x00537513 _RulesClass__Objects_ReadIni_Fix
+@LJMP 0x004CB760, _HouseTypeClass__AddNewHouseTypes
+@LJMP 0x004CD0DB, _HouseTypeClass__Init_Heap_AddNewHouseTypes
+;@CLEAR 0x004F4095, HouseTypeClass.NEW_COUNT, 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
+@LJMP 0x00537513, _RulesClass__Objects_ReadIni_Fix
 
 _RulesClass__Objects_ReadIni_Fix:
     mov  edx,ebx

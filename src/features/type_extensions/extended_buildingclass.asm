@@ -1,6 +1,6 @@
-@HOOK 0x0045E429 _BuildingClass__Building_Crew_House_NoBuildingCrew
-@HOOK 0x004EC58F _InfantryClass__Per_Cell_Process_House_Instant_Capture
-@HOOK 0x004EFC9E _InfantryClass__What_Action_House_Instant_Capture
+@LJMP 0x0045E429, _BuildingClass__Building_Crew_House_NoBuildingCrew
+@LJMP 0x004EC58F, _InfantryClass__Per_Cell_Process_House_Instant_Capture
+@LJMP 0x004EFC9E, _InfantryClass__What_Action_House_Instant_Capture
 
 ; no buildingcrew if the house has no building crew set
 ; this requires the extended houseclass option NoBuildingCrew

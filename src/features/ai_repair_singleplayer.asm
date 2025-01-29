@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x00460073 _BuildingClass_Repair_AI_SingleplayerRepair
-@HOOK 0x0045FF34 _BuildingClass_Repair_AI_Singleplayer_Sellback
+@LJMP 0x00460073, _BuildingClass_Repair_AI_SingleplayerRepair
+@LJMP 0x0045FF34, _BuildingClass_Repair_AI_Singleplayer_Sellback
 
 _BuildingClass_Repair_AI_SingleplayerRepair:
     cmp  dword [InCoopMode],1 ; inherited from coop mode

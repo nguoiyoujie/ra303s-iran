@@ -5,12 +5,12 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0053D081 _Map_Load_Before_Hook ; For map loading stuff
-@HOOK 0x0053A568 _Map_Load_Late_Hook  ; For map loading stuff
-@HOOK 0x0053D6AA _Custom_Missions_Load_Map_Specific_Tutorial_Text
-@HOOK 0x00538CE1 _Custom_Missions_Load_Game_Map_Specific_Tutorial_Text
-@HOOK 0x0055B84B _Ore_Mine_Foundation_Voodoo ; retrieve address
-@HOOK 0x00408005 _FRAG1_Data_Voodoo ; retrieve address
+@LJMP 0x0053D081, _Map_Load_Before_Hook ; For map loading stuff
+@LJMP 0x0053A568, _Map_Load_Late_Hook  ; For map loading stuff
+@LJMP 0x0053D6AA, _Custom_Missions_Load_Map_Specific_Tutorial_Text
+@LJMP 0x00538CE1, _Custom_Missions_Load_Game_Map_Specific_Tutorial_Text
+@LJMP 0x0055B84B, _Ore_Mine_Foundation_Voodoo ; retrieve address
+@LJMP 0x00408005, _FRAG1_Data_Voodoo ; retrieve address
 
 
 _Map_Load_Before_Hook:

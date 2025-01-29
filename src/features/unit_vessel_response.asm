@@ -12,9 +12,9 @@
 ; This is because we use their common type class DriveClass to run the logic for both.
 ; Ensure that this assumption is upheld
 
-@HOOK 0x004B6207 _DriveClass__Response_Select_CustomVoice
-@HOOK 0x004B625F _DriveClass__Response_Move_CustomVoice
-@HOOK 0x004B62B7 _DriveClass__Response_Attack_CustomVoice
+@LJMP 0x004B6207, _DriveClass__Response_Select_CustomVoice
+@LJMP 0x004B625F, _DriveClass__Response_Move_CustomVoice
+@LJMP 0x004B62B7, _DriveClass__Response_Attack_CustomVoice
 
 ; ecx is the unit/vessel class
 _DriveClass__Response_Select_CustomVoice:

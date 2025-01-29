@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x0051614C _Skirmish_Menu_Write_Multiplayer_Settings
-@HOOK 0x00509C22 _Network_Menu_Write_Multiplayer_Settings
+@LJMP 0x0051614C, _Skirmish_Menu_Write_Multiplayer_Settings
+@LJMP 0x00509C22, _Network_Menu_Write_Multiplayer_Settings
 
 _Skirmish_Menu_Write_Multiplayer_Settings:
     mov  eax, Globals___Session_Type

@@ -10,25 +10,28 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0057B953 _UnitClass_Try_To_Deploy_MCVUnhardcode
-@HOOK 0x0057B9BC _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
-@HOOK 0x0057BA4D _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2
-@HOOK 0x0057BB03 _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3
+@LJMP 0x0057B953, _UnitClass_Try_To_Deploy_MCVUnhardcode
+@LJMP 0x0057B9BC, _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
+@LJMP 0x0057BA4D, _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2
+@LJMP 0x0057BB03, _UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3
 
-@HOOK 0x0057F4AD _UnitClass_What_Action_MCVUnhardcode
-@HOOK 0x0057F509 _UnitClass_What_Action_ConstructionYardUnhardcode
+@LJMP 0x0057F4AD, _UnitClass_What_Action_MCVUnhardcode
+@LJMP 0x0057F509, _UnitClass_What_Action_ConstructionYardUnhardcode
 
-@HOOK 0x0057FC97 _UnitClass_Mission_Guard_MCVUnhardcode
+@LJMP 0x0057FC97, _UnitClass_Mission_Guard_MCVUnhardcode
 
-@HOOK 0x0057D9A6 _UnitClass_Mission_Unload_IsRotating_IsDriving_Check
-@HOOK 0x0057DA64 _UnitClass_Mission_Unload_DeploysInto_Status2_Check
-;@HOOK 0x0057D3C8 _UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
+@LJMP 0x0057D9A6, _UnitClass_Mission_Unload_IsRotating_IsDriving_Check
+@LJMP 0x0057DA64, _UnitClass_Mission_Unload_DeploysInto_Status2_Check
+;@LJMP 0x0057D3C8, _UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 
 ; TO-DO: MCV check on Mission_Hunt
 ; TO-DO: MCV check on TeamClass::TMission_Deploy
 
+[section .data] 
 Cache_UnitType_DeploysInto       db 0
 
+
+[section .text] 
 ;Replaces the MCV check with a DeploysInto=xx check
 _UnitClass_Try_To_Deploy_MCVUnhardcode:
     movzx eax,al

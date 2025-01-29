@@ -10,15 +10,15 @@
 ;
 ;----------------------------------------------------------------
 
-@CLEAR 0x004EC4D9 0x90 0x004EC4DA
-@CLEAR 0x004ECB7D 0x90 0x004ECB7E
-@CLEAR 0x0057BE5A 0x90 0x0057BE5B
+@CLEAR 0x004EC4D9, 0x90, 0x004EC4DA
+@CLEAR 0x004ECB7D, 0x90, 0x004ECB7E
+@CLEAR 0x0057BE5A, 0x90, 0x0057BE5B
 
-@HOOK 0x004EC4D4 _InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent
-@HOOK 0x004EC5A2 _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
-@HOOK 0x004EC723 _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
-@HOOK 0x004ECB78 _InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
-@HOOK 0x0057BE55 _UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
+@LJMP 0x004EC4D4, _InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent
+@LJMP 0x004EC5A2, _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
+@LJMP 0x004EC723, _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
+@LJMP 0x004ECB78, _InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
+@LJMP 0x0057BE55, _UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
 
 
 

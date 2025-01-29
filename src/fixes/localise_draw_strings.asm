@@ -6,16 +6,16 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0053B623 _Do_Lose_The_Game_Is_A_Draw_Text
-@HOOK 0x004BDF6B _Localise_Has_Rectracted_The_Offer_Of_A_Draw
-@HOOK 0x004BDF2B _Localise_You_Have_Rectracted_Your_Offer_Of_A_Draw
-@HOOK 0x004BDE55 _Localise_Has_Proposed_That_The_Game_Be_Declared_A_Draw
-@HOOK 0x004BDE04 _Localise_You_Have_Proposed_That_The_Game_Be_Declared_A_Draw
-@HOOK 0x004CAB93 _Localise_Are_You_Sure_You_Want_To_Accept_A_Draw
-@HOOK 0x004CAB34 _Localise_Are_You_Sure_You_Want_To_Propose_A_Draw
-@HOOK 0x004CA0F7 _Localise_Accept_Proposed_Draw
-@HOOK 0x004CA090 _Localise_Retract_Draw_Proposal
-@HOOK 0x004CA0CC _Localise_Propose_A_Draw
+@LJMP 0x0053B623, _Do_Lose_The_Game_Is_A_Draw_Text
+@LJMP 0x004BDF6B, _Localise_Has_Rectracted_The_Offer_Of_A_Draw
+@LJMP 0x004BDF2B, _Localise_You_Have_Rectracted_Your_Offer_Of_A_Draw
+@LJMP 0x004BDE55, _Localise_Has_Proposed_That_The_Game_Be_Declared_A_Draw
+@LJMP 0x004BDE04, _Localise_You_Have_Proposed_That_The_Game_Be_Declared_A_Draw
+@LJMP 0x004CAB93, _Localise_Are_You_Sure_You_Want_To_Accept_A_Draw
+@LJMP 0x004CAB34, _Localise_Are_You_Sure_You_Want_To_Propose_A_Draw
+@LJMP 0x004CA0F7, _Localise_Accept_Proposed_Draw
+@LJMP 0x004CA090, _Localise_Retract_Draw_Proposal
+@LJMP 0x004CA0CC, _Localise_Propose_A_Draw
 
 _Do_Lose_The_Game_Is_A_Draw_Text:
     Extract_Conquer_Eng_String 118

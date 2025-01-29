@@ -1,10 +1,11 @@
-;@HOOK 0x0053DDEB _Read_Scenario_INI_Spawn_Locations
-@HOOK 0x0053E6A9 _Create_Units_Spawn_Location
-@HOOK 0x0053E534 _Create_Units_First_Spawn_Save_Waypoint_number_In_ECX
-@HOOK 0x0053E6B0 _Create_Units_Save_Spawn_Location_In_HouseClass
-@HOOK 0x0053E4CE _Create_Units_Set_Selected_Spawn_Locations
-@HOOK 0x0053E511 _Create_Units_First_Spawn_Check_If_Not_Selected
+;@LJMP 0x0053DDEB, _Read_Scenario_INI_Spawn_Locations
+@LJMP 0x0053E6A9, _Create_Units_Spawn_Location
+@LJMP 0x0053E534, _Create_Units_First_Spawn_Save_Waypoint_number_In_ECX
+@LJMP 0x0053E6B0, _Create_Units_Save_Spawn_Location_In_HouseClass
+@LJMP 0x0053E4CE, _Create_Units_Set_Selected_Spawn_Locations
+@LJMP 0x0053E511, _Create_Units_First_Spawn_Check_If_Not_Selected
 
+[section .data]
 multi1_Spawn    dd -1
 multi2_Spawn    dd -1
 multi3_Spawn    dd -1
@@ -14,6 +15,8 @@ multi6_Spawn    dd -1
 multi7_Spawn    dd -1
 multi8_Spawn    dd -1
 
+
+[section .text]
 _Create_Units_First_Spawn_Check_If_Not_Selected:
     call 0x005BC960
 

@@ -17,6 +17,7 @@
 ;    If it's a extension reference, str_ext_<ext_name>
 ; Try to use Title case for string names.
 
+[section .rdata]
 ; Generic Text
 %assign str_EmptyString                           0x005EC01F ; ""
 %assign str_Comma                                 0x005E82C5 ; ","
@@ -388,4 +389,4 @@ str_MapSelectB                                    db"MapSelectB",0
 str_MapSelectC                                    db"MapSelectC",0
 str_IsCoopMode                                    db"IsCoopMode",0
 
-
+[section .text]

@@ -1,0 +1,33 @@
+1 VERSIONINFO
+FILEVERSION     1,0,0,1
+PRODUCTVERSION  1,0,0,1
+FILEOS 0x4
+FILETYPE 0x1
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904B0"
+        {
+            VALUE "Comments", ""
+            VALUE "CompanyName", "Westwood Studios"
+			VALUE "FileDescription", "Main executable for Red Alert"
+			VALUE "FileVersion", "3.03"
+			VALUE "InternalName", "RA95"
+			VALUE "LegalCopyright", "Copyright \xA9 1996 Westwood Studios"
+			VALUE "LegalTrademarks", "Command & Conquer is a trademark of Westwood Studios"
+			VALUE "OriginalFilename", "ra95.exe"
+			VALUE "PrivateBuild", ""
+			VALUE "ProductName", "Command & Conquer : Red Alert"
+			VALUE "ProductVersion", "3.03"
+			VALUE "SpecialBuild", ""
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 0x04E4
+    }
+}
+//
+// Icon resources
+//
+93 ICON "ra95.ico"

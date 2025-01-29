@@ -8,10 +8,10 @@
 ; 
 ;----------------------------------------------------------------
 
-@SETB 0x00405E90 0x00
+@SET 0x00405E8F, {push 0}
 
 ; old solution
-;@HOOK 0x00405E8B _AnimTypeClass__fn_init_FRAG1_Constructor
+;@LJMP 0x00405E8B, _AnimTypeClass__fn_init_FRAG1_Constructor
 
 ;_AnimTypeClass__fn_init_FRAG1_Constructor:
 ;    push 0               ; __int32

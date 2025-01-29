@@ -6,6 +6,7 @@
 ;
 ;----------------------------------------------------------------
 
+[section .data] 
 ;;; Temporary location for CCFILE storage 
 ; Note: sizes not actually verified. Check against Remaster
 ; src/fixes/rules_oos.asm
@@ -208,3 +209,5 @@ HouseTypeClass_p1                                 dd 0x00405610 ; (originally ar
 HouseTypeClass_p2                                 dd 0x0040561C
 HouseTypeClass_p3                                 dd 0x0040566C
 HouseTypeClass_p4                                 dd 0x004CD174 ; do not remove - the deconstructor may use these functions
+
+[section .text] 

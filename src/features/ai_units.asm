@@ -16,43 +16,46 @@
 ;added by lovalmidas
 ; hook into AI_Unit() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original UNIT_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
-@HOOK 0x004DB839 _HouseClass__AI_Unit_CheckHarvester
-@HOOK 0x004DB84D _HouseClass__AI_Unit_PickHarvester
-@HOOK 0x004DBBB6 _HouseClass__AI_Unit_Extend_BestList_1
-@HOOK 0x004DBBE4 _HouseClass__AI_Unit_Extend_BestList_2
-@HOOK 0x004DBB6A _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
+@LJMP 0x004DB839, _HouseClass__AI_Unit_CheckHarvester
+@LJMP 0x004DB84D, _HouseClass__AI_Unit_PickHarvester
+@LJMP 0x004DBBB6, _HouseClass__AI_Unit_Extend_BestList_1
+@LJMP 0x004DBBE4, _HouseClass__AI_Unit_Extend_BestList_2
+@LJMP 0x004DBB6A, _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
 ; extends the check to new unittypeclass
-@HOOK 0x004DBBC5 _HouseClass__AI_Unit_Expand
-@HOOK 0x004DBC32 _HouseClass__AI_Unit_Ignore_Harvesters
-@HOOK 0x004DBC89 _HouseClass__AI_Unit_Expand_Choice
-@HOOK 0x004DBCAE _HouseClass__AI_Unit_Expand_Choice_2
+@LJMP 0x004DBBC5, _HouseClass__AI_Unit_Expand
+@LJMP 0x004DBC32, _HouseClass__AI_Unit_Ignore_Harvesters
+@LJMP 0x004DBC89, _HouseClass__AI_Unit_Expand_Choice
+@LJMP 0x004DBCAE, _HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
 
 
 ; Warning stack manipulation!
-@SETD 0x004DB7F6 0x5e8 ; was 0xE8, add 200h to hold counter[UNIT_COUNT] (400h) and bestlist[UNIT_COUNT] (100h)
+@SET 0x004DB7F4, {sub esp,0x5e8} ; was 0xE8, add 200h to hold counter[UNIT_COUNT] (400h) and bestlist[UNIT_COUNT] (100h)
 ; this section deals with the AI with Teams
-@SETD 0x004DB881 0x500 ; was 0x58, for memset
-@SETD 0x004DB887 -1532 ; 0xfffffa04 ; was 0xffffff04
-@SETD 0x004DB96C -1532
-@SETD 0x004DBA43 -1532
-@SETD 0x004DBA70 -1532
-@SETD 0x004DBA98 -1532
-@SETD 0x004DBACC -1532
-@SETD 0x004DBB30 -1532
-@SETD 0x004DBBA0 -1532
-@SETD 0x004DBBB1 -1532
+@SET 0x004DB880, {mov ebx,0x500} ; was 0x58, for, memset
+@SET 0x004DB885, {lea eax,[ebp-0x5FC]} ; 0xfffffa04 ; was 0xffffff04
+@SET 0x004DB969, {mov dword[ebp+ebx*4-0x5FC],1}
+@SET 0x004DBA40, {mov esi,dword[ebp+ebx-0x5FC]}
+@SET 0x004DBA6D, {mov dword[ebp+ecx*4-0x5FC],ebx}
+@SET 0x004DBA95, {cmp dword[ebp+eax*4-0x5FC],0}
+@SET 0x004DBAC9, {dec dword[ebp+eax*4-0x5FC]}
+@SET 0x004DBB2D, {cmp dword[ebp+eax*4-0x5FC],0}
+@SET 0x004DBB9D, {cmp esi,dword[ebp+eax*4-0x5FC]}
+@SET 0x004DBBAE, {mov esi,dword[ebp+eax*4-0x5FC]}
 ; this section deals with the AI with BaseBuilding, to include the additional units in its random building roster
-@SETD 0x004DBC48 -1276 ; 0xfffffb04 ; was 0xffffff5c
-@SETD 0x004DBC5B -1276
-@SETD 0x004DBC6E -1276
-@SETD 0x004DBC7B -1276
-@SETD 0x004DBCE2 -1276
+@SET 0x004DBC45, {mov dword[ebp+eax*4-0x4FC],0x14} ; 0xfffffb04 ; was 0xffffff5c
+@SET 0x004DBC58, {mov dword[ebp+eax*4-0x4FC],0x1}
+@SET 0x004DBC6B, {mov dword[ebp+eax*4-0x4FC],edi}
+@SET 0x004DBC78, {mov ecx,dword[ebp+eax*4-0x4FC]}
+@SET 0x004DBCDF, {mov esi,dword[ebp+edx-0x4FC]}
 
-@HOOK 0x004DBC37 _HouseClass__AI_Unit_Set_Weight
+@LJMP 0x004DBC37, _HouseClass__AI_Unit_Set_Weight
 
+[section .data] 
 Temp.AIUnit.Harvester db 0
 
+
+[section .text] 
 _HouseClass__AI_Unit_CheckHarvester:
     ; EDX = HouseClass
     ; set EDI to 1 if there is income, 0 otherwise

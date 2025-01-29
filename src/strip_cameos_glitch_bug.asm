@@ -5,9 +5,9 @@
 
 ; Need to also check "Hack_Prevented" local function variable because I patch out a check whether a factory for a TechnoTypeClass actually exists.
 
-@HOOK 0x0054EA90 _SidebarClass__StripClass__Draw_It_Is_TechnoType_Being_Built_By_Its_Factory_Check
+@LJMP 0x0054EA90, _SidebarClass__StripClass__Draw_It_Is_TechnoType_Being_Built_By_Its_Factory_Check
 
-@CLEAR 0x0054EA80 0x90 0x0054EA82 ; was 0x0054EA81, why not 0x0054EA82... 
+@CLEAR 0x0054EA80, 0x90, 0x0054EA82 ; was 0x0054EA81, why not 0x0054EA82... 
 
 ; eax = 1, "being built" is set to true, eax = 0xFFFFFFFF, "being built" is set to false
 Set_Is_Being_Built:

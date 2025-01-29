@@ -16,15 +16,18 @@
 
 ;[org 0x006ED220]
 ;[org 0x00711000]
-[org 0x00703000] ; space achieved by removing .reloc section (and adding icons in .rsrc)
+;[org 0x00703000] ; space achieved by removing .reloc section (and adding icons in .rsrc)
 
 ;_str_version: db"3.03p4 B6 ",0
 ;_str_version: db"3.03p-iB1v1",0
-_str_version: db"3.03s-v01-20241225",0
+;_str_version: db"3.03s-v01-20241225",0
 
 %include "config.inc"
 
 ; /include
+%include "macros/patch.inc"
+;%include "macros/setsym.inc"
+;%include "macros/datatypes.inc"
 %include "libc.inc"
 %include "INIClass.inc"
 %include "CCINIClass.inc"
@@ -77,7 +80,7 @@ _str_version: db"3.03s-v01-20241225",0
 %endif
 
 ;loading code
-%include "src/loading.asm" ; now empty, split to features/loading/
+;%include "src/loading.asm" ; now empty, split to features/loading/
 %include "src/features/ini_load_longer_lines.asm"
 %include "src/features/loading/loading_redalert.asm"
 %include "src/features/loading/loading_spawn.asm"

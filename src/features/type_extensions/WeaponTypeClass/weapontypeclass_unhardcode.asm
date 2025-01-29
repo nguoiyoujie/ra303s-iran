@@ -1,5 +1,5 @@
-@HOOK 0x00536275 _RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
-@HOOK 0x0053668A _RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
+@LJMP 0x00536275, _RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
+@LJMP 0x0053668A, _RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
 
 Init_WeaponTypeClass:
     mov  eax, 26h
@@ -10,7 +10,7 @@ Init_WeaponTypeClass:
     push eax
     mov  eax, edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  edx, eax
 
     pop  eax

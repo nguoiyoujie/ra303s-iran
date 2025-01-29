@@ -11,8 +11,8 @@
 ;
 ;----------------------------------------------------------------
 
-;@HOOK 0x004A38E5 _Combat_Wide_Area_Damage_FixInverseDamageSpread
-@HOOK 0x004A39BE _Combat_Wide_Area_Damage_FixInverseDamageSpread
+;@LJMP 0x004A38E5, _Combat_Wide_Area_Damage_FixInverseDamageSpread
+@LJMP 0x004A39BE, _Combat_Wide_Area_Damage_FixInverseDamageSpread
 
 
 ; Genius move by Westwood.

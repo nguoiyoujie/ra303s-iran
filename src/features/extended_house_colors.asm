@@ -11,12 +11,12 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004D654B _HouseClass__Remap_Table_Return_Custom_Remaps
-@HOOK 0x0049EF65 _CellClass__Cell_Color
-@HOOK 0x0052E4E7 _RadarClass__Draw_It_Custom_Remaps
-@HOOK 0x00532767 _RadarClass__Draw_Names_Custom_Remaps
-@HOOK 0x0052EAB1 _RadarClass__Render_Infantry
-@HOOK 0x0052EBC3 _RadarClass__Render_Infantry2
+@LJMP 0x004D654B, _HouseClass__Remap_Table_Return_Custom_Remaps
+@LJMP 0x0049EF65, _CellClass__Cell_Color
+@LJMP 0x0052E4E7, _RadarClass__Draw_It_Custom_Remaps
+@LJMP 0x00532767, _RadarClass__Draw_Names_Custom_Remaps
+@LJMP 0x0052EAB1, _RadarClass__Render_Infantry
+@LJMP 0x0052EBC3, _RadarClass__Render_Infantry2
 
 %macro Initialize_Remap_Table 1
     xor  eax,eax

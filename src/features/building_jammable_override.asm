@@ -6,9 +6,9 @@
 ; This function is enabled by setting [<BuildingType>] > IsJammable=true
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x004566CB _BuildingClass_AI_UseIsJammable
-@HOOK 0x0045C88E _BuildingClass_MissionAttack_Jammed_PreventsAttack
-@HOOK 0x0057B0F2 _UnitClass_Take_Damage_UseIsNoSmoke
+@LJMP 0x004566CB, _BuildingClass_AI_UseIsJammable
+@LJMP 0x0045C88E, _BuildingClass_MissionAttack_Jammed_PreventsAttack
+@LJMP 0x0057B0F2, _UnitClass_Take_Damage_UseIsNoSmoke
 
 _BuildingClass_AI_UseIsJammable:
     ; eax is the id

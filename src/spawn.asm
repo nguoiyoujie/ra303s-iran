@@ -36,16 +36,16 @@
 %define htonl                                       0x005E5A30
 %define time_                                       0x005CEDA1
 
-@HOOK 0x004F44DC Select_Game
+@LJMP 0x004F44DC, Select_Game
 ; these force the game to use the actual port for sending and receiving packets rather than the default 1234
-@HOOK 0x005A8ADF SendFix
-@HOOK 0x005A8A75 ReceiveFix
-@HOOK 0x0052971B _Wait_For_Players_Hack_Wait_Time
+@LJMP 0x005A8ADF, SendFix
+@LJMP 0x005A8A75, ReceiveFix
+@LJMP 0x0052971B, _Wait_For_Players_Hack_Wait_Time
 
-;@JMP  0x0052A2DB 0x0052A2E0
-;@JMP  0x0052BF02 0x0052BF0B ; Make version protocol 0 netcode also use frame limiter
-@HOOK 0x004A7D3D _Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols
-@HOOK 0x005292E5 _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols
+;@SJMP  0x0052A2DB, 0x0052A2E0
+;@SJMP  0x0052BF02, 0x0052BF0B ; Make version protocol 0 netcode also use frame limiter
+@LJMP 0x004A7D3D, _Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols
+@LJMP 0x005292E5, _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols
 
 _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols:
     cmp  byte [spawner_is_active], 0 ; if spawner is active jump over version protocol check
@@ -105,16 +105,15 @@ endstruc
 
 %define game Globals___Session_Type
 
-
+[section .data]
 SpectatorsArray  TIMES 32 db 0
-
 tunnel_ip dd 0
 tunnel_port dd 0
 tunnel_id dd 0
-
 var_dword:          dd 0
 HumanPlayers        dd 0 ; Need to read it from here for spawner stats
 
+[section .text]
 ; args: <section>, <key>, <default>
 %macro spawn_INI_Get_Bool 3
     call_INIClass__Get_Bool CCINIClass_Spawn, {%1}, {%2}, {%3}

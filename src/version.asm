@@ -1,4 +1,10 @@
-@HOOK 0x00589960 _Version_Name
+;----------------------------------------------------------------
+; src/version.asm
+;
+; Writes the version number to the game main menu
+;
+;----------------------------------------------------------------
+@LJMP 0x00589960, _Version_Name
 
 %ifndef __GIT_REVISION__
 %define __GIT_REVISION__ "????"

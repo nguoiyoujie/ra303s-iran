@@ -11,9 +11,9 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x004232DC _AircraftClass_Can_Fire_UseIsDroppingForParabomb
-@HOOK 0x00423323 _AircraftClass_Can_Fire_RemovePassengerCheckForBombing
-@HOOK 0x00423385 _AircraftClass_Can_Fire_UseWeaponRangeForBombing
+@LJMP 0x004232DC, _AircraftClass_Can_Fire_UseIsDroppingForParabomb
+@LJMP 0x00423323, _AircraftClass_Can_Fire_RemovePassengerCheckForBombing
+@LJMP 0x00423385, _AircraftClass_Can_Fire_UseWeaponRangeForBombing
 
 _AircraftClass_Can_Fire_UseIsDroppingForParabomb:
     test byte [edx + 0x138],0x8 ;IsDropping

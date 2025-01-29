@@ -1,5 +1,5 @@
 ;Read INI settings
-@HOOK 0x0059004D _WeaponTypeClass__Read_INI_Extended
+@LJMP 0x0059004D, _WeaponTypeClass__Read_INI_Extended
 
 _WeaponTypeClass__Read_INI_Extended:
 

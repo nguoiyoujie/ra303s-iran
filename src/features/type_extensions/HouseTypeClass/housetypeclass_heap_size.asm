@@ -10,40 +10,39 @@
 ;----------------------------------------------------------------
 
 ;_HouseTypeClass__Init_Heap_NewSize (one for each of the 20 originally allocated houses)
-; SETD only accepts constants, not HouseTypeClass.NEW_SIZE
-@SETD 0x004CB854 HouseTypeClass.NEW_SIZE
-@SETD 0x004CB98E HouseTypeClass.NEW_SIZE
-@SETD 0x004CBAC8 HouseTypeClass.NEW_SIZE
-@SETD 0x004CBC02 HouseTypeClass.NEW_SIZE
-@SETD 0x004CBD3C HouseTypeClass.NEW_SIZE
-@SETD 0x004CBE76 HouseTypeClass.NEW_SIZE
-@SETD 0x004CBFB0 HouseTypeClass.NEW_SIZE
-@SETD 0x004CC0EA HouseTypeClass.NEW_SIZE
-@SETD 0x004CC224 HouseTypeClass.NEW_SIZE
-@SETD 0x004CC35E HouseTypeClass.NEW_SIZE
-@SETD 0x004CC498 HouseTypeClass.NEW_SIZE
-@SETD 0x004CC5D2 HouseTypeClass.NEW_SIZE
-@SETD 0x004CC70C HouseTypeClass.NEW_SIZE
-@SETD 0x004CC846 HouseTypeClass.NEW_SIZE
-@SETD 0x004CC980 HouseTypeClass.NEW_SIZE
-@SETD 0x004CCABA HouseTypeClass.NEW_SIZE
-@SETD 0x004CCBF4 HouseTypeClass.NEW_SIZE
-@SETD 0x004CCD2E HouseTypeClass.NEW_SIZE
-@SETD 0x004CCE68 HouseTypeClass.NEW_SIZE
-@SETD 0x004CCFA2 HouseTypeClass.NEW_SIZE
+@SET 0x004CB853, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CB98D, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CBAC7, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CBC01, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CBD3B, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CBE75, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CBFAF, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC0E9, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC223, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC35D, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC497, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC5D1, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC70B, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC845, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CC97F, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CCAB9, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CCBF3, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CCD2D, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CCE67, {mov eax,HouseTypeClass.NEW_SIZE}
+@SET 0x004CCFA1, {mov eax,HouseTypeClass.NEW_SIZE}
 
 ;fn_Init
-@SETD 0x004C73B4 HouseTypeClass.NEW_SIZE
+@SET 0x004C73B3, {mov edx,HouseTypeClass.NEW_SIZE}
 
 ;TFixedIHeapClass_HouseTypeClass___Constructor
-@SETD 0x004C9026 HouseTypeClass.NEW_SIZE
+@SET 0x004C9025, {mov edx,HouseTypeClass.NEW_SIZE}
 
 ;TFixedIHeapClass_HouseTypeClass___Save()
-@SETD 0x004D0764 HouseTypeClass.NEW_SIZE
+@SET 0x004D0763, {mov ebx,HouseTypeClass.NEW_SIZE}
 
 ;TFixedIHeapClass_HouseTypeClass___Load()
-@HOOK 0x004D0860 _TFixedIHeapClass__HouseTypeClass__Load_Clear_Memory
-@SETD 0x004D0846 HouseTypeClass.NEW_SIZE
+@LJMP 0x004D0860, _TFixedIHeapClass__HouseTypeClass__Load_Clear_Memory
+@SET 0x004D0845, {mov ebx,HouseTypeClass.NEW_SIZE}
 
 
 _TFixedIHeapClass__HouseTypeClass__Load_Clear_Memory:

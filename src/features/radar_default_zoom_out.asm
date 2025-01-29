@@ -9,7 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0052D751 _RadarClass__Init_Clear_Zoom_Out_Radar_By_Default
+@LJMP 0x0052D751, _RadarClass__Init_Clear_Zoom_Out_Radar_By_Default
 
 _RadarClass__Init_Clear_Zoom_Out_Radar_By_Default:
     or   dl, Globals___Map_IsZoomed_Bitmask ; 1h

@@ -6,10 +6,10 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0050C2B0 _LAN_New_Dialog_Aftermath_Text
-@HOOK 0x0050C748 _LAN_New_Dialog_Aftermath_Text2
-@HOOK 0x0050DB55 _LAN_New_Dialog_Aftermath_Text3
-@HOOK 0x00513D46 _Skirmish_Dialog_Aftermath_Text
+@LJMP 0x0050C2B0, _LAN_New_Dialog_Aftermath_Text
+@LJMP 0x0050C748, _LAN_New_Dialog_Aftermath_Text2
+@LJMP 0x0050DB55, _LAN_New_Dialog_Aftermath_Text3
+@LJMP 0x00513D46, _Skirmish_Dialog_Aftermath_Text
 
 %define    Is_Aftermath_Installed    0x004AC024
 %define    Fancy_Text_Print        0x004AE7FC
@@ -17,8 +17,11 @@
 
 ;str_Aftermathgame db"Aftermath game",0
 
+[section .data] 
 startedasam: db 0
 
+
+[section .text] 
 _Skirmish_Dialog_Aftermath_Text:
     call Is_Aftermath_Installed
     cmp  eax, 1

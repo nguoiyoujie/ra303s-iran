@@ -16,17 +16,11 @@
 
 ;%assign DriveClass__Assign_Destination                            0x004B67C8 ; void DriveClass::Assign_Destination(TARGET target)
 
-; standard library
-%assign __strdup                                                  0x005C3900 ; strdup()
-%assign __strstr                                                  0x005CEC59 ; strstr()
-
 ; AUDIO.CPP
 %assign Audio___Voc_From_Name                                     0x00425CA0 ; VocType Voc_From_Name(char const * name)
 %assign Audio___Sound_Effect_At_Coord                             0x00425D1C ; void Sound_Effect(VocType voc, COORDINATE coord, int variation, HousesType house)
 %assign Audio___Sound_Effect                                      0x00425F24 ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
 %assign Audio___SoundEffectName                                   0x005FE090 ; SoundEffectName[VOC_COUNT]
-
-
 
 ; CCFile.CPP
 ; !!! FileClass is a base type, check what derived type these addresses really point to

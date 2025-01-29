@@ -9,11 +9,11 @@
 ;
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x004AF821 _Build_Off_Ally_Buildings
-@HOOK 0x004AF9D3 _Build_Off_Ally_Buildings2
-@HOOK 0x004AFAF5 _Build_Off_Ally_Buildings3
-@HOOK 0x004AFB82 _Build_Off_Ally_Buildings4
-@HOOK 0x004AFC3E _Build_Off_Ally_Buildings5
+@LJMP 0x004AF821, _Build_Off_Ally_Buildings
+@LJMP 0x004AF9D3, _Build_Off_Ally_Buildings2
+@LJMP 0x004AFAF5, _Build_Off_Ally_Buildings3
+@LJMP 0x004AFB82, _Build_Off_Ally_Buildings4
+@LJMP 0x004AFC3E, _Build_Off_Ally_Buildings5
 
 ; args <HouseType to check whose alliances will be checked>, <HouseType to check for>
 %macro Is_Ally 2

@@ -10,7 +10,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x004EBD50 _InfantryClass__Take_Damage_CheckDoing
+@LJMP 0x004EBD50, _InfantryClass__Take_Damage_CheckDoing
 
 _InfantryClass__Take_Damage_CheckDoing:
     ; eax is the damaged infantry, let's check if he is already running a dying animation

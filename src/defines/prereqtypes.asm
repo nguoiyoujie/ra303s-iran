@@ -42,7 +42,6 @@
 %assign PrereqType.MISC                        30
 %assign PrereqType.CIVBUILDING                 31
 
-
 ; PrerequisiteType_Enums
 str.PrereqType.NONE                            db"NONE",0
 str.PrereqType.CONYARD                         db"CONYARD",0
@@ -108,6 +107,6 @@ strlist.PrereqTypes                            dd str.PrereqType.NONE, \
                                                   str.PrereqType.USER.28, \
                                                   str.PrereqType.USER.29, \
                                                   str.PrereqType.MISC, \
-                                                  str.PrereqType.CIVBUILDING, \ 
+                                                  str.PrereqType.CIVBUILDING, \
                                                   0
    

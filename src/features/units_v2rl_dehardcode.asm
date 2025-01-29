@@ -11,7 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0057C9A1 _UnitClass__ShapeNumber_Offset_V2RL_Body
+@LJMP 0x0057C9A1, _UnitClass__ShapeNumber_Offset_V2RL_Body
 
 _UnitClass__ShapeNumber_Offset_V2RL_Body:
 ; for STNK

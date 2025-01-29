@@ -1,22 +1,22 @@
-@HOOK 0x004BE468 _Custom_Missions_Load_Mission_Name
-@HOOK 0x004BE491 _Custom_Missions_Load_Mission_Name2
-@HOOK 0x004BE929 _Custom_Missions_Hook_Function_End
-@HOOK 0x004BE548 _Custom_Missions_Amount_To_Read
-@HOOK 0x004BE732 _Custom_Missions_Amount_To_Read2
-@HOOK 0x004BE132 _Custom_Missions_Dont_Prepend_Side
-@HOOK 0x004BE147 _Custom_Missions_Dont_Prepend_Side2
-@HOOK 0x00501E0E _Custom_Missions_Custom_Missions_Button_Name
-@HOOK 0x004BE7C8 _Custom_Missions_Custom_Missions_Dialog_Name
-@HOOK 0x004BE7DE _Custom_Missions_Expansion_Missions_Dialog_Name
-@HOOK 0x00501E3F _Custom_Missions_Expansion_Missions_Button_Name
-@HOOK 0x00501DB3 _Custom_Missions_Enable_Custom_Missions_Button
-@HOOK 0x00501DDB _Custom_Missions_Enable_Expansion_Missions_Button
-@HOOK 0x0053B520 _Do_Win_Next_Mission_In_Campaign
-@HOOK 0x0053B23C _Campaign_Do_Win_Next_mission_In_Campaign
-@HOOK 0x00500C62 _Map_Selection_Selection_Animation
-@HOOK 0x005011FE _Map_Selection_Selected_Mission_Name
+@LJMP 0x004BE468, _Custom_Missions_Load_Mission_Name
+@LJMP 0x004BE491, _Custom_Missions_Load_Mission_Name2
+@LJMP 0x004BE929, _Custom_Missions_Hook_Function_End
+@LJMP 0x004BE548, _Custom_Missions_Amount_To_Read
+@LJMP 0x004BE732, _Custom_Missions_Amount_To_Read2
+@LJMP 0x004BE132, _Custom_Missions_Dont_Prepend_Side
+@LJMP 0x004BE147, _Custom_Missions_Dont_Prepend_Side2
+@LJMP 0x00501E0E, _Custom_Missions_Custom_Missions_Button_Name
+@LJMP 0x004BE7C8, _Custom_Missions_Custom_Missions_Dialog_Name
+@LJMP 0x004BE7DE, _Custom_Missions_Expansion_Missions_Dialog_Name
+@LJMP 0x00501E3F, _Custom_Missions_Expansion_Missions_Button_Name
+@LJMP 0x00501DB3, _Custom_Missions_Enable_Custom_Missions_Button
+@LJMP 0x00501DDB, _Custom_Missions_Enable_Expansion_Missions_Button
+@LJMP 0x0053B520, _Do_Win_Next_Mission_In_Campaign
+@LJMP 0x0053B23C, _Campaign_Do_Win_Next_mission_In_Campaign
+@LJMP 0x00500C62, _Map_Selection_Selection_Animation
+@LJMP 0x005011FE, _Map_Selection_Selected_Mission_Name
 
-@JMP 0x00538764 0x00538771
+@SJMP 0x00538764, 0x00538771
 
 _Map_Selection_Selected_Mission_Name:
     cmp  byte [NextCampaignMissionBuf],0

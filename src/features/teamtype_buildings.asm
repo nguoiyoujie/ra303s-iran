@@ -10,7 +10,7 @@
 ; For teams to actually recruit BuildingTypes, the relevant recruiting logic needs to be added to TeamClass::Recruit(int typeindex)
 ;   Perhaps this could be useful for undeploying an MCV?
 
-@HOOK 0x0056069C _TeamTypeClass__Read_Add_BuildingTypes_Reading
+@LJMP 0x0056069C, _TeamTypeClass__Read_Add_BuildingTypes_Reading
 
 ; use movzx to support 255 buildings
 

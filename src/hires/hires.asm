@@ -24,128 +24,171 @@
 
 ; derived from ra95-hires
 
-;@HOOK 0x004B03AA _DisplayClass_Click_Cell_Calc_Redraw_GScreen
-@HOOK 0x0049F600 _CellClass_Draw_It_Dont_Draw_Past_Map_Border
+;@LJMP 0x004B03AA, _DisplayClass_Click_Cell_Calc_Redraw_GScreen
+@LJMP 0x0049F600, _CellClass_Draw_It_Dont_Draw_Past_Map_Border
 
-@HOOK 0x004ABBDF _Shake_The_Screen_Height2
-@HOOK 0x004AB8A8 _Shake_The_Screen_Height1
+@LJMP 0x004ABBDF, _Shake_The_Screen_Height2
+@LJMP 0x004AB8A8, _Shake_The_Screen_Height1
 
-;@HOOK 0x00507DFB _hires_Net_Join_MessageBox
-@HOOK 0x00507887 _hires_Net_Join_Playing_As_Text_Print
-@HOOK 0x00508074 _hires_Net_Join_AI_Players_Text_Print
-@HOOK 0x00508016 _hires_Net_Join_Credits_Text_Print
-@HOOK 0x00507F97 _hires_Net_Join_Tech_Level_Text_Print
-@HOOK 0x00507F33 _hires_Net_Join_Unit_Count_Text_Print
-@HOOK 0x00508565 _hires_Net_Join_Color_Box_Select_Thingy3
-@HOOK 0x00508525 _hires_Net_Join_Color_Box_Select_Thingy2
-@HOOK 0x0050854B _hires_Net_Join_Color_Box_Select_Thingy
-@HOOK 0x00507BDC _hires_Net_Join_Color_Draw_Boxes2
-@HOOK 0x00507BBB _hires_Net_Join_Color_Draw_Boxes
-@HOOK 0x00507B48 _hires_Net_Join_Color_Draw_Colored_Rectangles
-@HOOK 0x005077C2 _hires_Net_Join_Color_Text_Print
-@HOOK 0x0050779F _hires_Net_Join_Side_Text_Print
-@HOOK 0x0050777C _hires_Net_Join_Name_Text_Print
-@HOOK 0x0050774B _hires_Net_Join_Players_Text_Print
-@HOOK 0x00507728 _hires_Net_Join_Games_Text_Print
-@HOOK 0x00506E0C _hires_Net_Join_Static_Button
-@HOOK 0x00506DA9 _hires_Net_Join_Credits_Slider
-@HOOK 0x00506CE4 _hires_Net_Join_Join_Button
-@HOOK 0x00506C32 _hires_Net_Join_Country_Box
-@HOOK 0x00506BDC _hires_Net_Join_Name_Box
-@HOOK 0x00506931 _hires_Net_Join_Dialog
+;@LJMP 0x00507DFB, _hires_Net_Join_MessageBox
+@LJMP 0x00507887, _hires_Net_Join_Playing_As_Text_Print
+@LJMP 0x00508074, _hires_Net_Join_AI_Players_Text_Print
+@LJMP 0x00508016, _hires_Net_Join_Credits_Text_Print
+@LJMP 0x00507F97, _hires_Net_Join_Tech_Level_Text_Print
+@LJMP 0x00507F33, _hires_Net_Join_Unit_Count_Text_Print
+@LJMP 0x00508565, _hires_Net_Join_Color_Box_Select_Thingy3
+@LJMP 0x00508525, _hires_Net_Join_Color_Box_Select_Thingy2
+@LJMP 0x0050854B, _hires_Net_Join_Color_Box_Select_Thingy
+@LJMP 0x00507BDC, _hires_Net_Join_Color_Draw_Boxes2
+@LJMP 0x00507BBB, _hires_Net_Join_Color_Draw_Boxes
+@LJMP 0x00507B48, _hires_Net_Join_Color_Draw_Colored_Rectangles
+@LJMP 0x005077C2, _hires_Net_Join_Color_Text_Print
+@LJMP 0x0050779F, _hires_Net_Join_Side_Text_Print
+@LJMP 0x0050777C, _hires_Net_Join_Name_Text_Print
+@LJMP 0x0050774B, _hires_Net_Join_Players_Text_Print
+@LJMP 0x00507728, _hires_Net_Join_Games_Text_Print
+@LJMP 0x00506E0C, _hires_Net_Join_Static_Button
+@LJMP 0x00506DA9, _hires_Net_Join_Credits_Slider
+@LJMP 0x00506CE4, _hires_Net_Join_Join_Button
+@LJMP 0x00506C32, _hires_Net_Join_Country_Box
+@LJMP 0x00506BDC, _hires_Net_Join_Name_Box
+@LJMP 0x00506931, _hires_Net_Join_Dialog
 
-@HOOK 0x0050C33D _hires_Net_New_AI_Players_Text_Print
-@HOOK 0x0050C31D _hires_Net_New_Credits_Text_Print
-@HOOK 0x0050C2FD _hires_Net_New_Tech_Level_Text_Print
-@HOOK 0x0050C2DD _hires_Net_New_Unit_Count_Text_Print
-@HOOK 0x0050C2C0 _hires_Net_New_Scenario_Text_Print
-@HOOK 0x0050C2A3 _hires_Net_New_Players_Text_Print
-@HOOK 0x0050B97D _hires_Net_New_Dialog_OK_Button
-@HOOK 0x0050B8A9 _hires_Net_New_Dialog2
-@HOOK 0x0050B70D _hires_Net_New_Dialog
+@LJMP 0x0050C33D, _hires_Net_New_AI_Players_Text_Print
+@LJMP 0x0050C31D, _hires_Net_New_Credits_Text_Print
+@LJMP 0x0050C2FD, _hires_Net_New_Tech_Level_Text_Print
+@LJMP 0x0050C2DD, _hires_Net_New_Unit_Count_Text_Print
+@LJMP 0x0050C2C0, _hires_Net_New_Scenario_Text_Print
+@LJMP 0x0050C2A3, _hires_Net_New_Players_Text_Print
+@LJMP 0x0050B97D, _hires_Net_New_Dialog_OK_Button
+@LJMP 0x0050B8A9, _hires_Net_New_Dialog2
+@LJMP 0x0050B70D, _hires_Net_New_Dialog
 
-@HOOK 0x005D1801 _Receive_Remote_File_Caption
-@HOOK 0x005D17F3 _Receive_Remote_File_Dialog
-@HOOK 0x005D162E _Receive_Remote_File_Text_Button
-@HOOK 0x005D1663 _Receive_Remote_File_Gauge_Gadget
-@HOOK 0x005D1827 _Receive_Remote_File_Text_Print
-@HOOK 0x005D2182 _Send_Remote_File_Text_Print
-@HOOK 0x005D1D25 _Send_Remote_File_Text_Gauge_Gadget
-@HOOK 0x005D1CFC _Send_Remote_File_Text_Button
-@HOOK 0x005D215C _Send_Remote_File_Caption
-@HOOK 0x005D214E _Send_Remote_File_Dialog
-@HOOK 0x0053A376 _Start_Scenario_Set_Flag_To_Redraw_Screen
-@HOOK 0x005523C6 _Set_Screen_Height_480_NOP
-@HOOK 0x005525D7 _Set_Screen_Height_400_NOP
-@HOOK 0x005525E6 _No_Black_Bars_In_640x480
-@HOOK 0x00552974 _hires_ini
-@HOOK 0x004A9EA9 _hires_Intro
-@HOOK 0x005B3DBF _hires_MainMenu
-@HOOK 0x004F479B _hires_MainMenuClear
-;@HOOK 0x004F6090 _hires_MainMenuClearBackground ; load blackbackground.pcx
-@HOOK 0x005B3DAA _Load_Title_Screen_Clear_Background
-@HOOK 0x005B3CD8 _hires_ScoreScreenBackground
-@HOOK 0x004F75FB _hires_MainMenuClearPalette
-;@HOOK 0x0053BE6C _hires_RestateMissionClearBackground ; uses blackbackground.pcx, not needed anymore
-;@HOOK 0x0053B806 _hires_DoRestartMissionClearBackground ; uses blackbackground.pcx, not needed anymore
-@HOOK 0x005518A3 _hires_NewGameText
-@HOOK 0x005128D4 _hires_SkirmishMenu
-@HOOK 0x0054D009 _hires_StripClass
-@HOOK 0x004BE377 _NewMissions_Handle_Hires_Buttons_A
-@HOOK 0x004BE39E _NewMissions_Handle_Hires_Buttons_B
-;@HOOK 0x00527C19 _hires_Power_Usage_Indicator_Height
-;@HOOK 0x0050692B _hires_NetworkJoinMenu
-;@HOOK 0x00506CEE _hires_Network_Join_Button
-;@HOOK 0x00506CBC _hires_Network_Color_List
-;@HOOK 0x00506BDC _hires_Network_Name_EditBox
-;@HOOK 0x00506C28 _hires_Network_Country_DropList
-;@HOOK 0x00506C73 _hires_Network_Channel
-;@HOOK 0x0050721F _hires_Network_Join_ChatBox
-;@HOOK 0x00507DEF _hires_Network_Join_DrawBox
-;@HOOK 0x00507E10 _hires_Network_Join_DrawBox2
-;@HOOK 0x00507BB1 _hires_Network_Join_ColorBoxes
-;@HOOK 0x00507BD2 _hires_Network_Join_ColorBoxes2
-;@HOOK 0x00507C0C _hires_Network_Join_Fill_ColorBoxes
-@HOOK 0x0050253A _hires_MainMenu_AntMissions_Select
-@HOOK 0x005024AF _hires_MainMenu_Credits_Select
-@HOOK 0x005B30D0 _hires_Deinterlace_Videos
-@HOOK 0x005E548D _hires_Deinterlace_Videos_Fix_Bottom_Line
-@HOOK 0x004A9EA9 _hires_Center_VQA640_Videos
-;@HOOK 0x005B2FE6 _hires_Deinterlace_Videos_Always_Deinterlace
-;@HOOK 0x005B3023 _hires_Deinterlace_Videos2
-;@HOOK 0x004A8C6A _hires_Videos
-;@HOOK 0x004A8AC6 _hires_Videos2
-;@HOOK 0x0050223E _Blacken_Screen_Border_Menu
-;@HOOK 0x0050228E _Blacken_Screen_Border_Menu2
-;@HOOK 0x0054DFF5 _StripClass_Add
+@LJMP 0x005D1801, _Receive_Remote_File_Caption
+@LJMP 0x005D17F3, _Receive_Remote_File_Dialog
+@LJMP 0x005D162E, _Receive_Remote_File_Text_Button
+@LJMP 0x005D1663, _Receive_Remote_File_Gauge_Gadget
+@LJMP 0x005D1827, _Receive_Remote_File_Text_Print
+@LJMP 0x005D2182, _Send_Remote_File_Text_Print
+@LJMP 0x005D1D25, _Send_Remote_File_Text_Gauge_Gadget
+@LJMP 0x005D1CFC, _Send_Remote_File_Text_Button
+@LJMP 0x005D215C, _Send_Remote_File_Caption
+@LJMP 0x005D214E, _Send_Remote_File_Dialog
+@LJMP 0x0053A376, _Start_Scenario_Set_Flag_To_Redraw_Screen
+@LJMP 0x005523C6, _Set_Screen_Height_480_NOP
+@LJMP 0x005525D7, _Set_Screen_Height_400_NOP
+@LJMP 0x005525E6, _No_Black_Bars_In_640x480
+@LJMP 0x00552974, _hires_ini
+@LJMP 0x004A9EA9, _hires_Intro
+@LJMP 0x005B3DBF, _hires_MainMenu
+@LJMP 0x004F479B, _hires_MainMenuClear
+;@LJMP 0x004F6090, _hires_MainMenuClearBackground ; load blackbackground.pcx
+@LJMP 0x005B3DAA, _Load_Title_Screen_Clear_Background
+@LJMP 0x005B3CD8, _hires_ScoreScreenBackground
+@LJMP 0x004F75FB, _hires_MainMenuClearPalette
+;@LJMP 0x0053BE6C, _hires_RestateMissionClearBackground ; uses blackbackground.pcx, not needed anymore
+;@LJMP 0x0053B806, _hires_DoRestartMissionClearBackground ; uses blackbackground.pcx, not needed anymore
+@LJMP 0x005518A3, _hires_NewGameText
+@LJMP 0x005128D4, _hires_SkirmishMenu
+@LJMP 0x0054D009, _hires_StripClass
+@LJMP 0x004BE377, _NewMissions_Handle_Hires_Buttons_A
+@LJMP 0x004BE39E, _NewMissions_Handle_Hires_Buttons_B
+;@LJMP 0x00527C19, _hires_Power_Usage_Indicator_Height
+;@LJMP 0x0050692B, _hires_NetworkJoinMenu
+;@LJMP 0x00506CEE, _hires_Network_Join_Button
+;@LJMP 0x00506CBC, _hires_Network_Color_List
+;@LJMP 0x00506BDC, _hires_Network_Name_EditBox
+;@LJMP 0x00506C28, _hires_Network_Country_DropList
+;@LJMP 0x00506C73, _hires_Network_Channel
+;@LJMP 0x0050721F, _hires_Network_Join_ChatBox
+;@LJMP 0x00507DEF, _hires_Network_Join_DrawBox
+;@LJMP 0x00507E10, _hires_Network_Join_DrawBox2
+;@LJMP 0x00507BB1, _hires_Network_Join_ColorBoxes
+;@LJMP 0x00507BD2, _hires_Network_Join_ColorBoxes2
+;@LJMP 0x00507C0C, _hires_Network_Join_Fill_ColorBoxes
+@LJMP 0x0050253A, _hires_MainMenu_AntMissions_Select
+@LJMP 0x005024AF, _hires_MainMenu_Credits_Select
+@LJMP 0x005B30D0, _hires_Deinterlace_Videos
+@LJMP 0x005E548D, _hires_Deinterlace_Videos_Fix_Bottom_Line
+@LJMP 0x004A9EA9, _hires_Center_VQA640_Videos
+;@LJMP 0x005B2FE6, _hires_Deinterlace_Videos_Always_Deinterlace
+;@LJMP 0x005B3023, _hires_Deinterlace_Videos2
+;@LJMP 0x004A8C6A, _hires_Videos
+;@LJMP 0x004A8AC6, _hires_Videos2
+;@LJMP 0x0050223E, _Blacken_Screen_Border_Menu
+;@LJMP 0x0050228E, _Blacken_Screen_Border_Menu2
+;@LJMP 0x0054DFF5, _StripClass_Add
 
-;@HOOK 0x0054E9C2 _hires_Sidebar_Cameos_Draw
-;@HOOK 0x0054CF42 _hires_Sidebar_Cameos_Init
-;@HOOK 0x0054DFAE _hires_Sidebar_Cameos_Init_IO
-;@HOOK 0x0054DFF8 _hires_Sidebar_Cameos_Init_IO2
-;@HOOK 0x0054DE8B _hires_Sidebar_Cameos_Init_IO3
-;@HOOK 0x0054DEBE _hires_Sidebar_Cameos_Init_IO4
-;@HOOK 0x0054DF4A _hires_Sidebar_Cameos_Init_IO5
-;@HOOK 0x0054DF15 _hires_Sidebar_Cameos_Init_IO6
-;@HOOK 0x0054E142 _hires_Sidebar_Cameos_Activate
-;@HOOK 0x0054E156 _hires_Sidebar_Cameos_Activate2
-;@HOOK 0x0054E172 _hires_Sidebar_Cameos_Activate3
-;@HOOK 0x0054E1CC _hires_Sidebar_Cameos_Deactivate
-;@HOOK 0x0054E1E8 _hires_Sidebar_Cameos_Deactivate2
-;@HOOK 0x0054E2AD _hires_Sidebar_Cameos_Scroll ; broke atm?
-;@HOOK 0x0054E4BE _hires_Sidebar_Cameos_AI
-;@HOOK 0x0054D08B _hires_Sidebar_Cameos_Height
-;@HOOK 0x0054E72A _hires_Sidebar_Cameos_Draw_Buttons
+;@LJMP 0x0054E9C2, _hires_Sidebar_Cameos_Draw
+;@LJMP 0x0054CF42, _hires_Sidebar_Cameos_Init
+;@LJMP 0x0054DFAE, _hires_Sidebar_Cameos_Init_IO
+;@LJMP 0x0054DFF8, _hires_Sidebar_Cameos_Init_IO2
+;@LJMP 0x0054DE8B, _hires_Sidebar_Cameos_Init_IO3
+;@LJMP 0x0054DEBE, _hires_Sidebar_Cameos_Init_IO4
+;@LJMP 0x0054DF4A, _hires_Sidebar_Cameos_Init_IO5
+;@LJMP 0x0054DF15, _hires_Sidebar_Cameos_Init_IO6
+;@LJMP 0x0054E142, _hires_Sidebar_Cameos_Activate
+;@LJMP 0x0054E156, _hires_Sidebar_Cameos_Activate2
+;@LJMP 0x0054E172, _hires_Sidebar_Cameos_Activate3
+;@LJMP 0x0054E1CC, _hires_Sidebar_Cameos_Deactivate
+;@LJMP 0x0054E1E8, _hires_Sidebar_Cameos_Deactivate2
+;@LJMP 0x0054E2AD, _hires_Sidebar_Cameos_Scroll ; broke atm?
+;@LJMP 0x0054E4BE, _hires_Sidebar_Cameos_AI
+;@LJMP 0x0054D08B, _hires_Sidebar_Cameos_Height
+;@LJMP 0x0054E72A, _hires_Sidebar_Cameos_Draw_Buttons
+@LJMP 0x0054DB14, _Set_Game_Area_Width
 
-@HOOK 0x0050E7E9 _hires_Reconnect_Dialog_Fill_Rect2
-@HOOK 0x0050E7F1 _hires_Reconnect_Dialog_Fill_Rect
-@HOOK 0x0050E4FD _hires_Reconnect_Dialog_Dialog_Box
-@HOOK 0x0050E5D2 _hires_Reconnect_Dialog_Text_Print1
-@HOOK 0x0050E554 _hires_Reconnect_Dialog_Text_Print2
-@HOOK 0x0050E526 _hires_Reconnect_Dialog_Text_Print3
-@HOOK 0x0050E5A0 _hires_Reconnect_Dialog_Text_Print4
-@HOOK 0x0050E845 _hires_Reconnect_Dialog_Text_Print5
+@LJMP 0x0050E7E9, _hires_Reconnect_Dialog_Fill_Rect2
+@LJMP 0x0050E7F1, _hires_Reconnect_Dialog_Fill_Rect
+@LJMP 0x0050E4FD, _hires_Reconnect_Dialog_Dialog_Box
+@LJMP 0x0050E5D2, _hires_Reconnect_Dialog_Text_Print1
+@LJMP 0x0050E554, _hires_Reconnect_Dialog_Text_Print2
+@LJMP 0x0050E526, _hires_Reconnect_Dialog_Text_Print3
+@LJMP 0x0050E5A0, _hires_Reconnect_Dialog_Text_Print4
+@LJMP 0x0050E845, _hires_Reconnect_Dialog_Text_Print5
 
+; These are per strip, there's a left and right strip in the sidebar
+%define CAMEO_ITEMS 30
+%define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
+
+%define ScreenWidth     0x006016B0
+%define ScreenHeight    0x006016B4
+%define MainWindow      0x006B1498
+
+%define Set_Video_Mode  0x005C9D60
+
+%define _Buffer_Fill_Rect 0x005C23F0
+%define _Buffer_Clear 0x005C4DE0
+
+%define GraphicsViewPortClass_HidPage 0x006807CC
+%define GraphicBufferClass_VisiblePage 0x0068065C
+%define GraphicsViewPortClass_SeenBuff 0x006807A4
+%define DefaultSelectButtons 0x0068A2C4
+
+[section .data] 
+WidthTiles dd 0x14
+CellSize dd 100h
+fake480height dd 0
+AdjustedWidth           dd 0
+diff_width              dd 0
+diff_height             dd 0
+diff_top                dd 0
+diff_left               dd 0
+left_strip_offset       dd 0
+right_strip_offset      dd 0
+ExtendedSelectButtons8 TIMES 824 dd 0
+scorebackground db 0
+
+[section .rdata] 
+str_options             db"Options",0
+str_width               db"Width",0
+str_height              db"Height",0
+str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
+
+;_hires_NewGameText_top  dd 0x96
+;_hires_NewGameText_left dd 0x6E
+
+[section .text] 
 _hires_Reconnect_Dialog_Fill_Rect:
     mov  edx, [ebp-30h]
     add  edx, [diff_top]
@@ -212,8 +255,6 @@ _hires_Reconnect_Dialog_Dialog_Box:
     add  eax, [diff_left]
     jmp  0x0050E508
 
-CellSize dd 100h
-fake480height dd 0
 
 _Receive_Remote_File_Caption:
     mov  ebx, 0x6e
@@ -350,7 +391,6 @@ _hires_Center_VQA640_Videos:
 
     jmp  0x004A9EB1
 
-scorebackground db 0
 
 _hires_ScoreScreenBackground:
     cmp  eax, 0x005F01EB
@@ -370,20 +410,6 @@ _hires_ScoreScreenBackground:
     push edi
     jmp  0x005B3CDE
 
-; These are per strip, there's a left and right strip in the sidebar
-%define CAMEO_ITEMS 30
-%define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
-
-%define ScreenWidth     0x006016B0
-%define ScreenHeight    0x006016B4
-
-%define _Buffer_Fill_Rect 0x005C23F0
-
-%define _Buffer_Clear 0x005C4DE0
-
-%define GraphicsViewPortClass_HidPage 0x006807CC
-%define GraphicBufferClass_VisiblePage 0x0068065C
-%define GraphicsViewPortClass_SeenBuff 0x006807A4
 
 %macro hires_Clear 0
     push 0ch
@@ -424,7 +450,6 @@ _hires_Sidebar_Cameos_AI: ; No idea if this does anything..
     add  eax, CAMEO_ITEMS
     jmp  0x0054E4C4
 
-str_blackbackgroundpcx db"BLACKBACKGROUND.PCX",0
 
 _hires_DoRestartMissionClearBackground:
     push ecx
@@ -480,8 +505,6 @@ _hires_MainMenuClearBackground:
     mov  ebx, 0x0066995C
     jmp  0x004F6097
 
-ExtendedSelectButtons8 TIMES 824 dd 0
-%define DefaultSelectButtons 0x0068A2C4
 
 _hires_Sidebar_Cameos_Init_IO6:     ; Down buttons
     add  esi, 0C2h
@@ -559,19 +582,7 @@ _hires_Sidebar_Cameos_Draw:
     cmp  eax, edx
     jmp  0x0054E9C7
 
-AdjustedWidth           dd 0
 
-diff_width              dd 0
-diff_height             dd 0
-diff_top                dd 0
-diff_left               dd 0
-
-str_options             db"Options",0
-str_width               db"Width",0
-str_height              db"Height",0
-
-left_strip_offset       dd 0
-right_strip_offset      dd 0
 
 %macro _hires_adjust_width 1
     mov  ecx, [diff_width]
@@ -633,7 +644,7 @@ _hires_ini:
     DIV  ebx
 
     ; width of the game area, in tiles, 1 tile = 24px
-    mov  byte [0x0054DB15], AL
+    mov  byte [WidthTiles], AL
 
     xor  edx,edx
     mov  ebx, 24
@@ -1436,9 +1447,6 @@ _hires_Intro:
 
     jmp  0x004A9EB1
 
-_hires_NewGameText_top  dd 0x96
-_hires_NewGameText_left dd 0x6E
-
 _hires_NewGameText:
     mov  eax, [diff_top]
     add  eax,0x96
@@ -1482,7 +1490,7 @@ _hires_MainMenuClearPalette:
     jmp  0x004F7600
 
 _Blacken_Screen_Border_Menu:
-    call 0x005C9E60
+    call Set_Video_Mode
     mov  eax, 1
 
     jmp  0x00502243
@@ -1880,3 +1888,9 @@ _Set_Screen_Height_480_NOP:
     mov  dword [ScreenHeight], ebx
     mov  dword [fake480height], 1
     jmp  0x005523EE
+
+
+_Set_Game_Area_Width:
+    mov ecx, [WidthTiles]
+    jmp 0x0054DB19
+

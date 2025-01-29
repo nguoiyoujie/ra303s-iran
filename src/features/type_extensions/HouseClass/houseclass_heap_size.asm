@@ -9,12 +9,12 @@
 ;
 ;----------------------------------------------------------------
 
-@SETD 0x004C7176 HouseClass.NEW_SIZE ; _TFixedHeapClass_fn_init_HouseClass
-@SETD 0x004C8366 HouseClass.NEW_SIZE ; _TFixedHeapClass__HouseClass__Constructor_HouseClass
-@SETD 0x004CED14 HouseClass.NEW_SIZE ; _TFixedHeapClass__HouseClass__Save_HouseClass
-@HOOK 0x004CEDF5 _TFixedHeapClass__HouseClass__Load_HouseClass
-@HOOK 0x004CEE10 _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames
-@SETD 0x004DDD1E HouseClass.NEW_SIZE ; _HouseClass__Read_INI_HouseClass_Size
+@SET 0x004C7175, {mov edx,HouseClass.NEW_SIZE} ; _TFixedHeapClass_fn_init_HouseClass
+@SET 0x004C8365, {mov edx,HouseClass.NEW_SIZE} ; _TFixedHeapClass__HouseClass__Constructor_HouseClass
+@SET 0x004CED13, {mov ebx,HouseClass.NEW_SIZE} ; _TFixedHeapClass__HouseClass__Save_HouseClass
+@LJMP 0x004CEDF5, _TFixedHeapClass__HouseClass__Load_HouseClass
+@LJMP 0x004CEE10, _TFixedHeapClass__HouseClass__Load_Clear_Memory_For_Old_Savegames
+@SET 0x004DDD1D, {mov eax,HouseClass.NEW_SIZE} ; _HouseClass__Read_INI_HouseClass_Size
 
 
 _TFixedHeapClass__HouseClass__Load_HouseClass:

@@ -7,45 +7,46 @@
 ; A good deal of testing is needed to check for compatibility issues, as many things are tied to the affected values
 ;----------------------------------------------------------------
 
-@HOOK 0x004DCC8F _HouseClass__Tracking_Add_New_Building_Tracking
-@HOOK 0x004DCCF8 _HouseClass__Tracking_Add_New_Planes_Tracking
-@HOOK 0x004DCDD2 _HouseClass__Tracking_Add_New_Vehicle_Tracking
-@HOOK 0x004DCD5B _HouseClass__Tracking_Add_New_Infantry_Tracking
-@HOOK 0x004DCE40 _HouseClass__Tracking_Add_New_Vessels_Tracking
-@HOOK 0x004DCB58 _HouseClass__Tracking_Remove_New_Building_Tracking
-@HOOK 0x004DCB79 _HouseClass__Tracking_Remove_New_Planes_Tracking
-@HOOK 0x004DCBA7 _HouseClass__Tracking_Remove_New_Infantry_Tracking
-@HOOK 0x004DCBD1 _HouseClass__Tracking_Remove_New_Vehicle_Tracking
-@HOOK 0x004DCBFB _HouseClass__Tracking_Remove_New_Vessels_Tracking
+@LJMP 0x004DCC8F, _HouseClass__Tracking_Add_New_Building_Tracking
+@LJMP 0x004DCCF8, _HouseClass__Tracking_Add_New_Planes_Tracking
+@LJMP 0x004DCDD2, _HouseClass__Tracking_Add_New_Vehicle_Tracking
+@LJMP 0x004DCD5B, _HouseClass__Tracking_Add_New_Infantry_Tracking
+@LJMP 0x004DCE40, _HouseClass__Tracking_Add_New_Vessels_Tracking
+@LJMP 0x004DCB58, _HouseClass__Tracking_Remove_New_Building_Tracking
+@LJMP 0x004DCB79, _HouseClass__Tracking_Remove_New_Planes_Tracking
+@LJMP 0x004DCBA7, _HouseClass__Tracking_Remove_New_Infantry_Tracking
+@LJMP 0x004DCBD1, _HouseClass__Tracking_Remove_New_Vehicle_Tracking
+@LJMP 0x004DCBFB, _HouseClass__Tracking_Remove_New_Vessels_Tracking
 
 ;Temp
 ; CellClass::GoodieCheck
-;@SETD 0x004A0781 HouseClass.Offset.NewUQuantity 
-@HOOK 0x004A08AA _CellClass__GoodieCheck_Replace_Quantity
+;@SET 0x004A077E, {mov ebx,[ecx+ebx*4+HouseClass.Offset.NewUQuantity]}
+@LJMP 0x004A08AA, _CellClass__GoodieCheck_Replace_Quantity
 
 ; HouseClass::Get_Quantity
-@SETD 0x004DDBC5 HouseClass.Offset.NewAQuantity 
-@SETD 0x004DDCF1 HouseClass.Offset.NewBQuantity 
+@SET 0x004DDBC2, {mov eax,[eax+edx*4+HouseClass.Offset.NewAQuantity]}
+@SET 0x004DDCEE, {mov eax,[eax+edx*4+HouseClass.Offset.NewBQuantity]}
 
 ; HouseClass::Find_Building
-@SETD 0x004D8F4E HouseClass.Offset.NewBQuantity 
+@SET 0x004D8F4B, {cmp dword[ecx+eax*4+HouseClass.Offset.NewBQuantity],0}
 
 ; HouseClass::AI
 ; this check for force sub surfacing is rather wasteful. Maybe try to use a bitmask? 
-@SETD 0x004D4AF5 HouseClass.Offset.NewVQuantity ; SUB
-@SETD 0x004D4B07 0x400 
-@SETD 0x004D4B0D HouseClass.Offset.NewBQuantity 
-@HOOK 0x004D4B22 _HouseClass__AI_Replace_UQuantity
-@SETD 0x004D4B2A HouseClass.Offset.NewUQuantity 
-@HOOK 0x004D4B3F _HouseClass__AI_Replace_IQuantity
-@SETD 0x004D4B47 HouseClass.Offset.NewIQuantity 
-@HOOK 0x004D4B5C _HouseClass__AI_Replace_AQuantity
-@SETD 0x004D4B64 HouseClass.Offset.NewAQuantity 
-@SETD 0x004D4B84 HouseClass.Offset.NewVQuantity 
-@SETD 0x004D4B97 HouseClass.Offset.NewVQuantity 
-@HOOK 0x004D4B89 _HouseClass__AI_Replace_VCount
+@SET 0x004D4AF3, {cmp dword[eax+HouseClass.Offset.NewVQuantity],0} ; SUB
+@SET 0x004D4B05, {lea edx,[esi+0x400]}
+@SET 0x004D4B0B, {mov edi,[esi+HouseClass.Offset.NewBQuantity]}
+@LJMP 0x004D4B22, _HouseClass__AI_Replace_UQuantity
+@SET 0x004D4B28, {mov ebx,[esi+HouseClass.Offset.NewUQuantity]}
+@LJMP 0x004D4B3F, _HouseClass__AI_Replace_IQuantity
+@SET 0x004D4B45, {mov ecx,[esi+HouseClass.Offset.NewIQuantity]}
+@LJMP 0x004D4B5C, _HouseClass__AI_Replace_AQuantity
+@CLEAR 0x004D4B61, 0x90, 0x004D4B62
+@SET 0x004D4B62, {mov edi,[esi+HouseClass.Offset.NewAQuantity]}
+@SET 0x004D4B82, {add eax,[edx+HouseClass.Offset.NewVQuantity]}
+@LJMP 0x004D4B89, _HouseClass__AI_Replace_VCount
+@SET 0x004D4B95, {add eax,[edx+HouseClass.Offset.NewVQuantity]}
 
-@HOOK 0x004D496F _HouseClass__AI_Replace_AAPowerCheck
+@LJMP 0x004D496F, _HouseClass__AI_Replace_AAPowerCheck
 
 _HouseClass__Tracking_Remove_New_Building_Tracking:
     shr  eax, 18h

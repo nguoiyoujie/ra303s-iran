@@ -8,10 +8,10 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x0052BE87 _Queue_AI_Multiplayer__Remove_Compute_Game_CRC
-@HOOK 0x004AB16C _Do_Record_Playback_Dont_Record_Objects_Selected_And_Other_Stuff
-@HOOK 0x004AB321 _Do_Record_Playback_Dont_Playback_Objects_Selected_And_Other_Stuff
-@HOOK 0x0052BECB _Queue_Playback_Remove_Single_Player_Only_Playback_Check
+@LJMP 0x0052BE87, _Queue_AI_Multiplayer__Remove_Compute_Game_CRC
+@LJMP 0x004AB16C, _Do_Record_Playback_Dont_Record_Objects_Selected_And_Other_Stuff
+@LJMP 0x004AB321, _Do_Record_Playback_Dont_Playback_Objects_Selected_And_Other_Stuff
+@LJMP 0x0052BECB, _Queue_Playback_Remove_Single_Player_Only_Playback_Check
 
 _Queue_AI_Multiplayer__Remove_Compute_Game_CRC:
     jmp  0x0052BEAC

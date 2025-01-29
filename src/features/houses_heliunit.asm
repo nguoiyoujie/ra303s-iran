@@ -6,11 +6,14 @@
 ; This function is enabled by setting [HouseType] > HeliUnit
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x00459FA4 _BuildingClass__Grand_Opening_HeliUnit_Unhardcode
-@HOOK 0x0045A049 _BuildingClass__Grand_Opening_HeliUnit_Unhardcode2
+@LJMP 0x00459FA4, _BuildingClass__Grand_Opening_HeliUnit_Unhardcode
+@LJMP 0x0045A049, _BuildingClass__Grand_Opening_HeliUnit_Unhardcode2
 
+[section .data] 
 Temp.HeliUnit db 0
 
+
+[section .text] 
 _BuildingClass__Grand_Opening_HeliUnit_Unhardcode:
     ;mov  eax,[eax+0x41] ; ActLike
     ;movzx eax,al

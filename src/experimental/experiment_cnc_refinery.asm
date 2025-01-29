@@ -6,19 +6,21 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00454C81 _BuildingClass_Refinery_HandleMessage_RADIO_IM_IN
-;@HOOK 0x0057BD53 _UnitClass_PerCellProcess_Ignore_PCP_END
-@HOOK 0x0057BD69 _UnitClass_PerCellProcess_Save_Contact_With_Whom
-@HOOK 0x0057BDEA _UnitClass_PerCellProcess_HandleMessage_RADIO_ATTACH
-@HOOK 0x0057A570 _UnitClass_HandleMessage_RADIO_BACKUP_NOW
-@HOOK 0x0045CDA4 _BuildingClass_MissionHarvest_Initial_BSTATE_ACTIVE
-@HOOK 0x0045CDD4 _BuildingClass_MissionHarvest_WaitForDock_BSTATE_AUX1
-@HOOK 0x0045CEA2 _BuildingClass_MissionHarvest_Middle_BSTATE_AUX2
-@HOOK 0x0045CEC0 _BuildingClass_MissionHarvest_DetachWhenDone
+@LJMP 0x00454C81, _BuildingClass_Refinery_HandleMessage_RADIO_IM_IN
+;@LJMP 0x0057BD53, _UnitClass_PerCellProcess_Ignore_PCP_END
+@LJMP 0x0057BD69, _UnitClass_PerCellProcess_Save_Contact_With_Whom
+@LJMP 0x0057BDEA, _UnitClass_PerCellProcess_HandleMessage_RADIO_ATTACH
+@LJMP 0x0057A570, _UnitClass_HandleMessage_RADIO_BACKUP_NOW
+@LJMP 0x0045CDA4, _BuildingClass_MissionHarvest_Initial_BSTATE_ACTIVE
+@LJMP 0x0045CDD4, _BuildingClass_MissionHarvest_WaitForDock_BSTATE_AUX1
+@LJMP 0x0045CEA2, _BuildingClass_MissionHarvest_Middle_BSTATE_AUX2
+@LJMP 0x0045CEC0, _BuildingClass_MissionHarvest_DetachWhenDone
 
+[section .data] 
 temp.This     dd 0
 temp.Whom     dd 0
 
+[section .text] 
 _BuildingClass_Refinery_HandleMessage_RADIO_IM_IN:
     inc  dword [Globals___ScenarioInit]
     mov  edx,0x2 ;BSTATE_ACTIVE

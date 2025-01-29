@@ -29,6 +29,7 @@
 ;%assign TrackType.Track12                       0x00600f04
 ;%assign TrackType.Track13                       0x00600f48
 
+[section .rdata] 
 TrackType.NewTurnTracks   db \
                          14, 14, 0xa0, 0
 
@@ -92,6 +93,7 @@ d.TrackType.Track14   db 0x68, 0x00, 0x21, 0xff, 0x96, \
 ;	{0x00000000L,DIR_SW}
 ;};
 
+[section .text] 
 
 
 

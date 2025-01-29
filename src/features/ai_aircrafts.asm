@@ -19,29 +19,31 @@
 %define HouseClass.Offset.NewAQuantity_Longbow 0x2424
 %define HouseClass.Offset.NewAQuantity_Hind 0x2428
 
-@SETD 0x004DC7E3 HouseClass.Offset.NewAQuantity_Longbow ; Longbow
-@SETD 0x004DC7E9 HouseClass.Offset.NewAQuantity_Hind ; Hind
-@SETD 0x004DC7EF HouseClass.Offset.NewBQuantity_Helipad ; Helipad
-@SETD 0x004DC83E HouseClass.Offset.NewAQuantity_Longbow ; Longbow
-@SETD 0x004DC844 HouseClass.Offset.NewAQuantity_Hind ; Hind
-@SETD 0x004DC84A HouseClass.Offset.NewBQuantity_Helipad ; Helipad
-@SETD 0x004DC89E HouseClass.Offset.NewAQuantity_Mig ; Mig
-@SETD 0x004DC8A4 HouseClass.Offset.NewAQuantity_Yak ; Yak
-@SETD 0x004DC8AA HouseClass.Offset.NewBQuantity_Airfield ; Airfield
-@SETD 0x004DC8FE HouseClass.Offset.NewAQuantity_Mig ; Mig
-@SETD 0x004DC904 HouseClass.Offset.NewAQuantity_Yak ; Yak
-@SETD 0x004DC90A HouseClass.Offset.NewBQuantity_Airfield ; Airfield
+@SET 0x004DC7E1, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+@SET 0x004DC7E7, {mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+@SET 0x004DC7ED, {mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+@SET 0x004DC83C, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+@SET 0x004DC842, {mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+@SET 0x004DC848, {mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+@SET 0x004DC89C, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+@SET 0x004DC8A2, {mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+@SET 0x004DC8A8, {mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
+@SET 0x004DC8FC, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+@SET 0x004DC902, {mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+@SET 0x004DC908, {mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
 
-@HOOK 0x004DC7AF _HouseClass__AI_Aircraft_Implementation
+@LJMP 0x004DC7AF, _HouseClass__AI_Aircraft_Implementation
 
+[section .data] 
 Temp.AIAircraft.Airfields        dd 0
 Temp.AIAircraft.Helipads         dd 0
 Temp.AIAircraft.CombatWings      dd 0
 Temp.AIAircraft.CombatHelis      dd 0
-
 Temp.AIAircraft.Array            times 256 db 0 ; we will not have more than 256 AircraftTypes
 Temp.AIAircraft.Count            db 0
 
+
+[section .text] 
 _HouseClass__AI_Aircraft_Implementation:
 ; first count the buildings and aircrafts
 ; ECX is HouseClass

@@ -15,7 +15,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0058144B _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
+@LJMP 0x0058144B, _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
 
 
 Check_AI_Difficulty_Gem_And_Gold_Values:

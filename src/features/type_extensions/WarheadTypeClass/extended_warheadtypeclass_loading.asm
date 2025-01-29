@@ -1,11 +1,11 @@
 ;Read INI settings
 ;We want to expand the modifiers, so we move all offsets after modifiers to clear the way for future expansion. Turns out that there are only two int values, which both may as well be byte values. They can fit into the space that holds bool values. Very convenient, as we do not need to worry about moving the heavily used Modifier
-@HOOK 0x0058FB6D _WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath
-@HOOK 0x0058FC04 _WarheadTypeClass__Read_INI_Expand_Modifier_5_to_9
-@HOOK 0x004EBF1D _Combat_InfantryDeathCheck
-@HOOK 0x004A37BC _Combat_ExplosionSetCheck
-@HOOK 0x005900C0 _ArmorType_NameFrom_Expand_Array
-@HOOK 0x005900D4 _ArmorType_NameFrom_Expand_Array2
+@LJMP 0x0058FB6D, _WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath
+@LJMP 0x0058FC04, _WarheadTypeClass__Read_INI_Expand_Modifier_5_to_9
+@LJMP 0x004EBF1D, _Combat_InfantryDeathCheck
+@LJMP 0x004A37BC, _Combat_ExplosionSetCheck
+@LJMP 0x005900C0, _ArmorType_NameFrom_Expand_Array
+@LJMP 0x005900D4, _ArmorType_NameFrom_Expand_Array2
 
 
 

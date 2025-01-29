@@ -8,7 +8,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x005D8F79 _ASM_Set_Mouse_Cursor_Mouse_Coords_Check
+@LJMP 0x005D8F79, _ASM_Set_Mouse_Cursor_Mouse_Coords_Check
 
 _ASM_Set_Mouse_Cursor_Mouse_Coords_Check:
     cmp  dword eax, [ScreenWidth]

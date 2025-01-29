@@ -10,7 +10,7 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004EB2D0 _InfantryTypeClass__Read_INI_Extended
+@LJMP 0x004EB2D0, _InfantryTypeClass__Read_INI_Extended
 
 
 ;DoInfoStruct (size 0x80)
@@ -28,35 +28,12 @@
 %define DoControls.CIV                                     0x00601F4C ; CIV, also used for DELPHI
 %define DoControls.EINS                                    0x00601FCC ; EINS, also used for CHAN
 
-list.DoControlsByInfantryType      dd DoControls.E1, \      ; E1       
-                                      DoControls.E2, \      ; E2       
-                                      DoControls.E3, \      ; E3       
-                                      DoControls.E4, \      ; E4       
-                                      DoControls.E6, \      ; E6       
-                                      DoControls.E7, \      ; E7       
-                                      DoControls.SPY, \     ; SPY      
-                                      DoControls.THF, \     ; THF      
-                                      DoControls.MEDI, \    ; MEDI     
-                                      DoControls.GNRL, \    ; GNRL     
-                                      DoControls.DOG, \     ; DOG      
-                                      DoControls.CIV, \     ; C1       
-                                      DoControls.CIV, \     ; C2       
-                                      DoControls.CIV, \     ; C3       
-                                      DoControls.CIV, \     ; C4       
-                                      DoControls.CIV, \     ; C5       
-                                      DoControls.CIV, \     ; C6       
-                                      DoControls.CIV, \     ; C7       
-                                      DoControls.CIV, \     ; C8       
-                                      DoControls.CIV, \     ; C9       
-                                      DoControls.CIV, \     ; C10      
-                                      DoControls.EINS, \    ; EINSTEIN  
-                                      DoControls.CIV, \     ; DELPHI    
-                                      DoControls.EINS, \    ; CHAN      
-                                      DoControls.E4, \      ; SHOK      
-                                      DoControls.MEDI, \    ; MECH      
-
+[section .rdata] 
+list.DoControlsByInfantryType      dd DoControls.E1, DoControls.E2, DoControls.E3, DoControls.E4, DoControls.E6, DoControls.E7, DoControls.SPY, DoControls.THF, DoControls.MEDI, DoControls.GNRL, DoControls.DOG, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.CIV, DoControls.EINS, DoControls.CIV, DoControls.EINS, DoControls.E4, DoControls.MEDI, 0 
 str.CUSTOM                           db"CUSTOM",0
 
+
+[section .text] 
 _InfantryTypeClass__Read_INI_Extended:                    
     push esi                                              
     push edi

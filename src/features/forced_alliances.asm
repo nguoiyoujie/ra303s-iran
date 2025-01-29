@@ -10,7 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004BD167 EventClass__Execute_Ally_Forced_Alliances
+@LJMP 0x004BD167, EventClass__Execute_Ally_Forced_Alliances
 
 
 EventClass__Execute_Ally_Forced_Alliances:

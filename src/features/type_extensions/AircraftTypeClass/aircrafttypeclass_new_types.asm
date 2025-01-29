@@ -11,11 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00403EE3 _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
-@HOOK 0x00403F08 _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes
-@HOOK 0x00403FF3 _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes
-@HOOK 0x00459850 _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
-@HOOK 0x004F40B6 _Init_Game_Set_AircraftTypes_Heap_Count
+@LJMP 0x00403EE3, _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
+@LJMP 0x00403F08, _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes
+@LJMP 0x00403FF3, _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes
+@LJMP 0x00459850, _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
+@LJMP 0x004F40B6, _Init_Game_Set_AircraftTypes_Heap_Count
 
 
 _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
@@ -40,7 +40,7 @@ Init_AircraftTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  ecx,eax
 
     pop  eax

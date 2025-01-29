@@ -9,10 +9,10 @@
 ;----------------------------------------------------------------
 
 ; review this scatter mechanism
-;@HOOK 0x004619E7 _BulletClass__Unlimbo_IncreaseScatter_BallisticScatter
-;@HOOK 0x00461A50 _BulletClass__Unlimbo_IncreaseScatter_HomingScatter
+;@LJMP 0x004619E7, _BulletClass__Unlimbo_IncreaseScatter_BallisticScatter
+;@LJMP 0x00461A50, _BulletClass__Unlimbo_IncreaseScatter_HomingScatter
 
-@HOOK 0x00461C3F _BulletClass__Unlimbo_Recalc_BallisticScatter
+@LJMP 0x00461C3F, _BulletClass__Unlimbo_Recalc_BallisticScatter
 
 _BulletClass__Unlimbo_Recalc_BallisticScatter:
     ;eax is the distance

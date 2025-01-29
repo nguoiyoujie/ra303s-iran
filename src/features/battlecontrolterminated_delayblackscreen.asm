@@ -9,13 +9,15 @@
 
 ; This is experimental, as sometimes the game blackouts before the announcer finishes saying "Battle Control Terminated"
 ; This should be replaced by a proper announcer check
-@HOOK 0x004BDAB5 _EventClass_Execute_BattleControlTerminated_DelayBlackScreen
+@LJMP 0x004BDAB5, _EventClass_Execute_BattleControlTerminated_DelayBlackScreen
 
 %define BCTInitDelay          0xE80000 ; by trial and error
 
+[section .data] 
 bctdelay dd 0
 
 
+[section .text] 
 _EventClass_Execute_BattleControlTerminated_DelayBlackScreen:
     mov  dword [bctdelay],BCTInitDelay
 .Delay:

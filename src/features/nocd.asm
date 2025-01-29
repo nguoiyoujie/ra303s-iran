@@ -23,14 +23,12 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
-@HOOK 0x004AAC58 _Force_CD_Available
-@HOOK 0x004F7A10 _Init_CDROM_Access
-@HOOK 0x005CDD6E _GetCDClass__GetCDClass_GetDriveType
-@HOOK 0x004C7B2A _Patch_Out_Early_GetCDClass_Init
-@HOOK 0x00551FC8 _Patch_In_Later_GetCDClass_Init
-;@HOOK 0x004AAE0C _Fix_CDROM_Name_Get_Crash
-
-;RedAlert.Options.NoCDMode db 1
+@LJMP 0x004AAC58, _Force_CD_Available
+@LJMP 0x004F7A10, _Init_CDROM_Access
+@LJMP 0x005CDD6E, _GetCDClass__GetCDClass_GetDriveType
+@LJMP 0x004C7B2A, _Patch_Out_Early_GetCDClass_Init
+@LJMP 0x00551FC8, _Patch_In_Later_GetCDClass_Init
+;@LJMP 0x004AAE0C, _Fix_CDROM_Name_Get_Crash
 
 %define GetCDClass__GetCDClass    0x005CDD10
 %define CDList                    0x00680884

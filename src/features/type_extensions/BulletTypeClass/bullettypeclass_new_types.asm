@@ -11,10 +11,10 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00426C90 _BulletTypeClass__Init_Heap_Init_Extra_BulletTypes
-@HOOK 0x00426CF5 _BulletTypeClass__One_Time_Unhardcode_BulletTypes
-@HOOK 0x00463701 _CCINIClass__Get_BulletType_Unhardcode_BulletTypes_Count
-@HOOK 0x004F40D8 _Init_Game_Set_Bullet_Types_Heap_Count
+@LJMP 0x00426C90, _BulletTypeClass__Init_Heap_Init_Extra_BulletTypes
+@LJMP 0x00426CF5, _BulletTypeClass__One_Time_Unhardcode_BulletTypes
+@LJMP 0x00463701, _CCINIClass__Get_BulletType_Unhardcode_BulletTypes_Count
+@LJMP 0x004F40D8, _Init_Game_Set_Bullet_Types_Heap_Count
 
 
 _BulletTypeClass__Init_Heap_Init_Extra_BulletTypes:
@@ -34,7 +34,7 @@ Init_BulletTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  edx,eax
     pop  eax
     call BulletTypeClass__BulletTypeClass

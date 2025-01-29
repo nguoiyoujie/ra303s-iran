@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x004593AB _BuildingClass_ExitObject_Base_HouseCheck
+@LJMP 0x004593AB, _BuildingClass_ExitObject_Base_HouseCheck
 
 ; TO-DO: Control this behaviour via an INI key
 

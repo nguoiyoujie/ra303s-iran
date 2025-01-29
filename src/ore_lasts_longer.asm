@@ -1,9 +1,11 @@
-@HOOK 0x0049FE2C _CellCass__Reduce_Tiberium_Last_Longer
+@LJMP 0x0049FE2C, _CellCass__Reduce_Tiberium_Last_Longer
 
+[section .data]
 ReduceEveryOneCell dd 0
 
 ; NOTE THIS FILE IS ONLY FOR TESTING AND COMMENTED OUT IN MAIN.ASM
 
+[section .text]
 _CellCass__Reduce_Tiberium_Last_Longer:
     cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jnz  .Normal_Code

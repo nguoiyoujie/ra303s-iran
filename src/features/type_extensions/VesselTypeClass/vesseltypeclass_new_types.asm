@@ -11,11 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00459661 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes
-@HOOK 0x004F410B _Init_Game_Set_VesselTypes_Heap_Count
-@HOOK 0x0058484B _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes
-@HOOK 0x00584A3A _VesselTypeClass__One_Time_Unhardcode_VesselTypes
-@HOOK 0x00584B44 _VesselTypeClass__From_Name_Unhardcode_VesselTypes
+@LJMP 0x00459661, _BuildingClass__Update_Buildables_Unhardcode_VesselTypes
+@LJMP 0x004F410B, _Init_Game_Set_VesselTypes_Heap_Count
+@LJMP 0x0058484B, _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes
+@LJMP 0x00584A3A, _VesselTypeClass__One_Time_Unhardcode_VesselTypes
+@LJMP 0x00584B44, _VesselTypeClass__From_Name_Unhardcode_VesselTypes
 
 
 _BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
@@ -60,7 +60,7 @@ Init_VesslTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  ecx,eax
 
     pop  eax

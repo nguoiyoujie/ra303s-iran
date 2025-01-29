@@ -8,8 +8,8 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x005665D3 _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE
-@HOOK 0x00566547 _TechnoClass_Take_Damage_UseDeathWeapon
+@LJMP 0x005665D3, _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE
+@LJMP 0x00566547, _TechnoClass_Take_Damage_UseDeathWeapon
 
 _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE:
 ; check eax return of Combat_Anim

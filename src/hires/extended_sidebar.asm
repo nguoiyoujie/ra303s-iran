@@ -7,39 +7,40 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 ; modify call at 0x0054D823 to use custom sidebar graphics and draw it multiple times below each other
-@HOOK 0x0054E142 _StripClass_Activate_hires
-@HOOK 0x0054E156 _StripClass_Activate_hires2
-@HOOK 0x0054E172 _StripClass_Activate_hires3
-@HOOK 0x0054CF47 _SidebarClass_fn_init_hires
-@HOOK 0x0054DFAE _StripClass_Init_IO_hires
-@HOOK 0x0054DFF8 _StripClass_Init_IO_hires2
-@HOOK 0x0054E1CC _StripClass_Deactivate_hires
-@HOOK 0x0054E1E8 _StripClass_Deactivate_hires2
-@HOOK 0x0054E9C2 _StripClass_Draw_It_hires
-;@HOOK 0x004A6BA4 _StripClass_Draw_It_hires2
-@HOOK 0x0054D0B1 _SidebarClass_One_TIme_Icon_Area_Size_hires
-@HOOK 0x0054E425 _StripClass_AI_hires
-@HOOK 0x0054E000 _StripClass_Init_IO_Up_Down_Buttons_hires
-@HOOK 0x0054E2AD _StripClass_Scroll_hires
-@HOOK 0x0054E74F _StripClass_Draw_It_hires3
-@HOOK 0x0054D644 _SidebarClass_Add_hires
-@HOOK 0x00538FD1 _Load_Game_hires
-@HOOK 0x0054D803 _SidebarClass_Draw_It
-@HOOK 0x00527756 _PowerClass_Draw_It_hires
-@HOOK 0x00527743 _PowerClass_Draw_It_hires2
-@HOOK 0x0054EC67 _StripClass_Recalc_hires
-@HOOK 0x0052761D _PowerClass_One_Time
-@HOOK 0x0054D353 _SidebarClass_Reload_Sidebar_hires
-;@HOOK 0x00527C19 _PowerClass_Draw_it_hires4
-@HOOK 0x005278B7 _PowerClass_Draw_it_hires5
-;@HOOK 0x005277A6 _PowerClass_Draw_It_hires3
-;@HOOK 0x00527A67 _PowerClass_Draw_it_hires6
-@HOOK 0x00527885 _PowerClass_Draw_it_hires7
-@HOOK 0x00527863 _PowerClass_Draw_it_hires8
-@HOOK 0x0052789B _PowerClass_Draw_it_hires9
-@HOOK 0x00527C19 _PowerClass_Draw_it_hires10
-@HOOK 0x00527771 _PowerClass_Draw_it_hires11
+@LJMP 0x0054E142, _StripClass_Activate_hires
+@LJMP 0x0054E156, _StripClass_Activate_hires2
+@LJMP 0x0054E172, _StripClass_Activate_hires3
+@LJMP 0x0054CF47, _SidebarClass_fn_init_hires
+@LJMP 0x0054DFAE, _StripClass_Init_IO_hires
+@LJMP 0x0054DFF8, _StripClass_Init_IO_hires2
+@LJMP 0x0054E1CC, _StripClass_Deactivate_hires
+@LJMP 0x0054E1E8, _StripClass_Deactivate_hires2
+@LJMP 0x0054E9C2, _StripClass_Draw_It_hires
+;@LJMP 0x004A6BA4, _StripClass_Draw_It_hires2
+@LJMP 0x0054D0B1, _SidebarClass_One_TIme_Icon_Area_Size_hires
+@LJMP 0x0054E425, _StripClass_AI_hires
+@LJMP 0x0054E000, _StripClass_Init_IO_Up_Down_Buttons_hires
+@LJMP 0x0054E2AD, _StripClass_Scroll_hires
+@LJMP 0x0054E74F, _StripClass_Draw_It_hires3
+@LJMP 0x0054D644, _SidebarClass_Add_hires
+@LJMP 0x00538FD1, _Load_Game_hires
+@LJMP 0x0054D803, _SidebarClass_Draw_It
+@LJMP 0x00527756, _PowerClass_Draw_It_hires
+@LJMP 0x00527743, _PowerClass_Draw_It_hires2
+@LJMP 0x0054EC67, _StripClass_Recalc_hires
+@LJMP 0x0052761D, _PowerClass_One_Time
+@LJMP 0x0054D353, _SidebarClass_Reload_Sidebar_hires
+;@LJMP 0x00527C19, _PowerClass_Draw_it_hires4
+@LJMP 0x005278B7, _PowerClass_Draw_it_hires5
+;@LJMP 0x005277A6, _PowerClass_Draw_It_hires3
+;@LJMP 0x00527A67, _PowerClass_Draw_it_hires6
+@LJMP 0x00527885, _PowerClass_Draw_it_hires7
+@LJMP 0x00527863, _PowerClass_Draw_it_hires8
+@LJMP 0x0052789B, _PowerClass_Draw_it_hires9
+@LJMP 0x00527C19, _PowerClass_Draw_it_hires10
+@LJMP 0x00527771, _PowerClass_Draw_it_hires11
 
+[section .data]
 CameoItems dd 0 ; Cameo icons to draw the per strip
 CurrentStripIndex dd 0 ; variable used for strip.shp drawing
 CurrentStripFrame dd 0 ; variable used for strip.shp frame
@@ -47,16 +48,17 @@ CurrentStripDrawPosition dd 0 ; variable for strip.shp drawing height position
 CurrentPowerBarDrawPosition dd 0 ; variable used for pwrbar.shp no power bar drawing height position
 CurrentPowerBarDrawPosition2 dd 0 ; variable used for pwrbar.shp with power bar drawing height position
 PowerBarBottomPos dd 0 ; variable used for
+PowerTileShape dd 0
+Side4Shape dd 0
+Strip2Shape dd 0
+ExtendedSelectButtons TIMES 824 dd 0
 
+[section .rdata]
 powerext_str db"POWEREXT.SHP",0
 side4na_str db"SIDE4NA.SHP",0
 side4us_str db"SIDE4US.SHP",0
 strip2na_str db"STRIP2NA.SHP",0
 strip2us_str db"STRIP2US.SHP",0
-
-PowerTileShape dd 0
-Side4Shape dd 0
-Strip2Shape dd 0
 
 ; These are per strip, there's a left and right strip in the sidebar
 ; 208 / 52 = 4 items
@@ -74,8 +76,8 @@ Strip2Shape dd 0
 ;[23:58:21] <iran> so
 ;[23:58:42] <iran> IngameHeight-181-27 / 48 for total amount of possible icons
 
-ExtendedSelectButtons TIMES 824 dd 0
 
+[section .text]
 _PowerClass_Draw_it_hires11:
     mov  ebx, 18Eh
     add  ebx, [diff_height]

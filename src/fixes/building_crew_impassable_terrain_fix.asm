@@ -6,9 +6,13 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0045C2F3 _BuildingClass_Mission_Exit_Coord
+@LJMP 0x0045C2F3, _BuildingClass_Mission_Exit_Coord
+
+[section .data] 
 Unk1_Cell__    dw 0
 
+
+[section .text] 
 ; args: <CellClass pointer>
 ; returns: Whether it's valid for a building crew to spawn on this cell.
 ; eax == 1 for true, eax == 0 for false

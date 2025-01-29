@@ -11,12 +11,15 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x0058A1E4 _VesselClass__Draw_It_Check_Second_Turret
-@HOOK 0x00584A78 _VesselClass__Turret_Adjust_Apply_TurretOffset
-@HOOK 0x0058B5FC _VesselClass__Fire_Data_Apply_Offsets
+@LJMP 0x0058A1E4, _VesselClass__Draw_It_Check_Second_Turret
+@LJMP 0x00584A78, _VesselClass__Turret_Adjust_Apply_TurretOffset
+@LJMP 0x0058B5FC, _VesselClass__Fire_Data_Apply_Offsets
 
+[section .data] 
 temp_objecttype      dd    0
 
+
+[section .text] 
 _VesselClass__Draw_It_Check_Second_Turret:
     ; dx is the vessel type id
     push edi

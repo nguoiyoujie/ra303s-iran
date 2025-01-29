@@ -30,8 +30,8 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0053D541 _Read_Scenario_INI_Load_OOS_FIX_INI
-@HOOK 0x00538B73 _Load_Game_Load_OOS_FIX_INI
+@LJMP 0x0053D541, _Read_Scenario_INI_Load_OOS_FIX_INI
+@LJMP 0x00538B73, _Load_Game_Load_OOS_FIX_INI
 
 _Load_Game_Load_OOS_FIX_INI:
     Save_Registers

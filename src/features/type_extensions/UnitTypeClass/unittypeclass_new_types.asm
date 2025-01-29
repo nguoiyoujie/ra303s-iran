@@ -11,11 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00459715 _BuildingClass__Update_Buildables_UnhardCode_UnitTypes
-@HOOK 0x004F40FA _Init_Game_Set_UnitTypes_Heap_Count
-@HOOK 0x00578950 _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes
-@HOOK 0x00578974 _UnitTypeClass__From_Name_Unhardcode_UnitTypes_Count
-@HOOK 0x00578ADB _UnitTypeClass__One_Time_UnhardCode_UnitTypes
+@LJMP 0x00459715, _BuildingClass__Update_Buildables_UnhardCode_UnitTypes
+@LJMP 0x004F40FA, _Init_Game_Set_UnitTypes_Heap_Count
+@LJMP 0x00578950, _UnitTypeClass__Init_Heap_UnhardCode_UnitTypes
+@LJMP 0x00578974, _UnitTypeClass__From_Name_Unhardcode_UnitTypes_Count
+@LJMP 0x00578ADB, _UnitTypeClass__One_Time_UnhardCode_UnitTypes
 
 
 _BuildingClass__Update_Buildables_UnhardCode_UnitTypes:
@@ -60,7 +60,7 @@ Init_UnitTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  ecx,eax
 
     pop  eax

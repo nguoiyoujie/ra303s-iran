@@ -6,12 +6,15 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
-@HOOK 0x004B0655 _DisplayClass__Refresh_Cells__Bounds_Check_Fix
-@CLEAR 0x004B065A 0x90 0x004B065B ; nop over debris after jmp
-@HOOK 0x004B065B _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2
+@LJMP 0x004B0655, _DisplayClass__Refresh_Cells__Bounds_Check_Fix
+@CLEAR 0x004B065A, 0x90, 0x004B065B ; nop over debris after jmp
+@LJMP 0x004B065B, _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2
 
+[section .data] 
 Temp.RefreshCells_Tracker db 0
 
+
+[section .text] 
 _DisplayClass__Refresh_Cells__Bounds_Check_Fix:
     mov   byte [Temp.RefreshCells_Tracker],24h ; short tlist[36]
     lea   ebx,[ebp-58h]  

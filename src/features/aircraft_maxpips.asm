@@ -9,7 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x00040409D _AircraftTypeClass__Max_Pips_Show_Actual_Max_Pips
+@LJMP 0x00040409D, _AircraftTypeClass__Max_Pips_Show_Actual_Max_Pips
 
 _AircraftTypeClass__Max_Pips_Show_Actual_Max_Pips:
     TechnoTypeClass.MaxAmmo.Get(eax,edx) 

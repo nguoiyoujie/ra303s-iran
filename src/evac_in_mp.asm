@@ -1,4 +1,4 @@
-@HOOK 0x0041CB90 _Count_as_Civ_Evac_Check
+@LJMP 0x0041CB90, _Count_as_Civ_Evac_Check
 
 _Count_as_Civ_Evac_Check:
     cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL

@@ -6,7 +6,7 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x005BE913 _Print_Sound_Error_Fix_Window_Title
+@LJMP 0x005BE913, _Print_Sound_Error_Fix_Window_Title
 
 str_redalert db"Red Alert",0
 

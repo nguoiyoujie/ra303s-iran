@@ -8,16 +8,16 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004D8CB4 _HouseClass__Init_Data_Spectator_Stuff
-@HOOK 0x0053E4FB _Create_Units_Skip_Dead_Houses
-@HOOK 0x0053DFD7 _Assign_Houses_Set_Up_Player_Pointer
-@HOOK 0x00581153 _UnitClass__Read_INI_Skip_Dead_Houses
-@HOOK 0x0058CAD3 _VesselClass__Read_INI_Skip_Dead_Houses
-@HOOK 0x004F095B _InfantryClass__Read_INI_Skip_Dead_Houses
-@HOOK 0x0045EF20 _BuildingClass__Read_INI_Skip_Dead_Houses
-@HOOK 0x005326A2 _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator
-@HOOK 0x00532855 _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator
-@HOOK 0x00567048 _TechnoClass_Visual_Character_Spectator_Stuff
+@LJMP 0x004D8CB4, _HouseClass__Init_Data_Spectator_Stuff
+@LJMP 0x0053E4FB, _Create_Units_Skip_Dead_Houses
+@LJMP 0x0053DFD7, _Assign_Houses_Set_Up_Player_Pointer
+@LJMP 0x00581153, _UnitClass__Read_INI_Skip_Dead_Houses
+@LJMP 0x0058CAD3, _VesselClass__Read_INI_Skip_Dead_Houses
+@LJMP 0x004F095B, _InfantryClass__Read_INI_Skip_Dead_Houses
+@LJMP 0x0045EF20, _BuildingClass__Read_INI_Skip_Dead_Houses
+@LJMP 0x005326A2, _RadarClass__Draw_Names__Draw_Credits_Text_For_Specator
+@LJMP 0x00532855, _RadarClass__Draw_Names__Draw_Credits_Count_For_Specator
+@LJMP 0x00567048, _TechnoClass_Visual_Character_Spectator_Stuff
 
 _TechnoClass_Visual_Character_Spectator_Stuff:
     cmp  cl,5

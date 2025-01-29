@@ -10,7 +10,7 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x004CD36F _HouseTypeClass__Read_INI_Extended
+@LJMP 0x004CD36F, _HouseTypeClass__Read_INI_Extended
 
 _HouseTypeClass__Read_INI_Extended:
     push esi

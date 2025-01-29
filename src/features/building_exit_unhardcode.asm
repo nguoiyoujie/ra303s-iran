@@ -6,10 +6,10 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x00458DCD _BuildingClass__Exit_Object_InfantryUnit_Unhardcode
-@HOOK 0x00458C8F _BuildingClass__Exit_Object_Vessel_Unhardcode
-@HOOK 0x0045C0BA _BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode
-@HOOK 0x0045E457 _BuildingClass__Crew_Type_Unhardcode
+@LJMP 0x00458DCD, _BuildingClass__Exit_Object_InfantryUnit_Unhardcode
+@LJMP 0x00458C8F, _BuildingClass__Exit_Object_Vessel_Unhardcode
+@LJMP 0x0045C0BA, _BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode
+@LJMP 0x0045E457, _BuildingClass__Crew_Type_Unhardcode
 
 
 _BuildingClass__Exit_Object_InfantryUnit_Unhardcode:

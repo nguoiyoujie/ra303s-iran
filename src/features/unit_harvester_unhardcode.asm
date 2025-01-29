@@ -7,13 +7,13 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x00454B89 _BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode
-@HOOK 0x00578CB5 _UnitTypeClass__Max_Pips_Harvester_Unhardcode
-@HOOK 0x0057B2F6 _UnitClass__Take_Damage_Harvester_Unhardcode
-@HOOK 0x0057B3B4 _UnitClass__Take_Damage_Harvester_Unhardcode2
-@HOOK 0x0057BFAF _UnitClass__Per_Cell_Process_Harvester_Unhardcode
-@HOOK 0x00580136 _UnitClass__PipCount_Harvester_Unhardcode
-@HOOK 0x005808A4 _UnitClass__TiberiumLoad_Unhardcode
+@LJMP 0x00454B89, _BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode
+@LJMP 0x00578CB5, _UnitTypeClass__Max_Pips_Harvester_Unhardcode
+@LJMP 0x0057B2F6, _UnitClass__Take_Damage_Harvester_Unhardcode
+@LJMP 0x0057B3B4, _UnitClass__Take_Damage_Harvester_Unhardcode2
+@LJMP 0x0057BFAF, _UnitClass__Per_Cell_Process_Harvester_Unhardcode
+@LJMP 0x00580136, _UnitClass__PipCount_Harvester_Unhardcode
+@LJMP 0x005808A4, _UnitClass__TiberiumLoad_Unhardcode
 
 
 _BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode:

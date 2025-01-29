@@ -11,8 +11,8 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004B07E0 _DisplayClass__Map_Cell_Share_Shroud
-@HOOK 0x00561385 _TechnoClass__Revealed_Reveal_Other_Player_Buildings
+@LJMP 0x004B07E0, _DisplayClass__Map_Cell_Share_Shroud
+@LJMP 0x00561385, _TechnoClass__Revealed_Reveal_Other_Player_Buildings
 
 _TechnoClass__Revealed_Reveal_Other_Player_Buildings:
     push ebx

@@ -9,11 +9,14 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x004B3F80 _Formation_Speed_Glitched_Loop
-@HOOK 0x004B45FD _DisplayClass__Mouse_Left_Release_Function_End
+@LJMP 0x004B3F80, _Formation_Speed_Glitched_Loop
+@LJMP 0x004B45FD, _DisplayClass__Mouse_Left_Release_Function_End
 
+[section .data] 
 Temp.FormationFirstUnit: db 1 ; whether the current unit is the formation's first unit
 
+
+[section .text] 
 _Formation_Speed_Glitched_Loop:
     cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
     jz   .Apply_Fix

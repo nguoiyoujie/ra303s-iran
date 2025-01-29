@@ -8,21 +8,23 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x0056586D _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate
-@HOOK 0x004EBECD _InfantryClass__Take_Damage_RememberID
-@HOOK 0x004EBF33 _InfantryClass__Take_Damage_DeathReport1
-@HOOK 0x004EBF68 _InfantryClass__Take_Damage_DeathReport2
-@HOOK 0x004EBF9F _InfantryClass__Take_Damage_DeathReport3
-@HOOK 0x004EBFD6 _InfantryClass__Take_Damage_DeathReport4
-@HOOK 0x004EC002 _InfantryClass__Take_Damage_DeathReport5
-@HOOK 0x004EF463 _InfantryClass__Response_Select_CustomVoice
-@HOOK 0x004EF6C3 _InfantryClass__Response_Move_CustomVoice
-@HOOK 0x004EF92B _InfantryClass__Response_Attack_CustomVoice
+@LJMP 0x0056586D, _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate
+@LJMP 0x004EBECD, _InfantryClass__Take_Damage_RememberID
+@LJMP 0x004EBF33, _InfantryClass__Take_Damage_DeathReport1
+@LJMP 0x004EBF68, _InfantryClass__Take_Damage_DeathReport2
+@LJMP 0x004EBF9F, _InfantryClass__Take_Damage_DeathReport3
+@LJMP 0x004EBFD6, _InfantryClass__Take_Damage_DeathReport4
+@LJMP 0x004EC002, _InfantryClass__Take_Damage_DeathReport5
+@LJMP 0x004EF463, _InfantryClass__Response_Select_CustomVoice
+@LJMP 0x004EF6C3, _InfantryClass__Response_Move_CustomVoice
+@LJMP 0x004EF92B, _InfantryClass__Response_Attack_CustomVoice
 
+[section .data] 
 Temp.DeathInfantryID db 0
-;Temp.UseResponseInvade db 0
 Temp.ResponseMission db 0
 
+
+[section .text] 
 ; used for Infantry, Unit and Vessel
 _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate:
     mov  dl,byte[ebp-0xc]

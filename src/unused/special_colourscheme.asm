@@ -1,6 +1,6 @@
 ; unused
 
-;@HOOK 0x00567343 _TechnoClass__Remap_Table_Building_Check
+;@LJMP 0x00567343, _TechnoClass__Remap_Table_Building_Check
 
 _TechnoClass__Remap_Table_Building_Check:
     cmp  dword [eax+93h], 2

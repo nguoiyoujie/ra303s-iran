@@ -10,12 +10,12 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004D4EEF _HouseClass__AI_Radar1
-@HOOK 0x004D4ED3 _HouseClass__AI_Radar2
-@HOOK 0x004D4EFD _HouseClass__AI_Radar3
-@HOOK 0x0052DBBD _RadarClass__Draw_It_1
-@HOOK 0x0052D832 _RadarClass__Activate_Play_Radar_Sound1
-@HOOK 0x0052D8D8 _RadarClass__Activate_Play_Radar_Sound2
+@LJMP 0x004D4EEF, _HouseClass__AI_Radar1
+@LJMP 0x004D4ED3, _HouseClass__AI_Radar2
+@LJMP 0x004D4EFD, _HouseClass__AI_Radar3
+@LJMP 0x0052DBBD, _RadarClass__Draw_It_1
+@LJMP 0x0052D832, _RadarClass__Activate_Play_Radar_Sound1
+@LJMP 0x0052D8D8, _RadarClass__Activate_Play_Radar_Sound2
 
 _RadarClass__Draw_It_1:
     test ch, 40h

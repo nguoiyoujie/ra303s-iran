@@ -190,8 +190,11 @@
 ;;;;;;;;;;;;;;; STRING ;;;;;;;;;;;;;;;
 ;; For Get and Set, use GetInt and SetInt as they work for string addresses (dword) as well
 %define ObjectTypeClass.StringBuffer.Length      1024
+[section .data] 
 ObjectTypeClass.StringBuffer                     times ObjectTypeClass.StringBuffer.Length db 0
 ObjectTypeClass.ValueBuffer                      dd 0
+
+[section .text] 
 
 ; args <Pointer to type class>,<Pointer to rules class>,<offset of data>,<Pointer to INI keyword string>
 ; %1-%4 must not be eax

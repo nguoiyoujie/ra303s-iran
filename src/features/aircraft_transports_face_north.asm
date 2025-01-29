@@ -9,7 +9,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x00420662 _AircraftClass__PoseDir_HeliTransportsFaceNorth
+@LJMP 0x00420662, _AircraftClass__PoseDir_HeliTransportsFaceNorth
 
 _AircraftClass__PoseDir_HeliTransportsFaceNorth:
     mov  dl,byte [edx + 0x196] ; dl is now the ID

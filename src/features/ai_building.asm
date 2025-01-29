@@ -17,20 +17,14 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x004D9D3D _HouseClass__Check_Lower_Power__Override
-@HOOK 0x004D9D90 _HouseClass__Check_Raise_Power__Override
-@HOOK 0x004DA18B _HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building
-@HOOK 0x004DA2EB _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
-@HOOK 0x004DA348 _HouseClass__AI_Building_CheckIncome
-@HOOK 0x004DA391 _HouseClass__AI_Building_Choose
-@HOOK 0x004DE86C _HouseClass__Find_Cell_In_Zone_Detect_SingleCell
-@HOOK 0x004DE966 _HouseClass__Find_Cell_In_Zone_Force_Clearance
-
-Temp.AIBuilding.Array            times 256 db 0 ; we will not have more than 256 BuildingTypes
-Temp.AIBuilding.Count            db 0
-
-; Precalculated states
-Temp.AIBuilding.AirThreat        dd 0
+@LJMP 0x004D9D3D, _HouseClass__Check_Lower_Power__Override
+@LJMP 0x004D9D90, _HouseClass__Check_Raise_Power__Override
+@LJMP 0x004DA18B, _HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building
+@LJMP 0x004DA2EB, _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
+@LJMP 0x004DA348, _HouseClass__AI_Building_CheckIncome
+@LJMP 0x004DA391, _HouseClass__AI_Building_Choose
+@LJMP 0x004DE86C, _HouseClass__Find_Cell_In_Zone_Detect_SingleCell
+@LJMP 0x004DE966, _HouseClass__Find_Cell_In_Zone_Force_Clearance
 
 %define UrgencyType.NONE                       0
 %define UrgencyType.LOW                        1
@@ -38,7 +32,14 @@ Temp.AIBuilding.AirThreat        dd 0
 %define UrgencyType.HIGH                       3
 %define UrgencyType.CRITICAL                   4
 
+[section .data] 
+Temp.AIBuilding.Array            times 256 db 0 ; we will not have more than 256 BuildingTypes
+Temp.AIBuilding.Count            db 0
+Temp.AIBuilding.AirThreat        dd 0
+Temp.FindCell.BuildingIsSingleCell db 0
 
+
+[section .text] 
 _HouseClass__Check_Lower_Power__Override:
     cmp  dword[Rules.AI.PowerExcess],-1
     jle  .OrginalCode
@@ -668,8 +669,6 @@ ChooseOneToBuildAlloc:
     pop  esi
     retn
 
-
-Temp.FindCell.BuildingIsSingleCell db 0
 
 _HouseClass__Find_Cell_In_Zone_Detect_SingleCell:
     call [ebx+0x84]

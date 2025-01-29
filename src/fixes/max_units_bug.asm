@@ -23,8 +23,8 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
-@HOOK 0x004BEFED _max_units_bug
-;@HOOK 0x004BEE93 _FactorClass__Set_Speak_Unable_To_Build_More ; causes desyncs online, need to use EventClass:: stuff for abandon
+@LJMP 0x004BEFED, _max_units_bug
+;@LJMP 0x004BEE93, _FactorClass__Set_Speak_Unable_To_Build_More ; causes desyncs online, need to use EventClass:: stuff for abandon
 
 _max_units_bug:
     je   0x004BF21B

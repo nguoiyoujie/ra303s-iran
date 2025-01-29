@@ -10,8 +10,9 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x00453FFB _BuildingTypeClass__Read_INI_Extended
+@LJMP 0x00453FFB, _BuildingTypeClass__Read_INI_Extended
 
+[section .rdata] 
 ; OccupyList, OverlapList
 d_Occupy_1                    dw 0,0x7FFF                                                 ;00, GUN,SILO
 d_Occupy_0_1                  dw 0x80,0x7FFF                                              ;01, GAP,TESLA
@@ -45,7 +46,6 @@ d_Occupy_00_11_01             dw 0x80,0x81,0x101,0x7FFF                         
 d_Occupy_S11_00_00_11         dw 0,1,0x180,0x181,0x7FFF                                   ;29, 
 d_Occupy_00_11_11             dw 0x80,0x81,0x100,0x101,0x7FFF                             ;30, 
 
-
 %define d_ExitPyle            0x005FEA5C      ;0
 %define d_ExitSub             0x005FEA78      ;1
 %define d_ExitWeap            0x005FEA82      ;2
@@ -54,9 +54,12 @@ d_ExitCCHand                  dw 0x182,0x181,0x180,0x102,0x17F,0xFF,0,1,0xFFFF,2
 d_ExitCCWeap                  dw 0x17F,0x180,0xFF,0x181,0x7F,0x83,0x103,0x183,0x182,0x7FFF            ;4
 d_ExitCCAirstrip              dw 0xFF7F,0xFFFF,0x7F,0xFF,0xFF80,0x100,0xFF81,0x101,0xFF82,0x102,0xFF83,0x103,0xFF84,4,0x84,0x104,0x7FFF      ;5
 
+
+[section .data] 
 Buffer_BuildingType           times 512 db 0 
 
 
+[section .text] 
 _BuildingTypeClass__Read_INI_Extended:
     push esi
     push edi

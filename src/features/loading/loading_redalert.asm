@@ -5,9 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
-@JMP  0x004F406D  _Init_Game_Early_Hook ; For loading REDALERT.INI stuff early
-@HOOK 0x00525A9F _OptionsClass__Load_Settings ; For redalert.ini and some spawn.ini stuff
-@JMP  0x004F4462 0x004F446C ; Don't call OptionsClass::Load_Settings() again, patch calls it at start of Init_Game()
+@LJMP  0x004F406D, _Init_Game_Early_Hook ; For loading REDALERT.INI stuff early
+@LJMP 0x00525A9F, _OptionsClass__Load_Settings ; For redalert.ini and some spawn.ini stuff
+@SJMP  0x004F4462, 0x004F446C ; Don't call OptionsClass::Load_Settings() again, patch calls it at start of Init_Game()
 
 %define        ebp_RedAlertINI        [ebp-0x74] ; for _OptionsClass__Load_Settings
 

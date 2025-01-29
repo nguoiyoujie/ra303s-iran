@@ -1,9 +1,12 @@
 str_MapSnap_MPR db"MapSnap.MPR",0
 
 ; sizes not actually verified
+[section .data] 
 MapSnapshot_CCINIClass  TIMES 256 db 0
 MapSnapshot_FileClass   TIMES 256 db 0
 
+
+[section .text] 
 Create_Map_Snapshot:
     Save_Registers
 

@@ -1,6 +1,6 @@
 ; Test code
 
-;@HOOK 0x004D6D3B _Paradrop_Superweapon_Custom
+;@LJMP 0x004D6D3B, _Paradrop_Superweapon_Custom
 
 _Paradrop_Superweapon_Custom:
 

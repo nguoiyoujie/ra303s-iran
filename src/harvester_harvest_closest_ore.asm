@@ -1,5 +1,5 @@
-@HOOK 0x0057E3E6 _UnitClass__Mission_Harvest_Set_Target_Ore_Patch_To_NULL
-@HOOK 0x0057E5DD _UnitClass__Mission_Harvest_Set_Target_Ore_Patch_To_NULL2
+@LJMP 0x0057E3E6, _UnitClass__Mission_Harvest_Set_Target_Ore_Patch_To_NULL
+@LJMP 0x0057E5DD, _UnitClass__Mission_Harvest_Set_Target_Ore_Patch_To_NULL2
 
 _UnitClass__Mission_Harvest_Set_Target_Ore_Patch_To_NULL:
     Save_Registers

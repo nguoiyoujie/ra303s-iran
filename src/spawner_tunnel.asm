@@ -17,8 +17,8 @@
 %define sendto 0x005E59D0
 %define recvfrom 0x005E59D6
 
-@call 0x005A8B31 Tunnel_SendTo
-@call 0x005A89AE Tunnel_RecvFrom
+@CALL 0x005A8B31, Tunnel_SendTo
+@CALL 0x005A89AE, Tunnel_RecvFrom
 
 Tunnel_SendTo:
 %push

@@ -15,17 +15,38 @@
 ; Taction offset 0x5 = Trigger Parameter 2 (dword)
 ; Taction offset 0x9 = Trigger Parameter 3 (dword)
 
-@HOOK 0x00554125 _TActionClass__operator__New_Trigger_Actions
-@HOOK 0x0055E396 _TeamClass__Coordinate_Attack_Chrono_Tank_Check
-@HOOK 0x0055E1EE _TeamClass__Coordinate_Attack_Chrono_Tank_Check2
-@HOOK 0x0055F9E3 _TeamClass__TMission_Spy_Chrono_Tank_Check
-@HOOK 0x00554171 _TActionClass__operator__TAction_Text_Trigger_Override_Color
+@LJMP 0x00554125, _TActionClass__operator__New_Trigger_Actions
+@LJMP 0x0055E396, _TeamClass__Coordinate_Attack_Chrono_Tank_Check
+@LJMP 0x0055E1EE, _TeamClass__Coordinate_Attack_Chrono_Tank_Check2
+@LJMP 0x0055F9E3, _TeamClass__TMission_Spy_Chrono_Tank_Check
+@LJMP 0x00554171, _TActionClass__operator__TAction_Text_Trigger_Override_Color
 
-
+[section .data] 
 temp_unk8 dd 0
 temp_unkC dd 0
 temp_unk10 dd 0
+NukeCellTarget dd  0
+Nuke_unk34 dd 0
+Nuke_unk18 dd 0
+Nuke_unk44 dd 0
+Nuke_unk1C dd 0
+HouseClass_Which_Captures dd 0
+Capture_Attached_unk6C dd 0
+Capture_Attached_unk68 dd 0
+Capture_Attached_unk34 dd 0
+Capture_Attached_unk38 dd 0
+Capture_Attached_unk3C dd 0
+What_Heap1 dd 0
+What_Heap2 dd 0
+IronCurtain_unk20 db 0
+IronCurtain_unk1F dd 0
+IronCurtain_unk1B dd 0
+IronCurtain_Frames dd 0
+MissionToSet dd 0
+ChronoShiftDest dd 0
 
+
+[section .text] 
 _TeamClass__TMission_Spy_Chrono_Tank_Check:
     cmp  dword [Map.Basic.ChronoReinforceTanks],1
     jz   .Ret
@@ -330,11 +351,7 @@ Give_Credits_Action:
 
     retn
 
-NukeCellTarget dd  0
-Nuke_unk34 dd 0
-Nuke_unk18 dd 0
-Nuke_unk44 dd 0
-Nuke_unk1C dd 0
+
 
 Nuke_Strike_On_Waypoint:
     mov  eax,[ebp+TActionClass_This]
@@ -424,15 +441,7 @@ Nuke_Strike_On_Waypoint:
 
 retn
 
-HouseClass_Which_Captures dd 0
-Capture_Attached_unk6C dd 0
-Capture_Attached_unk68 dd 0
-Capture_Attached_unk34 dd 0
-Capture_Attached_unk38 dd 0
-Capture_Attached_unk3C dd 0
 
-What_Heap1 dd 0
-What_Heap2 dd 0
 
 Loop_Over_Object_Heap_And_Call_Captured_If_Trigger_Attached:
 .Setup_Buildings_Loop:
@@ -526,10 +535,6 @@ Capture_Attached_Objects:
 .Ret:
     retn
 
-IronCurtain_unk20 db 0
-IronCurtain_unk1F dd 0
-IronCurtain_unk1B dd 0
-IronCurtain_Frames dd 0
 
 Iron_Curtain_Object:
     Save_Registers
@@ -682,7 +687,6 @@ Create_Building_At_Waypoint:
     call BuildingTypeClass__Create_And_Place
     retn
 
-MissionToSet dd 0
 
 Loop_Over_Object_Heap_And_Set_Mission_Trigger_Attached:
 .Setup_Buildings_Loop:
@@ -840,7 +844,6 @@ Repair_Attached_Buildings:
 
     retn
 
-ChronoShiftDest dd 0
 
 Chrono_Shift_Object:
     Save_Registers

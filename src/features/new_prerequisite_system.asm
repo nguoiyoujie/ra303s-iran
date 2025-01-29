@@ -12,55 +12,55 @@
 ;----------------------------------------------------------------
 
 ; AI will use the same space as human players, since we maintain one BScan in the future
-@SETD 0x004D4098 HouseClass.Offset.BPreGroupScan ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Can_Build
-@JMP 0x004D409C 0x004D40A7 ;_HouseClass__Can_Build ; skip AI using OldBScan
+@SET 0x004D4096, {mov eax,[esi+HouseClass.Offset.BPreGroupScan]} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Can_Build
+@SJMP 0x004D409C, 0x004D40A7 ;_HouseClass__Can_Build ; skip AI using OldBScan
 ; with the new system, do not combine the STRUCTF_ADVANCED_POWER with STRUCTF_POWER, or STRUCTF_SOVIET_TECH with STRUCTF_ADVANCED_TECH
-@JMP 0x004D40AD 0x004D40CE ;_HouseClass__Can_Build ; skip flag combinations
-@HOOK 0x004D40DF _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
+@SJMP 0x004D40AD, 0x004D40CE ;_HouseClass__Can_Build ; skip flag combinations
+@LJMP 0x004D40DF, _HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
 
-@SETD 0x00456A88 HouseClass.Offset.BPreGroupScan ; 0x137 (HouseClass.Offset.BScan) // BuildingClass::Unlimbo
-@HOOK 0x00456AA5 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1
-@HOOK 0x00456AC1 _BuildingClass__Unlimbo_Skip_ActiveBScan
-;@SETD 0x00456AE4 HouseClass.Offset.BPreGroupScan ; 0x13B (HouseClass.Offset.ActiveBScan) // BuildingClass::Unlimbo // skipped
-;@HOOK 0x00456B01 _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2 ; skipped
+@SET 0x00456A86, {add ebx,HouseClass.Offset.BPreGroupScan} ; 0x137 (HouseClass.Offset.BScan) // BuildingClass::Unlimbo
+@LJMP 0x00456AA5, _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1
+@LJMP 0x00456AC1, _BuildingClass__Unlimbo_Skip_ActiveBScan
+;@SET 0x00456AE2, {add edx,HouseClass.Offset.BPreGroupScan} ; 0x13B (HouseClass.Offset.ActiveBScan) // BuildingClass::Unlimbo // skipped
+;@LJMP 0x00456B01, _BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2 ;, skipped
 
-@HOOK 0x004D7E30 _BuildingClass__Does_Enemy_Building_Exist_UsePrereqType
-@HOOK 0x004D9D06 _BuildingClass__Check_Raise_Money_UseNewRefineryPrereqType
-@HOOK 0x004D9BA8 _BuildingClass__Check_Build_Power_UseNewRefineryPrereqType
-@HOOK 0x004D9BE9 _BuildingClass__Check_Build_Power_UseNewAdvDefensePrereqType
-@HOOK 0x004D9CA4 _BuildingClass__Check_Fire_Sale_UseNewFactoriesPrereqType
+@LJMP 0x004D7E30, _BuildingClass__Does_Enemy_Building_Exist_UsePrereqType
+@LJMP 0x004D9D06, _BuildingClass__Check_Raise_Money_UseNewRefineryPrereqType
+@LJMP 0x004D9BA8, _BuildingClass__Check_Build_Power_UseNewRefineryPrereqType
+@LJMP 0x004D9BE9, _BuildingClass__Check_Build_Power_UseNewAdvDefensePrereqType
+@LJMP 0x004D9CA4, _BuildingClass__Check_Fire_Sale_UseNewFactoriesPrereqType
 
-@HOOK 0x0057E333 _UnitClass_Mission_Harvest_RefineryCheck
-@HOOK 0x0057E783 _UnitClass_Mission_Harvest_RepairCheck
-@HOOK 0x0057FBFF _UnitClass_Mission_Guard_RemoveChecksForRefinery_And_ShortOnTiberium
-@HOOK 0x0058033B _UnitClass_Mission_Repair_RefineryCheck2
+@LJMP 0x0057E333, _UnitClass_Mission_Harvest_RefineryCheck
+@LJMP 0x0057E783, _UnitClass_Mission_Harvest_RepairCheck
+@LJMP 0x0057FBFF, _UnitClass_Mission_Guard_RemoveChecksForRefinery_And_ShortOnTiberium
+@LJMP 0x0058033B, _UnitClass_Mission_Repair_RefineryCheck2
 
-@HOOK 0x0056B4B4 _TEventClass__Operator_NoFactories_Check
-@HOOK 0x0056B4E7 _TEventClass__Operator_BuildingExists_Check
-@HOOK 0x0056B259 _TEventClass__Operator_FakesDestroyed_Check
-@HOOK 0x0056B615 _TEventClass__Operator_BuildingsDestroyed_Check
-;@HOOK 0x0056B64A _TEventClass__Operator_AllDestroyed_Check
+@LJMP 0x0056B4B4, _TEventClass__Operator_NoFactories_Check
+@LJMP 0x0056B4E7, _TEventClass__Operator_BuildingExists_Check
+@LJMP 0x0056B259, _TEventClass__Operator_FakesDestroyed_Check
+@LJMP 0x0056B615, _TEventClass__Operator_BuildingsDestroyed_Check
+;@LJMP 0x0056B64A, _TEventClass__Operator_AllDestroyed_Check
 
-@JMP  0x004DD5BF 0x004DD631 ; 0x004DD5D1 to skip just the ID < 32 check // skip original HouseClass.Offset.BScan
-;@HOOK 0x004DD5BF _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1
-;@SETD 0x004DD61D TechnoTypeClass.Offset.PrereqType-3 ; skipped
-@SETD 0x004DD6A8 HouseClass.Offset.BPreGroupScan ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Recalc_Attributes // skipped
-@HOOK 0x004DD6CA _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3
-@JMP  0x004DD6E8 0x004DD73C
-;@HOOK 0x004DD728 _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType4 // skipped
-;@SETD 0x004DD5FB HouseClass.Offset.BPreGroupScan ; 0x137 (HouseClass.Offset.BScan) // HouseClass::Recalc_Attributes
-;@SETD 0x004DD70A HouseClass.Offset.BPreGroupScan ; 0x13F (HouseClass.Offset.OldBScan) // HouseClass::Recalc_Attributes // skipped
+@SJMP  0x004DD5BF, 0x004DD631 ; 0x004DD5D1 to skip just the ID < 32 check // skip original HouseClass.Offset.BScan
+;@LJMP 0x004DD5BF, _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType1
+;@SET 0x004DD61D, TechnoTypeClass.Offset.PrereqType-3 ; skipped
+@SET 0x004DD6A6, {add esi,HouseClass.Offset.BPreGroupScan} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Recalc_Attributes // skipped
+@LJMP 0x004DD6CA, _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType3
+@SJMP  0x004DD6E8, 0x004DD73C
+;@LJMP 0x004DD728, _HouseClass__Recalc_Attributes_ReplaceTypeWithPrereqType4 //, skipped
+;@SET 0x004DD5F9, {add esi,HouseClass.Offset.BPreGroupScan} ; 0x137 (HouseClass.Offset.BScan) // HouseClass::Recalc_Attributes
+;@SET 0x004DD708, {lea eax, [ecx+HouseClass.Offset.BPreGroupScan]} ; 0x13F (HouseClass.Offset.OldBScan) // HouseClass::Recalc_Attributes // skipped
 
-@SETD 0x004D46E1 HouseClass.Offset.BPreGroupScan ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::AI (Sell control)
-@HOOK 0x004D483D _HouseClass__AI_SpeakSilosNeeded_Check
-@HOOK 0x004D4903 _HouseClass__AI_SpeakLowPower_Check
-@HOOK 0x004D4EAA _HouseClass__AI_RadarMap_Check1
-@HOOK 0x004D4E49 _HouseClass__AI_RadarMap_Check2
-@HOOK 0x004D4DDF _HouseClass__AI_RadarJammed_Check
-@HOOK 0x004D4C79 _HouseClass__AI_MPlayerDefeated_Check
+@SET 0x004D46DF, {cmp dword[edi+HouseClass.Offset.BPreGroupScan],0} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::AI (Sell control)
+@LJMP 0x004D483D, _HouseClass__AI_SpeakSilosNeeded_Check
+@LJMP 0x004D4903, _HouseClass__AI_SpeakLowPower_Check
+@LJMP 0x004D4EAA, _HouseClass__AI_RadarMap_Check1
+@LJMP 0x004D4E49, _HouseClass__AI_RadarMap_Check2
+@LJMP 0x004D4DDF, _HouseClass__AI_RadarJammed_Check
+@LJMP 0x004D4C79, _HouseClass__AI_MPlayerDefeated_Check
 
-@SETD 0x004B4BDB HouseClass.Offset.BPreGroupScan ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Sell_Mode_Control
-@SETD 0x004B4C83 HouseClass.Offset.BPreGroupScan ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Repair_Mode_Control
+@SET 0x004B4BD9, {cmp dword[edx+HouseClass.Offset.BPreGroupScan],0} ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Sell_Mode_Control
+@SET 0x004B4C81, {cmp dword[edx+HouseClass.Offset.BPreGroupScan],0} ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Repair_Mode_Control
 
 _BuildingClass__Unlimbo_Skip_ActiveBScan:
     lea  eax,[esi+0x93]

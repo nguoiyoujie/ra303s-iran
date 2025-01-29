@@ -10,10 +10,10 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x0056718C _TechnoClass__TechnoDrawObject_RemapJammedAsShade
+@LJMP 0x0056718C, _TechnoClass__TechnoDrawObject_RemapJammedAsShade
 ; the current method in this hook prevents selling/deconstruction. Weird things could also happen if building has special animations like a war factory
-;@HOOK 0x0046033B _BuildingClass__Animation_AI_FreezeJammed
-@HOOK 0x004603B2 _BuildingClass__Animation_AI_AlwaysUpdateJammable
+;@LJMP 0x0046033B, _BuildingClass__Animation_AI_FreezeJammed
+@LJMP 0x004603B2, _BuildingClass__Animation_AI_AlwaysUpdateJammable
 
 ; FadingBrighten  0x006560e0
 ; FadingShade     0x006561e0

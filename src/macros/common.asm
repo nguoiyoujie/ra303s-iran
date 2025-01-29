@@ -1,6 +1,8 @@
+[section .data] 
+Loop_Entry_Buffer: TIMES 256 DB 0
 
 
-
+[section .text] 
 %macro Save_Registers 0
     push eax
     push ebx
@@ -34,7 +36,6 @@
     pop  edx
 %endmacro
 
-Loop_Entry_Buffer: TIMES 256 DB 0
 
 Loop_Over_RULES_INI_Section_Entries_:
     Save_Registers

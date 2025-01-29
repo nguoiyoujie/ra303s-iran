@@ -6,28 +6,30 @@
 ; This function is enabled by having more buildings with FactoryType=UnitType, and setting the relevant / WarFactoryOverlayFrames / WarFactoryOverlayRate controls.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0045DFF3 _BuildingClass_Mission_Unload_WeaponsFactoryOpening
-@HOOK 0x0045E0C1 _BuildingClass_Mission_Unload_WeaponsFactory_OpenDoor
-@HOOK 0x0045E237 _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor1
-@HOOK 0x0045E25D _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor2
-@HOOK 0x0045E033 _BuildingClass_Mission_Unload_WeaponsFactory_CalculateSouthCell
-@HOOK 0x0045E20D _BuildingClass_Mission_Unload_WeaponsFactory_ForceTrack
+@LJMP 0x0045DFF3, _BuildingClass_Mission_Unload_WeaponsFactoryOpening
+@LJMP 0x0045E0C1, _BuildingClass_Mission_Unload_WeaponsFactory_OpenDoor
+@LJMP 0x0045E237, _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor1
+@LJMP 0x0045E25D, _BuildingClass_Mission_Unload_WeaponsFactory_CloseDoor2
+@LJMP 0x0045E033, _BuildingClass_Mission_Unload_WeaponsFactory_CalculateSouthCell
+@LJMP 0x0045E20D, _BuildingClass_Mission_Unload_WeaponsFactory_ForceTrack
 
-@HOOK 0x00455412 _BuildingClass_Draw_It_WeaponsFactoryDoor
-@HOOK 0x00455442 _BuildingClass_Draw_It_WeaponsFactoryDoorFake
-@HOOK 0x00455477 _BuildingClass_Draw_It_WeaponsFactoryDoor2
-@HOOK 0x00455491 _BuildingClass_Draw_It_WeaponsFactoryDoor3
-;@HOOK 0x00458DCD _BuildingClass_ExitObject_Factories
-@HOOK 0x00458F42 _BuildingClass_ExitObject_Factories2
-@HOOK 0x00459004 _BuildingClass_ExitObject_FactoriesSetFacing
+@LJMP 0x00455412, _BuildingClass_Draw_It_WeaponsFactoryDoor
+@LJMP 0x00455442, _BuildingClass_Draw_It_WeaponsFactoryDoorFake
+@LJMP 0x00455477, _BuildingClass_Draw_It_WeaponsFactoryDoor2
+@LJMP 0x00455491, _BuildingClass_Draw_It_WeaponsFactoryDoor3
+;@LJMP 0x00458DCD, _BuildingClass_ExitObject_Factories
+@LJMP 0x00458F42, _BuildingClass_ExitObject_Factories2
+@LJMP 0x00459004, _BuildingClass_ExitObject_FactoriesSetFacing
 
 
-
+[section .data] 
 Cache_WarFactory_DoorAnim       dd 0
 Cache_WarFactory_DoorFrames     dd 0
 Cache_WarFactory_DoorStages     dd 0
 Cache_WarFactory_DoorRate     dd 0
 
+
+[section .text] 
 ; Use movzx to support 255 structure types
 ;Overrides the structure type check with a FactoryType=xx check
 _BuildingClass_Mission_Unload_WeaponsFactoryOpening:

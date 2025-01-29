@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x0045A71A BuildingClass__What_Action_MCV_Undeploy
-@HOOK 0x0045C1CE BuildingClass__Mission_Deconstruction_MCV_Undeploy
+@LJMP 0x0045A71A, BuildingClass__What_Action_MCV_Undeploy
+@LJMP 0x0045C1CE, BuildingClass__Mission_Deconstruction_MCV_Undeploy
 
 BuildingClass__What_Action_MCV_Undeploy:
     cmp  byte [Spawn.Settings.MCVUndeploy], 1

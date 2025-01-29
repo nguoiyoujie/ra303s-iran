@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x005431C0 _ScoreClass__Do_GDI_Graph_Force_Font_Colour
+@LJMP 0x005431C0, _ScoreClass__Do_GDI_Graph_Force_Font_Colour
 
 _ScoreClass__Do_GDI_Graph_Force_Font_Colour:
     Save_Registers

@@ -11,9 +11,9 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-;@JMP 0x00568f32 0x00568f38 ;override spied check on Silos and Refineries
-;@HOOK 0x00568f8b _test_TechnoClass_Draw_Pip ; Draw house Capacity instead
-@HOOK 0x0045993E _BuildingClass__Limbo_CalcFix
+;@SJMP 0x00568F32, 0x00568F38 ;override spied check on Silos and Refineries
+;@LJMP 0x00568F8B, _test_TechnoClass_Draw_Pip ; Draw house Capacity instead
+@LJMP 0x0045993E, _BuildingClass__Limbo_CalcFix
 
 ;_test_TechnoClass_Draw_Pip:
 ;    mov eax,[eax+HouseClass.Offset.Capacity]

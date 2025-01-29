@@ -7,21 +7,21 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x0042054A _AircraftClass__What_Action_RepairPad_Unhardcode
-@HOOK 0x00422C24 _AircraftClass__Mission_Guard_RepairPad_Unhardcode
-@HOOK 0x00455111 _BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode
-@HOOK 0x0045B7D4 _BuildingClass__Sort_Y_RepairPad_Unhardcode
-@HOOK 0x0045BD3B _BuildingClass__Mission_Guard_RepairPad_Unhardcode
-@HOOK 0x0045BFBB _BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode
-@HOOK 0x004C2CBE _FootClass__Receive_Message_RadioOnDepot_Unhardcode
-@HOOK 0x004C3383 _FootClass__Can_Demolish_RepairPad_Unhardcode
-@HOOK 0x0055C552 _TeamClass__AI_RepairPad_Unhardcode
-@HOOK 0x0057EE77 _UnitClass__Can_Enter_Cell_RepairPad_Unhardcode
-@HOOK 0x0057F869 _UnitClass__What_Action_RepairPad_Unhardcode
-@HOOK 0x005802FD _UnitClass__Mission_Repair_Refinery_Unhardcode
-@HOOK 0x00580C8E _UnitClass__Assign_Destination_RepairPad_Unhardcode1
-@HOOK 0x00580CF4 _UnitClass__Assign_Destination_RepairPad_Unhardcode2
-@HOOK 0x00580D33 _UnitClass__Assign_Destination_RepairPad_Unhardcode3
+@LJMP 0x0042054A, _AircraftClass__What_Action_RepairPad_Unhardcode
+@LJMP 0x00422C24, _AircraftClass__Mission_Guard_RepairPad_Unhardcode
+@LJMP 0x00455111, _BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode
+@LJMP 0x0045B7D4, _BuildingClass__Sort_Y_RepairPad_Unhardcode
+@LJMP 0x0045BD3B, _BuildingClass__Mission_Guard_RepairPad_Unhardcode
+@LJMP 0x0045BFBB, _BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode
+@LJMP 0x004C2CBE, _FootClass__Receive_Message_RadioOnDepot_Unhardcode
+@LJMP 0x004C3383, _FootClass__Can_Demolish_RepairPad_Unhardcode
+@LJMP 0x0055C552, _TeamClass__AI_RepairPad_Unhardcode
+@LJMP 0x0057EE77, _UnitClass__Can_Enter_Cell_RepairPad_Unhardcode
+@LJMP 0x0057F869, _UnitClass__What_Action_RepairPad_Unhardcode
+@LJMP 0x005802FD, _UnitClass__Mission_Repair_Refinery_Unhardcode
+@LJMP 0x00580C8E, _UnitClass__Assign_Destination_RepairPad_Unhardcode1
+@LJMP 0x00580CF4, _UnitClass__Assign_Destination_RepairPad_Unhardcode2
+@LJMP 0x00580D33, _UnitClass__Assign_Destination_RepairPad_Unhardcode3
 
 
 _AircraftClass__What_Action_RepairPad_Unhardcode:

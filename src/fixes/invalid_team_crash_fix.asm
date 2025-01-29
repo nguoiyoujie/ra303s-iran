@@ -11,11 +11,11 @@
 ;----------------------------------------------------------------
 
 ; move EB 10 to EB 15 to short jump past the JMP function call
-@SETB 0x00554A30 0x15 ; Create Team
-@SETB 0x00554A68 0x15 ; Destroy Team
+@SJMP 0x00554A2F, 0x00554A46 ; Create Team
+@SJMP 0x00554A67, 0x00554A7E ; Destroy Team
 
-@HOOK 0x00554A98 _TActionClass__operator__Reinforcement_Team_Validity_Check_Fix
-@CLEAR 0x00554A9D 0x90 0x00554A9E ; nop over debris after jmp
+@LJMP 0x00554A98, _TActionClass__operator__Reinforcement_Team_Validity_Check_Fix
+@CLEAR 0x00554A9D, 0x90, 0x00554A9E ; nop over debris after jmp
 
 _TActionClass__operator__Reinforcement_Team_Validity_Check_Fix:
     cmp   edx,-1

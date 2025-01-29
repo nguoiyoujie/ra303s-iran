@@ -7,9 +7,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x004BB74A Slide_Show_Credits_CnCDDraw_Crash_Fix
+@LJMP 0x004BB74A, Slide_Show_Credits_CnCDDraw_Crash_Fix
 
-@HOOK 0x004BC2E5 _Slide_Show_No_Background
+@LJMP 0x004BC2E5, _Slide_Show_No_Background
 
 str_derppp db"derpppp",0
 

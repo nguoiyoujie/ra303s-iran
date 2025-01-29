@@ -8,9 +8,9 @@
 ; 
 ;----------------------------------------------------------------
 
-@HOOK 0x0042315F _AircraftClass__Response_Select_CustomVoice
-@HOOK 0x00423107 _AircraftClass__Response_Move_CustomVoice
-@HOOK 0x004230AF _AircraftClass__Response_Attack_CustomVoice
+@LJMP 0x0042315F, _AircraftClass__Response_Select_CustomVoice
+@LJMP 0x00423107, _AircraftClass__Response_Move_CustomVoice
+@LJMP 0x004230AF, _AircraftClass__Response_Attack_CustomVoice
 
 ; edx is the unit/vessel class
 _AircraftClass__Response_Select_CustomVoice:

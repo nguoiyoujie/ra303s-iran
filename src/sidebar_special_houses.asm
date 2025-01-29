@@ -1,12 +1,12 @@
 ; Fix 20240527 - It is possible cmp is evaluated against a number FFF.....
 ; Change jng to jbe
 
-@HOOK 0x0054D359 _SidebarClass__Reload_Sidebar_Special_Houses
-@HOOK 0x0054E0A4 _SidebarClass__Reload_Logoshape_Special_Houses
-@HOOK 0x0052DA5C _RadarClass__Draw_It_Radarshape_Special_Houses
-@CLEAR 0x0052DA61 0x90 0x0052DA62 ; nop over debris after jmp
+@LJMP 0x0054D359, _SidebarClass__Reload_Sidebar_Special_Houses
+@LJMP 0x0054E0A4, _SidebarClass__Reload_Logoshape_Special_Houses
+@LJMP 0x0052DA5C, _RadarClass__Draw_It_Radarshape_Special_Houses
+@CLEAR 0x0052DA61, 0x90, 0x0052DA62 ; nop over debris after jmp
 
-@HOOK 0x0052DB02 _RadarClass__Draw_It_Radarframes_Special_Houses
+@LJMP 0x0052DB02, _RadarClass__Draw_It_Radarframes_Special_Houses
 
 
 _RadarClass__Draw_It_Radarframes_Special_Houses:

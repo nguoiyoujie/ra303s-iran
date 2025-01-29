@@ -10,19 +10,22 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x00579FAD _UnitClass__Reload_AI_UseAmmoReloadRate
-@HOOK 0x00579FE7 _UnitClass__Reload_AI_UseAmmoReloadRate2
-@HOOK 0x0057A05E _UnitClass__Reload_AI_UseAmmoReloadAmount
-@HOOK 0x0057A089 _UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow
-@HOOK 0x0057A097 _UnitClass__Reload_AI_UseAmmoReloadRate3
-@HOOK 0x005807FE _UnitClass__Fire_At_UpdateReload
-@HOOK 0x0058082D _UnitClass__Fire_At_UpdateReload2
-@HOOK 0x0057DD83 _UnitClass__Mission_Unload_Minelayer_Reload
+@LJMP 0x00579FAD, _UnitClass__Reload_AI_UseAmmoReloadRate
+@LJMP 0x00579FE7, _UnitClass__Reload_AI_UseAmmoReloadRate2
+@LJMP 0x0057A05E, _UnitClass__Reload_AI_UseAmmoReloadAmount
+@LJMP 0x0057A089, _UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow
+@LJMP 0x0057A097, _UnitClass__Reload_AI_UseAmmoReloadRate3
+@LJMP 0x005807FE, _UnitClass__Fire_At_UpdateReload
+@LJMP 0x0058082D, _UnitClass__Fire_At_UpdateReload2
+@LJMP 0x0057DD83, _UnitClass__Mission_Unload_Minelayer_Reload
 
+[section .data] 
 Temp.UnitReload           dd    0
 Temp.UnitReload.ID   db    0
 Temp.UnitReload.Amount    dd    0
 
+
+[section .text] 
 _UnitClass__Reload_AI_UseAmmoReloadRate:
     ; dl is the unit type id
     mov  byte [Temp.UnitReload.ID],dl

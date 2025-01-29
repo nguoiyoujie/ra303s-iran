@@ -1,26 +1,26 @@
-@HOOK 0x004BE468 _Hook_Expansion_Mission_Loading
-;@HOOK 0x004BE491 _Hook_Expansion_Mission_Loading2
-;@HOOK 0x004BE72F _Hook_Expansion_Mission_Aftermath_Counter
-@HOOK 0x004BE548 _Hook_Expansion_Mission_Counterstrike_Counter
-@HOOK 0x004BE7C8 _Hook_Expansion_Mission_Counterstrike_Caption
-@HOOK 0x00501E0E _Hook_Expansion_Mission_Counterstrike_Title
+@LJMP 0x004BE468, _Hook_Expansion_Mission_Loading
+;@LJMP 0x004BE491, _Hook_Expansion_Mission_Loading2
+;@LJMP 0x004BE72F, _Hook_Expansion_Mission_Aftermath_Counter
+@LJMP 0x004BE548, _Hook_Expansion_Mission_Counterstrike_Counter
+@LJMP 0x004BE7C8, _Hook_Expansion_Mission_Counterstrike_Caption
+@LJMP 0x00501E0E, _Hook_Expansion_Mission_Counterstrike_Title
 
+[section .data]
+mission_index_counter dd 0
+FileClass_this2  TIMES 128 db 0
+INIClass_this2 TIMES 128 db 0
+sprintf_buffer   TIMES 64 db 0
+newmissions_array TIMES 4096h db 0; char newmissions_array[256][64]
 
+[section .rdata]
 herpini_str db"ffg101ea",0
 newmissions_str db"New Missions",0
 str_newmissions_ini db"NEWMISSIONS.INI",0
 str_one db"1",0
 str_sprintf_format db"%d",0
-mission_index_counter dd 0
-
-FileClass_this2  TIMES 128 db 0
-INIClass_this2 TIMES 128 db 0
-
-sprintf_buffer   TIMES 64 db 0
-newmissions_array TIMES 4096h db 0; char newmissions_array[256][64]
 
 ;EXTERN newmissionsenabled ; defined in arguments.asm
-
+[section .text]
 _Hook_Expansion_Mission_Loading:
     cmp  byte [ebp-24h],1 ; Expansion type check
     jne  Ret_Normal

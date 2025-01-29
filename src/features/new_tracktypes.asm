@@ -10,10 +10,10 @@
 ; New track types
 ; definitions moved to defines_tracktypes
 ; fortunately, most internal code have fixed indices and checks for custom tracks can be avoided. The real check occurs for the refinery and warfactory exits
-@HOOK 0x004B6A76 _DriveClass_TrackControl_Route
-@HOOK 0x004B6AA4 _DriveClass_RawTracks_Route
-@HOOK 0x004B82E5 _DriveClass_Mark_Track_TrackControl_Route
-@HOOK 0x004B82F7 _DriveClass_Mark_Track_RawTracks_Route
+@LJMP 0x004B6A76, _DriveClass_TrackControl_Route
+@LJMP 0x004B6AA4, _DriveClass_RawTracks_Route
+@LJMP 0x004B82E5, _DriveClass_Mark_Track_TrackControl_Route
+@LJMP 0x004B82F7, _DriveClass_Mark_Track_RawTracks_Route
 
 
 _DriveClass_TrackControl_Route: 

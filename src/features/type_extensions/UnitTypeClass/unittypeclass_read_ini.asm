@@ -10,7 +10,7 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@HOOK 0x00578DCE _UnitTypeClass__Read_INI_Extended
+@LJMP 0x00578DCE, _UnitTypeClass__Read_INI_Extended
 
 _UnitTypeClass__Read_INI_Extended:
 

@@ -6,12 +6,12 @@
 ; This function is enabled by configuring the relevant building to use a compatible PrimaryWeapon. Remember to set building animations for the Active state.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@HOOK 0x0045571B _BuildingClass_ShapeNumber_RemoveTeslaIDCheck
-@HOOK 0x00460414 _BuildingClass_AnimationAI_IncludeAllChargingBuildings
-@HOOK 0x0045FCC7 _BuildingClass_ChargingAI_Jammed_PreventsCharge
-@HOOK 0x0045FCF1 _BuildingClass_ChargingAI_UseActiveAnimCount
-@HOOK 0x0045FDA7 _BuildingClass_ChargingAI_UnhardcodeRate
-@HOOK 0x0045FDAE _BuildingClass_ChargingAI_UseWeaponChargeVoice
+@LJMP 0x0045571B, _BuildingClass_ShapeNumber_RemoveTeslaIDCheck
+@LJMP 0x00460414, _BuildingClass_AnimationAI_IncludeAllChargingBuildings
+@LJMP 0x0045FCC7, _BuildingClass_ChargingAI_Jammed_PreventsCharge
+@LJMP 0x0045FCF1, _BuildingClass_ChargingAI_UseActiveAnimCount
+@LJMP 0x0045FDA7, _BuildingClass_ChargingAI_UnhardcodeRate
+@LJMP 0x0045FDAE, _BuildingClass_ChargingAI_UseWeaponChargeVoice
 
 ; use PrimaryWeapon -> Charges instead of hardcode Tesla ID check
 _BuildingClass_ShapeNumber_RemoveTeslaIDCheck:

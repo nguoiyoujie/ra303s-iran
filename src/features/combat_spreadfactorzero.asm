@@ -8,7 +8,7 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004A3275 _Combat_Modify_Damage_SpreadFactor_Zero
+@LJMP 0x004A3275, _Combat_Modify_Damage_SpreadFactor_Zero
 
 _Combat_Modify_Damage_SpreadFactor_Zero:
 ;if spread factor is 0, distances above 8 will not apply damage, overriding distance adjustments

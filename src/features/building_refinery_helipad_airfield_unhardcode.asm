@@ -12,34 +12,36 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x0041F36D _AircraftClass__Mission_Move_LandingBuilding_Unhardcode
-@HOOK 0x0041FBDF _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode
-@HOOK 0x0041FE9E _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2
-@HOOK 0x00422CD0 _AircraftClass__Mission_Guard_Helipad_Unhardcode
-@HOOK 0x00454CE3 _BuildingClass__Receive_Message_RadioDocking_Unhardcode1
-@HOOK 0x00454E1C _BuildingClass__Receive_Message_RadioDocking_Unhardcode2
-@HOOK 0x00454F6A _BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3
-@HOOK 0x00454A6E _BuildingClass__Receive_Message_RadioCanLoad_Unhardcode
-@HOOK 0x0045505D _BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode
-@HOOK 0x00454BFC _BuildingClass__Receive_Message_RadioImIn_Unhardcode
-@HOOK 0x0045517F _BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode
+@LJMP 0x0041F36D, _AircraftClass__Mission_Move_LandingBuilding_Unhardcode
+@LJMP 0x0041FBDF, _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode
+@LJMP 0x0041FE9E, _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2
+@LJMP 0x00422CD0, _AircraftClass__Mission_Guard_Helipad_Unhardcode
+@LJMP 0x00454CE3, _BuildingClass__Receive_Message_RadioDocking_Unhardcode1
+@LJMP 0x00454E1C, _BuildingClass__Receive_Message_RadioDocking_Unhardcode2
+@LJMP 0x00454F6A, _BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3
+@LJMP 0x00454A6E, _BuildingClass__Receive_Message_RadioCanLoad_Unhardcode
+@LJMP 0x0045505D, _BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode
+@LJMP 0x00454BFC, _BuildingClass__Receive_Message_RadioImIn_Unhardcode
+@LJMP 0x0045517F, _BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode
 
 
-@HOOK 0x00459F68 _BuildingClass__Grand_Opening_Helipad_Unhardcode
-@HOOK 0x0045B84A _BuildingClass__Sort_Y_Refinery_Unhardcode
-@HOOK 0x0045BB59 _BuildingClass__Can_Demolish_Refinery_Unhardcode
-@HOOK 0x004B6817 _DriveClass__Assign_Destination_Refinery_Unhardcode
+@LJMP 0x00459F68, _BuildingClass__Grand_Opening_Helipad_Unhardcode
+@LJMP 0x0045B84A, _BuildingClass__Sort_Y_Refinery_Unhardcode
+@LJMP 0x0045BB59, _BuildingClass__Can_Demolish_Refinery_Unhardcode
+@LJMP 0x004B6817, _DriveClass__Assign_Destination_Refinery_Unhardcode
 
-@HOOK 0x00569039 _TechnoClass__Find_Docking_Bay_UseInitBuilding
-@HOOK 0x00569075 _TechnoClass__Find_Docking_Bay_RecalcBestValue
+@LJMP 0x00569039, _TechnoClass__Find_Docking_Bay_UseInitBuilding
+@LJMP 0x00569075, _TechnoClass__Find_Docking_Bay_RecalcBestValue
 
-@HOOK 0x0057B33E _UnitClass__Take_Damage_Refinery_Unhardcode
-@HOOK 0x0057E656 _UnitClass__Mission_Harvest_Refinery_Unhardcode1
-@HOOK 0x0057E6F1 _UnitClass__Mission_Harvest_Refinery_Unhardcode2
+@LJMP 0x0057B33E, _UnitClass__Take_Damage_Refinery_Unhardcode
+@LJMP 0x0057E656, _UnitClass__Mission_Harvest_Refinery_Unhardcode1
+@LJMP 0x0057E6F1, _UnitClass__Mission_Harvest_Refinery_Unhardcode2
 
+[section .data] 
 Temp.FindDockingBayInitBuilding dd 0
 
 
+[section .text] 
 _AircraftClass__Mission_Move_LandingBuilding_Unhardcode:
 ; eax is the AircraftType class
     mov  ebx,eax

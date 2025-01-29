@@ -10,8 +10,8 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x005819F5 _UnitClass__Mission_Guard_Area_Enable_For_Singleplayer
-@HOOK 0x00581A28 _UnitClass__Mission_Guard_Area_Check_Passengers
+@LJMP 0x005819F5, _UnitClass__Mission_Guard_Area_Enable_For_Singleplayer
+@LJMP 0x00581A28, _UnitClass__Mission_Guard_Area_Check_Passengers
 
 _UnitClass__Mission_Guard_Area_Enable_For_Singleplayer:
     cmp  byte[Globals___Session_Type],0

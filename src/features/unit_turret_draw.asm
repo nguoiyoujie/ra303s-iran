@@ -10,13 +10,16 @@
 ; No compatibility issues is expected, as this is a new feature.
 ;----------------------------------------------------------------
 
-@HOOK 0x0057CAF3 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
-@HOOK 0x0057CB08 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
-@HOOK 0x00578CE1 _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
+@LJMP 0x0057CAF3, _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
+@LJMP 0x0057CB08, _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
+@LJMP 0x00578CE1, _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
 
+[section .data] 
 temp.TurretFrameStart                                dw 0 
 temp.TurretFrameCount                                dw 0 
 
+
+[section .text] 
 _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
     ; eax is the unit id
     push eax

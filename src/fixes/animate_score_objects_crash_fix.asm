@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@HOOK 0x005464EE _Animate_Score_Objs_PseudoSeenBuff_NULL_Check
+@LJMP 0x005464EE, _Animate_Score_Objs_PseudoSeenBuff_NULL_Check
 
 _Animate_Score_Objs_PseudoSeenBuff_NULL_Check:
     cmp  dword esi,0

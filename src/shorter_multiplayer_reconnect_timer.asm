@@ -1,5 +1,5 @@
-@HOOK 0x005293EF _Queue_AI_Multiplayer_Mid_Game_Reconnect_Time
-@HOOK 0X005291EA _Queue_AI_Multiplayer_Game_Start_Reconnect_Time
+@LJMP 0x005293EF, _Queue_AI_Multiplayer_Mid_Game_Reconnect_Time
+@LJMP 0X005291EA, _Queue_AI_Multiplayer_Game_Start_Reconnect_Time
 
 _Queue_AI_Multiplayer_Mid_Game_Reconnect_Time:
     push esi             ; __int32

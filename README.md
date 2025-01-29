@@ -26,8 +26,8 @@ well as customization of properties in rules.ini normally locked behind code.
 
 ### I Just Want To Play
 
-A built version, with supporting mixes and content, are hosted in this [here](https://github.com/nguoiyoujie/Red-Alert-Modified-Executable). 
-The built mod is a test mod, hosted publicly if any one wants to look at the INI controls employed, or just have a game.
+A built version, with supporting mixes and content, are hosted [here](https://github.com/nguoiyoujie/Red-Alert-Modified-Executable). 
+The built mod is a test mod, hosted publicly if any one wants to look at the INI controls employed, use as a template to build their own mod, or just have a game.
 
 There is also map editor support that caters specifically for the new logic introduced here. It is hosted [here](https://github.com/nguoiyoujie/Red-Alert-Mission-Editor).
 
@@ -37,18 +37,31 @@ Enjoy. :)
 
 ### Building the Project
 
-Windows binaries of the tools to modify `ra95.dat` are in `tools/`. Users of
-other OSes can find the tools' source at in the
-[`nasm-patcher`](https://github.com/cnc-patch/nasm-patcher) repo.  RA-specific
-patches are in `src/`. Just run `build.cmd` from the root directory with
-`ra95.dat` present to compile the tools and apply the patches.
+This patch uses tools released by FunkyFr3sh. The tools can be inspected in his respective repositories.
 
-**Instructions**
+**Instructions for *nix**
+
+1. Install [petool](https://github.com/FunkyFr3sh/petool) from github
+2. Get NASM
+3. Run make. This will generate `ra95-build.exe` 
+4. Copy this file to a RA game directory of your choice.
+
+**Instructions for Windows**
 
 1. Clone or pull this repository
-2. Ensure `ra95.dat` exists on the local repository space
-3. Run `build.cmd` or `build_pause.cmd`
-4. Copy the generated `ra95.exe` file to a RA game directory of your choice.
+2. Download the minimal devkit [release](https://github.com/FunkyFr3sh/petool/releases/latest/download/w64devkit-mini-for-patching.zip).
+3. Extract this devkit to `C:\\`. You should have a folder at the path `C:\\w64devkit\\bin`.*
+4. Run `build.cmd` or `build_pause.cmd`
+5. Copy the generated `ra95.exe` file to a RA game directory of your choice.
+
+* You may customize where you extract the devkit. Modify `build.cmd` accordingly to point to your chosen tools location.
+
+**Additional Instructions for playing on windowed mode**
+
+If you are using a resolution above 800x640, ensure that cnc-ddraw (ddraw.dll) is up to date. 
+You may retrieve the latest [release](https://github.com/FunkyFr3sh/cnc-ddraw/releases/download/v7.1.0.0/cnc-ddraw.zip) from this [github](https://github.com/FunkyFr3sh/cnc-ddraw).
+
+Alternatively, you may retrieve the files from my mod hosted [here](https://github.com/nguoiyoujie/Red-Alert-Modified-Executable) and begin your efforts from there.
 
 -------
 

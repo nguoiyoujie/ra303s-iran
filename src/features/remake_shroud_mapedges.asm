@@ -10,20 +10,23 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004B06C4 _DisplayClass_Cell_Shadow_SaveCell
-@HOOK 0x004B06FC _DisplayClass_Cell_Shadow_In_Radar_Check0
-@HOOK 0x004B070C _DisplayClass_Cell_Shadow_In_Radar_Check1
-@HOOK 0x004B071A _DisplayClass_Cell_Shadow_In_Radar_Check2
-@HOOK 0x004B072B _DisplayClass_Cell_Shadow_In_Radar_Check3
-@HOOK 0x004B073B _DisplayClass_Cell_Shadow_In_Radar_Check4
-@HOOK 0x004B074C _DisplayClass_Cell_Shadow_In_Radar_Check5
-@HOOK 0x004B075C _DisplayClass_Cell_Shadow_In_Radar_Check6
-@HOOK 0x004B076A _DisplayClass_Cell_Shadow_In_Radar_Check7
+@LJMP 0x004B06C4, _DisplayClass_Cell_Shadow_SaveCell
+@LJMP 0x004B06FC, _DisplayClass_Cell_Shadow_In_Radar_Check0
+@LJMP 0x004B070C, _DisplayClass_Cell_Shadow_In_Radar_Check1
+@LJMP 0x004B071A, _DisplayClass_Cell_Shadow_In_Radar_Check2
+@LJMP 0x004B072B, _DisplayClass_Cell_Shadow_In_Radar_Check3
+@LJMP 0x004B073B, _DisplayClass_Cell_Shadow_In_Radar_Check4
+@LJMP 0x004B074C, _DisplayClass_Cell_Shadow_In_Radar_Check5
+@LJMP 0x004B075C, _DisplayClass_Cell_Shadow_In_Radar_Check6
+@LJMP 0x004B076A, _DisplayClass_Cell_Shadow_In_Radar_Check7
 
-@HOOK 0x0053A75A _ScenarioClass_Fill_In_Data_Skip_MapEdge_Setup
+@LJMP 0x0053A75A, _ScenarioClass_Fill_In_Data_Skip_MapEdge_Setup
 
+[section .data] 
 temp_cell dd 0
 
+
+[section .text] 
 _DisplayClass_Cell_Shadow_SaveCell:
     mov  dword [temp_cell],eax
     lea  esi,[ebx + 0x1c]

@@ -11,8 +11,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@HOOK 0x004EEE3B _InfantryClass__Fire_At_Range_Check
-@HOOK 0x004F10FE _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire
+@LJMP 0x004EEE3B, _InfantryClass__Fire_At_Range_Check
+@LJMP 0x004F10FE, _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire
 
 _InfantryClass__Fire_At_Range_Check:
     cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH

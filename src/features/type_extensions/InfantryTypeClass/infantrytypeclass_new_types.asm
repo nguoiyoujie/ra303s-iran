@@ -11,11 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
-@HOOK 0x004597F2 _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes
-@HOOK 0x004EAF16 _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes
-@HOOK 0x004EB040 _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count
-@HOOK 0x004EB159 _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes
-@HOOK 0x004F40C7 _Init_Game_Set_InfantryTypes_Heap_Count
+@LJMP 0x004597F2, _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes
+@LJMP 0x004EAF16, _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes
+@LJMP 0x004EB040, _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count
+@LJMP 0x004EB159, _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes
+@LJMP 0x004F40C7, _Init_Game_Set_InfantryTypes_Heap_Count
 
 
 _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
@@ -48,7 +48,7 @@ Init_InfantryTypeClass:
     push eax
     mov  eax,edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  ecx,eax
 
     pop  eax

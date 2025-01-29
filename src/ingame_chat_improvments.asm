@@ -1,5 +1,5 @@
-@HOOK 0x00534D59 _Load_MessageDelay
-;@HOOK 0x0050559B _Check_MessageList_Messages_Count
+@LJMP 0x00534D59, _Load_MessageDelay
+;@LJMP 0x0050559B, _Check_MessageList_Messages_Count
 ; 004A79A8
 
 _Check_MessageList_Messages_Count:

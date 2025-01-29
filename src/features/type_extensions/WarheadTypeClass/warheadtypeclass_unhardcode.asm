@@ -1,6 +1,6 @@
-@HOOK 0x0046360D _CCINIClass__Get_WarheadType_Unhardcode_WarheadTypes_Count
-@HOOK 0x0053618B _RulesClass__Heap_Maximums_Set_Warheads_Heap_Count
-@HOOK 0x00536270 _RulesClass__Heap_Maximums_Init_Extra_WarheadTypes
+@LJMP 0x0046360D, _CCINIClass__Get_WarheadType_Unhardcode_WarheadTypes_Count
+@LJMP 0x0053618B, _RulesClass__Heap_Maximums_Set_Warheads_Heap_Count
+@LJMP 0x00536270, _RulesClass__Heap_Maximums_Init_Extra_WarheadTypes
 
 Init_WarheadTypeClass:
     mov  eax, WarheadTypeClass.NEW_SIZE
@@ -11,7 +11,7 @@ Init_WarheadTypeClass:
     push eax
     mov  eax, edx
     ; edx should have the name of the INI section already
-    call __strdup
+    call _strdup
     mov  edx, eax
 
     pop  eax

@@ -5,4 +5,4 @@
 ; TEvent offset 0x1 = Event Parameter 1 (dword) ; Team
 ; TEvent offset 0x5 = Event Parameter 2 (dword) ; Data
 
-;@HOOK 0x00554125 _TActionClass__operator__New_Trigger_Events 
+;@LJMP 0x00554125, _TActionClass__operator__New_Trigger_Events 

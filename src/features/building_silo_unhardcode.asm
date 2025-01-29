@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@HOOK 0x004558FF _BuildingClass__Shape_Number_Silo_Unhardcode
-@HOOK 0x004D5F67 _HouseClass__Silo_Redraw_Check_Unhardcode
+@LJMP 0x004558FF, _BuildingClass__Shape_Number_Silo_Unhardcode
+@LJMP 0x004D5F67, _HouseClass__Silo_Redraw_Check_Unhardcode
 
 
 _BuildingClass__Shape_Number_Silo_Unhardcode:
