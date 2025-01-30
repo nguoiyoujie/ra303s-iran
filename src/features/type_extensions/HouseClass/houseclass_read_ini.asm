@@ -9,13 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004DDD31, _HouseClass__Read_INI
-@LJMP 0x004DDE56, _HouseClass__Read_INI_Optional_House_Neutral_Ally
-@LJMP 0x004DDE80, _HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
-@LJMP 0x00540F20, _ScoreClass__Presentation_Proper_Country_Check
-
-    
-_HouseClass__Read_INI:
+@HACK 0x004DDD31,0x004DDD39,_HouseClass__Read_INI
     call 0x004D33E4 ; HouseClass::HouseClass(HousesType)
     mov  [ebp-0x24],eax
 
@@ -42,27 +36,31 @@ _HouseClass__Read_INI:
     pop  esi
     pop  edx
     jmp  0x004DDD39
+@ENDHACK
 
 
-_HouseClass__Read_INI_Optional_House_Neutral_Ally:
-    mov  edx,0Ah
+@HACK 0x004DDE56,0x004DDE62,_HouseClass__Read_INI_Optional_House_Neutral_Ally
+    mov  edx,0xA
     mov  eax,esi
     test byte[esi+HouseClass.Offset.AllyTheNeutralHouse],1 ; offset 1
     jz   .Ret
     call HouseClass__Make_Ally
 .Ret:
     jmp  0x004DDE62
+@ENDHACK
 
 
-_HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double:
-    cmp  edx,0x0A ; Neutral house
+@HACK 0x004DDE80,0x004DDE85,_HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
+    cmp  edx,0xA ; Neutral house
     jz   .Ret
     call HouseClass__Make_Ally
 .Ret:
     jmp  0x004DDE85
+@ENDHACK
 
 
-_ScoreClass__Presentation_Proper_Country_Check:
+@HACK 0x00540F20,0x00540F25,_ScoreClass__Presentation_Proper_Country_Check
     mov  byte dl,[eax+0x41]
     mov  edi,eax
     jmp  0x00540F25
+@ENDHACK

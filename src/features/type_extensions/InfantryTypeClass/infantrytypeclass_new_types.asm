@@ -11,34 +11,60 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004597F2, _BuildingClass__Update_Buildables_UnhardCode_InfantryTypes
-@LJMP 0x004EAF16, _InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes
-@LJMP 0x004EB040, _InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count
-@LJMP 0x004EB159, _InfantryTypeClass__One_Time_UnhardCode_InfantryTypes
-@LJMP 0x004F40C7, _Init_Game_Set_InfantryTypes_Heap_Count
 
 
-_BuildingClass__Update_Buildables_UnhardCode_InfantryTypes:
+@HACK 0x004597F2,0x004597FB,_BuildingClass__Update_Buildables_UnhardCode_InfantryTypes
     mov  al,[InfantryTypeClass.Count]
     cmp  dh,al
     jl   0x0045972F
     jmp  0x004597FB
+@ENDHACK
 
 
-_InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes:
+@HACK 0x004EAF16,0x004EAF1C,_InfantryTypeClass__Init_Heap_UnhardCode_UnitTypes
     Loop_Over_RULES_INI_Section_Entries str_InfantryTypes,Init_InfantryTypeClass
     ;mov  edx,[InfantryTypeClass.Count]
     ;dec  edx
     ;mov  [0x006019C4],edx ; used by deconstructor
     call Init_Heap_OverrideExistingInfantryTypes
 .Ret:
-    lea  esp,[ebp-14h]
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx
     jmp  0x004EAF1C
+@ENDHACK
 
 
+@HACK 0x004EB040,0x004EB045,_InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count
+    mov  al,[InfantryTypeClass.Count]
+    cmp  dl,al
+    jl   0x004EB04C
+    jmp  0x004EB045
+@ENDHACK
+
+
+@HACK 0x004EB159,0x004EB162,_InfantryTypeClass__One_Time_UnhardCode_InfantryTypes
+    mov  al,[InfantryTypeClass.Count]
+    cmp  dl,al
+    jl   0x004EB08D
+    jmp  0x004EB162
+@ENDHACK
+
+
+@HACK 0x004F40C7,0x004F40CC,_Init_Game_Set_InfantryTypes_Heap_Count
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Infantry,[Rules.StringTableOffsets.InfantryTypes]
+    mov  [Rules.StringTableOffsets.InfantryTypes],eax
+    ; update heap count
+    Get_RULES_INI_Section_Entry_Count str_InfantryTypes
+    mov  edx,eax
+    add  edx,InfantryTypeClass.ORIGINAL_COUNT
+    jmp  0x004F40CC
+@ENDHACK
+
+
+[section .text]
 Init_InfantryTypeClass:
     mov  eax,InfantryTypeClass.NEW_SIZE
     call InfantryTypeClass__new
@@ -67,8 +93,8 @@ Init_InfantryTypeClass:
     push 0               ; bool is_civilian
     push 1               ; bool is_crawling
     push 0               ; bool is_female
-    push 10h             ; int primaryoffset
-    push 35h             ; int verticaloffset
+    push 0x10             ; int primaryoffset
+    push 0x35             ; int verticaloffset
     ; ecx: char const * ininame
     ; ebx: int name
     ; edx: InfantryType type
@@ -76,10 +102,10 @@ Init_InfantryTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [Rules.StringTableOffsets.InfantryTypes],-1
+    cmp  dword[Rules.StringTableOffsets.InfantryTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [Rules.StringTableOffsets.InfantryTypes]
+    add  ebx,dword[Rules.StringTableOffsets.InfantryTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -112,30 +138,3 @@ Init_Heap_OverrideExistingInfantryTypes:
     InfantryTypeClass.AIBuildWeight.Set(edi,1)
 
 	retn
-
-
-_InfantryTypeClass__From_Name_Unhardcode_InfantryTypes_Count:
-    mov  al,[InfantryTypeClass.Count]
-    cmp  dl,al
-    jl   0x004EB04C
-    jmp  0x004EB045
-
-
-_InfantryTypeClass__One_Time_UnhardCode_InfantryTypes:
-    mov  al,[InfantryTypeClass.Count]
-    cmp  dl,al
-    jl   0x004EB08D
-    jmp  0x004EB162
-
-
-_Init_Game_Set_InfantryTypes_Heap_Count:
-    ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Infantry,[Rules.StringTableOffsets.InfantryTypes]
-    mov  [Rules.StringTableOffsets.InfantryTypes],eax
-
-    ; update heap count
-    Get_RULES_INI_Section_Entry_Count str_InfantryTypes
-    mov  edx,eax
-    add  edx,InfantryTypeClass.ORIGINAL_COUNT
-    jmp  0x004F40CC
-

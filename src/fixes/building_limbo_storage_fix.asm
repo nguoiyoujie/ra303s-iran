@@ -22,7 +22,7 @@
 _BuildingClass__Limbo_CalcFix:
 ; positive adjustments were applied during capture or Grand_Opening. But it is possible to Limbo an object before that.
 ; Check Building->HasOpening() instead
-    test byte[ecx + 0xd7],0x40 ; HasOpened
+    test byte[ecx+0xd7],0x40 ; HasOpened
     jz   0x004599E4 ; not opened, skip
     lea  eax,[ecx+0xCD]  
     jmp  0x00459944

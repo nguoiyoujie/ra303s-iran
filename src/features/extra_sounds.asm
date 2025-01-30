@@ -17,25 +17,25 @@
 _Change_Weapon_Sounds:
     call 0x00463428
 
-    cmp  byte [esi], 12 ; [M1Carbine]
+    cmp  byte[esi],12 ; [M1Carbine]
     jz   .Modify_Grenade_Sound
 
-    cmp  byte [esi], 9 ; [Grenade]
+    cmp  byte[esi],9 ; [Grenade]
     jz   .Modify_Rifle_Sound
 
 .No_Change:
     jmp  0x0058FF45
 
 .Modify_Grenade_Sound:
-    cmp  byte [RedAlert.Options.UseGrenadeThrowingSound], 1
+    cmp  byte[RedAlert.Options.UseGrenadeThrowingSound],1
     jnz  .No_Change
 
-    mov  word [esi+23h], 41 ; GRENADE1
+    mov  word[esi+0x23],41 ; GRENADE1
     jmp  0x0058FF49
 
 .Modify_Rifle_Sound:
-    cmp  byte [RedAlert.Options.AlternativeRifleSound], 1
+    cmp  byte[RedAlert.Options.AlternativeRifleSound],1
     jnz  .No_Change
 
-    mov  word [esi+23h], 56 ; MGUNINF1
+    mov  word[esi+0x23],56 ; MGUNINF1
     jmp  0x0058FF49

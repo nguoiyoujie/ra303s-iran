@@ -203,8 +203,8 @@
 ; WarheadTypeClass in WARHEAD.CPP
 %assign WarheadTypeClass.Count             0x0069160C
 %assign WarheadTypeClass.Array             0x00691634
-%assign WarheadTypeClass.ORIGINAL_SIZE     22h
-%assign WarheadTypeClass.NEW_SIZE          22h ; size change not implemented
+%assign WarheadTypeClass.ORIGINAL_SIZE     0x22
+%assign WarheadTypeClass.NEW_SIZE          0x22 ; size change not implemented
 
 ; WeaponTypeClass in WEAPOM.CPP
 %assign WeaponTypeClass.Array              0x00691680

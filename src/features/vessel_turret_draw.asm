@@ -29,7 +29,7 @@ _VesselClass__Draw_It_Check_Second_Turret:
     and  edx,0xFF
     VesselTypeClass.FromIndex(edx,edi)
     pop  edx
-    mov  dword [temp_objecttype],edi
+    mov  dword[temp_objecttype],edi
     xor  ecx,ecx
     VesselTypeClass.TurretShape.Get(edi,ecx)
     test ecx,ecx
@@ -42,7 +42,7 @@ _VesselClass__Draw_It_Check_Second_Turret:
     ; ecx is the shape
     jz  .SingleTurret
 .DoubleTurret:
-    mov  dl,byte [ebx]
+    mov  dl,byte[ebx]
     xor  ebx,ebx
     jmp  0x0058A207
 
@@ -53,14 +53,14 @@ _VesselClass__Draw_It_Check_Second_Turret:
     jmp  0x0058A302
     
 .SingleTurret:
-    mov  dl,byte [ebx]
+    mov  dl,byte[ebx]
     xor  ebx,ebx
     jmp  0x0058A368
 
 
 _VesselClass__Turret_Adjust_Apply_TurretOffset:
     push edi
-    mov edi, dword [temp_objecttype]
+    mov edi,dword[temp_objecttype]
     xor ecx,ecx
     VesselTypeClass.TurretOffset.Get(edi,cl)
     ;mov  cl,<offset>
@@ -76,10 +76,10 @@ _VesselClass__Turret_Adjust_Apply_TurretOffset:
     mov  bl,al
     lea  eax,[ebp-0x10]
     call 0x004AC870 ; Normal_Move_Point
-    mov  eax,dword [ebp-0x12]
+    mov  eax,dword[ebp-0x12]
     sar  eax,0x10
-    mov  dword [esi],eax
-    mov  eax,dword [ebp-0xe]
+    mov  dword[esi],eax
+    mov  eax,dword[ebp-0xe]
     sar  eax,0x10
     VesselTypeClass.TurretAdjustY.Get(edi,ecx)
     add  eax,ecx
@@ -93,15 +93,15 @@ _VesselClass__Fire_Data_Apply_Offsets:
     push eax
     VesselTypeClass.FromIndex(ebx,edi)
     ; check IsSecondShot
-    mov  al,byte[ecx+72h]
+    mov  al,byte[ecx+0x72]
     mov  dl,byte[ecx+0xba] ; PrimaryFacing
-    test al,10h ; IsSecondShot
+    test al,0x10 ; IsSecondShot
     jz   .FirstShot
     VesselTypeClass.HasSecondTurret.Get(edi,bl) ; modifies eax
     test bl,bl
     jz   .FirstShot
 .SecondShot:
-    add  dl,80h
+    add  dl,0x80
 .FirstShot:
     pop  eax
     and  edx,0xff
@@ -112,9 +112,9 @@ _VesselClass__Fire_Data_Apply_Offsets:
     call 0x004AC798 ; Coord_Move
     TechnoTypeClass.PrimaryOffset.Get(edi,ebx)
     pop  edi
-    mov  edx,dword [ecx+0x11]
+    mov  edx,dword[ecx+0x11]
     mov  esi,eax
     mov  eax,ecx
-    call dword [edx+0x164]
+    call dword[edx+0x164]
     xor  edx,edx
     jmp  0x0058B648

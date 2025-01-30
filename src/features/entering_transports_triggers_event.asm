@@ -9,24 +9,15 @@
 ; No compatibility issues is expected.
 ;
 ;----------------------------------------------------------------
+; Remove existing triggers; the above code includes both Engineer and Spy
+@LJMP 0x004EC5A2,0x004EC5E6 ; _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
+@LJMP 0x004EC723,0x004EC765 ; _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
 
-@CLEAR 0x004EC4D9, 0x90, 0x004EC4DA
-@CLEAR 0x004ECB7D, 0x90, 0x004ECB7E
-@CLEAR 0x0057BE5A, 0x90, 0x0057BE5B
-
-@LJMP 0x004EC4D4, _InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent
-@LJMP 0x004EC5A2, _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
-@LJMP 0x004EC723, _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
-@LJMP 0x004ECB78, _InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
-@LJMP 0x0057BE55, _UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
-
-
-
-_InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent:
+@HACK 0x004EC4D4,0x004EC4DA,_InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent
     push eax
     push esi
-    mov  esi,dword[edi+21h]
-    mov  ebx,dword[ebp-1ch]
+    mov  esi,dword[edi+0x21]
+    mov  ebx,dword[ebp-0x1C]
     xor  ecx,ecx
     cmp  esi,-1
     jnz  .Trigger
@@ -44,21 +35,16 @@ _InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent:
 .NoTrigger:
     pop  esi
     pop  eax
-    mov  al,byte[eax+196h] ;restore
+    mov  al,byte[eax+0x196] ;restore
     jmp  0x004EC4DA
+@ENDHACK
 
-; Remove existing triggers; the above code includes both Engineer and Spy
-_InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip:
-    jmp  0x004EC5E6
-
-_InfantryClass__Per_Cell_Process_Spy_Trigger_Skip:
-    jmp  0x004EC765
 
 ; Trigger event when infantry enters any transport with attached trigger
-_InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent:
+@HACK 0x004ECB78,0x004ECB7E,_InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
     push eax
-    mov  esi,dword[edi+21h]
-    mov  ebx,dword[ebp-1ch]
+    mov  esi,dword[edi+0x21]
+    mov  ebx,dword[ebp-0x1C]
     xor  ecx,ecx
     cmp  esi,-1
     jnz  .Trigger
@@ -75,16 +61,18 @@ _InfantryClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent:
     call TriggerClass__Spring
 .NoTrigger:
     pop  eax
-    mov  edx,dword[ebp-1ch] ;restore
-    mov  edx,dword[edx+11h] ;restore
+    mov  edx,dword[ebp-0x1C] ;restore
+    mov  edx,dword[edx+0x11] ;restore
     jmp  0x004ECB7E
+@ENDHACK
+
 
 ; Trigger event when a unit enters any transport with attached trigger
-_UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent:
+@HACK 0x0057BE55,0x0057BE5B,_UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent
     push eax
     push esi
-    mov  esi,dword[esi+21h]
-    mov  ebx,dword[ebp-1ch]
+    mov  esi,dword[esi+0x21]
+    mov  ebx,dword[ebp-0x1C]
     xor  ecx,ecx
     cmp  esi,-1
     jnz  .Trigger
@@ -102,6 +90,8 @@ _UnitClass__Per_Cell_Process_Any_Enter_Transport_PlayerEnteredEvent:
 .NoTrigger:
     pop  esi
     pop  eax
-    mov  edx,dword[ebp-1ch] ;restore
-    mov  edx,dword[edx+11h] ;restore
+    mov  edx,dword[ebp-0x1C] ;restore
+    mov  edx,dword[edx+0x11] ;restore
     jmp  0x0057BE5B
+@ENDHACK
+

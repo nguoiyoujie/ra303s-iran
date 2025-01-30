@@ -33,11 +33,11 @@ _HouseClass__AI_Vessel_Can_Build_Force_True:
 
 _HouseClass__AI_Vessel_Fix_Crash:
     mov  dword eax,[VesselAIHouseClassPointer]
-    test byte [eax+42h],20h
+    test byte[eax+0x42],0x20
     jmp  0x004DC125
 
 _HouseClass__AI_Vessel_Fix_Crash2:
-    sub  esp,44h
-    mov  [ebp-20h],eax
-    mov  dword [VesselAIHouseClassPointer],eax
+    sub  esp,0x44
+    mov  [ebp-0x20],eax
+    mov  dword[VesselAIHouseClassPointer],eax
     jmp  0x004DBD16

@@ -9,10 +9,6 @@
 ;
 ;----------------------------------------------------------------
 
-;Read INI settings
-@LJMP 0x004EB2D0, _InfantryTypeClass__Read_INI_Extended
-
-
 ;DoInfoStruct (size 0x80)
 %define DoControls.DOG                                     0x006019CC ; DOG
 %define DoControls.E1                                      0x00601A4C ; E1   
@@ -33,8 +29,8 @@ list.DoControlsByInfantryType      dd DoControls.E1, DoControls.E2, DoControls.E
 str.CUSTOM                           db"CUSTOM",0
 
 
-[section .text] 
-_InfantryTypeClass__Read_INI_Extended:                    
+;Read INI settings
+@HACK 0x004EB2D0,0x004EB2D5,_InfantryTypeClass__Read_INI_Extended
     push esi                                              
     push edi
     mov esi,edi
@@ -128,16 +124,15 @@ _InfantryTypeClass__Read_INI_Extended:
 
     pop  edi
     pop  esi
-
-
 .Ret:
-    lea  esp,[ebp-10h]
+    lea  esp,[ebp-0x10]
     pop  edi
     pop  esi
-    pop  ecx
-    jmp  0x004EB2D6
+    jmp  0x004EB2D5
+@ENDHACK
 
 
+[section .text] 
 _SelectDoControlsFromString:
     push ebx
     cmp  eax,0
@@ -156,7 +151,7 @@ _SelectDoControlsFromString:
     ;select InfantryType by performing string compare on eax
     mov  eax,ebx
     InfantryTypeClass.FromID(eax,ebx)
-    mov  ebx,dword [ebx+1]; index
+    mov  ebx,dword[ebx+1]; index
 
     ;then select DoInfoControls based on InfantryType ID
     cmp  ebx,InfantryType.MECH

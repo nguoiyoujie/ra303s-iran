@@ -17,10 +17,10 @@
 @LJMP 0x004DDA71, _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure
 
 _HouseClass__Where_To_Go_Save_CurrentObject:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
+    cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
 .Apply_Fix_For_Skirmish:
@@ -40,10 +40,10 @@ _HouseClass__Where_To_Go_Save_CurrentObject:
 
 
 _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
+    cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
 .Apply_Fix_For_Skirmish:
@@ -57,7 +57,7 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 
 .DefaultToObjectCoord:
     pop  edx
-    mov  eax, dword [edx+5] ; AbstractClass::Coord
+    mov  eax,dword[edx+5] ; AbstractClass::Coord
     call Coord___Coord_Cell
     jmp  0x004DDA76
 
@@ -73,10 +73,10 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;
 ;
 ;_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1:
-;    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+;    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
-;    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
+;    cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
 ;    jnz  .Original_Code
 ;
 ;.Apply_Fix_For_Skirmish:
@@ -100,10 +100,10 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;
 ;; In case the Where_To_Go returns 0 
 ;_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2:
-;    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+;    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
-;    cmp  byte [Rules.AI.FixAISendingTanksTopLeft],1
+;    cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
 ;    jnz  .Original_Code
 ;
 ;.Apply_Fix_For_Skirmish:

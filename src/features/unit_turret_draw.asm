@@ -33,14 +33,14 @@ _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
 .DefaultStart:
     mov  cx,32
 .UseStart:
-    mov  word [temp.TurretFrameStart], cx
+    mov  word[temp.TurretFrameStart],cx
     UnitTypeClass.TurretFrameCount.Get(ebx,cx)
     test cx,cx
     jnz   .UseCount
 .DefaultCount:
     mov  cx,32
 .UseCount:
-    mov  word [temp.TurretFrameCount], cx
+    mov  word[temp.TurretFrameCount],cx
     pop  ecx
     pop  ebx
     pop  eax
@@ -51,16 +51,16 @@ _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2:
     push ecx
     mov  eax,[Globals___Frame]
     xor  edx,edx
-    mov  cx, word [temp.TurretFrameCount]
+    mov  cx,word[temp.TurretFrameCount]
     idiv cx
-    add  dx, word [temp.TurretFrameStart]
+    add  dx,word[temp.TurretFrameStart]
     mov  eax,edx
     pop  ecx
     pop  edx
     jmp  0x0057CB13
 
 _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
-    mov  al,byte [eax + 0x196]
+    mov  al,byte[eax+0x196]
     ; eax is the unit id
     push eax
     push edx
@@ -121,9 +121,9 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     mov  ebx,edi
     mov  ecx,esi
     pop  edx ; y
-    add  dword [ecx], edx
+    add  dword[ecx],edx
     pop  edx ; x
-    add  dword [ebx], edx
+    add  dword[ebx],edx
     pop  edi
     pop  esi
     pop  edx

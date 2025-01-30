@@ -30,123 +30,111 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0053D541, _Read_Scenario_INI_Load_OOS_FIX_INI
-@LJMP 0x00538B73, _Load_Game_Load_OOS_FIX_INI
+extern CCFileClass__CCFileClass
+extern CCINIClass__Load
 
-_Load_Game_Load_OOS_FIX_INI:
+@HACK 0x00538B73, 0x00538B7D, _Load_Game_Load_OOS_FIX_INI
     Save_Registers
-
-    cmp  byte [spawner_is_active], 1
+    cmp  byte[spawner_is_active],1
     jz   .Ret
-
-    mov  edx, str_ini_OOSFix
-    mov  eax, CCFileClass_OOSFix
+    mov  edx,str_ini_OOSFix
+    mov  eax,CCFileClass_OOSFix
     call CCFileClass__CCFileClass
-
-    mov  eax, CCINIClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call CCINIClass__CCINIClass
-
-    xor  ebx, ebx
-    mov  edx, CCFileClass_OOSFix
-    mov  eax, CCINIClass_OOSFix
+    xor  ebx,ebx
+    mov  edx,CCFileClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call CCINIClass__Load
-
-    mov  eax, CCINIClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call 0x00463BD4
-    cmp  eax, 0x1539DF28
+    cmp  eax,0x1539DF28
     jnz  .Ret
-
-    mov  byte [0x00665E02], 55h ; EngineerDamage
-    mov  byte [0x00665E04], 40h ; EngineerCaptureLevel
-
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  byte[0x00665E02],0x55 ; EngineerDamage
+    mov  byte[0x00665E04],0x40 ; EngineerCaptureLevel
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__General
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Recharge
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__AI
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Powerups
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Land_Types
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Themes
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__IQ
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Objects
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Difficulty
-
 .Ret:
-
     Restore_Registers
-    mov  edx, Globals___RuleINI
-    mov  eax, Globals___Rule
+    mov  edx,Globals___RuleINI
+    mov  eax,Globals___Rule
     jmp  0x00538B7D
+@ENDHACK
 
-_Read_Scenario_INI_Load_OOS_FIX_INI:
-    cmp  byte [spawner_is_active], 1
+
+@HACK 0x0053D541, 0x0053D546, _Read_Scenario_INI_Load_OOS_FIX_INI
+    cmp  byte[spawner_is_active],1
     jz   .Ret
-
-    mov  edx, str_ini_OOSFix
-    mov  eax, CCFileClass_OOSFix
+    mov  edx,str_ini_OOSFix
+    mov  eax,CCFileClass_OOSFix
     call CCFileClass__CCFileClass
-
-    mov  eax, CCINIClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call CCINIClass__CCINIClass
-
-    xor  ebx, ebx
-    mov  edx, CCFileClass_OOSFix
-    mov  eax, CCINIClass_OOSFix
+    xor  ebx,ebx
+    mov  edx,CCFileClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call CCINIClass__Load
-
-    mov  eax, CCINIClass_OOSFix
+    mov  eax,CCINIClass_OOSFix
     call 0x00463BD4
-    cmp  eax, 0x1539DF28
+    cmp  eax,0x1539DF28
     jnz  .Ret
-
-    mov  byte [0x00665E02], 55h ; EngineerDamage
-    mov  byte [0x00665E04], 40h ; EngineerCaptureLevel
-
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  byte[0x00665E02],0x55 ; EngineerDamage
+    mov  byte[0x00665E04],0x40 ; EngineerCaptureLevel
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__General
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Recharge
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__AI
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Powerups
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Land_Types
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Themes
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__IQ
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Objects
-    mov  edx, CCINIClass_OOSFix
-    mov  eax, Globals___Rule
+    mov  edx,CCINIClass_OOSFix
+    mov  eax,Globals___Rule
     call RulesClass__Difficulty
-
 .Ret:
-    mov  edx, Globals___RuleINI
-    mov  eax, Globals___Rule
+    mov  edx,Globals___RuleINI
+    mov  eax,Globals___Rule
     jmp  0x0053D546
+@ENDHACK
+

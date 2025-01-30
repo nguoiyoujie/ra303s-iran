@@ -8,8 +8,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@LJMP 0x004AB108, _Get_Disk_Space ; Not the function's real name
-
-_Get_Disk_Space:
-    mov  eax, 800001h
-    RETN
+@HACK 0x004AB108,0x004AB13F,_Disk_Space_Available__Skip
+    mov  eax,0x800001
+    retn
+@ENDHACK

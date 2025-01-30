@@ -11,8 +11,8 @@
 
 ; original size 0x3a, new size 0x74?
 ;void MapClass::Alloc_Cells(void)
-@SET 0x00586518, {imul ebx,eax,0x74}
-@SET 0x00586527, {add edx,0x74}
+@SET 0x00586518,{imul ebx,eax,0x74}
+@SET 0x00586527,{add edx,0x74}
 
 ;void MapClass::Init_Cells(void)
 ;@CLEAR 0x004FE40A, 0x74, 0x004FE40B
@@ -25,7 +25,7 @@
 
 ;_DisplayClass__Shroud_Cell_Unhardcode_Size:
 ;    imul eax,0x74
-;    jmp  mov edx,dword[ebx + 0x1c]
+;    jmp  mov edx,dword[ebx+0x1c]
 ;    add  eax,edx
 ;    jmp  0x004b508c
 

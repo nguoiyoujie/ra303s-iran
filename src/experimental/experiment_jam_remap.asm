@@ -29,19 +29,19 @@ _TechnoClass__TechnoDrawObject_RemapJammedAsShade:
     jz   0x00567194
     cmp  al,RTTIType.Building
     jnz  0x00567242
-    mov  al,byte [Rules.General.RemapJammedBuildings]
+    mov  al,byte[Rules.General.RemapJammedBuildings]
     cmp  al,0
     jz   0x00567242
-    mov  eax,dword [ebp - 0x10]
-    ;mov  al,byte [eax + 0x196]
+    mov  eax,dword[ebp - 0x10]
+    ;mov  al,byte[eax+0x196]
     ;movzx eax,al
-    test byte [eax + 0xd7],0x10 ;Jammed
+    test byte[eax+0xd7],0x10 ;Jammed
     jz   0x00567242
-    mov dword [ebp - 0x24],0x006561E0 ;FadingShade
+    mov dword[ebp - 0x24],0x006561E0 ;FadingShade
     jmp  0x00567242
 
 _BuildingClass__Animation_AI_FreezeJammed:
-    test byte [ebx + 0xd7],0x10
+    test byte[ebx+0xd7],0x10
     jnz  0x004605FE
     cmp  eax,ecx
     jnc  0x00460343

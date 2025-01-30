@@ -16,60 +16,59 @@
 ; hook into AI_Infantry() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original INFANTRY_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
 
-@LJMP 0x004DC516, _HouseClass__AI_Infantry_Expand
-@LJMP 0x004DC62B, _HouseClass__AI_Infantry_Expand_Choice
 
-@SET 0x004DC160, {sub esp,0x72c} ; was 0x12c, add 600h to hold counter[INFANTRY_COUNT] (500h) and bestlist[INFANTRY_COUNT] (100h)
-@SET 0x004DC195, {mov ebx,0x600} ; was 0x68, for memset
-@SET 0x004DC19A, {lea eax,[ebp-0x6bc]} ; 0xfffff944 ; was 0xffffff44
-@SET 0x004DC282, {lea ebx,[ebp+ebx*4-0x6bc]}
-@SET 0x004DC363, {lea esi,[ebp+edx-0x6bc]}
-@SET 0x004DC37F, {mov dword[ebp+edx-0x6bc],esi}
-@SET 0x004DC3A8, {mov dword[ebp+ebx*4-0x6bc],edx}
-@SET 0x004DC3D0, {cmp dword[ebp+eax*4-0x6bc],0}
-@SET 0x004DC404, {dec dword[ebp+eax*4-0x6bc]}
-@SET 0x004DC47E, {cmp dword[ebp+eax*4-0x6bc],0}
-@SET 0x004DC4EE, {cmp esi,dword[ebp+eax*4-0x6bc]}
-@SET 0x004DC4FF, {mov esi,dword[ebp+eax*4-0x6bc]}
+@SET 0x004DC160,{sub esp,0x72c} ; was 0x12c, add 0x600 to hold counter[INFANTRY_COUNT] (0x500) and bestlist[INFANTRY_COUNT] (0x100)
+@SET 0x004DC195,{mov ebx,0x600} ; was 0x68,for memset
+@SET 0x004DC19A,{lea eax,[ebp-0x6bc]} ; 0xfffff944 ; was 0xffffff44
+@SET 0x004DC282,{lea ebx,[ebp+ebx*4-0x6bc]}
+@SET 0x004DC363,{lea esi,[ebp+edx-0x6bc]}
+@SET 0x004DC37F,{mov dword[ebp+edx-0x6bc],esi}
+@SET 0x004DC3A8,{mov dword[ebp+ebx*4-0x6bc],edx}
+@SET 0x004DC3D0,{cmp dword[ebp+eax*4-0x6bc],0}
+@SET 0x004DC404,{dec dword[ebp+eax*4-0x6bc]}
+@SET 0x004DC47E,{cmp dword[ebp+eax*4-0x6bc],0}
+@SET 0x004DC4EE,{cmp esi,dword[ebp+eax*4-0x6bc]}
+@SET 0x004DC4FF,{mov esi,dword[ebp+eax*4-0x6bc]}
 
 ; this section deals with the AI with BaseBuilding, to include the additional units in its random building roster
-@SET 0x004DC5B5, {mov dword[ebp+ecx-0x5bc],eax} ; 0xfffffa44
-@SET 0x004DC638, {mov dword[ebp+ecx-0x5bc],3}
-@SET 0x004DC643, {cmp dword[ebp+ecx-0x5bc],0}
-@SET 0x004DC650, {mov byte[ebp+ecx-0x5bd],al} ; -1
-@SET 0x004DC65A, {mov eax,dword[ebp+ecx-0x5bc]}
-@SET 0x004DC66C, {mov dword[ebp+ecx-0x5bc],5}
-@SET 0x004DC679, {mov dword[ebp+ecx-0x5bc],2}
-@SET 0x004DC6B7, {mov dword[ebp+ecx-0x5bc],edx}
-@SET 0x004DC6E5, {mov dword[ebp+ecx-0x5bc],edx}
-@SET 0x004DC6F3, {mov dword[ebp+ecx-0x5bc],eax}
-@SET 0x004DC745, {mov ecx,dword[ebp+eax-0x5bc]}
-@SET 0x004DC753, {mov al,byte[ebp+eax-0x5bd]} ; -1
+@SET 0x004DC5B5,{mov dword[ebp+ecx-0x5bc],eax} ; 0xfffffa44
+@SET 0x004DC638,{mov dword[ebp+ecx-0x5bc],3}
+@SET 0x004DC643,{cmp dword[ebp+ecx-0x5bc],0}
+@SET 0x004DC650,{mov byte[ebp+ecx-0x5bd],al} ; -1
+@SET 0x004DC65A,{mov eax,dword[ebp+ecx-0x5bc]}
+@SET 0x004DC66C,{mov dword[ebp+ecx-0x5bc],5}
+@SET 0x004DC679,{mov dword[ebp+ecx-0x5bc],2}
+@SET 0x004DC6B7,{mov dword[ebp+ecx-0x5bc],edx}
+@SET 0x004DC6E5,{mov dword[ebp+ecx-0x5bc],edx}
+@SET 0x004DC6F3,{mov dword[ebp+ecx-0x5bc],eax}
+@SET 0x004DC745,{mov ecx,dword[ebp+eax-0x5bc]}
+@SET 0x004DC753,{mov al,byte[ebp+eax-0x5bd]} ; -1
 
 ; convert sar eax,18 to shr eax,18
-@SET 0x004DC5BF, {shr eax,0x18} 
-@CLEAR 0x004DC5C5, 0x90, 0x004DC5CA ; don't reduce by INFANTRY_RA_COUNT
-@SET 0x004DC5D6, {mov eax,dword[edi+eax*1+HouseClass.Offset.NewIQuantity]}
-@SET 0x004DC5DD, {cmp eax,dword[edx+HouseClass.Offset.NewIQuantity]}
+@SET 0x004DC5BF,{shr eax,0x18} 
+@CLEAR 0x004DC5C5,0x90,0x004DC5CA ; don't reduce by INFANTRY_RA_COUNT
+@SET 0x004DC5D6,{mov eax,dword[edi+eax*1+HouseClass.Offset.NewIQuantity]}
+@SET 0x004DC5DD,{cmp eax,dword[edx+HouseClass.Offset.NewIQuantity]}
 
-@LJMP 0x004DC4A5, _HouseClass__AI_Infantry_Extend_Remove_CanBuild_From_TeamTypeCheck
-@LJMP 0x004DC702, _HouseClass__AI_Infantry_Set_Weight ;, 0x004DC6F1
+@SJMP 0x004DC4A5,0x004DC4C4 ;_HouseClass__AI_Infantry_Extend_Remove_CanBuild_From_TeamTypeCheck
 
-_HouseClass__AI_Infantry_Expand:
+
+@HACK 0x004DC516,0x004DC51E,_HouseClass__AI_Infantry_Expand
     cmp  al,[InfantryTypeClass.Count] ; was INFANTRY_COUNT (0x1A)
     jb   0x004DC462
     jmp  0x004DC51E
+@ENDHACK
 
-_HouseClass__AI_Infantry_Expand_Choice:
+
+@HACK 0x004DC62B,0x004DC638,_HouseClass__AI_Infantry_Expand_Choice
     cmp  al,[InfantryTypeClass.Count] ; was INFANTRY_COUNT (0x1A)
     jae  0x004DC713
     jmp  0x004DC574
+@ENDHACK
 
-_HouseClass__AI_Infantry_Extend_Remove_CanBuild_From_TeamTypeCheck:
-    jmp  0x004DC4C4
 
 ; Warning: AIBuildLimit doesn't work correctly because buildings clear BuildInfantry when starting production; allowing BuildInfantry to be set again while another instance of the unit is producing 
-_HouseClass__AI_Infantry_Set_Weight:
+@HACK 0x004DC702,0x004DC713,_HouseClass__AI_Infantry_Set_Weight ; 0x004DC6F1
     xor  eax,eax
     mov  al,bh
     push edx ; HouseClass
@@ -88,11 +87,13 @@ _HouseClass__AI_Infantry_Set_Weight:
     jle  .Clear
 .Set:
     InfantryTypeClass.AIBuildWeight.Get(edi,eax)
-    mov  dword [ecx + ebp*1 -1468],eax
+    mov  dword[ecx+ebp*1-1468],eax
     jmp  .Done
 .Clear:
-    mov  dword [ecx + ebp*1 -1468],0
+    mov  dword[ecx+ebp*1-1468],0
 .Done:
     pop  edi
     pop  edx
     jmp  0x004DC643
+@ENDHACK
+

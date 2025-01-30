@@ -10,15 +10,15 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@SET 0x004C73ED, {mov edx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_BuildingTypes_Heap
-@SET 0x004D0953, {mov ebx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
-@SET 0x004D0A36, {mov ebx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
-@LJMP 0x004D0A51, _TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory
+@SET 0x004C73ED,{mov edx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_BuildingTypes_Heap
+@SET 0x004D0953,{mov ebx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__BuildingTypeClass__Save_New_Size
+@SET 0x004D0A36,{mov ebx,BuildingTypeClass.NEW_SIZE} ; _TFixedIHeapClass__BuildingTypeClass__Load_New_Size
 
-
-_TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory:
+@HACK 0x004D0A51,0x004D0A56,_TFixedIHeapClass__BuildingTypeClass__Load_Clear_Memory
     Clear_Extended_Class_Memory_For_Old_Saves ecx,BuildingTypeClass.NEW_SIZE,BuildingTypeClass.ORIGINAL_SIZE
 .Ret:
     lea  edx,[ebp-0x14]
     mov  eax,ecx
     jmp  0x004D0A56
+@ENDHACK
+

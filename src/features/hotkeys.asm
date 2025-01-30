@@ -59,15 +59,15 @@ _UnhardCode_Keyboard_Key0:
     jmp  0x004A6221
 
 _Keyboard_Process_Home_Key_Overwrite:
-    cmp  word ax, [RedAlert.WinHotKeys.KeySidebarToggle]
+    cmp  word ax,[RedAlert.WinHotKeys.KeySidebarToggle]
     jz   .Toggle_Sidebar
-    cmp  word ax, [RedAlert.WinHotKeys.KeyMapSnapshot]
+    cmp  word ax,[RedAlert.WinHotKeys.KeyMapSnapshot]
     jz   .Map_Snapshot
-    cmp  word ax, [Globals___Options_KeyResign]
+    cmp  word ax,[Globals___Options_KeyResign]
     jz   .Resign_Key
 
 .Out:
-    cmp  ax, [0x006681B4] ; KeyNext
+    cmp  ax,[0x006681B4] ; KeyNext
     jnz  0x004A57DF
     jmp  0x004A5760
 
@@ -75,57 +75,57 @@ _Keyboard_Process_Home_Key_Overwrite:
     push eax
 
 .Lock_Graphics_Buffer:
-;    mov eax, 0 ; Crash
-    mov  eax, Globals___Map
-    mov  edx, 0FFFFFFFFh
+;    mov eax,0 ; Crash
+    mov  eax,Globals___Map
+    mov  edx,0xFFFFFFFF
     call 0x0054DA70 ;  SidebarClass::Activate(int)
 
-    mov  eax, [0x006807E8] ; ds:GraphicBufferClass__Something
+    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
     call 0x005C101A ; GraphicBufferClass::Lock(void)
-    test eax, eax
+    test eax,eax
     jz   .Clear_Buffer
-    mov  edx, [0x006807E8] ;  ds:GraphicBufferClass__Something
-    cmp  edx, 0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  edx,[0x006807E8] ;  ds:GraphicBufferClass__Something
+    cmp  edx,0x006807CC ; offset GraphicViewPortClass HidPage
     jz   .EAX_One
-    mov  ebx, [0x006807D4]
+    mov  ebx,[0x006807D4]
     push ebx             ; __int32
-    mov  ecx, [0x006807D0]
-    mov  eax, 0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  ecx,[0x006807D0]
+    mov  eax,0x006807CC ; offset GraphicViewPortClass HidPage
     push ecx             ; __int32
-    mov  ebx, [0x006807DC]
-    mov  ecx, [0x006807E0]
+    mov  ebx,[0x006807DC]
+    mov  ecx,[0x006807E0]
     call 0x005C094F ; GraphicViewPortClass::Attach(GraphicBufferClass *,int,int,int,int)
 
 .EAX_One:
-    mov  eax, 1
+    mov  eax,1
 
 .Clear_Buffer:
     push 0
     push 0x006807CC; offset GraphicViewPortClass HidPage
     call 0x005C4DE0 ; _Buffer_Clear
-    add  esp, 8
+    add  esp,8
 
 .Unlock_Graphics_Buffer:
-    mov  eax, [0x006807E8] ; ds:GraphicBufferClass__Something
+    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
     call 0x005C1191 ; GraphicBufferClass::Unlock(void)
-    test eax, eax
+    test eax,eax
     jz   .Redraw_Screen
-    mov  eax, [0x006807E8] ; ds:GraphicBufferClass__Something
-    cmp  eax, 0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
+    cmp  eax,0x006807CC ; offset GraphicViewPortClass HidPage
     jz   .Redraw_Screen
-    cmp  dword [0x006807EC], 0
+    cmp  dword[0x006807EC],0
     jz   .Redraw_Screen
-    mov  ebx, [eax+24h]
-    test ebx, ebx
+    mov  ebx,[eax+0x24]
+    test ebx,ebx
     jnz  .Redraw_Screen
-    mov  [0x006807CC], ebx
+    mov  [0x006807CC],ebx
 
 .Redraw_Screen:
-    mov  edx, 1
-    mov  eax, Globals___Map
+    mov  edx,1
+    mov  eax,Globals___Map
     call GScreenClass__Flag_To_Redraw
 
-    mov  eax, Globals___Map
+    mov  eax,Globals___Map
     call 0x004CB110 ; GScreenClass::Render()
 
     pop  eax
@@ -134,9 +134,9 @@ _Keyboard_Process_Home_Key_Overwrite:
 .Resign_Key:
     push eax
 
-    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Out
-    mov  dword [ResignKeyPressed],1
+    mov  dword[ResignKeyPressed],1
     call 0x00528DCC ; Queue_Options(void)
 
     pop  eax
@@ -150,20 +150,20 @@ _Patch_Out_Erroneous_Sidebar_Activate_CALL:
     jmp  0x0054D91B
 
 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check:
-    cmp  dword [ResignKeyPressed], 0
+    cmp  dword[ResignKeyPressed],0
     jnz  0x004CA9C9
 
 .Out:
-    test eax, eax
+    test eax,eax
     jle  0x004CA15E
     jmp  0x004C9F4E
 
 _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2:
-    cmp  dword [ResignKeyPressed], 0
+    cmp  dword[ResignKeyPressed],0
     jz   0x004CA7A5
 
-    mov  dword [ResignKeyPressed], 0
-    lea  esp, [ebp-14h]
+    mov  dword[ResignKeyPressed],0
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx

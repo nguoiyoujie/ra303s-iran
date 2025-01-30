@@ -8,12 +8,10 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004A3275, _Combat_Modify_Damage_SpreadFactor_Zero
-
-_Combat_Modify_Damage_SpreadFactor_Zero:
-;if spread factor is 0, distances above 8 will not apply damage, overriding distance adjustments
+@HACK 0x004A3275,0x004A327B,_Combat_Modify_Damage_SpreadFactor_Zero
+    ;if spread factor is 0, distances above 8 will not apply damage, overriding distance adjustments
     sub  eax,edx
-    cmp  eax, 0x08
+    cmp  eax,8
     jg   .DistanceOver8
     sar  eax,1
     jmp  0x004A328E
@@ -21,3 +19,4 @@ _Combat_Modify_Damage_SpreadFactor_Zero:
     xor  ebx,ebx ;set damage to 0
     xor  esi,esi ;set damage to 0
     jmp  0x004A328E
+@ENDHACK

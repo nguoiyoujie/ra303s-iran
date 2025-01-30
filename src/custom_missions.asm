@@ -1,25 +1,25 @@
-@LJMP 0x004BE468, _Custom_Missions_Load_Mission_Name
-@LJMP 0x004BE491, _Custom_Missions_Load_Mission_Name2
-@LJMP 0x004BE929, _Custom_Missions_Hook_Function_End
-@LJMP 0x004BE548, _Custom_Missions_Amount_To_Read
-@LJMP 0x004BE732, _Custom_Missions_Amount_To_Read2
-@LJMP 0x004BE132, _Custom_Missions_Dont_Prepend_Side
-@LJMP 0x004BE147, _Custom_Missions_Dont_Prepend_Side2
-@LJMP 0x00501E0E, _Custom_Missions_Custom_Missions_Button_Name
-@LJMP 0x004BE7C8, _Custom_Missions_Custom_Missions_Dialog_Name
-@LJMP 0x004BE7DE, _Custom_Missions_Expansion_Missions_Dialog_Name
-@LJMP 0x00501E3F, _Custom_Missions_Expansion_Missions_Button_Name
-@LJMP 0x00501DB3, _Custom_Missions_Enable_Custom_Missions_Button
-@LJMP 0x00501DDB, _Custom_Missions_Enable_Expansion_Missions_Button
-@LJMP 0x0053B520, _Do_Win_Next_Mission_In_Campaign
-@LJMP 0x0053B23C, _Campaign_Do_Win_Next_mission_In_Campaign
-@LJMP 0x00500C62, _Map_Selection_Selection_Animation
-@LJMP 0x005011FE, _Map_Selection_Selected_Mission_Name
+@LJMP 0x004BE468,_Custom_Missions_Load_Mission_Name
+@LJMP 0x004BE491,_Custom_Missions_Load_Mission_Name2
+@LJMP 0x004BE929,_Custom_Missions_Hook_Function_End
+@LJMP 0x004BE548,_Custom_Missions_Amount_To_Read
+@LJMP 0x004BE732,_Custom_Missions_Amount_To_Read2
+@LJMP 0x004BE132,_Custom_Missions_Dont_Prepend_Side
+@LJMP 0x004BE147,_Custom_Missions_Dont_Prepend_Side2
+@LJMP 0x00501E0E,_Custom_Missions_Custom_Missions_Button_Name
+@LJMP 0x004BE7C8,_Custom_Missions_Custom_Missions_Dialog_Name
+@LJMP 0x004BE7DE,_Custom_Missions_Expansion_Missions_Dialog_Name
+@LJMP 0x00501E3F,_Custom_Missions_Expansion_Missions_Button_Name
+@LJMP 0x00501DB3,_Custom_Missions_Enable_Custom_Missions_Button
+@LJMP 0x00501DDB,_Custom_Missions_Enable_Expansion_Missions_Button
+@LJMP 0x0053B520,_Do_Win_Next_Mission_In_Campaign
+@LJMP 0x0053B23C,_Campaign_Do_Win_Next_mission_In_Campaign
+@LJMP 0x00500C62,_Map_Selection_Selection_Animation
+@LJMP 0x005011FE,_Map_Selection_Selected_Mission_Name
 
-@SJMP 0x00538764, 0x00538771
+@SJMP 0x00538764,0x00538771
 
 _Map_Selection_Selected_Mission_Name:
-    cmp  byte [NextCampaignMissionBuf],0
+    cmp  byte[NextCampaignMissionBuf],0
     jz   .Ret
 
     cmp  byte al,'A'
@@ -50,14 +50,14 @@ _Map_Selection_Selected_Mission_Name:
 
 .Not_C:
 .Ret:
-    mov  byte [0x00684F3A],al
+    mov  byte[0x00684F3A],al
     jmp  0x00501203
 
 _Map_Selection_Selection_Animation:
     push 0
     lea  eax,[ebp-0x78]
 
-    cmp  dword [MapSelectionAnimationBuf],0
+    cmp  dword[MapSelectionAnimationBuf],0
     jz   .Ret
 
     lea  eax,[MapSelectionAnimationBuf]
@@ -66,7 +66,7 @@ _Map_Selection_Selection_Animation:
     jmp  0x00500C67
 
 _Campaign_Do_Win_Next_mission_In_Campaign:
-    cmp  byte [NextCampaignMissionBuf],0
+    cmp  byte[NextCampaignMissionBuf],0
     jz   .Ret
 
     ; Copy next campaign mission filename to ScenarioName global char array
@@ -81,7 +81,7 @@ _Campaign_Do_Win_Next_mission_In_Campaign:
     jmp  0x0053B241
 
 _Do_Win_Next_Mission_In_Campaign:
-    cmp  byte [NextCampaignMissionBuf],0
+    cmp  byte[NextCampaignMissionBuf],0
     jz   .Ret
 
     ; Copy next campaign mission filename to ScenarioName global char array
@@ -157,39 +157,39 @@ _Custom_Missions_Custom_Missions_Button_Name:
     jmp  0x00501E13
 
 _Custom_Missions_Load_Mission_Name:
-    cmp  dword [ebp-24h],0 ; Expansion type
+    cmp  dword[ebp-0x24],0 ; Expansion type
     jz   .Do_Normal_Read
 
     Save_Registers
-    mov  esi,dword [MissionCounter]
-    inc  dword [MissionCounter]
+    mov  esi,dword[MissionCounter]
+    inc  dword[MissionCounter]
     push esi             ; Format
     push str_sprintf_format3 ; %d
     lea  esi,[sprintf_buffer3]
     push esi             ; Dest
 
     call _sprintf
-    add  esp,0Ch
+    add  esp,0xC
     Restore_Registers
     mov  esi,sprintf_buffer3
     jmp  0x004BE46E
 
 .Do_Normal_Read:
-    mov  esi,dword [esi+0x601400]
+    mov  esi,dword[esi+0x601400]
     jmp  0x004BE46E
 
 _Custom_Missions_Load_Mission_Name2:
-    cmp  dword [ebp-24h],0 ; Expansion type
+    cmp  dword[ebp-0x24],0 ; Expansion type
     jz   .Do_Normal_Read
     mov  esi,sprintf_buffer3
     jmp  0x004BE497
 
 .Do_Normal_Read:
-    mov  esi,dword [esi+0x601400]
+    mov  esi,dword[esi+0x601400]
     jmp  0x004BE497
 
 _Custom_Missions_Hook_Function_End:
-    mov  dword [MissionCounter],0
+    mov  dword[MissionCounter],0
     pop  edi
     pop  esi
     pop  edx
@@ -199,10 +199,10 @@ _Custom_Missions_Hook_Function_End:
     retn
 
 _Custom_Missions_Amount_To_Read:
-    cmp  dword [ebp-24h],0 ; Expansion type
+    cmp  dword[ebp-0x24],0 ; Expansion type
     jz   .Not_Custom_Missions_Dialog
 
-    cmp  edi,999h
+    cmp  edi,0x999
     jge  0x004BE552
     jmp  0x004BE54D
 
@@ -213,7 +213,7 @@ _Custom_Missions_Amount_To_Read:
     cmp  eax,1
     jz   .CS_Present
 
-    mov  ebx,24h
+    mov  ebx,0x24
 
 .CS_Present:
     mov  eax,ebx
@@ -222,22 +222,22 @@ _Custom_Missions_Amount_To_Read:
     jmp  0x004BE54D
 
 _Custom_Missions_Amount_To_Read2:
-    mov  [ebp-30h],ecx
+    mov  [ebp-0x30],ecx
 
-    cmp  dword [ebp-24h],0 ; Expansion type
+    cmp  dword[ebp-0x24],0 ; Expansion type
     jz   .Not_Custom_Missions_Dialog
 
-    cmp  ecx,900h
+    cmp  ecx,0x900
     jmp  0x004BE738
 
 .Not_Custom_Missions_Dialog:
-    mov  ebx,36h
+    mov  ebx,0x36
 
     call 0x004BE09C ;  Expansion_AM_Present(void)
     cmp  eax,1
     jz   .AM_Present
 
-    mov  ebx,24h
+    mov  ebx,0x24
 
 .AM_Present:
     mov  eax,ebx
@@ -249,6 +249,6 @@ _Custom_Missions_Dont_Prepend_Side:
     jmp  0x004BE138
 
 _Custom_Missions_Dont_Prepend_Side2:
-    mov  ax,[edi+2Ch]
-    add  esp,0Ch
+    mov  ax,[edi+0x2C]
+    add  esp,0xC
     jmp  0x004BE14E

@@ -26,11 +26,12 @@
 
 ; /include
 %include "macros/patch.inc"
+%include "macros/hack.inc"
 ;%include "macros/setsym.inc"
 ;%include "macros/datatypes.inc"
 %include "libc.inc"
-%include "INIClass.inc"
-%include "CCINIClass.inc"
+%include "types/INIClass.inc"
+%include "types/CCINIClass.inc"
 
 ; Version
 %include "src/version.asm"

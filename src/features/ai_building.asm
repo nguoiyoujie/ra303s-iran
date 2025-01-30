@@ -100,8 +100,8 @@ _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building:
 
 
 _HouseClass__AI_Building_CheckIncome:
-    ; ECX = HouseClass
-    ; set EDI to 1 if there is income, 0 otherwise
+    ; ecx = HouseClass
+    ; set edi to 1 if there is income, 0 otherwise
     mov  esi,eax
     test byte[ecx+0x43],0x80
     jnz  0x004DA36A
@@ -173,7 +173,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x0066673E] ; Rule.RefineryRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax ; divide by 256, edx is now CurBuildings * Rule.RefineryRatio
     pop  eax
     cmp  eax,edx
@@ -237,7 +237,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x00666734] ; Rule.BarracksRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -267,7 +267,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x0066672E] ; Rule.WarRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -297,7 +297,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x00666728] ; Rule.DefenseRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -312,7 +312,7 @@ _HouseClass__AI_Building_Choose:
 .CheckAADefense:
     ; check 'enemy' if it has airforce
     mov  eax,dword[ebp-0x1b]
-    sar  eax,18h
+    sar  eax,0x18
     call HouseClass__As_Pointer
     test eax,eax
     jz   .CheckAdvDefense
@@ -328,7 +328,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x00666722] ; Rule.DefenseRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -363,7 +363,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x0066671C] ; Rule.DefenseRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -394,7 +394,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x00666716] ; Rule.HelipadRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx
@@ -417,7 +417,7 @@ _HouseClass__AI_Building_Choose:
     mov  ax,word[0x00666712] ; Rule.AirstripRatio (fixed)
     imul ebx
     sar  eax,8
-    shl  edx,18h
+    shl  edx,0x18
     or   edx,eax
     pop  eax
     cmp  eax,edx

@@ -279,7 +279,7 @@ _GetUnitTypeIDFromString:
     ;in case the ID was invalid...
     test ebx,ebx
     jz   .Retn ; just return 0
-    mov  ebx,dword [ebx+1]; index
+    mov  ebx,dword[ebx+1]; index
 	;ObjectTypeClass.ID ebx,ebx
     mov  eax,ebx
 .Retn:

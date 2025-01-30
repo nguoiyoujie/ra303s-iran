@@ -36,7 +36,7 @@ _fence_bug:
     push eax
     push ebx
 
-    sub  eax, dword [Globals___Map_Array]
+    sub  eax,dword[Globals___Map_Array]
     xor  edx,edx
     mov  ebx,0x3A
     idiv ebx

@@ -76,10 +76,8 @@ str_memory_dump_name        db"ra95crash_memory.dmp",0
 
 
 [section .text]
-@LJMP 0x005DE62C, _try_WinMain
-
-_try_WinMain:
-;    mov        dword [CommandLineArg], [esp+4h]
+@HACK 0x005DE62C,_try_WinMain
+;    mov        dword[CommandLineArg],[esp+0x4]
 
 ;    push    esi
 ;    push    edi
@@ -109,7 +107,7 @@ _try_WinMain:
     mov  [hProcess],eax
 
     call GetCurrentThreadId
-    mov  [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ThreadId],eax
+    mov  [exception_info+MINIDUMP_EXCEPTION_INFORMATION.ThreadId],eax
 
     call GetCurrentProcessId
     mov  [ProcessId],eax
@@ -123,7 +121,7 @@ _try_WinMain:
 
     mov  esi,_exception_handler
     push esi
-    push dword [FS:0]
+    push dword[FS:0]
     mov  [FS:0],esp
 
 ;    Restore_Registers
@@ -135,7 +133,7 @@ _try_WinMain:
 ;        pop    ebx
 ;    mov        eax,ebx
 
-    push 0Ah
+    push 0xA
     push eax
     push edx
     push edx             ; lpModuleName
@@ -150,10 +148,10 @@ _try_WinMain:
     add  esp,12 + 4
 
     ; free minidump library if loaded
-    cmp  dword [dbghelp_dll],0
+    cmp  dword[dbghelp_dll],0
     je   .nodebugdll
 
-    push dword [dbghelp_dll]
+    push dword[dbghelp_dll]
     call [FreeLibrary]
 
 .nodebugdll:
@@ -164,14 +162,14 @@ _try_WinMain:
     jmp  _exit
 
 _exception_handler:
-    mov  ebx,dword [esp + 0x4]
-    mov  edx,dword [esp + 0x0C]
-    mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
-    mov  [exception_pointers + EXCEPTION_POINTERS.ExceptionRecord],ebx
-    mov  [exception_pointers + EXCEPTION_POINTERS.ContextRecord],edx
+    mov  ebx,dword[esp+0x4]
+    mov  edx,dword[esp+0xC]
+    mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
+    mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
+    mov  [exception_pointers+EXCEPTION_POINTERS.ContextRecord],edx
 
-    mov  dword [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers],exception_pointers
-    mov  dword [exception_info + MINIDUMP_EXCEPTION_INFORMATION.ClientPointers],1
+    mov  dword[exception_info+MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers],exception_pointers
+    mov  dword[exception_info+MINIDUMP_EXCEPTION_INFORMATION.ClientPointers],1
 
     push 0
     push FILE_ATTRIBUTE_NORMAL
@@ -188,11 +186,11 @@ _exception_handler:
     push 0                  ; DumpType, normal dump
 ;    push 2                  ; DumpType, normal dump with full memory dump
     push eax                ; hFile
-    push dword [ProcessId]
-    push dword [hProcess]
+    push dword[ProcessId]
+    push dword[hProcess]
     call [MiniDumpWriteDump]
 
-    cmp  byte [RedAlert.Options.GenerateMemoryDump],1
+    cmp  byte[RedAlert.Options.GenerateMemoryDump],1
     jz   .Generate_Memory_Dump
 
     push 0
@@ -201,15 +199,15 @@ _exception_handler:
     push 0
     call [MessageBoxA]
 
-    mov  esp,[esp + 8]
-    pop  dword [FS:0]
+    mov  esp,[esp+8]
+    pop  dword[FS:0]
     add  esp,4
 
     push ExitCode
-    push dword [hProcess]
+    push dword[hProcess]
     call GetExitCodeProcess
 
-    push dword [ExitCode]
+    push dword[ExitCode]
     jmp  _exit
 
 .Generate_Memory_Dump:
@@ -227,8 +225,8 @@ _exception_handler:
     push exception_info                ; ExceptionParam
     push 2                  ; DumpType,normal dump with full memory dump
     push eax                ; hFile
-    push dword [ProcessId]
-    push dword [hProcess]
+    push dword[ProcessId]
+    push dword[hProcess]
     call [MiniDumpWriteDump]
 
     push 0
@@ -237,13 +235,15 @@ _exception_handler:
     push 0
     call [MessageBoxA]
 
-    mov  esp,[esp + 8]
-    pop  dword [FS:0]
-    add  esp, 4
+    mov  esp,[esp+8]
+    pop  dword[FS:0]
+    add  esp,4
 
     push ExitCode
-    push dword [hProcess]
+    push dword[hProcess]
     call GetExitCodeProcess
 
-    push dword [ExitCode]
+    push dword[ExitCode]
     jmp  _exit
+@ENDHACK
+

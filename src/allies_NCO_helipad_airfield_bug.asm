@@ -4,24 +4,23 @@
 
 ; Fix will desync online with 3.03 most likely in the very rare occasion that this situation occurs. That's because Hind and Transport Helicopter will spawn for players with this fix but without those two helicopters won't spawn because both the Helipad and Airfield aren't considered valid factories for those two helicopters in this situation.
 
-;@CLEAR 0x0051EBBD, 0x90, 0x0051EBC2
+;@CLEAR 0x0051EBBD,0x90,0x0051EBC2
 
-; Checks are failing because of building ownership/ActLike checks. Aircrafts can dock in airstrips that cannot build them.
+; Checks were failing because of building ownership/ActLike checks. Aircrafts can dock in airstrips that cannot build them.
+; However, Who_Can_Build_Me() serves dual purpose. It is used to test if a techno can be built, and it is also used to test which factory can build it for exit and docking purposes.
+; It does not account for the fact that aircraft can dock on any suitable port even if it is not produced by that factory.
 ; This change has a side-effect where you no longer lose captured aircraft tech unless all airfields / helipads are destroyed.
-@LJMP 0x0051EA31, _ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType
-@LJMP 0x0051EBBA, _ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode
-@LJMP 0x0051EBF2, _ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode
-
-_ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType:
+@HACK 0x0051EA31,0x0051EA36,_ObjectTypeClass__Who_Can_Build_Me_Relax_AircraftType
     cmp  byte[edi],RTTIType.AircraftType
     je   0x0051EA94 ; skip prereq checks
     mov  edx,dword[edi+0x21]
     mov  eax,edi
     jmp  0x0051EA36
+@ENDHACK
 
 
 ; Avoid NCO bug (allies_NCO_helipad_bug.asm)
-_ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode:
+@HACK 0x0051EBBA,0x0051EBC2,_ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -32,9 +31,10 @@ _ObjectTypeClass__Who_Can_Build_Me_Helipad_Unhardcode:
     jnz  0x0051EBC2
 .NotAHelipad:
     jmp  0x0051EBCB
+@ENDHACK
 
 
-_ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode:
+@HACK 0x0051EBF2,0x0051EBFE,_ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -45,4 +45,5 @@ _ObjectTypeClass__Who_Can_Build_Me_Airfield_Unhardcode:
     jnz  0x0051EBFE
 .NotAnAirfield:
     jmp  0x0051EB02
+@ENDHACK
 

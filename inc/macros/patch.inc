@@ -2,7 +2,7 @@
 
 %macro @PATCH 1
     %ifctx __patch
-        %error "can't nest patches"
+        %error "can't nest patches" (%1)
     %else
         [section .patch]
         %push __patch
@@ -80,7 +80,7 @@
 %macro @HOOK 2
     %define @HOOKEND %2
     %if (%2) - ((%1) + 5) < 0
-        %error "end must be at least 5 bytes (the size of a long jump) after start" (%2)
+        %error "end must be at least 5 bytes after start" (%2)
     %endif
 
     @PATCH (%1)

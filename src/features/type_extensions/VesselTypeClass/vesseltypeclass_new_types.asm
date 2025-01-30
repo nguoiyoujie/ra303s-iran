@@ -11,21 +11,15 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x00459661, _BuildingClass__Update_Buildables_Unhardcode_VesselTypes
-@LJMP 0x004F410B, _Init_Game_Set_VesselTypes_Heap_Count
-@LJMP 0x0058484B, _VesselTypeClass__Init_Heap_Unhardcode_VesselTypes
-@LJMP 0x00584A3A, _VesselTypeClass__One_Time_Unhardcode_VesselTypes
-@LJMP 0x00584B44, _VesselTypeClass__From_Name_Unhardcode_VesselTypes
-
-
-_BuildingClass__Update_Buildables_Unhardcode_VesselTypes:
+@HACK 0x00459661,0x00459666,_BuildingClass__Update_Buildables_Unhardcode_VesselTypes
     mov  byte al,[VesselTypeClass.Count]
     cmp  dl,al
     jl   0x00459620
     jmp  0x00459666
+@ENDHACK
 
 
-_Init_Game_Set_VesselTypes_Heap_Count:
+@HACK 0x004F410B,0x004F4110,_Init_Game_Set_VesselTypes_Heap_Count
     ; update the stringtableoffset,if defined in Rules
     call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Vessel,[Rules.StringTableOffsets.VesselTypes]
     mov  [Rules.StringTableOffsets.VesselTypes],eax
@@ -35,22 +29,41 @@ _Init_Game_Set_VesselTypes_Heap_Count:
     mov  edx,eax
     add  edx,VesselTypeClass.ORIGINAL_COUNT
     jmp  0x004F4110
+@ENDHACK
 
 
-_VesselTypeClass__Init_Heap_Unhardcode_VesselTypes:
+@HACK 0x0058484B,0x00584851,_VesselTypeClass__Init_Heap_Unhardcode_VesselTypes
     Loop_Over_RULES_INI_Section_Entries str_VesselTypes,Init_VesslTypeClass
     ;mov  edx,[VesselTypeClass.Count]
     ;dec  edx
     ;mov  [0x00605A90],edx ; used by deconstructor
     call Init_Heap_OverrideExistingVesselTypes
 .Ret:
-    lea  esp,[ebp-14h]
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx
     jmp  0x00584851
+@ENDHACK
 
 
+@HACK 0x00584A3A,0x00584A43,_VesselTypeClass__One_Time_Unhardcode_VesselTypes
+    mov  byte al,[VesselTypeClass.Count]
+    cmp  dh,al
+    jl   0x0058497D
+    jmp  0x00584A43
+@ENDHACK
+
+
+@HACK 0x00584B44,0x00584B49,_VesselTypeClass__From_Name_Unhardcode_VesselTypes
+    mov  byte al,[VesselTypeClass.Count]
+    cmp  dl,al
+    jl   0x00584B50
+    jmp  0x00584B49
+@ENDHACK
+
+
+[section .text]
 Init_VesslTypeClass:
     mov  eax,VesselTypeClass.NEW_SIZE
     call VesselTypeClass_new
@@ -68,7 +81,7 @@ Init_VesslTypeClass:
     add  edx,VesselTypeClass.ORIGINAL_COUNT ; VesselType
 
     ; mimic VesselType DD, but using Civilian text name
-    push 0Eh             ; int toffset
+    push 0xE             ; int toffset
     push 8               ; int rotation
     push 1               ; bool is_turret_equipped
     push 1               ; bool is_nominal
@@ -86,10 +99,10 @@ Init_VesslTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [Rules.StringTableOffsets.VesselTypes],-1
+    cmp  dword[Rules.StringTableOffsets.VesselTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [Rules.StringTableOffsets.VesselTypes]
+    add  ebx,dword[Rules.StringTableOffsets.VesselTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -106,9 +119,9 @@ Init_Heap_OverrideExistingVesselTypes:
     VesselTypeClass.TurretName.Set(edi,str_MGUN)
     VesselTypeClass.TurretOffset.Set(edi,14)
     VesselTypeClass.TurretAdjustY.Set(edi,1)
-    VesselTypeClass.TurretFireOffset.Set(edi,80h)
-    TechnoTypeClass.PrimaryOffset.Set(edi,10h)
-    TechnoTypeClass.VerticalOffset.Set(edi,20h)
+    VesselTypeClass.TurretFireOffset.Set(edi,0x80)
+    TechnoTypeClass.PrimaryOffset.Set(edi,0x10)
+    TechnoTypeClass.VerticalOffset.Set(edi,0x20)
 
     VesselTypeClass.FromIndex(VesselType.DD,edi)
     VesselTypeClass.TurretName.Set(edi,str_SSAM)
@@ -120,22 +133,11 @@ Init_Heap_OverrideExistingVesselTypes:
     VesselTypeClass.HasSecondTurret.Set(edi,1)
     VesselTypeClass.TurretOffset.Set(edi,22)
     VesselTypeClass.TurretAdjustY.Set(edi,-4)
-    VesselTypeClass.TurretFireOffset.Set(edi,100h)
-    TechnoTypeClass.PrimaryOffset.Set(edi,40h)
-    TechnoTypeClass.VerticalOffset.Set(edi,30h)
+    VesselTypeClass.TurretFireOffset.Set(edi,0x100)
+    TechnoTypeClass.PrimaryOffset.Set(edi,0x40)
+    TechnoTypeClass.VerticalOffset.Set(edi,0x30)
     pop esi
     retn
 
 
-_VesselTypeClass__One_Time_Unhardcode_VesselTypes:
-    mov  byte al,[VesselTypeClass.Count]
-    cmp  dh,al
-    jl   0x0058497D
-    jmp  0x00584A43
 
-
-_VesselTypeClass__From_Name_Unhardcode_VesselTypes:
-    mov  byte al,[VesselTypeClass.Count]
-    cmp  dl,al
-    jl   0x00584B50
-    jmp  0x00584B49

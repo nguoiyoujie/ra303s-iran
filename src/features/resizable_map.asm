@@ -21,13 +21,13 @@
 @LJMP 0x0054FDBC, _SmudgeClass_Replace_In_Radar_Check
 
 _BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit:
-    cmp  dword [Globals___ScenarioInit],0
+    cmp  dword[Globals___ScenarioInit],0
     jg   0x0045B9F2 ; MOVE_OK
     jmp  0x0045BA12
 
 _SmudgeClass_Replace_In_Radar_Check:
     ; Instead of using Map::In_Radar, check the cell against the map cell limit (16384)
-    cmp  edx, 0x4000
+    cmp  edx,0x4000
 	jge  0x0054FF31
     jmp  0x0054FDC9
 

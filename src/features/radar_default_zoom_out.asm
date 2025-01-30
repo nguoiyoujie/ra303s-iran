@@ -9,9 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0052D751, _RadarClass__Init_Clear_Zoom_Out_Radar_By_Default
-
-_RadarClass__Init_Clear_Zoom_Out_Radar_By_Default:
-    or   dl, Globals___Map_IsZoomed_Bitmask ; 1h
-    mov  eax, dword [Globals___Map_IsZoomed_Address]
+@HACK 0x0052D751,0x0052D759,_RadarClass__Init_Clear_Zoom_Out_Radar_By_Default
+    or   dl,Globals___Map_IsZoomed_Bitmask
+    mov  eax,dword[Globals___Map_IsZoomed_Address]
     jmp  0x0052D759
+@ENDHACK
+

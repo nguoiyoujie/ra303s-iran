@@ -1,14 +1,18 @@
-@LJMP 0x004A8DE2, _Play_Movie
-@LJMP 0x004637FF, _CCINIClass_Get_VQType
-;@LJMP 0x0053A1D3, _Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
-@LJMP 0x004F5061, _Extra_Sneak_Peaks
-@LJMP 0x004F4358, _Optional_Play_ENGLISHVQA_Intro
+@LJMP 0x004A8DE2,_Play_Movie
+@LJMP 0x004637FF,_CCINIClass_Get_VQType
+;@LJMP 0x0053A1D3,_Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
+@LJMP 0x004F5061,_Extra_Sneak_Peaks
+@LJMP 0x004F4358,_Optional_Play_ENGLISHVQA_Intro
 
 %define    _Play_Movie_                                0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
+extern CCFileClass__CCFileClass
+extern CCFileClass__Is_Available
+extern CCINIClass__Load
+
 [section .rdata] 
-; TLF movies + sizzle3 and sizzle4
+; TLF moviessizzle3 and sizzle4
 derp_str db"derp",0
 ALLX1_str db"ALLX1",0
 ALLX2_str db"ALLX2",0
@@ -51,28 +55,28 @@ CCINIClass_redalertini2 TIMES 128 db 0
 [section .text] 
 ; args: <video name no extension>, <index to return>
 %macro Video_Name_To_Index 2
-    lea  eax, [ebp-88h]
-    mov  edx, %1
+    lea  eax,[ebp-0x88]
+    mov  edx,%1
     call _strcmpi
-    test eax, eax
-    mov  al, %2
+    test eax,eax
+    mov  al,%2
     jz   0x00463828
 %endmacro
 
 ; args: <video name no extension>, <index to return>
 %macro Index_To_Video_Name 2
-    cmp  al, %2
+    cmp  al,%2
     push eax
-    mov  eax, %1
+    mov  eax,%1
     je   Load_Custom_String
     pop  eax
 %endmacro
 
 ; args: <video index>
 %macro Play_Movie 1
-    mov  ebx, 1
-    mov  edx, 0FFFFFFFFh
-    mov  eax, %1
+    mov  ebx,1
+    mov  edx,0xFFFFFFFF
+    mov  eax,%1
     call _Play_Movie_
 %endmacro
 
@@ -82,28 +86,28 @@ _Optional_Play_ENGLISHVQA_Intro:
     push eax
     push ebx
 
-    mov  edx, str_redalert_ini
-    mov  eax, FileClass_redalertini2
+    mov  edx,str_redalert_ini
+    mov  eax,FileClass_redalertini2
     call CCFileClass__CCFileClass
 
     ; check ini exists
-    mov  eax, FileClass_redalertini2
-    xor  edx, edx
+    mov  eax,FileClass_redalertini2
+    xor  edx,edx
     call CCFileClass__Is_Available
 ;    test eax,eax
 ;    je .exit_error
 
     ; initialize CCINIClass
-    mov  eax, CCINIClass_redalertini2
+    mov  eax,CCINIClass_redalertini2
     call CCINIClass__CCINIClass
 
     ; load FileClass to CCINIClass
-    mov  edx, FileClass_redalertini2
-    mov  eax, CCINIClass_redalertini2
+    mov  edx,FileClass_redalertini2
+    mov  eax,CCINIClass_redalertini2
     call CCINIClass__Load
 
     call_INIClass__Get_Bool CCINIClass_redalertini2, str_options2, str_playenglishintro, 1
-    cmp  eax, 0
+    cmp  eax,0
 
     pop  ebx
     pop  eax
@@ -118,7 +122,7 @@ _Optional_Play_ENGLISHVQA_Intro:
     ; check -SPAWN exists
     call GetCommandLineA
 
-    mov  edx, str_arg_Spawn
+    mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
 
@@ -143,13 +147,13 @@ _Extra_Sneak_Peaks:
     jmp  0x004F5066
 
 _Start_Scenario_VQName:
-    mov  edi, 0
+    mov  edi,0
     jmp  0x0053A1DA
 
 _CCINIClass_Get_VQType:
 
-    xor  ah, ah
-    mov  [ebp-8h], ah
+    xor  ah,ah
+    mov  [ebp-8h],ah
 
     Video_Name_To_Index ALLX2_str, 151
     Video_Name_To_Index ALLX1_str, 150
@@ -183,8 +187,8 @@ _CCINIClass_Get_VQType:
     jmp  0x00463804
 
 _Play_Movie:
-    movsx eax, al
-    movsx edx, dl
+    movsx eax,al
+    movsx edx,dl
     push eax
 
     Index_To_Video_Name ALLX2_str, 151
@@ -222,6 +226,6 @@ _Play_Movie:
 Load_Custom_String:
     pop  esi
     pop  esi
-    xor  esi, esi
+    xor  esi,esi
     call 0x004A88AC
     jmp  0x004A8DF6

@@ -15,13 +15,13 @@
 @SJMP 0x00554A67, 0x00554A7E ; Destroy Team
 
 @LJMP 0x00554A98, _TActionClass__operator__Reinforcement_Team_Validity_Check_Fix
-@CLEAR 0x00554A9D, 0x90, 0x00554A9E ; nop over debris after jmp
+@CLEAR 0x00554A9D,0x90,0x00554A9E ; nop over debris after jmp
 
 _TActionClass__operator__Reinforcement_Team_Validity_Check_Fix:
     cmp   edx,-1
     jz    0x00554AA8
     imul  edx,esi
-    mov   eax,dword [eax+10h]
+    mov   eax,dword[eax+0x10]
     jmp   0x00554A9E
 
 

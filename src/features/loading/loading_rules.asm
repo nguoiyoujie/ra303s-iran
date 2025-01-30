@@ -65,64 +65,64 @@ _RulesClass__AI_Load:
 
     ; [General]
 .DeathReport1:
-    call_INIClass__Get_String esi, str_General, str_DeathReport1, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport1, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DeathReport2
     GetVocArrayFromString Rules.General.DeathReport1_Data,16
     mov  [Rules.General.DeathReport1],eax
 
 .DeathReport2:
-    call_INIClass__Get_String esi, str_General, str_DeathReport2, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport2, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DeathReport3
     GetVocArrayFromString Rules.General.DeathReport2_Data,16
     mov  [Rules.General.DeathReport2],eax
 
 .DeathReport3:
-    call_INIClass__Get_String esi, str_General, str_DeathReport3, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport3, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DeathReport4
     GetVocArrayFromString Rules.General.DeathReport3_Data,16
     mov  [Rules.General.DeathReport3],eax
 
 .DeathReport4:
-    call_INIClass__Get_String esi, str_General, str_DeathReport4, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport4, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DeathReport5
     GetVocArrayFromString Rules.General.DeathReport4_Data,16
     mov  [Rules.General.DeathReport4],eax
 
 .DeathReport5:
-    call_INIClass__Get_String esi, str_General, str_DeathReport5, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport5, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DeathReport
     GetVocArrayFromString Rules.General.DeathReport5_Data,16
     mov  [Rules.General.DeathReport5],eax
 
 .DeathReport:
-    call_INIClass__Get_String esi, str_General, str_DeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .TanyaDeathReport
     GetVocArrayFromString Rules.General.DeathReport_Data,16
     mov  [Rules.General.DeathReport],eax
 
 .TanyaDeathReport:
-    call_INIClass__Get_String esi, str_General, str_TanyaDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_TanyaDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .DogDeathReport
     GetVocArrayFromString Rules.General.TanyaDeathReport_Data,16
     mov  [Rules.General.TanyaDeathReport],eax
 
 .DogDeathReport:
-    call_INIClass__Get_String esi, str_General, str_DogDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax, ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General, str_DogDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  eax,ObjectTypeClass.StringBuffer
     cmp  byte[eax],0
     je   .AI
     GetVocArrayFromString Rules.General.DogDeathReport_Data,16

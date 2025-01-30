@@ -38,16 +38,16 @@ _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties:
     mov  dword eax,[eax+0x93]
     call HouseClass__As_Pointer
 
-    test byte [eax+42h],2
+    test byte[eax+0x42],2
     jnz  .Not_AI
 
-    cmp  byte [eax+9],0
+    cmp  byte[eax+9],0
     jz   .AI_Easy_Dfficulty
 
-    cmp  byte [eax+9],1
+    cmp  byte[eax+9],1
     jz   .AI_Normal_Dfficulty
 
-    cmp  byte [eax+9],2
+    cmp  byte[eax+9],2
     jz   .AI_Hard_Dfficulty
 
     jmp  .Not_AI ; Shouldn't be reached ever

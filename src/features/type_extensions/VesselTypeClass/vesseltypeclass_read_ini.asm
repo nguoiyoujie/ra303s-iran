@@ -10,14 +10,12 @@
 ;----------------------------------------------------------------
 
 ;There is no Read_INI in VesselTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
-@LJMP 0x005374A2, _RulesClass_Objects_Replace_VesselTypes_Read_INI
 
 [section .data] 
 Buffer_VesselType           times 512 db 0 
 
 
-[section .text] 
-_RulesClass_Objects_Replace_VesselTypes_Read_INI:
+@HACK 0x005374A2,0x005374B1,_RulesClass_Objects_Replace_VesselTypes_Read_INI
     mov  dword eax,[ecx+eax]
     mov  edx,ebx
     mov  dword edi,[eax+0x21]
@@ -25,7 +23,10 @@ _RulesClass_Objects_Replace_VesselTypes_Read_INI:
     inc  esi
     call VesselTypes_Read_INI
     jmp  0x005374B1
+@ENDHACK
 
+
+[section .text] 
 VesselTypes_Read_INI:
     push  ebp
     mov   ebp,esp
@@ -99,7 +100,7 @@ _LoadTurretShapeFromString:
     ; move the result to TurretShape
     mov  edx,esi
     add  edx,VesselTypeClass.Offset.TurretShape
-    mov  dword [edx], eax
+    mov  dword[edx],eax
 
 .Retn:
     pop edi

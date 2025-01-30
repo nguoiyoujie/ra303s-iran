@@ -29,7 +29,7 @@
 @LJMP 0x004A7AEB, _Theater_From_Name_New_Theaters_Array
 @LJMP 0x004A7AD4, _Theater_From_Name_New_Theaters_Counter_Check
 ; If no match is found, revert to TEMPERATE instead of crashing the game
-@SET 0x004A7AFF, {mov al,0x01}
+@SET 0x004A7AFF,{mov al,0x1}
 
 %define THEATERS_COUNT 12 ; was 3
 
@@ -86,66 +86,66 @@ _OverlayTypeClass__Init_Theater_Check_NOP:
     jmp  0x00524B8B
 
 _Init_Heaps_Larger_Theater_Buffer:
-    mov  edx, 5500000
+    mov  edx,5500000
     jmp  0x004F780A
 
 _TemplateTypeClass__Init_Theater_Check_NOP:
-    shl  eax, cl
+    shl  eax,cl
     jmp  0x0049EAF9
 
 _TerrainTypeClass__Init_Theater_Check_NOP:
-    shl  eax, cl
+    shl  eax,cl
     jmp  0x0055B900
 
 _TerrainTypeClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x0055B90E
 
 _SmudgeTypeClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x00549E0F
 
 _OverlayTypeClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x00524B7B
 
 _DisplayClass__Init_Theater2:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x004AF0D9
 
 _DisplayClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x004AF05C
 
 _Fading_Table_Name_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x004A9455
 
 _TemplateTypeClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x0049EB07
 
 _CCINIClass__Put_TheaterType_Theater:
-    mov  ecx, Temperate_Name
+    mov  ecx,Temperate_Name
     jmp  0x004638A9
 
 _Theater_From_Name_New_Theaters_Array:
-    add  edx, Temperate_Name
+    add  edx,Temperate_Name
     jmp  0x004A7AF1
 
 _Theater_From_Name_New_Theaters_Counter_Check:
-    cmp  dl, THEATERS_COUNT
+    cmp  dl,THEATERS_COUNT
     jl   0x004A7AE0
     jmp  0x004A7AFF
 
 _AnimTypeClass__Init_Theater:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x0041C6B4
 
 _BuildingTypeClass__Init_Theater:
-    add  edx, Temperate_Name
+    add  edx,Temperate_Name
     jmp  0x00453949
 
 _BuildingTypeClass__Init_Theater2:
-    add  eax, Temperate_Name
+    add  eax,Temperate_Name
     jmp  0x0045398D

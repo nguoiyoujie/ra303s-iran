@@ -19,13 +19,13 @@ bctdelay dd 0
 
 [section .text] 
 _EventClass_Execute_BattleControlTerminated_DelayBlackScreen:
-    mov  dword [bctdelay],BCTInitDelay
+    mov  dword[bctdelay],BCTInitDelay
 .Delay:
-    cmp  dword [bctdelay],0
+    cmp  dword[bctdelay],0
 	jz   .Proceed
-    mov  eax,dword [bctdelay]
+    mov  eax,dword[bctdelay]
     dec  eax
-    mov  dword [bctdelay],eax
+    mov  dword[bctdelay],eax
     call Conquer___Call_Back 
     jmp  .Delay
 .Proceed:

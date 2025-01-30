@@ -51,7 +51,7 @@ _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
     ;dec  edx
     ;mov  [0x005FDF98],edx ; used by deconstructor
 .Ret:
-    lea  esp,[ebp-14h]
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx
@@ -96,7 +96,7 @@ Init_AnimTypeClass:
     push 1               ; bool isnormal
     push 0               ; bool istheater 
     push 6               ; int biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
-    mov  ecx,43h         ; size (max of width or height,to establish refresh area)
+    mov  ecx,0x43         ; size (max of width or height,to establish refresh area)
     ; ecx: size
     ; ebx: int name
     ; edx: BuildingType type
@@ -108,33 +108,33 @@ Init_AnimTypeClass:
 
 ; for 8 direction animations
 Init_DirectionalAnimTypeClass:
-    mov  dword [Temp.Anim.Direction],0
-    mov  dword [Temp.Anim.DirFrameStart],0
-    mov  dword [Temp.Anim.DirFrameBiggest],4 ; ANIM_SAM_N
-    mov  dword [Temp.Anim.Str],edx
-    mov  byte [Temp.Anim.ID],bl
+    mov  dword[Temp.Anim.Direction],0
+    mov  dword[Temp.Anim.DirFrameStart],0
+    mov  dword[Temp.Anim.DirFrameBiggest],4 ; ANIM_SAM_N
+    mov  dword[Temp.Anim.Str],edx
+    mov  byte[Temp.Anim.ID],bl
     ; edx should have the name of the INI section already
     jmp  .Create
 
 .Next:
     push eax
-    mov  eax,dword [Temp.Anim.Direction]
+    mov  eax,dword[Temp.Anim.Direction]
     test eax,eax
     jnz  .Next2
-    add  dword [Temp.Anim.DirFrameStart],AnimDirStageFrames * 8
-    add  dword [Temp.Anim.DirFrameBiggest],AnimDirStageFrames * 8
+    add  dword[Temp.Anim.DirFrameStart],AnimDirStageFrames * 8
+    add  dword[Temp.Anim.DirFrameBiggest],AnimDirStageFrames * 8
 
 .Next2:
     inc  eax
     cmp  eax,0x8
     jge  .RetPop
-    mov  dword [Temp.Anim.Direction],eax
-    mov  eax,dword [Temp.Anim.DirFrameStart]
+    mov  dword[Temp.Anim.Direction],eax
+    mov  eax,dword[Temp.Anim.DirFrameStart]
     sub  eax,AnimDirStageFrames
-    mov  dword [Temp.Anim.DirFrameStart],eax
-    mov  eax,dword [Temp.Anim.DirFrameBiggest]
+    mov  dword[Temp.Anim.DirFrameStart],eax
+    mov  eax,dword[Temp.Anim.DirFrameBiggest]
     sub  eax,AnimDirStageFrames
-    mov  dword [Temp.Anim.DirFrameBiggest],eax
+    mov  dword[Temp.Anim.DirFrameBiggest],eax
     pop  eax
 
 .Create:
@@ -144,16 +144,16 @@ Init_DirectionalAnimTypeClass:
     jz   .Ret
 
     push eax
-    mov  eax,dword [Temp.Anim.Str]
+    mov  eax,dword[Temp.Anim.Str]
     call _strdup
     mov  ecx,eax
     pop  eax
 
     xor  edx,edx
-    mov  dl,byte [Temp.Anim.ID]
+    mov  dl,byte[Temp.Anim.ID]
     shl  dl,3 ; multiply by 8
-    add  dl,byte [FirstDirectionalAnim] ; AnimType
-    add  edx,dword [Temp.Anim.Direction]
+    add  dl,byte[FirstDirectionalAnim] ; AnimType
+    add  edx,dword[Temp.Anim.Direction]
     mov  ebx,ecx ; Name/ID
 
     ; mimic AnimType ANIM_SAM_N / SAMFIRE, but muted
@@ -163,7 +163,7 @@ Init_DirectionalAnimTypeClass:
     push AnimDirStageFrames ; int stages
     push 0               ; int loopend
     push 0               ; int loopstart
-    push dword [Temp.Anim.DirFrameStart] ; int start
+    push dword[Temp.Anim.DirFrameStart] ; int start
     push 1               ; int delaytime
     push Temp.Anim.typeclass_constructor_arg ; fixed damage (needs to be a reference)
     push 0               ; bool isflame
@@ -175,7 +175,7 @@ Init_DirectionalAnimTypeClass:
     push 0               ; bool iswhitetrans
     push 0               ; bool isnormal
     push 0               ; bool istheater 
-    push dword [Temp.Anim.DirFrameBiggest] ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
+    push dword[Temp.Anim.DirFrameBiggest] ; biggest (in effect,the ground effects like scorch are applied at this frame,so this is typically the biggest stage)
     mov  ecx,55          ; size (max of width or height,to establish refresh area)
     ; ecx: size
     ; ebx: int name
@@ -215,7 +215,7 @@ _Init_Game_Set_AnimTypes_Heap_Count:
     Get_RULES_INI_Section_Entry_Count str_AnimTypes
     mov  edx,eax
     add  edx,AnimTypesHeap.ORIGINAL_COUNT
-    mov  byte [FirstDirectionalAnim],dl
+    mov  byte[FirstDirectionalAnim],dl
 
     Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
     shl  al,3 ;x8
@@ -224,7 +224,7 @@ _Init_Game_Set_AnimTypes_Heap_Count:
 
 
 _TechnoClass_FireAt_ApplyDirectionalAnim:
-    cmp  al,byte [FirstDirectionalAnim]
+    cmp  al,byte[FirstDirectionalAnim]
     jge  .DirectionalAnim
     cmp  al,0x19
     jc   0x005655D7
@@ -234,13 +234,13 @@ _TechnoClass_FireAt_ApplyDirectionalAnim:
 .DirectionalAnim:
     push edx
     mov  edx,eax
-    mov  eax,dword [ebp-0x18]
+    mov  eax,dword[ebp-0x18]
     add  eax,0xba
-    mov  al,byte [eax]
+    mov  al,byte[eax]
     add  al,0x10
     and  eax,0xff
     sar  eax,0x5
     add  al,dl 
     pop  edx
-    mov  byte [ebp-0x10],al
+    mov  byte[ebp-0x10],al
     jmp  0x005655D7

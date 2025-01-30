@@ -32,13 +32,13 @@ _HouseClass__Make_Ally_Show_Computer_Has_Allied:
 
 ; On certain conditions, force Computer_Paranoid() to return without performing any work
 _HouseClass__Computer_Paranoid_Force_Disabled_Skirmish:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Ret
 
-    cmp  byte [Rules.AI.ComputerParanoidForceDisabledSkirmish],1
+    cmp  byte[Rules.AI.ComputerParanoidForceDisabledSkirmish],1
     jz   .Ret
 
-    cmp  byte [Spawn.Settings.ForcedAlliances],1
+    cmp  byte[Spawn.Settings.ForcedAlliances],1
     jz   .Ret
 
     jmp  .Normal_Ret
@@ -58,10 +58,10 @@ _HouseClass__Computer_Paranoid_Force_Disabled_Skirmish:
 
 ; Suppresses game over if enemy AI is still alive. Could be useful in coop games
 _HouseClass__MPlayer_Defeated_Check_AI_Allies:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Ret
 
-    test byte [eax+42h],2
+    test byte[eax+0x42],2
     jz   0x004D84CD
 .Ret:
     jmp  0x004D84CA
@@ -73,10 +73,10 @@ _EventClass__Execute_Make_Ally:
     push edx
     call HouseClass__Make_Ally
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Apply_Fix_For_Skirmish
 
-    cmp  byte [Rules.AI.FixAIAlly],0
+    cmp  byte[Rules.AI.FixAIAlly],0
     jz   .Ret
 
 .Apply_Fix_For_Skirmish:
@@ -89,7 +89,7 @@ _EventClass__Execute_Make_Ally:
     mov  edx,eax ; now contains new HouseType
     pop  eax ; now conains new HouseClass
 
-    test byte [eax+42h],2
+    test byte[eax+0x42],2
     jnz  .Ret2
 
     call HouseClass__Make_Ally
@@ -105,15 +105,15 @@ _EventClass__Execute_Make_Ally:
 
 ; Suppress IsHuman check, allowing the player to ally the AI
 _HouseClass__Is_Allowed_To_Ally_AI_Player_Fix:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Allow_AI_Ally
 
-    cmp  byte [Rules.AI.FixAIAlly],1
+    cmp  byte[Rules.AI.FixAIAlly],1
     jz   .Allow_AI_Ally
 
     cmp  dword eax,0
     jz   0x004DE5D8
-    test byte [eax+42h],2
+    test byte[eax+0x42],2
     jnz  0x004DE5E2 ; Assemble jmp here to fix?
     jmp  0x004DE5D8
 
@@ -123,10 +123,10 @@ _HouseClass__Is_Allowed_To_Ally_AI_Player_Fix:
 
 ; Suppress Computer_Paranoid() call when a human alliance is made
 _HouseClass__Make_Ally_Computer_Paranoid_Call_Patch_Out:
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .Jump_Over
 
-    cmp  byte [Rules.AI.FixAIParanoid],1
+    cmp  byte[Rules.AI.FixAIParanoid],1
     jz   .Jump_Over
 
     call HouseClass__Computer_Paranoid

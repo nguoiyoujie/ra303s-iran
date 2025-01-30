@@ -8,19 +8,13 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x0049F3B6, _CellClass__Occupy_Down_Check_BuildingAlreadyInList
-@LJMP 0x0049F4BF, _CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings
-@LJMP 0x00455C43, _BuildingClass__Mark_MarkUp_RePlaceDown_Buildings
-
-
 [section .data] 
 _occupier_building dd 0
 _bib_cell dd 0
 _bib_type dd 0
 
 
-[section .text] 
-_CellClass__Occupy_Down_Check_BuildingAlreadyInList:
+@HACK 0x0049F3B6,0x0049F3BF,_CellClass__Occupy_Down_Check_BuildingAlreadyInList
     cmp  eax,ecx ; check is object is already in list
     jz   0x0049F3E6 ; skip the append to list if so
     lea  edx,[eax+0x1d]
@@ -30,16 +24,18 @@ _CellClass__Occupy_Down_Check_BuildingAlreadyInList:
     test eax,eax
     jnz  0x0049F3B6
     jmp  0x0049F3BF
+@ENDHACK
 
-_CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings:
+
+@HACK 0x0049F4BF,0x0049F4C5,_CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings
     ; ecx is the CellClass
     push ebx
     xor  ebx,ebx
-    mov  edx,dword [ecx + 0x19] ; CellClass->Cell_Occupier()
+    mov  edx,dword[ecx+0x19] ; CellClass->Cell_Occupier()
     test edx,edx ; check NULL
     jz   .Original_Code
 .Check:
-    mov  al,byte [edx]
+    mov  al,byte[edx]
     cmp  al,RTTIType.Building
     je   .StillHasBuilding
 .Next:
@@ -53,19 +49,20 @@ _CellClass__Occupy_Up_Recheck_Remaining_Occupants_For_Buildings:
     ; remove this building from Cell_Occupier, it will be added again in RePlaceDown
     test ebx,ebx
     jz   .Clear_Cell_Occupier
-    mov  dword [ebx + 0x1d],0
+    mov  dword[ebx+0x1d],0
     jmp   .Original_Code
 .Clear_Cell_Occupier:
-    mov  dword [ecx + 0x19],0
-    ;or   byte [ecx+0x35],0x80 ; set Flag.Occupy.Building
+    mov  dword[ecx+0x19],0
+    ;or   byte[ecx+0x35],0x80 ; set Flag.Occupy.Building
     ;jmp  0x0049F4DB
 .Original_Code:
-    and  byte [ecx+0x35],0x7f ; clear Flag.Occupy.Building
+    and  byte[ecx+0x35],0x7f ; clear Flag.Occupy.Building
     pop  ebx
     jmp  0x0049F4DB
+@ENDHACK
 
 
-_BuildingClass__Mark_MarkUp_RePlaceDown_Buildings:
+@HACK 0x00455C43,0x00455C48,_BuildingClass__Mark_MarkUp_RePlaceDown_Buildings
     jnz  0x004FEB02
     mov  ebx,[_occupier_building]
 .Check:
@@ -124,13 +121,13 @@ _BuildingClass__Mark_MarkUp_RePlaceDown_Buildings:
     push eax
     and  eax,0x7F
     mov  bl,0x80
-    mov  byte [_bib_cell + 1],al
+    mov  byte[_bib_cell+1],al
     pop  eax
     shl  eax,0x12
-    mov  byte [_bib_cell],bl
-    mov  byte [_bib_cell + 2],bl
+    mov  byte[_bib_cell],bl
+    mov  byte[_bib_cell+2],bl
     shr  eax,0x19
-    mov  byte [_bib_cell + 3],al
+    mov  byte[_bib_cell+3],al
     mov  edx,[_bib_type]
     movzx edx,dl
     mov  ebx,[_bib_cell]
@@ -151,4 +148,5 @@ _BuildingClass__Mark_MarkUp_RePlaceDown_Buildings:
     mov  dword[_occupier_building],0
     mov  eax,1
     jmp  0x00455C48 ; 0x004FE681
+@ENDHACK
 

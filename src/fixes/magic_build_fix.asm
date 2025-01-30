@@ -15,30 +15,30 @@
 @LJMP 0x004B31E9, _DisplayClass__TacticalClass__Action_Magic_Build_Fix
 
 _DisplayClass_Set_Cursor_Pos_Magic_Build_Fix:
-    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix
-    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [Spawn.Settings.FixMagicBuild], 1
+    cmp  byte[Spawn.Settings.FixMagicBuild],1
     jz   .Apply_Fix
 
     ; if fix isn't applied this check is done
-    cmp  cx, ax
+    cmp  cx,ax
     jz   0x004AFF9A
 
 .Apply_Fix:
     jmp  0x004AFF16
 
 _DisplayClass__TacticalClass__Action_Magic_Build_Fix:
-    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix
-    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [Spawn.Settings.FixMagicBuild], 1
+    cmp  byte[Spawn.Settings.FixMagicBuild],1
     jz   .Apply_Fix
 
     ; if fix isn't applied this check is done
-    cmp  ax, dx
+    cmp  ax,dx
     jz   0x004B31FE
 
 .Apply_Fix:

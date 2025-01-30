@@ -11,28 +11,60 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x00403EE3, _AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
-@LJMP 0x00403F08, _AircraftTypeClass__From_Name_Unhardcode_AircraftTypes
-@LJMP 0x00403FF3, _AircraftTypeClass__One_Time_Unhardcode_AircraftTypes
-@LJMP 0x00459850, _BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
-@LJMP 0x004F40B6, _Init_Game_Set_AircraftTypes_Heap_Count
-
-
-_AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes:
+@HACK 0x00403EE3,0x00403EE9,_AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
     Loop_Over_RULES_INI_Section_Entries str_AircraftTypes,Init_AircraftTypeClass
     ;mov  edx,[AircraftTypeClass.Count]
     ;dec  edx
     ;mov  [0x005FDF74],edx ; used by deconstructor
 .Ret:
-    lea  esp,[ebp-14h]
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx
     jmp  0x00403EE9
+@ENDHACK
 
 
+@HACK 0x00403F08,0x00403F0D,_AircraftTypeClass__From_Name_Unhardcode_AircraftTypes
+    mov  byte al,[AircraftTypeClass.Count]
+    cmp  dl,al
+    jl   0x00403F14
+    jmp  0x00403F0D
+@ENDHACK
+
+
+@HACK 0x00403FF3,0x00403FFC,_AircraftTypeClass__One_Time_Unhardcode_AircraftTypes
+    mov  al,[AircraftTypeClass.Count]
+    cmp  dl,al
+    jl   0x00403F55
+    jmp  0x00403FFC
+@ENDHACK
+
+    
+@HACK 0x00459850,0x00459855,_BuildingClass__Update_Buildables_Unhardcode_AircraftTypes
+    mov  al,[AircraftTypeClass.Count]
+    cmp  ah,al
+    jl   0x0045980F
+    jmp  0x00459855
+@ENDHACK
+
+
+@HACK 0x004F40B6,0x004F40BB,_Init_Game_Set_AircraftTypes_Heap_Count
+    ; update the stringtableoffset,if defined in Rules
+    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Aircraft,[Rules.StringTableOffsets.AircraftTypes]
+    mov  [Rules.StringTableOffsets.AircraftTypes],eax
+
+    ; update heap count
+    Get_RULES_INI_Section_Entry_Count str_AircraftTypes
+    mov  edx,eax
+    add  edx,AircraftTypeClass.ORIGINAL_COUNT
+    jmp  0x004F40BB
+@ENDHACK
+
+
+[section .text]
 Init_AircraftTypeClass:
-    mov  eax,19Dh
+    mov  eax,0x19D
     call AircraftTypeClass__new
     test eax,eax
     jz   .Ret
@@ -49,7 +81,7 @@ Init_AircraftTypeClass:
 
     ; mimic AircraftType HELI, but using Civilian text name
     push MissionType.MISSION_HUNT ; MissionType order MISSION_HUNT
-    push 20h             ; bool rotation
+    push 0x20             ; bool rotation
     push -1             ; int landingspeed
     push BuildingType.HPAD ; StructType building
     push 0               ; bool is_immune
@@ -62,7 +94,7 @@ Init_AircraftTypeClass:
     push 1               ; bool is_rotorequipped
     push 0               ; bool is_fixedwing
     push 0               ; int primarylateral
-    push 40h             ; int primaryoffset
+    push 0x40             ; int primaryoffset
     push 0               ; int verticaloffset
     ; ecx: char const * ininame
     ; ebx: int name
@@ -71,10 +103,10 @@ Init_AircraftTypeClass:
 
     ; apply offset names
     push eax
-    cmp  dword [Rules.StringTableOffsets.AircraftTypes],-1
+    cmp  dword[Rules.StringTableOffsets.AircraftTypes],-1
     je   .Default_Name
 .Offset_Name:
-    add  ebx,dword [Rules.StringTableOffsets.AircraftTypes]
+    add  ebx,dword[Rules.StringTableOffsets.AircraftTypes]
     jmp  .Continue 
 .Default_Name:
     mov  ebx,21 ; Civilian
@@ -84,35 +116,3 @@ Init_AircraftTypeClass:
 .Ret:
     retn
 
-
-_AircraftTypeClass__From_Name_Unhardcode_AircraftTypes:
-    mov  byte al,[AircraftTypeClass.Count]
-    cmp  dl,al
-    jl   0x00403F14
-    jmp  0x00403F0D
-
-
-_AircraftTypeClass__One_Time_Unhardcode_AircraftTypes:
-    mov  al,[AircraftTypeClass.Count]
-    cmp  dl,al
-    jl   0x00403F55
-    jmp  0x00403FFC
-
-    
-_BuildingClass__Update_Buildables_Unhardcode_AircraftTypes:
-    mov  al,[AircraftTypeClass.Count]
-    cmp  ah,al
-    jl   0x0045980F
-    jmp  0x00459855
-
-
-_Init_Game_Set_AircraftTypes_Heap_Count:
-    ; update the stringtableoffset,if defined in Rules
-    call_INIClass__Get_Int Globals___RuleINI,str_StringTableOffsets,str_Aircraft,[Rules.StringTableOffsets.AircraftTypes]
-    mov  [Rules.StringTableOffsets.AircraftTypes],eax
-
-    ; update heap count
-    Get_RULES_INI_Section_Entry_Count str_AircraftTypes
-    mov  edx,eax
-    add  edx,AircraftTypeClass.ORIGINAL_COUNT
-    jmp  0x004F40BB

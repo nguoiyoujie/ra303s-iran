@@ -59,26 +59,26 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
     push eax
     push edx
 
-    mov  edx, 0
-    mov  eax, %1
+    mov  edx,0
+    mov  eax,%1
 
   %%loop:
     push edx
-    AbstractTypeClass.FromIndex  edx, %2, %3, edi
+    AbstractTypeClass.FromIndex  edx,%2,%3,edi
     push eax
-	mov  edx, [edi+WeaponTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WeaponTypeClass is a pointer instead of a buffer
+	mov  edx,[edi+WeaponTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WeaponTypeClass is a pointer instead of a buffer
     call _strcmpi
-    test eax, eax
+    test eax,eax
     pop  eax
     pop  edx
     jnz  %%next
 
-    mov  %4, edi
+    mov  %4,edi
     jmp  %%done
 
   %%next:
     inc  edx
-    cmp  edx, [%2] 
+    cmp  edx,[%2] 
     jae  %%done_no_match
     jmp  %%loop
 
@@ -158,55 +158,55 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 
 %macro WeaponTypeClass.ReadBool    5
     WeaponTypeClass.ID %1,edx
-    Get_Bit byte [%1+%3], %4
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool %2, edx, %5, ecx
-    Set_Bit_Byte [%1+%3], %4, al
+    Get_Bit byte[%1+%3],%4
+    xor  ecx,ecx
+    mov  cl,al
+    call_INIClass__Get_Bool %2,edx,%5,ecx
+    Set_Bit_Byte[%1+%3],%4,al
 %endmacro
 
 %macro WeaponTypeClass.ReadByte    4
     WeaponTypeClass.ID %1,edx
-    xor  ecx, ecx
-    mov  byte cl, [%1+%3]
-    call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  byte [%1+%3], al
+    xor  ecx,ecx
+    mov  byte cl,[%1+%3]
+    call_INIClass__Get_Int %2,edx,%4,ecx
+    mov  byte[%1+%3],al
 %endmacro
 
 %macro WeaponTypeClass.ReadWord    4
     WeaponTypeClass.ID %1,edx
-    xor  ecx, ecx
-    mov  word cx, [%1+%3]
-    call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  word [%1+%3], ax
+    xor  ecx,ecx
+    mov  word cx,[%1+%3]
+    call_INIClass__Get_Int %2,edx,%4,ecx
+    mov  word[%1+%3],ax
 %endmacro
 
 %macro WeaponTypeClass.ReadInt    4
     WeaponTypeClass.ID %1,edx
-    xor  ecx, ecx
-    mov  ecx, [%1+%3]
-    call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  [%1+%3], eax
+    xor  ecx,ecx
+    mov  ecx,[%1+%3]
+    call_INIClass__Get_Int %2,edx,%4,ecx
+    mov  [%1+%3],eax
 %endmacro
 
 %macro WeaponTypeClass.ReadStringToWordExt    5
     WeaponTypeClass.ID %1,edx
-    xor  ecx, ecx
-    mov  ecx, [%1+%3]
-    mov  word [ObjectTypeClass.ValueBuffer], cx
-    xor  ecx, ecx
-    call_INIClass__Get_String %2, edx, %4, ecx, ObjectTypeClass.StringBuffer, 256
-    mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
-    test al, al
+    xor  ecx,ecx
+    mov  ecx,[%1+%3]
+    mov  word[ObjectTypeClass.ValueBuffer],cx
+    xor  ecx,ecx
+    call_INIClass__Get_String %2,edx,%4,ecx,ObjectTypeClass.StringBuffer, 256
+    mov  byte al,[ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al,al
     jz   %%null_string
   %%valid_string:
-    mov  eax, ObjectTypeClass.StringBuffer
+    mov  eax,ObjectTypeClass.StringBuffer
     call %5
-    mov  word [%1+%3], ax
+    mov  word[%1+%3],ax
     jmp  %%done
   %%null_string:
   %%done:
-    mov  dword [ObjectTypeClass.ValueBuffer], 0
+    mov  dword[ObjectTypeClass.ValueBuffer],0
 %endmacro
 
 
@@ -214,18 +214,18 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 ; returns the type class pointer as eax
 %macro Get_WeaponTypeClass    1
     push edx
-    mov  edx, [WeaponTypeClass.Count] 
-    cmp  %1, edx
+    mov  edx,[WeaponTypeClass.Count] 
+    cmp  %1,edx
     jge  %%invalid_type
 
-    mov  edx, [WeaponTypeClass.Array] 
+    mov  edx,[WeaponTypeClass.Array] 
     shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
+    add  edx,%1
+    mov  eax,[edx] 
     jmp  %%done
 
   %%invalid_type:
-    mov  eax, 0
+    mov  eax,0
   %%done:
     pop  edx
 %endmacro

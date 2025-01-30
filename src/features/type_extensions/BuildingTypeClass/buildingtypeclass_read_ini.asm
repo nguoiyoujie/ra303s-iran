@@ -9,8 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-;Read INI settings
-@LJMP 0x00453FFB, _BuildingTypeClass__Read_INI_Extended
+
 
 [section .rdata] 
 ; OccupyList, OverlapList
@@ -59,8 +58,8 @@ d_ExitCCAirstrip              dw 0xFF7F,0xFFFF,0x7F,0xFF,0xFF80,0x100,0xFF81,0x1
 Buffer_BuildingType           times 512 db 0 
 
 
-[section .text] 
-_BuildingTypeClass__Read_INI_Extended:
+;Read INI settings
+@HACK 0x00453FFB,0x00454001,_BuildingTypeClass__Read_INI_Extended
     push esi
     push edi
     push eax
@@ -151,14 +150,15 @@ _BuildingTypeClass__Read_INI_Extended:
     pop  esi
 
 .Ret:
-    lea  esp,[ebp-10h]
+    lea  esp,[ebp-0x10]
     pop  edi
     pop  esi
     pop  ecx
     jmp  0x00454001
+@ENDHACK
 
 
-
+[section .text] 
 _SelectFactoryType:
     ;select FactoryType by performing string compare on eax
     push edx
@@ -495,8 +495,8 @@ _GetSpecialsFromString:
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax],0
-    lea  eax,[eax + 1]
+    mov  byte[eax],0
+    lea  eax,[eax+1]
     mov  ebx,eax
     pop  eax
     call _SelectSpecialTypeFromString
@@ -630,50 +630,50 @@ _CustomOccupyListFromString:
     mov  edi,esi
     add  edi,BuildingTypeClass.Offset.CustomOverlapList
 .GetInstruction:
-    mov  cl, byte [eax]
+    mov  cl,byte[eax]
     inc  eax ; advance eax to the next character
 
 .CheckInstruction.S:
-    cmp  cl, 'S'
+    cmp  cl,'S'
     jne  .CheckInstruction.Dash
     add  bx,0xFF80  ; subtract 0x80 (row)
     and  bl,0x80    ; clear the column (0x0 - 0x7F)
     jmp  .GetInstruction
 
 .CheckInstruction.Dash:
-    cmp  cl, '-'
+    cmp  cl,'-'
     jne  .CheckInstruction.Next
     inc  bx         ; add one column
     jmp  .GetInstruction
 
 .CheckInstruction.Next:
-    cmp  cl, '|'
+    cmp  cl,'|'
     jne  .CheckInstruction.X
     add  bx,0x80    ; add 0x80 (row)
     and  bl,0x80    ; clear the column (0x0 - 0x7F)
     jmp  .GetInstruction
 
 .CheckInstruction.X:
-    cmp  cl, 'X'
+    cmp  cl,'X'
     jne  .CheckInstruction.O
-    mov  word [edx], bx
-    add  edx, 2
+    mov  word[edx],bx
+    add  edx,2
     inc  bx         ; add one column
     jmp  .GetInstruction
 
 .CheckInstruction.O:
-    cmp  cl, 'O'
+    cmp  cl,'O'
     jne  .CheckInstruction.Abort
-    mov  word [edi], bx
-    add  edi, 2
+    mov  word[edi],bx
+    add  edi,2
     inc  bx         ; add one column
     jmp  .GetInstruction
 
 .CheckInstruction.Abort:
     ; append the terminating 0x7FFF
     mov  bx,0x7FFF
-    mov  word [edx], bx
-    mov  word [edi], bx
+    mov  word[edx],bx
+    mov  word[edi],bx
 
     ; replace lists
     mov  edx,esi

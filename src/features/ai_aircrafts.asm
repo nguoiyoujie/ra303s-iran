@@ -19,18 +19,18 @@
 %define HouseClass.Offset.NewAQuantity_Longbow 0x2424
 %define HouseClass.Offset.NewAQuantity_Hind 0x2428
 
-@SET 0x004DC7E1, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-@SET 0x004DC7E7, {mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-@SET 0x004DC7ED, {mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-@SET 0x004DC83C, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-@SET 0x004DC842, {mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-@SET 0x004DC848, {mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-@SET 0x004DC89C, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-@SET 0x004DC8A2, {mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-@SET 0x004DC8A8, {mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
-@SET 0x004DC8FC, {mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-@SET 0x004DC902, {mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-@SET 0x004DC908, {mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
+@SET 0x004DC7E1,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+@SET 0x004DC7E7,{mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+@SET 0x004DC7ED,{mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+@SET 0x004DC83C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+@SET 0x004DC842,{mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+@SET 0x004DC848,{mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+@SET 0x004DC89C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+@SET 0x004DC8A2,{mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+@SET 0x004DC8A8,{mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
+@SET 0x004DC8FC,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+@SET 0x004DC902,{mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+@SET 0x004DC908,{mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
 
 @LJMP 0x004DC7AF, _HouseClass__AI_Aircraft_Implementation
 
@@ -46,7 +46,7 @@ Temp.AIAircraft.Count            db 0
 [section .text] 
 _HouseClass__AI_Aircraft_Implementation:
 ; first count the buildings and aircrafts
-; ECX is HouseClass
+; ecx is HouseClass
     push esi
     push ebx
     push edx

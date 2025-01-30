@@ -24,17 +24,17 @@
 str_cncnet_org db"http://cncnet.org/", 0
 str_dot db".", 0
 
-@LJMP 0x004F4D7E, _Internet_Action
+@LJMP 0x004F4D7E,_Internet_Action
 
 _Internet_Action:
-    cmp  byte [RedAlert.Options.EnableWOL], 1
+    cmp  byte[RedAlert.Options.EnableWOL],1
     jz   .Normal_Code
 
 
     push SW_MINIMIZE
-    mov  eax, [pHWnd]
+    mov  eax,[pHWnd]
     push eax
-    call dword [ShowWindow]
+    call dword[ShowWindow]
 
     push 5
     push str_dot
@@ -42,11 +42,11 @@ _Internet_Action:
     push str_cncnet_org
     push 0
     push 0
-    call dword [ShellExecuteA]
+    call dword[ShellExecuteA]
 
-    mov  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    mov  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jmp  0x004F467B
 
 .Normal_Code:
-    mov  eax, [0x0069172C]
+    mov  eax,[0x0069172C]
     jmp  0x004F4D83

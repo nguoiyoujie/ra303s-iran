@@ -1,26 +1,27 @@
-@LJMP 0x0052C2B8, _Print_CRCs_Debug_On_Check
-@LJMP 0x005C3548, _Mono_Printf_Redirect
-@LJMP 0x005CD97B, _Printf_Hook
-@LJMP 0x005B3914, _WWDebugString_Hook
-@LJMP 0x005C4720, _IconCacheClass__Draw_It_Debug
-@LJMP 0x005A8E00, _IPXInterfaceClass__Open_Socket_Debug
-@LJMP 0x005A8E72, _IPXInterfaceClass__Open_Socket_Debug2
-@LJMP 0x005A8EDA, _IPXInterfaceClass__Open_Socket_Debug3
-@LJMP 0x005A8F22, _IPXInterfaceClass__Open_Socket_Debug4
-@LJMP 0x005A8F6A, _IPXInterfaceClass__Open_Socket_Debug5
-@LJMP 0x005BBE3F, _WinTimerClass__WinTimerClass_Debug
-@LJMP 0x005D2A18, _WinModemClass__Serial_Port_Open_Debug
-@LJMP 0x005D2A8C, _WinModemClass__Serial_Port_Open_Debug2
-@LJMP 0x005A87DB, _UDPInterfaceClass__Open_Socket_Debug
-@LJMP 0x005A84A8, _WinsockInterfaceClass__Set_Socket_Options_Debug
-@LJMP 0x005A84F1, _WinsockInterfaceClass__Set_Socket_Options_Debug2
-@LJMP 0x005A81FA, _WinsockInterfaceClass__Init_Debug
-@LJMP 0x005A822D, _WinsockInterfaceClass__Init_Debug2
-@LJMP 0x0059E770, _OutputDebugStringW95_Hook
-@LJMP 0x005CDF08, _assert_Debug
+@LJMP 0x0052C2B8,_Print_CRCs_Debug_On_Check
+@LJMP 0x005C3548,_Mono_Printf_Redirect
+@LJMP 0x005CD97B,_Printf_Hook
+@LJMP 0x005B3914,_WWDebugString_Hook
+@LJMP 0x005C4720,_IconCacheClass__Draw_It_Debug
+@LJMP 0x005A8E00,_IPXInterfaceClass__Open_Socket_Debug
+@LJMP 0x005A8E72,_IPXInterfaceClass__Open_Socket_Debug2
+@LJMP 0x005A8EDA,_IPXInterfaceClass__Open_Socket_Debug3
+@LJMP 0x005A8F22,_IPXInterfaceClass__Open_Socket_Debug4
+@LJMP 0x005A8F6A,_IPXInterfaceClass__Open_Socket_Debug5
+@LJMP 0x005BBE3F,_WinTimerClass__WinTimerClass_Debug
+@LJMP 0x005D2A18,_WinModemClass__Serial_Port_Open_Debug
+@LJMP 0x005D2A8C,_WinModemClass__Serial_Port_Open_Debug2
+@LJMP 0x005A87DB,_UDPInterfaceClass__Open_Socket_Debug
+@LJMP 0x005A84A8,_WinsockInterfaceClass__Set_Socket_Options_Debug
+@LJMP 0x005A84F1,_WinsockInterfaceClass__Set_Socket_Options_Debug2
+@LJMP 0x005A81FA,_WinsockInterfaceClass__Init_Debug
+@LJMP 0x005A822D,_WinsockInterfaceClass__Init_Debug2
+@LJMP 0x0059E770,_OutputDebugStringW95_Hook
+@LJMP 0x005CDF08,_assert_Debug
 
 %define    AssertionFailed        0x005F588C
 
+[section .rdata]
 str_fopenmode db"a+",0
 str_debuglog db"DebugLog.txt",0
 str_assertlog db"Assert.txt",0
@@ -42,13 +43,14 @@ str_test2 db"test2",0
     mov  ebx,eax
     push ebx
     call fprintf
-    add  esp,0Ch
+    add  esp,0xC
     mov  eax,ebx
     call fclose
 
     Restore_Registers
 %endmacro
 
+[section .text]
 _assert_Debug:
 
     mov  edx,str_fopenmode
@@ -63,7 +65,7 @@ _assert_Debug:
     push AssertionFailed
     push ebx
     call fprintf
-    add  esp,14h
+    add  esp,0x14
 
     mov  eax,ebx
     call fclose
@@ -155,7 +157,7 @@ _Mono_Printf_Redirect:
 
 _Print_CRCs_Debug_On_Check:
     ; do cmp
-    cmp  byte [RedAlert.Options.DebugLogging],1
+    cmp  byte[RedAlert.Options.DebugLogging],1
     jz   .Debug_On
 
     retn

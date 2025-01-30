@@ -7,7 +7,7 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 @LJMP 0x004B0655, _DisplayClass__Refresh_Cells__Bounds_Check_Fix
-@CLEAR 0x004B065A, 0x90, 0x004B065B ; nop over debris after jmp
+@CLEAR 0x004B065A,0x90,0x004B065B ; nop over debris after jmp
 @LJMP 0x004B065B, _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2
 
 [section .data] 
@@ -16,20 +16,20 @@ Temp.RefreshCells_Tracker db 0
 
 [section .text] 
 _DisplayClass__Refresh_Cells__Bounds_Check_Fix:
-    mov   byte [Temp.RefreshCells_Tracker],24h ; short tlist[36]
-    lea   ebx,[ebp-58h]  
-    mov   dword [ebp-10h],eax
+    mov   byte[Temp.RefreshCells_Tracker],0x24 ; short tlist[36]
+    lea   ebx,[ebp-0x58]  
+    mov   dword[ebp-0x10],eax
     jmp   0x004B065B
 
 _DisplayClass__Refresh_Cells__Bounds_Check_Fix_2:
     push  eax
-    mov   al,byte [Temp.RefreshCells_Tracker]
+    mov   al,byte[Temp.RefreshCells_Tracker]
     test  al,al
     dec   al
-    mov   byte [Temp.RefreshCells_Tracker],al
+    mov   byte[Temp.RefreshCells_Tracker],al
     pop   eax
     jz    0x004B03AA
 
     movzx eax,word[ebx]  
-    cmp   eax,7FFFh
+    cmp   eax,0x7FFF
     jmp   0x004B0663

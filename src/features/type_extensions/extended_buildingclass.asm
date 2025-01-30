@@ -15,7 +15,7 @@ _BuildingClass__Building_Crew_House_NoBuildingCrew:
     jnz  .No_Building_Crew
 
 .Ret:
-    mov  edx,[eax+0CDh]
+    mov  edx,[eax+0xCD]
     jmp  0x0045E42F
 
 .No_Building_Crew:
@@ -34,7 +34,7 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
     jnz  .Capture_Building
 
 .Normal_Code:
-    and  eax,0FFh
+    and  eax,0xFF
     jmp  0x004EC594
 
 .Capture_Building:
@@ -57,7 +57,7 @@ _InfantryClass__What_Action_House_Instant_Capture:
     mov  ax,[eax]
     cmp  ax,bx
     setbe al
-    and  eax,0FFh
+    and  eax,0xFF
     jmp  0x004EFCB3
 
 .Capture_Building:

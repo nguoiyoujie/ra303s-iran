@@ -11,22 +11,18 @@
 
 ; Expose other technotype fields that already exist
 ;Read INI settings
-@SJMP 0x00569B6A, 0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
-@LJMP 0x00569E1F, _TechnoTypeClass__Read_INI_Extended
+@SJMP 0x00569B6A,0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
 
-@CLEAR 0x00569B6F, 0x90, 0x00569B72
-@CLEAR 0x00569B7B, 0x90, 0x00569B81 ; bug-fix: remove actual writing of value into prerequisite
-
-;_TechnoTypeClass__SkipReading_Prerequisite:
-;    jmp  0x00569B72
+@CLEAR 0x00569B6F,0x90,0x00569B72
+@CLEAR 0x00569B7B,0x90,0x00569B81 ; bug-fix: remove actual writing of value into prerequisite
 
 
-_TechnoTypeClass__Read_INI_Extended:
+@HACK 0x00569E1F,0x00569E24,_TechnoTypeClass__Read_INI_Extended
 ;========= start loading from INI ==============
     push esi
     push edi
     ;mov edi,Globals___RuleINI
-    mov  edi,[ebp-18h]
+    mov  edi,[ebp-0x18]
 
     ; Clear the fields of Risk and Reward, as they are replaced with other functions
     push eax
@@ -60,13 +56,11 @@ _TechnoTypeClass__Read_INI_Extended:
  
 .Ret:
     mov  eax,1 ;return 1
-    lea  esp,[ebp-10h]
-    pop  edi
-    pop  esi
-    pop  ecx
-    jmp  0x00569E2A
+    jmp  0x00569E24
+@ENDHACK
 
 
+[section .text]
 _GetWeaponTypeFromString:
     ;select WeaponType by performing string compare on eax
     push ebx
@@ -96,8 +90,8 @@ _GetPrerequisiteFromString:
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax],0
-    lea  eax,[eax + 1]
+    mov  byte[eax],0
+    lea  eax,[eax+1]
     mov  ebx,eax
     pop  eax
     call _SelectPrereqTypeFromString
@@ -138,10 +132,10 @@ _GetPrerequisiteExtendedFromString:
     cmp  di,0
     je  .Retn ; just return 0
 ; clear 32-bit field
-    lea  ecx,[esi + edi]
+    lea  ecx,[esi+edi]
     mov  edx,8
 .RepeatZero:
-    mov  dword [ecx],0
+    mov  dword[ecx],0
     dec  edx
     add  ecx,4
     cmp  edx,0
@@ -158,8 +152,8 @@ _GetPrerequisiteExtendedFromString:
     call _stristr
     test eax,eax
     je  .Read_Last    
-    mov  byte [eax],0
-    lea  eax,[eax + 1]
+    mov  byte[eax],0
+    lea  eax,[eax+1]
     mov  ebx,eax
     pop  eax
     call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
@@ -168,7 +162,7 @@ _GetPrerequisiteExtendedFromString:
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
     ; esi is the pointer to the type
-    lea  edx,[esi + edi]
+    lea  edx,[esi+edi]
     xor  ecx,ecx
     mov  cl,al
     shr  cl,3
@@ -177,7 +171,7 @@ _GetPrerequisiteExtendedFromString:
     and  cl,7
     mov  al,1
     shl  al,cl
-    or   byte [edx],al
+    or   byte[edx],al
     jmp  .Read_Next
 
 .Read_Last:
@@ -188,7 +182,7 @@ _GetPrerequisiteExtendedFromString:
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
     ; esi is the pointer to the type
-    lea  edx,[esi + edi]
+    lea  edx,[esi+edi]
     xor  ecx,ecx
     mov  cl,al
     shr  cl,3
@@ -197,7 +191,7 @@ _GetPrerequisiteExtendedFromString:
     and  cl,7
     mov  al,1
     shl  al,cl
-    or   byte [edx],al
+    or   byte[edx],al
     
 .Retn:
     ;mov eax,edi

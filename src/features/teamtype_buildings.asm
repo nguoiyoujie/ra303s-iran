@@ -15,15 +15,15 @@
 ; use movzx to support 255 buildings
 
 _TeamTypeClass__Read_Add_BuildingTypes_Reading:
-	mov     eax, ebx
+	mov     eax,ebx
 	call    0x004537B4   ;  StructType BuildingTypeClass::From_Name(char *)
-	cmp     al, 0FFh
+	cmp     al,0xFF
 	jz      .Read_AircraftType
-	movzx   eax, al
+	movzx   eax,al
 	call    BuildingTypeClass__As_Reference
 	jmp     0x005606C4
 
 .Read_AircraftType:
-	mov eax, ebx
+	mov eax,ebx
 	call 0x00403EF0; AircraftTypeClass::From_Name(char *)
 	jmp 0x005606A3

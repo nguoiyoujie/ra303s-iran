@@ -28,7 +28,7 @@ Temp.UnitReload.Amount    dd    0
 [section .text] 
 _UnitClass__Reload_AI_UseAmmoReloadRate:
     ; dl is the unit type id
-    mov  byte [Temp.UnitReload.ID],dl
+    mov  byte[Temp.UnitReload.ID],dl
     jmp  0x00579FB9
 
 
@@ -36,17 +36,17 @@ _UnitClass__Reload_AI_UseAmmoReloadRate2:
     jge  0x0057A0C2
     push edi
     push edx
-    mov  dl,byte [Temp.UnitReload.ID]
+    mov  dl,byte[Temp.UnitReload.ID]
     movzx edx,dl  
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadAmount.Get(edi,edx) 
-    mov  dword [Temp.UnitReload.Amount],edx
+    mov  dword[Temp.UnitReload.Amount],edx
     cmp  edx,0
     jg   .Continue
-    mov  dword [Temp.UnitReload.Amount],1
+    mov  dword[Temp.UnitReload.Amount],1
 .Continue:
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
-    mov  dword [Temp.UnitReload],edx
+    mov  dword[Temp.UnitReload],edx
     cmp  edx,0
     pop  edx
     pop  edi
@@ -72,7 +72,7 @@ _UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow:
 
 
 _UnitClass__Reload_AI_UseAmmoReloadRate3:
-    mov  edi,dword [Temp.UnitReload]
+    mov  edi,dword[Temp.UnitReload]
     imul edi,15
     jmp  0x0057A09C
 
@@ -85,34 +85,34 @@ _UnitClass__Fire_At_UpdateReload:
     movzx edx,dl  
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
-    mov  dword [Temp.UnitReload],edx
+    mov  dword[Temp.UnitReload],edx
     pop  edx
     pop  edi
     jmp  0x00580803
 
 
 _UnitClass__Fire_At_UpdateReload2:
-    mov  ebx,dword [Temp.UnitReload]
+    mov  ebx,dword[Temp.UnitReload]
     imul ebx,15
     jmp  0x00580832
 
 
 _UnitClass__Mission_Unload_Minelayer_Reload:
-    dec  dword[eax + 0xc5]
-    ;dec  dword[eax + 0xc5]
+    dec  dword[eax+0xc5]
+    ;dec  dword[eax+0xc5]
     push eax
     push ebx
     push edx
     push edi
-    mov  edx,dword[eax + 0x15c]
+    mov  edx,dword[eax+0x15c]
     movzx edx,dl
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
     imul edx,15 ; don't forget to convert seconds to ticks
     mov  ebx,dword[0x006680C4]
     ; set Reload timer (current tick, duration)
-    mov  dword[eax + 0x170],ebx
-    mov  dword[eax + 0x174],edx
+    mov  dword[eax+0x170],ebx
+    mov  dword[eax+0x174],edx
     pop  edi
     pop  edx
     pop  ebx

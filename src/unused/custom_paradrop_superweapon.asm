@@ -5,7 +5,7 @@
 _Paradrop_Superweapon_Custom:
 
     ; Amount to paradrop
-    mov  byte [eax+0A9h],30
+    mov  byte[eax+0xA9],30
 
     mov  esi,eax
 
@@ -25,7 +25,7 @@ _Paradrop_Superweapon_Custom:
 ;    mov        eax,5
 ;    call    AircraftTypeClass__As_Reference
 
-    mov  dword [esi+0ADh],eax
+    mov  dword[esi+0xAD],eax
     mov  eax,esi
     call Reinf___Do_Reinforcements
     jmp  0x004D6D40

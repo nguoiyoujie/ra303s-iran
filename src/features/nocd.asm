@@ -34,21 +34,21 @@
 %define CDList                    0x00680884
 
 _Fix_CDROM_Name_Get_Crash:
-    cmp  eax, 12
+    cmp  eax,12
     jng  .No_EAX_Adjust
-    mov  eax, 0
+    mov  eax,0
 
 .No_EAX_Adjust:
-    cmp  esi, 0FFFFFFFFh
+    cmp  esi,0xFFFFFFFF
     jnz  0x004AAE25
     jmp  0x004AAE11
 
 _Force_CD_Available:
-    cmp  byte [RedAlert.Options.NoCDMode], 1
+    cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Ret_Now
 
     push ebp
-    mov  ebp, esp
+    mov  ebp,esp
     push ebx
     push ecx
     push edx
@@ -57,18 +57,18 @@ _Force_CD_Available:
 
 .Ret_Now:
     mov  eax,1
-    RETN
+    retn
 
 _Init_CDROM_Access:
-    cmp  byte [RedAlert.Options.NoCDMode], 1
+    cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Ret_Now
 
-    sub  esp, 1Ch
-    xor  ah, ah
+    sub  esp,0x1C
+    xor  ah,ah
     jmp  0x004F7A15
 
 .Ret_Now:
-    lea  esp, [ebp-14h]
+    lea  esp,[ebp-0x14]
     pop  edi
     pop  esi
     pop  edx
@@ -76,21 +76,21 @@ _Init_CDROM_Access:
     pop  ebx
     pop  ebp
 
-    RETN
+    retn
 
 _GetCDClass__GetCDClass_GetDriveType:
-    cmp  byte [RedAlert.Options.NoCDMode], 1
+    cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Get_Hard_Drive
 
-    cmp  eax, 5
+    cmp  eax,5
     jnz  0x005CDD50
-    mov  eax, [esi+68h]
+    mov  eax,[esi+0x68]
     jmp  0x005CDD76
 
 .Get_Hard_Drive:
-    cmp  eax, 3
+    cmp  eax,3
     jnz  0x005CDD50
-    mov  eax, [esi+68h]
+    mov  eax,[esi+0x68]
     jmp  0x005CDD76
 
 _Patch_Out_Early_GetCDClass_Init:
@@ -98,7 +98,7 @@ _Patch_Out_Early_GetCDClass_Init:
 
 _Patch_In_Later_GetCDClass_Init:
 
-    mov  eax, CDList
+    mov  eax,CDList
     call GetCDClass__GetCDClass
-    mov  eax, CDList
+    mov  eax,CDList
     jmp  0x00551FCD

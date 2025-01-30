@@ -12,12 +12,12 @@
 @LJMP 0x00420662, _AircraftClass__PoseDir_HeliTransportsFaceNorth
 
 _AircraftClass__PoseDir_HeliTransportsFaceNorth:
-    mov  dl,byte [edx + 0x196] ; dl is now the ID
+    mov  dl,byte[edx+0x196] ; dl is now the ID
     movzx edx,dl
     push eax
     push ebx
     AircraftTypeClass.FromIndex(edx,ebx)
-    AircraftTypeClass.IsFixedWing.Get(ebx,al) ; check not fixed wing + passengers > 0
+    AircraftTypeClass.IsFixedWing.Get(ebx,al) ; check not fixed wingpassengers > 0
     cmp  al,0
     jnz  .IsNotHeliTransport
     TechnoTypeClass.MaxPassengers.Get(ebx,eax)

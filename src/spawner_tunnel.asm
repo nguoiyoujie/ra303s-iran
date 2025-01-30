@@ -38,12 +38,12 @@ Tunnel_SendTo:
 %define sockfd      ebp+8
 
     ; no processing if no tunnel
-    cmp  dword [tunnel_port],0
+    cmp  dword[tunnel_port],0
     je   .notunnel
 
     ; copy packet to our buffer
     mov  esi,[buf]
-    lea  edi,[var_buf + 4]
+    lea  edi,[var_buf+4]
     mov  ecx,[len]
     CLD
     REP  MOVSB
@@ -52,29 +52,29 @@ Tunnel_SendTo:
     lea  eax,[var_buf]
 
     mov  ecx,[dest_addr]
-    lea  ecx,[ecx + sockaddr_in.sin_port]
+    lea  ecx,[ecx+sockaddr_in.sin_port]
     mov  edx,[ecx]
     SHL  edx,16
-    mov  [eax], edx
+    mov  [eax],edx
 
     mov  edx,[tunnel_id]
-    SHR  edx,16
-    OR   [eax], edx
+    shr  edx,16
+    OR   [eax],edx
 
     AND  edx,0xFFFF
-    OR   [eax], edx
+    OR   [eax],edx
 
     ; set dest_addr to tunnel address
     mov  eax,[dest_addr]
-    lea  eax,[eax + sockaddr_in.sin_port]
+    lea  eax,[eax+sockaddr_in.sin_port]
     mov  edx,[tunnel_port]
-    SHR  edx,16
-    mov  word [eax],DX
+    shr  edx,16
+    mov  word[eax],DX
 
     mov  eax,[dest_addr]
-    lea  eax,[eax + sockaddr_in.sin_addr]
+    lea  eax,[eax+sockaddr_in.sin_addr]
     mov  edx,[tunnel_ip]
-    mov  dword [eax],edx
+    mov  dword[eax],edx
 
     mov  eax,[addrlen]
     push eax
@@ -112,7 +112,7 @@ Tunnel_SendTo:
     pop  esi
     mov  esp,ebp
     pop  ebp
-    RETN 24
+    retn 24
 %pop
 
 Tunnel_RecvFrom:
@@ -133,7 +133,7 @@ Tunnel_RecvFrom:
 %define sockfd      ebp+8
 
     ; no processing if no tunnel
-    cmp  dword [tunnel_port],0
+    cmp  dword[tunnel_port],0
     je   .notunnel
 
     ; call recvfrom first to get the packet
@@ -163,7 +163,7 @@ Tunnel_RecvFrom:
     sub  eax,4
 
     ; copy real packet after header to game buf
-    lea  esi,[var_buf + 4]
+    lea  esi,[var_buf+4]
     mov  edi,[buf]
     mov  ecx,eax
     CLD
@@ -179,13 +179,13 @@ Tunnel_RecvFrom:
 
     ; set from port to header identifier
     mov  ecx,[src_addr]
-    lea  ecx,[ecx + sockaddr_in.sin_port]
-    mov  word [ecx],DX
+    lea  ecx,[ecx+sockaddr_in.sin_port]
+    mov  word[ecx],DX
 
     xor  edx,edx
     mov  ecx,[src_addr]
-    lea  ecx,[ecx + sockaddr_in.sin_addr]
-    mov  dword [ecx],edx
+    lea  ecx,[ecx+sockaddr_in.sin_addr]
+    mov  dword[ecx],edx
 
     jmp  .exit
 
@@ -213,5 +213,5 @@ Tunnel_RecvFrom:
     pop  esi
     mov  esp,ebp
     pop  ebp
-    RETN 24
+    retn 24
 %pop

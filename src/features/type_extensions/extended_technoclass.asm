@@ -28,16 +28,16 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
     mov  eax,[Globals___Houses]
     mov  edx,esi
     imul edx,[eax+4]
-    mov  eax,[eax+10h]
+    mov  eax,[eax+0x10]
     add  eax,edx
 
     push eax
 
-    cmp  byte [eax+HouseClass.Offset.SecondaryColorScheme],0xFF
+    cmp  byte[eax+HouseClass.Offset.SecondaryColorScheme],0xFF
     jz   .Normal_Code
-    cmp  byte [edi],0x05 ; Is Building?
+    cmp  byte[edi],0x5 ; Is Building?
     je   .Normal_Code
-    cmp  byte [edi],0x1C ; Is Unit?
+    cmp  byte[edi],0x1C ; Is Unit?
     jnz  .Draw_Secondary_Color_Scheme
     mov  eax,edi
     call 0x00580854 ; ObjectTypeClass & const UnitClass::Class_Of(void)
@@ -83,12 +83,12 @@ _HouseClass__Remap_Table_Use_RemapType_Arg2:
 
 ; use Points instead of Risk
 _TechnoClass_Risk_UsePoints:
-    mov  eax,dword [eax + TechnoTypeClass.Offset.Points]
+    mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
     jmp  0x0056859C
 
 ; use Points instead of Reward
 _TechnoClass_Value_UsePointsInsteadOfReward:
-    mov  eax,dword [eax + TechnoTypeClass.Offset.Points]
+    mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
     jmp  0x00567638
 
 ; use Points instead of Risk/Reward
@@ -105,6 +105,6 @@ _BuildingClass_Value_UsePointsInsteadOfRiskOrReward:
 	add  eax,temp.fakes.fakeof
 	mov  eax,[eax]
     call 0x00453A6C
-    mov  eax,dword [eax + TechnoTypeClass.Offset.Points]
+    mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
     jmp  0x00460885
 

@@ -16,10 +16,9 @@
 
 ; This fix was originally in AlexB's Arda project, thank you for sharing
 
-@LJMP 0x004FDDDC, _tags_bug
-
-_tags_bug:
+@HACK 0x004FDDDC,0x004FDDE3,_tags_bug
     cmp  esi,0
     je   0x004FDDB8
-    test byte [0x006680A1],2
+    test byte[0x006680A1],2
     jmp  0x004FDDE3
+@ENDHACK

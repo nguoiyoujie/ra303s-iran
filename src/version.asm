@@ -4,7 +4,7 @@
 ; Writes the version number to the game main menu
 ;
 ;----------------------------------------------------------------
-@LJMP 0x00589960, _Version_Name
+@LJMP 0x00589960,_Version_Name
 
 %ifndef __GIT_REVISION__
 %define __GIT_REVISION__ "????"
@@ -14,8 +14,8 @@
 %define __GIT_COMMIT__ "unknown"
 %endif
 
-str_version db"3.03s r", __GIT_REVISION__, 0x0D, "git~", __GIT_COMMIT__, 0
+str_version db"3.03s r",__GIT_REVISION__,0x0D,"git~",__GIT_COMMIT__,0
 
 _Version_Name:
-    mov  eax, str_version
+    mov  eax,str_version
     retn

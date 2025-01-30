@@ -15,19 +15,19 @@ usedremaps: TIMES 25 db 0
 
 [section .text] 
 _Assign_Houses_Colour_Remaps_NULL_Check:
-    cmp  eax, 14h
+    cmp  eax,0x14
     jz   0x0053E184
     call HouseClass__As_Pointer
     jmp  0x0053E15D
 
 
 _Assign_Houses_Colour_Remaps_Cleanup:
-    mov  edx, 0
+    mov  edx,0
 
 .Loop:
-    mov  byte [usedremaps+edx], 0
+    mov  byte[usedremaps+edx],0
     inc  edx
-    cmp  edx, 24
+    cmp  edx,24
     jnz  .Loop
     pop  edi
     pop  esi
@@ -39,18 +39,18 @@ _Assign_Houses_Colour_Remaps_Cleanup:
 
 
 _Assign_Houses_Color_Remaps_Index_Check2:
-    mov  byte [usedremaps+edx], 1
+    mov  byte[usedremaps+edx],1
     call 0x004D8CA8
     jmp  0x0053DFD3
 
 
 _Assign_Houses_Color_Remaps_Indexes:
-    mov  edi, amountofremaps
+    mov  edi,amountofremaps
     jmp  0x0053E057
 
 
 _Assign_Houses_Color_Remaps_Index_Check:
-    cmp  byte cl, [usedremaps+ebx]
+    cmp  byte cl,[usedremaps+ebx]
     jnz  0x0053E059
-    mov  byte [usedremaps+ebx], 1
+    mov  byte[usedremaps+ebx],1
     jmp  0x0053E06F

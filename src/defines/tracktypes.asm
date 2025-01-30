@@ -38,7 +38,7 @@ TrackType.NewRawTracks    dd \
                          d.TrackType.Track14, -1, 0, -1
 
 
-; DIR_SW-10 = 96h
+; DIR_SW-10 = 0x96
 d.TrackType.Track14   db 0x68, 0x00, 0x21, 0xff, 0x96, \
                          0x68, 0x00, 0x21, 0xff, 0x96, \
                          0x68, 0x00, 0x2c, 0xff, 0x96, \

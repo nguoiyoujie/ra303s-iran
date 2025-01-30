@@ -26,18 +26,18 @@
     push %1
 
     pop  eax ; %1
-    mov  ebx, [eax+0x11]
-    call [ebx+0x0C]
-    mov  ebx, eax
+    mov  ebx,[eax+0x11]
+    call [ebx+0xC]
+    mov  ebx,eax
     pop  eax ; %2
-    mov  ecx, [eax+0x11]
-    call [ecx+0x0C]
-    xor  ecx, ecx
-    mov  word cx, ebx
-    xor  edx, edx
-    and  ebx, 0FFFFh     ; ebx & -1
-    mov  word dx, eax
-    and  eax, 0FFFFh     ; eax & -1
+    mov  ecx,[eax+0x11]
+    call [ecx+0xC]
+    xor  ecx,ecx
+    mov  word cx,ebx
+    xor  edx,edx
+    and  ebx,0xFFFF     ; ebx & -1
+    mov  word dx,eax
+    and  eax,0xFFFF     ; eax & -1
     call Face_Desired_Facing256
 
     pop  ecx
@@ -54,16 +54,16 @@
     push %1
 
     pop  eax ; %1
-    mov  ebx, [eax+0x11]
-    call [ebx+0x0C]
-    mov  ebx, eax
+    mov  ebx,[eax+0x11]
+    call [ebx+0xC]
+    mov  ebx,eax
     pop  eax ; %2
-    xor  ecx, ecx
-    mov  word cx, bx
-    xor  edx, edx
-    and  ebx, 0FFFFh     ; ebx & -1
-    mov  word dx, ax
-    and  eax, 0FFFFh     ; eax & -1
+    xor  ecx,ecx
+    mov  word cx,bx
+    xor  edx,edx
+    and  ebx,0xFFFF     ; ebx & -1
+    mov  word dx,ax
+    and  eax,0xFFFF     ; eax & -1
     call Face_Desired_Facing256
 
     pop  ecx
@@ -72,41 +72,41 @@
 %endmacro
 
 ; args: <identifier for unique branch identifiers>, <dirtype to check>
-; NOTE: returns 1 or 0 in eax, destroying its value
+; NOTE: returns 1 or 0 in eax,destroying its value
 %macro Is_Shooting_Northward 2
-    mov  al, %2
-    cmp  byte al, 0xE0
+    mov  al,%2
+    cmp  byte al,0xE0
     jz   .Return_True_%1
-    cmp  byte al, 0x00
+    cmp  byte al,0x00
     jz   .Return_True_%1
-    cmp  byte al, 0x20
+    cmp  byte al,0x20
     jz   .Return_True_%1
 
-    mov  eax, 0
+    mov  eax,0
     jmp  .Return_%1
 
 .Return_True_%1:
-    mov  eax, 1
+    mov  eax,1
 
 .Return_%1:
 %endmacro
 
 ; args: <identifier for unique branch identifiers>, <dirtype to check>
-; NOTE: returns 1 or 0 in eax, destroying its value
+; NOTE: returns 1 or 0 in eax,destroying its value
 %macro Is_Shooting_Southward 2
-    mov  al, %2
-    cmp  byte al, 0xA0
+    mov  al,%2
+    cmp  byte al,0xA0
     jz   .Return_True_%1
-    cmp  byte al, 0x60
+    cmp  byte al,0x60
     jz   .Return_True_%1
-    cmp  byte al, 0x80
+    cmp  byte al,0x80
     jz   .Return_True_%1
 
-    mov  eax, 0
+    mov  eax,0
     jmp  .Return_%1
 
 .Return_True_%1:
-    mov  eax, 1
+    mov  eax,1
 
 .Return_%1:
 
@@ -121,20 +121,20 @@
     push %1
 
     pop  eax ; %1
-    mov  ebx, eax
+    mov  ebx,eax
     pop  eax ; %2
-    xor  ecx, ecx
+    xor  ecx,ecx
     push ebx
-    shr  ebx, 16
-    mov  word cx, bx
+    shr  ebx,16
+    mov  word cx,bx
     pop  ebx
-    xor  edx, edx
-    and  ebx, 0FFFFh     ; ebx & -1
+    xor  edx,edx
+    and  ebx,0xFFFF     ; ebx & -1
     push eax
-    shr  eax, 16
-    mov  word dx, ax
+    shr  eax,16
+    mov  word dx,ax
     pop  eax
-    and  eax, 0FFFFh     ; eax & -1
+    and  eax,0xFFFF     ; eax & -1
     call Face_Desired_Facing8
 
     pop  ecx
@@ -143,56 +143,56 @@
 %endmacro
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_No_Building_Exception:
-    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
+    cmp  byte[Spawn.Settings.SouthAdvantageFix],0
     jz   .Normal_Code
     jmp  0x00562840
 
 .Normal_Code:
-    cmp  al, 5
+    cmp  al,5
     jnz  0x00562840
     jmp  0x005627D0
 
 _TechnoClass_In_Range_Long_Int_No_Building_Exception:
-    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
+    cmp  byte[Spawn.Settings.SouthAdvantageFix],0
     jz   .Normal_Code
 
     jmp  0x00562762
 
 .Normal_Code:
-    test eax, eax
+    test eax,eax
     jz   0x00562762
     jmp  0x005626F0
 
 ; 0x80 = shooting southward, 0x00 = shooting northward, 0xc0 = westward, 0x40 = eastward
 _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
-    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
+    cmp  byte[Spawn.Settings.SouthAdvantageFix],0
     jz   .Normal_Code
 
-    mov  ebx, eax
+    mov  ebx,eax
     call Coord___Distance_As_Coord
     push eax
-;    mov     ebx, [ecx+11h]
-;    call    dword [ebx+164h] ; TechnoClass::Turret_Facing()
+;    mov     ebx,[ecx+0x11]
+;    call    dword[ebx+0x164] ; TechnoClass::Turret_Facing()
 
-    Get_Facing_For_Coords esi, ebx
-    mov  bl, al
+    Get_Facing_For_Coords esi,ebx
+    mov  bl,al
 
-    Is_Shooting_Northward derplong, bl
-    cmp  al, 0
+    Is_Shooting_Northward derplong,bl
+    cmp  al,0
     pop  eax
 
     jz   .Dont_Patch_South_Range
 
 
-    add  eax, 256    ; eax is the distance, edi contains range, we increase the distance because this unit
+    add  eax,256    ; eax is the distance, edi contains range, we increase the distance because this unit
             ; has south advantage, 256 = one cell
 
 .Dont_Patch_South_Range:
 
-    cmp  byte [ecx], 5 ; Check for building
+    cmp  byte[ecx],5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
 
-    cmp  byte [ecx+0xcd], 0x1f
+    cmp  byte[ecx+0xcd],0x1f
     push eax
     jz   .Tesla_Coil_Adjustments
 
@@ -205,25 +205,25 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
 
 .Tesla_Coil_Adjustments:
 
-    Is_Shooting_Northward derpnorth, bl
-    cmp  al, 0
+    Is_Shooting_Northward derpnorth,bl
+    cmp  al,0
     pop  eax
     jz   .Dont_Reduce_Tesla_Coil_North_Range
 
-    add  eax, 256 ; Reduce distance by increasing distance
+    add  eax,256 ; Reduce distance by increasing distance
 
 .Dont_Reduce_Tesla_Coil_North_Range:
     push eax
 
-;    Is_Shooting_Southward  derpsouth, bl
-;    cmp     al, 0
+;    Is_Shooting_Southward  derpsouth,bl
+;    cmp     al,0
 ;    pop     eax
 ;    jz      .Dont_Increase_Tesla_Coil_South_Range
 
 
-;    cmp     eax, 256
+;    cmp     eax,256
 ;    jl      .Dont_Increase_Tesla_Coil_South_Range
-;    sub     eax, 256 ; Reduce distance by increasing distance
+;    sub     eax,256 ; Reduce distance by increasing distance
 
 ;.Dont_Increase_Tesla_Coil_South_Range:
 
@@ -240,34 +240,34 @@ _TechnoClass_In_Range_Long_Int_Distance_Check_Patched:
 
 
 _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
-    cmp  byte [Spawn.Settings.SouthAdvantageFix], 0
+    cmp  byte[Spawn.Settings.SouthAdvantageFix],0
     jz   .Normal_Code
 
-    mov  ebx, eax
+    mov  ebx,eax
     push edx
     call Coord___Distance_As_Coord
     pop  edx
     push eax
 
-    Get_Facing_For_Coords edx, ebx
-    mov  bl, al
+    Get_Facing_For_Coords edx,ebx
+    mov  bl,al
 
-    Is_Shooting_Northward derpobject, bl
-    cmp  al, 0
+    Is_Shooting_Northward derpobject,bl
+    cmp  al,0
     pop  eax
 
     jz   .Dont_Patch_South_Range
 
 
-    add  eax, 256    ; eax is the distance, edi contains range, we increase the distance because this unit
+    add  eax,256    ; eax is the distance, edi contains range, we increase the distance because this unit
             ; has south advantage, 256 = one cell
 
 .Dont_Patch_South_Range:
 
-    cmp  byte [esi], 5 ; Check for building
+    cmp  byte[esi],5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
 
-    cmp  byte [esi+0xcd], 0x1f
+    cmp  byte[esi+0xcd],0x1f
     push eax
     jz   .Tesla_Coil_Adjustments
 
@@ -281,25 +281,25 @@ _TechnoClass_In_Range_ObjectClass_Pointer_Int_Distance_Check_Patched:
 
 .Tesla_Coil_Adjustments:
 
-    Is_Shooting_Northward derpnorth2, bl
-    cmp  al, 0
+    Is_Shooting_Northward derpnorth2,bl
+    cmp  al,0
     pop  eax
     jz   .Dont_Reduce_Tesla_Coil_North_Range
 
-    add  eax, 256 ; Reduce distance by increasing distance
+    add  eax,256 ; Reduce distance by increasing distance
 
 .Dont_Reduce_Tesla_Coil_North_Range:
 ;    push    eax
 
-;    Is_Shooting_Southward  derpsouth2, bl
-;    cmp     al, 0
+;    Is_Shooting_Southward  derpsouth2,bl
+;    cmp     al,0
 ;    pop     eax
 ;    jz      .Dont_Increase_Tesla_Coil_South_Range
 
 
-;    cmp     eax, 256
+;    cmp     eax,256
 ;    jl      .Dont_Increase_Tesla_Coil_South_Range
-;    sub     eax, 256 ; Reduce distance by increasing distance
+;    sub     eax,256 ; Reduce distance by increasing distance
 
 ;.Dont_Increase_Tesla_Coil_South_Range:
 

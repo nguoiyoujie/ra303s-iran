@@ -27,7 +27,7 @@ _InfantryClass__Take_Damage_CheckDoing:
     jmp  0x004EC21B
 .Continue:
     pop  eax
-    mov  byte[ebp-10h],cl
+    mov  byte[ebp-0x10],cl
     jmp  0x004EBD55
 
 

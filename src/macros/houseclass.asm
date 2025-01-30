@@ -329,8 +329,8 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     Get_Bit byte[%1+%3],%4
     xor  ecx,ecx
     mov  cl,al
-    call_INIClass__Get_Bool %2, %5, %6, ecx
-    Set_Bit_Byte [%1+%3], %4, al
+    call_INIClass__Get_Bool %2,%5,%6,ecx
+    Set_Bit_Byte[%1+%3],%4,al
     pop  ecx
     pop  edx
 %endmacro
@@ -342,8 +342,8 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     push ecx
     xor  ecx,ecx
     mov  byte cl,[%1+%3]
-    call_INIClass__Get_Int %2, %4, %5, ecx
-    mov  byte [%1+%3],al
+    call_INIClass__Get_Int %2,%4,%5,ecx
+    mov  byte[%1+%3],al
     pop  ecx
     pop  edx
 %endmacro
@@ -354,22 +354,22 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     push ecx
     xor  ecx,ecx
     mov  byte cl,[%1+%3]
-    mov  byte [ObjectTypeClass.ValueBuffer], cl
-    xor  ecx, ecx
-    call_INIClass__Get_String %2, %4, %5, ecx, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  byte al, [ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
-    test al, al
+    mov  byte[ObjectTypeClass.ValueBuffer],cl
+    xor  ecx,ecx
+    call_INIClass__Get_String %2,%4,%5,ecx,ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
+    mov  byte al,[ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    test al,al
     jz   %%null_string
   %%valid_string:
-    mov  eax, ObjectTypeClass.StringBuffer
+    mov  eax,ObjectTypeClass.StringBuffer
     call %6
-    mov  byte [%1+%3], al
+    mov  byte[%1+%3],al
     jmp  %%done
   %%null_string:
-    ;mov  byte al, [ObjectTypeClass.ValueBuffer]
-    ;mov  byte [%1+%3], al
+    ;mov  byte al,[ObjectTypeClass.ValueBuffer]
+    ;mov  byte[%1+%3],al
   %%done:
-    mov  dword [ObjectTypeClass.ValueBuffer], 0
+    mov  dword[ObjectTypeClass.ValueBuffer],0
     pop  ecx
     pop  edx
 %endmacro
@@ -382,67 +382,67 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     test eax,eax
     jz   %%skip
     mov  ecx,6
-    mov  dl,byte [%1]
-    mov  esi,%1 + 5
-    mov  byte [eax],dl
-    mov  edx, [%1 + 1]
+    mov  dl,byte[%1]
+    mov  esi,%1+5
+    mov  byte[eax],dl
+    mov  edx,[%1+1]
     lea  edi,[eax+5]
-    mov  dword [eax+1],edx
+    mov  dword[eax+1],edx
     add  eax,0x12c
     rep movsd 
-    mov  edx,dword [%1 + 0x1d]
+    mov  edx,dword[%1+0x1D]
     mov  ecx,0x40
-    mov  dword [eax-0x10b],0x005F6468
-    mov  esi,%1 + HouseTypeClass.Offset.Suffix
-    mov  dword [eax-0x10f],edx
-    mov  dl,byte [%1 + HouseTypeClass.Offset.House]
+    mov  dword[eax-0x10b],0x005F6468
+    mov  esi,%1+HouseTypeClass.Offset.Suffix
+    mov  dword[eax-0x10f],edx
+    mov  dl,byte[%1+HouseTypeClass.Offset.House]
     lea  edi,[eax-0x106]
-    mov  byte [eax-0x107],dl
-    mov  edx,[%1 + 0x126]
+    mov  byte[eax-0x107],dl
+    mov  edx,[%1+0x126]
     rep movsd 
-    mov  dword [eax-6],edx
-    mov  dl,byte [%1 + HouseTypeClass.Offset.RemapColor]
-    mov  byte [eax-2],dl
-    mov  dl,byte [%1 + HouseTypeClass.Offset.Prefix]
-    mov  byte [eax-1],dl
-    mov  edx,%1 + HouseTypeClass.Offset.FirepowerBias
+    mov  dword[eax-6],edx
+    mov  dl,byte[%1+HouseTypeClass.Offset.RemapColor]
+    mov  byte[eax-2],dl
+    mov  dl,byte[%1+HouseTypeClass.Offset.Prefix]
+    mov  byte[eax-1],dl
+    mov  edx,%1+HouseTypeClass.Offset.FirepowerBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.FirepowerBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 + HouseTypeClass.Offset.GroundspeedBias
+    mov  dx,word[%1+HouseTypeClass.Offset.FirepowerBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.GroundspeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.GroundspeedBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 + HouseTypeClass.Offset.AirspeedBias
+    mov  dx,word[%1+HouseTypeClass.Offset.GroundspeedBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.AirspeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.AirspeedBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 + HouseTypeClass.Offset.ArmorBias
+    mov  dx,word[%1+HouseTypeClass.Offset.AirspeedBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.ArmorBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.ArmorBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 + HouseTypeClass.Offset.ROFBias
+    mov  dx,word[%1+HouseTypeClass.Offset.ArmorBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.ROFBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.ROFBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 + HouseTypeClass.Offset.CostBias
+    mov  dx,word[%1+HouseTypeClass.Offset.ROFBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.CostBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     add  eax,2
-    mov  dx,word [%1 + HouseTypeClass.Offset.CostBias]
-    mov  word [eax-2],dx
-    mov  edx,%1 +  HouseTypeClass.Offset.BuildSpeedBias
+    mov  dx,word[%1+HouseTypeClass.Offset.CostBias]
+    mov  word[eax-2],dx
+    mov  edx,%1+HouseTypeClass.Offset.BuildSpeedBias
     call 0x0041CB70 ; fixed::Data::Composite::Composite(fixed::Data::Composite &)
     sub  eax,0x138
-    mov  dx,word [%1 + HouseTypeClass.Offset.BuildSpeedBias]
-    mov  word [eax+0x138],dx
-    mov  dword [eax+0x21],0x005FA8A8
-    ;mov  dword [HouseTypeClass.DestructorPtrs-0x14*8+%2*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
-    ;mov  dword [HouseTypeClass.DestructorPtrs-0x14*8+4+%2*8],%1
-    ;mov  dword [eax+0x21],HouseTypeClass.DestructorPtrs;+0xC*8 ;0x005FA8A8
+    mov  dx,word[%1+HouseTypeClass.Offset.BuildSpeedBias]
+    mov  word[eax+0x138],dx
+    mov  dword[eax+0x21],0x005FA8A8
+    ;mov  dword[HouseTypeClass.DestructorPtrs-0x14*8+%2*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
+    ;mov  dword[HouseTypeClass.DestructorPtrs-0x14*8+4+%2*8],%1
+    ;mov  dword[eax+0x21],HouseTypeClass.DestructorPtrs;+0xC*8 ;0x005FA8A8
 %%skip:
 %endmacro

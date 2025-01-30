@@ -7,43 +7,32 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-
-@LJMP 0x0056586D, _TechnoClass__Player_Assign_Mission_CheckIfInfiltrate
-@LJMP 0x004EBECD, _InfantryClass__Take_Damage_RememberID
-@LJMP 0x004EBF33, _InfantryClass__Take_Damage_DeathReport1
-@LJMP 0x004EBF68, _InfantryClass__Take_Damage_DeathReport2
-@LJMP 0x004EBF9F, _InfantryClass__Take_Damage_DeathReport3
-@LJMP 0x004EBFD6, _InfantryClass__Take_Damage_DeathReport4
-@LJMP 0x004EC002, _InfantryClass__Take_Damage_DeathReport5
-@LJMP 0x004EF463, _InfantryClass__Response_Select_CustomVoice
-@LJMP 0x004EF6C3, _InfantryClass__Response_Move_CustomVoice
-@LJMP 0x004EF92B, _InfantryClass__Response_Attack_CustomVoice
-
 [section .data] 
 Temp.DeathInfantryID db 0
 Temp.ResponseMission db 0
 
 
-[section .text] 
 ; used for Infantry, Unit and Vessel
-_TechnoClass__Player_Assign_Mission_CheckIfInfiltrate:
-    mov  dl,byte[ebp-0xc]
+@HACK 0x0056586D,0x00565872,_TechnoClass__Player_Assign_Mission_CheckIfInfiltrate
+    mov  dl,byte[ebp-0xC]
     mov  byte[Temp.ResponseMission],dl
     mov  edx,dword[esi+0x11]
     mov  eax,esi
     jmp  0x00565872
+@ENDHACK
 
 
-_InfantryClass__Take_Damage_RememberID:
+@HACK 0x004EBECD,0x004EBED3,_InfantryClass__Take_Damage_RememberID
     movzx eax,al
     mov  byte[Temp.DeathInfantryID],al
     cmp  eax,5
     jmp  0x004EBED3
+@ENDHACK
 
 
 ; %1 - deathtyppe: 1 to 5
 ; %2 - register to place the result, unmodified if no custom deathreport is found. Expects ebx or edx
-%macro GetCustomDeathReport 2
+%macro GetCustomInfDeathReport 2
     ; eax and ecx are available
     mov  al,byte[Temp.DeathInfantryID] ; ID
     movzx eax,al
@@ -123,43 +112,49 @@ _InfantryClass__Take_Damage_RememberID:
 %endmacro
 
 
-_InfantryClass__Take_Damage_DeathReport1:
-    GetCustomDeathReport 1,dx
+@HACK 0x004EBF33,0x004EBF38,_InfantryClass__Take_Damage_DeathReport1
+    GetCustomInfDeathReport 1,dx
     movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF38
+@ENDHACK
 
 
-_InfantryClass__Take_Damage_DeathReport2:
-    GetCustomDeathReport 2,dx
+@HACK 0x004EBF68,0x004EBF6D,_InfantryClass__Take_Damage_DeathReport2
+    GetCustomInfDeathReport 2,dx
     movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBF6D
+@ENDHACK
 
 
-_InfantryClass__Take_Damage_DeathReport3:
-    GetCustomDeathReport 3,dx
+@HACK 0x004EBF9F,0x004EBFA4,_InfantryClass__Take_Damage_DeathReport3
+    GetCustomInfDeathReport 3,dx
     movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFA4
+@ENDHACK
 
 
-_InfantryClass__Take_Damage_DeathReport4:
+
+@HACK 0x004EBFD6,0x004EBFDB,_InfantryClass__Take_Damage_DeathReport4
     ; ebx is the sound
-    GetCustomDeathReport 4,bx
+    GetCustomInfDeathReport 4,bx
     movzx ebx,bx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EBFDB
+@ENDHACK
 
 
-_InfantryClass__Take_Damage_DeathReport5:
-    GetCustomDeathReport 5,dx
+@HACK 0x004EC002,0x004EC007,_InfantryClass__Take_Damage_DeathReport5
+    GetCustomInfDeathReport 5,dx
     movzx edx,dx
     mov  ecx,0xFFFFFFFF
     jmp  0x004EC007
+@ENDHACK
 
 
-_InfantryClass__Response_Select_CustomVoice:
+@HACK 0x004EF463,0x004EF46A,_InfantryClass__Response_Select_CustomVoice
     push eax
     mov  al,byte[eax+0x196] ; ID
     movzx eax,al
@@ -170,14 +165,14 @@ _InfantryClass__Response_Select_CustomVoice:
     pop  ecx
     lea  ecx,[edx+InfantryTypeClass.Offset.Response_Select_Data]
     jmp  0x004EF5B6
-
 .Retn:
     pop  eax
     test byte[eax+0x192],0x10 ; IsCivilian
     jmp  0x004EF46A
+@ENDHACK
 
 
-_InfantryClass__Response_Move_CustomVoice:
+@HACK 0x004EF6C3,0x004EF6CA,_InfantryClass__Response_Move_CustomVoice
     push eax
     mov  al,byte[eax+0x196] ; ID
     movzx eax,al
@@ -186,7 +181,6 @@ _InfantryClass__Response_Move_CustomVoice:
     je   .UseInvade
     cmp  byte[Temp.ResponseMission],MissionType.MISSION_SABOTAGE
     jne  .UseMove
-
 .UseInvade:
     InfantryTypeClass.Response_Invade.Get(edx,eax)
     test eax,eax
@@ -194,7 +188,6 @@ _InfantryClass__Response_Move_CustomVoice:
     pop  ecx
     lea  ecx,[edx+InfantryTypeClass.Offset.Response_Invade_Data]
     jmp  0x004EF826
-
 .UseMove:
     InfantryTypeClass.Response_Move.Get(edx,eax)
     test eax,eax
@@ -202,14 +195,14 @@ _InfantryClass__Response_Move_CustomVoice:
     pop  ecx
     lea  ecx,[edx+InfantryTypeClass.Offset.Response_Move_Data]
     jmp  0x004EF826
-
 .Retn:
     pop  eax
     test byte[eax+0x192],0x10 ; IsCivilian
     jmp  0x004EF6CA
+@ENDHACK
 
 
-_InfantryClass__Response_Attack_CustomVoice:
+@HACK 0x004EF92B,0x004EF932,_InfantryClass__Response_Attack_CustomVoice
     push eax
     mov  al,byte[eax+0x196] ; ID
     movzx eax,al
@@ -220,8 +213,9 @@ _InfantryClass__Response_Attack_CustomVoice:
     pop  ecx
     lea  ecx,[edx+InfantryTypeClass.Offset.Response_Attack_Data]
     jmp  0x004EFA70
-
 .Retn:
     pop  eax
     test byte[eax+0x192],0x10 ; IsCivilian
     jmp  0x004EF932
+@ENDHACK
+

@@ -11,7 +11,7 @@
 @LJMP 0x0045FF34, _BuildingClass_Repair_AI_Singleplayer_Sellback
 
 _BuildingClass_Repair_AI_SingleplayerRepair:
-    cmp  dword [InCoopMode],1 ; inherited from coop mode
+    cmp  dword[InCoopMode],1 ; inherited from coop mode
     je   0x0046007C
     cmp  byte[Rules.AI.RepairConstructedBuildingsInSingleplayer],1
     je   0x00460089
@@ -21,7 +21,7 @@ _BuildingClass_Repair_AI_SingleplayerRepair:
 
 
 _BuildingClass_Repair_AI_Singleplayer_Sellback:
-    cmp  dword [InCoopMode],1 ; inherited from coop mode
+    cmp  dword[InCoopMode],1 ; inherited from coop mode
     je   0x00460176
     cmp  byte[Rules.AI.RepairConstructedBuildingsInSingleplayer],1
     je   0x0045FF41

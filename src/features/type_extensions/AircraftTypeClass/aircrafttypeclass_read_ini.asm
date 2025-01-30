@@ -10,9 +10,7 @@
 ;----------------------------------------------------------------
 
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
-@LJMP 0x005374C5, _RulesClass_Objects_Replace_AircraftTypes_Read_INI
-
-_RulesClass_Objects_Replace_AircraftTypes_Read_INI:
+@HACK 0x005374C5,0x005374D4,_RulesClass_Objects_Replace_AircraftTypes_Read_INI
     mov  dword eax,[esi+eax]
     mov  edx,ebx
     mov  dword edi,[eax+0x21]
@@ -20,7 +18,10 @@ _RulesClass_Objects_Replace_AircraftTypes_Read_INI:
     inc  ecx
     call AircraftTypes_Read_INI
     jmp 0x005374D4
+@ENDHACK
 
+
+[section .text]
 AircraftTypes_Read_INI:
     push  ebp
     mov   ebp,esp
@@ -53,7 +54,7 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.Response_Attack.Read(esi,edi,_GetAircraftResponseAttackFromString)
 
     lea  edx,[esi+5]
-    Get_Bit byte [esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
+    Get_Bit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
     xor  ecx,ecx
     mov  cl,al
     call_INIClass__Get_Bool edi,edx,str.AircraftTypeClass.IsFixedWing,ecx
@@ -65,7 +66,7 @@ AircraftTypes_Read_INI:
 .SetPreferredBuilding_Airstrip:
     mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.AFLD
 .After_SetPreferredBuilding:
-    Set_Bit_Byte [esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
+    Set_Bit_Byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
 
     pop  edi
     pop  esi

@@ -28,128 +28,128 @@ temp_cell dd 0
 
 [section .text] 
 _DisplayClass_Cell_Shadow_SaveCell:
-    mov  dword [temp_cell],eax
-    lea  esi,[ebx + 0x1c]
+    mov  dword[temp_cell],eax
+    lea  esi,[ebx+0x1c]
     mov  ebx,eax
     jmp  0x004B06C9
 
 _DisplayClass_Cell_Shadow_In_Radar_Check0:
-    sub  eax, 0x1d3a
+    sub  eax,0x1d3a
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    sub  edx, 129
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    sub  edx,129
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0709
     jmp  0x004B0701
 
 _DisplayClass_Cell_Shadow_In_Radar_Check1:
-    add  eax, 0x3a
+    add  eax,0x3a
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    sub  edx, 128
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    sub  edx,128
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0717
-    test cl, 4
+    test cl,4
     jmp  0x004B0712
 
 _DisplayClass_Cell_Shadow_In_Radar_Check2:
-    add  eax, 0x3a
+    add  eax,0x3a
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    sub  edx, 127
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    sub  edx,127
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0725
-    test ch, 4
+    test ch,4
     jmp  0x004B0720
 
 _DisplayClass_Cell_Shadow_In_Radar_Check3:
-    add  eax, 0x1c8c
+    add  eax,0x1c8c
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    sub  edx, 1
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    sub  edx,1
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0738
-    test bl, 4
+    test bl,4
     jmp  0x004B0733
 
 _DisplayClass_Cell_Shadow_In_Radar_Check4:
-    add  eax, 0x74
+    add  eax,0x74
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    add  edx, 1
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    add  edx,1
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0746
-    test bh, 4
+    test bh,4
     jmp  0x004B0741
 
 _DisplayClass_Cell_Shadow_In_Radar_Check5:
-    add  eax, 0x1c8c
+    add  eax,0x1c8c
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    add  edx, 127
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    add  edx,127
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0759
-    test cl, 4
+    test cl,4
     jmp  0x004B0754
 
 _DisplayClass_Cell_Shadow_In_Radar_Check6:
-    add  eax, 0x3a
+    add  eax,0x3a
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    add  edx, 128
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    add  edx,128
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0767
-    test ch, 4
+    test ch,4
     jmp  0x004B0762
 
 _DisplayClass_Cell_Shadow_In_Radar_Check7:
-    add  eax, 0x3a
+    add  eax,0x3a
     push eax
     push edx
-    mov  eax, Globals___Map
-    mov  edx, dword [temp_cell]
-    add  edx, 129
+    mov  eax,Globals___Map
+    mov  edx,dword[temp_cell]
+    add  edx,129
     call MapClass__In_Radar
-    test eax, eax
+    test eax,eax
     pop  edx
     pop  eax
     jz   0x004B0775
-    test bl, 4
+    test bl,4
     jmp  0x004B0770
 
 _ScenarioClass_Fill_In_Data_Skip_MapEdge_Setup:

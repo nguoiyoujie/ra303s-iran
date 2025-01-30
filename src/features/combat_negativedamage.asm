@@ -66,6 +66,6 @@ _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons:
     pop  ecx
     test eax,eax  
     jl   0x00564524
-    mov  ebx,dword [ecx + 0x11]
+    mov  ebx,dword[ecx+0x11]
     mov  eax,ecx
     jmp  0x0056451c

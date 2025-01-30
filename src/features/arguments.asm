@@ -50,20 +50,20 @@ presetscenarioname                                   times 128 db 0
 [section .text] 
 _Select_Game_AntMissions_Check:
 
-    cmp  byte [presetscenarioenabled],1
+    cmp  byte[presetscenarioenabled],1
     jnz  .Check_AntMission
 	
-    mov  byte [presetscenarioenabled],0
-    mov  dword [ebp-30h],2
+    mov  byte[presetscenarioenabled],0
+    mov  dword[ebp-0x30],2
     jmp  0x005025D4
 
 .Check_AntMission:
-    cmp  byte [antmissionsenabled],1
+    cmp  byte[antmissionsenabled],1
     jne  .Jump_Back	
 
-    mov  byte [antmissionsenabled],0
-    mov  byte [Globals___AntsEnabled],1
-    mov  dword [ebp-30h],2
+    mov  byte[antmissionsenabled],0
+    mov  byte[Globals___AntsEnabled],1
+    mov  dword[ebp-0x30],2
     xor  edi,edi
 
 .Jump_Back:
@@ -81,8 +81,8 @@ _arguments:
     cmp  eax,ecx ; check if match is found at the start of the string
     pop  ecx
     jne  .lan    
-	lea  eax,[eax + 3] ; -M:
-    mov  byte [presetscenarioenabled],1
+	lea  eax,[eax+3] ; -M:
+    mov  byte[presetscenarioenabled],1
     push eax
     push presetscenarioname
 	call _strcpy
@@ -94,7 +94,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .skirmish
-    mov  byte [Globals___Session_Type],GameType.GAME_IPX
+    mov  byte[Globals___Session_Type],GameType.GAME_IPX
     jmp  .Ret
 
 .skirmish:
@@ -103,7 +103,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .antmissions
-    mov  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    mov  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jmp  .Ret
 
 .antmissions:
@@ -112,7 +112,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .skiptitle
-    mov  byte [antmissionsenabled],1
+    mov  byte[antmissionsenabled],1
     jmp  .Ret
 
 .skiptitle:
@@ -121,7 +121,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .onetime    
-    mov  byte [skiptitle],1
+    mov  byte[skiptitle],1
     jmp  .Ret
 	
 .onetime:
@@ -130,8 +130,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .deasy    
-    mov  byte [onetimeenabled],1
-    mov  byte [closegamestate],1
+    mov  byte[onetimeenabled],1
+    mov  byte[closegamestate],1
     jmp  .Ret
 	
 .deasy:
@@ -140,8 +140,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .deasyf
-    mov  byte [presetdifficulty],0
-    mov  byte [presetdifficultyenabled],1
+    mov  byte[presetdifficulty],0
+    mov  byte[presetdifficultyenabled],1
     jmp  .Ret
 
 .deasyf:
@@ -150,8 +150,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .dnorm
-    mov  byte [presetdifficulty],1
-    mov  byte [presetdifficultyenabled],1
+    mov  byte[presetdifficulty],1
+    mov  byte[presetdifficultyenabled],1
     jmp  .Ret
 
 .dnorm:
@@ -160,8 +160,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .dhardf
-    mov  byte [presetdifficulty],2
-    mov  byte [presetdifficultyenabled],1
+    mov  byte[presetdifficulty],2
+    mov  byte[presetdifficultyenabled],1
     jmp  .Ret
 
 .dhardf:
@@ -170,8 +170,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .dhard
-    mov  byte [presetdifficulty],3
-    mov  byte [presetdifficultyenabled],1
+    mov  byte[presetdifficulty],3
+    mov  byte[presetdifficultyenabled],1
     jmp  .Ret
 
 .dhard:
@@ -180,8 +180,8 @@ _arguments:
     call _stristr
     test eax,eax
     je   .newmissions
-    mov  byte [presetdifficulty],4
-    mov  byte [presetdifficultyenabled],1
+    mov  byte[presetdifficulty],4
+    mov  byte[presetdifficultyenabled],1
     jmp  .Ret
 
 .newmissions:
@@ -190,7 +190,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .internet
-    mov  byte [newmissionsenabled],1
+    mov  byte[newmissionsenabled],1
     jmp  .Ret
 
 .internet:
@@ -199,7 +199,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .record
-    mov  byte [Globals___Session_Type],GameType.GAME_INTERNET
+    mov  byte[Globals___Session_Type],GameType.GAME_INTERNET
 
 .record:
     mov  edx,str_arg_Record
@@ -207,7 +207,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .playback
-    or   byte [recording_mode],5
+    or   byte[recording_mode],5
 
 .playback:
     mov  edx,str_arg_Playback
@@ -215,7 +215,7 @@ _arguments:
     call _stristr
     test eax,eax
     je   .Ret
-    or   byte [recording_mode],6
+    or   byte[recording_mode],6
 
 .Ret:
     mov  edx,str_arg_Attract
@@ -224,65 +224,65 @@ _arguments:
 
 _Select_Game_SkipDifficulty:
     xor  eax,eax
-    mov  al,byte [presetdifficultyenabled]
+    mov  al,byte[presetdifficultyenabled]
     test al,al
     jnz  .SkipDialog
-    mov  byte [presetdifficultyenabled],0
+    mov  byte[presetdifficultyenabled],0
     xor  eax,eax
-    mov  al,byte [ebp - 0x18]
+    mov  al,byte[ebp - 0x18]
     call 0x00551728
     jmp  .Ret
 .SkipDialog:
-    mov  al,byte [presetdifficulty]
+    mov  al,byte[presetdifficulty]
 .Ret:
     jmp  0x004F4976
 
 _Select_Game_SkipDifficulty2:
     xor  eax,eax
-    mov  al,byte [presetdifficultyenabled]
+    mov  al,byte[presetdifficultyenabled]
     test al,al
-    mov  byte [presetdifficultyenabled],0
+    mov  byte[presetdifficultyenabled],0
     jnz  .SkipDialog
     xor  eax,eax
     call 0x00551728
     jmp  .Ret
 .SkipDialog:
-    mov  al,byte [presetdifficulty]
+    mov  al,byte[presetdifficulty]
 .Ret:
     jmp  0x004F4A2A
 
 
 _Select_Game_SetScenarioName:
-    mov  al,byte [presetscenarioname]
+    mov  al,byte[presetscenarioname]
     test al,al
     jz   .Ret
 .SetName:
     mov  edx,presetscenarioname
     mov  eax,Globals___Scen
     call ScenarioClass__Set_Scenario_Name
-    mov  byte [presetscenarioname],0 ;invalidate the preset scenario name
+    mov  byte[presetscenarioname],0 ;invalidate the preset scenario name
 	jmp  0x004F4ADC
 .Ret:
-    cmp  dword [Globals___AntsEnabled],0
+    cmp  dword[Globals___AntsEnabled],0
     jmp  0x004F4A74
 
 
 _Init_Game_SkipIntro:
-    cmp  byte [skiptitle],1
+    cmp  byte[skiptitle],1
     jz   0x004F4377
-    test byte [0x00669908],0x4 
+    test byte[0x00669908],0x4 
     jmp  0x004F42A6
 
 
 _Main_Game_AutoExit:
-    cmp  byte [closegamestate],0
+    cmp  byte[closegamestate],0
     jz   .SelectGame	
-    cmp  byte [closegamestate],1
+    cmp  byte[closegamestate],1
 	jz   .SetCloseNextTime
     xor  eax,eax
 	jmp  .Ret
 .SetCloseNextTime:
-    mov  byte [closegamestate],0xff
+    mov  byte[closegamestate],0xff
 .SelectGame:
     mov  eax,[0x005FEDBC] 
     call Init___Select_Game

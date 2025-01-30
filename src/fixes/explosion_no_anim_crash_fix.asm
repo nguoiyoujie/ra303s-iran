@@ -8,42 +8,37 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x005665D3, _TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE
-@LJMP 0x00566547, _TechnoClass_Take_Damage_UseDeathWeapon
-
-_TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE:
-; check eax return of Combat_Anim
-
+@HACK 0x005665D3,0x005665DC,_TechnoClass_Take_Damage_SkipAnim_if_ANIM_NONE
+    ; check eax return of Combat_Anim
     cmp   al,0xFF
 	;jz    0x005665E1  ;; AnimClass already allocated, skipping will result in crash
 	jnz   .Normal
 	mov   al,8 ;ANIM_NAPALM2
 .Normal:
-    mov   ebx,dword [ebp - 0x20]
+    mov   ebx,dword[ebp-0x20]
     movsx edx,al
-    mov   eax,dword [ebp - 0x1c]
+    mov   eax,dword[ebp-0x1c]
     jmp   0x005665DC
-	
+@ENDHACK
 
-_TechnoClass_Take_Damage_UseDeathWeapon:
-    mov  edx,dword [eax + TechnoTypeClass.Offset.DeathWeapon]
+
+@HACK 0x00566547,0x0056654D,_TechnoClass_Take_Damage_UseDeathWeapon
+    mov  edx,dword[eax+TechnoTypeClass.Offset.DeathWeapon]
     test edx,edx
-
     jz   .UsePrimaryWeapon
-    mov  edx,dword [esi + 0x11]
+    mov  edx,dword[esi+0x11]
     mov  eax,esi
-    call dword [edx + 0x34]
-    mov  eax,dword [eax + TechnoTypeClass.Offset.DeathWeapon]
+    call dword[edx+0x34]
+    mov  eax,dword[eax+TechnoTypeClass.Offset.DeathWeapon]
 ; Use the Weapon damage
-	mov  edi,dword [eax + WeaponTypeClass.Offset.Damage]
-    mov  eax,dword [eax + WeaponTypeClass.Offset.WarheadPtr]
-    mov  al,byte [eax]
-    mov  byte [ebp - 0x14],al
+	mov  edi,dword[eax+WeaponTypeClass.Offset.Damage]
+    mov  eax,dword[eax+WeaponTypeClass.Offset.WarheadPtr]
+    mov  al,byte[eax]
+    mov  byte[ebp-0x14],al
     ;jmp  0x0056656A ; use unit's MaxStrength as the blast damage
     jmp  0x0056657B
-
-
 .UsePrimaryWeapon:
-    mov  edx,dword [eax + TechnoTypeClass.Offset.PrimaryWeapon]
+    mov  edx,dword[eax+TechnoTypeClass.Offset.PrimaryWeapon]
     jmp  0x0056654D
+@ENDHACK
 	

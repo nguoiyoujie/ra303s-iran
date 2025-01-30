@@ -13,7 +13,7 @@ _Animate_Score_Objs_PseudoSeenBuff_NULL_Check:
     cmp  dword esi,0
     je   .Ret
 
-    mov  eax,[esi+20h]
+    mov  eax,[esi+0x20]
     xor  edi,edi
     jmp  0x005464F3
 

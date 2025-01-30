@@ -39,14 +39,14 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
 %macro AbstractTypeClass.FromIndex    4
     push esi
     push edi
-    mov  esi, [%2] 
-    mov  edi, %1
-    cmp  edi, esi
+    mov  esi,[%2] 
+    mov  edi,%1
+    cmp  edi,esi
     jae  %%invalid_type
 
-    mov  esi, [%3] 
-    shl  edi, 2
-    add  esi, edi
+    mov  esi,[%3] 
+    shl  edi,2
+    add  esi,edi
     pop  edi
     mov  %4, [esi] 
     jmp  %%done
@@ -59,7 +59,7 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
 %endmacro
 
 ; args <pointer to string>,<pointer to type count>,<pointer to type array>,<register to output the result to>
-; %4 must not be esi, edi or edx
+; %4 must not be esi,edi or edx
 ; return <output>: the type class pointer, or 0 / NULL if invalid
 %macro AbstractTypeClass.FromID    4
     push esi
@@ -67,8 +67,8 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
     push eax
     push edx
 
-    mov  edx, 0
-    mov  eax, %1
+    mov  edx,0
+    mov  eax,%1
 
   %%loop:
     AbstractTypeClass.FromIndex  edx,%2,%3,edi
@@ -79,16 +79,16 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
     call _strcmpi
     pop  edi
     pop  edx
-    test eax, eax
+    test eax,eax
     pop  eax
     jnz  %%next
 
-    mov  %4, edi
+    mov  %4,edi
     jmp  %%done
 
   %%next:
     inc  edx
-    cmp  edx, [%2] 
+    cmp  edx,[%2] 
     jae  %%done_no_match
     jmp  %%loop
 

@@ -46,33 +46,33 @@
 
 _HouseClass__Recalc_Attributes_SetSpecialTypes:
 ;ecx is 0
-    mov  dword [eax + HouseClass.Offset.BScan],ecx
-    mov  dword [eax + HouseClass.Offset.ActiveBScan],ecx
-    mov  dword [eax + HouseClass.Offset.UScan],ecx
-    mov  dword [eax + HouseClass.Offset.ActiveUScan],ecx
-    mov  dword [eax + HouseClass.Offset.IScan],ecx
-    mov  dword [eax + HouseClass.Offset.ActiveIScan],ecx
-    mov  dword [eax + HouseClass.Offset.AScan],ecx
-    mov  dword [eax + HouseClass.Offset.ActiveAScan],ecx
-    mov  dword [eax + HouseClass.Offset.VScan],ecx
-    mov  dword [eax + HouseClass.Offset.ActiveVScan],ecx
-    mov  dword [eax + HouseClass.Offset.BPreGroupScan],ecx
+    mov  dword[eax+HouseClass.Offset.BScan],ecx
+    mov  dword[eax+HouseClass.Offset.ActiveBScan],ecx
+    mov  dword[eax+HouseClass.Offset.UScan],ecx
+    mov  dword[eax+HouseClass.Offset.ActiveUScan],ecx
+    mov  dword[eax+HouseClass.Offset.IScan],ecx
+    mov  dword[eax+HouseClass.Offset.ActiveIScan],ecx
+    mov  dword[eax+HouseClass.Offset.AScan],ecx
+    mov  dword[eax+HouseClass.Offset.ActiveAScan],ecx
+    mov  dword[eax+HouseClass.Offset.VScan],ecx
+    mov  dword[eax+HouseClass.Offset.ActiveVScan],ecx
+    mov  dword[eax+HouseClass.Offset.BPreGroupScan],ecx
     ; zero out 32-bit SpecialScan
-    lea  eax, [Houses.SpecialScan]
-    lea  eax, [eax + edx*4]
-    mov  dword [eax],ecx
+    lea  eax,[Houses.SpecialScan]
+    lea  eax,[eax+edx*4]
+    mov  dword[eax],ecx
     ; zero out 8-bit Radar
-    lea  eax, [Houses.Radar]
-    lea  eax, [eax + edx]
-    mov  byte [eax],cl
+    lea  eax,[Houses.Radar]
+    lea  eax,[eax+edx]
+    mov  byte[eax],cl
     ; zero out 256-bit BScan
-    lea  eax, [Houses.BScan]
+    lea  eax,[Houses.BScan]
     push edx
     shl  edx,5
-    lea  eax, [eax + edx]
+    lea  eax,[eax+edx]
     mov  edx,8
 .RepeatZero:
-    mov  dword [eax],ecx
+    mov  dword[eax],ecx
     dec  edx
     add  eax,4
     cmp  edx,0
@@ -84,11 +84,11 @@ _HouseClass__Recalc_Attributes_SetSpecialTypes:
 _HouseClass__Super_Weapon_Handler_GPS_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x100   ; GPS 1 << 8
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x100   ; GPS 1 << 8
     pop  ebx   
     pop  ecx   
     jmp  0x004D519A
@@ -96,11 +96,11 @@ _HouseClass__Super_Weapon_Handler_GPS_Check1:
 _HouseClass__Super_Weapon_Handler_GPS_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x100   ; GPS 1 << 8
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x100   ; GPS 1 << 8
     pop  ebx   
     pop  ecx   
     jmp  0x004D51D0
@@ -108,11 +108,11 @@ _HouseClass__Super_Weapon_Handler_GPS_Check2:
 _HouseClass__Super_Weapon_Handler_GPS_Check3:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x100   ; GPS 1 << 8
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x100   ; GPS 1 << 8
     pop  ebx   
     pop  ecx   
     jmp  0x004D52EA
@@ -124,7 +124,7 @@ _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck1:
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx, 0x100; SpecialType.GPS (8)
+    test cx,0x100; SpecialType.GPS (8)
     pop  ecx
     pop  ebx
     jz   0x004D525E
@@ -137,7 +137,7 @@ _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck2:
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx, 0x100; SpecialType.GPS (8)
+    test cx,0x100; SpecialType.GPS (8)
     pop  ecx
     pop  ebx
     jz   0x004D5327
@@ -147,11 +147,11 @@ _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck2:
 _HouseClass__Super_Weapon_Handler_Chronosphere_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x8   ; CHRONOSPHERE 1 << 3
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x8   ; CHRONOSPHERE 1 << 3
     pop  ebx   
     pop  ecx   
     jmp  0x004D541F
@@ -159,11 +159,11 @@ _HouseClass__Super_Weapon_Handler_Chronosphere_Check1:
 _HouseClass__Super_Weapon_Handler_Chronosphere_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x8   ; CHRONOSPHERE 1 << 3
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x8   ; CHRONOSPHERE 1 << 3
     pop  ebx   
     pop  ecx   
     jmp  0x004D54E5
@@ -171,11 +171,11 @@ _HouseClass__Super_Weapon_Handler_Chronosphere_Check2:
 _HouseClass__Super_Weapon_Handler_IronCurtain_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x80   ; IRONCURTAIN 1 << 7
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x80   ; IRONCURTAIN 1 << 7
     pop  ebx   
     pop  ecx   
     jmp  0x004D558B
@@ -184,11 +184,11 @@ _HouseClass__Super_Weapon_Handler_IronCurtain_Check2:
 ; Also remove the USSR / Ukraine check
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x80   ; IRONCURTAIN 1 << 7
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x80   ; IRONCURTAIN 1 << 7
     pop  ebx   
     pop  ecx   
     jmp  0x004D560F ; use 0x004D55F5 if we want to restore check for USSR / Ukraine
@@ -197,11 +197,11 @@ _HouseClass__Super_Weapon_Handler_IronCurtain_Check2:
 _HouseClass__Super_Weapon_Handler_NukeMissile_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x4   ; NUCLEAR_BOMB 1 << 2
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x4   ; NUCLEAR_BOMB 1 << 2
     pop  ebx   
     pop  ecx   
     jmp  0x004D5924
@@ -209,11 +209,11 @@ _HouseClass__Super_Weapon_Handler_NukeMissile_Check1:
 _HouseClass__Super_Weapon_Handler_NukeMissile_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x4   ; NUCLEAR_BOMB 1 << 2
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x4   ; NUCLEAR_BOMB 1 << 2
     pop  ebx   
     pop  ecx   
     jmp  0x004D5893
@@ -221,11 +221,11 @@ _HouseClass__Super_Weapon_Handler_NukeMissile_Check2:
 _HouseClass__Super_Weapon_Handler_SpyPlane_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x40   ; SPY_MISSION 1 << 6
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x40   ; SPY_MISSION 1 << 6
     pop  ebx   
     pop  ecx   
     jmp  0x004D59CB
@@ -233,11 +233,11 @@ _HouseClass__Super_Weapon_Handler_SpyPlane_Check1:
 _HouseClass__Super_Weapon_Handler_SpyPlane_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x40   ; SPY_MISSION 1 << 6
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x40   ; SPY_MISSION 1 << 6
     pop  ebx   
     pop  ecx   
     jmp  0x004D5A44
@@ -245,11 +245,11 @@ _HouseClass__Super_Weapon_Handler_SpyPlane_Check2:
 _HouseClass__Super_Weapon_Handler_Paradrop_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x20   ; PARA_INFANTRY 1 << 5
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x20   ; PARA_INFANTRY 1 << 5
     pop  ebx   
     pop  ecx   
     jmp  0x004D5AB1
@@ -257,11 +257,11 @@ _HouseClass__Super_Weapon_Handler_Paradrop_Check1:
 _HouseClass__Super_Weapon_Handler_Paradrop_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x20   ; PARA_INFANTRY 1 << 5
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x20   ; PARA_INFANTRY 1 << 5
     pop  ebx   
     pop  ecx   
     jmp  0x004D5B06
@@ -269,11 +269,11 @@ _HouseClass__Super_Weapon_Handler_Paradrop_Check2:
 _HouseClass__Super_Weapon_Handler_Parabomb_Check1:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x10   ; PARA_BOMB 1 << 4
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x10   ; PARA_BOMB 1 << 4
     pop  ebx   
     pop  ecx   
     jmp  0x004D5B73
@@ -281,11 +281,11 @@ _HouseClass__Super_Weapon_Handler_Parabomb_Check1:
 _HouseClass__Super_Weapon_Handler_Parabomb_Check2:
     push ecx
     push ebx
-    xor  ebx, ebx
-    mov  bl, byte [esi+1] ; ID
-    lea  ecx, [Houses.SpecialScan]
-    lea  ecx, [ecx + ebx*4]
-    test dword [ecx],0x10   ; PARA_BOMB 1 << 4
+    xor  ebx,ebx
+    mov  bl,byte[esi+1] ; ID
+    lea  ecx,[Houses.SpecialScan]
+    lea  ecx,[ecx+ebx*4]
+    test dword[ecx],0x10   ; PARA_BOMB 1 << 4
     pop  ebx   
     pop  ecx   
     jmp  0x004D5BC4
@@ -297,7 +297,7 @@ _BuildingClass_Mission_Missile_SpecialWeapon_GPSCheck:
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx, 0x100; SpecialType.GPS (8)
+    test cx,0x100; SpecialType.GPS (8)
     pop  ecx
     pop  ebx
     jnz  0x0045D8A6
@@ -310,7 +310,7 @@ _BuildingClass_Mission_Missile_SpecialWeapon_NuclearLaunchCheck:
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx, 0x4; SpecialType.NUCLEAR_BOMB (2)
+    test cx,0x4; SpecialType.NUCLEAR_BOMB (2)
     pop  ecx
     pop  ebx
     jnz  0x0045DC1A
@@ -326,7 +326,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     push eax
     BuildingTypeClass.FromIndex(eax,ebx)
     BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx, 0x4; SpecialType.NUCLEAR_BOMB (2)
+    test cx,0x4; SpecialType.NUCLEAR_BOMB (2)
     pop  eax
     pop  ecx
     pop  ebx
@@ -336,7 +336,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
 .FindBuilding:
     mov  ebx,0xffffffff
     mov  edx,esi
-    mov  eax,dword [ebp-0x28]
+    mov  eax,dword[ebp-0x28]
     call HouseClass__Find_Building
     mov  ebx,eax
     test eax,eax
@@ -346,7 +346,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     mov  eax,esi
     movzx eax,al
     inc  al
-    cmp  al, byte [BuildingTypeClass.Count]
+    cmp  al,byte[BuildingTypeClass.Count]
     jb   .CheckSpecialWeapons ;use unsigned check
 
 .NotFound:
@@ -363,11 +363,11 @@ _HouseClass__Place_Special_Blast_SwitchRoute:
 
 
 _HouseClass__Place_Special_Blast_Redefine_Chrono2:
-    mov  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    mov  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jmp  0x004D71BB
 
 _HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2:
-    mov  ah,byte [Globals___Map_IsTargettingMode]
+    mov  ah,byte[Globals___Map_IsTargettingMode]
     cmp  ah,0x2
     jz   0x004D54C4
     cmp  ah,SpecialChrono2
@@ -375,28 +375,28 @@ _HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2:
     jmp  0x004D54CB
 
 _DisplayClass__TacticalClass__Action_Chrono_Target_Icon_new_Chrono2:
-    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    cmp  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jz   0x004B344C
     jg   0x004B34BD
-    mov  byte [ebp-10h], 0x11 ; ACTION_PARA_INFANTRY (to replace later)
+    mov  byte[ebp-0x10],0x11 ; ACTION_PARA_INFANTRY (to replace later)
     jmp  0x004B34BD
 
 _UnitClass__Mission_Unload__Chrono_Tank_new_Chrono2:
-    mov  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    mov  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jmp  0x0057E1CC
 
 _UnitClass__What_Action__Chrono_Tank_new_Chrono2:
-    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    cmp  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jnz  0x0057F718
     jmp  0x0057F711
 
 _TechnoClass__Record_The_Kill__Chrono_Tank_new_Chrono2:
-    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    cmp  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jnz  0x005668F8
     jmp  0x005668A5
 
 _TechnoClass__Take_Damage__Chrono_Tank_new_Chrono2:
-    cmp  byte [Globals___Map_IsTargettingMode],SpecialChrono2
+    cmp  byte[Globals___Map_IsTargettingMode],SpecialChrono2
     jnz  0x00566711
     jmp  0x005666B7
 

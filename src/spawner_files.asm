@@ -5,17 +5,17 @@
 
 
 _Init_Game_AFTRMATH_INI_File:
-    mov  edx, 0x005EBB45 ; "AFTRMATH.INI"
+    mov  edx,0x005EBB45 ; "AFTRMATH.INI"
     Save_Registers
 
     call GetCommandLineA
-    mov  edx, str_arg_Spawn
+    mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
     Restore_Registers
     jz   .No_Spawner_AFTRMATH_INI_File
 
-    mov  edx, str_xdp_Spawnam
+    mov  edx,str_xdp_Spawnam
 
 .No_Spawner_AFTRMATH_INI_File:
     jmp  0x004F4212
@@ -25,7 +25,7 @@ _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active:
 
     call GetCommandLineA
 
-    mov  edx, str_arg_Spawn
+    mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
 
@@ -37,7 +37,7 @@ _Read_Scenario_Dont_Load_MPLAYER_INI_With_Spawner_Active:
     jmp  0x0053A568
 
 .Ret:
-    test edx, edx
+    test edx,edx
     jz   0x0053A568
     jmp  0x0053A3EE
 
@@ -49,14 +49,14 @@ _Init_Game_RULES_File:
 
     call GetCommandLineA
 
-    mov  edx, str_arg_Spawn
+    mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
 
     je   .Ret_RULES_INI
 
     Restore_Registers
-    mov  edx, str_xdp_Spawn
+    mov  edx,str_xdp_Spawn
     jmp  0x004F41A1
 
 .Ret_RULES_INI:
@@ -67,7 +67,7 @@ _SessionClass__Read_Scenario_Descriptions_Map_Extension:
 
     call GetCommandLineA
 
-    mov  edx, str_arg_Spawn
+    mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
 

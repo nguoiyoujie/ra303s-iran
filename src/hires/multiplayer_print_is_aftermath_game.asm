@@ -6,102 +6,94 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x0050C2B0, _LAN_New_Dialog_Aftermath_Text
-@LJMP 0x0050C748, _LAN_New_Dialog_Aftermath_Text2
-@LJMP 0x0050DB55, _LAN_New_Dialog_Aftermath_Text3
-@LJMP 0x00513D46, _Skirmish_Dialog_Aftermath_Text
+extern Fancy_Text_Print
 
-%define    Is_Aftermath_Installed    0x004AC024
-%define    Fancy_Text_Print        0x004AE7FC
-%define bAftermathMultiplayer    0x00680538
+%define Is_Aftermath_Installed    0x004AC024
+%define bAftermathMultiplayer     0x00680538
 
-;str_Aftermathgame db"Aftermath game",0
 
 [section .data] 
-startedasam: db 0
+Temp.IsAftermathGame: db 0
 
 
-[section .text] 
-_Skirmish_Dialog_Aftermath_Text:
+@HACK 0x00513D46,0x00513D4B,_Skirmish_Dialog_Aftermath_Text
     call Is_Aftermath_Installed
-    cmp  eax, 1
+    cmp  eax,1
     jnz  .Ret
-
-    push 216h
+    push 0x216
     push 0
     push esi
-    mov  edx, 361 ; Decimal
-    add  edx, [diff_top]
+    mov  edx,361 ; Decimal
+    add  edx,[Hires.DeltaTop]
     push edx
-    mov  ebx, 362 ; Decimal
-    add  ebx, [diff_left]
+    mov  ebx,362 ; Decimal
+    add  ebx,[Hires.DeltaLeft]
     push ebx
-    push 74h
+    push 0x74
     call Fancy_Text_Print
-    add  esp, 18h
-
+    add  esp,0x18
 .Ret:
     call Fancy_Text_Print
     jmp  0x00513D4B
+@ENDHACK
 
-_LAN_New_Dialog_Aftermath_Text:
+
+@HACK 0x0050C2B0,0x0050C2B8,_LAN_New_Dialog_Aftermath_Text
     call Fancy_Text_Print
-    add  esp, 18h
-
+    add  esp,0x18
     call Is_Aftermath_Installed
-    cmp  eax, 1
+    cmp  eax,1
     jnz  .Ret
-
-    cmp  dword [bAftermathMultiplayer], 1
+    cmp  dword[bAftermathMultiplayer],1
     jnz  .Ret
-
-    mov  byte [startedasam], 1
-    push 216h
+    mov  byte[Temp.IsAftermathGame],1
+    push 0x216
     push 0
-    mov  eax, [ebp-70h]
+    mov  eax,[ebp-0x70]
     push eax
-    mov  edx, 195 ; Decimal
-    add  edx, [diff_top]
+    mov  edx,195 ; Decimal
+    add  edx,[Hires.DeltaTop]
     push edx
-    mov  ebx, 200 ; Decimal
-    add  ebx, [diff_left]
+    mov  ebx,200 ; Decimal
+    add  ebx,[Hires.DeltaLeft]
     push ebx
-    push 74h
+    push 0x74
     call Fancy_Text_Print
-    add  esp, 18h
-
+    add  esp,0x18
 .Ret:
     jmp  0x0050C2B8
+@ENDHACK
 
-_LAN_New_Dialog_Aftermath_Text2:
+
+@HACK 0x0050C748,0x0050C74E,_LAN_New_Dialog_Aftermath_Text2
     call Is_Aftermath_Installed
-    cmp  eax, 1
+    cmp  eax,1
     jnz  .Ret
-
-    cmp  dword [bAftermathMultiplayer], 1
+    cmp  dword[bAftermathMultiplayer],1
     jz   .Ret
-    cmp  byte [startedasam], 1
+    cmp  byte[Temp.IsAftermathGame],1
     jnz  .Ret
-
-    push 216h
+    push 0x216
     push 0
-    mov  eax, [ebp-70h]
+    mov  eax,[ebp-0x70]
     push eax
-    mov  edx, 195 ; Decimal
-    add  edx, [diff_top]
+    mov  edx,195 ; Decimal
+    add  edx,[Hires.DeltaTop]
     push edx
-    mov  ebx, 225 ; Decimal
-    add  ebx, [diff_left]
+    mov  ebx,225 ; Decimal
+    add  ebx,[Hires.DeltaLeft]
     push ebx
-    push 79h
+    push 0x79
     call Fancy_Text_Print
-    add  esp, 18h
-
+    add  esp,0x18
 .Ret:
-    mov  edx, [0x00680875]
+    mov  edx,[0x00680875]
     jmp  0x0050C74E
+@ENDHACK
 
-_LAN_New_Dialog_Aftermath_Text3:
-    mov  eax, [ebp-08Ch]
-    mov  byte [startedasam], 1
+
+@HACK 0x0050DB55,0x0050DB5B,_LAN_New_Dialog_Aftermath_Text3
+    mov  eax,[ebp-0x08C]
+    mov  byte[Temp.IsAftermathGame],1
     jmp  0x0050DB5B
+@ENDHACK

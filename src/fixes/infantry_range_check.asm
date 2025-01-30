@@ -15,12 +15,12 @@
 @LJMP 0x004F10FE, _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire
 
 _InfantryClass__Fire_At_Range_Check:
-    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix
-    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Apply_Fix
 
-    cmp  byte [Spawn.Settings.FixRangeExploit], 1
+    cmp  byte[Spawn.Settings.FixRangeExploit],1
     jz   .Apply_Fix
 
     jmp  .Ret
@@ -31,7 +31,7 @@ _InfantryClass__Fire_At_Range_Check:
     push edx
 
     call InfantryClass__Can_Fire
-    cmp  dword eax, 0
+    cmp  dword eax,0
     jne  .Cant_Fire ; If NOT 0 goto .Cant_Fire, function returns 0 on if can fire..
 
     pop  edx
@@ -43,26 +43,26 @@ _InfantryClass__Fire_At_Range_Check:
     jmp  0x004EEE40
 
 .Cant_Fire:
-    add  esp, 12
-    mov  ebx, 0
+    add  esp,12
+    mov  ebx,0
     jmp  0x004EEEA2
 
 _InfantryClass__Firing_AI_No_Animation_If_Cant_Fire:
-    cmp  byte [Globals___Session_Type], GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix
-    cmp  byte [Globals___Session_Type], GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Apply_Fix
-    cmp  byte [Spawn.Settings.FixRangeExploit], 1
+    cmp  byte[Spawn.Settings.FixRangeExploit],1
     jz   .Apply_Fix
 
     jmp  .Original_Code
 
 .Apply_Fix:
-    cmp  dword eax, 0
+    cmp  dword eax,0
     je   .Ret
 
 .Original_Code:
-    lea  edx, [esi+141h]
+    lea  edx,[esi+0x141]
     jmp  0x004F1104
 
 .Ret:

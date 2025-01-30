@@ -211,6 +211,8 @@ str_arg_Hard                                      db"-HARD",0           ; Diffic
 %assign str_Options                               0x005EDE1F ; "Options"
 %assign str_WinHotkeys                            0x005EE3E4 ; "WinHotkeys"
 
+%assign str_Width                                 0x005EB3AB ; "Width"
+%assign str_Height                                0x005EB3B1 ; "Height"
 
 str_Colour                                        db"Colour",0 ; Used in lieu with [<House>] > Color
 str_Country                                       db"Country",0

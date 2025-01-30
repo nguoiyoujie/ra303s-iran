@@ -28,38 +28,38 @@
 
 _max_units_bug:
     je   0x004BF21B
-    cmp  dword [ecx+0x2A], 0
+    cmp  dword[ecx+0x2A],0
     je   .Abandon_Production
     jmp  0x004BEFF3
 
 .Abandon_Production:
-;    mov eax, ecx
+;    mov eax,ecx
 ;    call 0x004BF228
-    mov  eax, 17
+    mov  eax,17
     call 0x00426158 ; void Speak(VoxType)
     jmp  0x004BF21B
 
 _FactorClass__Set_Speak_Unable_To_Build_More:
-    mov  edi, [ecx+22h]
+    mov  edi,[ecx+0x22]
 
-    cmp  edi, 0
+    cmp  edi,0
     jnz  .Dont_Speak
-    mov  eax, [0x00669958] ; PlayerPtr
-    cmp  dword ebx, eax
+    mov  eax,[0x00669958] ; PlayerPtr
+    cmp  dword ebx,eax
     jnz  .Dont_Speak
 
     Save_Registers
 
-    xor  edx, edx
-    mov  ebx, [ebp-0x10]
-    mov  byte dl, [ebx]
+    xor  edx,edx
+    mov  ebx,[ebp-0x10]
+    mov  byte dl,[ebx]
     call 0x004D671C  ; ProdFailType HouseClass::Abandon_Production(RTTIType)
 
-    mov  eax, 17
+    mov  eax,17
     call 0x00426158 ; void Speak(VoxType)
 
     Restore_Registers
 
 .Dont_Speak:
-    test edi, edi
+    test edi,edi
     jmp  0x004BEE98

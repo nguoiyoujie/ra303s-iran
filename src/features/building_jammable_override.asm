@@ -6,11 +6,7 @@
 ; This function is enabled by setting [<BuildingType>] > IsJammable=true
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x004566CB, _BuildingClass_AI_UseIsJammable
-@LJMP 0x0045C88E, _BuildingClass_MissionAttack_Jammed_PreventsAttack
-@LJMP 0x0057B0F2, _UnitClass_Take_Damage_UseIsNoSmoke
-
-_BuildingClass_AI_UseIsJammable:
+@HACK 0x004566CB,0x0045670A,_BuildingClass_AI_UseIsJammable
     ; eax is the id
     push ebx
     push ecx
@@ -22,17 +18,18 @@ _BuildingClass_AI_UseIsJammable:
     pop  ebx
     jz   0x00456814
     jmp  0x0045670A; 0x004566D0
+@ENDHACK
 
 
-
-_BuildingClass_MissionAttack_Jammed_PreventsAttack:
-    test byte [esi + 0xd7],0x10
+@HACK 0x0045C88E,0x0045C894,_BuildingClass_MissionAttack_Jammed_PreventsAttack
+    test byte[esi+0xd7],0x10
     jnz  0x0045CB26
-    mov  al,byte [eax + 1a4h]
+    mov  al,byte[eax+0x1A4]
     jmp  0x0045C894	
+@ENDHACK
 
 
-_UnitClass_Take_Damage_UseIsNoSmoke:
+@HACK 0x0057B0F2,0x0057B0FB,_UnitClass_Take_Damage_UseIsNoSmoke
     ; eax is the id
     push eax
     push ebx
@@ -48,4 +45,5 @@ _UnitClass_Take_Damage_UseIsNoSmoke:
     cmp  eax,0xe
     jz   0x0057B1CA
     jmp  0x0057B0FB
-    
+   @ENDHACK
+ 

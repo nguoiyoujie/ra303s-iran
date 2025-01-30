@@ -16,44 +16,40 @@
 
 ; rewritten to check for a file instead of a registry key
 
-@LJMP 0x004AC024, _Is_Aftermath_Installed
-@LJMP 0x004ABF88, _Is_Counterstrike_Installed
-
+[section .rdata]
 str_am_file db"SCG43EA.INI",0
 str_cs_file db"SCU38EA.INI",0
 
-_Is_Aftermath_Installed:
-_Init_Game_Should_Load_AFTRMATH_INI:
-    Save_Registers
 
+@HACK 0x004AC024,0x004AC029,_Is_Aftermath_Installed
+    Save_Registers
     call GetCommandLineA
     mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
     Restore_Registers
     jz   .Non_Spawner_Check
-
     xor  eax,eax
     mov  byte al,[Spawn.Settings.Aftermath]
     retn
-
 .Non_Spawner_Check:
-    cmp  byte [RedAlert.Options.AftermathEnabled],1
+    cmp  byte[RedAlert.Options.AftermathEnabled],1
     jz   .Ret_True
-
 .Ret_False:
     mov  eax,0
     retn
 .Ret_True:
     mov  eax,1
     retn
+@ENDHACK
 
-_Is_Counterstrike_Installed:
-    cmp  byte [RedAlert.Options.CounterstrikeEnabled],1
+
+@HACK 0x004ABF88,0x004ABF8D,_Is_Counterstrike_Installed
+    cmp  byte[RedAlert.Options.CounterstrikeEnabled],1
     jz   .Ret_True
-
     mov  eax,0
     retn
 .Ret_True:
     mov  eax,1
     retn
+@ENDHACK

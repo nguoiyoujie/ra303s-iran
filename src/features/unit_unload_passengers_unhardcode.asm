@@ -19,7 +19,7 @@
 ;    movzx eax,al
 ;    UnitTypeClass.FromIndex(eax,eax)
 ;    TechnoTypeClass.MaxPassengers.Get(eax,eax)
-;    cmp  eax, 0
+;    cmp  eax,0
 ;    pop  eax
 ;    jg   0x0057D6E1
 ;    jmp  0x0057E244

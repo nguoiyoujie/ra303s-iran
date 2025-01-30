@@ -8,7 +8,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@SET 0x00405E8F, {push 0}
+@SET 0x00405E8F,{push 0}
 
 ; old solution
 ;@LJMP 0x00405E8B, _AnimTypeClass__fn_init_FRAG1_Constructor

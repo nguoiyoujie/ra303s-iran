@@ -11,18 +11,9 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004CB760, _HouseTypeClass__AddNewHouseTypes
-@LJMP 0x004CD0DB, _HouseTypeClass__Init_Heap_AddNewHouseTypes
 ;@CLEAR 0x004F4095, HouseTypeClass.NEW_COUNT, 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
-@LJMP 0x00537513, _RulesClass__Objects_ReadIni_Fix
 
-_RulesClass__Objects_ReadIni_Fix:
-    mov  edx,ebx
-    call HouseTypeClass__Read_INI
-    jmp  0x00537518
-
-
-_HouseTypeClass__AddNewHouseTypes:
+@HACK 0x004CB760,0x004CB76A,_HouseTypeClass__AddNewHouseTypes
 ;Multi9
     push 0x4d
     push 0x7
@@ -32,7 +23,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi9
     push str_MP9
     mov  eax,HouseTypeClass.Multi9
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi10
     push 0x4d
@@ -43,7 +34,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi10
     push str_MP10
     mov  eax,HouseTypeClass.Multi10
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi11
     push 0x4d
@@ -54,7 +45,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi11
     push str_MP11
     mov  eax,HouseTypeClass.Multi11
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi12
     push 0x4d
@@ -65,7 +56,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi12
     push str_MP12
     mov  eax,HouseTypeClass.Multi12
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi13
     push 0x4d
@@ -76,7 +67,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi13
     push str_MP13
     mov  eax,HouseTypeClass.Multi13
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi14
     push 0x4d
@@ -87,7 +78,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi14
     push str_MP14
     mov  eax,HouseTypeClass.Multi14
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi15
     push 0x4d
@@ -98,7 +89,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi15
     push str_MP15
     mov  eax,HouseTypeClass.Multi15
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi16
     push 0x4d
@@ -109,7 +100,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi16
     push str_MP16
     mov  eax,HouseTypeClass.Multi16
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi17
     push 0x4d
@@ -120,7 +111,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi17
     push str_MP17
     mov  eax,HouseTypeClass.Multi17
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi18
     push 0x4d
@@ -131,7 +122,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi18
     push str_MP18
     mov  eax,HouseTypeClass.Multi18
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi19
     push 0x4d
@@ -142,7 +133,7 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  ebx,str_Multi19
     push str_MP19
     mov  eax,HouseTypeClass.Multi19
-    mov  dword [0x006018B4],edx
+    mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi20
     push 0x4d
@@ -165,7 +156,6 @@ _HouseTypeClass__AddNewHouseTypes:
     inc  ecx
     cmp  ecx,0x14 * 2
     jl   .Fill
-
     mov  dword[HouseTypeClass.DestructorPtrs-0x14*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
     mov  dword[HouseTypeClass.DestructorPtrs-0x14*8+4],HouseTypeClass.Multi9
     mov  dword[HouseTypeClass.DestructorPtrs-0x15*8],0x004CD4F0
@@ -190,14 +180,13 @@ _HouseTypeClass__AddNewHouseTypes:
     mov  dword[HouseTypeClass.DestructorPtrs-0x1E*8+4],HouseTypeClass.Multi19
     mov  dword[HouseTypeClass.DestructorPtrs-0x1F*8],0x004CD4F0
     mov  dword[HouseTypeClass.DestructorPtrs-0x1F*8+4],HouseTypeClass.Multi20
-
     mov  dword[0x006018B0],HouseTypeClass.DestructorPtrs
     mov  dword[0x006018B4],HouseTypeClass.NEW_COUNT 
-
     jmp  0x004CB76A
+@ENDHACK
 
 
-_HouseTypeClass__Init_Heap_AddNewHouseTypes:
+@HACK 0x004CD0DB,0x004CD0E0,_HouseTypeClass__Init_Heap_AddNewHouseTypes
     HouseTypeClass.new HouseTypeClass.Multi9,0x14
     HouseTypeClass.new HouseTypeClass.Multi10,0x15
     HouseTypeClass.new HouseTypeClass.Multi11,0x16
@@ -216,8 +205,17 @@ _HouseTypeClass__Init_Heap_AddNewHouseTypes:
     pop  edi
     pop  esi
     jmp  0x004CD0E0
+@ENDHACK
 
 
+@HACK 0x00537513,0x00537518,_RulesClass__Objects_ReadIni_Fix
+    mov  edx,ebx
+    call HouseTypeClass__Read_INI
+    jmp  0x00537518
+@ENDHACK
+
+
+[section .text]
 Init_OverrideExistingHouseTypes:
 
     HouseTypeClass.FromIndex(HouseType.Spain,edi)

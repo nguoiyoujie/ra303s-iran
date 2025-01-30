@@ -11,14 +11,14 @@
 @LJMP 0x005D8F79, _ASM_Set_Mouse_Cursor_Mouse_Coords_Check
 
 _ASM_Set_Mouse_Cursor_Mouse_Coords_Check:
-    cmp  dword eax, [ScreenWidth]
+    cmp  dword eax,[ScreenWidth]
     JG   .Exit
 
-    cmp  dword ebx, [ScreenHeight]
+    cmp  dword ebx,[ScreenHeight]
     JG   .Exit
 
-    mov  [ebp-4h], eax ; y
-    mov  [ebp-8h], ebx ; x
+    mov  [ebp-4h],eax ; y
+    mov  [ebp-8h],ebx ; x
     jmp  0x005D8F7F
 
 .Exit:

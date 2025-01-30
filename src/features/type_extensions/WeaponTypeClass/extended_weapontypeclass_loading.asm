@@ -1,25 +1,32 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/WeaponTypeClass/weapontypeclass_read_ini.asm
+;
+; Implements the reading of new INI settings, or modifications to existing INI reads, if any.
+; 
+; This function is enabled by default and is not configurable.
+; 
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
+extern Audio___Voc_From_Name
+
 ;Read INI settings
-@LJMP 0x0059004D, _WeaponTypeClass__Read_INI_Extended
-
-_WeaponTypeClass__Read_INI_Extended:
-
+@HACK 0x0059004D,0x00590052,_WeaponTypeClass__Read_INI_Extended
 ;========= start loading from INI ==============
     push esi
-
     WeaponTypeClass.ChargeSound.Read(esi,edi,_GetVocTypeFromString)
-
     pop  esi
 .Ret:
-    lea  esp, [ebp-10h]
+    lea  esp,[ebp-0x10]
     pop  edi
     pop  esi
-    pop  ecx
-    pop  ebx
-    pop  ebp
-    jmp  0x00590055
+    jmp  0x00590052
+@ENDHACK
 
 
+[section .text]
 _GetVocTypeFromString:
    ;create voc type with string from eax
     call Audio___Voc_From_Name    ; Voc_From_Name
     retn
+

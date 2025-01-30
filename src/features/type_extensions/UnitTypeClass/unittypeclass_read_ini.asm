@@ -10,11 +10,7 @@
 ;----------------------------------------------------------------
 
 ;Read INI settings
-@LJMP 0x00578DCE, _UnitTypeClass__Read_INI_Extended
-
-_UnitTypeClass__Read_INI_Extended:
-
-;========= start loading from INI ==============
+@HACK 0x00578DCE,0x00578DD3,_UnitTypeClass__Read_INI_Extended
     push esi
 
     TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,UnitTypeClass.Offset.ExtendedPrerequisite)
@@ -75,12 +71,11 @@ _UnitTypeClass__Read_INI_Extended:
 
     pop  esi
 .Ret:
-    lea  esp,[ebp-10h]
+    lea  esp,[ebp-0x10]
     pop  edi
     pop  esi
-    pop  ecx
-    jmp  0x00578DD4
-
+    jmp  0x00578DD3
+@ENDHACK
 
 
 

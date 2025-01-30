@@ -12,11 +12,11 @@
 ; TO-DO: Control this behaviour via an INI key
 
 _BuildingClass_ExitObject_Base_HouseCheck:
-    test byte [eax + 0x42],2
+    test byte[eax+0x42],2
     jnz  0x00459582
     push edx
-    mov  dl,byte [Globals___Base_House]
-    cmp  byte [eax + 1],dl
+    mov  dl,byte[Globals___Base_House]
+    cmp  byte[eax+1],dl
     pop  edx
     jne  .SkipBase_NextBuildable
     jmp  0x004593B5

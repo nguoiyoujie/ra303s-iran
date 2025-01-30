@@ -16,37 +16,6 @@
 
 ;%assign DriveClass__Assign_Destination                            0x004B67C8 ; void DriveClass::Assign_Destination(TARGET target)
 
-; AUDIO.CPP
-%assign Audio___Voc_From_Name                                     0x00425CA0 ; VocType Voc_From_Name(char const * name)
-%assign Audio___Sound_Effect_At_Coord                             0x00425D1C ; void Sound_Effect(VocType voc, COORDINATE coord, int variation, HousesType house)
-%assign Audio___Sound_Effect                                      0x00425F24 ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
-%assign Audio___SoundEffectName                                   0x005FE090 ; SoundEffectName[VOC_COUNT]
-
-; CCFile.CPP
-; !!! FileClass is a base type, check what derived type these addresses really point to
-%assign CCFileClass__CCFileClass                                  0x004627D4 ; CCFileClass::CCFileClass(char const * filename)
-%assign CCFileClass__Write                                        0x00462860 ; long CCFileClass::Write(void const * buffer, long size)
-%assign CCFileClass__Close                                        0x00462AA8 ; void CCFileClass::Close(void)
-%assign CCFileClass__Open                                         0x00462AD4 ; int CCFileClass::Open(int rights)
-%assign CCFileClass__Is_Available                                 0x00462A30 ; int CCFileClass::Is_Available(int )
-;%assign CCFile_Find_File                                          0x00462DD4
-
-; CCINI.CPP
-%assign CCINIClass__Load                                          0x00462F50 ; bool CCINIClass::Load(FileClass & file, bool withdigest)
-
-%assign CCINIClass__Put_VQType                                    0x00463830 ; bool CCINIClass::Put_VQType(char const * section, char const * entry, VQType value)
-%assign CCINIClass__Put_ThemeType                                 0x00463948 ; bool CCINIClass::Put_ThemeType(char const * section, char const * entry, ThemeType value)
-
-; BASE.INI
-%assign BaseClass__Write_INI                                      0x00426944 ; void BaseClass::Write_INI(CCINIClass & ini)
-
-; BUILDING.CPP
-%assign BuildingClass__Exit_Coord                                 0x0045EB04 ; COORDINATE BuildingClass::Exit_Coord(void) const
-%assign BuildingClass__Write_INI                                  0x0045F07C ; void BuildingClass::Write_INI(CCINIClass & ini)
-%assign BuildingClass__Begin_Mode                                 0x0045A794 ; void BuildingClass::Begin_Mode(BStateType bstate)
-
-; CARGO.CPP
-%assign CargoClass__Attached_Object                               0x0046247C ; FootClass * CargoClass::Attached_Object(void) const
 
 ; CELL.CPP
 %assign CellClass__Cell_Coord                                     0x0049FDE0 ; COORDINATE CellClass::Cell_Coord(void) const
@@ -434,7 +403,7 @@
 ; Globals___ScorePalette
 
 %assign Globals___Base                                            0x0067F28C ; BaseClass Base;
-%assign Globals___Base_House                                      0x0067F28C + 0x18 ; HousesType House;
+%assign Globals___Base_House                                      0x0067F28C+0x18 ; HousesType House;
 
 
 ;%assign Globals___Session                                         0x0067F2B4 ; SessionClass Session;

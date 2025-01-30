@@ -29,7 +29,7 @@
 
 @LJMP 0x0058109D, _UnitClass__Read_INI_Use_Single_Player_Logic
 @LJMP 0x004D406A, _HouseClass__Use_Single_Player_Logic
-@CLEAR 0x004D406F, 0x90, 0x004D4070 ; nop over debris after jmp
+@CLEAR 0x004D406F,0x90,0x004D4070 ; nop over debris after jmp
 
 @LJMP 0x00568267, _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic
 @LJMP 0x0053DDEB, _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop
@@ -62,21 +62,21 @@ InCoopMode    dd 0
 
 _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses:
     push eax
-    cmp  dword [InCoopMode],0
+    cmp  dword[InCoopMode],0
     jz   .Normal_Code
     mov  eax,[eax+0x2D]
-    sar  eax,18h
+    sar  eax,0x18
     call HouseClass__As_Pointer
     test eax,eax ; Check for NULL
     jz   .Out
 
-    test byte [eax+0x43],1 ; test if house is dead or spectator
+    test byte[eax+0x43],1 ; test if house is dead or spectator
     jnz  .Out
 
 
 .Normal_Code:
     pop  eax
-    sub  esp,34h
+    sub  esp,0x34
     mov  [ebp-0x30],eax
     jmp  0x00533186
 
@@ -85,12 +85,12 @@ _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses:
     jmp  0x00533514
 
 _Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004AB661
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   0x004AB661
 
-    cmp  al,0x0c
+    cmp  al,0xC
     jl   0x004AB661
     cmp  al,HouseTypeClass.NEW_COUNT-1
     jmp  0x004AB65F
@@ -106,7 +106,7 @@ _Read_Scenario_INI__Read_Is_Coop_Mode_Option:
     lea  eax,[ebp-0x8C] ; Scenario INI file
     call INIClass__Get_Bool
 
-    mov  dword [InCoopMode],eax
+    mov  dword[InCoopMode],eax
 
     Restore_Registers
     jmp  0x0053D7C3
@@ -119,7 +119,7 @@ _Read_Scenario_INI__Read_Is_Coop_Mode_Option:
 
 
 _HouseClass__AI_No_Expert_AI_In_Coop_Mode:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004D4F5E
 
     test eax,eax        ; Hooked by patch
@@ -133,10 +133,10 @@ _HouseClass__AI_No_Expert_AI_In_Coop_Mode:
 
 
 _HouseClass__AI_Building_Single_Player_AI_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004DA2AE
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x004DA2F1
     jmp  0x004DA2AE
 
@@ -145,10 +145,10 @@ _HouseClass__AI_Building_Single_Player_AI_In_Coop:
 
 
 _HouseClass__AI_Unit_Single_Player_AI_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004DB880
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x004DBBEE; AI_Skirmish
     jmp  0x004DB880
 
@@ -157,10 +157,10 @@ _HouseClass__AI_Unit_Single_Player_AI_In_Coop:
 
 
 _HouseClass__AI_Vessel_Single_Player_AI_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004DBD45
 
-    mov  dh,byte [Globals___Session_Type]
+    mov  dh,byte[Globals___Session_Type]
     jmp  0x004DBD3B
 
 
@@ -169,10 +169,10 @@ _HouseClass__AI_Vessel_Single_Player_AI_In_Coop:
 
 
 _HouseClass__AI_Infantry_Single_Player_AI_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004DC195
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x004DC53E ; Skirmish_AI
     jmp  0x004DC195
 
@@ -183,9 +183,9 @@ _HouseClass__AI_Infantry_Single_Player_AI_In_Coop:
 
 
 _Assign_Houses_House_Auto_Production_Bit:
-    mov  edx,126h
+    mov  edx,0x126
 
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Ret
 
     or   ch,8 ; Auto production bit for house
@@ -207,10 +207,10 @@ _Assign_Houses_House_Auto_Production_Bit:
 
 
 _TeamClass__AI_Single_Player_Logic1:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x0055C380
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jmp  0x0055C425
 
 ;0055C7B6     90             NOP
@@ -218,10 +218,10 @@ _TeamClass__AI_Single_Player_Logic1:
 
 
 _TeamClass__AI_Single_Player_Logic2:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x0055C7BC
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jmp  0x0055C7B6
 
 ;004FE1CC     C645 E4 00     mov byte PTR SS:[ebp-1C],0
@@ -229,9 +229,9 @@ _TeamClass__AI_Single_Player_Logic2:
 
 
 _LogicClass__AI_Call_HouseClass_AI_For_All_Houses_In_Coop:
-    mov  al,byte [Globals___Session_Type]
+    mov  al,byte[Globals___Session_Type]
 
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Set_House_Types_Loop_Variable
 
     test al,al
@@ -239,7 +239,7 @@ _LogicClass__AI_Call_HouseClass_AI_For_All_Houses_In_Coop:
     jmp  0x004FE1CA
 
 .Set_House_Types_Loop_Variable:
-    mov  byte [ebp-1Ch],0
+    mov  byte[ebp-0x1C],0
     jmp  0x004FE1D0
 
 
@@ -248,7 +248,7 @@ _LogicClass__AI_Call_HouseClass_AI_For_All_Houses_In_Coop:
 
 
 _HouseClass__AI_No_MPlayer_Defeated_Call_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x004D4CB4
 
     call HouseClass__MPlayer_Defeated
@@ -259,10 +259,10 @@ _HouseClass__AI_No_MPlayer_Defeated_Call_In_Coop:
 
 
 _UnitClass__Read_INI_Use_Single_Player_Logic:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x005810CE
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   0x005810CE
 
     jmp  0x005810A6
@@ -270,14 +270,14 @@ _UnitClass__Read_INI_Use_Single_Player_Logic:
 
 
 _HouseClass__Use_Single_Player_Logic:
-    cmp  byte [Rules.AI.SingleplayerAIObeyPrerequisites], 1
+    cmp  byte[Rules.AI.SingleplayerAIObeyPrerequisites],1
     jz   0x004D407D
     
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Ret
 
 .NormalCheck:
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x004D407D
 
 .Ret:
@@ -288,10 +288,10 @@ _HouseClass__Use_Single_Player_Logic:
 
 
 _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Ret
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x005682B6
 
 .Ret:
@@ -306,7 +306,7 @@ _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic:
 
 
 _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Ret
 
     call Scenario___Create_Units
@@ -320,9 +320,9 @@ _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop:
 
 
 _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode:
-    mov  eax,dword [0x006016C8] ; ds:int BuildLevel
+    mov  eax,dword[0x006016C8] ; ds:int BuildLevel
 
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x0053DFEF
 
     jmp  0x0053DFE2
@@ -332,9 +332,9 @@ _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode:
 
 
 _Assign_Houses__Dont_Set_IQ_Level_In_Coop_Mode:
-    mov  eax,dword [Globals___Rule_MaxIQ] ; ds:nRulesClass_IQ_MaxIQLevels
+    mov  eax,dword[Globals___Rule_MaxIQ] ; ds:nRulesClass_IQ_MaxIQLevels
 
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x0053E0D3
 
     jmp  0x0053E0D0
@@ -344,9 +344,9 @@ _Assign_Houses__Dont_Set_IQ_Level_In_Coop_Mode:
 
 
 _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2:
-    mov  eax,dword [0x006016C8] ; ds:int BuildLevel
+    mov  eax,dword[0x006016C8] ; ds:int BuildLevel
 
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x0053E0FE
 
     jmp  0x0053E0F1
@@ -355,10 +355,10 @@ _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2:
 
 
 _TechnoClass__Base_Is_Attacked_Single_Player_Logic1:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   .Ret
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jnz  0x0056789D
 
 .Ret:
@@ -367,10 +367,10 @@ _TechnoClass__Base_Is_Attacked_Single_Player_Logic1:
 
 
 _TechnoClass__Base_Is_Attacked_Single_Player_Logic2:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x00567B4E
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   0x00567B4E
 
     jmp  0x00567BD3
@@ -378,16 +378,16 @@ _TechnoClass__Base_Is_Attacked_Single_Player_Logic2:
 
 
 _TechnoClass__Base_Is_Attacked_Single_Player_Logic3:
-    cmp  dword [InCoopMode],1
+    cmp  dword[InCoopMode],1
     jz   0x00567DDF
 
-    cmp  byte [Globals___Session_Type],GameType.GAME_NORMAL
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   0x00567DDF
 
     jmp  0x00567E65
 
 _TActionClass_Operator___ACTION_LOSE_Multiplayer:
-    cmp  dword [InCoopMode],1 ; if coop don't set PlayeWins to true
+    cmp  dword[InCoopMode],1 ; if coop don't set PlayeWins to true
     jz   0x00554941
 
     cmp  bl,[edx+9]
@@ -396,7 +396,7 @@ _TActionClass_Operator___ACTION_LOSE_Multiplayer:
     jmp  0x00554985
 
 _TActionClass_Operator___ACTION_WIN_Multiplayer:
-    cmp  dword [InCoopMode],1 ; if coop don't set PlayerLoses to true
+    cmp  dword[InCoopMode],1 ; if coop don't set PlayerLoses to true
     jz   .Ret
 
     cmp  bh,[edx+9]
@@ -406,10 +406,10 @@ _TActionClass_Operator___ACTION_WIN_Multiplayer:
     jmp  0x0055492B
 
 _HouseClass__AI_Player_Lose_Flag_Set_Remove_Win:
-    cmp  dword [InCoopMode],1 ; if coop don't set PlayerLoses to true
+    cmp  dword[InCoopMode],1 ; if coop don't set PlayerLoses to true
     jz   .Ret
 
-    mov  dword [Globals___PlayerWins],1
+    mov  dword[Globals___PlayerWins],1
 
 .Ret:
     jmp  0x004D85B3
@@ -417,10 +417,10 @@ _HouseClass__AI_Player_Lose_Flag_Set_Remove_Win:
 
 
 _HouseClass__AI_Player_Win_Flag_Set_Remove_Lose:
-    cmp  dword [InCoopMode],1 ; if coop don't set PlayerLoses to true
+    cmp  dword[InCoopMode],1 ; if coop don't set PlayerLoses to true
     jz   .Ret
 
-    mov  dword [Globals___PlayerLoses],1
+    mov  dword[Globals___PlayerLoses],1
 
 .Ret:
     jmp  0x04D41D4

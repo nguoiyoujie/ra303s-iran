@@ -22,11 +22,11 @@
 
 _HouseClass__AI_Building_Build_Radar_Dome:
     jnz  0x004DB0E4
-    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
     jz   .Normal_Code
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .No_Techup_Check
-    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .No_Techup_Check
 
 .Normal_Code:
@@ -39,17 +39,17 @@ _HouseClass__AI_Building_Build_Radar_Dome:
 _HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check:
     jnz  0x004DB050
     ; do we need to do this check twice?
-    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
     jz   .Normal_Code
-    cmp  byte [Globals___Session_Type],GameType.GAME_SKIRMISH
+    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .War_Check
-    cmp  byte [Rules.AI.BuildRadarWithoutAirThreatCheck],1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .War_Check
     jmp  .Normal_Code
 
 .War_Check:
     test dword[eax+HouseClass.Offset.BPreGroupScan],0x80 ; WARFACTORY
-    ;cmp  dword [ecx+30Eh],0 ; war factory count 
+    ;cmp  dword[ecx+0x30E],0 ; war factory count 
     jz   0x004DB050
 
 .Normal_Code:

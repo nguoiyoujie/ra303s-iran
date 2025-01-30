@@ -63,26 +63,26 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
     push eax
     push edx
 
-    mov  edx, 0
-    mov  eax, %1
+    mov  edx,0
+    mov  eax,%1
 
   %%loop:
     push edx
-    AbstractTypeClass.FromIndex  edx, %2, %3, edi
+    AbstractTypeClass.FromIndex  edx,%2,%3,edi
     push eax
-	mov  edx, [edi+WarheadTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WarheadTypeClass is a pointer instead of a buffer
+	mov  edx,[edi+WarheadTypeClass.Offset.IniName] ; use mov instead of lea because the string stored in WarheadTypeClass is a pointer instead of a buffer
     call _strcmpi
-    test eax, eax
+    test eax,eax
     pop  eax
     pop  edx
     jnz  %%next
 
-    mov  %4, edi
+    mov  %4,edi
     jmp  %%done
 
   %%next:
     inc  edx
-    cmp  edx, [%2] 
+    cmp  edx,[%2] 
     jae  %%done_no_match
     jmp  %%loop
 
@@ -133,37 +133,37 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
 %macro WarheadTypeClass.ReadBool    5
     WarheadTypeClass.ID %1,edx
-    Get_Bit byte [%1+%3], %4
-    xor  ecx, ecx
-    mov  cl, al
-    call_INIClass__Get_Bool %2, edx, %5, ecx
-    Set_Bit_Byte [%1+%3], %4, al
+    Get_Bit byte[%1+%3],%4
+    xor  ecx,ecx
+    mov  cl,al
+    call_INIClass__Get_Bool %2,edx,%5,ecx
+    Set_Bit_Byte[%1+%3],%4,al
 %endmacro
 
 %macro WarheadTypeClass.ReadByte    4
     WarheadTypeClass.ID %1,edx
-    xor  ecx, ecx
-    mov  byte cl, [%1+%3]
-    call_INIClass__Get_Int %2, edx, %4, ecx
-    mov  byte [%1+%3], al
+    xor  ecx,ecx
+    mov  byte cl,[%1+%3]
+    call_INIClass__Get_Int %2,edx,%4,ecx
+    mov  byte[%1+%3],al
 %endmacro
 
 ; args <Internal ID of type class>
 ; returns the type class pointer as eax
 %macro Get_WarheadTypeClass    1
     push edx
-    mov  edx, [WarheadTypeClass.Count] 
-    cmp  %1, edx
+    mov  edx,[WarheadTypeClass.Count] 
+    cmp  %1,edx
     jge  %%invalid_type
 
-    mov  edx, [WarheadTypeClass.Array] 
+    mov  edx,[WarheadTypeClass.Array] 
     shl  %1, 2
-    add  edx, %1
-    mov  eax, [edx] 
+    add  edx,%1
+    mov  eax,[edx] 
     jmp  %%done
 
   %%invalid_type:
-    mov  eax, 0
+    mov  eax,0
   %%done:
     pop  edx
 %endmacro
@@ -178,7 +178,7 @@ _GetWarheadTypeIDFromString:
     ;in case the ID was invalid...
     test ebx,ebx
     jz   .Retn ; just return 0
-    mov  ebx,dword [ebx]; index
+    mov  ebx,dword[ebx]; index
     mov  eax,ebx
 .Retn:
     pop ebx
