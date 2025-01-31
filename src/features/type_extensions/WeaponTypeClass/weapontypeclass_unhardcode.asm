@@ -1,6 +1,23 @@
-@LJMP 0x00536275,_RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
-@LJMP 0x0053668A,_RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
 
+@HACK 0x0053668A,0x0053668F,_RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
+    Loop_Over_RULES_INI_Section_Entries str_Weapons, Init_WeaponTypeClass
+
+.Ret:
+    mov  eax,1
+    jmp  0x0053668F
+@ENDHACK
+
+
+@HACK 0x00536275,0x0053627B,_RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
+    mov  edx,[esi+0x1CC]
+    Get_RULES_INI_Section_Entry_Count str_Weapons
+    add  edx,eax
+    mov  eax, Weapon__Weapons
+    jmp  0x0053627B
+@ENDHACK
+
+
+[section .text]
 Init_WeaponTypeClass:
     mov  eax,0x26
     call WeaponTypeClass__new
@@ -18,18 +35,3 @@ Init_WeaponTypeClass:
 .Ret:
     retn
 
-_RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes:
-
-Loop_Over_RULES_INI_Section_Entries str_Weapons, Init_WeaponTypeClass
-
-.Ret:
-    mov  eax,1
-    jmp  0x0053668F
-
-_RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count:
-    mov  edx,[esi+0x1CC]
-    Get_RULES_INI_Section_Entry_Count str_Weapons
-    add  edx,eax
-    mov  eax, Weapon__Weapons
-
-    jmp  0x0053627B

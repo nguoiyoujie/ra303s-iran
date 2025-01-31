@@ -1,12 +1,3 @@
-;----------------------------------------------------------------
-; src/features/nocd.asm
-;
-; Removes the CD check.  
-;
-; This function is enabled by default and is not controllable.
-; No compatibility issues is expected as this was not an adjustable parameter
-; 
-;----------------------------------------------------------------
 ;
 ; Copyright (c) 2012 Toni Spets <toni.spets@iki.fi>
 ;
@@ -22,31 +13,35 @@
 ; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
+;----------------------------------------------------------------
+; src/features/nocd.asm
+;
+; Removes the CD check.  
+;
+; This function is enabled by defining in RedAlert.ini [Options] > NoCDMode=yes
+; No compatibility issues is expected as this was not an adjustable parameter
+; 
+;----------------------------------------------------------------
 
-@LJMP 0x004AAC58,_Force_CD_Available
-@LJMP 0x004F7A10,_Init_CDROM_Access
-@LJMP 0x005CDD6E,_GetCDClass__GetCDClass_GetDriveType
-@LJMP 0x004C7B2A,_Patch_Out_Early_GetCDClass_Init
-@LJMP 0x00551FC8,_Patch_In_Later_GetCDClass_Init
-;@LJMP 0x004AAE0C,_Fix_CDROM_Name_Get_Crash
+@SJMP 0x004C7B2A,0x004C7B40 ; _Patch_Out_Early_GetCDClass_Init
 
 %define GetCDClass__GetCDClass    0x005CDD10
 %define CDList                    0x00680884
 
-_Fix_CDROM_Name_Get_Crash:
-    cmp  eax,12
-    jng  .No_EAX_Adjust
-    xor  eax,eax
+;@HACK 0x004AAE0C,_Fix_CDROM_Name_Get_Crash
+;    cmp  eax,12
+;    jng  .No_EAX_Adjust
+;    xor  eax,eax
+;.No_EAX_Adjust:
+;    cmp  esi,0xFFFFFFFF
+;    jnz  0x004AAE25
+;    jmp  0x004AAE11
+;@ENDHACK
 
-.No_EAX_Adjust:
-    cmp  esi,0xFFFFFFFF
-    jnz  0x004AAE25
-    jmp  0x004AAE11
 
-_Force_CD_Available:
+@HACK 0x004AAC58,0x004AAC5F,_Force_CD_Available
     cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Ret_Now
-
     push ebp
     mov  ebp,esp
     push ebx
@@ -54,19 +49,18 @@ _Force_CD_Available:
     push edx
     push esi
     jmp  0x004AAC5F
-
 .Ret_Now:
     mov  eax,1
     retn
+@ENDHACK
 
-_Init_CDROM_Access:
+
+@HACK 0x004F7A10,0x004F7A15,_Init_CDROM_Access
     cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Ret_Now
-
     sub  esp,0x1C
     xor  ah,ah
     jmp  0x004F7A15
-
 .Ret_Now:
     lea  esp,[ebp-0x14]
     pop  edi
@@ -75,30 +69,26 @@ _Init_CDROM_Access:
     pop  ecx
     pop  ebx
     pop  ebp
-
     retn
+@ENDHACK
 
-_GetCDClass__GetCDClass_GetDriveType:
+
+@HACK 0x005CDD6E,0x005CDD73,_GetCDClass__GetCDClass_GetDriveType
     cmp  byte[RedAlert.Options.NoCDMode],1
     jz   .Get_Hard_Drive
-
     cmp  eax,5
     jnz  0x005CDD50
-    mov  eax,[esi+0x68]
-    jmp  0x005CDD76
-
+    jmp  0x005CDD73
 .Get_Hard_Drive:
     cmp  eax,3
     jnz  0x005CDD50
-    mov  eax,[esi+0x68]
-    jmp  0x005CDD76
+    jmp  0x005CDD73
+@ENDHACK
 
-_Patch_Out_Early_GetCDClass_Init:
-    jmp  0x004C7B40
 
-_Patch_In_Later_GetCDClass_Init:
-
+@HACK 0x00551FC8,0x00551FCD,_Patch_In_Later_GetCDClass_Init
     mov  eax,CDList
     call GetCDClass__GetCDClass
     mov  eax,CDList
     jmp  0x00551FCD
+@ENDHACK

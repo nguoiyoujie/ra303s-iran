@@ -6,7 +6,5 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00508AB7,_Net_Join_Dialog_Cancel_Lag_Fix
+@SJMP 0x00508AB7,0x00508ACD ; _Net_Join_Dialog_Cancel_Lag_Fix
 
-_Net_Join_Dialog_Cancel_Lag_Fix:
-    jmp  0x00508ACD

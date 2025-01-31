@@ -7,15 +7,13 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@LJMP 0x005464EE,_Animate_Score_Objs_PseudoSeenBuff_NULL_Check
 
-_Animate_Score_Objs_PseudoSeenBuff_NULL_Check:
+@HACK 0x005464EE,0x005464F3,_Animate_Score_Objs_PseudoSeenBuff_NULL_Check
     cmp  dword esi,0
     je   .Ret
-
     mov  eax,[esi+0x20]
     xor  edi,edi
     jmp  0x005464F3
-
 .Ret:
     jmp  0x005464B8
+@ENDHACK

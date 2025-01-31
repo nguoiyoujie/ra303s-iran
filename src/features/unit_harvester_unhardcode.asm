@@ -7,16 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00454B89,_BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode
-@LJMP 0x00578CB5,_UnitTypeClass__Max_Pips_Harvester_Unhardcode
-@LJMP 0x0057B2F6,_UnitClass__Take_Damage_Harvester_Unhardcode
-@LJMP 0x0057B3B4,_UnitClass__Take_Damage_Harvester_Unhardcode2
-@LJMP 0x0057BFAF,_UnitClass__Per_Cell_Process_Harvester_Unhardcode
-@LJMP 0x00580136,_UnitClass__PipCount_Harvester_Unhardcode
-@LJMP 0x005808A4,_UnitClass__TiberiumLoad_Unhardcode
-
-
-_BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode:
+@HACK 0x00454B89,0x00454B91,_BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -27,9 +18,10 @@ _BuildingClass__Receive_Message_RadioCanLoad_Harvester_Unhardcode:
     jnz  0x00454B91
 .NotAHarvester:
     jmp  0x00454BBC
+@ENDHACK
 
 
-_UnitTypeClass__Max_Pips_Harvester_Unhardcode:
+@HACK 0x00578CB5,0x00578CBE,_UnitTypeClass__Max_Pips_Harvester_Unhardcode
     movzx edx,dl
     push edx
     push eax
@@ -46,9 +38,10 @@ _UnitTypeClass__Max_Pips_Harvester_Unhardcode:
     jmp  0x00578CD5
 .NotAHarvester:
     jmp  0x00578CBE
+@ENDHACK
 
 
-_UnitClass__Take_Damage_Harvester_Unhardcode:
+@HACK 0x0057B2F6,0x0057B302,_UnitClass__Take_Damage_Harvester_Unhardcode
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -59,9 +52,10 @@ _UnitClass__Take_Damage_Harvester_Unhardcode:
     jnz  0x0057B302
 .NotAHarvester:
     jmp  0x0057B386
+@ENDHACK
 
 
-_UnitClass__Take_Damage_Harvester_Unhardcode2:
+@HACK 0x0057B3B4,0x0057B3BC,_UnitClass__Take_Damage_Harvester_Unhardcode2
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -72,9 +66,10 @@ _UnitClass__Take_Damage_Harvester_Unhardcode2:
     jnz  0x0057B3BC
 .NotAHarvester:
     jmp  0x0057B3FB
+@ENDHACK
 
 
-_UnitClass__Per_Cell_Process_Harvester_Unhardcode:
+@HACK 0x0057BFAF,0x0057BFBB,_UnitClass__Per_Cell_Process_Harvester_Unhardcode
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -85,9 +80,10 @@ _UnitClass__Per_Cell_Process_Harvester_Unhardcode:
     jnz  0x0057BFBB
 .NotAHarvester:
     jmp  0x0057C038
+@ENDHACK
 
 
-_UnitClass__PipCount_Harvester_Unhardcode:
+@HACK 0x00580136,0x0058013E,_UnitClass__PipCount_Harvester_Unhardcode
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -98,9 +94,10 @@ _UnitClass__PipCount_Harvester_Unhardcode:
     jnz  0x0058013E
 .NotAHarvester:
     jmp  0x00580165
+@ENDHACK
 
 
-_UnitClass__TiberiumLoad_Unhardcode:
+@HACK 0x005808A4,0x005808AC,_UnitClass__TiberiumLoad_Unhardcode
     movzx edx,dl
     push eax
     push edi
@@ -113,4 +110,4 @@ _UnitClass__TiberiumLoad_Unhardcode:
     jnz  0x005808AC
 .NotAHarvester:
     jmp  0x005808C2
-
+@ENDHACK

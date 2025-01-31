@@ -5,11 +5,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x00551A87,_Startup_Function_Hook_Early_Load ; for some spawn.ini stuff
-
-
-
-_Startup_Function_Hook_Early_Load:
+@HACK 0x00551A87,0x00551A8D,_Startup_Function_Hook_Early_Load ; for some spawn.ini stuff
     xor  edx,edx
     mov  [0x006ABBC8],edx
     Save_Registers
@@ -23,3 +19,4 @@ _Startup_Function_Hook_Early_Load:
     mov  ebx,[0x006ABC10]
     jmp  0x00551A8D
     retn
+@ENDHACK

@@ -12,12 +12,7 @@
 ; // HouseClass::Is_No_YakMig
 ; // HouseClass::Is_Hack_Prevented
 ; // Reinf::_Need_To_Take
-@LJMP 0x004DE09E,_HouseClass_Is_No_YakMig_UseFixedWing
-@LJMP 0x004DE103,_HouseClass_Is_No_YakMig_UseFixedWing2
-@LJMP 0x004DE13C,_HouseClass_Is_No_YakMig_CountAirfield
-@LJMP 0x004DE15C,_HouseClass_Is_Hack_Prevented_UseFixedWing
-
-_HouseClass_Is_No_YakMig_UseFixedWing:
+@HACK 0x004DE09E,0x004DE0AC,_HouseClass_Is_No_YakMig_UseFixedWing
     push edi
     push eax
     xor  edi,edi ;begin from ID 0
@@ -45,9 +40,10 @@ _HouseClass_Is_No_YakMig_UseFixedWing:
     pop  eax
     pop  edi
     jmp  0x004DE0AC
+@ENDHACK
 
 
-_HouseClass_Is_No_YakMig_UseFixedWing2:
+@HACK 0x004DE103,0x004DE10B,_HouseClass_Is_No_YakMig_UseFixedWing2
     movzx eax,al
     push edi
     AircraftTypeClass.FromIndex(eax,edi)
@@ -58,9 +54,10 @@ _HouseClass_Is_No_YakMig_UseFixedWing2:
     jnz  0x004DE13B
 .NotFixedWing:
     jmp  0x004DE13C
+@ENDHACK
 
 
-_HouseClass_Is_No_YakMig_CountAirfield:
+@HACK 0x004DE13C,0x004DE142,_HouseClass_Is_No_YakMig_CountAirfield
 ; edx is not used. ebx is HouseClass
     push edi
     push esi
@@ -85,9 +82,10 @@ _HouseClass_Is_No_YakMig_CountAirfield:
     pop  esi
     pop  edi
     jmp  0x004DE142
+@ENDHACK
 
 
-_HouseClass_Is_Hack_Prevented_UseFixedWing:
+@HACK 0x004DE15C,0x004DE16B,_HouseClass_Is_Hack_Prevented_UseFixedWing
     push eax
     push ecx
     push edx
@@ -114,3 +112,5 @@ _HouseClass_Is_Hack_Prevented_UseFixedWing:
     pop  eax
     call HouseClass__Is_No_YakMig
     jmp  0x004DE16B
+@ENDHACK
+

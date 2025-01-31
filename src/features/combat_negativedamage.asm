@@ -10,27 +10,20 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004A321B,_Combat_Modify_Damage_NegativeDamage_Always_Count
-@LJMP 0x004A325E,_Combat_Modify_Damage_NegativeDamage_Always_Count2
-@LJMP 0x004A3287,_Combat_Modify_Damage_NegativeDamage_Always_Count3
-@LJMP 0x004A32AA,_Combat_Modify_Damage_NegativeDamage_Always_Count4
-@LJMP 0x004A32B1,_Combat_Modify_Damage_NegativeDamage_Always_Count5
-@LJMP 0x00564517,_TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons
-
-_Combat_Modify_Damage_NegativeDamage_Always_Count:
 ; don't consider any distance or warhead checks, just apply the negative damage
-    jmp  0x004A323E
-    ;    jmp  0x004A3236
+@SJMP 0x004A321B,0x004A323E ; _Combat_Modify_Damage_NegativeDamage_Always_Count
 
-_Combat_Modify_Damage_NegativeDamage_Always_Count2:
-; replace shr with sar to support negative values
+
+@HACK 0x004A325E,0x004A3263,_Combat_Modify_Damage_NegativeDamage_Always_Count2
+    ; replace shr with sar to support negative values
     sar  ebx,0x8
     mov  esi,ebx
     jmp  0x004A3263
+@ENDHACK
 
 
-_Combat_Modify_Damage_NegativeDamage_Always_Count3:
-; have idiv work with negative values
+@HACK 0x004A3287,0x004A328E,_Combat_Modify_Damage_NegativeDamage_Always_Count3
+    ; have idiv work with negative values
     push edx
     xor  edx,edx
     mov  eax,ecx
@@ -39,9 +32,11 @@ _Combat_Modify_Damage_NegativeDamage_Always_Count3:
     idiv ebx
     pop  edx
     jmp  0x004A328E
+@ENDHACK
 
-_Combat_Modify_Damage_NegativeDamage_Always_Count4:
-; do not subject negative values to MinDamage or MaxDamage, since that will truncate it to MinDamage
+
+@HACK 0x004A32AA,0x004A32B1,_Combat_Modify_Damage_NegativeDamage_Always_Count4
+    ; do not subject negative values to MinDamage or MaxDamage, since that will truncate it to MinDamage
     sar  dl,0x1F
     push edx
     xor  edx,edx
@@ -50,15 +45,19 @@ _Combat_Modify_Damage_NegativeDamage_Always_Count4:
     mov  esi,eax
     pop  edx
     jmp  0x004A32B1
+@ENDHACK
 
-_Combat_Modify_Damage_NegativeDamage_Always_Count5:
+
+@HACK 0x004A32B1,0x004A32B6,_Combat_Modify_Damage_NegativeDamage_Always_Count5
     test eax,eax
     jle  0x004A32CE
     cmp  ecx,0x4
     jge  0x004A32C2
     jmp  0x004A32B6
+@ENDHACK
 
-_TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons:
+
+@HACK 0x00564517,0x0056451C,_TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons
     push ecx
     mov  eax,ecx    ; ecx is the current unit
     mov  edx,-1
@@ -69,3 +68,5 @@ _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons:
     mov  ebx,dword[ecx+0x11]
     mov  eax,ecx
     jmp  0x0056451C
+@ENDHACK
+

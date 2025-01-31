@@ -9,8 +9,4 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-
-@LJMP 0x004535D0,_BuildingTypeClass__One_Time_TechLevel_Check
-
-_BuildingTypeClass__One_Time_TechLevel_Check:
-    jmp  0x004535D9
+@SJMP 0x004535D0,0x004535D9 ; _BuildingTypeClass__One_Time_TechLevel_Check

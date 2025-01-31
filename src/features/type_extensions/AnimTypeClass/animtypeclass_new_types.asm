@@ -22,13 +22,6 @@
 ; We emulate this by placing the directional animations at the end of our list, then use the ID of the first animation to determine if an animation is directional
 ; The animation file is not loaded at this time, so we cannot obtain the frame 
 
-@LJMP 0x0041C5D8,_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
-@LJMP 0x0041C654,_AnimTypeClass__One_Time_UnhardCode_AnimTypes
-@LJMP 0x0041C6E3,_AnimTypeClass__Init_UnhardCode_AnimTypes
-@LJMP 0x00423EE8,_Anim_From_Name_Unhardcode_AnimTypes
-@LJMP 0x004F40E9,_Init_Game_Set_AnimTypes_Heap_Count
-@LJMP 0x005655C5,_TechnoClass_FireAt_ApplyDirectionalAnim
-
 %define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
 
 [section .data] 
@@ -43,8 +36,7 @@ Temp.Anim.typeclass_constructor_arg dd 0
 
 ; Note: SAMFIRE and MINIGUN read the .shp counter-clockwise, but the numbering is clockwise.
 
-[section .text] 
-_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
+@HACK 0x0041C5D8,0x0041C5DE,_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
     Loop_Over_RULES_INI_Section_Entries str_AnimTypes,Init_AnimTypeClass
     Loop_Over_RULES_INI_Section_Entries str_DirectionalAnimTypes,Init_DirectionalAnimTypeClass
     ;mov  edx,[AnimTypeClass.Count]
@@ -56,8 +48,70 @@ _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes:
     pop  esi
     pop  edx
     jmp  0x0041C5DE
+@ENDHACK
 
 
+@HACK 0x0041C654,0x0041C659,_AnimTypeClass__One_Time_UnhardCode_AnimTypes
+    mov  al,byte[AnimTypeClass.Count]
+    cmp  dh,al
+    jl   0x0041C5F8
+    jmp  0x0041C659
+@ENDHACK
+
+
+@HACK 0x0041C6E3,0x0041C6E8,_AnimTypeClass__Init_UnhardCode_AnimTypes
+    mov  al,byte[AnimTypeClass.Count]
+    cmp  bl,al
+    jl   0x0041C68E
+    jmp  0x0041C6E8
+@ENDHACK
+    
+    
+@HACK 0x00423EE8,0x00423EED,_Anim_From_Name_Unhardcode_AnimTypes
+    mov  al,byte[AnimTypeClass.Count]
+    cmp  dl,al
+    jl   0x00423EF4
+    jmp  0x00423EED
+@ENDHACK
+
+
+@HACK 0x004F40E9,0x004F40EE,_Init_Game_Set_AnimTypes_Heap_Count
+    Get_RULES_INI_Section_Entry_Count str_AnimTypes
+    mov  edx,eax
+    add  edx,AnimTypesHeap.ORIGINAL_COUNT
+    mov  byte[FirstDirectionalAnim],dl
+
+    Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
+    shl  al,3 ;x8
+    add  edx,eax
+    jmp  0x004F40EE
+@ENDHACK
+
+
+@HACK 0x005655C5,0x005655CF,_TechnoClass_FireAt_ApplyDirectionalAnim
+    cmp  al,byte[FirstDirectionalAnim]
+    jge  .DirectionalAnim
+    cmp  al,0x19
+    jc   0x005655D7
+    jbe  0x005657D8
+    jmp  0x005655CF
+.DirectionalAnim:
+    push edx
+    mov  edx,eax
+    mov  eax,dword[ebp-0x18]
+    add  eax,0xBA
+    mov  al,byte[eax]
+    add  al,0x10
+    and  eax,0xFF
+    sar  eax,0x5
+    add  al,dl 
+    pop  edx
+    mov  byte[ebp-0x10],al
+    jmp  0x005655D7
+@ENDHACK
+
+
+[section .text] 
 ; We preserve this for now, we can tidy this later when we want to customize
 Init_AnimTypeClass:
     mov  eax,AnimTypeClass.NEW_SIZE
@@ -189,58 +243,3 @@ Init_DirectionalAnimTypeClass:
 .Ret:
     retn
 
-
-_AnimTypeClass__One_Time_UnhardCode_AnimTypes:
-    mov  al,byte[AnimTypeClass.Count]
-    cmp  dh,al
-    jl   0x0041C5F8
-    jmp  0x0041C659
-
-
-_AnimTypeClass__Init_UnhardCode_AnimTypes:
-    mov  al,byte[AnimTypeClass.Count]
-    cmp  bl,al
-    jl   0x0041C68E
-    jmp  0x0041C6E8
-    
-    
-_Anim_From_Name_Unhardcode_AnimTypes:
-    mov  al,byte[AnimTypeClass.Count]
-    cmp  dl,al
-    jl   0x00423EF4
-    jmp  0x00423EED
-
-
-_Init_Game_Set_AnimTypes_Heap_Count:
-    Get_RULES_INI_Section_Entry_Count str_AnimTypes
-    mov  edx,eax
-    add  edx,AnimTypesHeap.ORIGINAL_COUNT
-    mov  byte[FirstDirectionalAnim],dl
-
-    Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
-    shl  al,3 ;x8
-    add  edx,eax
-    jmp  0x004F40EE
-
-
-_TechnoClass_FireAt_ApplyDirectionalAnim:
-    cmp  al,byte[FirstDirectionalAnim]
-    jge  .DirectionalAnim
-    cmp  al,0x19
-    jc   0x005655D7
-    jbe  0x005657D8
-    jmp  0x005655CF
-
-.DirectionalAnim:
-    push edx
-    mov  edx,eax
-    mov  eax,dword[ebp-0x18]
-    add  eax,0xBA
-    mov  al,byte[eax]
-    add  al,0x10
-    and  eax,0xFF
-    sar  eax,0x5
-    add  al,dl 
-    pop  edx
-    mov  byte[ebp-0x10],al
-    jmp  0x005655D7

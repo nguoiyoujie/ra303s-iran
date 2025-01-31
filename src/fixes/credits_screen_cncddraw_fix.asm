@@ -7,15 +7,10 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@LJMP 0x004BB74A, Slide_Show_Credits_CnCDDraw_Crash_Fix
 
-@LJMP 0x004BC2E5,_Slide_Show_No_Background
-
+[section .rdata]
 str_derppp db"derpppp",0
 
-Slide_Show_Credits_CnCDDraw_Crash_Fix:
-    jmp  0x004BB74F
+@SJMP 0x004BB74A,0x004BB74F ; Slide_Show_Credits_CnCDDraw_Crash_Fix
+@SET 0x004BC2E5,{mov edi,str_derppp} ; _Slide_Show_No_Background
 
-_Slide_Show_No_Background:
-    mov  edi,str_derppp
-    jmp  0x004BC2EA

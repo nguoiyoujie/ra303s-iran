@@ -10,11 +10,8 @@
 ;
 ;----------------------------------------------------------------
 
-;@LJMP 0x0057E23C,_UnitClass_Mission_Unload_PassengerUnhardcode
-@LJMP 0x0057D3C2,_UnitClass_Mission_Unload_PassengerUnhardcode
-
 ;Replaces the Supply Truck check with a Passengers=xx check
-;_UnitClass_Mission_Unload_PassengerUnhardcode:
+;@HACK 0x0057E23C,_UnitClass_Mission_Unload_PassengerUnhardcode
 ;    push eax
 ;    movzx eax,al
 ;    UnitTypeClass.FromIndex(eax,eax)
@@ -23,9 +20,11 @@
 ;    pop  eax
 ;    jg   0x0057D6E1
 ;    jmp  0x0057E244
+;@ENDHACK
+
 
 ; For Unit IDs >= 0x11
-_UnitClass_Mission_Unload_PassengerUnhardcode:
+@HACK 0x0057D3C2,0x0057D3F9,_UnitClass_Mission_Unload_PassengerUnhardcode
     mov  al,byte[eax+0x196]
     movzx eax,al
     push eax
@@ -69,3 +68,4 @@ _UnitClass_Mission_Unload_PassengerUnhardcode:
     pop  edx
     pop  eax
     jmp  0x0057D3F9
+@ENDHACK

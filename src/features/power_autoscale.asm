@@ -7,17 +7,14 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x00527C9A,_PowerClass__AI_Record_Power_Drain
-@LJMP 0x00527D11,_PowerClass__AI_Record_Power_Drain2
-@LJMP 0x00527EEB,_PowerClass__Power_Height_Scale_Height_Relative
+@SJMP 0x00527D11,0x00527D15 ; _PowerClass__AI_Record_Power_Drain2
 
 [section .data] 
 Temp.PowerClassAI.Power  dd 0
 Temp.PowerClassAI.Drain  dd 0
 
 
-[section .text] 
-_PowerClass__AI_Record_Power_Drain:
+@HACK 0x00527C9A,0x00527CA4,_PowerClass__AI_Record_Power_Drain
     push ebx
     xor  ebx,ebx
     mov  eax,[edx+HouseClass.Offset.Power]
@@ -42,14 +39,10 @@ _PowerClass__AI_Record_Power_Drain:
     jmp  0x00527CA4
 .NotChanged:
     jmp  0x00527D6F
+@ENDHACK
 
 
-_PowerClass__AI_Record_Power_Drain2:
-    mov  eax,esi
-    jmp  0x00527D17
-
-
-_PowerClass__Power_Height_Scale_Height_Relative:
+@HACK 0x00527EEB,0x00527EF0,_PowerClass__Power_Height_Scale_Height_Relative
     sub  esp,4
     ; edx is our value to manipulate
     ; the height fills out around 1600 power
@@ -92,3 +85,4 @@ _PowerClass__Power_Height_Scale_Height_Relative:
     pop  ecx
     mov  esi,edx
     jmp  0x00527EF0
+@ENDHACK

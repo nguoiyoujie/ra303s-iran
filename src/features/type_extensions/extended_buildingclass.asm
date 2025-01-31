@@ -1,10 +1,7 @@
-@LJMP 0x0045E429,_BuildingClass__Building_Crew_House_NoBuildingCrew
-@LJMP 0x004EC58F,_InfantryClass__Per_Cell_Process_House_Instant_Capture
-@LJMP 0x004EFC9E,_InfantryClass__What_Action_House_Instant_Capture
 
 ; no buildingcrew if the house has no building crew set
 ; this requires the extended houseclass option NoBuildingCrew
-_BuildingClass__Building_Crew_House_NoBuildingCrew:
+@HACK 0x0045E429,0x0045E42F,_BuildingClass__Building_Crew_House_NoBuildingCrew
     Save_Registers
 
     mov  edx,[eax+0x11]  ; vtable
@@ -20,9 +17,10 @@ _BuildingClass__Building_Crew_House_NoBuildingCrew:
 
 .No_Building_Crew:
     jmp  0x0045E542
+@ENDHACK
 
 ;edi = buildingclass
-_InfantryClass__Per_Cell_Process_House_Instant_Capture:
+@HACK 0x004EC58F,0x004EC594,_InfantryClass__Per_Cell_Process_House_Instant_Capture
     Save_Registers
 
     mov  eax,edi ; make sure eax has this pointer
@@ -39,9 +37,10 @@ _InfantryClass__Per_Cell_Process_House_Instant_Capture:
 
 .Capture_Building:
     jmp  0x004EC59A
+@ENDHACK
 
 ;ebx = buildingclass
-_InfantryClass__What_Action_House_Instant_Capture:
+@HACK 0x004EFC9E,0x004EFCB3,_InfantryClass__What_Action_House_Instant_Capture
     Save_Registers
 
     mov  eax,ebx ; make sure eax has this pointer
@@ -62,3 +61,4 @@ _InfantryClass__What_Action_House_Instant_Capture:
 
 .Capture_Building:
     jmp  0x004EFCB5
+@ENDHACK

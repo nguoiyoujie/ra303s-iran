@@ -6,13 +6,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00458DCD,_BuildingClass__Exit_Object_InfantryUnit_Unhardcode
-@LJMP 0x00458C8F,_BuildingClass__Exit_Object_Vessel_Unhardcode
-@LJMP 0x0045C0BA,_BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode
-@LJMP 0x0045E457,_BuildingClass__Crew_Type_Unhardcode
-
-
-_BuildingClass__Exit_Object_InfantryUnit_Unhardcode:
+@HACK 0x00458DCD,0x00458DEC,_BuildingClass__Exit_Object_InfantryUnit_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -36,9 +30,10 @@ _BuildingClass__Exit_Object_InfantryUnit_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x004592BC
+@ENDHACK
 
 
-_BuildingClass__Exit_Object_Vessel_Unhardcode:
+@HACK 0x00458C8F,0x00458C9F,_BuildingClass__Exit_Object_Vessel_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -51,9 +46,10 @@ _BuildingClass__Exit_Object_Vessel_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x00459582
+@ENDHACK
 
 
-_BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode:
+@HACK 0x0045C0BA,0x0045C0F5,_BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -66,9 +62,10 @@ _BuildingClass__Mission_Deconstruction_DetachShips_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045C176
+@ENDHACK
 
 
-_BuildingClass__Crew_Type_Unhardcode:
+@HACK 0x0045E457,0x0045E47E,_BuildingClass__Crew_Type_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -98,4 +95,5 @@ _BuildingClass__Crew_Type_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045E566
+@ENDHACK
 

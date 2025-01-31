@@ -11,12 +11,9 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x004AB678,_Shake_The_Screen_Return_At_Prologue
-
-_Shake_The_Screen_Return_At_Prologue:
+@HACK 0x004AB678,0x004AB67F,_Shake_The_Screen_Return_At_Prologue
     cmp  byte[Rules.General.NoScreenShake],1
     jz   .Early_Return
-
     push ebp
     mov  ebp,esp
     push ebx
@@ -24,6 +21,6 @@ _Shake_The_Screen_Return_At_Prologue:
     push edx
     push esi
     jmp  0x004AB67F
-
 .Early_Return:
     jmp  0x004ABF4A ; jump to retn instruction at the end of the function
+@ENDHACK

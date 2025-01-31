@@ -7,12 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x0045A507,_BuildingClass__What_Action_Kennel_Unhardcode
-@LJMP 0x0045A574,_BuildingClass__What_Action_Kennel_Unhardcode2
-@LJMP 0x0045A61D,_BuildingClass__What_Action_Kennel_Unhardcode3
-
-
-_BuildingClass__What_Action_Kennel_Unhardcode:
+@HACK 0x0045A507,0x0045A513,_BuildingClass__What_Action_Kennel_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -23,9 +18,10 @@ _BuildingClass__What_Action_Kennel_Unhardcode:
     jnz  0x0045A513
 .NotAKennel:
     jmp  0x0045A585
+@ENDHACK
 
 
-_BuildingClass__What_Action_Kennel_Unhardcode2:
+@HACK 0x0045A574,0x0045A57C,_BuildingClass__What_Action_Kennel_Unhardcode2
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -36,9 +32,10 @@ _BuildingClass__What_Action_Kennel_Unhardcode2:
     jnz  0x0045A57C
 .NotAKennel:
     jmp  0x0045A519
+@ENDHACK
 
 
-_BuildingClass__What_Action_Kennel_Unhardcode3:
+@HACK 0x0045A61D,0x0045A629,_BuildingClass__What_Action_Kennel_Unhardcode3
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -49,3 +46,4 @@ _BuildingClass__What_Action_Kennel_Unhardcode3:
     jnz  0x0045A58B
 .NotAKennel:
     jmp  0x0045A629
+@ENDHACK

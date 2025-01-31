@@ -16,18 +16,8 @@
 ;added by lovalmidas
 ; hook into AI_Unit() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original UNIT_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
-@LJMP 0x004DB839,_HouseClass__AI_Unit_CheckHarvester
-@LJMP 0x004DB84D,_HouseClass__AI_Unit_PickHarvester
-@LJMP 0x004DBBB6,_HouseClass__AI_Unit_Extend_BestList_1
-@LJMP 0x004DBBE4,_HouseClass__AI_Unit_Extend_BestList_2
-@LJMP 0x004DBB6A,_HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
-; extends the check to new unittypeclass
-@LJMP 0x004DBBC5,_HouseClass__AI_Unit_Expand
-@LJMP 0x004DBC32,_HouseClass__AI_Unit_Ignore_Harvesters
-@LJMP 0x004DBC89,_HouseClass__AI_Unit_Expand_Choice
-@LJMP 0x004DBCAE,_HouseClass__AI_Unit_Expand_Choice_2
-;added by lovalmidas/
 
+@SJMP 0x004DBB6A,0x004DBB73 ; _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
 
 ; Warning stack manipulation!
 @SET 0x004DB7F4,{sub esp,0x5E8} ; was 0xE8, add 0x200 to hold counter[UNIT_COUNT] (0x400) and bestlist[UNIT_COUNT] (0x100)
@@ -43,20 +33,19 @@
 @SET 0x004DBB9D,{cmp esi,dword[ebp+eax*4-0x5FC]}
 @SET 0x004DBBAE,{mov esi,dword[ebp+eax*4-0x5FC]}
 ; this section deals with the AI with BaseBuilding, to include the additional units in its random building roster
-@SET 0x004DBC45,{mov dword[ebp+eax*4-0x4FC],0x14} ; 0xFFFFFB04 ; was 0xFFFFFF5C
-@SET 0x004DBC58,{mov dword[ebp+eax*4-0x4FC],0x1}
+;@SET 0x004DBC45,{mov dword[ebp+eax*4-0x4FC],0x14} ; 0xFFFFFB04 ; was 0xFFFFFF5C
+;@SET 0x004DBC58,{mov dword[ebp+eax*4-0x4FC],0x1}
 @SET 0x004DBC6B,{mov dword[ebp+eax*4-0x4FC],edi}
 @SET 0x004DBC78,{mov ecx,dword[ebp+eax*4-0x4FC]}
 @SET 0x004DBCDF,{mov esi,dword[ebp+edx-0x4FC]}
 
-@LJMP 0x004DBC37,_HouseClass__AI_Unit_Set_Weight
 
 [section .data] 
 Temp.AIUnit.Harvester db 0
 
 
 [section .text] 
-_HouseClass__AI_Unit_CheckHarvester:
+@HACK 0x004DB839,0x004DB845,_HouseClass__AI_Unit_CheckHarvester
     ; edx = HouseClass
     ; set edi to 1 if there is income, 0 otherwise
     push edi
@@ -97,9 +86,10 @@ _HouseClass__AI_Unit_CheckHarvester:
     cmp  edi,0
     pop  edi
     jmp  0x004DB845
+@ENDHACK
 
 
-_HouseClass__AI_Unit_PickHarvester:
+@HACK 0x004DB84D,0x004DB86E,_HouseClass__AI_Unit_PickHarvester
     ; edx: House class
     ; cycle through all units
     ; pick the first unit that is buildable
@@ -149,38 +139,46 @@ _HouseClass__AI_Unit_PickHarvester:
     mov  byte[edx+HouseClass.Offset.BuildUnit],al
     mov  eax,0xF
     jmp  0x004DB86E
+@ENDHACK
 
 
-_HouseClass__AI_Unit_Extend_BestList_1:
+@HACK 0x004DBBB6,0x004DBBBD,_HouseClass__AI_Unit_Extend_BestList_1
     mov  al,byte[ebp-0x18]
     mov  byte[ecx+ebp*0x1 - 1533],al  ; was -0x4D
     jmp  0x004DBBBD
+@ENDHACK
 
-_HouseClass__AI_Unit_Extend_BestList_2:
+
+@HACK 0x004DBBE4,0x004DBBEE,_HouseClass__AI_Unit_Extend_BestList_2
     mov  al,byte[eax+ebp*0x1 - 1532] ; was -0x4C
     mov  byte[edx+HouseClass.Offset.BuildUnit],al
     jmp  0x004DBCF6 ; skip AutoBase
+@ENDHACK
 
-_HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck:
-    jmp  0x004DBB73
 
-_HouseClass__AI_Unit_Expand:
+@HACK 0x004DBBC5,0x004DBBCE,_HouseClass__AI_Unit_Expand
     cmp  byte bl,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBB27
     jmp  0x004DBBCE
+@ENDHACK
 
-_HouseClass__AI_Unit_Expand_Choice:
+
+@HACK 0x004DBC89,0x004DBC91,_HouseClass__AI_Unit_Expand_Choice
     cmp  byte al,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBC05
     jmp  0x004DBC91
+@ENDHACK
 
-_HouseClass__AI_Unit_Expand_Choice_2:
+
+; extends the check to new unittypeclass
+@HACK 0x004DBCAE,0x004DBCB3,_HouseClass__AI_Unit_Expand_Choice_2
     cmp  byte dh,[UnitTypeClass.Count] ; was UNIT_COUNT (0x16)
     jl   0x004DBCD6
     jmp  0x004DBCB3
+@ENDHACK
 
 
-_HouseClass__AI_Unit_Ignore_Harvesters:
+@HACK 0x004DBC32,0x004DBC37,_HouseClass__AI_Unit_Ignore_Harvesters
     movzx eax,al
     push ebx
     UnitTypeClass.FromIndex(eax,ebx)
@@ -189,9 +187,10 @@ _HouseClass__AI_Unit_Ignore_Harvesters:
 	test al,al
     jnz  0x004DBC65 ; harvester
     jmp  0x004DBC37
+@ENDHACK
 
 
-_HouseClass__AI_Unit_Set_Weight:
+@HACK 0x004DBC37,0x004DBC65,_HouseClass__AI_Unit_Set_Weight
     mov  eax,dword[ebp-0x1F]
     shr  eax,0x18
     ; HouseClass us ebp-0x20
@@ -218,4 +217,5 @@ _HouseClass__AI_Unit_Set_Weight:
     pop  edx
     pop  ebx
     jmp  0x004DBC72    
+@ENDHACK
 

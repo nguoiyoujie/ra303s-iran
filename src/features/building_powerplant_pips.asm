@@ -7,9 +7,7 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00568A8A,_TechnoClass_Draw_Pips_CheckPower
-
-_TechnoClass_Draw_Pips_CheckPower:
+@HACK 0x00568A8A,0x00568AC5,_TechnoClass_Draw_Pips_CheckPower
     movzx eax,al
     push edx
     push edi
@@ -23,3 +21,4 @@ _TechnoClass_Draw_Pips_CheckPower:
     jg    0x00568AC5
 .NotPowerPlant:
     jmp   0x00568B72
+@ENDHACK

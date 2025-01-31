@@ -10,14 +10,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x0045ED9C,_BuildingClass__Read_INI_Repair_Yard_Unhardcode
-@LJMP 0x00460139,_BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode
-@LJMP 0x004604C3,_BuildingClass__Animation_AI_Yard_Unhardcode
-@LJMP 0x004A5BF5,_Keyboard_Process__Yard_Unhardcode
-@LJMP 0x004A5CA2,_Keyboard_Process__MCV_Unhardcode
-
-
-_BuildingClass__Read_INI_Repair_Yard_Unhardcode:
+@HACK 0x0045ED9C,0x0045EDA4,_BuildingClass__Read_INI_Repair_Yard_Unhardcode
     movzx edx,dl
     push edi
     BuildingTypeClass.FromIndex(edx,edi)
@@ -28,9 +21,10 @@ _BuildingClass__Read_INI_Repair_Yard_Unhardcode:
     je   0x0045EDA4
 .NotAYard:
     jmp  0x0045EDAB
+@ENDHACK
 
 
-_BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode:
+@HACK 0x00460139,0x00460141,_BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -41,9 +35,10 @@ _BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode:
     je   0x00460176
 .NotAYard:
     jmp  0x00460141
+@ENDHACK
 
 
-_BuildingClass__Animation_AI_Yard_Unhardcode:
+@HACK 0x004604C3,0x004604CB,_BuildingClass__Animation_AI_Yard_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -54,9 +49,10 @@ _BuildingClass__Animation_AI_Yard_Unhardcode:
     je   0x004604CB
 .NotAYard:
     jmp  0x004604E2
+@ENDHACK
 
 
-_Keyboard_Process__Yard_Unhardcode:
+@HACK 0x004A5BF5,0x004A5BFD,_Keyboard_Process__Yard_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -67,9 +63,10 @@ _Keyboard_Process__Yard_Unhardcode:
     je   0x004A5BFD
 .NotAYard:
     jmp  0x004A5B8F
+@ENDHACK
 
 
-_Keyboard_Process__MCV_Unhardcode:
+@HACK 0x004A5CA2,0x004A5CAA,_Keyboard_Process__MCV_Unhardcode
     movzx eax,al
     push edi
     UnitTypeClass.FromIndex(eax,edi)
@@ -80,3 +77,4 @@ _Keyboard_Process__MCV_Unhardcode:
     jnz  0x004A5CAA
 .NotADeployer:
     jmp  0x004A5C3C
+@ENDHACK

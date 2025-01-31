@@ -9,6 +9,8 @@
 ;
 ;----------------------------------------------------------------
 
+extern BuildingTypeClass__From_Name
+
 ; Expose other technotype fields that already exist
 ;Read INI settings
 @SJMP 0x00569B6A,0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
@@ -156,7 +158,7 @@ _GetPrerequisiteExtendedFromString:
     lea  eax,[eax+1]
     mov  ebx,eax
     pop  eax
-    call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
+    call BuildingTypeClass__From_Name
     cmp  al,0xFF ; STRUCT_NONE
     jz   .Read_Next
     ; al is any value from 00 to FE
@@ -176,7 +178,7 @@ _GetPrerequisiteExtendedFromString:
 
 .Read_Last:
     pop  eax
-    call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
+    call BuildingTypeClass__From_Name
     cmp  al,0xFF ; STRUCT_NONE
     jz   .Retn
     ; al is any value from 00 to FE

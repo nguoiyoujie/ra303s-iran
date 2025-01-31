@@ -8,12 +8,6 @@
 ; No compatibility issues is expected. To not use this logic, simply refrain from including NOICON.SHP.
 ;----------------------------------------------------------------
 
-@LJMP 0x00403FAE,_AircraftTypeClass__One_Time__Load_NoIcon_SHP
-@LJMP 0x00453637,_BuildingTypeClass__One_Time__Load_NoIcon_SHP
-@LJMP 0x004EB12E,_InfantryTypeClass__One_Time__Load_NoIcon_SHP
-@LJMP 0x0054DDBD,_SideBarClass__One_Time__Load_NoIcon_SHP
-@LJMP 0x00578A24,_UnitTypeClass__One_Time__Load_NoIcon_SHP
-@LJMP 0x005849EB,_VesselTypeClass__One_Time__Load_NoIcon_SHP
 
 [section .rdata] 
 str_NoIcon_SHP       db"NOICON.SHP", 0
@@ -24,68 +18,69 @@ obj_NoIcon_SHP       dd 0
 
 
 [section .text] 
-_AircraftTypeClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x00403FAE,0x00403FB4,_AircraftTypeClass__One_Time__Load_NoIcon_SHP
     ; eax is the Shape object loaded from <TypeName>ICON.SHP. It is NUL (0) if the icon does not exist.
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dword[esi+0x166],eax
     jmp  0x00403FB4
+@ENDHACK
 
 
-_BuildingTypeClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x00453637,0x0045363D,_BuildingTypeClass__One_Time__Load_NoIcon_SHP
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dword[esi+0x166],eax
     jmp  0x0045363D
+@ENDHACK
 
 
-_InfantryTypeClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x004EB12E,0x004EB134,_InfantryTypeClass__One_Time__Load_NoIcon_SHP
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dword[esi+0x166],eax
     jmp  0x004EB134
+@ENDHACK
+
     
-    
-_SideBarClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x0054DDBD,0x0054DDC3,_SideBarClass__One_Time__Load_NoIcon_SHP
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dl,byte[ebp-0x10]
     mov  ecx,dword[ebp-0x13]
     jmp  0x0054DDC3
+@ENDHACK
+
     
-    
-_UnitTypeClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x00578A24,0x00578A2A,_UnitTypeClass__One_Time__Load_NoIcon_SHP
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dword[esi+0x166],eax
     jmp  0x00578A2A
-    
+@ENDHACK
+ 
 
-_VesselTypeClass__One_Time__Load_NoIcon_SHP:
+@HACK 0x005849EB,0x005849F1,_VesselTypeClass__One_Time__Load_NoIcon_SHP
     test eax,eax
     jnz  .Retn
     call Load_NoIcon_SHP
-
 .Retn:
     mov  dword[esi+0x166],eax
     jmp  0x005849F1
+@ENDHACK
 
 
+[section .text]
 Load_NoIcon_SHP:
     mov  al,byte[chk_NoIcon_SHP]
     test al,al

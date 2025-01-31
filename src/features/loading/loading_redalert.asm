@@ -5,20 +5,19 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP  0x004F406D,_Init_Game_Early_Hook ; For loading REDALERT.INI stuff early
-@LJMP 0x00525A9F,_OptionsClass__Load_Settings ; For redalert.ini and some spawn.ini stuff
-@SJMP  0x004F4462,0x004F446C ; Don't call OptionsClass::Load_Settings() again, patch calls it at start of Init_Game()
+@SJMP 0x004F4462,0x004F446C ; Don't call OptionsClass::Load_Settings() again, patch calls it at start of Init_Game()
 
 %define        ebp_RedAlertINI        [ebp-0x74] ; for _OptionsClass__Load_Settings
 
-_Init_Game_Early_Hook:
+@HACK 0x004F406D,0x004F4072,_Init_Game_Early_Hook ; For loading REDALERT.INI stuff early
     call 0x004F8664 ; Init_Keys(void)
     mov eax,0x00668188 ; offset GameOptionsClass Options
     call 0x00525A24 ; OptionsClass::Load_Settings(void)
     jmp 0x004F4072   
+@ENDHACK
 
 
-_OptionsClass__Load_Settings:
+@HACK 0x00525A9F,0x00525AA4,_OptionsClass__Load_Settings ; For redalert.ini and some spawn.ini stuff
     call 0x004F3660
     Save_Registers
 
@@ -143,8 +142,10 @@ _OptionsClass__Load_Settings:
 
     Restore_Registers
     jmp  0x00525AA4
+@ENDHACK
 
 
+[section .text]
 Set_Single_CPU_Affinity:
     push str_dll_Kernel32
     call 0x005E5892 ; LoadLibraryA

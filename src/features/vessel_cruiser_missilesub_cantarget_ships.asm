@@ -8,8 +8,5 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x0058AC6C,_VesselClass__What_Action__Remove_Attack_Restrictions
-
-_VesselClass__What_Action__Remove_Attack_Restrictions:
-    jmp  0x0058ACE4
+@SJMP 0x0058AC6C,0x0058ACE4 ; _VesselClass__What_Action__Remove_Attack_Restrictions
 

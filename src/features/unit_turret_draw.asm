@@ -10,17 +10,13 @@
 ; No compatibility issues is expected, as this is a new feature.
 ;----------------------------------------------------------------
 
-@LJMP 0x0057CAF3,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
-@LJMP 0x0057CB08,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
-@LJMP 0x00578CE1,_UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
-
 [section .data] 
-temp.TurretFrameStart                                dw 0 
-temp.TurretFrameCount                                dw 0 
+Temp.TurretFrameStart                                dw 0 
+Temp.TurretFrameCount                                dw 0 
 
 
 [section .text] 
-_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
+@HACK 0x0057CAF3,0x0057CAFC,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
     ; eax is the unit id
     push eax
     push ebx
@@ -33,33 +29,37 @@ _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1:
 .DefaultStart:
     mov  cx,32
 .UseStart:
-    mov  word[temp.TurretFrameStart],cx
+    mov  word[Temp.TurretFrameStart],cx
     UnitTypeClass.TurretFrameCount.Get(ebx,cx)
     test cx,cx
     jnz   .UseCount
 .DefaultCount:
     mov  cx,32
 .UseCount:
-    mov  word[temp.TurretFrameCount],cx
+    mov  word[Temp.TurretFrameCount],cx
     pop  ecx
     pop  ebx
     pop  eax
     jmp  0x0057CAFC
+@ENDHACK
 
-_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2:
+
+@HACK 0x0057CB08,0x0057CB13,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
     push edx
     push ecx
     mov  eax,[Globals___Frame]
     xor  edx,edx
-    mov  cx,word[temp.TurretFrameCount]
+    mov  cx,word[Temp.TurretFrameCount]
     idiv cx
-    add  dx,word[temp.TurretFrameStart]
+    add  dx,word[Temp.TurretFrameStart]
     mov  eax,edx
     pop  ecx
     pop  edx
     jmp  0x0057CB13
+@ENDHACK
 
-_UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
+
+@HACK 0x00578CE1,0x00578CE7,_UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
     mov  al,byte[eax+0x196]
     ; eax is the unit id
     push eax
@@ -129,7 +129,6 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     pop  edx
     pop  eax
     jmp  0x00578CF1
-
-
+@ENDHACK
 
     

@@ -17,10 +17,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004DAFA4,_HouseClass__AI_Building_Build_Radar_Dome
-@LJMP 0x004DAFD5,_HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check
-
-_HouseClass__AI_Building_Build_Radar_Dome:
+@HACK 0x004DAFA4,0x004DAFAA,_HouseClass__AI_Building_Build_Radar_Dome
     jnz  0x004DB0E4
     cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
     jz   .Normal_Code
@@ -28,15 +25,14 @@ _HouseClass__AI_Building_Build_Radar_Dome:
     je   .No_Techup_Check
     cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .No_Techup_Check
-
 .Normal_Code:
     jmp  0x004DAFAA
-
 .No_Techup_Check:
     jmp  0x004DAFB7
+@ENDHACK
 
 
-_HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check:
+@HACK 0x004DAFD5,0x004DAFDB,_HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check
     jnz  0x004DB050
     ; do we need to do this check twice?
     cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
@@ -46,11 +42,10 @@ _HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check:
     cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],1
     jz   .War_Check
     jmp  .Normal_Code
-
 .War_Check:
     test dword[eax+HouseClass.Offset.BPreGroupScan],0x80 ; WARFACTORY
     ;cmp  dword[ecx+0x30E],0 ; war factory count 
     jz   0x004DB050
-
 .Normal_Code:
     jmp  0x004DAFDB
+@ENDHACK

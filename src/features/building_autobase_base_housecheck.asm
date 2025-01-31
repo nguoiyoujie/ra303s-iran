@@ -7,11 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x004593AB,_BuildingClass_ExitObject_Base_HouseCheck
-
-; TO-DO: Control this behaviour via an INI key
-
-_BuildingClass_ExitObject_Base_HouseCheck:
+@HACK 0x004593AB,_BuildingClass_ExitObject_Base_HouseCheck
+    ; TO-DO: Control this behaviour via an INI key
     test byte[eax+0x42],2
     jnz  0x00459582
     push edx
@@ -20,7 +17,7 @@ _BuildingClass_ExitObject_Base_HouseCheck:
     pop  edx
     jne  .SkipBase_NextBuildable
     jmp  0x004593B5
-
 .SkipBase_NextBuildable:
     xor  eax,eax
     jmp  0x004593F3
+@ENDHACK

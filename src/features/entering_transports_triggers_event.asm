@@ -10,8 +10,8 @@
 ;
 ;----------------------------------------------------------------
 ; Remove existing triggers; the above code includes both Engineer and Spy
-@LJMP 0x004EC5A2,0x004EC5E6 ; _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
-@LJMP 0x004EC723,0x004EC765 ; _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
+@SJMP 0x004EC5A2,0x004EC5E6 ; _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
+@SJMP 0x004EC723,0x004EC765 ; _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
 
 @HACK 0x004EC4D4,0x004EC4DA,_InfantryClass__Per_Cell_Process_Any_Trigger_PlayerEnteredEvent
     push eax

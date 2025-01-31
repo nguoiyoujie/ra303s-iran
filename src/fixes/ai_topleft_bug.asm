@@ -13,17 +13,17 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004DDA00,_HouseClass__Where_To_Go_Save_CurrentObject
-@LJMP 0x004DDA71,_HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure
+@HACK 0x004DDA00,0x004DDA05,_HouseClass__Where_To_Go_Save_CurrentObject
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+    je   .Apply_Fix
 
-_HouseClass__Where_To_Go_Save_CurrentObject:
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
-    je   .Apply_Fix_For_Skirmish
+    je   .Apply_Fix
 
     cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
-.Apply_Fix_For_Skirmish:
+.Apply_Fix:
     push ecx
     ; eax is the house, edx is the object to be moved
     ; save the object for future use
@@ -37,16 +37,20 @@ _HouseClass__Where_To_Go_Save_CurrentObject:
     mov  ecx,eax
     mov  eax,edx
     jmp  0x004DDA05
+@ENDHACK
 
 
-_HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
+@HACK 0x004DDA71,0x004DDA76,_HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+    je   .Apply_Fix
+
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
-    je   .Apply_Fix_For_Skirmish
+    je   .Apply_Fix
 
     cmp  byte[Rules.AI.FixAISendingTanksTopLeft],1
     jnz  .Original_Code
 
-.Apply_Fix_For_Skirmish:
+.Apply_Fix:
     call MapClass__Nearby_Location
     cmp  eax,-1 ; check for 0xFFFFFFFF cell
     jz   .DefaultToObjectCoord
@@ -64,15 +68,12 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 .Original_Code:
     call MapClass__Nearby_Location
     jmp  0x004DDA76
+@ENDHACK
 
 
 
 ; 3.03p
-;@LJMP 0x004DDA00,_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1
-;@LJMP 0x004DDA71,_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2
-;
-;
-;_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1:
+;@HACK 0x004DDA00,_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug1
 ;    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
@@ -96,10 +97,11 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;    mov  ecx,eax
 ;    mov  eax,edx
 ;    jmp  0x004DDA05
-;
-;
+;@ENDHACK
+
+
 ;; In case the Where_To_Go returns 0 
-;_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2:
+;@HACK 0x004DDA71,_HouseClass__Where_To_Go_Fix_AI_Attacking_Top_Left_Bug2
 ;    cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
 ;    je   .Apply_Fix_For_Skirmish
 ;
@@ -128,4 +130,4 @@ _HouseClass__Where_To_Go_Use_CurrentCell_on_Location_Failure:
 ;.Original_Code:
 ;    call MapClass__Nearby_Location
 ;    jmp  0x004DDA76
-;
+;@ENDHACK

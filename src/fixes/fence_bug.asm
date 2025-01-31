@@ -27,12 +27,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004A0219,_fence_bug
-
-%define fence_bug_bad 0x004A0227
-%define fence_bug_good 0x004A0229
-
-_fence_bug:
+@HACK 0x004A0219,0x004A0227,_fence_bug
     push eax
     push ebx
 
@@ -46,7 +41,8 @@ _fence_bug:
     pop  eax
 
     cmp  edx,0
-    jl   fence_bug_bad
+    jl   0x004A0227
     cmp  edx,0x4000
-    jb   fence_bug_good
-    jmp  fence_bug_bad
+    jb   0x004A0229
+    jmp  0x004A0227
+@ENDHACK

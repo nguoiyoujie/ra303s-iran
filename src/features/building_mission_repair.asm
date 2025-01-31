@@ -6,19 +6,18 @@
 ; This function is enabled by having more buildings with FactoryType=BuildingType. Remember to set the relevant animation frames
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x0045CF1B,_BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck
-@LJMP 0x0045CF94,_BuildingClass_Mission_Repair_RepairBay_Unhardcode
-@LJMP 0x0045D376,_BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode
 
 ;Overrides the structure type check with a FactoryType=xx check
-_BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck:
+@HACK 0x0045CF1B,0x0045CF22,_BuildingClass_Mission_Repair_Replace_TypeCheck_with_FactoryTypeCheck
     movzx eax,al
     BuildingTypeClass.FromIndex(eax,eax)
     cmp  byte[eax+BuildingTypeClass.Offset.FactoryType],RTTIType.BuildingType 
     jz   0x0045CF57 ; is a conyard
     jmp  0x0045CF6D
+@ENDHACK
 
-_BuildingClass_Mission_Repair_RepairBay_Unhardcode:
+
+@HACK 0x0045CF94,0x0045CFA0,_BuildingClass_Mission_Repair_RepairBay_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -29,9 +28,10 @@ _BuildingClass_Mission_Repair_RepairBay_Unhardcode:
     jnz  0x0045D2FF
 .NotARepairPad:
     jmp  0x0045CFA0
+@ENDHACK
 
 
-_BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode:
+@HACK 0x0045D376,0x0045D3B5,_BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -47,3 +47,4 @@ _BuildingClass_Mission_Repair_Helipad_Airfield_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045D3B5
+@ENDHACK

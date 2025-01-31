@@ -11,9 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0057C568,_UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units
-
-_UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units:
+@HACK 0x0057C568,0x0057C575,_UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units
     test byte[ebx+0xCD],0x80  
     jnz  0x0057C5EF
     push eax
@@ -31,3 +29,5 @@ _UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units:
     pop  eax
     jz   0x0057C5EF
     jmp  0x0057C575
+@ENDHACK
+

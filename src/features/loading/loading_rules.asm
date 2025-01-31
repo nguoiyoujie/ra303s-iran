@@ -4,11 +4,9 @@
 ; Load setting keys from rules.ini. Some of the logic may be called again when loading from map
 ;
 ;----------------------------------------------------------------
-@LJMP 0x004F446C,_Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
-@LJMP 0x00536AB5,_RulesClass__AI_Load ; it doesn't matter if we hook RulesClass::AI or RulesClass::General, the loaidng is contiguous. Intended for logic that should load per map.
 
 ; only loaded once on game init, not per map
-_Init_Game_Hook_Load:
+@HACK 0x004F446C,0x004F4471,_Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
     push ecx
     push ebx
     push edx
@@ -57,10 +55,11 @@ _Init_Game_Hook_Load:
 
     mov  eax,1
     jmp  0x004F4471
+@ENDHACK
 
 
 ; loaded per map
-_RulesClass__AI_Load:
+@HACK 0x00536AB5,0x00536ABA,_RulesClass__AI_Load ; it doesn't matter if we hook RulesClass::AI or RulesClass::General, the loading is contiguous. Intended for logic that should load per map.
     Save_Registers
 
     ; [General]
@@ -188,3 +187,4 @@ _RulesClass__AI_Load:
     Restore_Registers
     mov  ebx,0x005EFD21; offset aDefenselimit
     jmp  0x00536ABA
+@ENDHACK

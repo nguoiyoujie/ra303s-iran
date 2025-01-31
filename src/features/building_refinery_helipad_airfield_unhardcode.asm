@@ -12,37 +12,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x0041F36D,_AircraftClass__Mission_Move_LandingBuilding_Unhardcode
-@LJMP 0x0041FBDF,_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode
-@LJMP 0x0041FE9E,_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2
-@LJMP 0x00422CD0,_AircraftClass__Mission_Guard_Helipad_Unhardcode
-@LJMP 0x00454CE3,_BuildingClass__Receive_Message_RadioDocking_Unhardcode1
-@LJMP 0x00454E1C,_BuildingClass__Receive_Message_RadioDocking_Unhardcode2
-@LJMP 0x00454F6A,_BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3
-@LJMP 0x00454A6E,_BuildingClass__Receive_Message_RadioCanLoad_Unhardcode
-@LJMP 0x0045505D,_BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode
-@LJMP 0x00454BFC,_BuildingClass__Receive_Message_RadioImIn_Unhardcode
-@LJMP 0x0045517F,_BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode
-
-
-@LJMP 0x00459F68,_BuildingClass__Grand_Opening_Helipad_Unhardcode
-@LJMP 0x0045B84A,_BuildingClass__Sort_Y_Refinery_Unhardcode
-@LJMP 0x0045BB59,_BuildingClass__Can_Demolish_Refinery_Unhardcode
-@LJMP 0x004B6817,_DriveClass__Assign_Destination_Refinery_Unhardcode
-
-@LJMP 0x00569039,_TechnoClass__Find_Docking_Bay_UseInitBuilding
-@LJMP 0x00569075,_TechnoClass__Find_Docking_Bay_RecalcBestValue
-
-@LJMP 0x0057B33E,_UnitClass__Take_Damage_Refinery_Unhardcode
-@LJMP 0x0057E656,_UnitClass__Mission_Harvest_Refinery_Unhardcode1
-@LJMP 0x0057E6F1,_UnitClass__Mission_Harvest_Refinery_Unhardcode2
-
 [section .data] 
 Temp.FindDockingBayInitBuilding dd 0
 
 
-[section .text] 
-_AircraftClass__Mission_Move_LandingBuilding_Unhardcode:
+@HACK 0x0041F36D,0x0041F37E,_AircraftClass__Mission_Move_LandingBuilding_Unhardcode
 ; eax is the AircraftType class
     mov  ebx,eax
     AircraftTypeClass.IsFixedWing.Get(ebx,dl)
@@ -98,10 +72,11 @@ _AircraftClass__Mission_Move_LandingBuilding_Unhardcode:
     pop  edi
     mov  dword[Temp.FindDockingBayInitBuilding],0     
     jmp  0x0041F37E
+@ENDHACK
 
 
-_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode:
-; eax is the AircraftType class
+@HACK 0x0041FBDF,0x0041FBF3,_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode
+    ; eax is the AircraftType class
     mov  ecx,esi
     mov  esi,dword[ebp-0x20]  
     mov  ebx,eax
@@ -156,9 +131,10 @@ _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode:
     mov  dword[Temp.FindDockingBayInitBuilding],0     
     mov  esi,dword[ebp-0x20]  
     jmp  0x0041FBF3
+@ENDHACK
 
 
-_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2:
+@HACK 0x0041FE9E,0x0041FEB1,_AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2
 ; eax is the AircraftType class
     mov  edx,eax
     mov  ecx,esi
@@ -215,9 +191,10 @@ _AircraftClass__Enter_Idle_Mode_LandingBuilding_Unhardcode2:
     mov  dword[Temp.FindDockingBayInitBuilding],0     
     mov  esi,edi
     jmp  0x0041FEB1
+@ENDHACK
 
 
-_AircraftClass__Mission_Guard_Helipad_Unhardcode:
+@HACK 0x00422CD0,0x00422CE2,_AircraftClass__Mission_Guard_Helipad_Unhardcode
     push edi
     xor  edi,edi
     mov  dword[Temp.FindDockingBayInitBuilding],0   
@@ -246,9 +223,10 @@ _AircraftClass__Mission_Guard_Helipad_Unhardcode:
     pop  edi
     mov  dword[Temp.FindDockingBayInitBuilding],0   
     jmp  0x00422CE2
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioDocking_Unhardcode1:
+@HACK 0x00454CE3,0x00454CEB,_BuildingClass__Receive_Message_RadioDocking_Unhardcode1
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -267,9 +245,10 @@ _BuildingClass__Receive_Message_RadioDocking_Unhardcode1:
 .Normal:
     pop  edi
     jmp  0x00454DB3
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioDocking_Unhardcode2:
+@HACK 0x00454E1C,0x00454E39,_BuildingClass__Receive_Message_RadioDocking_Unhardcode2
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -300,9 +279,10 @@ _BuildingClass__Receive_Message_RadioDocking_Unhardcode2:
 .Normal:
     pop  edi
     jmp  0x00454F0F
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3:
+@HACK 0x00454F6A,0x00454F72,_BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -313,9 +293,10 @@ _BuildingClass__Receive_Message_RadioDocking_Refinery_Unhardcode3:
     jnz  0x00454F72
 .NotARefinery:
     jmp  0x00454FA1
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioCanLoad_Unhardcode:
+@HACK 0x00454A6E,0x00454A9A,_BuildingClass__Receive_Message_RadioCanLoad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -348,9 +329,10 @@ _BuildingClass__Receive_Message_RadioCanLoad_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x00454BBC
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode:
+@HACK 0x0045505D,0x00455069,_BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -361,10 +343,10 @@ _BuildingClass__Receive_Message_RadioAreRefinery_Refinery__Unhardcode:
     jnz  0x00455069
 .NotARefinery:
     jmp  0x00454FA1
+@ENDHACK
 
 
-
-_BuildingClass__Receive_Message_RadioImIn_Unhardcode:
+@HACK 0x00454BFC,0x00454C18,_BuildingClass__Receive_Message_RadioImIn_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -392,9 +374,10 @@ _BuildingClass__Receive_Message_RadioImIn_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x00455221
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode:
+@HACK 0x0045517F,0x004551EB,_BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -413,9 +396,10 @@ _BuildingClass__Receive_Message_RadioUnloaded_RunAway_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045513B
+@ENDHACK
 
 
-_BuildingClass__Grand_Opening_Helipad_Unhardcode:
+@HACK 0x00459F68,0x00459F74,_BuildingClass__Grand_Opening_Helipad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -426,9 +410,10 @@ _BuildingClass__Grand_Opening_Helipad_Unhardcode:
     jnz  0x00459F74
 .NotAHelipad:
     jmp  0x0045A12D
+@ENDHACK
 
 
-_BuildingClass__Sort_Y_Refinery_Unhardcode:
+@HACK 0x0045B84A,0x0045B852,_BuildingClass__Sort_Y_Refinery_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -439,9 +424,11 @@ _BuildingClass__Sort_Y_Refinery_Unhardcode:
     jnz  0x0045B852
 .NotARefinery:
     jmp  0x0045B864 
+@ENDHACK
 
 
-_BuildingClass__Can_Demolish_Refinery_Unhardcode:
+
+@HACK 0x0045BB59,0x0045BB61,_BuildingClass__Can_Demolish_Refinery_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -452,9 +439,10 @@ _BuildingClass__Can_Demolish_Refinery_Unhardcode:
     jnz  0x0045BB61
 .NotARefinery:
     jmp  0x0045BB73
+@ENDHACK
 
 
-_DriveClass__Assign_Destination_Refinery_Unhardcode:
+@HACK 0x004B6817,0x004B681F,_DriveClass__Assign_Destination_Refinery_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -465,16 +453,18 @@ _DriveClass__Assign_Destination_Refinery_Unhardcode:
     jnz  0x004B681F
 .NotARefinery:
     jmp  0x004B687E
+@ENDHACK
 
 
-_TechnoClass__Find_Docking_Bay_UseInitBuilding:
+@HACK 0x00569039,0x0056903F,_TechnoClass__Find_Docking_Bay_UseInitBuilding
     mov  edx,dword[Temp.FindDockingBayInitBuilding]
     mov  dword[ebp-0x1C],edx
     mov  edx,dword[ebp-0x13]
     jmp  0x0056903F
+@ENDHACK
 
 
-_TechnoClass__Find_Docking_Bay_RecalcBestValue:
+@HACK 0x00569075,0x0056907A,_TechnoClass__Find_Docking_Bay_RecalcBestValue
 ; edi originally -1
     xor  edx,edx
     cmp  dword[ebp-0x1C],0
@@ -497,9 +487,10 @@ _TechnoClass__Find_Docking_Bay_RecalcBestValue:
 .Done:
     mov  dword[ebp-0x14],edi
     jmp  0x0056907A
+@ENDHACK
 
 
-_UnitClass__Take_Damage_Refinery_Unhardcode:
+@HACK 0x0057B33E,0x0057B358,_UnitClass__Take_Damage_Refinery_Unhardcode
     push edi
     xor  edi,edi
     mov  dword[Temp.FindDockingBayInitBuilding],0   
@@ -530,9 +521,10 @@ _UnitClass__Take_Damage_Refinery_Unhardcode:
     mov  dword[Temp.FindDockingBayInitBuilding],0   
     jz   0x0057B386  
     jmp  0x0057B358
+@ENDHACK
 
 
-_UnitClass__Mission_Harvest_Refinery_Unhardcode1:
+@HACK 0x0057E656,0x0057E668,_UnitClass__Mission_Harvest_Refinery_Unhardcode1
     mov  esi,dword[ecx+0x11]
     mov  eax,ecx
     push edi
@@ -568,9 +560,10 @@ _UnitClass__Mission_Harvest_Refinery_Unhardcode1:
     mov  esi,eax
     jz   0x0057E6F1  
     jmp  0x0057E672
+@ENDHACK
 
 
-_UnitClass__Mission_Harvest_Refinery_Unhardcode2:
+@HACK 0x0057E6F1,0x0057E71E,_UnitClass__Mission_Harvest_Refinery_Unhardcode2
     mov  esi,dword[ecx+0x11]
     mov  eax,ecx
     push edi
@@ -611,4 +604,5 @@ _UnitClass__Mission_Harvest_Refinery_Unhardcode2:
     mov  dword[Temp.FindDockingBayInitBuilding],0   
     jz   0x0057E4CF  
     jmp  0x0057E71E
+@ENDHACK
 

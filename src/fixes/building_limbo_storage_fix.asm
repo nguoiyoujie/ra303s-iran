@@ -13,17 +13,15 @@
 
 ;@SJMP 0x00568F32,0x00568F38 ;override spied check on Silos and Refineries
 ;@LJMP 0x00568F8B,_test_TechnoClass_Draw_Pip ; Draw house Capacity instead
-@LJMP 0x0045993E,_BuildingClass__Limbo_CalcFix
-
 ;_test_TechnoClass_Draw_Pip:
 ;    mov eax,[eax+HouseClass.Offset.Capacity]
 ;    jmp 0x00568F90
 
-_BuildingClass__Limbo_CalcFix:
-; positive adjustments were applied during capture or Grand_Opening. But it is possible to Limbo an object before that.
-; Check Building->HasOpening() instead
+@HACK 0x0045993E,0x00459944,_BuildingClass__Limbo_CalcFix
+    ; positive adjustments were applied during capture or Grand_Opening. But it is possible to Limbo an object before that.
+    ; Check Building->HasOpening() instead
     test byte[ecx+0xD7],0x40 ; HasOpened
     jz   0x004599E4 ; not opened, skip
     lea  eax,[ecx+0xCD]  
     jmp  0x00459944
-
+@ENDHACK

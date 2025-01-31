@@ -10,11 +10,9 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004D2DAE,_HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult
-
-_HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult:
+@HACK 0x004D2DAE,0x004D2DB4,_HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult
     jnz  0x004D2DB4 ; multiplayer mode
     mov  dword eax,[eax+1] ; use HouseClass:ID
     jmp  0x004D2DBA ; back to multiplayer mode calculation, using ID instead of ActsLike
-
+@ENDHACK
 

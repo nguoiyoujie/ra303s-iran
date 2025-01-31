@@ -8,9 +8,7 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x00453FDC,_BuildingTypeClass_Read_Ini_ResetDrain
-
-_BuildingTypeClass_Read_Ini_ResetDrain:
+@HACK 0x00453FDC,0x00453FF6,_BuildingTypeClass_Read_Ini_ResetDrain
     jge  .PositivePower
     BuildingTypeClass.Power.Set(esi,0)
     neg  eax
@@ -19,3 +17,4 @@ _BuildingTypeClass_Read_Ini_ResetDrain:
 .PositivePower:
     BuildingTypeClass.Drain.Set(esi,0)
     jmp  0x00453FF6
+@ENDHACK

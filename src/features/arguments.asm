@@ -25,14 +25,6 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x004F5B38,_arguments
-@LJMP 0x005025CC,_Select_Game_AntMissions_Check
-@LJMP 0x004F496C,_Select_Game_SkipDifficulty
-@LJMP 0x004F4A23,_Select_Game_SkipDifficulty2
-@LJMP 0x004F4A6D,_Select_Game_SetScenarioName
-@LJMP 0x004F429F,_Init_Game_SkipIntro
-@LJMP 0x004A537F,_Main_Game_AutoExit
-
 %define recording_mode                               0x00680151
 
 [section .data] 
@@ -47,31 +39,27 @@ presetscenarioenabled                                db 0
 presetscenarioname                                   times 128 db 0
 
 
-[section .text] 
-_Select_Game_AntMissions_Check:
-
+@HACK 0x005025CC,0x005025D4,_Select_Game_AntMissions_Check
     cmp  byte[presetscenarioenabled],1
     jnz  .Check_AntMission
-	
     mov  byte[presetscenarioenabled],0
     mov  dword[ebp-0x30],2
     jmp  0x005025D4
-
 .Check_AntMission:
     cmp  byte[antmissionsenabled],1
     jne  .Jump_Back	
-
     mov  byte[antmissionsenabled],0
     mov  byte[Globals___AntsEnabled],1
     mov  dword[ebp-0x30],2
     xor  edi,edi
-
 .Jump_Back:
     test edi,edi
     jnz  0x0050210E
     jmp  0x005025D4
+@ENDHACK
 
-_arguments:
+
+@HACK 0x004F5B38,0x004F5B3D,_arguments
 .mission:
     push ecx
     mov  edx,str_arg_MissionPrefix
@@ -87,7 +75,6 @@ _arguments:
     push presetscenarioname
 	call _strcpy
     jmp  .Ret
-
 .lan:
     mov  edx,str_arg_LAN
     mov  eax,esi
@@ -96,7 +83,6 @@ _arguments:
     je   .skirmish
     mov  byte[Globals___Session_Type],GameType.GAME_IPX
     jmp  .Ret
-
 .skirmish:
     mov  edx,str_arg_Skirmish
     mov  eax,esi
@@ -105,7 +91,6 @@ _arguments:
     je   .antmissions
     mov  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jmp  .Ret
-
 .antmissions:
     mov  edx,str_arg_AntMissions
     mov  eax,esi
@@ -114,7 +99,6 @@ _arguments:
     je   .skiptitle
     mov  byte[antmissionsenabled],1
     jmp  .Ret
-
 .skiptitle:
     mov  edx,str_arg_Skiptitle
     mov  eax,esi
@@ -123,7 +107,6 @@ _arguments:
     je   .onetime    
     mov  byte[skiptitle],1
     jmp  .Ret
-	
 .onetime:
     mov  edx,str_arg_Onetime
     mov  eax,esi
@@ -133,7 +116,6 @@ _arguments:
     mov  byte[onetimeenabled],1
     mov  byte[closegamestate],1
     jmp  .Ret
-	
 .deasy:
     mov  edx,str_arg_Easy
     mov  eax,esi
@@ -143,7 +125,6 @@ _arguments:
     mov  byte[presetdifficulty],0
     mov  byte[presetdifficultyenabled],1
     jmp  .Ret
-
 .deasyf:
     mov  edx,str_arg_EasyF
     mov  eax,esi
@@ -153,7 +134,6 @@ _arguments:
     mov  byte[presetdifficulty],1
     mov  byte[presetdifficultyenabled],1
     jmp  .Ret
-
 .dnorm:
     mov  edx,str_arg_Norm
     mov  eax,esi
@@ -163,7 +143,6 @@ _arguments:
     mov  byte[presetdifficulty],2
     mov  byte[presetdifficultyenabled],1
     jmp  .Ret
-
 .dhardf:
     mov  edx,str_arg_HardF
     mov  eax,esi
@@ -173,7 +152,6 @@ _arguments:
     mov  byte[presetdifficulty],3
     mov  byte[presetdifficultyenabled],1
     jmp  .Ret
-
 .dhard:
     mov  edx,str_arg_Hard
     mov  eax,esi
@@ -183,7 +161,6 @@ _arguments:
     mov  byte[presetdifficulty],4
     mov  byte[presetdifficultyenabled],1
     jmp  .Ret
-
 .newmissions:
     mov  edx,str_arg_NewMissions
     mov  eax,esi
@@ -192,7 +169,6 @@ _arguments:
     je   .internet
     mov  byte[newmissionsenabled],1
     jmp  .Ret
-
 .internet:
     mov  edx,str_arg_Internet
     mov  eax,esi
@@ -200,7 +176,6 @@ _arguments:
     test eax,eax
     je   .record
     mov  byte[Globals___Session_Type],GameType.GAME_INTERNET
-
 .record:
     mov  edx,str_arg_Record
     mov  eax,esi
@@ -208,7 +183,6 @@ _arguments:
     test eax,eax
     je   .playback
     or   byte[recording_mode],5
-
 .playback:
     mov  edx,str_arg_Playback
     mov  eax,esi
@@ -216,13 +190,13 @@ _arguments:
     test eax,eax
     je   .Ret
     or   byte[recording_mode],6
-
 .Ret:
     mov  edx,str_arg_Attract
     jmp  0x004F5B3D
+@ENDHACK
 
 
-_Select_Game_SkipDifficulty:
+@HACK 0x004F496C,0x004F4976,_Select_Game_SkipDifficulty
     xor  eax,eax
     mov  al,byte[presetdifficultyenabled]
     test al,al
@@ -236,8 +210,10 @@ _Select_Game_SkipDifficulty:
     mov  al,byte[presetdifficulty]
 .Ret:
     jmp  0x004F4976
+@ENDHACK
 
-_Select_Game_SkipDifficulty2:
+
+@HACK 0x004F4A23,0x004F4A2A,_Select_Game_SkipDifficulty2
     xor  eax,eax
     mov  al,byte[presetdifficultyenabled]
     test al,al
@@ -250,9 +226,10 @@ _Select_Game_SkipDifficulty2:
     mov  al,byte[presetdifficulty]
 .Ret:
     jmp  0x004F4A2A
+@ENDHACK
 
 
-_Select_Game_SetScenarioName:
+@HACK 0x004F4A6D,0x004F4A74,_Select_Game_SetScenarioName
     mov  al,byte[presetscenarioname]
     test al,al
     jz   .Ret
@@ -265,16 +242,18 @@ _Select_Game_SetScenarioName:
 .Ret:
     cmp  dword[Globals___AntsEnabled],0
     jmp  0x004F4A74
+@ENDHACK
 
 
-_Init_Game_SkipIntro:
+@HACK 0x004F429F,0x004F42A6,_Init_Game_SkipIntro
     cmp  byte[skiptitle],1
     jz   0x004F4377
     test byte[0x00669908],0x4 
     jmp  0x004F42A6
+@ENDHACK
 
 
-_Main_Game_AutoExit:
+@HACK 0x004A537F,0x004A5389,_Main_Game_AutoExit
     cmp  byte[closegamestate],0
     jz   .SelectGame	
     cmp  byte[closegamestate],1
@@ -286,8 +265,7 @@ _Main_Game_AutoExit:
 .SelectGame:
     mov  eax,[0x005FEDBC] 
     call Init___Select_Game
-
 .Ret:
     jmp  0x004A5389
-
+@ENDHACK
 

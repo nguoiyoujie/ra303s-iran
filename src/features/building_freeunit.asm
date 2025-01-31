@@ -10,17 +10,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00453CD3,_BuildingClass__Raw_Cost_FreeUnit_Override
-@LJMP 0x00459CD0,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit
-@LJMP 0x00459DF2,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit2
-@LJMP 0x00459EFC,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit3
-
 [section .data] 
 Temp.FreeUnit db 0
 
 
-[section .text] 
-_BuildingClass__Raw_Cost_FreeUnit_Override:
+@HACK 0x00453CD3,0x00453CDD,_BuildingClass__Raw_Cost_FreeUnit_Override
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -32,9 +26,10 @@ _BuildingClass__Raw_Cost_FreeUnit_Override:
     jnz  0x00453CDD
 .NotFreeUnit:
     jmp  0x00453CE8
+@ENDHACK
 
 
-_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit:
+@HACK 0x00459CD0,0x00459CDC,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -46,16 +41,19 @@ _BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit:
     jnz  0x00459CDC
 .NotFreeUnit:
     jmp  0x00459F34
+@ENDHACK
 
 
-_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit2:
+@HACK 0x00459DF2,0x00459DF7,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit2
     mov  dl,byte[Temp.FreeUnit]
     movzx edx,dl
     jmp  0x00459DF7
+@ENDHACK
 
 
-_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit3:
+@HACK 0x00459EFC,0x00459F01,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit3
     mov  al,byte[Temp.FreeUnit]
     movzx eax,al
     jmp  0x00459F01
+@ENDHACK
 

@@ -8,57 +8,23 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x004A5753,_Keyboard_Process_Home_Key_Overwrite
-@LJMP 0x0054D916,_Patch_Out_Erroneous_Sidebar_Activate_CALL
-@LJMP 0x004C9F46,_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check
-@LJMP 0x004CAA29,_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2
-@LJMP 0x004A6206,_UnhardCode_Keyboard_Key0
-@LJMP 0x004A61D3,_UnhardCode_Keyboard_Key9
-@LJMP 0x004A61A0,_UnhardCode_Keyboard_Key8
-@LJMP 0x004A616D,_UnhardCode_Keyboard_Key7
-@LJMP 0x004A613A,_UnhardCode_Keyboard_Key6
-@LJMP 0x004A6107,_UnhardCode_Keyboard_Key5
-@LJMP 0x004A60D4,_UnhardCode_Keyboard_Key4
-@LJMP 0x004A60A1,_UnhardCode_Keyboard_Key3
-@LJMP 0x004A606E,_UnhardCode_Keyboard_Key2
-@LJMP 0x004A603E,_UnhardCode_Keyboard_Key1
+@SJMP 0x0054D916,0x0054D91B ; _Patch_Out_Erroneous_Sidebar_Activate_CALL
+@SJMP 0x004A6206,0x004A6221 ; _UnhardCode_Keyboard_Key0
+@SJMP 0x004A61D3,0x004A61EE ; _UnhardCode_Keyboard_Key9
+@SJMP 0x004A61A0,0x004A61BB ; _UnhardCode_Keyboard_Key8
+@SJMP 0x004A616D,0x004A6188 ; _UnhardCode_Keyboard_Key7
+@SJMP 0x004A613A,0x004A6155 ; _UnhardCode_Keyboard_Key6
+@SJMP 0x004A6107,0x004A6122 ; _UnhardCode_Keyboard_Key5
+@SJMP 0x004A60D4,0x004A60EF ; _UnhardCode_Keyboard_Key4
+@SJMP 0x004A60A1,0x004A60BC ; _UnhardCode_Keyboard_Key3
+@SJMP 0x004A606E,0x004A6089 ; _UnhardCode_Keyboard_Key2
+@SJMP 0x004A603E,0x004A6056 ; _UnhardCode_Keyboard_Key1
 
 [section .data] 
 ResignKeyPressed: dd 0
 
 
-[section .text] 
-_UnhardCode_Keyboard_Key1:
-    jmp  0x004A6056
-
-_UnhardCode_Keyboard_Key2:
-    jmp  0x004A6089
-
-_UnhardCode_Keyboard_Key3:
-    jmp  0x004A60BC
-
-_UnhardCode_Keyboard_Key4:
-    jmp  0x004A60EF
-
-_UnhardCode_Keyboard_Key5:
-    jmp  0x004A6122
-
-_UnhardCode_Keyboard_Key6:
-    jmp  0x004A6155
-
-_UnhardCode_Keyboard_Key7:
-    jmp  0x004A6188
-
-_UnhardCode_Keyboard_Key8:
-    jmp  0x004A61BB
-
-_UnhardCode_Keyboard_Key9:
-    jmp  0x004A61EE
-
-_UnhardCode_Keyboard_Key0:
-    jmp  0x004A6221
-
-_Keyboard_Process_Home_Key_Overwrite:
+@HACK 0x004A5753,_Keyboard_Process_Home_Key_Overwrite
     cmp  word ax,[RedAlert.WinHotKeys.KeySidebarToggle]
     jz   .Toggle_Sidebar
     cmp  word ax,[RedAlert.WinHotKeys.KeyMapSnapshot]
@@ -124,44 +90,39 @@ _Keyboard_Process_Home_Key_Overwrite:
     mov  edx,1
     mov  eax,Globals___Map
     call GScreenClass__Flag_To_Redraw
-
     mov  eax,Globals___Map
     call 0x004CB110 ; GScreenClass::Render()
-
     pop  eax
     jmp  .Out
 
 .Resign_Key:
     push eax
-
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   .Out
     mov  dword[ResignKeyPressed],1
     call 0x00528DCC ; Queue_Options(void)
-
     pop  eax
     jmp  .Out
 
 .Map_Snapshot:
     call Create_Map_Snapshot
     jmp  .Out
+@ENDHACK
 
-_Patch_Out_Erroneous_Sidebar_Activate_CALL:
-    jmp  0x0054D91B
 
-_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check:
+@HACK 0x004C9F46,0x004C9F4E,_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check
     cmp  dword[ResignKeyPressed],0
     jnz  0x004CA9C9
-
 .Out:
     test eax,eax
     jle  0x004CA15E
     jmp  0x004C9F4E
+@ENDHACK
 
-_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2:
+
+@HACK 0x004CAA29,0x004CAA2E,_RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2
     cmp  dword[ResignKeyPressed],0
     jz   0x004CA7A5
-
     mov  dword[ResignKeyPressed],0
     lea  esp,[ebp-0x14]
     pop  edi
@@ -171,3 +132,4 @@ _RedrawOptionsMenu_Add_Surrender_Dialog_Flag_Check2:
     pop  ebx
     pop  ebp
     retn
+@ENDHACK

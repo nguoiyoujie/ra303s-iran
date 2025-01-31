@@ -7,24 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x0042054A,_AircraftClass__What_Action_RepairPad_Unhardcode
-@LJMP 0x00422C24,_AircraftClass__Mission_Guard_RepairPad_Unhardcode
-@LJMP 0x00455111,_BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode
-@LJMP 0x0045B7D4,_BuildingClass__Sort_Y_RepairPad_Unhardcode
-@LJMP 0x0045BD3B,_BuildingClass__Mission_Guard_RepairPad_Unhardcode
-@LJMP 0x0045BFBB,_BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode
-@LJMP 0x004C2CBE,_FootClass__Receive_Message_RadioOnDepot_Unhardcode
-@LJMP 0x004C3383,_FootClass__Can_Demolish_RepairPad_Unhardcode
-@LJMP 0x0055C552,_TeamClass__AI_RepairPad_Unhardcode
-@LJMP 0x0057EE77,_UnitClass__Can_Enter_Cell_RepairPad_Unhardcode
-@LJMP 0x0057F869,_UnitClass__What_Action_RepairPad_Unhardcode
-@LJMP 0x005802FD,_UnitClass__Mission_Repair_Refinery_Unhardcode
-@LJMP 0x00580C8E,_UnitClass__Assign_Destination_RepairPad_Unhardcode1
-@LJMP 0x00580CF4,_UnitClass__Assign_Destination_RepairPad_Unhardcode2
-@LJMP 0x00580D33,_UnitClass__Assign_Destination_RepairPad_Unhardcode3
-
-
-_AircraftClass__What_Action_RepairPad_Unhardcode:
+@HACK 0x0042054A,0x00420553,_AircraftClass__What_Action_RepairPad_Unhardcode
     push edi
     push eax
     mov  al,byte[edx+0x1A4]
@@ -38,9 +21,10 @@ _AircraftClass__What_Action_RepairPad_Unhardcode:
     jnz  0x00420553
 .NotARepairPad:
     jmp  0x00420578
+@ENDHACK
 
 
-_AircraftClass__Mission_Guard_RepairPad_Unhardcode:
+@HACK 0x00422C24,0x00422C2C,_AircraftClass__Mission_Guard_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -81,9 +65,10 @@ _AircraftClass__Mission_Guard_RepairPad_Unhardcode:
     mov  dword[Temp.FindDockingBayInitBuilding],0   
     jz   0x00422C9E  
     jmp  0x00422C45
+@ENDHACK
 
 
-_BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode:
+@HACK 0x00455111,0x00455119,_BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -94,9 +79,10 @@ _BuildingClass__Receive_Message_RadioUnloaded_RepairPad_Unhardcode:
     jnz  0x00455119
 .NotARepairPad:
     jmp  0x00455147
+@ENDHACK
 
 
-_BuildingClass__Sort_Y_RepairPad_Unhardcode:
+@HACK 0x0045B7D4,0x0045B7DC,_BuildingClass__Sort_Y_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -107,9 +93,10 @@ _BuildingClass__Sort_Y_RepairPad_Unhardcode:
     jnz  0x0045B7DC
 .NotARepairPad:
     jmp  0x0045B7E4
+@ENDHACK
 
 
-_BuildingClass__Mission_Guard_RepairPad_Unhardcode:
+@HACK 0x0045BD3B,0x0045BD43,_BuildingClass__Mission_Guard_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -120,9 +107,10 @@ _BuildingClass__Mission_Guard_RepairPad_Unhardcode:
     jnz  0x0045BD43
 .NotARepairPad:
     jmp  0x0045BD5C
+@ENDHACK
 
 
-_BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode:
+@HACK 0x0045BFBB,0x0045BFF7,_BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -138,9 +126,10 @@ _BuildingClass__Mission_Deconstruction_SellUnit_Unhardcode:
 .Normal:
     pop  edi
     jmp  0x0045C095
+@ENDHACK
 
     
-_FootClass__Receive_Message_RadioOnDepot_Unhardcode:
+@HACK 0x004C2CBE,0x004C2CC6,_FootClass__Receive_Message_RadioOnDepot_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -151,9 +140,10 @@ _FootClass__Receive_Message_RadioOnDepot_Unhardcode:
     jnz  0x004C2CC6
 .NotARepairPad:
     jmp  0x004C2CE3
-    
+@ENDHACK
 
-_FootClass__Can_Demolish_RepairPad_Unhardcode:
+
+@HACK 0x004C3383,0x004C338B,_FootClass__Can_Demolish_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -164,9 +154,10 @@ _FootClass__Can_Demolish_RepairPad_Unhardcode:
     jnz  0x004C338B
 .NotARepairPad:
     jmp  0x004C33B5
+@ENDHACK
 
 
-_TeamClass__AI_RepairPad_Unhardcode:
+@HACK 0x0055C552,0x0055C55A,_TeamClass__AI_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -177,9 +168,10 @@ _TeamClass__AI_RepairPad_Unhardcode:
     jnz  0x0055C55A
 .NotARepairPad:
     jmp  0x0055C567
+@ENDHACK
 
 
-_UnitClass__Can_Enter_Cell_RepairPad_Unhardcode:
+@HACK 0x0057EE77,0x0057EE7F,_UnitClass__Can_Enter_Cell_RepairPad_Unhardcode
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -190,9 +182,10 @@ _UnitClass__Can_Enter_Cell_RepairPad_Unhardcode:
     jnz  0x0057EE7F
 .NotARepairPad:
     jmp  0x0057EE8C
+@ENDHACK
 
 
-_UnitClass__What_Action_RepairPad_Unhardcode:
+@HACK 0x0057F869,0x0057F872,_UnitClass__What_Action_RepairPad_Unhardcode
     push eax
     mov  eax,[eax+0x1A4]
     movzx eax,al
@@ -206,9 +199,10 @@ _UnitClass__What_Action_RepairPad_Unhardcode:
     jnz  0x0057F872
 .NotARepairPad:
     jmp  0x0057F8B3
-    
+@ENDHACK
 
-_UnitClass__Mission_Repair_Refinery_Unhardcode:
+
+@HACK 0x005802FD,0x0058031B,_UnitClass__Mission_Repair_Refinery_Unhardcode
     mov  esi,dword[eax+0x11]
     and  byte[ecx+0x141],0xFE
     push edi
@@ -244,9 +238,10 @@ _UnitClass__Mission_Repair_Refinery_Unhardcode:
     mov  dword[Temp.FindDockingBayInitBuilding],0   
     jz   0x0058031B  
     jmp  0x00580533
+@ENDHACK
 
 
-_UnitClass__Assign_Destination_RepairPad_Unhardcode1:
+@HACK 0x00580C8E,0x00580C9A,_UnitClass__Assign_Destination_RepairPad_Unhardcode1
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -257,9 +252,10 @@ _UnitClass__Assign_Destination_RepairPad_Unhardcode1:
     jnz  0x00580DC7
 .NotARepairPad:
     jmp  0x00580C9A
+@ENDHACK
 
 
-_UnitClass__Assign_Destination_RepairPad_Unhardcode2:
+@HACK 0x00580CF4,0x00580CFC,_UnitClass__Assign_Destination_RepairPad_Unhardcode2
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -270,9 +266,10 @@ _UnitClass__Assign_Destination_RepairPad_Unhardcode2:
     jnz  0x00580CFC
 .NotARepairPad:
     jmp  0x00580D05
+@ENDHACK
 
 
-_UnitClass__Assign_Destination_RepairPad_Unhardcode3:
+@HACK 0x00580D33,0x00580D3F,_UnitClass__Assign_Destination_RepairPad_Unhardcode3
     movzx eax,al
     push edi
     BuildingTypeClass.FromIndex(eax,edi)
@@ -283,4 +280,5 @@ _UnitClass__Assign_Destination_RepairPad_Unhardcode3:
     jnz  0x00580DC7
 .NotARepairPad:
     jmp  0x00580D3F
+@ENDHACK
 

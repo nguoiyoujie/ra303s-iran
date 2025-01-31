@@ -8,9 +8,4 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00456C7B,_BuildingClass_Unlimbo_RemoveHardcodeAlliedSovietOwners
-
-
-
-_BuildingClass_Unlimbo_RemoveHardcodeAlliedSovietOwners:
-    jmp  0x00456CCC
+@SJMP 0x00456C7B,0x00456CCC ; _BuildingClass_Unlimbo_RemoveHardcodeAlliedSovietOwners

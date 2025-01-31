@@ -1,14 +1,10 @@
-@LJMP 0x004C3343,_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell
 
-; ebx contains FootClass this pointer
-_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell:
+@HACK 0x004C3343,0x004C336D,_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell
+    ; ebx contains FootClass this pointer
     Save_Registers
     push ebx
     xor  esi,esi
     xor  edi,edi
-;    cmp     byte al,1
-;    jz      .Return_False
-
     jmp  .Loop_Start
 
 .Next_Iteration_Heap_Stuff1:
@@ -77,3 +73,5 @@ _FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell:
     Restore_Registers
     xor  eax,eax
     jmp  0x004C33BC
+@ENDHACK
+

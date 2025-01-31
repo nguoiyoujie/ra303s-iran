@@ -11,9 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0057C9A1,_UnitClass__ShapeNumber_Offset_V2RL_Body
-
-_UnitClass__ShapeNumber_Offset_V2RL_Body:
+@HACK 0x0057C9A1,0x0057C9B5,_UnitClass__ShapeNumber_Offset_V2RL_Body
 ; for STNK
     movzx eax,al ; use movzx
     push ebx
@@ -39,18 +37,17 @@ _UnitClass__ShapeNumber_Offset_V2RL_Body:
     movzx edx,dl
     mov  ebx,edx
     shl  edx,4 ; (16)
-    add  edx,ebx ; (161)
+    add  edx,ebx ; (16+1)
     shl  ebx,1 ; (2)
-    add  edx,ebx ; (1621)
-    shl  edx,1 ; multiply by 38 (1621) * 2
+    add  edx,ebx ; (16+2+1)
+    shl  edx,1 ; multiply by 38 (16+2+1) * 2
     add  ecx,edx
 .Done:
     pop  edi
     pop  edx    
     pop  ebx    
     jmp  0x0057C9B5
-
-; Turret offset is done in _UnitClass__Draw_It_Offset_Turrets (units_apc_dehardcode.asm)
-
+    ; Turret offset is done in _UnitClass__Draw_It_Offset_Turrets (units_apc_dehardcode.asm)
+@ENDHACK
 
 

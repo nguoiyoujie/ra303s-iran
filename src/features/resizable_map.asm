@@ -15,19 +15,18 @@
 ;----------------------------------------------------------------
 
 ; allow building placement outside of play area, only during scenario setup
-@LJMP 0x0045BA09,_BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit
-
-; allow smudges to be marked outside of the play area
-@LJMP 0x0054FDBC,_SmudgeClass_Replace_In_Radar_Check
-
-_BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit:
+@HACK 0x0045BA09,0x0045BA12,_BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit
     cmp  dword[Globals___ScenarioInit],0
     jg   0x0045B9F2 ; MOVE_OK
     jmp  0x0045BA12
+@ENDHACK
 
-_SmudgeClass_Replace_In_Radar_Check:
+
+; allow smudges to be marked outside of the play area
+@HACK 0x0054FDBC,0x0054FDC9,_SmudgeClass_Replace_In_Radar_Check
     ; Instead of using Map::In_Radar, check the cell against the map cell limit (16384)
     cmp  edx,0x4000
 	jge  0x0054FF31
     jmp  0x0054FDC9
+@ENDHACK
 
