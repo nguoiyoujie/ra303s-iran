@@ -6,9 +6,7 @@
 ; This function is enabled by setting [HouseType] > MCVUnit
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x0053E6FF, _Create_Units__MCV_Unit_Unhardcode
-
-_Create_Units__MCV_Unit_Unhardcode:
+@HACK 0x0053E6FF,0x0053E704,_Create_Units__MCV_Unit_Unhardcode
     mov  byte dl,[esi+HouseClass.Offset.ActLike]
     movzx edx,dl
     push edi
@@ -25,3 +23,4 @@ _Create_Units__MCV_Unit_Unhardcode:
 .Continue:
     pop  edi
     jmp  0x0053E704
+@ENDHACK

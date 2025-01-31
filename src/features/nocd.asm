@@ -36,7 +36,7 @@
 _Fix_CDROM_Name_Get_Crash:
     cmp  eax,12
     jng  .No_EAX_Adjust
-    mov  eax,0
+    xor  eax,eax
 
 .No_EAX_Adjust:
     cmp  esi,0xFFFFFFFF

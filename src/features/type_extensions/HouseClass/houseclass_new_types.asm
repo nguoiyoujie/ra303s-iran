@@ -10,6 +10,7 @@
 ;----------------------------------------------------------------
 
 ; moving Globals::HouseTriggers[x] to Houses.HouseTriggers
+@SET 0x004C7966,{mov eax,Houses.HouseTriggers} ; fn_init
 @SET 0x004D3C12,{add eax,Houses.HouseTriggers} ; HouseClass::HouseClass
 @SET 0x004D4113,{add eax,Houses.HouseTriggers} ; HouseClass::Init
 @SET 0x004D4CDE,{add eax,Houses.HouseTriggers} ; HouseClass::AI
@@ -23,12 +24,7 @@
 @SET 0x0053A745,{add eax,Houses.HouseTriggers} ; Fill_in_Data
 @SET 0x0053AB84,{add eax,Houses.HouseTriggers} ; Clear_Scenario
 
-@HACK 0x004C7966,0x004C796B,_Replace_HouseTriggers_4C7966
-    mov dword[0x005F99C0],Houses.HouseTriggers ; ugly hack to appease the deconstructor~
-    mov eax,Houses.HouseTriggers
-    jmp 0x004C796B
-@ENDHACK
-
+@SET 0x005F99C0,{dd Houses.HouseTriggers} ; ugly hack to appease the deconstructor called when closing the game~
 
 ; TO-DO: check FlasherClass::FlashCountPerPlayer[HOUSE_COUNT] as well, it is possible FlashCountPerPlayer only exists in Remastered code
 @SET 0x004C796E,{mov edx,HouseTypeClass.NEW_COUNT} ; init

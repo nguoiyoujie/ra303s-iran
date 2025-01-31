@@ -59,7 +59,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
     push eax
     push edx
 
-    mov  edx,0
+    xor  edx,edx
     mov  eax,%1
 
   %%loop:
@@ -225,7 +225,7 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
     jmp  %%done
 
   %%invalid_type:
-    mov  eax,0
+    xor  eax,eax
   %%done:
     pop  edx
 %endmacro

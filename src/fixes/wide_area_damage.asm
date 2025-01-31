@@ -11,10 +11,6 @@
 ;
 ;----------------------------------------------------------------
 
-;@LJMP 0x004A38E5, _Combat_Wide_Area_Damage_FixInverseDamageSpread
-@LJMP 0x004A39BE, _Combat_Wide_Area_Damage_FixInverseDamageSpread
-
-
 ; Genius move by Westwood.
 ; In Combat::Wide_Area_Damage
 ; 	int damage = rawdamage * Inverse(fixed(cell_radius, dist_from_center)); 
@@ -22,7 +18,7 @@
 ;   int damage = rawdamage - rawdamage * Inverse(fixed(cell_radius, dist_from_center));
 ; instead
 
-_Combat_Wide_Area_Damage_FixInverseDamageSpread:
+@HACK 0x004A39BE,0x004A39C4,_Combat_Wide_Area_Damage_FixInverseDamageSpread
     mov  edx,[ebp-0x60] ; original damage
     cmp  byte[Rules.General.FixWideAreaDamage],0
     jz   .Continue
@@ -39,16 +35,4 @@ _Combat_Wide_Area_Damage_FixInverseDamageSpread:
     mov  [ebp-0x60],edx ; update damage (for scorch determination)
     mov  eax,[ebp-0x58] ; restore
     jmp  0x004A39C4
-
-;    mov  edx,edi ; cell_radius
-;    mov  ebx,edi ; cell_radius
-;   cmp  ebx,eax ; dist_from_center may be more than cell_radius, in that case we truncate to 0
-;    jg   .Subtract
-;.Truncate:
-;    xor  ebx,ebx
-;    jmp  .Continue
-;.Subtract:
-;    sub  ebx,eax
-;.Continue:
-;    lea  eax,[ebp -0x14]
-;    jmp  0x004A38EC
+@ENDHACK

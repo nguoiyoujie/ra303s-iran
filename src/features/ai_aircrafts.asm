@@ -19,20 +19,20 @@
 %define HouseClass.Offset.NewAQuantity_Longbow 0x2424
 %define HouseClass.Offset.NewAQuantity_Hind 0x2428
 
-@SET 0x004DC7E1,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-@SET 0x004DC7E7,{mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-@SET 0x004DC7ED,{mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-@SET 0x004DC83C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-@SET 0x004DC842,{mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-@SET 0x004DC848,{mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-@SET 0x004DC89C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-@SET 0x004DC8A2,{mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-@SET 0x004DC8A8,{mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
-@SET 0x004DC8FC,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-@SET 0x004DC902,{mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-@SET 0x004DC908,{mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
+; no longer needed as all of AI_Aircraft() has been replaced
+;@SET 0x004DC7E1,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+;@SET 0x004DC7E7,{mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+;@SET 0x004DC7ED,{mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+;@SET 0x004DC83C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
+;@SET 0x004DC842,{mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
+;@SET 0x004DC848,{mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
+;@SET 0x004DC89C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+;@SET 0x004DC8A2,{mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+;@SET 0x004DC8A8,{mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
+;@SET 0x004DC8FC,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
+;@SET 0x004DC902,{mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
+;@SET 0x004DC908,{mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
 
-@LJMP 0x004DC7AF, _HouseClass__AI_Aircraft_Implementation
 
 [section .data] 
 Temp.AIAircraft.Airfields        dd 0
@@ -43,8 +43,7 @@ Temp.AIAircraft.Array            times 256 db 0 ; we will not have more than 256
 Temp.AIAircraft.Count            db 0
 
 
-[section .text] 
-_HouseClass__AI_Aircraft_Implementation:
+@HACK 0x004DC7AF,0x004DC92A,_HouseClass__AI_Aircraft_Implementation
 ; first count the buildings and aircrafts
 ; ecx is HouseClass
     push esi
@@ -132,9 +131,10 @@ _HouseClass__AI_Aircraft_Implementation:
     call ChooseOneToBuild
 .Done:
     jmp  0x004DC92F
+@ENDHACK
 
 
-
+[section .text] 
 GetRandomAircraft:
     ; eax: 1=Wing, 0=Heli
     ; ecx: House class

@@ -86,8 +86,8 @@
     mov  dword[ebx+0x132F],0xB4 ; right strip offset top
     mov  dword[ebx+0x104F],ecx ; left strip offset left
     mov  dword[ebx+0x132B],edx ; right strip offset left
-    mov  ebx,0
-    mov  eax,0
+    xor  ebx,ebx
+    xor  eax,eax
 .Loop:
     inc  ebx
     mov  [ExtendedSelectButtons+12+eax],ecx

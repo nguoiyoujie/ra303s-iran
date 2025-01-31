@@ -8,7 +8,6 @@
 ; No compatibility issues is expected. However, changes to the allocated memory renders older savegames incompatible. It is generally a good idea to allocate more than is needed to avoid that incompatibility
 ;
 ;----------------------------------------------------------------
-
 ;Read INI settings
 @SET 0x004C7427,{mov edx,AircraftTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_AircraftTypes_Heap
 @SET 0x004D0B53,{mov ebx,AircraftTypeClass.NEW_SIZE} ; _TFixedIHeapClass__AircraftTypeClass__Save_New_Size

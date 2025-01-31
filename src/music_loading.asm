@@ -244,16 +244,16 @@ _ThemeClass_Is_Allowed:
     retn
 .Ret_False:
     pop  edx
-    mov  eax,0
+    xor  eax,eax
     retn
 
 .Ret_False2:
-    mov  eax,0
+    xor  eax,eax
     retn
 
 .Ret_False_File_Not_Available:
     Restore_Registers
-    mov  eax,0
+    xor  eax,eax
     retn
 
 .Ret_Original_Function:

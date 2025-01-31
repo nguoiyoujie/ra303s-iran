@@ -75,5 +75,5 @@ _FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell:
 .Return_False:
     pop  ebx
     Restore_Registers
-    mov  eax,0
+    xor  eax,eax
     jmp  0x004C33BC

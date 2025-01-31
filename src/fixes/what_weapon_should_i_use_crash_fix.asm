@@ -8,10 +8,9 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00560B62, _TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check
-
-_TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check:
+@HACK 0x00560B62,0x00560B67,_TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check
     call 0x00555190 ; As_Object(long)
     cmp  eax,dword 0
     je   0x00560C91
     jmp  0x00560B67
+@ENDHACK

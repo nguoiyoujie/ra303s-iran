@@ -47,7 +47,7 @@ Loop_Over_RULES_INI_Section_Entries_:
     push eax    ; function to call
     Get_RULES_INI_Section_Entry_Count edx
     mov  esi,eax ; loop max
-    mov  edi,0 ; Loop variable
+    xor  edi,edi ; Loop variable
 ;    ==== start looping
 .Loop:
     cmp  edi,esi
@@ -144,7 +144,7 @@ Loop_Over_RULES_INI_Section_Entries_:
     jmp  %%done
 
   %%invalid_type:
-    mov  eax,0
+    xor  eax,eax
   %%done:
     pop  edx
 %endmacro

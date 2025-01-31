@@ -7,9 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-
-@LJMP 0x00503C20, _Select_MPlayer_Game_Serial_Menu
-
-_Select_MPlayer_Game_Serial_Menu:
-    mov  eax,0
+@HACK 0x00503C20,0x00503C25,_Select_MPlayer_Game_Serial_Menu
+    xor  eax,eax
     jmp  0x00503C25
+@ENDHACK

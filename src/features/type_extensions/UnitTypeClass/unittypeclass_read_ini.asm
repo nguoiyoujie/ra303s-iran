@@ -8,7 +8,6 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
-
 ;Read INI settings
 @HACK 0x00578DCE,0x00578DD3,_UnitTypeClass__Read_INI_Extended
     push esi

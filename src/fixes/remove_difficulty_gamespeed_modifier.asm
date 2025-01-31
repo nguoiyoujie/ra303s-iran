@@ -8,10 +8,8 @@
 ; No compatibility issues is expected from an adjustment to game speed.
 ;
 ;----------------------------------------------------------------
-
-@LJMP 0x004A7DE3, _Main_Loop_Modify_Game_Speed_Based_On_Difficulty
-
-_Main_Loop_Modify_Game_Speed_Based_On_Difficulty:
+@HACK 0x004A7DE3,0x004A7DE8, _Main_Loop_Modify_Game_Speed_Based_On_Difficulty
     mov  byte bh,1
     test bh,bh
     jmp  0x004A7DE8
+@ENDHACK

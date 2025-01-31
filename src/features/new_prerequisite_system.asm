@@ -63,7 +63,7 @@
     mov  eax,1 ; prerequisite is met
     jmp  0x004D40E4
 .NotFulfilled:
-    mov  eax,0 ; prerequisite is not met
+    xor  eax,eax ; prerequisite is not met
     jmp  0x004D40E4
 @ENDHACK
 

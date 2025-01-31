@@ -24,80 +24,6 @@
 
 ; derived from ra95-hires
 
-;@LJMP  0x004B03AA,_DisplayClass_Click_Cell_Calc_Redraw_GScreen
-
-@LJMP  0x004ABBDF,_Shake_The_Screen_Height2
-@LJMP  0x004AB8A8,_Shake_The_Screen_Height1
-
-;@LJMP  0x00507DFB,_hires_Net_Join_MessageBox
-@LJMP  0x00507887,_hires_Net_Join_Playing_As_Text_Print
-@LJMP  0x00508074,_hires_Net_Join_AI_Players_Text_Print
-@LJMP  0x00508016,_hires_Net_Join_Credits_Text_Print
-@LJMP  0x00507F97,_hires_Net_Join_Tech_Level_Text_Print
-@LJMP  0x00507F33,_hires_Net_Join_Unit_Count_Text_Print
-@LJMP  0x00508565,_hires_Net_Join_Color_Box_Select_Thingy3
-@LJMP  0x00508525,_hires_Net_Join_Color_Box_Select_Thingy2
-@LJMP  0x0050854B,_hires_Net_Join_Color_Box_Select_Thingy
-@LJMP  0x00507BDC,_hires_Net_Join_Color_Draw_Boxes2
-@LJMP  0x00507BBB,_hires_Net_Join_Color_Draw_Boxes
-@LJMP  0x00507B48,_hires_Net_Join_Color_Draw_Colored_Rectangles
-@LJMP  0x005077C2,_hires_Net_Join_Color_Text_Print
-@LJMP  0x0050779F,_hires_Net_Join_Side_Text_Print
-@LJMP  0x0050777C,_hires_Net_Join_Name_Text_Print
-@LJMP  0x0050774B,_hires_Net_Join_Players_Text_Print
-@LJMP  0x00507728,_hires_Net_Join_Games_Text_Print
-@LJMP  0x00506E0C,_hires_Net_Join_Static_Button
-@LJMP  0x00506DA9,_hires_Net_Join_Credits_Slider
-@LJMP  0x00506CE4,_hires_Net_Join_Join_Button
-@LJMP  0x00506C32,_hires_Net_Join_Country_Box
-@LJMP  0x00506BDC,_hires_Net_Join_Name_Box
-@LJMP  0x00506931,_hires_Net_Join_Dialog
-
-@LJMP  0x0050C33D,_hires_Net_New_AI_Players_Text_Print
-@LJMP  0x0050C31D,_hires_Net_New_Credits_Text_Print
-@LJMP  0x0050C2FD,_hires_Net_New_Tech_Level_Text_Print
-@LJMP  0x0050C2DD,_hires_Net_New_Unit_Count_Text_Print
-@LJMP  0x0050C2C0,_hires_Net_New_Scenario_Text_Print
-@LJMP  0x0050C2A3,_hires_Net_New_Players_Text_Print
-@LJMP  0x0050B97D,_hires_Net_New_Dialog_OK_Button
-@LJMP  0x0050B8A9,_hires_Net_New_Dialog2
-@LJMP  0x0050B70D,_hires_Net_New_Dialog
-
-
-@LJMP  0x005523C6,_Set_Screen_Height_480_NOP
-@LJMP  0x005525D7,_Set_Screen_Height_400_NOP
-@LJMP  0x005525E6,_No_Black_Bars_In_640x480
-;@LJMP  0x00552974,_hires_ini
-
-@LJMP  0x004BE377,_NewMissions_Handle_Hires_Buttons_A
-@LJMP  0x004BE39E,_NewMissions_Handle_Hires_Buttons_B
-;@LJMP  0x0050692B,_hires_NetworkJoinMenu
-;@LJMP  0x00506CEE,_hires_Network_Join_Button
-;@LJMP  0x00506CBC,_hires_Network_Color_List
-;@LJMP  0x00506BDC,_hires_Network_Name_EditBox
-;@LJMP  0x00506C28,_hires_Network_Country_DropList
-;@LJMP  0x00506C73,_hires_Network_Channel
-;@LJMP  0x0050721F,_hires_Network_Join_ChatBox
-;@LJMP  0x00507DEF,_hires_Network_Join_DrawBox
-;@LJMP  0x00507E10,_hires_Network_Join_DrawBox2
-;@LJMP  0x00507BB1,_hires_Network_Join_ColorBoxes
-;@LJMP  0x00507BD2,_hires_Network_Join_ColorBoxes2
-;@LJMP  0x00507C0C,_hires_Network_Join_Fill_ColorBoxes
-@LJMP  0x0050253A,_hires_MainMenu_AntMissions_Select
-@LJMP  0x005024AF,_hires_MainMenu_Credits_Select
-@LJMP  0x005B30D0,_hires_Deinterlace_Videos
-@LJMP  0x005E548D,_hires_Deinterlace_Videos_Fix_Bottom_Line
-
-;@LJMP  0x005B2FE6,_hires_Deinterlace_Videos_Always_Deinterlace
-;@LJMP  0x005B3023,_hires_Deinterlace_Videos2
-;@LJMP  0x004A8C6A,_hires_Videos
-;@LJMP  0x004A8AC6,_hires_Videos2
-;@LJMP  0x0050223E,_Blacken_Screen_Border_Menu
-;@LJMP  0x0050228E,_Blacken_Screen_Border_Menu2
-;@LJMP  0x0054DFF5,_StripClass_Add
-
-
-
 ; These are per strip,there's a left and right strip in the sidebar
 %define CAMEO_ITEMS    30
 %define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
@@ -1562,44 +1488,51 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 ;@ENDHACK
 
 
-_hires_Deinterlace_Videos_Always_Deinterlace:
-    mov  eax,ebx
-    call 0x005B2CE0 ; Read_Interpolation_Palette(char *)
-    cmp  dword[0x00691730],0
-    jz   .Jump_Over_Create_Table
-    call 0x005B2DD0 ; Create_Palette_Interpolation_Table(void)
-.Jump_Over_Create_Table:
-    mov  eax,ebx
-    call 0x005B3009 ; Write_Interpolation_Palette(char *)
-    jmp  0x005B300E
+;@HACK 0x005B2FE6,_hires_Deinterlace_Videos_Always_Deinterlace
+;    mov  eax,ebx
+;    call 0x005B2CE0 ; Read_Interpolation_Palette(char *)
+;    cmp  dword[0x00691730],0
+;    jz   .Jump_Over_Create_Table
+;    call 0x005B2DD0 ; Create_Palette_Interpolation_Table(void)
+;.Jump_Over_Create_Table:
+;    mov  eax,ebx
+;    call 0x005B3009 ; Write_Interpolation_Palette(char *)
+;    jmp  0x005B300E
+;@ENDHACK
 
 
-_hires_Deinterlace_Videos_Fix_Bottom_Line:
+@HACK 0x005E548D,0x005E5493,_hires_Deinterlace_Videos_Fix_Bottom_Line
     jmp  0x005E5498
+@ENDHACK
 
 
-_hires_Deinterlace_Videos:
-;    mov     eax,2 ; video mode,2 = deinterlace
+@HACK 0x005B30D0,0x005B30D5,_hires_Deinterlace_Videos
     mov  eax,[RedAlert.Options.VideoInterlaceMode]
     jmp  0x005B30D5
+@ENDHACK
 
-;_hires_Deinterlace_Videos2:
+
+;@HACK 0x005B3023,_hires_Deinterlace_Videos2
 ;    jmp     0x005B304A
+;@ENDHACK
 
 
-_hires_Videos:
-    mov  ecx,0x100
-    mov  ebx,0x100
-    jmp  0x004A8C77
+
+;@HACK 0x004A8C6A,0x004A8C77,_hires_Videos
+;    mov  ecx,0x100
+;    mov  ebx,0x100
+;    jmp  0x004A8C77
+;@ENDHACK
 
 
-_hires_Videos2:
-    mov  eax,0xC8
-    mov  edi,0x140
-    jmp  0x004A8AD0
+;@HACK 0x004A8AC6,0x004A8AD0,_hires_Videos2
+;    mov  eax,0xC8
+;    mov  edi,0x140
+;    jmp  0x004A8AD0
+;@ENDHACK
 
 
-_hires_MainMenu_Credits_Select:
+@HACK 0x005024AF,0x005024C5,_hires_MainMenu_Credits_Select
     mov  edx,0x30 ; left
     add  edx,[Hires.DeltaTop]
     push edx
@@ -1612,9 +1545,10 @@ _hires_MainMenu_Credits_Select:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x005024C5
+@ENDHACK
 
 
-_hires_MainMenu_AntMissions_Select:
+@HACK 0x0050253A,0x0050254D,_hires_MainMenu_AntMissions_Select
     mov  eax,0x64 ; left
     add  eax,[Hires.DeltaTop]
     push eax
@@ -1627,122 +1561,135 @@ _hires_MainMenu_AntMissions_Select:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x0050254D
+@ENDHACK
 
 
-_hires_Network_Join_Fill_ColorBoxes:
-    mov  ebx,edi
-    imul ebx,5
-    add  ebx,1
-    add  ebx,0x1A4
-    add  ebx,[Hires.DeltaTop]
-    jmp  0x00507C13
+;@HACK 0x00507C0C,_hires_Network_Join_Fill_ColorBoxes
+;    mov  ebx,edi
+;    imul ebx,5
+;    add  ebx,1
+;    add  ebx,0x1A4
+;    add  ebx,[Hires.DeltaTop]
+;    jmp  0x00507C13
+;@ENDHACK
 
 
-_hires_Network_Join_ColorBoxes:
-    mov  edx,[ebp-0x80] ; top
-;    add        edx,[Hires.DeltaTop]
-    mov  eax,[edi+ebp-0x264] ; left
-    add  eax,[Hires.DeltaLeft]
-    jmp  0x00507BBB
+;@HACK 0x00507BB1,_hires_Network_Join_ColorBoxes
+;    mov  edx,[ebp-0x80] ; top
+;;    add        edx,[Hires.DeltaTop]
+;    mov  eax,[edi+ebp-0x264] ; left
+;    add  eax,[Hires.DeltaLeft]
+;    jmp  0x00507BBB
+;@ENDHACK
 
 
-_hires_Network_Join_ColorBoxes2:
-    mov  edx,[ebp-0x80] ; top
-;    add        edx,[Hires.DeltaTop]
-    mov  eax,[edi+ebp-0x264] ; left
-    add  eax,[Hires.DeltaLeft]
-    jmp  0x00507BDC
+;@HACK 0x00507BD2,_hires_Network_Join_ColorBoxes2
+;    mov  edx,[ebp-0x80] ; top
+;;    add        edx,[Hires.DeltaTop]
+;    mov  eax,[edi+ebp-0x264] ; left
+;    add  eax,[Hires.DeltaLeft]
+;    jmp  0x00507BDC
+;@ENDHACK
 
 
-_hires_Network_Join_DrawBox:
-    mov  edx,[ebp-0x148] ; top
-    add  edx,[Hires.DeltaTop]
-    mov  eax,[ebp-0x14C] ; left
-    add  eax,[Hires.DeltaLeft]
-    jmp  0x00507DFB
+;@HACK 0x00507DEF,_hires_Network_Join_DrawBox
+;    mov  edx,[ebp-0x148] ; top
+;    add  edx,[Hires.DeltaTop]
+;    mov  eax,[ebp-0x14C] ; left
+;    add  eax,[Hires.DeltaLeft]
+;    jmp  0x00507DFB
+;@ENDHACK
 
 
-_hires_Network_Join_DrawBox2:
-    mov  edx,[ebp-0x128] ; top
-    add  edx,[Hires.DeltaTop]
-    mov  eax,[ebp-0x12C] ; left
-    add  eax,[Hires.DeltaLeft]
-    jmp  0x00507E1C
+;@HACK 0x00507E10,_hires_Network_Join_DrawBox2
+;    mov  edx,[ebp-0x128] ; top
+;    add  edx,[Hires.DeltaTop]
+;    mov  eax,[ebp-0x12C] ; left
+;    add  eax,[Hires.DeltaLeft]
+;    jmp  0x00507E1C
+;@ENDHACK
 
 
-_hires_Network_Join_ChatBox:
-    mov  eax,0x73
-    add  eax,[Hires.DeltaTop]
-    push eax
-    mov  eax,0x14
-    add  eax,[Hires.DeltaLeft]
-    push eax
-    mov  eax,[ebp-0x128]
-    jmp  0x00507229
+;@HACK 0x0050721F,_hires_Network_Join_ChatBox
+;    mov  eax,0x73
+;    add  eax,[Hires.DeltaTop]
+;    push eax
+;    mov  eax,0x14
+;    add  eax,[Hires.DeltaLeft]
+;    push eax
+;    mov  eax,[ebp-0x128]
+;    jmp  0x00507229
+;@ENDHACK
 
 
-_hires_Network_Channel:
-    mov  ecx,0x43 ; top
-    add  ecx,[Hires.DeltaTop]
-    push 0x4E
-    mov  ebx,0x1E ; left
-    add  ebx,[Hires.DeltaLeft]
-    mov  edx,0x66
-    push 0x136
-    jmp  0x00506C89
+;@HACK 0x00506C73,_hires_Network_Channel
+;    mov  ecx,0x43 ; top
+;    add  ecx,[Hires.DeltaTop]
+;    push 0x4E
+;    mov  ebx,0x1E ; left
+;    add  ebx,[Hires.DeltaLeft]
+;    mov  edx,0x66
+;    push 0x136
+;    jmp  0x00506C89
+;@ENDHACK
 
 
-_hires_Network_Country_DropList:
-    push eax
-    push 0x50
-    push 0x78
-    mov  ecx,0x1F
-    add  ecx,[Hires.DeltaTop]
-    push ecx
-;    push    0x1F
-    jmp  0x00506C34
+;@HACK 0x00506C28,_hires_Network_Country_DropList
+;    push eax
+;    push 0x50
+;    push 0x78
+;    mov  ecx,0x1F
+;    add  ecx,[Hires.DeltaTop]
+;    push ecx
+;;    push    0x1F
+;    jmp  0x00506C34
+;@ENDHACK
 
 
-_hires_Network_Name_EditBox:
-    mov  eax,0x1F
-    add  eax,[Hires.DeltaTop]
-    push eax
-    mov  eax,0x00601694
-    xor  dh,dh
-    mov  edx,0x5A
-    add  edx,[Hires.DeltaLeft]
-    push edx
-    mov  [ebp-0x100],eax
-    mov  byte[0x0067F2D6],dh
-    push 0x16
-    jmp  0x00506BF5
+;@HACK 0x00506BDC,_hires_Network_Name_EditBox
+;    mov  eax,0x1F
+;    add  eax,[Hires.DeltaTop]
+;    push eax
+;    mov  eax,0x00601694
+;    xor  dh,dh
+;    mov  edx,0x5A
+;    add  edx,[Hires.DeltaLeft]
+;    push edx
+;    mov  [ebp-0x100],eax
+;    mov  byte[0x0067F2D6],dh
+;    push 0x16
+;    jmp  0x00506BF5
+;@ENDHACK
 
 
-_hires_Network_Color_List:
-    push 0x16
-    mov  ecx,0x42
-    add  ecx,[Hires.DeltaTop]
-    push ecx
-    mov  ecx,0x43
-    jmp  0x00506CC5
+;@HACK 0x00506CBC,_hires_Network_Color_List
+;    push 0x16
+;    mov  ecx,0x42
+;    add  ecx,[Hires.DeltaTop]
+;    push ecx
+;    mov  ecx,0x43
+;    jmp  0x00506CC5
+;@ENDHACK
 
 
-_hires_Network_Join_Button:
-    mov  ebx,0xC0
-    mov  edx,0x42
-    add  edx,[Hires.DeltaLeft]
-    push edx
-    mov  edx,0x68
-    jmp  0x00506CFA
+;@HACK 0x00506CEE,_hires_Network_Join_Button
+;    mov  ebx,0xC0
+;    mov  edx,0x42
+;    add  edx,[Hires.DeltaLeft]
+;    push edx
+;    mov  edx,0x68
+;    jmp  0x00506CFA
+;@ENDHACK
 
 
-_hires_NetworkJoinMenu:
-    mov  ecx,[Hires.DeltaTop]
-    mov  dword[ebp-0x1D4],ecx
-    mov  ecx,[Hires.DeltaLeft]
-    mov  dword[ebp-0x1D0],ecx
-    xor  ecx,ecx
-    jmp  0x0050693D
+;@HACK 0x0050692B,_hires_NetworkJoinMenu
+;    mov  ecx,[Hires.DeltaTop]
+;    mov  dword[ebp-0x1D4],ecx
+;    mov  ecx,[Hires.DeltaLeft]
+;    mov  dword[ebp-0x1D0],ecx
+;    xor  ecx,ecx
+;    jmp  0x0050693D
+;@ENDHACK
 
 
 @HACK 0x0054D009,0x0054D033,_hires_StripClass
@@ -1767,8 +1714,8 @@ _hires_NetworkJoinMenu:
     cmp  edx,0x190
     je   .Jump_Background_Skip
 .Display_Top_Left:
-    mov  ebx,0
-    mov  eax,0
+    xor  ebx,ebx
+    xor  eax,eax
 .Jump_Background_Skip:
     mov  byte[Hires.ScoreBackground],0
     push ebx
@@ -1814,19 +1761,21 @@ _hires_NetworkJoinMenu:
 @ENDHACK
 
 
-_Blacken_Screen_Border_Menu:
-    call Set_Video_Mode
-    mov  eax,1
-    jmp  0x00502243
+;@HACK 0x0050223E,0x00502243,_Blacken_Screen_Border_Menu
+;    call Set_Video_Mode
+;    mov  eax,1
+;    jmp  0x00502243
+;@ENDHACK
 
 
-_Blacken_Screen_Border_Menu2:
-    hires_Clear_2
-    mov  eax,1
-    jmp  0x00502293
+;@HACK 0x0050228E,0x00502293,_Blacken_Screen_Border_Menu2
+;    hires_Clear_2
+;    mov  eax,1
+;    jmp  0x00502293
+;@ENDHACK
 
 
-_NewMissions_Handle_Hires_Buttons_A:
+@HACK 0x004BE377,0x004BE388,_NewMissions_Handle_Hires_Buttons_A
     mov  edx,0x13C
     add  edx,[Hires.DeltaTop]
     push edx
@@ -1836,9 +1785,10 @@ _NewMissions_Handle_Hires_Buttons_A:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x004BE388
+@ENDHACK
 
 
-_NewMissions_Handle_Hires_Buttons_B:
+@HACK 0x004BE39E,0x004BE3B2,_NewMissions_Handle_Hires_Buttons_B
     mov  edx,0x13C
     add  edx,[Hires.DeltaTop]
     push edx
@@ -1848,17 +1798,19 @@ _NewMissions_Handle_Hires_Buttons_B:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x004BE3B2
+@ENDHACK
 
 
-_hires_Net_New_Dialog:
+@HACK 0x0050B70D,0x0050B719,_hires_Net_New_Dialog
     mov  ecx,[Hires.DeltaLeft]
     mov  [ebp-0xFC],ecx
     mov  ecx,[Hires.DeltaTop]
     mov  [ebp-0xF8],ecx
     jmp  0x0050B719
+@ENDHACK
 
 
-_hires_Net_New_Dialog2:
+@HACK 0x0050B8A9,0x0050B8B7,_hires_Net_New_Dialog2
     mov  edx,0x75
     add  edx,[Hires.DeltaTop]
     push edx
@@ -1868,9 +1820,10 @@ _hires_Net_New_Dialog2:
     mov  ecx,0x116
     mov  ebx,0xD8
     jmp  0x0050B8B7
+@ENDHACK
 
 
-_hires_Net_New_Dialog_OK_Button:
+@HACK 0x0050B97D,0x0050B98E,_hires_Net_New_Dialog_OK_Button
     mov  edx,0x16e
     add  edx,[Hires.DeltaTop]
     push edx
@@ -1880,9 +1833,10 @@ _hires_Net_New_Dialog_OK_Button:
     mov  ecx,0x116
     mov  ebx,0x17
     jmp  0x0050B98E
+@ENDHACK
 
 
-_hires_Net_New_Players_Text_Print:
+@HACK 0x0050C2A3,0x0050C2AB,_hires_Net_New_Players_Text_Print
     mov  eax,0x10
     add  eax,[Hires.DeltaTop]
     push eax
@@ -1890,9 +1844,10 @@ _hires_Net_New_Players_Text_Print:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x0050C2AB
+@ENDHACK
 
 
-_hires_Net_New_Scenario_Text_Print:
+@HACK 0x0050C2C0,0x0050C2C8,_hires_Net_New_Scenario_Text_Print
     mov  ecx,0x10
     add  ecx,[Hires.DeltaTop]
     push ecx
@@ -1900,9 +1855,10 @@ _hires_Net_New_Scenario_Text_Print:
     add  esi,[Hires.DeltaLeft]
     push esi
     jmp  0x0050C2C8
+@ENDHACK
 
 
-_hires_Net_New_Unit_Count_Text_Print:
+@HACK 0x0050C2DD,0x0050C2E8,_hires_Net_New_Unit_Count_Text_Print
     mov  eax,0x87
     add  eax,[Hires.DeltaTop]
     push eax
@@ -1910,9 +1866,10 @@ _hires_Net_New_Unit_Count_Text_Print:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x0050C2E8
+@ENDHACK
 
 
-_hires_Net_New_Tech_Level_Text_Print:
+@HACK 0x0050C2FD,0x0050C308,_hires_Net_New_Tech_Level_Text_Print
     mov  ecx,0x94
     add  ecx,[Hires.DeltaTop]
     push ecx
@@ -1920,9 +1877,10 @@ _hires_Net_New_Tech_Level_Text_Print:
     add  esi,[Hires.DeltaLeft]
     push esi
     jmp  0x0050C308
+@ENDHACK
 
 
-_hires_Net_New_Credits_Text_Print:
+@HACK 0x0050C31D,0x0050C328,_hires_Net_New_Credits_Text_Print
     mov  eax,0xA1
     add  eax,[Hires.DeltaTop]
     push eax
@@ -1930,9 +1888,10 @@ _hires_Net_New_Credits_Text_Print:
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x0050C328
+@ENDHACK
 
 
-_hires_Net_New_AI_Players_Text_Print:
+@HACK 0x0050C33D,0x0050C348,_hires_Net_New_AI_Players_Text_Print
     mov  ecx,0xAE
     add  ecx,[Hires.DeltaTop]
     push ecx
@@ -1940,17 +1899,19 @@ _hires_Net_New_AI_Players_Text_Print:
     add  esi,[Hires.DeltaLeft]
     push esi
     jmp  0x0050C348
+@ENDHACK
 
 
-_hires_Net_Join_Dialog:
+@HACK 0x00506931,0x0050693D,_hires_Net_Join_Dialog
     mov  ecx,[Hires.DeltaLeft]
     mov  [ebp-0x1d4],ecx
     mov  ecx,[Hires.DeltaTop]
     mov  [ebp-0x1d0],ecx
     jmp  0x0050693D
+@ENDHACK
 
 
-_hires_Net_Join_Name_Box:
+@HACK 0x00506BDC,0x00506BE7,_hires_Net_Join_Name_Box
     mov  eax,0x1f
     add  eax,[Hires.DeltaTop]
     push eax
@@ -1960,9 +1921,10 @@ _hires_Net_Join_Name_Box:
     mov  eax,dword[0x601694]
     xor  dh,dh
     jmp  0x00506BE7
+@ENDHACK
 
 
-_hires_Net_Join_Country_Box:
+@HACK 0x00506C32,0x00506C39,_hires_Net_Join_Country_Box
     mov  ecx,0x1F
     add  ecx,[Hires.DeltaTop]
     push ecx
@@ -1970,9 +1932,10 @@ _hires_Net_Join_Country_Box:
     add  ecx,[Hires.DeltaLeft]
     push ecx
     jmp  0x00506C39
+@ENDHACK
 
 
-_hires_Net_Join_Join_Button:
+@HACK 0x00506CE4,0x00506CF5,_hires_Net_Join_Join_Button
     mov  ecx,0x16E
     add  ecx,[Hires.DeltaTop]
     push ecx
@@ -1982,18 +1945,20 @@ _hires_Net_Join_Join_Button:
     mov  ecx,0x116
     mov  ebx,0xC0
     jmp  0x00506CF5
+@ENDHACK
 
 
-_hires_Net_Join_Credits_Slider:
+@HACK 0x00506DA9,0x00506DAE,_hires_Net_Join_Credits_Slider
     mov  ecx,0xB9
     add  ecx,[Hires.DeltaTop]
     mov  ebx,0xB9
     add  ebx,[Hires.DeltaLeft]
     call GaugeClass__GaugeClass
     jmp  0x00506DAE
+@ENDHACK
 
 
-_hires_Net_Join_Static_Button:
+@HACK 0x00506E0C,0x00506E1A,_hires_Net_Join_Static_Button
     mov  eax,0x1f
     add  eax,[Hires.DeltaTop]
     push eax
@@ -2003,9 +1968,10 @@ _hires_Net_Join_Static_Button:
     mov  ecx,0x116
     mov  ebx,0x005EC269
     jmp  0x00506E1A
+@ENDHACK
 
 
-_hires_Net_Join_Games_Text_Print:
+@HACK 0x00507728,0x00507736,_hires_Net_Join_Games_Text_Print
     mov  ebx,0x36
     add  ebx,[Hires.DeltaTop]
     push ebx
@@ -2013,8 +1979,10 @@ _hires_Net_Join_Games_Text_Print:
     add  ecx,[Hires.DeltaLeft]
     push ecx
     jmp  0x00507736
+@ENDHACK
 
-_hires_Net_Join_Players_Text_Print:
+
+@HACK 0x0050774B,_hires_Net_Join_Players_Text_Print
     mov  edi,0x36
     add  edi,[Hires.DeltaTop]
     push edi
@@ -2022,9 +1990,10 @@ _hires_Net_Join_Players_Text_Print:
     add  eax,[Hires.DeltaLeft]
     push eax
     jmp  0x00507759
+@ENDHACK
 
 
-_hires_Net_Join_Name_Text_Print:
+@HACK 0x0050777C,_hires_Net_Join_Name_Text_Print
     mov  esi,0x12
     add  esi,[Hires.DeltaTop]
     push esi
@@ -2032,9 +2001,10 @@ _hires_Net_Join_Name_Text_Print:
     add  edi,[Hires.DeltaLeft]
     push edi
     jmp  0x0050778A
+@ENDHACK
 
 
-_hires_Net_Join_Side_Text_Print:
+@HACK 0x0050779F,_hires_Net_Join_Side_Text_Print
     mov  edx,0x12
     add  edx,[Hires.DeltaTop]
     push edx
@@ -2042,9 +2012,10 @@ _hires_Net_Join_Side_Text_Print:
     add  ebx,[Hires.DeltaLeft]
     push ebx
     jmp  0x005077AD
+@ENDHACK
 
 
-_hires_Net_Join_Color_Text_Print:
+@HACK 0x005077C2,_hires_Net_Join_Color_Text_Print
     mov  esi,0x12
     add  esi,[Hires.DeltaTop]
     push esi
@@ -2052,9 +2023,10 @@ _hires_Net_Join_Color_Text_Print:
     add  edi,[Hires.DeltaLeft]
     push edi
     jmp  0x005077D0
+@ENDHACK
 
 
-_hires_Net_Join_Color_Draw_Colored_Rectangles:
+@HACK 0x00507B48,0x00507B64,_hires_Net_Join_Color_Draw_Colored_Rectangles
     mov  ecx,[ebp-0xAC] ; top
     add  ecx,[Hires.DeltaTop]
     push ecx             ; __int16
@@ -2068,23 +2040,26 @@ _hires_Net_Join_Color_Draw_Colored_Rectangles:
     add  ebx,[Hires.DeltaLeft]
     push ebx             ; __int16
     jmp  0x00507B64
+@ENDHACK
 
 
-_hires_Net_Join_Color_Draw_Boxes:
+@HACK 0x00507BBB,0x00507BC0,_hires_Net_Join_Color_Draw_Boxes
     add  edx,[Hires.DeltaTop]
     add  eax,[Hires.DeltaLeft]
     call Dialog___Draw_Box
     jmp  0x00507BC0
+@ENDHACK
 
 
-_hires_Net_Join_Color_Draw_Boxes2:
+@HACK 0x00507BDC,0x00507BE1,_hires_Net_Join_Color_Draw_Boxes2
     add  edx,[Hires.DeltaTop]
     add  eax,[Hires.DeltaLeft]
     call Dialog___Draw_Box
     jmp  0x00507BE1
+@ENDHACK
 
 
-_hires_Net_Join_Color_Box_Select_Thingy:
+@HACK 0x0050854B,0x0050855F,_hires_Net_Join_Color_Box_Select_Thingy
     mov  edi,[ebp-0x80]
     add  edi,[Hires.DeltaTop]
     mov  eax,[edx+4]
@@ -2094,9 +2069,10 @@ _hires_Net_Join_Color_Box_Select_Thingy:
     add  ecx,[Hires.DeltaTop]
     cmp  eax,ecx
     jmp  0x0050855F
+@ENDHACK
 
 
-_hires_Net_Join_Color_Box_Select_Thingy2:
+@HACK 0x00508525,0x0050853F,_hires_Net_Join_Color_Box_Select_Thingy2
     mov  ebx,[ebp-0x264]
     add  ebx,[Hires.DeltaLeft]
     cmp  ebx,[edx]
@@ -2105,99 +2081,108 @@ _hires_Net_Join_Color_Box_Select_Thingy2:
     mov  ecx,[ebp-0x1A8]
     add  eax,[Hires.DeltaLeft]
     jmp  0x0050853F
+@ENDHACK
 
 
-_hires_Net_Join_Color_Box_Select_Thingy3:
+@HACK 0x00508565,0x0050856B,_hires_Net_Join_Color_Box_Select_Thingy3
     mov  ecx,[ebp-0x264]
     add  ecx,[Hires.DeltaLeft]
     jmp  0x0050856B
+@ENDHACK
 
 
-_hires_Net_Join_MessageBox:
-; 00507DFB
-;edx = 00000102 eax = 6E
-;    cmp        eax,
-    add  edx,[Hires.DeltaTop]
-    call Dialog___Draw_Box
-    jmp  0x00507E00
+;@HACK 0x00507DFB,0x00507E00,_hires_Net_Join_MessageBox
+;;    cmp        eax,
+;    add  edx,[Hires.DeltaTop]
+;    call Dialog___Draw_Box
+;    jmp  0x00507E00
+;@ENDHACK
 
-_hires_Net_Join_Unit_Count_Text_Print:
-; ecx = 0000009F,esi = 000000B5
+
+@HACK 0x00507F33,0x00507F40,_hires_Net_Join_Unit_Count_Text_Print
+    ; ecx = 0000009F,esi = 000000B5
     mov  ecx,0x9F
     add  ecx,[Hires.DeltaTop]
     push ecx
     mov  esi,0xB5
     add  esi,[Hires.DeltaLeft]
     jmp  0x00507F40
+@ENDHACK
 
-; edx= 000000AC,ebx = 000000B5
-_hires_Net_Join_Tech_Level_Text_Print:
+
+@HACK 0x00507F97,0x00507FA4,_hires_Net_Join_Tech_Level_Text_Print
+    ; edx= 000000AC,ebx = 000000B5
     mov  edx,0xAC
     add  edx,[Hires.DeltaTop]
     push edx
     mov  ebx,0xB5
     add  ebx,[Hires.DeltaLeft]
     jmp  0x00507FA4
+@ENDHACK
 
-; eax = 000000B9,edx = B5
-_hires_Net_Join_Credits_Text_Print:
+
+@HACK 0x00508016,0x00508023,_hires_Net_Join_Credits_Text_Print
+    ; eax = 000000B9,edx = B5
     mov  eax,0xB9
     add  eax,[Hires.DeltaTop]
     push eax
     mov  edx,0xB5
     add  edx,[Hires.DeltaLeft]
     jmp  0x00508023
+@ENDHACK
 
-; esi = 000000C6,edi = b5
-_hires_Net_Join_AI_Players_Text_Print:
+
+@HACK 0x00508074,0x00508081,_hires_Net_Join_AI_Players_Text_Print
+    ; esi = 000000C6,edi = b5
     mov  esi,0xC6
     add  esi,[Hires.DeltaTop]
     push esi
     mov  edi,0xB5
     add  edi,[Hires.DeltaLeft]
     jmp  0x00508081
+@ENDHACK
 
-_hires_Net_Join_Playing_As_Text_Print:
-; edx = 00000010,ebx = 00000140
+
+@HACK 0x00507887,0x00507894,_hires_Net_Join_Playing_As_Text_Print
+    ; edx = 00000010,ebx = 00000140
     mov  edx,0x10
     add  edx,[Hires.DeltaTop]
     push edx
     mov  ebx,0x140
     add  ebx,[Hires.DeltaLeft]
     jmp  0x00507894
+@ENDHACK
 
-_Shake_The_Screen_Height2:
+
+@HACK 0x004ABBDF,0x004ABBE4,_Shake_The_Screen_Height2
     mov  eax,[ScreenHeight]
     sub  eax,2
     jmp  0x004ABBE4
+@ENDHACK
 
-_Shake_The_Screen_Height1:
+
+@HACK 0x004AB8A8,0x004AB8AD,_Shake_The_Screen_Height1
     mov  eax,[ScreenHeight]
     sub  eax,2
     jmp  0x004AB8AD
+@ENDHACK
 
-_Set_Screen_Height_400_NOP:
+
+@HACK 0x005525D7,0x005525ED,_Set_Screen_Height_400_NOP
     cmp  dword[Hires.Pseudo480Height],1
     je   .No_Change
-
     jmp  0x00552628
-
 .No_Change:
     mov  dword[ScreenHeight],0x190
     jmp  0x005525ED
+@ENDHACK
 
-_No_Black_Bars_In_640x480:
-    cmp  dword[Hires.Pseudo480Height],1
-    je   .No_Change
-    jmp  0x00552628
 
-.No_Change:
-    jmp  0x005525ED
-
-_Set_Screen_Height_480_NOP:
+@HACK 0x005523C6,0x005523CE,_Set_Screen_Height_480_NOP
     mov  dword[ScreenHeight],ebx
     mov  dword[Hires.Pseudo480Height],1
     jmp  0x005523EE
+@ENDHACK
 
 
 @HACK 0x0054DB14,0x0054DB19,_Set_Game_Area_Width

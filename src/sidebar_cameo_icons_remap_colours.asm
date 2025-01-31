@@ -5,9 +5,9 @@
 
 
 @HACK 0x0054E863,0x0054E868,_StripClass__Draw_It_Colour_Remap_Icon
-    mov  edx,0
+    xor  edx,edx
     mov  ebx,1
-    mov  eax,0 ; just to be sure
+    xor  eax,eax ; just to be sure
     cmp  byte[RedAlert.Options.ColorRemapSidebarIcons],0
     jz   .No_Colour_Remap
     mov  eax,[Globals___PlayerPtr]

@@ -63,7 +63,7 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
     push eax
     push edx
 
-    mov  edx,0
+    xor  edx,edx
     mov  eax,%1
 
   %%loop:
@@ -163,7 +163,7 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
     jmp  %%done
 
   %%invalid_type:
-    mov  eax,0
+    xor  eax,eax
   %%done:
     pop  edx
 %endmacro

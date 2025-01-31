@@ -159,7 +159,7 @@ Initialize_Spawn:
     cmp  [nameTags],dword 0
     je   .first_run
 
-    mov  eax,0
+    xor  eax,eax
     jmp  .exit
 
 .first_run:
@@ -326,7 +326,7 @@ Initialize_Spawn:
     ; generic stuff
     spawn_INI_Get_Int str_Settings, str_Port, 1234
     cmp  dword[tunnel_port],0
-    JNE  .nosetport
+    jne  .nosetport
     mov  [NetPort],eax
 .nosetport:
 
@@ -569,7 +569,7 @@ Initialize_Spawn:
 
     ; initialize network
     cmp  byte[Globals___Session_Type+Session.type],4
-    JNE  .nonet
+    jne  .nonet
 
     spawn_INI_Get_Int str_Settings, str_NetworkVersionProtocol, 0
     mov  [Globals___Session_Type+Session.protocol],al
@@ -749,7 +749,7 @@ Initialize_Spawn:
     mov  ecx,0x6
     mov  ebx,0x10
     mov  eax,0x67F5A8
-    mov  edx,0
+    xor  edx,edx
     call MessageListClass__Init
 
     spawn_INI_Get_Bool str_Settings, str_LoadSaveGame, 0
@@ -856,7 +856,7 @@ SendFix:
     call htonl
 
     test eax,eax
-    JNE  .have_port
+    jne  .have_port
     mov  AX,1234
 .have_port:
     pop  ebx

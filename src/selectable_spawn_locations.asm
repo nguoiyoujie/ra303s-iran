@@ -16,7 +16,7 @@ multi_Spawns    times 8 dd 0 ; Multi1-8
 @HACK 0x0053E4CE,0x0053E4D4,_Create_Units_Set_Selected_Spawn_Locations
     mov  dword[ebp-0x84],eax
     Save_Registers
-    mov  esi,0
+    xor  esi,esi
 .Loop:
     cmp  esi,7
     jg   .Ret
@@ -41,7 +41,7 @@ multi_Spawns    times 8 dd 0 ; Multi1-8
 ;    mov     esi,dword[multi_Spawns]
 ;    cmp     esi,-1
 ;    jnz     .First_Spawn_Selected
-    mov  esi,0
+    xor  esi,esi
 .Loop:
     cmp  esi,7
     jg   .Ret

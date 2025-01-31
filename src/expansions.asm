@@ -13,13 +13,21 @@
 ; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
-
-; rewritten to check for a file instead of a registry key
-
-[section .rdata]
-str_am_file db"SCG43EA.INI",0
-str_cs_file db"SCU38EA.INI",0
-
+;----------------------------------------------------------------
+; src/features/expansions.asm
+;
+; Allows alternative configuration to enable Aftermath and Counterstrike installations via file keys rather than registry keys
+; 
+; This function is activated by specifying the following options in RedAlert.ini:
+;     [Options] > CounterstrikeEnabled=yes
+;     [Options] > AftermathEnabled=yes
+;
+; or with Spawn.ini
+;
+;     [Settings] > Aftermath
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
 
 @HACK 0x004AC024,0x004AC029,_Is_Aftermath_Installed
     Save_Registers
@@ -36,7 +44,7 @@ str_cs_file db"SCU38EA.INI",0
     cmp  byte[RedAlert.Options.AftermathEnabled],1
     jz   .Ret_True
 .Ret_False:
-    mov  eax,0
+    xor  eax,eax
     retn
 .Ret_True:
     mov  eax,1
@@ -47,7 +55,7 @@ str_cs_file db"SCU38EA.INI",0
 @HACK 0x004ABF88,0x004ABF8D,_Is_Counterstrike_Installed
     cmp  byte[RedAlert.Options.CounterstrikeEnabled],1
     jz   .Ret_True
-    mov  eax,0
+    xor  eax,eax
     retn
 .Ret_True:
     mov  eax,1

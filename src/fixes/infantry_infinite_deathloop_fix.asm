@@ -9,10 +9,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter. However, lookout for the possibility of missions taking 'advantage' of this bug using Unit Destroyed on repeating triggers.
 ; 
 ;----------------------------------------------------------------
-
-@LJMP 0x004EBD50, _InfantryClass__Take_Damage_CheckDoing
-
-_InfantryClass__Take_Damage_CheckDoing:
+@HACK 0x004EBD50,0x004EBD55,_InfantryClass__Take_Damage_CheckDoing
     ; eax is the damaged infantry, let's check if he is already running a dying animation
     mov  esi,eax
     push eax
@@ -29,5 +26,5 @@ _InfantryClass__Take_Damage_CheckDoing:
     pop  eax
     mov  byte[ebp-0x10],cl
     jmp  0x004EBD55
-
+@ENDHACK
 

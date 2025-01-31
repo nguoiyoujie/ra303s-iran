@@ -1,3 +1,13 @@
+;----------------------------------------------------------------
+; src/features/multiplayer_defaults.asm
+;
+; Allows the game to remember your skirmish/multiplayer choices, but saving them in or loading them from RedAlert.ini. 
+; 
+; This function is not configurable at the moment
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
+
 %define BuildLevel                                    0x006016C8
 %define UnitCount                                    0x0067F2CE
 %define UnitCountNoBases                            0x00604CE0
@@ -58,62 +68,46 @@ mapindex_str db"MapIndex",0
     call_INIClass__Get_Int INIClass_this_,{%1},{%2},{%3}
 %endmacro
 
-@LJMP 0x00535CE6,_RulesClass_Multiplayer_Defaults
-@LJMP 0x005136CE,_Skirmish_Players_Slider3
-@LJMP 0x00513608,_Skirmish_UnitCount_Slider
-@LJMP 0x005138A0,_Skirmish_Selected_Map_Index
-@LJMP 0x00513163,_Skirmish_Set_AI_Difficulty
-@LJMP 0x00513480,_Skirmish_Unit_Count_Change
-@LJMP 0x00513554,_Skirmish_Check_Lists
-@LJMP 0x00513534,_Skirmish_Add_CTF_Check_List
-@LJMP 0x00514AA8,_Skirmish_Check_CTF_Check_List
 
-@LJMP 0x0050BCDD,_LAN_Check_Lists
-;@LJMP 0x0050C1AE,_LAN_Players_Slider3
-@LJMP 0x0050CA4D,_LAN_UnitCount_Slider
-@LJMP 0x0050BC36,_LAN_Unit_Count_Change
-@LJMP 0x0050BF87,_LAN_Selected_Map_Index
-@LJMP 0x005135AC,_Skirmish_Check_CTF_Check_Item
-;@LJMP 0x00514854,_Skirmish_Check_CTF_Check_Item2 ; Doesn't work
-;@LJMP 0x0051491E,_Skirmish_Check_CTF_Check_Item3 ; Doesn't work
+@SJMP 0x00513480,0x00513485 ; _Skirmish_Unit_Count_Change
+@CLEAR 0x00513534,0x90,0x00513538 ; _Skirmish_Add_CTF_Check_List
+@CLEAR 0x00514AA8,0x90,0x00514AAC ; _Skirmish_Check_CTF_Check_List
+@SJMP 0x0050BC36,0x0050BC3B ; _LAN_Unit_Count_Change
+@SJMP 0x005135AC,0x005135B5 ; _Skirmish_Check_CTF_Check_Item
+;@LJMP 0x00514854,0x00514928 ; _Skirmish_Check_CTF_Check_Item2 ; Doesn't work
+;@LJMP 0x0051491E,0x0051485D ; _Skirmish_Check_CTF_Check_Item3 ; Doesn't work
 
-_Skirmish_Check_CTF_Check_Item3:
-    jmp  0x0051485D
 
-_Skirmish_Check_CTF_Check_Item2:
-    jmp  0x00514928
-
-_LAN_Selected_Map_Index:
+@HACK 0x0050BF87,0x0050BF8D,_LAN_Selected_Map_Index
     lea  eax,[ebp-0x684]
     mov  edx,[SelectedMapIndex]
-
     call ListClass_Set_Selected_Index
-
     jmp  0x0050BF8D
+@ENDHACK
 
-_LAN_Unit_Count_Change:
-    jmp  0x0050BC3B
 
-_LAN_UnitCount_Slider:
+@HACK 0x0050CA4D,0x0050CA55,_LAN_UnitCount_Slider
     mov  edx,[UnitCount]
     lea  eax,[ebp-0x34C]
     jmp  0x0050CA55
+@ENDHACK
 
-_LAN_Players_Slider3:
-    push eax
-    cmp  byte[FirstLoadPlayers2],1
-    jne  .Not_First_Load_Players
 
-    mov  dword[FirstLoadPlayers2],0
-    this__INI_Get_Int multiplayer_defaults_str,aiplayers_str,1
-    mov  dword[Players],eax
+;@HACK 0x0050C1AE,_LAN_Players_Slider3
+;    push eax
+;    cmp  byte[FirstLoadPlayers2],1
+;    jne  .Not_First_Load_Players
+;    mov  dword[FirstLoadPlayers2],0
+;    this__INI_Get_Int multiplayer_defaults_str,aiplayers_str,1
+;    mov  dword[Players],eax
+;.Not_First_Load_Players:
+;    pop  eax
+;    mov  edx,[Players]
+;    jmp  0x0050C1B4
+;@ENDHACK
 
-.Not_First_Load_Players:
-    pop  eax
-    mov  edx,[Players]
-    jmp  0x0050C1B4
 
-_LAN_Check_Lists:
+@HACK 0x0050BCDD,0x0050BD1C,_LAN_Check_Lists
     lea  eax,[ebp-0x7AC]
     xor  ebx,ebx
     cmp  byte[FirstLoadLAN],1
@@ -122,47 +116,34 @@ _LAN_Check_Lists:
     mov  [BasesOrNoBases],ebx
 .Jump_Over_Bases:
     mov  ebx,[BasesOrNoBases]
-    mov  edx,0
+    xor  edx,edx
     call CheckListClass__Check_Item
-
     lea  eax,[ebp-0x7AC]
     xor  ebx,ebx
     cmp  byte[FirstLoadLAN],1
     jnz  .Jump_Over_OreRegenerates
     mov  bl,byte[oreregenerates]
     mov  [OreRegenerates],ebx
-
 .Jump_Over_OreRegenerates:
     mov  ebx,[OreRegenerates]
     mov  edx,1
     call CheckListClass__Check_Item
-
     lea  eax,[ebp-0x7AC]
     xor  ebx,ebx
     cmp  byte[FirstLoadLAN],1
     jnz  .Jump_Over_Crates
     mov  bl,byte[crates]
     mov  [Crates],ebx
-
 .Jump_Over_Crates:
     mov  ebx,[Crates]
     mov  edx,2
     call CheckListClass__Check_Item
     mov  byte[FirstLoadLAN],0
     jmp  0x0050BD1C
+@ENDHACK
 
-_Skirmish_Check_CTF_Check_Item:
-    jmp  0x005135B5
 
-_Skirmish_Check_CTF_Check_List:
-    mov  edx,4
-    jmp  0x00514AB1
-
-_Skirmish_Add_CTF_Check_List:
-    mov  edx,0x12D
-    jmp  0x0051353D
-
-_Skirmish_Check_Lists:
+@HACK 0x00513554,0x00513593,_Skirmish_Check_Lists
     lea  eax,[ebp-0x97C]
     xor  ebx,ebx
     cmp  byte[FirstLoad2],1
@@ -171,28 +152,24 @@ _Skirmish_Check_Lists:
     mov  [BasesOrNoBases],ebx
 .Jump_Over_Bases:
     mov  ebx,[BasesOrNoBases]
-    mov  edx,0
+    xor  edx,edx
     call CheckListClass__Check_Item
-
     lea  eax,[ebp-0x97C]
     xor  ebx,ebx
     cmp  byte[FirstLoad2],1
     jnz  .Jump_Over_OreRegenerates
     mov  bl,byte[oreregenerates]
     mov  [OreRegenerates],ebx
-
 .Jump_Over_OreRegenerates:
     mov  ebx,[OreRegenerates]
     mov  edx,1
     call CheckListClass__Check_Item
-
     lea  eax,[ebp-0x97C]
     xor  ebx,ebx
     cmp  byte[FirstLoad2],1
     jnz  .Jump_Over_Crates
     mov  bl,byte[crates]
     mov  [Crates],ebx
-
 .Jump_Over_Crates:
     mov  ebx,[Crates]
     mov  edx,2
@@ -249,52 +226,50 @@ _Skirmish_Check_Lists:
 ;    jmp        0x005135D1
     mov  byte[FirstLoad2],0
     jmp  0x00513593
-
-_Skirmish_Unit_Count_Change:
-    jmp  0x00513485
+@ENDHACK
 
 
-_Skirmish_Players_Slider3:
+@HACK 0x005136CE,0x005136D6,_Skirmish_Players_Slider3
     cmp  byte[FirstLoadPlayers],1
     jne  .Not_First_Load_Players
-
     mov  dword[FirstLoadPlayers],0
     this__INI_Get_Int multiplayer_defaults_str,aiplayers_str,1
     mov  dword[Players],eax
-
 .Not_First_Load_Players:
     mov  edx,[Players]
     lea  eax,[ebp-0x574]
     jmp  0x005136D6
+@ENDHACK
 
-_Skirmish_UnitCount_Slider:
+
+@HACK 0x00513608,0x00513610,_Skirmish_UnitCount_Slider
     mov  edx,[UnitCount]
     lea  eax,[ebp-0x4C0]
     jmp  0x00513610
+@ENDHACK
 
-_Skirmish_Selected_Map_Index:
 
+@HACK 0x005138A0,0x005138A6,_Skirmish_Selected_Map_Index
     cmp  byte[FirstLoad],1
     jne  Not_First_Load
-
     mov  byte[FirstLoad],0
-
 Not_First_Load:
     lea  eax,[ebp-0x854]
     mov  edx,[SelectedMapIndex]
-
     call ListClass_Set_Selected_Index
-
     xor  eax,eax
     jmp  0x005138A6
+@ENDHACK
 
-_Skirmish_Set_AI_Difficulty:
 
+@HACK 0x00513163,0x00513168,_Skirmish_Set_AI_Difficulty
     this__INI_Get_Int multiplayer_defaults_str,aidifficulty_str,1
     mov  edx,eax
     jmp  0x00513168
+@ENDHACK
 
-_RulesClass_Multiplayer_Defaults:
+
+@HACK 0x00535CE6,0x00535CEB,_RulesClass_Multiplayer_Defaults
     push eax
     push ebx
     push edx
@@ -383,7 +358,6 @@ _RulesClass_Multiplayer_Defaults:
     lea  esp,[ebp-0x10]
     pop  edi
     pop  esi
-    pop  ecx
-    pop  ebx
-    pop  ebp
-    jmp  0x00535CEE
+    jmp  0x00535CEB
+@ENDHACK
+

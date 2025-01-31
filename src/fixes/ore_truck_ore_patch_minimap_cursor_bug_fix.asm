@@ -7,14 +7,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@LJMP 0x00531207, _RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor
-
-_RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor:
+@HACK 0x00531207,0x0053120D,_RadarClass__RTacticalClass__Action_Ore_Truck_Ore_Patch_Minimap_Cursor
     mov  ah,[ebp-0x10]
-
     ; Add check for 'Harvest' ActionType
     cmp  ah,6
     jz   0x00531235
-
     cmp  ah,5
     jmp  0x00531235
+@ENDHACK

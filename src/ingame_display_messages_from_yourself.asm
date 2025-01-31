@@ -1,8 +1,14 @@
-@LJMP 0x004A731C,_Message_Input_Display_Message_After_Sending_To_Players
-
-_Message_Input_Display_Message_After_Sending_To_Players:
+;----------------------------------------------------------------
+; src/features/ingame_chat_improvments.asm
+;
+; Game will now include text messages sent by yourself
+; 
+; This function is enabled by default and is not configurable.
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
+@HACK 0x004A731C,0x004A7321,_Message_Input_Display_Message_After_Sending_To_Players
     Save_Registers
-
     ; Calculate duration the message is displayed for
     xor  ebx,ebx
     mov  bx,[Globals___Rule_MessageDelay]
@@ -13,13 +19,11 @@ _Message_Input_Display_Message_After_Sending_To_Players:
     shl  eax,2
     add  eax,0x80
     shr  eax,8
-
     push eax ; Message display duration
     push 0x4046 ; TextPrintType?
     mov  al,byte[0x0067F313]
     movsx eax,al
     push eax ; PlayerColorType arg
-
     mov  ecx,0x00680189
     mov  bl,byte[0x00680201]
     movsx ebx,bl
@@ -30,3 +34,4 @@ _Message_Input_Display_Message_After_Sending_To_Players:
     Restore_Registers
     mov  esi,0x00680189 ; (offset dword_00680186+3)
     jmp  0x004A7321
+@ENDHACK

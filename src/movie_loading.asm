@@ -1,10 +1,14 @@
-@LJMP 0x004A8DE2,_Play_Movie
-@LJMP 0x004637FF,_CCINIClass_Get_VQType
-;@LJMP 0x0053A1D3,_Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
-@LJMP 0x004F5061,_Extra_Sneak_Peaks
-@LJMP 0x004F4358,_Optional_Play_ENGLISHVQA_Intro
+;----------------------------------------------------------------
+; src/features/movie_loading.asm
+;
+; Allows playing of additional movies. The new movies have fixed names and indexes.
+; 
+; This function is not configurable at the moment
+; No compatibility issues is expected. 
+;
+;----------------------------------------------------------------
 
-%define    _Play_Movie_                                0x004A8DCC
+%define _Play_Movie_                                  0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
 extern CCFileClass__CCFileClass
@@ -13,7 +17,6 @@ extern CCINIClass__Load
 
 [section .rdata] 
 ; TLF moviessizzle3 and sizzle4
-derp_str db"derp",0
 ALLX1_str db"ALLX1",0
 ALLX2_str db"ALLX2",0
 ALLX3_str db"ALLX3",0
@@ -52,7 +55,6 @@ FileClass_redalertini2  TIMES 128 db 0
 CCINIClass_redalertini2 TIMES 128 db 0
 
 
-[section .text] 
 ; args: <video name no extension>, <index to return>
 %macro Video_Name_To_Index 2
     lea  eax,[ebp-0x88]
@@ -80,83 +82,70 @@ CCINIClass_redalertini2 TIMES 128 db 0
     call _Play_Movie_
 %endmacro
 
-_Optional_Play_ENGLISHVQA_Intro:
-
+@HACK 0x004F4358,0x004F435D,_Optional_Play_ENGLISHVQA_Intro
     push edx
     push eax
     push ebx
-
     mov  edx,str_redalert_ini
     mov  eax,FileClass_redalertini2
     call CCFileClass__CCFileClass
-
     ; check ini exists
     mov  eax,FileClass_redalertini2
     xor  edx,edx
     call CCFileClass__Is_Available
 ;    test eax,eax
 ;    je .exit_error
-
     ; initialize CCINIClass
     mov  eax,CCINIClass_redalertini2
     call CCINIClass__CCINIClass
-
     ; load FileClass to CCINIClass
     mov  edx,FileClass_redalertini2
     mov  eax,CCINIClass_redalertini2
     call CCINIClass__Load
-
     call_INIClass__Get_Bool CCINIClass_redalertini2, str_options2, str_playenglishintro, 1
     cmp  eax,0
-
     pop  ebx
     pop  eax
     pop  edx
-
     je   .Ret
-
     push edx
     push eax
     push ebx
-
     ; check -SPAWN exists
     call GetCommandLineA
-
     mov  edx,str_arg_Spawn
     call _stristr
     test eax,eax
-
     pop  ebx
     pop  eax
     pop  edx
-
-    JNE  .Ret
-
+    jne  .Ret
     call Play_Intro
-
 .Ret:
     jmp  0x004F435D
+@ENDHACK
 
-_Extra_Sneak_Peaks:
+
+@HACK 0x004F5061,0x004F5066,_Extra_Sneak_Peaks
     call _Play_Movie_
-
     Play_Movie 176 ; SIZZLE3.VQA
     Play_Movie 177 ; SIZZLE4.VQA
     Play_Movie 162 ; INTROX.VQA
-
     jmp  0x004F5066
+@ENDHACK
 
-_Start_Scenario_VQName:
-    mov  edi,0
-    jmp  0x0053A1DA
 
-_CCINIClass_Get_VQType:
+;@HACK 0x0053A1D3,0x0053A1DA,_Start_Scenario_VQName ; Not needed apparently, causes campaign to show briefings..
+;    xor  edi,edi
+;    jmp  0x0053A1DA
+;@ENDHACK
 
+
+@HACK 0x004637FF,0x00463804,_CCINIClass_Get_VQType
     xor  ah,ah
     mov  [ebp-8h],ah
-
-    Video_Name_To_Index ALLX2_str, 151
     Video_Name_To_Index ALLX1_str, 150
+    Video_Name_To_Index ALLX2_str, 151
     Video_Name_To_Index ALLX3_str, 152
     Video_Name_To_Index ALLX4_str, 153
     Video_Name_To_Index ALLX2W_str, 154
@@ -183,16 +172,16 @@ _CCINIClass_Get_VQType:
     Video_Name_To_Index TESLATNK_str, 175
     Video_Name_To_Index SIZZLE3_str, 176
     Video_Name_To_Index SIZZLE4_str, 177
-
     jmp  0x00463804
+@ENDHACK
 
-_Play_Movie:
+
+@HACK 0x004A8DE2,_Play_Movie
     movsx eax,al
     movsx edx,dl
     push eax
-
-    Index_To_Video_Name ALLX2_str, 151
     Index_To_Video_Name ALLX1_str, 150
+    Index_To_Video_Name ALLX2_str, 151
     Index_To_Video_Name ALLX3_str, 152
     Index_To_Video_Name ALLX4_str, 153
     Index_To_Video_Name ALLX2W_str, 154
@@ -219,10 +208,12 @@ _Play_Movie:
     Index_To_Video_Name TESLATNK_str, 175
     Index_To_Video_Name SIZZLE3_str, 176
     Index_To_Video_Name SIZZLE4_str, 177
-
     pop  eax
     jmp  0x004A8DE8
+@ENDHACK
 
+
+[section .text] 
 Load_Custom_String:
     pop  esi
     pop  esi

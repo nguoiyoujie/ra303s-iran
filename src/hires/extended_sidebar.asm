@@ -238,7 +238,7 @@ _PowerClass_Draw_It_hires2: ; Draw the whole powerbar graphics with power bar ti
     push 0               ; __int32
     mov  eax,[PowerTileShape]
 ;    mov     eax,[0x006877BC]
-    mov  edx,0
+    xor  edx,edx
     call Conquer___CC_Draw_Shape
 
     mov  dword ecx,[CurrentPowerBarDrawPosition2]

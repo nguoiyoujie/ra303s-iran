@@ -302,8 +302,8 @@ _Send_Statistics_Packet_FIX_BLLx_Info:
 Dword_Swap_Memory:
     Save_Registers
     mov  esi,eax
-    mov  ebx,0
-    mov  edi,0
+    xor  ebx,ebx
+    xor  edi,edi
 
 .Loop:
     lea  eax,[esi]

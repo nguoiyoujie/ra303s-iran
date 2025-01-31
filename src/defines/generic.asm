@@ -23,6 +23,9 @@
 %assign str_Comma                                 0x005E82C5 ; ","
 str_Zero                                          db"0",0
 
+
+%assign str_AftermathIni                          0x005EBB45 ; "AFTRMATH.INI"
+
 %assign str_Name                                  0x005EFFB2 ; "Name"
 %assign str_Side                                  0x005F028D ; "Side"
 %assign str_Color                                 0x005EDE7A ; "Color"
@@ -52,6 +55,7 @@ str_Zero                                          db"0",0
 ;%assign str_Official                              0x005F009F ; "Official"
 
 %assign str_Player                                0x005F0083 ; "Player"
+%assign str_RedAlert                              0x005F0A84 ; "Red Alert"
 
 %assign str_Basic                                 0x005EFFA5 ; "Basic"
 %assign str_General                               0x005EF3EE ; "General"

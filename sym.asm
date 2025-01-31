@@ -59,4 +59,9 @@ setcglob 0x0046247C, CargoClass__Attached_Object ; FootClass * CargoClass::Attac
 
 
 
+
+setcglob 0x005789AC,UnitTypeClass__One_Time    
+
+
+
 setcglob 0x004AE7FC,Fancy_Text_Print 

@@ -17,15 +17,6 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x004D9D3D, _HouseClass__Check_Lower_Power__Override
-@LJMP 0x004D9D90, _HouseClass__Check_Raise_Power__Override
-@LJMP 0x004DA18B, _HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building
-@LJMP 0x004DA2EB, _HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
-@LJMP 0x004DA348, _HouseClass__AI_Building_CheckIncome
-@LJMP 0x004DA391, _HouseClass__AI_Building_Choose
-@LJMP 0x004DE86C, _HouseClass__Find_Cell_In_Zone_Detect_SingleCell
-@LJMP 0x004DE966, _HouseClass__Find_Cell_In_Zone_Force_Clearance
-
 %define UrgencyType.NONE                       0
 %define UrgencyType.LOW                        1
 %define UrgencyType.NORMAL                     2
@@ -39,8 +30,7 @@ Temp.AIBuilding.AirThreat        dd 0
 Temp.FindCell.BuildingIsSingleCell db 0
 
 
-[section .text] 
-_HouseClass__Check_Lower_Power__Override:
+@HACK 0x004D9D3D,0x004D9D43,_HouseClass__Check_Lower_Power__Override
     cmp  dword[Rules.AI.PowerExcess],-1
     jle  .OrginalCode
 .Override:
@@ -49,9 +39,10 @@ _HouseClass__Check_Lower_Power__Override:
 .OrginalCode:
     add  edx,0x12C ; 300
     jmp  0x004D9D43
+@ENDHACK
 
 
-_HouseClass__Check_Raise_Power__Override:
+@HACK 0x004D9D90,0x004D9D95,_HouseClass__Check_Raise_Power__Override
     cmp  dword[Rules.AI.PowerEmergencyMinimum],-1
     jle  .OrginalCode
 .Override:
@@ -60,9 +51,10 @@ _HouseClass__Check_Raise_Power__Override:
 .OrginalCode:
     sub  eax,0x190 ; 400
     jmp  0x004D9D95
+@ENDHACK
 
 
-_HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building:
+@HACK 0x004DA18B,0x004DA1B3,_HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building
     push edi
     xor  edi,edi
 .Repeat:    
@@ -90,16 +82,17 @@ _HouseClass__AI_Lower_Power__Use_Any_Power_Positive_Building:
 .Done:
     pop  edi
     jmp  0x004DA1C6
+@ENDHACK
 
 
-
-_HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building:
+@HACK 0x004DA2EB,0x004DA2F1,_HouseClass__AI_Building_Break_If_BaseBuilding_Has_Building
 ; If there is Base and AutoBase, Base takes priority
     mov  byte[ecx+HouseClass.Offset.BuildStructure],al
     jmp  0x04DB7D9 ; skip AutoBuilding
+@ENDHACK
 
 
-_HouseClass__AI_Building_CheckIncome:
+@HACK 0x004DA348,0x004DA36A,_HouseClass__AI_Building_CheckIncome
     ; ecx = HouseClass
     ; set edi to 1 if there is income, 0 otherwise
     mov  esi,eax
@@ -148,16 +141,16 @@ _HouseClass__AI_Building_CheckIncome:
     pop  edx
     pop  esi
     jmp  0x004DA36C
+@ENDHACK
 
 
-_HouseClass__AI_Building_Choose:
+@HACK 0x004DA391,0x004DA396,_HouseClass__AI_Building_Choose
     ; ecx: House class
     cmp  byte[Rules.AI.UseNewBuildingAI],1
     je   .CheckRefinery
 .OrginalCode:
 	mov  eax,0x12 
     jmp  0x004DA396
-
 
 .CheckRefinery:
     mov  ebx,dword[ecx+HouseClass.Offset.IsTiberiumShort]
@@ -439,10 +432,10 @@ _HouseClass__AI_Building_Choose:
 
 .Done:
     jmp  0x004DB78F ; pass back to main code to handle BuildChoice heap
+@ENDHACK
 
 
-
-
+[section .text]
 GetRandomBuildingWithinAILimit:
     ; eax: AIBuildType
     ; ecx: House class
@@ -670,7 +663,7 @@ ChooseOneToBuildAlloc:
     retn
 
 
-_HouseClass__Find_Cell_In_Zone_Detect_SingleCell:
+@HACK 0x004DE86C,0x004DE872,_HouseClass__Find_Cell_In_Zone_Detect_SingleCell
     call [ebx+0x84]
     mov  byte[Temp.FindCell.BuildingIsSingleCell],0
     cmp  byte[Rules.AI.ForceSingleTileClearing],1
@@ -690,9 +683,10 @@ _HouseClass__Find_Cell_In_Zone_Detect_SingleCell:
     jmp  0x004DE872  
 .Done:
     jmp  0x004DE872   
+@ENDHACK
 
 
-_HouseClass__Find_Cell_In_Zone_Force_Clearance:
+@HACK 0x004DE966,0x004DE97A,_HouseClass__Find_Cell_In_Zone_Force_Clearance
     mov  edx,ebx
     mov  eax,edi
     call TechnoTypeClass__Legal_Placement
@@ -762,3 +756,4 @@ _HouseClass__Find_Cell_In_Zone_Force_Clearance:
 .DoneCantPlace:
     mov  [ebp-0x2c],eax
     jmp  0x004DE8D0
+@ENDHACK

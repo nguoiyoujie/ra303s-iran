@@ -10,9 +10,4 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-
-@LJMP 0x004FE495, _MapClass_Sight_From_NoIncremental
-
-_MapClass_Sight_From_NoIncremental:
-    jmp  0x004FE4B5
-
+@SJMP 0x004FE495,0x004FE4B5 ; _MapClass_Sight_From_NoIncremental

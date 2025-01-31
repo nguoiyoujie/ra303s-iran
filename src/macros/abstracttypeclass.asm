@@ -67,7 +67,7 @@ str.AbstractTypeClass.StringTableName           db"DefaultMission",0      ;inter
     push eax
     push edx
 
-    mov  edx,0
+    xor  edx,edx
     mov  eax,%1
 
   %%loop:

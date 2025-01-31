@@ -6,7 +6,7 @@
 .Check_EvacInMP_Keyword:
     cmp  byte[Rules.General.EvacInMP],1
     jz   .Normal_Function
-    mov  eax,0
+    xor  eax,eax
     retn
 .Normal_Function:
     push ebp

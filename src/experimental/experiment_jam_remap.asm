@@ -10,11 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0056718C, _TechnoClass__TechnoDrawObject_RemapJammedAsShade
-; the current method in this hook prevents selling/deconstruction. Weird things could also happen if building has special animations like a war factory
-;@LJMP 0x0046033B, _BuildingClass__Animation_AI_FreezeJammed
-@LJMP 0x004603B2, _BuildingClass__Animation_AI_AlwaysUpdateJammable
-
+%define FadingJammed 0x006562e0 ; FadingWayDark
 ; FadingBrighten  0x006560e0
 ; FadingShade     0x006561e0
 ; FadingWayDark   0x006562e0
@@ -24,7 +20,7 @@
 ; FadingRed       0x006566e0
 
 ; find a way to always refresh
-_TechnoClass__TechnoDrawObject_RemapJammedAsShade:
+@HACK 0x0056718C,0x00567194,_TechnoClass__TechnoDrawObject_RemapJammedAsShade
     cmp  al,RTTIType.Infantry
     jz   0x00567194
     cmp  al,RTTIType.Building
@@ -37,18 +33,23 @@ _TechnoClass__TechnoDrawObject_RemapJammedAsShade:
     ;movzx eax,al
     test byte[eax+0xd7],0x10 ;Jammed
     jz   0x00567242
-    mov dword[ebp - 0x24],0x006561E0 ;FadingShade
+    mov dword[ebp - 0x24],FadingJammed
     jmp  0x00567242
+@ENDHACK
 
-_BuildingClass__Animation_AI_FreezeJammed:
-    test byte[ebx+0xd7],0x10
-    jnz  0x004605FE
-    cmp  eax,ecx
-    jnc  0x00460343
-    sub  ecx,eax
-    jmp  0x00460347
 
-_BuildingClass__Animation_AI_AlwaysUpdateJammable:
+; the current method in this hook prevents selling/deconstruction. Weird things could also happen if building has special animations like a war factory
+;@HACK 0x0046033B,_BuildingClass__Animation_AI_FreezeJammed
+;    test byte[ebx+0xd7],0x10
+;    jnz  0x004605FE
+;    cmp  eax,ecx
+;    jnc  0x00460343
+;    sub  ecx,eax
+;    jmp  0x00460347
+;@ENDHACK
+
+
+@HACK 0x004603B2,0x004603B7,_BuildingClass__Animation_AI_AlwaysUpdateJammable
     ; eax is the building type ID
     push ebx
     push ecx
@@ -63,3 +64,4 @@ _BuildingClass__Animation_AI_AlwaysUpdateJammable:
     cmp  eax,0xf
     jnz  0x004603CB
     jmp  0x004603B7
+@ENDHACK

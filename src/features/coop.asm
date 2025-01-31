@@ -102,7 +102,7 @@ _Read_Scenario_INI__Read_Is_Coop_Mode_Option:
 
     mov  edx,str_Basic; "Basic"
     mov  ebx,str_IsCoopMode
-    mov  ecx,0
+    xor  ecx,ecx
     lea  eax,[ebp-0x8C] ; Scenario INI file
     call INIClass__Get_Bool
 

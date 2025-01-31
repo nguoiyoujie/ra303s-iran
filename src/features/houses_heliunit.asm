@@ -6,15 +6,13 @@
 ; This function is enabled by setting [HouseType] > HeliUnit
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00459FA4, _BuildingClass__Grand_Opening_HeliUnit_Unhardcode
-@LJMP 0x0045A049, _BuildingClass__Grand_Opening_HeliUnit_Unhardcode2
 
 [section .data] 
 Temp.HeliUnit db 0
 
 
 [section .text] 
-_BuildingClass__Grand_Opening_HeliUnit_Unhardcode:
+@HACK 0x00459FA4,0x00459FF6,_BuildingClass__Grand_Opening_HeliUnit_Unhardcode
     ;mov  eax,[eax+0x41] ; ActLike
     ;movzx eax,al
     push edi
@@ -41,9 +39,11 @@ _BuildingClass__Grand_Opening_HeliUnit_Unhardcode:
     pop  edi
     mov  byte[Temp.HeliUnit],al
     jmp  0x00459FF6
+@ENDHACK
 
 
-_BuildingClass__Grand_Opening_HeliUnit_Unhardcode2:
+@HACK 0x0045A049,0x0045A04E,_BuildingClass__Grand_Opening_HeliUnit_Unhardcode2
     mov  dl,byte[Temp.HeliUnit]
     movzx edx,dl
     jmp  0x0045A04E
+@ENDHACK

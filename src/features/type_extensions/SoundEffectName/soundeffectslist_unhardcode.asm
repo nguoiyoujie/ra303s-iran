@@ -24,7 +24,7 @@ extern Audio___SoundEffectName
     jl   0x00425CC8
 .Check_Unharded_Sound_Effects:
     mov  word[ebp-0x10],0
-    mov  ecx,0
+    xor  ecx,ecx
     cmp  word[SoundEffects.Count],0
     jz   .Ret_False
     jmp  .Loop

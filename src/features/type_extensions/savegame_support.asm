@@ -157,7 +157,7 @@ _Get_Savefile_Info_Is_Old_Savegame:
 %macro    Clear_Memory 3
     mov  eax,%1
     add  eax,%3
-    mov  edx,0
+    xor  edx,edx
     mov  ebx,%2-%3
 
     call 0x005C4E50 ; memset_

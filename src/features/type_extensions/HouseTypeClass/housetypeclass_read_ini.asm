@@ -8,7 +8,6 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
-
 ;Read INI settings
 @HACK 0x004CD36F,0x004CD374,_HouseTypeClass__Read_INI_Extended
     push esi

@@ -32,7 +32,7 @@ _Side_From_Country_Savegames:
     je   .Return_Soviet
 
 .Return_Allies:
-    mov  eax,0
+    xor  eax,eax
     retn
 
 .Return_Soviet:

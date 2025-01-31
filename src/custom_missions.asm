@@ -104,7 +104,7 @@ _Custom_Missions_Enable_Expansion_Missions_Button:
     cmp  eax,1
     jz   .Return_True
 
-    mov  eax,0
+    xor  eax,eax
     jmp  0x00501DE0
 
 .Return_True:
@@ -207,7 +207,7 @@ _Custom_Missions_Amount_To_Read:
     jmp  0x004BE54D
 
 .Not_Custom_Missions_Dialog:
-    mov  ebx,0
+    xor  ebx,ebx
 
     call 0x004BE090 ;  Expansion_CS_Present(void)
     cmp  eax,1

@@ -149,7 +149,7 @@
 ;End
 ; move array pointer at 0x006018B0 to new location
     mov  eax,dword[0x006018B0]
-    mov  ecx,0
+    xor  ecx,ecx
 .Fill:
     mov  edx,dword[eax+ecx*4]
     mov  dword[HouseTypeClass.DestructorPtrs+ecx*4],edx
