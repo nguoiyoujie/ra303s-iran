@@ -9,15 +9,15 @@
 %define WarheadTypeClass.Offset.ID                        0x000    ; INT // ID
 %define WarheadTypeClass.Offset.IniName                   0x004    ; INT PTR to STRING
 %define WarheadTypeClass.Offset.SpreadFactor              0x008    ; INT
-%define WarheadTypeClass.Offset.IsWallDestroyer           0x00c    ; BOOL // Already supported by game INI
+%define WarheadTypeClass.Offset.IsWallDestroyer           0x00C    ; BOOL // Already supported by game INI
 %define WarheadTypeClass.Bit.IsWallDestroyer              1    
-%define WarheadTypeClass.Offset.IsWoodDestroyer           0x00c    ; BOOL // Already supported by game INI
+%define WarheadTypeClass.Offset.IsWoodDestroyer           0x00C    ; BOOL // Already supported by game INI
 %define WarheadTypeClass.Bit.IsWoodDestroyer              2    
-%define WarheadTypeClass.Offset.IsTiberiumDestroyer       0x00c    ; BOOL // Already supported by game INI
+%define WarheadTypeClass.Offset.IsTiberiumDestroyer       0x00C    ; BOOL // Already supported by game INI
 %define WarheadTypeClass.Bit.IsTiberiumDestroyer          3    
-%define WarheadTypeClass.Offset.IsOrganic                 0x00c    ; BOOL// Already supported by game INI
+%define WarheadTypeClass.Offset.IsOrganic                 0x00C    ; BOOL// Already supported by game INI
 %define WarheadTypeClass.Bit.IsOrganic                    4    
-; 0x00d, 0x00e and 0x00f are empty
+; 0x00D, 0x00E and 0x00F are empty
 
 ;%define WarheadTypeClass.Offset.ExplosionAnim             0x00D    ; new, animation override, byte
 %define WarheadTypeClass.Offset.ExplosionSet              0x00E    ; moved, and use byte // was INT, 0x01A // Already supported by game INI

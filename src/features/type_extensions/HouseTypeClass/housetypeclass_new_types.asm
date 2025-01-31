@@ -15,7 +15,7 @@
 
 @HACK 0x004CB760,0x004CB76A,_HouseTypeClass__AddNewHouseTypes
 ;Multi9
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x14 ;ID
     push 0
@@ -26,7 +26,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi10
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x15 ;ID
     push 0
@@ -37,7 +37,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi11
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x16 ;ID
     push 0
@@ -48,7 +48,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi12
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x17 ;ID
     push 0
@@ -59,7 +59,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi13
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x18 ;ID
     push 0
@@ -70,7 +70,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi14
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x19 ;ID
     push 0
@@ -81,7 +81,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi15
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1A ;ID
     push 0
@@ -92,7 +92,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi16
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1B ;ID
     push 0
@@ -103,7 +103,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi17
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1C ;ID
     push 0
@@ -114,7 +114,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi18
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1D ;ID
     push 0
@@ -125,7 +125,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi19
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1E ;ID
     push 0
@@ -136,7 +136,7 @@
     mov  dword[0x006018B4],edx
     call HouseTypeClass__HouseTypeClass
 ;Multi20
-    push 0x4d
+    push 0x4D
     push 0x7
     mov  edx,0x1F ;ID
     push 0

@@ -1271,7 +1271,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x005D1801,0x005D1807,_Receive_Remote_File_Caption
-    mov  ebx,0x6e
+    mov  ebx,0x6E
     add  ebx,[Hires.DeltaTop]
     mov  edx,0x50
     add  edx,[Hires.DeltaLeft]
@@ -1281,7 +1281,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x005D17F3,0x005D17F9,_Receive_Remote_File_Dialog
-    mov  edx,0x6e
+    mov  edx,0x6E
     add  edx,[Hires.DeltaTop]
     mov  eax,0x78
     add  eax,[Hires.DeltaLeft]
@@ -1349,7 +1349,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x005D215C,0x005D2164,_Send_Remote_File_Caption
-    mov  ebx,0x6e
+    mov  ebx,0x6E
     add  ebx,[Hires.DeltaTop]
     mov  edx,0x50
     add  edx,[Hires.DeltaLeft]
@@ -1359,7 +1359,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x005D214E,0x005D2154,_Send_Remote_File_Dialog
-    mov  edx,0x6e
+    mov  edx,0x6E
     add  edx,[Hires.DeltaTop]
     mov  eax,0x50
     add  eax,[Hires.DeltaLeft]
@@ -1824,7 +1824,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x0050B97D,0x0050B98E,_hires_Net_New_Dialog_OK_Button
-    mov  edx,0x16e
+    mov  edx,0x16E
     add  edx,[Hires.DeltaTop]
     push edx
     mov  edx,0x38
@@ -1840,7 +1840,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
     mov  eax,0x10
     add  eax,[Hires.DeltaTop]
     push eax
-    mov  edx,0x9a
+    mov  edx,0x9A
     add  edx,[Hires.DeltaLeft]
     push edx
     jmp  0x0050C2AB
@@ -1904,18 +1904,18 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 @HACK 0x00506931,0x0050693D,_hires_Net_Join_Dialog
     mov  ecx,[Hires.DeltaLeft]
-    mov  [ebp-0x1d4],ecx
+    mov  [ebp-0x1D4],ecx
     mov  ecx,[Hires.DeltaTop]
-    mov  [ebp-0x1d0],ecx
+    mov  [ebp-0x1D0],ecx
     jmp  0x0050693D
 @ENDHACK
 
 
 @HACK 0x00506BDC,0x00506BE7,_hires_Net_Join_Name_Box
-    mov  eax,0x1f
+    mov  eax,0x1F
     add  eax,[Hires.DeltaTop]
     push eax
-    mov  eax,0x5a
+    mov  eax,0x5A
     add  eax,[Hires.DeltaLeft]
     push eax
     mov  eax,dword[0x601694]
@@ -1959,7 +1959,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
 
 
 @HACK 0x00506E0C,0x00506E1A,_hires_Net_Join_Static_Button
-    mov  eax,0x1f
+    mov  eax,0x1F
     add  eax,[Hires.DeltaTop]
     push eax
     mov  eax,0x20
@@ -1997,7 +1997,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
     mov  esi,0x12
     add  esi,[Hires.DeltaTop]
     push esi
-    mov  edi,0xa0
+    mov  edi,0xA0
     add  edi,[Hires.DeltaLeft]
     push edi
     jmp  0x0050778A
@@ -2019,7 +2019,7 @@ str_blackbackgroundpcx  db"BLACKBACKGROUND.PCX",0
     mov  esi,0x12
     add  esi,[Hires.DeltaTop]
     push esi
-    mov  edi,0x1f0
+    mov  edi,0x1F0
     add  edi,[Hires.DeltaLeft]
     push edi
     jmp  0x005077D0

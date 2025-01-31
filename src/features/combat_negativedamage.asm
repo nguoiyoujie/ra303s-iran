@@ -35,14 +35,14 @@ _Combat_Modify_Damage_NegativeDamage_Always_Count3:
     xor  edx,edx
     mov  eax,ecx
     cdq  ;sign extend to 64-bit edx:eax
-    sar  ecx,0x1f
+    sar  ecx,0x1F
     idiv ebx
     pop  edx
     jmp  0x004A328E
 
 _Combat_Modify_Damage_NegativeDamage_Always_Count4:
 ; do not subject negative values to MinDamage or MaxDamage, since that will truncate it to MinDamage
-    sar  dl,0x1f
+    sar  dl,0x1F
     push edx
     xor  edx,edx
     cdq  ;sign extend to 64-bit edx:eax
@@ -68,4 +68,4 @@ _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons:
     jl   0x00564524
     mov  ebx,dword[ecx+0x11]
     mov  eax,ecx
-    jmp  0x0056451c
+    jmp  0x0056451C

@@ -12,7 +12,7 @@
 
 @HACK 0x00461C3F,0x00461C53,_BulletClass__Unlimbo_Recalc_BallisticScatter
     ;eax is the distance
-    ;[ebp-0x1c] is speed
+    ;[ebp-0x1C] is speed
     ;We seek to calculate the Riser stat that determines the initial vertical speed.
     ;This speed decreases by Rule.Gravity every frame.
     ; The desired formula is R0 = g*(D-s)/2s
@@ -36,7 +36,7 @@
 ;@LJMP 0x004619E7,_BulletClass__Unlimbo_IncreaseScatter_BallisticScatter
 ;_BulletClass__Unlimbo_IncreaseScatter_BallisticScatter:
 ;    mov  edx,eax
-;    sar  edx,0x1f
+;    sar  edx,0x1F
 ;    shl  edx,0x4   ; was 4
 ;    sbb  eax,edx
 ;    sar  eax,0x1   ; was 4
@@ -47,7 +47,7 @@
 ;@LJMP 0x00461A50,_BulletClass__Unlimbo_IncreaseScatter_HomingScatter
 ;_BulletClass__Unlimbo_IncreaseScatter_HomingScatter:
 ;    mov  edx,eax
-;    sar  edx,0x1f
+;    sar  edx,0x1F
 ;    shl  edx,0x4   ; was 4
 ;    sbb  eax,edx
 ;    sar  eax,0x2   ; was 4

@@ -282,7 +282,7 @@ _Main_Game_AutoExit:
     xor  eax,eax
 	jmp  .Ret
 .SetCloseNextTime:
-    mov  byte[closegamestate],0xff
+    mov  byte[closegamestate],0xFF
 .SelectGame:
     mov  eax,[0x005FEDBC] 
     call Init___Select_Game

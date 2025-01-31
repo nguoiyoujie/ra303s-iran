@@ -334,7 +334,7 @@ _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck:
     jz   .Next
 
 .FindBuilding:
-    mov  ebx,0xffffffff
+    mov  ebx,0xFFFFFFFF
     mov  edx,esi
     mov  eax,dword[ebp-0x28]
     call HouseClass__Find_Building

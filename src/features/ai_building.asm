@@ -304,7 +304,7 @@ Temp.FindCell.BuildingIsSingleCell db 0
 
 .CheckAADefense:
     ; check 'enemy' if it has airforce
-    mov  eax,dword[ebp-0x1b]
+    mov  eax,dword[ebp-0x1B]
     sar  eax,0x18
     call HouseClass__As_Pointer
     test eax,eax
@@ -751,9 +751,9 @@ ChooseOneToBuildAlloc:
     test eax,eax
     jz   .DoneCantPlace
 .Done:
-    mov  [ebp-0x2c],eax
+    mov  [ebp-0x2C],eax
     jmp  0x004DE97A
 .DoneCantPlace:
-    mov  [ebp-0x2c],eax
+    mov  [ebp-0x2C],eax
     jmp  0x004DE8D0
 @ENDHACK

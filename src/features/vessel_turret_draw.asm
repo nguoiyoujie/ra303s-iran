@@ -67,14 +67,14 @@ Temp.VesselTypeObject      dd    0
     add  al,0x80
     neg  cl
 .ForwardOffset:
-    lea  edx,[ebp-0xc] 
+    lea  edx,[ebp-0xC] 
     mov  bl,al
     lea  eax,[ebp-0x10]
     call 0x004AC870 ; Normal_Move_Point
     mov  eax,dword[ebp-0x12]
     sar  eax,0x10
     mov  dword[esi],eax
-    mov  eax,dword[ebp-0xe]
+    mov  eax,dword[ebp-0xE]
     sar  eax,0x10
     VesselTypeClass.TurretAdjustY.Get(edi,ecx)
     add  eax,ecx
@@ -90,7 +90,7 @@ Temp.VesselTypeObject      dd    0
     VesselTypeClass.FromIndex(ebx,edi)
     ; check IsSecondShot
     mov  al,byte[ecx+0x72]
-    mov  dl,byte[ecx+0xba] ; PrimaryFacing
+    mov  dl,byte[ecx+0xBA] ; PrimaryFacing
     test al,0x10 ; IsSecondShot
     jz   .FirstShot
     VesselTypeClass.HasSecondTurret.Get(edi,bl) ; modifies eax
@@ -100,7 +100,7 @@ Temp.VesselTypeObject      dd    0
     add  dl,0x80
 .FirstShot:
     pop  eax
-    and  edx,0xff
+    and  edx,0xFF
     VesselTypeClass.TurretFireOffset.Get(edi,ebx)
     call 0x004AC798 ; Coord_Move
     TechnoTypeClass.VerticalOffset.Get(edi,ebx)

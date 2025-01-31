@@ -158,7 +158,7 @@
 @ENDHACK
 
 
-; 0x80 = shooting southward, 0x00 = shooting northward, 0xc0 = westward, 0x40 = eastward
+; 0x80 = shooting southward, 0x00 = shooting northward, 0xC0 = westward, 0x40 = eastward
 @HACK 0x0056277D,0x00562782,_TechnoClass_In_Range_Long_Int_Distance_Check_Patched ; Check during actual firing
     cmp  byte[Spawn.Settings.SouthAdvantageFix],0
     jz   .Normal_Code
@@ -178,7 +178,7 @@
 .Dont_Patch_South_Range:
     cmp  byte[ecx],5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
-    cmp  byte[ecx+0xcd],0x1f
+    cmp  byte[ecx+0xCD],0x1F
     push eax
     jz   .Tesla_Coil_Adjustments
     pop  eax
@@ -233,7 +233,7 @@
 .Dont_Patch_South_Range:
     cmp  byte[esi],5 ; Check for building
     jnz  .Merge_Point ; If not building goto Merge_Point
-    cmp  byte[esi+0xcd],0x1f
+    cmp  byte[esi+0xCD],0x1F
     push eax
     jz   .Tesla_Coil_Adjustments
     pop  eax

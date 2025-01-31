@@ -30,10 +30,10 @@
 
 
 ; Warning stack manipulation!
-@SET 0x004DB7F4,{sub esp,0x5e8} ; was 0xE8, add 0x200 to hold counter[UNIT_COUNT] (0x400) and bestlist[UNIT_COUNT] (0x100)
+@SET 0x004DB7F4,{sub esp,0x5E8} ; was 0xE8, add 0x200 to hold counter[UNIT_COUNT] (0x400) and bestlist[UNIT_COUNT] (0x100)
 ; this section deals with the AI with Teams
 @SET 0x004DB880,{mov ebx,0x500} ; was 0x58, for, memset
-@SET 0x004DB885,{lea eax,[ebp-0x5FC]} ; 0xfffffa04 ; was 0xffffff04
+@SET 0x004DB885,{lea eax,[ebp-0x5FC]} ; 0xFFFFFA04 ; was 0xFFFFFF04
 @SET 0x004DB969,{mov dword[ebp+ebx*4-0x5FC],1}
 @SET 0x004DBA40,{mov esi,dword[ebp+ebx-0x5FC]}
 @SET 0x004DBA6D,{mov dword[ebp+ecx*4-0x5FC],ebx}
@@ -43,7 +43,7 @@
 @SET 0x004DBB9D,{cmp esi,dword[ebp+eax*4-0x5FC]}
 @SET 0x004DBBAE,{mov esi,dword[ebp+eax*4-0x5FC]}
 ; this section deals with the AI with BaseBuilding, to include the additional units in its random building roster
-@SET 0x004DBC45,{mov dword[ebp+eax*4-0x4FC],0x14} ; 0xfffffb04 ; was 0xffffff5c
+@SET 0x004DBC45,{mov dword[ebp+eax*4-0x4FC],0x14} ; 0xFFFFFB04 ; was 0xFFFFFF5C
 @SET 0x004DBC58,{mov dword[ebp+eax*4-0x4FC],0x1}
 @SET 0x004DBC6B,{mov dword[ebp+eax*4-0x4FC],edi}
 @SET 0x004DBC78,{mov ecx,dword[ebp+eax*4-0x4FC]}
@@ -147,17 +147,17 @@ _HouseClass__AI_Unit_PickHarvester:
     pop  eax
     ja   0x004DB873
     mov  byte[edx+HouseClass.Offset.BuildUnit],al
-    mov  eax,0xf
+    mov  eax,0xF
     jmp  0x004DB86E
 
 
 _HouseClass__AI_Unit_Extend_BestList_1:
     mov  al,byte[ebp-0x18]
-    mov  byte[ecx+ebp*0x1 - 1533],al  ; was -0x4d
+    mov  byte[ecx+ebp*0x1 - 1533],al  ; was -0x4D
     jmp  0x004DBBBD
 
 _HouseClass__AI_Unit_Extend_BestList_2:
-    mov  al,byte[eax+ebp*0x1 - 1532] ; was -0x4c
+    mov  al,byte[eax+ebp*0x1 - 1532] ; was -0x4C
     mov  byte[edx+HouseClass.Offset.BuildUnit],al
     jmp  0x004DBCF6 ; skip AutoBase
 
@@ -192,7 +192,7 @@ _HouseClass__AI_Unit_Ignore_Harvesters:
 
 
 _HouseClass__AI_Unit_Set_Weight:
-    mov  eax,dword[ebp-0x1f]
+    mov  eax,dword[ebp-0x1F]
     shr  eax,0x18
     ; HouseClass us ebp-0x20
     push ebx 

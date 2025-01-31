@@ -469,7 +469,7 @@ _DriveClass__Assign_Destination_Refinery_Unhardcode:
 
 _TechnoClass__Find_Docking_Bay_UseInitBuilding:
     mov  edx,dword[Temp.FindDockingBayInitBuilding]
-    mov  dword[ebp-0x1c],edx
+    mov  dword[ebp-0x1C],edx
     mov  edx,dword[ebp-0x13]
     jmp  0x0056903F
 
@@ -477,12 +477,12 @@ _TechnoClass__Find_Docking_Bay_UseInitBuilding:
 _TechnoClass__Find_Docking_Bay_RecalcBestValue:
 ; edi originally -1
     xor  edx,edx
-    cmp  dword[ebp-0x1c],0
+    cmp  dword[ebp-0x1C],0
     je   .Done
     push esi
     push eax
     push edx
-    mov  eax,dword[ebp-0x1c]
+    mov  eax,dword[ebp-0x1C]
     mov  edx,dword[eax+0x11]
     call dword[edx+0x10] ; Coord (Building)
     mov  edx,eax

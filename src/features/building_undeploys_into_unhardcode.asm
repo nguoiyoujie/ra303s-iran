@@ -16,7 +16,7 @@
 
 @LJMP 0x0045C1F8,_BuildingClass_Mission_Deconstruct_MCVUnhardcode1
 @LJMP 0x0045C51C,_BuildingClass_Mission_Deconstruct_MCVUnhardcode2
-@LJMP 0x0045c5BB,_BuildingClass_Mission_Deconstruct_MCVUnhardcode3
+@LJMP 0x0045C5BB,_BuildingClass_Mission_Deconstruct_MCVUnhardcode3
 
 @LJMP 0x0045EAEC,_BuildingClass_Can_Player_Move_ConYardUnhardcode
 

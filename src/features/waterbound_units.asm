@@ -14,13 +14,13 @@
 @LJMP 0x0057C568,_UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units
 
 _UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units:
-    test byte[ebx+0xcd],0x80  
+    test byte[ebx+0xCD],0x80  
     jnz  0x0057C5EF
     push eax
     push ebx
     push edx
     push edi
-    mov  edx,dword[ebx+0x15c]
+    mov  edx,dword[ebx+0x15C]
     movzx edx,dl
     UnitTypeClass.FromIndex(edx,edi)
     TechnoTypeClass.Speed.Get(edi,dl) 

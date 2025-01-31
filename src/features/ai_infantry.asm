@@ -17,32 +17,32 @@
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
 
 
-@SET 0x004DC160,{sub esp,0x72c} ; was 0x12c, add 0x600 to hold counter[INFANTRY_COUNT] (0x500) and bestlist[INFANTRY_COUNT] (0x100)
+@SET 0x004DC160,{sub esp,0x72C} ; was 0x12C, add 0x600 to hold counter[INFANTRY_COUNT] (0x500) and bestlist[INFANTRY_COUNT] (0x100)
 @SET 0x004DC195,{mov ebx,0x600} ; was 0x68,for memset
-@SET 0x004DC19A,{lea eax,[ebp-0x6bc]} ; 0xfffff944 ; was 0xffffff44
-@SET 0x004DC282,{lea ebx,[ebp+ebx*4-0x6bc]}
-@SET 0x004DC363,{lea esi,[ebp+edx-0x6bc]}
-@SET 0x004DC37F,{mov dword[ebp+edx-0x6bc],esi}
-@SET 0x004DC3A8,{mov dword[ebp+ebx*4-0x6bc],edx}
-@SET 0x004DC3D0,{cmp dword[ebp+eax*4-0x6bc],0}
-@SET 0x004DC404,{dec dword[ebp+eax*4-0x6bc]}
-@SET 0x004DC47E,{cmp dword[ebp+eax*4-0x6bc],0}
-@SET 0x004DC4EE,{cmp esi,dword[ebp+eax*4-0x6bc]}
-@SET 0x004DC4FF,{mov esi,dword[ebp+eax*4-0x6bc]}
+@SET 0x004DC19A,{lea eax,[ebp-0x6BC]} ; 0xFFFFF944 ; was 0xFFFFFF44
+@SET 0x004DC282,{lea ebx,[ebp+ebx*4-0x6BC]}
+@SET 0x004DC363,{lea esi,[ebp+edx-0x6BC]}
+@SET 0x004DC37F,{mov dword[ebp+edx-0x6BC],esi}
+@SET 0x004DC3A8,{mov dword[ebp+ebx*4-0x6BC],edx}
+@SET 0x004DC3D0,{cmp dword[ebp+eax*4-0x6BC],0}
+@SET 0x004DC404,{dec dword[ebp+eax*4-0x6BC]}
+@SET 0x004DC47E,{cmp dword[ebp+eax*4-0x6BC],0}
+@SET 0x004DC4EE,{cmp esi,dword[ebp+eax*4-0x6BC]}
+@SET 0x004DC4FF,{mov esi,dword[ebp+eax*4-0x6BC]}
 
 ; this section deals with the AI with BaseBuilding, to include the additional units in its random building roster
-@SET 0x004DC5B5,{mov dword[ebp+ecx-0x5bc],eax} ; 0xfffffa44
-@SET 0x004DC638,{mov dword[ebp+ecx-0x5bc],3}
-@SET 0x004DC643,{cmp dword[ebp+ecx-0x5bc],0}
-@SET 0x004DC650,{mov byte[ebp+ecx-0x5bd],al} ; -1
-@SET 0x004DC65A,{mov eax,dword[ebp+ecx-0x5bc]}
-@SET 0x004DC66C,{mov dword[ebp+ecx-0x5bc],5}
-@SET 0x004DC679,{mov dword[ebp+ecx-0x5bc],2}
-@SET 0x004DC6B7,{mov dword[ebp+ecx-0x5bc],edx}
-@SET 0x004DC6E5,{mov dword[ebp+ecx-0x5bc],edx}
-@SET 0x004DC6F3,{mov dword[ebp+ecx-0x5bc],eax}
-@SET 0x004DC745,{mov ecx,dword[ebp+eax-0x5bc]}
-@SET 0x004DC753,{mov al,byte[ebp+eax-0x5bd]} ; -1
+@SET 0x004DC5B5,{mov dword[ebp+ecx-0x5BC],eax} ; 0xFFFFFA44
+@SET 0x004DC638,{mov dword[ebp+ecx-0x5BC],3}
+@SET 0x004DC643,{cmp dword[ebp+ecx-0x5BC],0}
+@SET 0x004DC650,{mov byte[ebp+ecx-0x5BD],al} ; -1
+@SET 0x004DC65A,{mov eax,dword[ebp+ecx-0x5BC]}
+@SET 0x004DC66C,{mov dword[ebp+ecx-0x5BC],5}
+@SET 0x004DC679,{mov dword[ebp+ecx-0x5BC],2}
+@SET 0x004DC6B7,{mov dword[ebp+ecx-0x5BC],edx}
+@SET 0x004DC6E5,{mov dword[ebp+ecx-0x5BC],edx}
+@SET 0x004DC6F3,{mov dword[ebp+ecx-0x5BC],eax}
+@SET 0x004DC745,{mov ecx,dword[ebp+eax-0x5BC]}
+@SET 0x004DC753,{mov al,byte[ebp+eax-0x5BD]} ; -1
 
 ; convert sar eax,18 to shr eax,18
 @SET 0x004DC5BF,{shr eax,0x18} 

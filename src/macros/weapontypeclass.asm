@@ -16,7 +16,7 @@
 %define WeaponTypeClass.Bit.IsCamera                     3    
 %define WeaponTypeClass.Offset.IsElectric                0x008    ; BOOL // Already supported by game INI
 %define WeaponTypeClass.Bit.IsElectric                   4    
-; 0x009, 0x00a and 0x00b are empty
+; 0x009, 0x00A and 0x00B are empty
 %define WeaponTypeClass.Offset.ChargeSound               0x00A    ; word
 
 %define WeaponTypeClass.Offset.Burst                     0x00C    ; INT (0,1)
@@ -24,7 +24,7 @@
 %define WeaponTypeClass.Offset.Damage                    0x014    ; INT
 %define WeaponTypeClass.Offset.MaxSpeed                  0x018    ; byte
 %define WeaponTypeClass.Offset.WarheadPtr                0x019    ; INT PTR
-%define WeaponTypeClass.Offset.ROF                       0x01d    ; INT
+%define WeaponTypeClass.Offset.ROF                       0x01D    ; INT
 %define WeaponTypeClass.Offset.Range                     0x021    ; word
 %define WeaponTypeClass.Offset.Sound                     0x023    ; word
 %define WeaponTypeClass.Offset.Anim                      0x025    ; byte

@@ -86,16 +86,16 @@ _UnitClass_Mission_Guard_MCVUnhardcode:
 
 
 _UnitClass_Mission_Unload_IsRotating_IsDriving_Check:
-    test byte[eax+0xcd],0xC0 ; originally only IsDriving is checked.
+    test byte[eax+0xCD],0xC0 ; originally only IsDriving is checked.
     jmp  0x0057D9AD
 
 _UnitClass_Mission_Unload_DeploysInto_Status2_Check:
-    test byte[eax+0xcd],0x10
+    test byte[eax+0xCD],0x10
     jnz  .StillDeploying
     jmp  0x0057DA66
 
 .StillDeploying:
-    mov  dword[eax+0x2a],0x1 ; allow the code to try again
+    mov  dword[eax+0x2A],0x1 ; allow the code to try again
     jmp  0x0057DAB0
 
 

@@ -20,11 +20,11 @@ temp.Whom     dd 0
     mov  dword ebx,[esi+0x11]
     mov  edx,0x2 ;MARK_CHANGE
     mov  eax,esi
-    call dword[ebx+0x9c] ;Mark()
+    call dword[ebx+0x9C] ;Mark()
     mov  dword ebx,[esi+0x11]
     mov  edx,0x9 ; MISSION_HARVEST
     mov  eax,esi
-    call dword[ebx+0xfc] ;Assign_Mission()
+    call dword[ebx+0xFC] ;Assign_Mission()
     mov  al,0x5 ; RADIO_ATTACH
     jmp  0x00454CA7
 @ENDHACK
@@ -35,9 +35,9 @@ temp.Whom     dd 0
 
 
 @HACK 0x0057BD69,0x0057BD72,_UnitClass_PerCellProcess_Save_Contact_With_Whom
-    mov  dword ebx,[ebp-0x1c]
+    mov  dword ebx,[ebp-0x1C]
     mov  dword[temp.This],ebx
-    mov  dword ebx,[ebx+0x3a]
+    mov  dword ebx,[ebx+0x3A]
     mov  dword[temp.Whom],ebx
     test ecx,0x80
     jz   0x0057BDF4
@@ -56,7 +56,7 @@ temp.Whom     dd 0
     mov  dword ebx,[temp.This]
     mov  dword ebx,[ebx+0x11]
     xor  edx,edx ;MARK_UP
-    call dword[ebx+0x9c] ;Mark()
+    call dword[ebx+0x9C] ;Mark()
     mov  dword edx,[temp.This]
     mov  dword edx,[edx+0x11]
     mov  dword eax,[temp.This]
@@ -77,7 +77,7 @@ temp.Whom     dd 0
     ;mov  dword edi,[esi+0x11]
     ;mov  ebx,ecx
     ;mov  eax,esi
-    ;call dword[edi+0x15c]
+    ;call dword[edi+0x15C]
     jmp  0x0057A586
 @ENDHACK
 

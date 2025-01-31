@@ -17,7 +17,7 @@
 .Normal:
     mov   ebx,dword[ebp-0x20]
     movsx edx,al
-    mov   eax,dword[ebp-0x1c]
+    mov   eax,dword[ebp-0x1C]
     jmp   0x005665DC
 @ENDHACK
 

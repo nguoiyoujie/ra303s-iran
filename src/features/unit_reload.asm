@@ -47,19 +47,19 @@ Temp.UnitReload.Amount    dd    0
 
 
 @HACK 0x0057A05E,0x0057A065,_UnitClass__Reload_AI_UseAmmoReloadAmount
-    mov  esi,dword[eax+0xc5]
+    mov  esi,dword[eax+0xC5]
     add  esi,dword[Temp.UnitReload.Amount]
     jmp  0x0057A065
 @ENDHACK
 
 
 @HACK 0x0057A089,0x0057A095,_UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow
-    mov  ebx,dword[eax+0xc5]
-    cmp  ebx,dword[edx+0x15e]
+    mov  ebx,dword[eax+0xC5]
+    cmp  ebx,dword[edx+0x15E]
     jl   .No_Overflow
 .Overflow:
-    mov  ebx,dword[edx+0x15e]
-    mov  dword[eax+0xc5],ebx
+    mov  ebx,dword[edx+0x15E]
+    mov  dword[eax+0xC5],ebx
 .No_Overflow:
     jmp  0x0057A095
 @ENDHACK
@@ -95,12 +95,12 @@ Temp.UnitReload.Amount    dd    0
 
 
 @HACK 0x0057DD83,0x0057DD89,_UnitClass__Mission_Unload_Minelayer_Reload
-    dec  dword[eax+0xc5]
+    dec  dword[eax+0xC5]
     push eax
     push ebx
     push edx
     push edi
-    mov  edx,dword[eax+0x15c]
+    mov  edx,dword[eax+0x15C]
     movzx edx,dl
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 

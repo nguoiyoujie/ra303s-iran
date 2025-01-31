@@ -225,7 +225,7 @@ _BuildingClass_ExitObject_FactoriesSetFacing:
     push edx
     xor  ebx,ebx
     xor  edx,edx
-    lea  ecx,[esi+0xcd]
+    lea  ecx,[esi+0xCD]
     mov  dl,byte[ecx]
     BuildingTypeClass.FromIndex(edx,edx)
     BuildingTypeClass.WarFactoryExitFacing.Get(edx,bl)

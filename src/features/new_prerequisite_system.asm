@@ -262,7 +262,7 @@
 ;; Set special types
 ;    push ebx
 ;    xor  ebx,ebx
-;    lea  eax,[eax-0x13f]
+;    lea  eax,[eax-0x13F]
 ;    mov  bl,byte[eax+1] ; ID
 ;    xor  eax,eax
 ;    push ecx
@@ -308,7 +308,7 @@
 
 
 @HACK 0x0056B259,0x0056B25E,_TEventClass__Operator_FakesDestroyed_Check
-    sub  esp,0xc
+    sub  esp,0xC
     mov  esi,eax
     mov  dword[0x0056B24C],.Check
     jmp  0x0056B25E

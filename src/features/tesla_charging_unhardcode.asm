@@ -33,7 +33,7 @@ _BuildingClass_AnimationAI_IncludeAllChargingBuildings:
 
 _BuildingClass_ChargingAI_Jammed_PreventsCharge:
     jz   0x0045FDCA
-    test byte[ebx+0xd7],0x10
+    test byte[ebx+0xD7],0x10
     jnz  0x0045FDCA
     jmp  0x0045FCCD
 
@@ -42,7 +42,7 @@ _BuildingClass_ChargingAI_UseActiveAnimCount:
 ; Link it to Anim_Active_Count instead
 ; fetch ID (building class ptr0xcd)
     xor  edx,edx
-    lea  eax,[ebx+0xcd]
+    lea  eax,[ebx+0xCD]
     mov  dl,byte[eax]
     push ecx
     BuildingTypeClass.FromIndex(edx,edx)
@@ -59,13 +59,13 @@ _BuildingClass_ChargingAI_UnhardcodeRate:
     push edx
     push eax
     xor  edx,edx
-    lea  eax,[ebx+0xcd]
+    lea  eax,[ebx+0xCD]
     mov  dl,byte[eax]
     BuildingTypeClass.FromIndex(edx,edx)
     BuildingTypeClass.Anim_Active_Rate.Get(edx,ecx)
     pop  eax
     pop  edx
-    mov  dword[edx+0xd],ecx
+    mov  dword[edx+0xD],ecx
     pop  ecx
     jmp  0x0045FDAE
 
@@ -73,7 +73,7 @@ _BuildingClass_ChargingAI_UseWeaponChargeVoice:
     push ecx
     push edx
     xor  edx,edx
-    lea  eax,[ebx+0xcd]
+    lea  eax,[ebx+0xCD]
     mov  dl,byte[eax]
     BuildingTypeClass.FromIndex(edx,edx)
     TechnoTypeClass.PrimaryWeapon.Get(edx,edx)

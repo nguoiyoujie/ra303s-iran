@@ -258,7 +258,7 @@ _Send_Statistics_Packet_Fix_VSLx_Info:
     mov  ecx,7
     call Dword_Swap_Memory
     lea  ebx,[esi+HouseClass.Offset.NewVQuantity]
-    mov  ecx,0x1c
+    mov  ecx,0x1C
     mov  eax,0x10
     jmp  0x005B7587
 
@@ -267,7 +267,7 @@ _Send_Statistics_Packet_Fix_PLLx_Info:
     mov  ecx,7
     call Dword_Swap_Memory
     lea  ebx,[esi+HouseClass.Offset.NewAQuantity]
-    mov  ecx,0x1c
+    mov  ecx,0x1C
     mov  eax,0x10
     jmp  0x005B7519
 

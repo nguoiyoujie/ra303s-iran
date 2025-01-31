@@ -388,13 +388,13 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     mov  edx,[%1+1]
     lea  edi,[eax+5]
     mov  dword[eax+1],edx
-    add  eax,0x12c
+    add  eax,0x12C
     rep movsd 
     mov  edx,dword[%1+0x1D]
     mov  ecx,0x40
-    mov  dword[eax-0x10b],0x005F6468
+    mov  dword[eax-0x10B],0x005F6468
     mov  esi,%1+HouseTypeClass.Offset.Suffix
-    mov  dword[eax-0x10f],edx
+    mov  dword[eax-0x10F],edx
     mov  dl,byte[%1+HouseTypeClass.Offset.House]
     lea  edi,[eax-0x106]
     mov  byte[eax-0x107],dl

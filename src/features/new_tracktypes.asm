@@ -31,7 +31,7 @@ _DriveClass_TrackControl_Route:
 
 
 _DriveClass_RawTracks_Route:
-; eax is tracknum (note 'tracknum-1' is implemented by offsetting with 0x00600fec instead of 0x00600ffc. Reroute if larger than to the original count 13
+; eax is tracknum (note 'tracknum-1' is implemented by offsetting with 0x00600FEC instead of 0x00600FFC. Reroute if larger than to the original count 13
     cmp  eax,TrackTypes.OriginalCount
     jg  .NewTrack
     shl  eax,0x4
@@ -61,7 +61,7 @@ _DriveClass_Mark_Track_TrackControl_Route:
 
 
 _DriveClass_Mark_Track_RawTracks_Route:
-; eax is tracknum (note 'tracknum-1' is implemented by offsetting with 0x00600fec instead of 0x00600ffc. Reroute if larger than to the original count 13
+; eax is tracknum (note 'tracknum-1' is implemented by offsetting with 0x00600FEC instead of 0x00600FFC. Reroute if larger than to the original count 13
     cmp  edx,TrackTypes.OriginalCount
     jg  .NewTrack
     shl  edx,0x4

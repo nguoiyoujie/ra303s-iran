@@ -235,10 +235,10 @@ _TechnoClass_FireAt_ApplyDirectionalAnim:
     push edx
     mov  edx,eax
     mov  eax,dword[ebp-0x18]
-    add  eax,0xba
+    add  eax,0xBA
     mov  al,byte[eax]
     add  al,0x10
-    and  eax,0xff
+    and  eax,0xFF
     sar  eax,0x5
     add  al,dl 
     pop  edx

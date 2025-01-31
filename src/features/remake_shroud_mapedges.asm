@@ -29,12 +29,12 @@ temp_cell dd 0
 [section .text] 
 _DisplayClass_Cell_Shadow_SaveCell:
     mov  dword[temp_cell],eax
-    lea  esi,[ebx+0x1c]
+    lea  esi,[ebx+0x1C]
     mov  ebx,eax
     jmp  0x004B06C9
 
 _DisplayClass_Cell_Shadow_In_Radar_Check0:
-    sub  eax,0x1d3a
+    sub  eax,0x1D3A
     push eax
     push edx
     mov  eax,Globals___Map
@@ -48,7 +48,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check0:
     jmp  0x004B0701
 
 _DisplayClass_Cell_Shadow_In_Radar_Check1:
-    add  eax,0x3a
+    add  eax,0x3A
     push eax
     push edx
     mov  eax,Globals___Map
@@ -63,7 +63,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check1:
     jmp  0x004B0712
 
 _DisplayClass_Cell_Shadow_In_Radar_Check2:
-    add  eax,0x3a
+    add  eax,0x3A
     push eax
     push edx
     mov  eax,Globals___Map
@@ -78,7 +78,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check2:
     jmp  0x004B0720
 
 _DisplayClass_Cell_Shadow_In_Radar_Check3:
-    add  eax,0x1c8c
+    add  eax,0x1C8C
     push eax
     push edx
     mov  eax,Globals___Map
@@ -108,7 +108,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check4:
     jmp  0x004B0741
 
 _DisplayClass_Cell_Shadow_In_Radar_Check5:
-    add  eax,0x1c8c
+    add  eax,0x1C8C
     push eax
     push edx
     mov  eax,Globals___Map
@@ -123,7 +123,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check5:
     jmp  0x004B0754
 
 _DisplayClass_Cell_Shadow_In_Radar_Check6:
-    add  eax,0x3a
+    add  eax,0x3A
     push eax
     push edx
     mov  eax,Globals___Map
@@ -138,7 +138,7 @@ _DisplayClass_Cell_Shadow_In_Radar_Check6:
     jmp  0x004B0762
 
 _DisplayClass_Cell_Shadow_In_Radar_Check7:
-    add  eax,0x3a
+    add  eax,0x3A
     push eax
     push edx
     mov  eax,Globals___Map

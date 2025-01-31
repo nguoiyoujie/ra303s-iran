@@ -45,20 +45,20 @@ extern CargoClass__Attached_Object
     push ebx
     push ecx
     push edx
-    mov  ecx,dword[eax+0xc5] ; object->Ammo 
+    mov  ecx,dword[eax+0xC5] ; object->Ammo 
     push eax
     push ecx
     mov  ecx,dword[eax+0x11]
     call dword[ecx+0x34]
     pop  ecx
-    cmp  ecx,dword[eax+0x15e] ; object->TechnoType->MaxAmmo 
+    cmp  ecx,dword[eax+0x15E] ; object->TechnoType->MaxAmmo 
     pop  eax
     pop  edx
     pop  ecx
     pop  ebx
     pop  eax
     jne  .Clear_Threat ; at least one passenger does not have full ammo,don't target
-    mov  eax,dword[eax+0x1d] ; object = object->Next
+    mov  eax,dword[eax+0x1D] ; object = object->Next
     jmp  .Iterate_Passengers
 .End_Iterate:
     jmp  0x0058B868

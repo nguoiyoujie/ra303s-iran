@@ -31,7 +31,7 @@
     mov  eax,dword[ebp - 0x10]
     ;mov  al,byte[eax+0x196]
     ;movzx eax,al
-    test byte[eax+0xd7],0x10 ;Jammed
+    test byte[eax+0xD7],0x10 ;Jammed
     jz   0x00567242
     mov dword[ebp - 0x24],FadingJammed
     jmp  0x00567242
@@ -40,7 +40,7 @@
 
 ; the current method in this hook prevents selling/deconstruction. Weird things could also happen if building has special animations like a war factory
 ;@HACK 0x0046033B,_BuildingClass__Animation_AI_FreezeJammed
-;    test byte[ebx+0xd7],0x10
+;    test byte[ebx+0xD7],0x10
 ;    jnz  0x004605FE
 ;    cmp  eax,ecx
 ;    jnc  0x00460343
@@ -61,7 +61,7 @@
     pop  ebx
     jnz  0x004603BB
     ; existing SAM-SITE check
-    cmp  eax,0xf
+    cmp  eax,0xF
     jnz  0x004603CB
     jmp  0x004603B7
 @ENDHACK

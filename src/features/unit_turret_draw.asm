@@ -85,7 +85,7 @@ _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings:
     neg  cl
 .ForwardOffset:
     push ebx
-    add  al,byte[edx+0xba]
+    add  al,byte[edx+0xBA]
     movzx ebx,al ; DirType PrimaryFacing
     lea  edx,[esi] ; y
     lea  eax,[edi] ; x

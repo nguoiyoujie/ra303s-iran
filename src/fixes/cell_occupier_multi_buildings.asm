@@ -17,7 +17,7 @@ _bib_type dd 0
 @HACK 0x0049F3B6,0x0049F3BF,_CellClass__Occupy_Down_Check_BuildingAlreadyInList
     cmp  eax,ecx ; check is object is already in list
     jz   0x0049F3E6 ; skip the append to list if so
-    lea  edx,[eax+0x1d]
+    lea  edx,[eax+0x1D]
     mov  eax,[edx]
     cmp  eax,ecx ; check is next object is already in list
     jz   0x0049F3E6 ; skip the append to list if so
@@ -40,7 +40,7 @@ _bib_type dd 0
     je   .StillHasBuilding
 .Next:
     mov  ebx,edx
-    mov  edx,[edx+0x1d]
+    mov  edx,[edx+0x1D]
     test edx,edx
     jz   .Original_Code
     jmp  .Check
@@ -49,14 +49,14 @@ _bib_type dd 0
     ; remove this building from Cell_Occupier, it will be added again in RePlaceDown
     test ebx,ebx
     jz   .Clear_Cell_Occupier
-    mov  dword[ebx+0x1d],0
+    mov  dword[ebx+0x1D],0
     jmp   .Original_Code
 .Clear_Cell_Occupier:
     mov  dword[ecx+0x19],0
     ;or   byte[ecx+0x35],0x80 ; set Flag.Occupy.Building
     ;jmp  0x0049F4DB
 .Original_Code:
-    and  byte[ecx+0x35],0x7f ; clear Flag.Occupy.Building
+    and  byte[ecx+0x35],0x7F ; clear Flag.Occupy.Building
     pop  ebx
     jmp  0x0049F4DB
 @ENDHACK
@@ -73,7 +73,7 @@ _bib_type dd 0
     je   .Ret
     push ebx
 .Bib:
-    mov  edx,[ebx+0xcd] ; BuildingType ID
+    mov  edx,[ebx+0xCD] ; BuildingType ID
     mov  eax,[ebx+5]
     call Coord___Coord_Cell
     mov  [_bib_cell],eax
@@ -86,14 +86,14 @@ _bib_type dd 0
     jz  .Placement
     ; [edx] = bibtype
     ; [ebx] = cell
-    mov  eax,0x2b ; SmudgeClass size
+    mov  eax,0x2B ; SmudgeClass size
     call SmudgeClass__new
     mov  edi,eax
     test eax,eax
     jz  .Placement
     pop  esi
     push esi    
-    mov  edx,[esi+0xcd] ; BuildingType ID
+    mov  edx,[esi+0xCD] ; BuildingType ID
     push edi  
     BuildingTypeClass.FromIndex(edx,edi)
     BuildingTypeClass.IsBase.Get(edi,cl) 
@@ -142,7 +142,7 @@ _bib_type dd 0
     mov  eax,Globals___Map
     call MapClass__Place_Down ; place again
     pop  ebx
-    mov  ebx,[ebx+0x1d]
+    mov  ebx,[ebx+0x1D]
     jmp  .Check
 .Ret:    
     mov  dword[_occupier_building],0

@@ -157,7 +157,7 @@ _GetPrerequisiteExtendedFromString:
     mov  ebx,eax
     pop  eax
     call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
-    cmp  al,0xff ; STRUCT_NONE
+    cmp  al,0xFF ; STRUCT_NONE
     jz   .Read_Next
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space
@@ -177,7 +177,7 @@ _GetPrerequisiteExtendedFromString:
 .Read_Last:
     pop  eax
     call 0x004537B4 ; BuildingTypeClass::From_Name, eax is already the string
-    cmp  al,0xff ; STRUCT_NONE
+    cmp  al,0xFF ; STRUCT_NONE
     jz   .Retn
     ; al is any value from 00 to FE
     ; di is the byte offset of the 32-byte ExtPrerequisiteOffset space

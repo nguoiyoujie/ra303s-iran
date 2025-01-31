@@ -914,25 +914,25 @@ Set_Map_Dimensions:
     and  ebx,127
     mov  eax,Globals___Map
     mov  edi,dword[eax+4]
-    call dword[edi+0x5c]
+    call dword[edi+0x5C]
 	; iterate over all buildings to update IsLocked. Buildings that are within the play field have IsLocked set
     mov  dword[What_Heap1],BuildingClass.Count
     mov  dword[What_Heap2],BuildingClass.Array
     call Loop_Over_Object_Heap_And_Update_IsLocked
     ; force radar refresh. Use a trick by toggling zoom mode twice.
-    mov  eax,dword[Globals___Map+0xc4a] ; TacticalCoord
+    mov  eax,dword[Globals___Map+0xC4A] ; TacticalCoord
     call Coord___Coord_Cell
     mov  edx,eax
 	mov  eax,Globals___Map ; global RadarClass
     call 0x0052F294 ; RadarClass::Zoom_Mode
-    mov  eax,dword[Globals___Map+0xc4a] ; TacticalCoord
+    mov  eax,dword[Globals___Map+0xC4A] ; TacticalCoord
     call Coord___Coord_Cell
     mov  edx,eax
 	mov  eax,Globals___Map ; global RadarClass
     call 0x0052F294 ; RadarClass::Zoom_Mode
     ; force set position, in case the map is shrunk, we want to snap the map to the boundaries
     mov  eax,Globals___Map
-    mov  edx,dword[Globals___Map+0xc4a] ; TacticalCoord
+    mov  edx,dword[Globals___Map+0xC4A] ; TacticalCoord
     call 0x004D2BC0; HelpClass::Set_Tactical_Position(ulong)
     ; force template refresh
     mov  edx,1
@@ -1152,7 +1152,7 @@ Do_Magic_Reinforcements:
     mov  dword[ebp-0x30],eax ; Parameter 1: Team
     test eax,eax
     jz   .No_Team
-    cmp  dword[eax+0xa5],0 ; TeamType.ClassCount, 0 means the team is empty
+    cmp  dword[eax+0xA5],0 ; TeamType.ClassCount, 0 means the team is empty
     jnz  .Team
 .No_Team:
     xor  eax,eax

@@ -22,7 +22,7 @@
 
 
 @HACK 0x0045C88E,0x0045C894,_BuildingClass_MissionAttack_Jammed_PreventsAttack
-    test byte[esi+0xd7],0x10
+    test byte[esi+0xD7],0x10
     jnz  0x0045CB26
     mov  al,byte[eax+0x1A4]
     jmp  0x0045C894	
@@ -42,7 +42,7 @@
     pop  ebx
     pop  eax
     jnz  0x0057B1CA
-    cmp  eax,0xe
+    cmp  eax,0xE
     jz   0x0057B1CA
     jmp  0x0057B0FB
    @ENDHACK
