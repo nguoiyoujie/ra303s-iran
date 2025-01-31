@@ -487,9 +487,8 @@ _TechnoClass__Find_Docking_Bay_RecalcBestValue:
     call dword[edx+0x10] ; Coord (Building)
     mov  edx,eax
     mov  eax,ecx
-    ;mov  esi,dword[ebp-0x1c]
+    mov  esi,dword[ecx+0x11]
     call dword[esi+0xC] 
-    ;mov  esi,dword[ebp-0x1c]
     call Coord___Distance_As_Coord
     mov  edi,eax
     pop  edx 
