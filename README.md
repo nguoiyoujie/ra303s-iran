@@ -46,6 +46,7 @@ This patch uses tools released by FunkyFr3sh. The tools can be inspected in his 
 3. Run make. This will generate `ra95-build.exe` 
 4. Copy this file to a RA game directory of your choice.
 
+
 **Instructions for Windows**
 
 1. Clone or pull this repository
@@ -55,6 +56,12 @@ This patch uses tools released by FunkyFr3sh. The tools can be inspected in his 
 5. Copy the generated `ra95.exe` file to a RA game directory of your choice.
 
 * You may customize where you extract the devkit. Modify `build.cmd` accordingly to point to your chosen tools location.
+
+
+**Additional notes on devkit**
+
+The devkit uses NASM 2.15.05, which has a bug where error messages do not print correct file and line numbers in #include files. You may want to replace them with NASM 2.16.01 or above to ease your debugging efforts.
+
 
 **Additional Instructions for playing on windowed mode**
 
