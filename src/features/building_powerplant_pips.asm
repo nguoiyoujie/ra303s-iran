@@ -7,7 +7,7 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-@LJMP 0x00568A8A, _TechnoClass_Draw_Pips_CheckPower
+@LJMP 0x00568A8A,_TechnoClass_Draw_Pips_CheckPower
 
 _TechnoClass_Draw_Pips_CheckPower:
     movzx eax,al

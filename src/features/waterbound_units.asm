@@ -11,7 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0057C568, _UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units
+@LJMP 0x0057C568,_UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units
 
 _UnitClass__Per_Cell_Process_Dont_Sink_Waterbound_Units:
     test byte[ebx+0xcd],0x80  

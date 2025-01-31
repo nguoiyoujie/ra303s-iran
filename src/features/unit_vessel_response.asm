@@ -12,12 +12,8 @@
 ; This is because we use their common type class DriveClass to run the logic for both.
 ; Ensure that this assumption is upheld
 
-@LJMP 0x004B6207, _DriveClass__Response_Select_CustomVoice
-@LJMP 0x004B625F, _DriveClass__Response_Move_CustomVoice
-@LJMP 0x004B62B7, _DriveClass__Response_Attack_CustomVoice
-
-; ecx is the unit/vessel class
-_DriveClass__Response_Select_CustomVoice:
+@HACK 0x004B6207,0x004B620C,_DriveClass__Response_Select_CustomVoice
+    ; ecx is the unit/vessel class
     mov  al,byte[ecx] ; RTTI
     cmp  al,RTTIType.Unit
     je   .Unit
@@ -57,9 +53,10 @@ _DriveClass__Response_Select_CustomVoice:
 .Retn:
     mov  ebx,5
     jmp  0x004B620C
+@ENDHACK
 
 
-_DriveClass__Response_Move_CustomVoice:
+@HACK 0x004B625F,0x004B6264,_DriveClass__Response_Move_CustomVoice
     mov  al,byte[ecx] ; RTTI
     cmp  al,RTTIType.Unit
     je   .Unit
@@ -152,9 +149,10 @@ _DriveClass__Response_Move_CustomVoice:
 .Retn:
     mov  ebx,1
     jmp  0x004B6264
+@ENDHACK
 
 
-_DriveClass__Response_Attack_CustomVoice:
+@HACK 0x004B62B7,0x004B62BC,_DriveClass__Response_Attack_CustomVoice
     mov  al,byte[ecx] ; RTTI
     cmp  al,RTTIType.Unit
     je   .Unit
@@ -194,3 +192,4 @@ _DriveClass__Response_Attack_CustomVoice:
 .Retn:
     mov  ebx,1
     jmp  0x004B62BC
+@ENDHACK

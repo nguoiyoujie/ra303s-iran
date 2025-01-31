@@ -7,21 +7,28 @@
 ; A good deal of testing is needed to check for compatibility issues, as many things are tied to the affected values
 ;----------------------------------------------------------------
 
-@LJMP 0x004DCC8F, _HouseClass__Tracking_Add_New_Building_Tracking
-@LJMP 0x004DCCF8, _HouseClass__Tracking_Add_New_Planes_Tracking
-@LJMP 0x004DCDD2, _HouseClass__Tracking_Add_New_Vehicle_Tracking
-@LJMP 0x004DCD5B, _HouseClass__Tracking_Add_New_Infantry_Tracking
-@LJMP 0x004DCE40, _HouseClass__Tracking_Add_New_Vessels_Tracking
-@LJMP 0x004DCB58, _HouseClass__Tracking_Remove_New_Building_Tracking
-@LJMP 0x004DCB79, _HouseClass__Tracking_Remove_New_Planes_Tracking
-@LJMP 0x004DCBA7, _HouseClass__Tracking_Remove_New_Infantry_Tracking
-@LJMP 0x004DCBD1, _HouseClass__Tracking_Remove_New_Vehicle_Tracking
-@LJMP 0x004DCBFB, _HouseClass__Tracking_Remove_New_Vessels_Tracking
+; _HouseClass__Tracking_Remove_New_Building_Tracking
+@SET 0x004DCB58,{shr eax,0x18}
+@SET 0x004DCB5B,{dec dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]}
 
-;Temp
-; CellClass::GoodieCheck
-;@SET 0x004A077E,{mov ebx,[ecx+ebx*4+HouseClass.Offset.NewUQuantity]}
-@LJMP 0x004A08AA, _CellClass__GoodieCheck_Replace_Quantity
+; _HouseClass__Tracking_Remove_New_Planes_Tracking
+@SET 0x004DCB79,{shr eax,0x18}
+@SET 0x004DCB7C,{dec dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]}
+
+; _HouseClass__Tracking_Remove_New_Infantry_Tracking
+@SET 0x004DCBA7,{shr eax,0x18}
+@SJMP 0x004DCBAA,0x004DCBB2
+@SET 0x004DCBB2,{dec dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]}
+
+; _HouseClass__Tracking_Remove_New_Vehicle_Tracking
+@SET 0x004DCBD1,{shr eax,0x18}
+@SJMP 0x004DCBD4,0x004DCBDC
+@SET 0x004DCBDC,{dec dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]}
+
+; _HouseClass__Tracking_Remove_New_Vessels_Tracking
+@SET 0x004DCBFB,{shr eax,0x18}
+@SJMP 0x004DCBFE,0x004DCC06
+@SET 0x004DCC06,{dec dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]}
 
 ; HouseClass::Get_Quantity
 @SET 0x004DDBC2,{mov eax,[eax+edx*4+HouseClass.Offset.NewAQuantity]}
@@ -35,106 +42,83 @@
 @SET 0x004D4AF3,{cmp dword[eax+HouseClass.Offset.NewVQuantity],0} ; SUB
 @SET 0x004D4B05,{lea edx,[esi+0x400]}
 @SET 0x004D4B0B,{mov edi,[esi+HouseClass.Offset.NewBQuantity]}
-@LJMP 0x004D4B22, _HouseClass__AI_Replace_UQuantity
 @SET 0x004D4B28,{mov ebx,[esi+HouseClass.Offset.NewUQuantity]}
-@LJMP 0x004D4B3F, _HouseClass__AI_Replace_IQuantity
 @SET 0x004D4B45,{mov ecx,[esi+HouseClass.Offset.NewIQuantity]}
-@LJMP 0x004D4B5C, _HouseClass__AI_Replace_AQuantity
-@CLEAR 0x004D4B61,0x90,0x004D4B62
 @SET 0x004D4B62,{mov edi,[esi+HouseClass.Offset.NewAQuantity]}
 @SET 0x004D4B82,{add eax,[edx+HouseClass.Offset.NewVQuantity]}
-@LJMP 0x004D4B89, _HouseClass__AI_Replace_VCount
 @SET 0x004D4B95,{add eax,[edx+HouseClass.Offset.NewVQuantity]}
 
-@LJMP 0x004D496F, _HouseClass__AI_Replace_AAPowerCheck
 
-_HouseClass__Tracking_Remove_New_Building_Tracking:
-    shr  eax,0x18
-    dec  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
-    ;dec  dword[ebx+eax*4+HouseClass.Offset.BQuantity]
-    jmp  0x004DCC27
-
-_HouseClass__Tracking_Remove_New_Planes_Tracking:
-    shr  eax,0x18
-    dec  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]
-    ;dec  dword[ebx+eax*4+HouseClass.Offset.AQuantity]
-    jmp  0x004DCC27
-
-_HouseClass__Tracking_Remove_New_Infantry_Tracking:
-    shr  eax,0x18
-    dec  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
-    ;dec  dword[ebx+eax*4+HouseClass.Offset.IQuantity]
-    jmp  0x004DCC27
-
-_HouseClass__Tracking_Remove_New_Vessels_Tracking:
-    shr  eax,0x18
-    dec  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
-    ;dec  dword[ebx+eax*4+HouseClass.Offset.VQuantity]
-    jmp  0x004DCC27
-
-
-_HouseClass__Tracking_Remove_New_Vehicle_Tracking:
-    shr  eax,0x18
-    dec  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
-    ;dec  dword[ebx+eax*4+HouseClass.Offset.UQuantity]
-    jmp  0x004DCC27
-
-
-_HouseClass__Tracking_Add_New_Building_Tracking:
+@HACK 0x004DCC8F,0x004DCC95,_HouseClass__Tracking_Add_New_Building_Tracking
     inc  dword[esi+HouseClass.Offset.NewBQuantity]
     mov  byte[esi+HouseClass.Offset.BuildStructure],-1 ; I just built something. Recheck my build order.
-    ;inc  dword[esi+HouseClass.Offset.BQuantity]
     jmp  0x004DCC95
+@ENDHACK
 
-_HouseClass__Tracking_Add_New_Planes_Tracking:
+
+@HACK 0x004DCCF8,0x004DCCFE,_HouseClass__Tracking_Add_New_Planes_Tracking
     inc  dword[esi+HouseClass.Offset.NewAQuantity]
     mov  byte[esi+HouseClass.Offset.BuildAircraft],-1 ; I just built something. Recheck my limits.
-    ;inc  dword[esi+HouseClass.Offset.AQuantity]
     jmp  0x004DCCFE
+@ENDHACK
 
-_HouseClass__Tracking_Add_New_Infantry_Tracking:
+
+@HACK 0x004DCD5B,0x004DCD6D,_HouseClass__Tracking_Add_New_Infantry_Tracking
     movzx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
     mov  byte[esi+HouseClass.Offset.BuildInfantry],-1 ; I just built something. Recheck my limits.
-    ;inc  dword[ebx+eax*4+HouseClass.Offset.IQuantity]
     jmp  0x004DCD6D
+@ENDHACK
 
-_HouseClass__Tracking_Add_New_Vehicle_Tracking:
+
+@HACK 0x004DCDD2,0x004DCDF0,_HouseClass__Tracking_Add_New_Vehicle_Tracking
     movzx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
     mov  byte[esi+HouseClass.Offset.BuildUnit],-1 ; I just built something. Recheck my limits.
-    ;inc  dword[ebx+eax*4+HouseClass.Offset.UQuantity]
     jmp  0x004DCDF0
+@ENDHACK
 
-_HouseClass__Tracking_Add_New_Vessels_Tracking:
+
+@HACK 0x004DCE40,0x004DCE5E,_HouseClass__Tracking_Add_New_Vessels_Tracking
     movsx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
     mov  byte[esi+HouseClass.Offset.BuildVessel],-1 ; I just built something. Recheck my limits.
-    ;inc  dword[ebx+eax*4+HouseClass.Offset.VQuantity]
     jmp  0x004DCE5E
+@ENDHACK
 
 
-_HouseClass__AI_Replace_UQuantity:
+@HACK 0x004D4B22,0x004D4B28,_HouseClass__AI_Sub_Check_Replace_UQuantity
     mov  esi,dword[ebp-0x58]
     lea  edx,[esi+0x400]
     jmp  0x004D4B28
+@ENDHACK
 
-_HouseClass__AI_Replace_IQuantity:
+
+@HACK 0x004D4B3F,0x004D4B45,_HouseClass__AI_Sub_Check_Replace_IQuantity
     mov  esi,dword[ebp-0x58]
     lea  edx,[esi+0x400]
     jmp  0x004D4B45
+@ENDHACK
 
-_HouseClass__AI_Replace_AQuantity:
+
+@HACK 0x004D4B5C,0x004D4B62,_HouseClass__AI_Sub_Check_Replace_AQuantity
     mov  esi,dword[ebp-0x58]
     lea  edx,[esi+0x400]
     jmp  0x004D4B62
+@ENDHACK
 
-_HouseClass__AI_Replace_VCount:
+
+@HACK 0x004D4B89,0x004D4B8F,_HouseClass__AI_Sub_Check_Replace_VCount
     add  edx,4
     cmp  esi,[VesselTypeClass.Count]
     jmp  0x004D4B8F
+@ENDHACK
 
-_CellClass__GoodieCheck_Replace_Quantity:
+
+;Temp
+; CellClass::GoodieCheck
+;@SET 0x004A077E,{mov ebx,[ecx+ebx*4+HouseClass.Offset.NewUQuantity]}
+@HACK 0x004A08AA,0x004A08AF,_CellClass__GoodieCheck_Replace_Quantity
     ; edx is houseclass
     lea  eax,[edx+HouseClass.Offset.NewUQuantity]
     lea  ecx,[eax+0x400*4] ; NewUQuantity, NewIQuantity, NewAQuantity, NewVQuantity
@@ -160,8 +144,10 @@ _CellClass__GoodieCheck_Replace_Quantity:
     add  dword[ebp-192],ebx
 .Done:
     jmp  0x004A085D
+@ENDHACK
 
-_HouseClass__AI_Replace_AAPowerCheck:
+
+@HACK 0x004D496F,0x004D49B2,_HouseClass__AI_Replace_AAPowerCheck
     test dword[eax+HouseClass.Offset.BPreGroupScan],0x800 ; ADV.DEFENSE
     jz   .TeslaOffline
     test dword[eax+HouseClass.Offset.BPreGroupScan],0x1000 ; AA.DEFENSE
@@ -174,3 +160,4 @@ _HouseClass__AI_Replace_AAPowerCheck:
 .AAOffline:
     mov  edx,0x201
     jmp  0x004D49B2
+@ENDHACK

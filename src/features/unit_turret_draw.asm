@@ -10,9 +10,9 @@
 ; No compatibility issues is expected, as this is a new feature.
 ;----------------------------------------------------------------
 
-@LJMP 0x0057CAF3, _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
-@LJMP 0x0057CB08, _UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
-@LJMP 0x00578CE1, _UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
+@LJMP 0x0057CAF3,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret1
+@LJMP 0x0057CB08,_UnitClass_DrawIt_UseDefinedTurretSettings_RotatingTurret2
+@LJMP 0x00578CE1,_UnitTypeClass_Turret_Adjust_UseDefinedTurretSettings
 
 [section .data] 
 temp.TurretFrameStart                                dw 0 

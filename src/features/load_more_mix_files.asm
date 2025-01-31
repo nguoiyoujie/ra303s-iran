@@ -43,25 +43,6 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x004F7E13, _Init_Bootstrap_Mixfiles__Preload_Mixes ; Called before other MIX files are loaded
-@LJMP 0x004F7F26, _Init_Bootstrap_Mixfiles__Postload_Mixes; Called AFTER REDALERT.MIX is loaded
-
-
-
-
-
-; args: <mix file name string>
-;%macro Load_Mix_File 1
-;mov        eax,%1
-;mov     edx,eax
-;mov     ecx,eax
-;mov     eax,0x24
-;call    0x005BBF80
-;test    eax,eax
-;mov     ebx,MixFileRelated
-;call    Mix_File_Load_Related_Function
-;%endmacro
-
 ; Loads without caching in memory
 ; args: <mix file name string>
 %macro Load_Mix_File 1
@@ -89,9 +70,9 @@ xor     edx,edx
 call    MixFileClass_CCFileClass_Cache
 %endmacro
 
-_Init_Bootstrap_Mixfiles__Postload_Mixes:
-    Save_Registers
 
+@HACK 0x004F7F26,0x004F7F2B,_Init_Bootstrap_Mixfiles__Postload_Mixes ; Called AFTER REDALERT.MIX is loaded
+    Save_Registers
     call MixFileClass_CCFileClass_Retrieve
 
     cmp  byte[RedAlert.Options.UseDOSInterfaceMod],0
@@ -158,9 +139,10 @@ _Init_Bootstrap_Mixfiles__Postload_Mixes:
 .Ret:
     Restore_Registers
     jmp  0x004F7F2B
+@ENDHACK
 
 
-_Init_Bootstrap_Mixfiles__Preload_Mixes:
+@HACK 0x004F7E13,0x004F7E18,_Init_Bootstrap_Mixfiles__Preload_Mixes ; Called before other MIX files are loaded
     ; The load order is important, files loaded first can't have their file content overwritten by files loaded later
 
     ; LANGUAGE PACKS STUFF
@@ -240,3 +222,4 @@ _Init_Bootstrap_Mixfiles__Preload_Mixes:
     mov  edx,0x005EBE41
     lea  eax,[ebp-0xCC]
     jmp  0x004F7E18
+@ENDHACK

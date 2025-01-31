@@ -10,7 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004D2DAE, _HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult
+@LJMP 0x004D2DAE,_HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult
 
 _HouseClass__Assign_Handicap__Singleplayer_Mode_Use_Mult:
     jnz  0x004D2DB4 ; multiplayer mode

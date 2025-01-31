@@ -10,12 +10,12 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004A321B, _Combat_Modify_Damage_NegativeDamage_Always_Count
-@LJMP 0x004A325E, _Combat_Modify_Damage_NegativeDamage_Always_Count2
-@LJMP 0x004A3287, _Combat_Modify_Damage_NegativeDamage_Always_Count3
-@LJMP 0x004A32AA, _Combat_Modify_Damage_NegativeDamage_Always_Count4
-@LJMP 0x004A32B1, _Combat_Modify_Damage_NegativeDamage_Always_Count5
-@LJMP 0x00564517, _TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons
+@LJMP 0x004A321B,_Combat_Modify_Damage_NegativeDamage_Always_Count
+@LJMP 0x004A325E,_Combat_Modify_Damage_NegativeDamage_Always_Count2
+@LJMP 0x004A3287,_Combat_Modify_Damage_NegativeDamage_Always_Count3
+@LJMP 0x004A32AA,_Combat_Modify_Damage_NegativeDamage_Always_Count4
+@LJMP 0x004A32B1,_Combat_Modify_Damage_NegativeDamage_Always_Count5
+@LJMP 0x00564517,_TechnoClass__AI_AllowAIToTargetAlliesWithNegativeDamageWeapons
 
 _Combat_Modify_Damage_NegativeDamage_Always_Count:
 ; don't consider any distance or warhead checks, just apply the negative damage

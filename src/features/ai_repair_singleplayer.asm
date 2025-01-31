@@ -7,10 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00460073, _BuildingClass_Repair_AI_SingleplayerRepair
-@LJMP 0x0045FF34, _BuildingClass_Repair_AI_Singleplayer_Sellback
-
-_BuildingClass_Repair_AI_SingleplayerRepair:
+@HACK 0x00460073,0x0046007A,_BuildingClass_Repair_AI_SingleplayerRepair
     cmp  dword[InCoopMode],1 ; inherited from coop mode
     je   0x0046007C
     cmp  byte[Rules.AI.RepairConstructedBuildingsInSingleplayer],1
@@ -18,9 +15,10 @@ _BuildingClass_Repair_AI_SingleplayerRepair:
 .OrginalCode:
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jmp  0x0046007A
+@ENDHACK
 
 
-_BuildingClass_Repair_AI_Singleplayer_Sellback:
+@HACK 0x0045FF34,0x0045FF3B,_BuildingClass_Repair_AI_Singleplayer_Sellback
     cmp  dword[InCoopMode],1 ; inherited from coop mode
     je   0x00460176
     cmp  byte[Rules.AI.RepairConstructedBuildingsInSingleplayer],1
@@ -28,3 +26,4 @@ _BuildingClass_Repair_AI_Singleplayer_Sellback:
 .OrginalCode:
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jmp  0x0045FF3B
+@ENDHACK

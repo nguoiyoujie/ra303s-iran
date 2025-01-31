@@ -7,7 +7,7 @@
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
 
-@HACK 0x0053D645, 0x0053D64A, _Read_Scenario_INI_Load_AI_INI
+@HACK 0x0053D645,0x0053D64A,_Read_Scenario_INI_Load_AI_INI
     call 0x00537564
     mov  edx,str_ini_AI
     mov  eax,CCFileClass_AI

@@ -12,10 +12,10 @@
 ; // HouseClass::Is_No_YakMig
 ; // HouseClass::Is_Hack_Prevented
 ; // Reinf::_Need_To_Take
-@LJMP 0x004DE09E, _HouseClass_Is_No_YakMig_UseFixedWing
-@LJMP 0x004DE103, _HouseClass_Is_No_YakMig_UseFixedWing2
-@LJMP 0x004DE13C, _HouseClass_Is_No_YakMig_CountAirfield
-@LJMP 0x004DE15C, _HouseClass_Is_Hack_Prevented_UseFixedWing
+@LJMP 0x004DE09E,_HouseClass_Is_No_YakMig_UseFixedWing
+@LJMP 0x004DE103,_HouseClass_Is_No_YakMig_UseFixedWing2
+@LJMP 0x004DE13C,_HouseClass_Is_No_YakMig_CountAirfield
+@LJMP 0x004DE15C,_HouseClass_Is_Hack_Prevented_UseFixedWing
 
 _HouseClass_Is_No_YakMig_UseFixedWing:
     push edi

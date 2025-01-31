@@ -8,6 +8,8 @@
 
 setcglob 0x005D6148, start
 
+setcglob 0x005E66A8, _imp__timeGetTime
+setcglob 0x005E667C, _imp__Sleep
 
 ; AUDIO.CPP
 setcglob 0x00425CA0, Audio___Voc_From_Name ; VocType Voc_From_Name(char const * name)
@@ -54,7 +56,7 @@ setcglob 0x0046247C, CargoClass__Attached_Object ; FootClass * CargoClass::Attac
 ;setcglob 0x004AC41C, Coord___Distance_As_Coord ; int Distance(COORDINATE coord1, COORDINATE coord2)
 
 ; CONQUER.CPP
-;setcglob 0x004A765C, Conquer___Call_Back ; void Call_Back(void)
+setcglob 0x004A765C, Conquer___Call_Back ; void Call_Back(void)
 ;setcglob 0x004A96E8, Conquer___CC_Draw_Shape ; void CC_Draw_Shape(const ObjectClass *object, const char *shape_file_name, void const * shapefile, int shapenum, int x, int y, WindowNumberType window, ShapeFlags_Type flags, void const * fadingdata, void const * ghostdata, DirType rotation, long virtualscale, char override_owner)
 
 

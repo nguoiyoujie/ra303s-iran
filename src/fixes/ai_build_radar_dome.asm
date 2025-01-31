@@ -17,8 +17,8 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004DAFA4, _HouseClass__AI_Building_Build_Radar_Dome
-@LJMP 0x004DAFD5, _HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check
+@LJMP 0x004DAFA4,_HouseClass__AI_Building_Build_Radar_Dome
+@LJMP 0x004DAFD5,_HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check
 
 _HouseClass__AI_Building_Build_Radar_Dome:
     jnz  0x004DB0E4

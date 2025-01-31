@@ -5,7 +5,7 @@
 ;
 ;----------------------------------------------------------------
 
-;@LJMP 0x004D4064, _HouseClass_Can_Build_ComputerObeyPrereqInSP
+;@LJMP 0x004D4064,_HouseClass_Can_Build_ComputerObeyPrereqInSP
 
 ;@CLEAR 0x004D4069,0x90,0x004D406A
 ;_HouseClass_Can_Build_ComputerObeyPrereqInSP:

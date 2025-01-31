@@ -19,7 +19,7 @@
 
 extern Audio___SoundEffectName
 
-@HACK 0x00425CB9, 0x00425CBE, _Voc_From_Name_Add_Unhardcoded_Sound_Effects
+@HACK 0x00425CB9,0x00425CBE,_Voc_From_Name_Add_Unhardcoded_Sound_Effects
     cmp  cx,SoundEffects.ORIGINAL_COUNT 
     jl   0x00425CC8
 .Check_Unharded_Sound_Effects:
@@ -52,7 +52,7 @@ extern Audio___SoundEffectName
 @ENDHACK
 
 
-@HACK 0x00425D0E, 0x00425D15, _Voc_Name_Add_Unhardcoded_Sound_Effects
+@HACK 0x00425D0E,0x00425D15,_Voc_Name_Add_Unhardcoded_Sound_Effects
     cmp  ax,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects
 .Normal_Code:
@@ -74,7 +74,7 @@ extern Audio___SoundEffectName
 @ENDHACK
 
 
-@HACK 0x00425FDF, 0x00425FEA, _Sound_Effect_Call_Where
+@HACK 0x00425FDF,0x00425FEA,_Sound_Effect_Call_Where
 ; eax is the voc id
     cmp  ax,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects
@@ -100,7 +100,7 @@ extern Audio___SoundEffectName
 @ENDHACK
 
 
-@HACK 0x004260AB, 0x004260B4, _Sound_Effect_Call_Voc_Name
+@HACK 0x004260AB,0x004260B4,_Sound_Effect_Call_Voc_Name
     call 0x00425CF8  ;    char * Voc_Name(VocType)
     mov  ecx,eax
     xor  edx,edx
@@ -108,7 +108,7 @@ extern Audio___SoundEffectName
 @ENDHACK
 
 
-@HACK 0x004260F5, 0x004260FC, _Sound_Effect_Call_Priority
+@HACK 0x004260F5,0x004260FC,_Sound_Effect_Call_Priority
 ; edx is the voc id
     cmp  dx,SoundEffects.ORIGINAL_COUNT 
     jge  .Check_Unhardcoded_Sound_Effects

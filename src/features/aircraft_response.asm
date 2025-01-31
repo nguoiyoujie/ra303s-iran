@@ -8,12 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x0042315F, _AircraftClass__Response_Select_CustomVoice
-@LJMP 0x00423107, _AircraftClass__Response_Move_CustomVoice
-@LJMP 0x004230AF, _AircraftClass__Response_Attack_CustomVoice
-
-; edx is the unit/vessel class
-_AircraftClass__Response_Select_CustomVoice:
+@HACK 0x0042315F,0x00423164,_AircraftClass__Response_Select_CustomVoice
+    ; edx is the unit/vessel class
     mov  al,byte[ecx+0x146] ; ID
     movzx eax,al
     AircraftTypeClass.FromIndex(eax,edx) 
@@ -31,9 +27,10 @@ _AircraftClass__Response_Select_CustomVoice:
 .Retn:
     mov  ebx,5
     jmp  0x00423164
+@ENDHACK
 
 
-_AircraftClass__Response_Move_CustomVoice:
+@HACK 0x00423107,0x0042310C,_AircraftClass__Response_Move_CustomVoice
     mov  al,byte[ecx+0x146] ; ID
     movzx eax,al
     AircraftTypeClass.FromIndex(eax,edx) 
@@ -51,9 +48,10 @@ _AircraftClass__Response_Move_CustomVoice:
 .Retn:
     mov  ebx,1
     jmp  0x0042310C
+@ENDHACK
 
 
-_AircraftClass__Response_Attack_CustomVoice:
+@HACK 0x004230AF,0x004230B4,_AircraftClass__Response_Attack_CustomVoice
     mov  al,byte[ecx+0x146] ; ID
     movzx eax,al
     AircraftTypeClass.FromIndex(eax,edx) 
@@ -71,3 +69,5 @@ _AircraftClass__Response_Attack_CustomVoice:
 .Retn:
     mov  ebx,1
     jmp  0x004230B4
+@ENDHACK
+

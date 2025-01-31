@@ -10,11 +10,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x0045ED9C, _BuildingClass__Read_INI_Repair_Yard_Unhardcode
-@LJMP 0x00460139, _BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode
-@LJMP 0x004604C3, _BuildingClass__Animation_AI_Yard_Unhardcode
-@LJMP 0x004A5BF5, _Keyboard_Process__Yard_Unhardcode
-@LJMP 0x004A5CA2, _Keyboard_Process__MCV_Unhardcode
+@LJMP 0x0045ED9C,_BuildingClass__Read_INI_Repair_Yard_Unhardcode
+@LJMP 0x00460139,_BuildingClass__Repair_AI_Dont_Sell_Yard_Unhardcode
+@LJMP 0x004604C3,_BuildingClass__Animation_AI_Yard_Unhardcode
+@LJMP 0x004A5BF5,_Keyboard_Process__Yard_Unhardcode
+@LJMP 0x004A5CA2,_Keyboard_Process__MCV_Unhardcode
 
 
 _BuildingClass__Read_INI_Repair_Yard_Unhardcode:

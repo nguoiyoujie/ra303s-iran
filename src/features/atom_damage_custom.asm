@@ -11,21 +11,10 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
-@LJMP 0x00425BA8, _AnimClass__Override_Atom_Range
-@LJMP 0x00425BC9, _AnimClass__Do_Atom_Damage
-@LJMP 0x00425C26, _AnimClass__Do_Atom_Damage2
 
-_AnimClass__Do_Atom_Damage2:
-    cmp  dword[Map.Basic.UseAtomWhiteScreenEffectInMP],1
-    jz   .Jump_Past
+extern Conquer___Call_Back
 
-    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
-    jnz  0x00425C43
-
-.Jump_Past:
-    jmp  0x00425C2F
-
-_AnimClass__Override_Atom_Range:
+@HACK 0x00425BA8,0x00425BAD,_AnimClass__Override_Atom_Range
     cmp  dword[Rules.General.AtomRadius],0
     jge   .Override_Range
     mov  ecx,4
@@ -34,18 +23,16 @@ _AnimClass__Override_Atom_Range:
     mov  ecx,[Rules.General.AtomRadius]
 .After_Override_Range:
     jmp  0x00425BAD
+@ENDHACK
 
 
-_AnimClass__Do_Atom_Damage:
+@HACK 0x00425BC9,0x00425BCE,_AnimClass__Do_Atom_Damage
     cmp  dword[Map.Basic.UseAtomWhiteScreenEffectInMP],0
     jz   .No_Whiten_Screen_Effect
-
     mov  ebx,Conquer___Call_Back
     mov  edx,0x1E
     mov  eax,Globals___WhitePalette
-
     call PaletteClass__Set
-
 .No_Whiten_Screen_Effect:
     cmp  dword[Rules.General.AtomRadius],0
     jge   .Override_Range
@@ -61,3 +48,14 @@ _AnimClass__Do_Atom_Damage:
 .Normal_Code:
     mov  eax,[Globals___Rule_AtomDamage]
     jmp  0x00425BCE
+@ENDHACK
+
+
+@HACK 0x00425C26,0x00425C2F,_AnimClass__Do_Atom_Damage2
+    cmp  dword[Map.Basic.UseAtomWhiteScreenEffectInMP],1
+    jz   .Jump_Past
+    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+    jnz  0x00425C43
+.Jump_Past:
+    jmp  0x00425C2F
+@ENDHACK

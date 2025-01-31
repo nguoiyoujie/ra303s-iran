@@ -10,10 +10,10 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00453CD3, _BuildingClass__Raw_Cost_FreeUnit_Override
-@LJMP 0x00459CD0, _BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit
-@LJMP 0x00459DF2, _BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit2
-@LJMP 0x00459EFC, _BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit3
+@LJMP 0x00453CD3,_BuildingClass__Raw_Cost_FreeUnit_Override
+@LJMP 0x00459CD0,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit
+@LJMP 0x00459DF2,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit2
+@LJMP 0x00459EFC,_BuildingClass__Grand_Opening_Refinery_Unhardcode_FreeUnit3
 
 [section .data] 
 Temp.FreeUnit db 0

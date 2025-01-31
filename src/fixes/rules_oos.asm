@@ -33,7 +33,7 @@
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
 
-@HACK 0x00538B73, 0x00538B7D, _Load_Game_Load_OOS_FIX_INI
+@HACK 0x00538B73,0x00538B7D,_Load_Game_Load_OOS_FIX_INI
     Save_Registers
     cmp  byte[spawner_is_active],1
     jz   .Ret
@@ -87,7 +87,7 @@ extern CCINIClass__Load
 @ENDHACK
 
 
-@HACK 0x0053D541, 0x0053D546, _Read_Scenario_INI_Load_OOS_FIX_INI
+@HACK 0x0053D541,0x0053D546,_Read_Scenario_INI_Load_OOS_FIX_INI
     cmp  byte[spawner_is_active],1
     jz   .Ret
     mov  edx,str_ini_OOSFix

@@ -8,37 +8,37 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x004DD108, _HouseClass__Recalc_Attributes_SetSpecialTypes
-@LJMP 0x004D5193, _HouseClass__Super_Weapon_Handler_GPS_Check1
-@LJMP 0x004D51C9, _HouseClass__Super_Weapon_Handler_GPS_Check2
-@LJMP 0x004D52E3, _HouseClass__Super_Weapon_Handler_GPS_Check3
-@LJMP 0x004D52A4, _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck1
-@LJMP 0x004D5371, _HouseClass__Super_Weapon_Handler_GPS_LaunchCheck2
-@LJMP 0x004D5418, _HouseClass__Super_Weapon_Handler_Chronosphere_Check1
-@LJMP 0x004D54DE, _HouseClass__Super_Weapon_Handler_Chronosphere_Check2
-@LJMP 0x004D5584, _HouseClass__Super_Weapon_Handler_IronCurtain_Check1
-@LJMP 0x004D55EE, _HouseClass__Super_Weapon_Handler_IronCurtain_Check2
-@LJMP 0x004D591D, _HouseClass__Super_Weapon_Handler_NukeMissile_Check1
-@LJMP 0x004D588C, _HouseClass__Super_Weapon_Handler_NukeMissile_Check2
-@LJMP 0x004D59C4, _HouseClass__Super_Weapon_Handler_SpyPlane_Check1
-@LJMP 0x004D5A3D, _HouseClass__Super_Weapon_Handler_SpyPlane_Check2
-@LJMP 0x004D5AAA, _HouseClass__Super_Weapon_Handler_Paradrop_Check1
-@LJMP 0x004D5AFF, _HouseClass__Super_Weapon_Handler_Paradrop_Check2
-@LJMP 0x004D5B6C, _HouseClass__Super_Weapon_Handler_Parabomb_Check1
-@LJMP 0x004D5BBD, _HouseClass__Super_Weapon_Handler_Parabomb_Check2
+@LJMP 0x004DD108,_HouseClass__Recalc_Attributes_SetSpecialTypes
+@LJMP 0x004D5193,_HouseClass__Super_Weapon_Handler_GPS_Check1
+@LJMP 0x004D51C9,_HouseClass__Super_Weapon_Handler_GPS_Check2
+@LJMP 0x004D52E3,_HouseClass__Super_Weapon_Handler_GPS_Check3
+@LJMP 0x004D52A4,_HouseClass__Super_Weapon_Handler_GPS_LaunchCheck1
+@LJMP 0x004D5371,_HouseClass__Super_Weapon_Handler_GPS_LaunchCheck2
+@LJMP 0x004D5418,_HouseClass__Super_Weapon_Handler_Chronosphere_Check1
+@LJMP 0x004D54DE,_HouseClass__Super_Weapon_Handler_Chronosphere_Check2
+@LJMP 0x004D5584,_HouseClass__Super_Weapon_Handler_IronCurtain_Check1
+@LJMP 0x004D55EE,_HouseClass__Super_Weapon_Handler_IronCurtain_Check2
+@LJMP 0x004D591D,_HouseClass__Super_Weapon_Handler_NukeMissile_Check1
+@LJMP 0x004D588C,_HouseClass__Super_Weapon_Handler_NukeMissile_Check2
+@LJMP 0x004D59C4,_HouseClass__Super_Weapon_Handler_SpyPlane_Check1
+@LJMP 0x004D5A3D,_HouseClass__Super_Weapon_Handler_SpyPlane_Check2
+@LJMP 0x004D5AAA,_HouseClass__Super_Weapon_Handler_Paradrop_Check1
+@LJMP 0x004D5AFF,_HouseClass__Super_Weapon_Handler_Paradrop_Check2
+@LJMP 0x004D5B6C,_HouseClass__Super_Weapon_Handler_Parabomb_Check1
+@LJMP 0x004D5BBD,_HouseClass__Super_Weapon_Handler_Parabomb_Check2
 
-@LJMP 0x0045D73A, _BuildingClass_Mission_Missile_SpecialWeapon_GPSCheck
-@LJMP 0x0045D8E0, _BuildingClass_Mission_Missile_SpecialWeapon_NuclearLaunchCheck
-@LJMP 0x004D6B89, _HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck
+@LJMP 0x0045D73A,_BuildingClass_Mission_Missile_SpecialWeapon_GPSCheck
+@LJMP 0x0045D8E0,_BuildingClass_Mission_Missile_SpecialWeapon_NuclearLaunchCheck
+@LJMP 0x004D6B89,_HouseClass__PlaceSpecialBlast_NukeMissile_LaunchCheck
 
-@LJMP 0x004D68DC, _HouseClass__Place_Special_Blast_SwitchRoute
-@LJMP 0x004D71B4, _HouseClass__Place_Special_Blast_Redefine_Chrono2
-@LJMP 0x004D5460, _HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2
-@LJMP 0x004B343F, _DisplayClass__TacticalClass__Action_Chrono_Target_Icon_new_Chrono2
-@LJMP 0x0057E1C5, _UnitClass__Mission_Unload__Chrono_Tank_new_Chrono2
-@LJMP 0x0057F708, _UnitClass__What_Action__Chrono_Tank_new_Chrono2
-@LJMP 0x00566898, _TechnoClass__Record_The_Kill__Chrono_Tank_new_Chrono2
-@LJMP 0x005666AE, _TechnoClass__Take_Damage__Chrono_Tank_new_Chrono2
+@LJMP 0x004D68DC,_HouseClass__Place_Special_Blast_SwitchRoute
+@LJMP 0x004D71B4,_HouseClass__Place_Special_Blast_Redefine_Chrono2
+@LJMP 0x004D5460,_HouseClass__Super_Weapon_Handler_Chronosphere_Check_new_Chrono2
+@LJMP 0x004B343F,_DisplayClass__TacticalClass__Action_Chrono_Target_Icon_new_Chrono2
+@LJMP 0x0057E1C5,_UnitClass__Mission_Unload__Chrono_Tank_new_Chrono2
+@LJMP 0x0057F708,_UnitClass__What_Action__Chrono_Tank_new_Chrono2
+@LJMP 0x00566898,_TechnoClass__Record_The_Kill__Chrono_Tank_new_Chrono2
+@LJMP 0x005666AE,_TechnoClass__Take_Damage__Chrono_Tank_new_Chrono2
 
 
 %define        SpecialChrono2        0xFE

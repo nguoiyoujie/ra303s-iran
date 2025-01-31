@@ -10,14 +10,14 @@
 ;
 ;----------------------------------------------------------------
 
-%define FadingJammed 0x006562e0 ; FadingWayDark
-; FadingBrighten  0x006560e0
-; FadingShade     0x006561e0
-; FadingWayDark   0x006562e0
-; FadingLight     0x006563e0
-; FadingGreen     0x006564e0
-; FadingYellow    0x006565e0
-; FadingRed       0x006566e0
+%define FadingJammed 0x006561E0 ; FadingShade
+; FadingBrighten  0x006560E0
+; FadingShade     0x006561E0
+; FadingWayDark   0x006562E0
+; FadingLight     0x006563E0
+; FadingGreen     0x006564E0
+; FadingYellow    0x006565E0
+; FadingRed       0x006566E0
 
 ; find a way to always refresh
 @HACK 0x0056718C,0x00567194,_TechnoClass__TechnoDrawObject_RemapJammedAsShade

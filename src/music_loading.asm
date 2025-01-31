@@ -1,21 +1,21 @@
-@LJMP 0x004F4B83, _Load_Game_Menu_Queue_Song_Call_Patch_Out
-@LJMP 0x00538EF0, _Load_Game_Queue_Song
-@LJMP 0x0056C15A, _ThemeClass_Track_Length
-@LJMP 0x0056C439, _ThemClass_Scan
-@LJMP 0x0056C40C, _ThemeClass_Scan_Jump_Over
-@LJMP 0x0056C115, _ThemeClass_File_Name
-@LJMP 0x0056BEA4, _ThemeClass_Full_Name
-@LJMP 0x0056BFC4, _ThemeClass_Next_Song_RNG
-@LJMP 0x0056BFF8, _ThemeClass_Next_Song_CMP
-@LJMP 0x0056BFA3, _ThemeClass_Next_Song_Cond_Jump
-@LJMP 0x0055066B, _SoundControlsClass_Process
-@LJMP 0x0056C240, _ThemeClass_Is_Allowed
-@LJMP 0x0056BFEC, _ThemeClass_Next_Song_BL_Register_Change
-@LJMP 0x0053A36F, _Start_Scenario_Queue_Theme
-@LJMP 0x004C7798, _TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
-;@LJMP 0x00550668, _SoundControlClass_Process_Jump_Over_Looping_Themes
-@LJMP 0x0056C3FE, _ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
-@LJMP 0x0056BF08, _ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
+@LJMP 0x004F4B83,_Load_Game_Menu_Queue_Song_Call_Patch_Out
+@LJMP 0x00538EF0,_Load_Game_Queue_Song
+@LJMP 0x0056C15A,_ThemeClass_Track_Length
+@LJMP 0x0056C439,_ThemClass_Scan
+@LJMP 0x0056C40C,_ThemeClass_Scan_Jump_Over
+@LJMP 0x0056C115,_ThemeClass_File_Name
+@LJMP 0x0056BEA4,_ThemeClass_Full_Name
+@LJMP 0x0056BFC4,_ThemeClass_Next_Song_RNG
+@LJMP 0x0056BFF8,_ThemeClass_Next_Song_CMP
+@LJMP 0x0056BFA3,_ThemeClass_Next_Song_Cond_Jump
+@LJMP 0x0055066B,_SoundControlsClass_Process
+@LJMP 0x0056C240,_ThemeClass_Is_Allowed
+@LJMP 0x0056BFEC,_ThemeClass_Next_Song_BL_Register_Change
+@LJMP 0x0053A36F,_Start_Scenario_Queue_Theme
+@LJMP 0x004C7798,_TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
+;@LJMP 0x00550668,_SoundControlClass_Process_Jump_Over_Looping_Themes
+@LJMP 0x0056C3FE,_ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
+@LJMP 0x0056BF08,_ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
 
 extern CCFileClass__CCFileClass
 extern CCFileClass__Is_Available

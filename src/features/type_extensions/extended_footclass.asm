@@ -1,4 +1,4 @@
-@LJMP 0x004C3343, _FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell
+@LJMP 0x004C3343,_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell
 
 ; ebx contains FootClass this pointer
 _FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell:

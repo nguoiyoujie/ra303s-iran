@@ -22,12 +22,12 @@
 ; We emulate this by placing the directional animations at the end of our list, then use the ID of the first animation to determine if an animation is directional
 ; The animation file is not loaded at this time, so we cannot obtain the frame 
 
-@LJMP 0x0041C5D8, _AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
-@LJMP 0x0041C654, _AnimTypeClass__One_Time_UnhardCode_AnimTypes
-@LJMP 0x0041C6E3, _AnimTypeClass__Init_UnhardCode_AnimTypes
-@LJMP 0x00423EE8, _Anim_From_Name_Unhardcode_AnimTypes
-@LJMP 0x004F40E9, _Init_Game_Set_AnimTypes_Heap_Count
-@LJMP 0x005655C5, _TechnoClass_FireAt_ApplyDirectionalAnim
+@LJMP 0x0041C5D8,_AnimTypeClass_Init_Heap_Unhardcode_AnimTypes
+@LJMP 0x0041C654,_AnimTypeClass__One_Time_UnhardCode_AnimTypes
+@LJMP 0x0041C6E3,_AnimTypeClass__Init_UnhardCode_AnimTypes
+@LJMP 0x00423EE8,_Anim_From_Name_Unhardcode_AnimTypes
+@LJMP 0x004F40E9,_Init_Game_Set_AnimTypes_Heap_Count
+@LJMP 0x005655C5,_TechnoClass_FireAt_ApplyDirectionalAnim
 
 %define        AnimDirStageFrames            18 ; use SAMFIRE (6 for MINIGUN)
 

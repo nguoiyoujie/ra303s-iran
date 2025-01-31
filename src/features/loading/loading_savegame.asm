@@ -4,11 +4,10 @@
 ; Load setting keys from savegames. 
 ;
 ;----------------------------------------------------------------
-@LJMP 0x00537E08, _Load_Game_Before_Hook ; For savegame loading stuff
-@LJMP 0x00538F07, _Load_Game_Late_Hook  ; For savegame loading stuff
 
+extern Conquer___Call_Back
 
-_Load_Game_Late_Hook:
+@HACK 0x00538F07,0x00538F0C,_Load_Game_Late_Hook  ; For savegame loading stuff
     Save_Registers
 
     ; Enable AM units for skirmish savegames
@@ -36,9 +35,10 @@ _Load_Game_Late_Hook:
     Restore_Registers
     call INIClass__~INIClass
     jmp  0x00538F0C
+@ENDHACK
 
 
-_Load_Game_Before_Hook:
+@HACK 0x00537E08,0x00537E0D,_Load_Game_Before_Hook ; For savegame loading stuff
     Save_Registers
 
     ;Remove any active Chrono Vortex
@@ -81,5 +81,7 @@ _Load_Game_Before_Hook:
 
 .Dont_Fix_FRAG1:
     Restore_Registers
-    call 0x004A765C ; Call_Back(void)
+    call Conquer___Call_Back
     jmp  0x00537E0D
+@ENDHACK
+

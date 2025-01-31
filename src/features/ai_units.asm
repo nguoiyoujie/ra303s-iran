@@ -16,16 +16,16 @@
 ;added by lovalmidas
 ; hook into AI_Unit() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original UNIT_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them
-@LJMP 0x004DB839, _HouseClass__AI_Unit_CheckHarvester
-@LJMP 0x004DB84D, _HouseClass__AI_Unit_PickHarvester
-@LJMP 0x004DBBB6, _HouseClass__AI_Unit_Extend_BestList_1
-@LJMP 0x004DBBE4, _HouseClass__AI_Unit_Extend_BestList_2
-@LJMP 0x004DBB6A, _HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
+@LJMP 0x004DB839,_HouseClass__AI_Unit_CheckHarvester
+@LJMP 0x004DB84D,_HouseClass__AI_Unit_PickHarvester
+@LJMP 0x004DBBB6,_HouseClass__AI_Unit_Extend_BestList_1
+@LJMP 0x004DBBE4,_HouseClass__AI_Unit_Extend_BestList_2
+@LJMP 0x004DBB6A,_HouseClass__AI_Unit_Extend_Remove_CanBuild_From_TeamTypeCheck
 ; extends the check to new unittypeclass
-@LJMP 0x004DBBC5, _HouseClass__AI_Unit_Expand
-@LJMP 0x004DBC32, _HouseClass__AI_Unit_Ignore_Harvesters
-@LJMP 0x004DBC89, _HouseClass__AI_Unit_Expand_Choice
-@LJMP 0x004DBCAE, _HouseClass__AI_Unit_Expand_Choice_2
+@LJMP 0x004DBBC5,_HouseClass__AI_Unit_Expand
+@LJMP 0x004DBC32,_HouseClass__AI_Unit_Ignore_Harvesters
+@LJMP 0x004DBC89,_HouseClass__AI_Unit_Expand_Choice
+@LJMP 0x004DBCAE,_HouseClass__AI_Unit_Expand_Choice_2
 ;added by lovalmidas/
 
 
@@ -49,7 +49,7 @@
 @SET 0x004DBC78,{mov ecx,dword[ebp+eax*4-0x4FC]}
 @SET 0x004DBCDF,{mov esi,dword[ebp+edx-0x4FC]}
 
-@LJMP 0x004DBC37, _HouseClass__AI_Unit_Set_Weight
+@LJMP 0x004DBC37,_HouseClass__AI_Unit_Set_Weight
 
 [section .data] 
 Temp.AIUnit.Harvester db 0

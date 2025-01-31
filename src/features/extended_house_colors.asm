@@ -10,14 +10,6 @@
 ; Care should be taken that the color index is not exceeded
 ;
 ;----------------------------------------------------------------
-
-@LJMP 0x004D654B, _HouseClass__Remap_Table_Return_Custom_Remaps
-@LJMP 0x0049EF65, _CellClass__Cell_Color
-@LJMP 0x0052E4E7, _RadarClass__Draw_It_Custom_Remaps
-@LJMP 0x00532767, _RadarClass__Draw_Names_Custom_Remaps
-@LJMP 0x0052EAB1, _RadarClass__Render_Infantry
-@LJMP 0x0052EBC3, _RadarClass__Render_Infantry2
-
 %macro Initialize_Remap_Table 1
     xor  eax,eax
 
@@ -36,6 +28,100 @@
 %endmacro
 
 
+@HACK 0x0052EBC3,0x0052EBCB,_RadarClass__Render_Infantry2
+    xor  ecx,ecx
+    cmp  eax,7
+    jg   .Custom_Remap
+    imul eax,0x11A
+    jmp  0x0052EBCB
+.Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    add  eax,0x119
+    mov  byte cl,[eax]
+    jmp  0x0052EBD1
+@ENDHACK
+
+
+@HACK 0x0052EAB1,0x0052EABC,_RadarClass__Render_Infantry
+    xor  ecx,ecx
+    mov  esi,[ebp-0x30]
+    cmp  eax,7
+    jg   .Custom_Remap
+    imul eax,0x11A
+    jmp  0x0052EABC
+.Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    add  eax,0x119
+    mov  byte cl,[eax]
+    jmp  0x0052EAC2
+@ENDHACK
+
+
+@HACK 0x0049EF65,_CellClass__Cell_Color
+    cmp  eax,7
+    jg   .Custom_Remap
+    imul eax,0x11A
+    jmp  0x0049EF6B
+.Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    add  eax,0x119
+    mov  al,[eax]
+    jmp  0x0049EF71
+@ENDHACK
+
+
+@HACK 0x00532767,0x0053276D,_RadarClass__Draw_Names_Custom_Remaps
+    cmp  eax,7
+    jg   .Custom_Remap
+    imul eax,0x11A
+    jmp  0x0053276D
+.Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    mov  edx,eax
+    jmp  0x00532774
+@ENDHACK
+
+
+@HACK 0x0052E4E7,0x0052E4ED,_RadarClass__Draw_It_Custom_Remaps
+    cmp  eax,7
+    jg   .Custom_Remap
+    imul eax,0x11A
+    jmp  0x0052E4ED
+.Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    push 0x136
+    push 0
+    jmp  0x0052E4F9
+@ENDHACK
+
+
+@HACK 0x004D654B,0x004D6551,_HouseClass__Remap_Table_Return_Custom_Remaps
+    cmp  eax,7
+    jg   .Return_Custom_Remap
+    imul eax,0x11A
+    jmp  0x004D6551
+.Return_Custom_Remap:
+    sub  eax,8
+    imul eax,0x11A
+    add  eax,ColorRemaps.ExtendedColors
+    add  eax,2
+    mov  esp,ebp
+    pop  ebp
+    retn
+@ENDHACK
+
+
+[section .text]
 ; called from loading.asm/_Init_Game_Hook_Load
 _InitializeExtendedColors:
 
@@ -227,97 +313,3 @@ _InitializeExtendedColors:
 
 
 
-_RadarClass__Render_Infantry2:
-    xor  ecx,ecx
-    cmp  eax,7
-    jg   .Custom_Remap
-    imul eax,0x11A
-    jmp  0x0052EBCB
-
-.Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    add  eax,0x119
-    mov  byte cl,[eax]
-    jmp  0x0052EBD1
-
-
-_RadarClass__Render_Infantry:
-    xor  ecx,ecx
-    mov  esi,[ebp-0x30]
-
-    cmp  eax,7
-    jg   .Custom_Remap
-
-    imul eax,0x11A
-    jmp  0x0052EABC
-
-.Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    add  eax,0x119
-    mov  byte cl,[eax]
-    jmp  0x0052EAC2
-
-
-_CellClass__Cell_Color:
-    cmp  eax,7
-    jg   .Custom_Remap
-    imul eax,0x11A
-    jmp  0x0049EF6B
-
-.Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    add  eax,0x119
-    mov  al,[eax]
-    jmp  0x0049EF71
-
-
-_RadarClass__Draw_Names_Custom_Remaps:
-    cmp  eax,7
-    jg   .Custom_Remap
-    imul eax,0x11A
-    jmp  0x0053276D
-
-.Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    mov  edx,eax
-    jmp  0x00532774
-
-
-_RadarClass__Draw_It_Custom_Remaps:
-    cmp  eax,7
-    jg   .Custom_Remap
-
-    imul eax,0x11A
-    jmp  0x0052E4ED
-
-.Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    push 0x136
-    push 0
-    jmp  0x0052E4F9
-
-
-_HouseClass__Remap_Table_Return_Custom_Remaps:
-    cmp  eax,7
-    jg   .Return_Custom_Remap
-    imul eax,0x11A
-    jmp  0x004D6551
-
-.Return_Custom_Remap:
-    sub  eax,8
-    imul eax,0x11A
-    add  eax,ColorRemaps.ExtendedColors
-    add  eax,2
-    mov  esp,ebp
-    pop  ebp
-    retn

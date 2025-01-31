@@ -25,13 +25,13 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x004F5B38, _arguments
-@LJMP 0x005025CC, _Select_Game_AntMissions_Check
-@LJMP 0x004F496C, _Select_Game_SkipDifficulty
-@LJMP 0x004F4A23, _Select_Game_SkipDifficulty2
-@LJMP 0x004F4A6D, _Select_Game_SetScenarioName
-@LJMP 0x004F429F, _Init_Game_SkipIntro
-@LJMP 0x004A537F, _Main_Game_AutoExit
+@LJMP 0x004F5B38,_arguments
+@LJMP 0x005025CC,_Select_Game_AntMissions_Check
+@LJMP 0x004F496C,_Select_Game_SkipDifficulty
+@LJMP 0x004F4A23,_Select_Game_SkipDifficulty2
+@LJMP 0x004F4A6D,_Select_Game_SetScenarioName
+@LJMP 0x004F429F,_Init_Game_SkipIntro
+@LJMP 0x004A537F,_Main_Game_AutoExit
 
 %define recording_mode                               0x00680151
 

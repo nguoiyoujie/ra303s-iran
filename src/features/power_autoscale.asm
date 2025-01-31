@@ -7,9 +7,9 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x00527C9A, _PowerClass__AI_Record_Power_Drain
-@LJMP 0x00527D11, _PowerClass__AI_Record_Power_Drain2
-@LJMP 0x00527EEB, _PowerClass__Power_Height_Scale_Height_Relative
+@LJMP 0x00527C9A,_PowerClass__AI_Record_Power_Drain
+@LJMP 0x00527D11,_PowerClass__AI_Record_Power_Drain2
+@LJMP 0x00527EEB,_PowerClass__Power_Height_Scale_Height_Relative
 
 [section .data] 
 Temp.PowerClassAI.Power  dd 0

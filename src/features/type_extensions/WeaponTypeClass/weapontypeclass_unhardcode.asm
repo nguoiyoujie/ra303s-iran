@@ -1,5 +1,5 @@
-@LJMP 0x00536275, _RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
-@LJMP 0x0053668A, _RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
+@LJMP 0x00536275,_RulesClass__Heap_Maxiums_Set_Weapons_Heap_Count
+@LJMP 0x0053668A,_RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes
 
 Init_WeaponTypeClass:
     mov  eax,0x26

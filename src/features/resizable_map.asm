@@ -15,10 +15,10 @@
 ;----------------------------------------------------------------
 
 ; allow building placement outside of play area, only during scenario setup
-@LJMP 0x0045BA09, _BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit
+@LJMP 0x0045BA09,_BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit
 
 ; allow smudges to be marked outside of the play area
-@LJMP 0x0054FDBC, _SmudgeClass_Replace_In_Radar_Check
+@LJMP 0x0054FDBC,_SmudgeClass_Replace_In_Radar_Check
 
 _BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit:
     cmp  dword[Globals___ScenarioInit],0

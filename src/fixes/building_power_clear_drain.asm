@@ -8,7 +8,7 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-@LJMP 0x00453FDC, _BuildingTypeClass_Read_Ini_ResetDrain
+@LJMP 0x00453FDC,_BuildingTypeClass_Read_Ini_ResetDrain
 
 _BuildingTypeClass_Read_Ini_ResetDrain:
     jge  .PositivePower

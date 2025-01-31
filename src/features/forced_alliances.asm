@@ -10,13 +10,9 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004BD167, EventClass__Execute_Ally_Forced_Alliances
-
-
-EventClass__Execute_Ally_Forced_Alliances:
-    mov  eax,0x0065D994
-
+@HACK 0x004BD167,0x004BD16C,EventClass__Execute_Ally_Forced_Alliances
+    mov  eax,0x0065D994 ; TFixedIHeapClass<HouseClass> Houses
     cmp  byte[Spawn.Settings.ForcedAlliances],1
     jz   0x004BDFED ; jump to EVENT_EXECUTE_NULL
-
     jmp  0x004BD16C
+@ENDHACK

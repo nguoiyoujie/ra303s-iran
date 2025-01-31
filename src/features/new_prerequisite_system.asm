@@ -168,31 +168,6 @@
 @ENDHACK
 
 
-@HACK 0x004D4C79,0x004D4C82,_HouseClass__AI_MPlayerDefeated_Check
-    ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
-    ; this filters out any Insignificant=yes entities
-    push eax
-    mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
-    shl  eax,5 ; ID * 32 bytes
-    lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
-    lea  ecx,[Houses.BSignificantScan]
-    xor  edi,edi ; start with offset 0
-.Scan:
-    mov  eax,[esi] 
-    mov  edx,[ecx] 
-    and  eax,edx
-    test eax,eax
-    pop  eax
-    jnz  0x004D4CB4 ; ret 1; abort check
-    add  eax,4
-    add  ecx,4  
-    inc  edi
-    cmp  edi,8
-    jl   .Scan
-    jmp  0x004D4C82 ; ret 0; continue check
-@ENDHACK
-
-
 @HACK 0x0057E333,0x0057E33A,_UnitClass_Mission_Harvest_RefineryCheck
     test byte[eax+HouseClass.Offset.BPreGroupScan],0x10 ; REFINERY
     jmp  0x0057E33A

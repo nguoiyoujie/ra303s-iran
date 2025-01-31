@@ -9,9 +9,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x00420662, _AircraftClass__PoseDir_HeliTransportsFaceNorth
-
-_AircraftClass__PoseDir_HeliTransportsFaceNorth:
+@HACK 0x00420662,0x00420673,_AircraftClass__PoseDir_HeliTransportsFaceNorth
     mov  dl,byte[edx+0x196] ; dl is now the ID
     movzx edx,dl
     push eax
@@ -34,3 +32,5 @@ _AircraftClass__PoseDir_HeliTransportsFaceNorth:
     pop  ebx
     pop  eax
     jmp  0x00420673
+@ENDHACK
+

@@ -10,8 +10,8 @@
 ;
 ;----------------------------------------------------------------
 
-;@LJMP 0x0057E23C, _UnitClass_Mission_Unload_PassengerUnhardcode
-@LJMP 0x0057D3C2, _UnitClass_Mission_Unload_PassengerUnhardcode
+;@LJMP 0x0057E23C,_UnitClass_Mission_Unload_PassengerUnhardcode
+@LJMP 0x0057D3C2,_UnitClass_Mission_Unload_PassengerUnhardcode
 
 ;Replaces the Supply Truck check with a Passengers=xx check
 ;_UnitClass_Mission_Unload_PassengerUnhardcode:

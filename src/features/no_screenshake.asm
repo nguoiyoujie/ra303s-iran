@@ -11,7 +11,7 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x004AB678, _Shake_The_Screen_Return_At_Prologue
+@LJMP 0x004AB678,_Shake_The_Screen_Return_At_Prologue
 
 _Shake_The_Screen_Return_At_Prologue:
     cmp  byte[Rules.General.NoScreenShake],1

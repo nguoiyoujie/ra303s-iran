@@ -11,16 +11,12 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x0058A1E4, _VesselClass__Draw_It_Check_Second_Turret
-@LJMP 0x00584A78, _VesselClass__Turret_Adjust_Apply_TurretOffset
-@LJMP 0x0058B5FC, _VesselClass__Fire_Data_Apply_Offsets
-
 [section .data] 
-temp_objecttype      dd    0
+Temp.VesselTypeObject      dd    0
 
 
 [section .text] 
-_VesselClass__Draw_It_Check_Second_Turret:
+@HACK 0x0058A1E4,0x0058A207,_VesselClass__Draw_It_Check_Second_Turret
     ; dx is the vessel type id
     push edi
     push eax
@@ -29,7 +25,7 @@ _VesselClass__Draw_It_Check_Second_Turret:
     and  edx,0xFF
     VesselTypeClass.FromIndex(edx,edi)
     pop  edx
-    mov  dword[temp_objecttype],edi
+    mov  dword[Temp.VesselTypeObject],edi
     xor  ecx,ecx
     VesselTypeClass.TurretShape.Get(edi,ecx)
     test ecx,ecx
@@ -45,22 +41,21 @@ _VesselClass__Draw_It_Check_Second_Turret:
     mov  dl,byte[ebx]
     xor  ebx,ebx
     jmp  0x0058A207
-
 .NoTurret:
     pop  ebx
     pop  eax
     pop  edi
     jmp  0x0058A302
-    
 .SingleTurret:
     mov  dl,byte[ebx]
     xor  ebx,ebx
     jmp  0x0058A368
+@ENDHACK
 
 
-_VesselClass__Turret_Adjust_Apply_TurretOffset:
+@HACK 0x00584A78,0x00584AE2,_VesselClass__Turret_Adjust_Apply_TurretOffset
     push edi
-    mov edi,dword[temp_objecttype]
+    mov edi,dword[Temp.VesselTypeObject]
     xor ecx,ecx
     VesselTypeClass.TurretOffset.Get(edi,cl)
     ;mov  cl,<offset>
@@ -85,9 +80,10 @@ _VesselClass__Turret_Adjust_Apply_TurretOffset:
     add  eax,ecx
     pop  edi
     jmp  0x00584B0B
+@ENDHACK
 
 
-_VesselClass__Fire_Data_Apply_Offsets:
+@HACK 0x0058B5FC,0x0058B648,_VesselClass__Fire_Data_Apply_Offsets
     ; ebx is the ID
     push edi
     push eax
@@ -118,3 +114,5 @@ _VesselClass__Fire_Data_Apply_Offsets:
     call dword[edx+0x164]
     xor  edx,edx
     jmp  0x0058B648
+@ENDHACK
+

@@ -8,8 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 ; Fixes lagging audio and movies
-@LJMP 0x005C5AFE, _VQA_Play_SetPriorityClass_NOP_Out
-@LJMP 0x005C5D71, _VQA_Play_SetPriorityClass_NOP_Out2
+@LJMP 0x005C5AFE,_VQA_Play_SetPriorityClass_NOP_Out
+@LJMP 0x005C5D71,_VQA_Play_SetPriorityClass_NOP_Out2
 
 _VQA_Play_SetPriorityClass_NOP_Out2:
     add  esp,8

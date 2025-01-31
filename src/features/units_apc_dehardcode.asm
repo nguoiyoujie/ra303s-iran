@@ -10,12 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0057A7A3, _UnitClass__Receive_Message_Door_Open_And_Close
-@LJMP 0x0057A863, _UnitClass__Receive_Message_PromptPassenger
-;@LJMP 0x0057D3C2, _UnitClass__Mission_Unload_CheckAPCDoor ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
-@LJMP 0x0057CC5F, _UnitClass__Draw_It_Offset_Turrets
-
-_UnitClass__Receive_Message_Door_Open_And_Close:
+@HACK 0x0057A7A3,0x0057A7D7,_UnitClass__Receive_Message_Door_Open_And_Close
     push eax
     push ebx
     push edx
@@ -29,9 +24,10 @@ _UnitClass__Receive_Message_Door_Open_And_Close:
     pop  eax
     je   0x0057A7D7 ; enter
     jmp  0x0057A81A ; bail
+@ENDHACK
 
 
-_UnitClass__Receive_Message_PromptPassenger:
+@HACK 0x0057A863,0x0057A897,_UnitClass__Receive_Message_PromptPassenger
     push eax
     push ebx
     push edx
@@ -45,10 +41,11 @@ _UnitClass__Receive_Message_PromptPassenger:
     pop  eax
     je   0x0057A897 ; enter
     jmp  0x0057A8B1 ; bail
+@ENDHACK
 
 
 ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
-;_UnitClass__Mission_Unload_CheckAPCDoor:
+;@HACK 0x0057D3C2,_UnitClass__Mission_Unload_CheckAPCDoor ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 ;    mov  al,byte[eax+0x196]
 ;    push eax
 ;    push ebx
@@ -64,10 +61,11 @@ _UnitClass__Receive_Message_PromptPassenger:
 ;    pop  eax
 ;    je   0x0057D96C ; enter
 ;    jmp  0x0057D3C8 ; bail
+;@ENDHACK
 
 
-_UnitClass__Draw_It_Offset_Turrets:
-; for STNK
+@HACK 0x0057CC5F,0x0057CC6B,_UnitClass__Draw_It_Offset_Turrets
+    ; for STNK
     movzx eax,al ; use movzx
     push edx
     push edi
@@ -111,3 +109,4 @@ _UnitClass__Draw_It_Offset_Turrets:
     pop  edi
     pop  edx    
     jmp  0x0057CC6B
+@ENDHACK

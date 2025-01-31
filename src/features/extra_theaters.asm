@@ -9,25 +9,25 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004F7805, _Init_Heaps_Larger_Theater_Buffer
-;@LJMP 0x0041C6A1, _AnimTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0056AAE9, _TerrainClass__Unlimbo_Theater_Check_NOP
-;@LJMP 0x00524B68, _OverlayTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0049EAF3, _TemplateTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0055B8FA, _TerrainTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0055B909, _TerrainTypeClass__Init_Theater
-@LJMP 0x00549E0A, _SmudgeTypeClass__Init_Theater
-@LJMP 0x00524B76, _OverlayTypeClass__Init_Theater
-@LJMP 0x004AF0D4, _DisplayClass__Init_Theater2
-@LJMP 0x004AF057, _DisplayClass__Init_Theater
-@LJMP 0x004A9450, _Fading_Table_Name_Theater
-@LJMP 0x0049EB02, _TemplateTypeClass__Init_Theater
-@LJMP 0x004638A4, _CCINIClass__Put_TheaterType_Theater
-@LJMP 0x00453988, _BuildingTypeClass__Init_Theater2
-@LJMP 0x00453943, _BuildingTypeClass__Init_Theater
-@LJMP 0x0041C6AF, _AnimTypeClass__Init_Theater
-@LJMP 0x004A7AEB, _Theater_From_Name_New_Theaters_Array
-@LJMP 0x004A7AD4, _Theater_From_Name_New_Theaters_Counter_Check
+@LJMP 0x004F7805,_Init_Heaps_Larger_Theater_Buffer
+;@LJMP 0x0041C6A1,_AnimTypeClass__Init_Theater_Check_NOP
+@LJMP 0x0056AAE9,_TerrainClass__Unlimbo_Theater_Check_NOP
+;@LJMP 0x00524B68,_OverlayTypeClass__Init_Theater_Check_NOP
+@LJMP 0x0049EAF3,_TemplateTypeClass__Init_Theater_Check_NOP
+@LJMP 0x0055B8FA,_TerrainTypeClass__Init_Theater_Check_NOP
+@LJMP 0x0055B909,_TerrainTypeClass__Init_Theater
+@LJMP 0x00549E0A,_SmudgeTypeClass__Init_Theater
+@LJMP 0x00524B76,_OverlayTypeClass__Init_Theater
+@LJMP 0x004AF0D4,_DisplayClass__Init_Theater2
+@LJMP 0x004AF057,_DisplayClass__Init_Theater
+@LJMP 0x004A9450,_Fading_Table_Name_Theater
+@LJMP 0x0049EB02,_TemplateTypeClass__Init_Theater
+@LJMP 0x004638A4,_CCINIClass__Put_TheaterType_Theater
+@LJMP 0x00453988,_BuildingTypeClass__Init_Theater2
+@LJMP 0x00453943,_BuildingTypeClass__Init_Theater
+@LJMP 0x0041C6AF,_AnimTypeClass__Init_Theater
+@LJMP 0x004A7AEB,_Theater_From_Name_New_Theaters_Array
+@LJMP 0x004A7AD4,_Theater_From_Name_New_Theaters_Counter_Check
 ; If no match is found, revert to TEMPERATE instead of crashing the game
 @SET 0x004A7AFF,{mov al,0x1}
 

@@ -8,17 +8,17 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004C9F62, _RedrawOptionsMenu_Skirmish_Savegames
-@LJMP 0x004C9F80, _RedrawOptionsMenu_Skirmish_Savegames2
-@LJMP 0x004C9F93, _RedrawOptionsMenu_Skirmish_Savegames3
-@LJMP 0x004C9FA7, _RedrawOptionsMenu_Skirmish_Savegames4
-@LJMP 0x004C9FB5, _RedrawOptionsMenu_Skirmish_Savegames5
-@LJMP 0x004CA2CD, _RedrawOptionsMenu_Skirmish_Savegames6
-@LJMP 0x004CA953, _RedrawOptionsMenu_Skirmish_Savegames7
-@LJMP 0x004CA9D0, _RedrawOptionsMenu_Skirmish_Savegames8
-@LJMP 0x00538267, _Load_Game_Set_Session_Type_Hack
-@LJMP 0x00537A3C, _Save_Game_House_Type_Get
-@LJMP 0x004FDB92, _LoadOptionsClass__Fill_Prepend_Skirmish_Text
+@LJMP 0x004C9F62,_RedrawOptionsMenu_Skirmish_Savegames
+@LJMP 0x004C9F80,_RedrawOptionsMenu_Skirmish_Savegames2
+@LJMP 0x004C9F93,_RedrawOptionsMenu_Skirmish_Savegames3
+@LJMP 0x004C9FA7,_RedrawOptionsMenu_Skirmish_Savegames4
+@LJMP 0x004C9FB5,_RedrawOptionsMenu_Skirmish_Savegames5
+@LJMP 0x004CA2CD,_RedrawOptionsMenu_Skirmish_Savegames6
+@LJMP 0x004CA953,_RedrawOptionsMenu_Skirmish_Savegames7
+@LJMP 0x004CA9D0,_RedrawOptionsMenu_Skirmish_Savegames8
+@LJMP 0x00538267,_Load_Game_Set_Session_Type_Hack
+@LJMP 0x00537A3C,_Save_Game_House_Type_Get
+@LJMP 0x004FDB92,_LoadOptionsClass__Fill_Prepend_Skirmish_Text
 
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>

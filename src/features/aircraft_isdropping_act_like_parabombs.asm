@@ -11,24 +11,15 @@
 ; 
 ;----------------------------------------------------------------
 
-@LJMP 0x004232DC, _AircraftClass_Can_Fire_UseIsDroppingForParabomb
-@LJMP 0x00423323, _AircraftClass_Can_Fire_RemovePassengerCheckForBombing
-@LJMP 0x00423385, _AircraftClass_Can_Fire_UseWeaponRangeForBombing
+@SJMP 0x00423323,0x00423348 ; _AircraftClass_Can_Fire_RemovePassengerCheckForBombing
 
-_AircraftClass_Can_Fire_UseIsDroppingForParabomb:
+@HACK 0x004232DC,0x004232E3,_AircraftClass_Can_Fire_UseIsDroppingForParabomb
     test byte[edx+0x138],0x8 ;IsDropping
     jmp  0x004232E3
+@ENDHACK
 
 
-; Replace
-;    if (camera || (fudge && Passenger && Is_Something_Attached())) 
-; with
-;    if (camera || fudge) 
-
-_AircraftClass_Can_Fire_RemovePassengerCheckForBombing:
-    jmp  0x00423348
-
-_AircraftClass_Can_Fire_UseWeaponRangeForBombing:
+@HACK 0x00423385,0x00423395,_AircraftClass_Can_Fire_UseWeaponRangeForBombing
     ; ebx is camera, it is used only to switch between a range of 0x200 and 0x320. 
 	; we use ebx  instead to fetch the weapon range of the primary weapon of this aircraft. If there is no primary weapon, fallback to 0x200
 	push eax
@@ -52,7 +43,6 @@ _AircraftClass_Can_Fire_UseWeaponRangeForBombing:
 .Ret:
 	pop  eax
     jmp  0x00423395 ; cmp code is here
+@ENDHACK
 
-;    mov  [edx+0x172] ; primary
-;    ...
-;    jmp  0x00423395
+

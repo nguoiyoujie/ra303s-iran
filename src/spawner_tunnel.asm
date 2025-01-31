@@ -61,7 +61,7 @@ Tunnel_SendTo:
     shr  edx,16
     OR   [eax],edx
 
-    AND  edx,0xFFFF
+    and  edx,0xFFFF
     OR   [eax],edx
 
     ; set dest_addr to tunnel address
@@ -175,7 +175,7 @@ Tunnel_RecvFrom:
 
     ; FIXME: going to assume packets are meant for me, someone can validate the "to" part later...
     ; leaving just from here
-    AND  edx,0xFFFF
+    and  edx,0xFFFF
 
     ; set from port to header identifier
     mov  ecx,[src_addr]

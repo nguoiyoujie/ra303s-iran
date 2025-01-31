@@ -10,29 +10,20 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-@LJMP 0x00579FAD, _UnitClass__Reload_AI_UseAmmoReloadRate
-@LJMP 0x00579FE7, _UnitClass__Reload_AI_UseAmmoReloadRate2
-@LJMP 0x0057A05E, _UnitClass__Reload_AI_UseAmmoReloadAmount
-@LJMP 0x0057A089, _UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow
-@LJMP 0x0057A097, _UnitClass__Reload_AI_UseAmmoReloadRate3
-@LJMP 0x005807FE, _UnitClass__Fire_At_UpdateReload
-@LJMP 0x0058082D, _UnitClass__Fire_At_UpdateReload2
-@LJMP 0x0057DD83, _UnitClass__Mission_Unload_Minelayer_Reload
-
 [section .data] 
 Temp.UnitReload           dd    0
 Temp.UnitReload.ID   db    0
 Temp.UnitReload.Amount    dd    0
 
 
-[section .text] 
-_UnitClass__Reload_AI_UseAmmoReloadRate:
+@HACK 0x00579FAD,0x00579FB9,_UnitClass__Reload_AI_UseAmmoReloadRate
     ; dl is the unit type id
     mov  byte[Temp.UnitReload.ID],dl
     jmp  0x00579FB9
+@ENDHACK
 
 
-_UnitClass__Reload_AI_UseAmmoReloadRate2:
+@HACK 0x00579FE7,0x00579FED,_UnitClass__Reload_AI_UseAmmoReloadRate2
     jge  0x0057A0C2
     push edi
     push edx
@@ -52,15 +43,17 @@ _UnitClass__Reload_AI_UseAmmoReloadRate2:
     pop  edi
     jle  0x0057A0C2
     jmp  0x00579FED
+@ENDHACK
 
 
-_UnitClass__Reload_AI_UseAmmoReloadAmount:
+@HACK 0x0057A05E,0x0057A065,_UnitClass__Reload_AI_UseAmmoReloadAmount
     mov  esi,dword[eax+0xc5]
     add  esi,dword[Temp.UnitReload.Amount]
     jmp  0x0057A065
+@ENDHACK
 
 
-_UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow:
+@HACK 0x0057A089,0x0057A095,_UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow
     mov  ebx,dword[eax+0xc5]
     cmp  ebx,dword[edx+0x15e]
     jl   .No_Overflow
@@ -69,15 +62,17 @@ _UnitClass__Reload_AI_UseAmmoReloadAmount_CheckOverflow:
     mov  dword[eax+0xc5],ebx
 .No_Overflow:
     jmp  0x0057A095
+@ENDHACK
 
 
-_UnitClass__Reload_AI_UseAmmoReloadRate3:
+@HACK 0x0057A097,0x0057A09C,_UnitClass__Reload_AI_UseAmmoReloadRate3
     mov  edi,dword[Temp.UnitReload]
-    imul edi,15
+    imul edi,15 ; ticks in a second
     jmp  0x0057A09C
+@ENDHACK
 
 
-_UnitClass__Fire_At_UpdateReload:
+@HACK 0x005807FE,0x00580803,_UnitClass__Fire_At_UpdateReload
     ; al is the unit type id
     push edi
     push edx
@@ -89,17 +84,18 @@ _UnitClass__Fire_At_UpdateReload:
     pop  edx
     pop  edi
     jmp  0x00580803
+@ENDHACK
 
 
-_UnitClass__Fire_At_UpdateReload2:
+@HACK 0x0058082D,0x00580832,_UnitClass__Fire_At_UpdateReload2
     mov  ebx,dword[Temp.UnitReload]
-    imul ebx,15
+    imul ebx,15 ; ticks in a second
     jmp  0x00580832
+@ENDHACK
 
 
-_UnitClass__Mission_Unload_Minelayer_Reload:
+@HACK 0x0057DD83,0x0057DD89,_UnitClass__Mission_Unload_Minelayer_Reload
     dec  dword[eax+0xc5]
-    ;dec  dword[eax+0xc5]
     push eax
     push ebx
     push edx
@@ -108,7 +104,7 @@ _UnitClass__Mission_Unload_Minelayer_Reload:
     movzx edx,dl
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
-    imul edx,15 ; don't forget to convert seconds to ticks
+    imul edx,15 ; ticks in a second
     mov  ebx,dword[0x006680C4]
     ; set Reload timer (current tick, duration)
     mov  dword[eax+0x170],ebx
@@ -118,5 +114,4 @@ _UnitClass__Mission_Unload_Minelayer_Reload:
     pop  ebx
     pop  eax
     jmp  0x0057DD89
-
-
+@ENDHACK

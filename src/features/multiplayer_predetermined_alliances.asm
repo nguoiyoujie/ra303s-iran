@@ -11,7 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0053DC0B, _Read_Scenario_INI_Ally_Test
+@LJMP 0x0053DC0B,_Read_Scenario_INI_Ally_Test
 
 str_HouseAllyOne        db"HouseAllyOne",0
 str_HouseAllyTwo        db"HouseAllyTwo",0

@@ -15,25 +15,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0058144B, _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
-
-
-Check_AI_Difficulty_Gem_And_Gold_Values:
-    cmp  ebx,-1 ; ebx = gold value
-    jnz  .Dont_Change_Gold_Value
-
-    mov  ebx,[Globals___Rule_GoldValue]
-
-.Dont_Change_Gold_Value:
-    cmp  ecx,-1 ; ebx = gold value
-    jnz  .Dont_Gem_Gold_Value
-    mov  ecx,[Globals___Rule_GemValue]
-
-.Dont_Gem_Gold_Value:
-    retn
-
-
-_UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties:
+@HACK 0x0058144B,0x00581451,_UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
     push eax
     mov  dword eax,[eax+0x93]
     call HouseClass__As_Pointer
@@ -78,4 +60,17 @@ _UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties:
     mov  ebx,[Rules.AI.HardAIGoldValue]
     call Check_AI_Difficulty_Gem_And_Gold_Values
     jmp  .Ret
+@ENDHACK
 
+
+[section .text]
+Check_AI_Difficulty_Gem_And_Gold_Values:
+    cmp  ebx,-1 ; ebx = gold value
+    jnz  .Dont_Change_Gold_Value
+    mov  ebx,[Globals___Rule_GoldValue]
+.Dont_Change_Gold_Value:
+    cmp  ecx,-1 ; ebx = gold value
+    jnz  .Dont_Gem_Gold_Value
+    mov  ecx,[Globals___Rule_GemValue]
+.Dont_Gem_Gold_Value:
+    retn

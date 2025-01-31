@@ -12,7 +12,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0058FF40, _Change_Weapon_Sounds
+@LJMP 0x0058FF40,_Change_Weapon_Sounds
 
 _Change_Weapon_Sounds:
     call 0x00463428

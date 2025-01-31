@@ -4,8 +4,8 @@
 ; Load setting keys from rules.ini. Some of the logic may be called again when loading from map
 ;
 ;----------------------------------------------------------------
-@LJMP 0x004F446C, _Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
-@LJMP 0x00536AB5, _RulesClass__AI_Load ; it doesn't matter if we hook RulesClass::AI or RulesClass::General, the loaidng is contiguous. Intended for logic that should load per map.
+@LJMP 0x004F446C,_Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
+@LJMP 0x00536AB5,_RulesClass__AI_Load ; it doesn't matter if we hook RulesClass::AI or RulesClass::General, the loaidng is contiguous. Intended for logic that should load per map.
 
 ; only loaded once on game init, not per map
 _Init_Game_Hook_Load:

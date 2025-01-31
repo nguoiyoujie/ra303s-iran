@@ -7,42 +7,42 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 ; Remove game single player game mode check when checking for win/lose flags set in HouseClass::AI()
-@SJMP  0x004D415D, 0x004D416A
-@SJMP  0x004D41D4, 0x004D41DD
+@SJMP  0x004D415D,0x004D416A
+@SJMP  0x004D41D4,0x004D41DD
 
-@LJMP 0x004D41CA, _HouseClass__AI_Player_Win_Flag_Set_Remove_Lose
-@LJMP 0x004D85A9, _HouseClass__AI_Player_Lose_Flag_Set_Remove_Win
-@LJMP 0x00554926, _TActionClass_Operator___ACTION_WIN_Multiplayer
-@LJMP 0x00554980, _TActionClass_Operator___ACTION_LOSE_Multiplayer
-@LJMP 0x004FE1C1, _LogicClass__AI_Call_HouseClass_AI_For_All_Houses_In_Coop
-@LJMP 0x004D4CAF, _HouseClass__AI_No_MPlayer_Defeated_Call_In_Coop
+@LJMP 0x004D41CA,_HouseClass__AI_Player_Win_Flag_Set_Remove_Lose
+@LJMP 0x004D85A9,_HouseClass__AI_Player_Lose_Flag_Set_Remove_Win
+@LJMP 0x00554926,_TActionClass_Operator___ACTION_WIN_Multiplayer
+@LJMP 0x00554980,_TActionClass_Operator___ACTION_LOSE_Multiplayer
+@LJMP 0x004FE1C1,_LogicClass__AI_Call_HouseClass_AI_For_All_Houses_In_Coop
+@LJMP 0x004D4CAF,_HouseClass__AI_No_MPlayer_Defeated_Call_In_Coop
 
-@LJMP 0x0053D7BE, _Read_Scenario_INI__Read_Is_Coop_Mode_Option
-@LJMP 0x004D4F2E, _HouseClass__AI_No_Expert_AI_In_Coop_Mode
-@LJMP 0x004DA2A5, _HouseClass__AI_Building_Single_Player_AI_In_Coop
-@LJMP 0x004DB873, _HouseClass__AI_Unit_Single_Player_AI_In_Coop
-@LJMP 0x004DBD35, _HouseClass__AI_Vessel_Single_Player_AI_In_Coop
-@LJMP 0x004DC188, _HouseClass__AI_Infantry_Single_Player_AI_In_Coop
-@LJMP 0x0053E085, _Assign_Houses_House_Auto_Production_Bit
-@LJMP 0x0055C41E, _TeamClass__AI_Single_Player_Logic1
-@LJMP 0x0055C7AF, _TeamClass__AI_Single_Player_Logic2
+@LJMP 0x0053D7BE,_Read_Scenario_INI__Read_Is_Coop_Mode_Option
+@LJMP 0x004D4F2E,_HouseClass__AI_No_Expert_AI_In_Coop_Mode
+@LJMP 0x004DA2A5,_HouseClass__AI_Building_Single_Player_AI_In_Coop
+@LJMP 0x004DB873,_HouseClass__AI_Unit_Single_Player_AI_In_Coop
+@LJMP 0x004DBD35,_HouseClass__AI_Vessel_Single_Player_AI_In_Coop
+@LJMP 0x004DC188,_HouseClass__AI_Infantry_Single_Player_AI_In_Coop
+@LJMP 0x0053E085,_Assign_Houses_House_Auto_Production_Bit
+@LJMP 0x0055C41E,_TeamClass__AI_Single_Player_Logic1
+@LJMP 0x0055C7AF,_TeamClass__AI_Single_Player_Logic2
 
-@LJMP 0x0058109D, _UnitClass__Read_INI_Use_Single_Player_Logic
-@LJMP 0x004D406A, _HouseClass__Use_Single_Player_Logic
+@LJMP 0x0058109D,_UnitClass__Read_INI_Use_Single_Player_Logic
+@LJMP 0x004D406A,_HouseClass__Use_Single_Player_Logic
 @CLEAR 0x004D406F,0x90,0x004D4070 ; nop over debris after jmp
 
-@LJMP 0x00568267, _TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic
-@LJMP 0x0053DDEB, _Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop
-;@LJMP 0x004D8CAE, _HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode ; combined with _HouseClass__Init_Data_Reset_NewData
-@LJMP 0x0053DFDD, _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode
-@LJMP 0x0053E0CB, _Assign_Houses__Dont_Set_IQ_Level_In_Coop_Mode
-@LJMP 0x00567E58, _TechnoClass__Base_Is_Attacked_Single_Player_Logic3
-@LJMP 0x00567BC6, _TechnoClass__Base_Is_Attacked_Single_Player_Logic2
-@LJMP 0x0056787B, _TechnoClass__Base_Is_Attacked_Single_Player_Logic1
-@LJMP 0x0053E0EC, _Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2
-@LJMP 0x004AB659, _Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode
+@LJMP 0x00568267,_TechnoClass__Is_Allowed_To_Retaliate_Single_Player_Logic
+@LJMP 0x0053DDEB,_Read_Scenario_INI_Dont_Create_MP_Spawning_Units_In_Coop
+;@LJMP 0x004D8CAE,_HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode ; combined with _HouseClass__Init_Data_Reset_NewData
+@LJMP 0x0053DFDD,_Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode
+@LJMP 0x0053E0CB,_Assign_Houses__Dont_Set_IQ_Level_In_Coop_Mode
+@LJMP 0x00567E58,_TechnoClass__Base_Is_Attacked_Single_Player_Logic3
+@LJMP 0x00567BC6,_TechnoClass__Base_Is_Attacked_Single_Player_Logic2
+@LJMP 0x0056787B,_TechnoClass__Base_Is_Attacked_Single_Player_Logic1
+@LJMP 0x0053E0EC,_Assign_Houses__Dont_Set_Tech_Level_In_Coop_Mode2
+@LJMP 0x004AB659,_Owner_From_Name_No_Multi_Houses_Check_In_Coop_Mode
 
-@LJMP 0x00533180, _Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses
+@LJMP 0x00533180,_Do_Reinforcements_Fix_Crash_When_Reinforcing_Nonexistent_Houses
 
 [section .data] 
 InCoopMode    dd 0

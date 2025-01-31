@@ -11,7 +11,7 @@
 ;
 ;----------------------------------------------------------------
 
-;@CLEAR 0x004F4095, HouseTypeClass.NEW_COUNT, 0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
+;@CLEAR 0x004F4095,HouseTypeClass.NEW_COUNT,0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
 
 @HACK 0x004CB760,0x004CB76A,_HouseTypeClass__AddNewHouseTypes
 ;Multi9

@@ -35,7 +35,7 @@
 ;@SET ??? HouseTypeClass.NEW_COUNT ??? ; Conquer::Shake_The_Screen, seems to exist only in Remastered
 @SET 0x004CD0FC,{cmp dl,HouseTypeClass.NEW_COUNT} ; HouseTypeClass::From_Name, was 0x14
 @SET 0x004D4126,{cmp dl,HouseTypeClass.NEW_COUNT} ; void HouseClass::Init(void), was 0x14
-@SET 0x004D7E71,{cmp dl,HouseTypeClass.NEW_COUNT} ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype) was, 0x14
+@SET 0x004D7E71,{cmp dl,HouseTypeClass.NEW_COUNT} ; bool HouseClass::Does_Enemy_Building_Exist(StructType btype), was 0x14
 @SET 0x004D866A,{cmp al,HouseTypeClass.NEW_COUNT} ; void HouseClass::Tally_Score(void), was 0x14
 @SET 0x004D8808,{cmp cl,HouseTypeClass.NEW_COUNT} ; void HouseClass::Tally_Score(void), was 0x14
 @SET 0x004D9812,{cmp ch,HouseTypeClass.NEW_COUNT} ; int HouseClass::Expert_AI(void), was 0x14

@@ -30,7 +30,6 @@
 
 
 ; CONQUER.CPP
-%assign Conquer___Call_Back                                       0x004A765C ; void Call_Back(void)
 %assign Conquer___CC_Draw_Shape                                   0x004A96E8 ; void CC_Draw_Shape(const ObjectClass *object, const char *shape_file_name, void const * shapefile, int shapenum, int x, int y, WindowNumberType window, ShapeFlags_Type flags, void const * fadingdata, void const * ghostdata, DirType rotation, long virtualscale, char override_owner)
 
 ; DIALOG.CPP

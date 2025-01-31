@@ -1,8 +1,8 @@
-@LJMP 0x00537B32, _Save_Game_Save_Game_Version
-@LJMP 0x00537FED, _Load_Game_Patch_Version_Check
-@LJMP 0x005396AF, _Get_Savefile_Info_Is_Old_Savegame
-@LJMP 0x0053903A, _Save_Misc_Values_Extended_Savegames
-@LJMP 0x00539106, _Load_Misc_Values_Extended_Savegames
+@LJMP 0x00537B32,_Save_Game_Save_Game_Version
+@LJMP 0x00537FED,_Load_Game_Patch_Version_Check
+@LJMP 0x005396AF,_Get_Savefile_Info_Is_Old_Savegame
+@LJMP 0x0053903A,_Save_Misc_Values_Extended_Savegames
+@LJMP 0x00539106,_Load_Misc_Values_Extended_Savegames
 
 %define New_Savegame_Version    0x1007000
 %define Old_Savegame_Version    0x100618B
@@ -26,6 +26,7 @@
     call dword[esi+8]
 %endmacro
 
+[section .text]
 ; For early map load, to prevent savegame values from working on
 ; next map load
 Clear_Extended_Savegame_Values:

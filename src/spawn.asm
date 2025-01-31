@@ -16,6 +16,8 @@
 
 ; Spawn code for CnCNet, reads SPAWN.INI for options
 
+extern Conquer___Call_Back
+
 %define GetCommandLineA                             0x005E5904
 %define calloc                                      0x005E1EF6
 %define operator_new                                0x005BBF80
@@ -35,38 +37,6 @@
 %define NetPort                                     0x00609DBC
 %define htonl                                       0x005E5A30
 %define time_                                       0x005CEDA1
-
-@LJMP 0x004F44DC, Select_Game
-; these force the game to use the actual port for sending and receiving packets rather than the default 1234
-@LJMP 0x005A8ADF, SendFix
-@LJMP 0x005A8A75, ReceiveFix
-@LJMP 0x0052971B, _Wait_For_Players_Hack_Wait_Time
-
-;@SJMP  0x0052A2DB, 0x0052A2E0
-;@SJMP  0x0052BF02, 0x0052BF0B ; Make version protocol 0 netcode also use frame limiter
-@LJMP 0x004A7D3D, _Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols
-@LJMP 0x005292E5, _Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols
-
-_Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols:
-    cmp  byte[spawner_is_active],0 ; if spawner is active jump over version protocol check
-    jnz  .Ret
-
-    cmp  byte[0x0067F2B5],2
-    jnz  0x00529317
-
-.Ret:
-jmp        0x005292EE
-
-_Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols:
-    mov  byte dh,[0x0067F2B5]
-    cmp  byte[spawner_is_active],0 ; if spawner isn't active do normal code
-    jz   .Ret
-    cmp  byte dh,2 ; if protocol version isn't 2 jump to protocol 2 speed
-    jnz  0x004A7D82
-
-.Ret:
-    cmp  dh,2
-    jmp  0x004A7D46
 
 struc NetAddress
     .port:      RESD 1
@@ -112,18 +82,18 @@ tunnel_id dd 0
 var_dword:          dd 0
 HumanPlayers        dd 0 ; Need to read it from here for spawner stats
 
-[section .text]
-; args: <section>, <key>, <default>
+
+; args: <section>,<key>,<default>
 %macro spawn_INI_Get_Bool 3
     call_INIClass__Get_Bool CCINIClass_Spawn,{%1},{%2},{%3}
 %endmacro
 
-; args: <section>, <key>, <default>
+; args: <section>,<key>,<default>
 %macro spawn_INI_Get_Int 3
     call_INIClass__Get_Int CCINIClass_Spawn,{%1},{%2},{%3}
 %endmacro
 
-; args: <section>, <key>, <default>, <dst>, <dst_len>
+; args: <section>,<key>,<default>,<dst>,<dst_len>
 %macro spawn_INI_Get_String 5
     call_INIClass__Get_String CCINIClass_Spawn,{%1},{%2},{%3},{%4},{%5}
 %endmacro
@@ -137,6 +107,99 @@ HumanPlayers        dd 0 ; Need to read it from here for spawner stats
     sub  eax,0xC
 %endmacro
 
+
+
+;@SJMP  0x0052A2DB,0x0052A2E0
+;@SJMP  0x0052BF02,0x0052BF0B ; Make version protocol 0 netcode also use frame limiter
+
+
+@HACK 0x005292E5,0x005292EE,_Queue_AI_Multiplayer_Do_Timing_Related_Code_With_Other_Network_Protocols
+    cmp  byte[spawner_is_active],0 ; if spawner is active jump over version protocol check
+    jnz  .Ret
+    cmp  byte[0x0067F2B5],2
+    jnz  0x00529317
+.Ret:
+    jmp  0x005292EE
+@ENDHACK
+
+
+@HACK 0x004A7D3D,0x004A7D46,_Main_Loop_Use_Normal_Gamespeed_Code_With_Other_Network_Protocols
+    mov  byte dh,[0x0067F2B5]
+    cmp  byte[spawner_is_active],0 ; if spawner isn't active do normal code
+    jz   .Ret
+    cmp  byte dh,2 ; if protocol version isn't 2 jump to protocol 2 speed
+    jnz  0x004A7D82
+.Ret:
+    cmp  dh,2
+    jmp  0x004A7D46
+@ENDHACK
+
+
+@HACK 0x004F44DC,0x004F44E4,_Select_Game
+    push ebp
+    mov  ebp,esp
+    push ebx
+    push ecx
+    push edx
+    push esi
+    push edi
+    call Initialize_Spawn
+    cmp  eax,-1
+    ; if spawn not initialized, go to main menu
+    je   0x004F44E4
+    pop  edi
+    pop  esi
+    pop  edx
+    pop  ecx
+    pop  ebx
+    pop  ebp
+    retn
+@ENDHACK
+
+
+; these force the game to use the actual port for sending and receiving packets rather than the default 1234
+@HACK 0x005A8ADF,0x005A8AE5,_SendFix
+    push ebx
+    mov  ebx,dword[ebp-0x18]
+    mov  eax,[ebx]
+    push eax
+    call htonl
+    test eax,eax
+    jne  .have_port
+    mov  AX,1234
+.have_port:
+    pop  ebx
+    jmp  0x005A8AE5
+@ENDHACK
+
+
+@HACK 0x005A8A75,0x005A8A81,_ReceiveFix
+    sub  esi,4
+    lea  edx,[ebp-0x18]
+    ; cleanup crap from port as using it as dword
+    mov  eax,[esi]
+    and  eax,0xFFFF0000
+    mov  [esi],eax
+    push edi
+    mov  eax,ecx
+    mov  ecx,2
+    jmp  0x005A8A81
+@ENDHACK
+
+
+@HACK 0x0052971B,0x00529720,_Wait_For_Players_Hack_Wait_Time
+    cmp  byte[spawner_is_active],0
+    jz   .Ret
+    mov  edx,120 ; NOT HEX
+.Ret:
+    sub  eax,[ebx+1]
+    cmp  eax,edx
+    jmp  0x00529720
+@ENDHACK
+
+
+
+[section .text]
 Initialize_Spawn:
 %push
     push ebp
@@ -164,7 +227,7 @@ Initialize_Spawn:
 
 .first_run:
 
-    call_CCINIClass__Load str_ini_Spawn, CCFileClass_Spawn, CCINIClass_Spawn
+    call_CCINIClass__Load str_ini_Spawn,CCFileClass_Spawn,CCINIClass_Spawn
 
     ; Set spawner_is_running global variable to 'true'
     mov  byte[spawner_is_active],1
@@ -177,7 +240,7 @@ Initialize_Spawn:
 
     ; tunnel ip
     lea  eax,[buf]
-    spawn_INI_Get_String str_Tunnel, str_Ip, str_EmptyString,eax,32
+    spawn_INI_Get_String str_Tunnel,str_Ip,str_EmptyString,eax,32
 
     lea  eax,[buf]
     push eax
@@ -185,158 +248,158 @@ Initialize_Spawn:
     mov  [tunnel_ip],eax
 
     ; tunnel port
-    spawn_INI_Get_Int str_Tunnel, str_Port, 0
-    AND  eax,0xFFFF
+    spawn_INI_Get_Int str_Tunnel,str_Port,0
+    and  eax,0xFFFF
     push eax
     call htonl
     mov  [tunnel_port],eax
 
     ; tunnel id
-    spawn_INI_Get_Int str_Settings, str_Port, 0
-    AND  eax,0xFFFF
+    spawn_INI_Get_Int str_Settings,str_Port,0
+    and  eax,0xFFFF
     push eax
     call htonl
     mov  [tunnel_id],eax
 
     ; spawn locations
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi1, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi1,-1
     mov  dword[multi1_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi2, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi2,-1
     mov  dword[multi2_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi3, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi3,-1
     mov  dword[multi3_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi4, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi4,-1
     mov  dword[multi4_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi5, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi5,-1
     mov  dword[multi5_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi6, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi6,-1
     mov  dword[multi6_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi7, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi7,-1
     mov  dword[multi7_Spawn],eax
 
-    spawn_INI_Get_Int str_SpawnLocations, str_Multi8, -1
+    spawn_INI_Get_Int str_SpawnLocations,str_Multi8,-1
     mov  dword[multi8_Spawn],eax
 
     ; multi1-8 colours
-    spawn_INI_Get_Int str_HouseColors, str_Multi1, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi1,0xFF
     mov  byte[Multi1_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi2, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi2,0xFF
     mov  byte[Multi2_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi3, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi3,0xFF
     mov  byte[Multi3_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi4, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi4,0xFF
     mov  byte[Multi4_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi5, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi5,0xFF
     mov  byte[Multi5_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi6, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi6,0xFF
     mov  byte[Multi6_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi7, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi7,0xFF
     mov  byte[Multi7_Colour],al
 
-    spawn_INI_Get_Int str_HouseColors, str_Multi8, 0xFF
+    spawn_INI_Get_Int str_HouseColors,str_Multi8,0xFF
     mov  byte[Multi8_Colour],al
 
     ; multi1-8 countries
-    spawn_INI_Get_Int str_HouseCountries, str_Multi1, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi1,0xFF
     mov  byte[Multi1_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi2, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi2,0xFF
     mov  byte[Multi2_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi3, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi3,0xFF
     mov  byte[Multi3_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi4, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi4,0xFF
     mov  byte[Multi4_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi5, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi5,0xFF
     mov  byte[Multi5_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi6, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi6,0xFF
     mov  byte[Multi6_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi7, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi7,0xFF
     mov  byte[Multi7_Country],al
 
-    spawn_INI_Get_Int str_HouseCountries, str_Multi8, 0xFF
+    spawn_INI_Get_Int str_HouseCountries,str_Multi8,0xFF
     mov  byte[Multi8_Country],al
 
     ; multi1-8 handicaps
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi1, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi1,0xFF
     mov  byte[Multi1_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi2, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi2,0xFF
     mov  byte[Multi2_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi3, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi3,0xFF
     mov  byte[Multi3_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi4, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi4,0xFF
     mov  byte[Multi4_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi5, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi5,0xFF
     mov  byte[Multi5_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi6, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi6,0xFF
     mov  byte[Multi6_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi7, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi7,0xFF
     mov  byte[Multi7_Handicap],al
 
-    spawn_INI_Get_Int str_HouseHandicaps, str_Multi8, 0xFF
+    spawn_INI_Get_Int str_HouseHandicaps,str_Multi8,0xFF
     mov  byte[Multi8_Handicap],al
 
     ; Spectators
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi1, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi1,0
     mov  byte[SpectatorsArray+0xC],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi2, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi2,0
     mov  byte[SpectatorsArray+0xD],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi3, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi3,0
     mov  byte[SpectatorsArray+0xE],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi4, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi4,0
     mov  byte[SpectatorsArray+0xF],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi5, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi5,0
     mov  byte[SpectatorsArray+0x10],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi6, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi6,0
     mov  byte[SpectatorsArray+0x11],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi7, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi7,0
     mov  byte[SpectatorsArray+0x12],al
 
-    spawn_INI_Get_Bool str_IsSpectator, str_Multi8, 0
+    spawn_INI_Get_Bool str_IsSpectator,str_Multi8,0
     mov  byte[SpectatorsArray+0x13],al
 
     ; generic stuff
-    spawn_INI_Get_Int str_Settings, str_Port, 1234
+    spawn_INI_Get_Int str_Settings,str_Port,1234
     cmp  dword[tunnel_port],0
     jne  .nosetport
     mov  [NetPort],eax
 .nosetport:
 
-    spawn_INI_Get_Bool str_Settings, str_Bases, 1
+    spawn_INI_Get_Bool str_Settings,str_Bases,1
     mov  [Globals___Session_Type+Session.bases],eax
 
-    spawn_INI_Get_Int str_Settings, str_Credits, 10000
+    spawn_INI_Get_Int str_Settings,str_Credits,10000
     mov  [Globals___Session_Type+Session.credits],eax
 
-    spawn_INI_Get_Bool str_Settings, str_OreRegenerates, 0
+    spawn_INI_Get_Bool str_Settings,str_OreRegenerates,0
     mov  [Globals___Session_Type+Session.oreRegen],eax
     test eax,eax
     je   .noregen
@@ -344,20 +407,20 @@ Initialize_Spawn:
 
 .noregen:
 
-    spawn_INI_Get_Bool str_Settings, str_Crates, 0
+    spawn_INI_Get_Bool str_Settings,str_Crates,0
     mov  [Globals___Session_Type+Session.crates],eax
 
-    spawn_INI_Get_Int str_Settings, str_UnitCount, 0
+    spawn_INI_Get_Int str_Settings,str_UnitCount,0
     mov  [Globals___Session_Type+Session.unitCount],eax
 
-    spawn_INI_Get_Int str_Settings, str_AIPlayers, 0
+    spawn_INI_Get_Int str_Settings,str_AIPlayers,0
     mov  [Globals___Session_Type+Session.aiPlayers],eax
 
-    spawn_INI_Get_Int str_Settings, str_Seed, 0
+    spawn_INI_Get_Int str_Settings,str_Seed,0
     mov  [Globals___Seed],eax
     mov  [Globals___CustomSeed],eax
 
-    spawn_INI_Get_Bool str_Settings, str_SlowUnitBuild, 0
+    spawn_INI_Get_Bool str_Settings,str_SlowUnitBuild,0
     test eax,eax
 
     mov  [Globals___UnitBuildPenalty],dword 0x64
@@ -366,7 +429,7 @@ Initialize_Spawn:
     mov  [Globals___UnitBuildPenalty],dword 0xFA
 .nopenalty:
 
-    spawn_INI_Get_Bool str_Settings, str_CaptureTheFlag, 0
+    spawn_INI_Get_Bool str_Settings,str_CaptureTheFlag,0
     test eax,eax
     je   .noctf
     mov  edx,[GameFlags]
@@ -375,7 +438,7 @@ Initialize_Spawn:
     mov  [Globals___Session_Type+Session.bases],dword 1
 .noctf:
 
-    spawn_INI_Get_Bool str_Settings, str_ShroudRegrows, 0
+    spawn_INI_Get_Bool str_Settings,str_ShroudRegrows,0
     test eax,eax
     je   .noregrow
     mov  edx,[GameFlags]
@@ -383,10 +446,10 @@ Initialize_Spawn:
     mov  [GameFlags],edx
 .noregrow:
 
-    spawn_INI_Get_Int str_Settings, str_TechLevel, 10
+    spawn_INI_Get_Int str_Settings,str_TechLevel,10
     mov  [TechLevel],eax
 
-    spawn_INI_Get_Int str_Settings, str_AIDifficulty, 2
+    spawn_INI_Get_Int str_Settings,str_AIDifficulty,2
 
     cmp  eax,2
     JL   .diff_easy
@@ -412,7 +475,7 @@ Initialize_Spawn:
 .diff_end:
 
     ; Note: works only in session type 4
-    spawn_INI_Get_Bool str_Settings, str_Aftermath, 0
+    spawn_INI_Get_Bool str_Settings,str_Aftermath,0
     mov  [Globals___NewUnitsEnabled],eax
     mov  [Version107InMix],eax
     mov  byte[RedAlert.Options.AftermathEnabled],AL
@@ -423,7 +486,7 @@ Initialize_Spawn:
 
     ; copy name
     lea  eax,[buf]
-    spawn_INI_Get_String str_Settings, str_Name, str_EmptyString,eax,32
+    spawn_INI_Get_String str_Settings,str_Name,str_EmptyString,eax,32
 
     lea  eax,[buf]
     push eax
@@ -432,11 +495,11 @@ Initialize_Spawn:
     push eax
     call _strcpy
 
-    spawn_INI_Get_Int str_Settings, str_Side, 0
+    spawn_INI_Get_Int str_Settings,str_Side,0
     mov  ebx,[plr]
     mov  [ebx+Player.side],AL
 
-    spawn_INI_Get_Int str_Settings, str_Color, 0
+    spawn_INI_Get_Int str_Settings,str_Color,0
     mov  ebx,[plr]
     mov  [ebx+Player.color],AL
     mov  [chatColor],AL
@@ -537,7 +600,7 @@ Initialize_Spawn:
     call INIClass__Get_Int
 
     mov  ebx,[plr]
-    AND  eax,0xFFFF
+    and  eax,0xFFFF
 
     push eax
     call htonl
@@ -556,12 +619,12 @@ Initialize_Spawn:
 .last_opp:
 
     ; Copy the amount of human players for spawner stats
-    mov  eax,dword[0x0068044A]
+    mov  dword eax,[0x0068044A]
     mov  dword[HumanPlayers],eax
 
     ; force gamespeed to fastest
-    spawn_INI_Get_Int str_Settings, str_GameSpeed, 1
-    mov  dword   [0x00668188],eax
+    spawn_INI_Get_Int str_Settings,str_GameSpeed,1
+    mov  dword[0x00668188],eax
 
     ; start game
     mov  [GameActive],dword 1
@@ -571,7 +634,7 @@ Initialize_Spawn:
     cmp  byte[Globals___Session_Type+Session.type],4
     jne  .nonet
 
-    spawn_INI_Get_Int str_Settings, str_NetworkVersionProtocol, 0
+    spawn_INI_Get_Int str_Settings,str_NetworkVersionProtocol,0
     mov  [Globals___Session_Type+Session.protocol],al
 
     mov  eax,1
@@ -600,10 +663,10 @@ Initialize_Spawn:
     call NetDlg___Init_Network
 
     ; Added this to hopefully correct any timing issues
-    spawn_INI_Get_Int str_Settings, str_MaxAhead, 15
+    spawn_INI_Get_Int str_Settings,str_MaxAhead,15
     mov  [Globals___Session_MaxAhead],eax
 
-    spawn_INI_Get_Int str_Settings, str_FrameSendRate, 3
+    spawn_INI_Get_Int str_Settings,str_FrameSendRate,3
     mov  [Globals___Session_FrameSendRate],eax
 
     mov  ecx,0x2E8
@@ -619,7 +682,7 @@ Initialize_Spawn:
     call time_
     mov  [Internet___PlanetWestwoodStartTime],eax
 
-    spawn_INI_Get_Int str_Settings, str_GameID, 0
+    spawn_INI_Get_Int str_Settings,str_GameID,0
     mov  [Internet___PlanetWestwoodGameID],eax
 
     ; Init random number generator and related data
@@ -654,68 +717,68 @@ Initialize_Spawn:
     call GraphicBufferClass__Unlock
 
     lea  eax,[Globals___Scen_ScenarioName]
-    spawn_INI_Get_String str_Settings, str_Scenario, str_EmptyString,eax,32
+    spawn_INI_Get_String str_Settings,str_Scenario,str_EmptyString,eax,32
 
     ; copy secnario name
     lea  eax,[buf]
-    spawn_INI_Get_String str_Settings, str_Scenario, str_EmptyString,eax,32
+    spawn_INI_Get_String str_Settings,str_Scenario,str_EmptyString,eax,32
 
     ; Initialize MapName char array for spawner stats
     lea  eax,[buf]
-    call_CCINIClass__Load eax,CCFileClass_Map, CCINIClass_Map
+    call_CCINIClass__Load eax,CCFileClass_Map,CCINIClass_Map
 
-    call_INIClass__Get_String CCINIClass_Map, str_Basic, str_Name, str_EmptyString, 0x0067F2D6, 0x2A
+    call_INIClass__Get_String CCINIClass_Map,str_Basic,str_Name,str_EmptyString,0x0067F2D6,0x2A
 
-    spawn_INI_Get_Bool str_Settings, str_AftermathFastBuildSpeed, 0
+    spawn_INI_Get_Bool str_Settings,str_AftermathFastBuildSpeed,0
     mov  [Rules.Aftermath.AftermathFastBuildSpeed],al
 
-    spawn_INI_Get_Bool str_Settings, str_FixFormationSpeed, 0
+    spawn_INI_Get_Bool str_Settings,str_FixFormationSpeed,0
     mov  [Rules.General.FixFormationSpeed],al
 
-    spawn_INI_Get_Bool str_Settings, str_FixRangeExploit, 0
+    spawn_INI_Get_Bool str_Settings,str_FixRangeExploit,0
     mov  byte[Spawn.Settings.FixRangeExploit],al
 
-    spawn_INI_Get_Bool str_Settings, str_FixMagicBuild, 0
+    spawn_INI_Get_Bool str_Settings,str_FixMagicBuild,0
     mov  byte[Spawn.Settings.FixMagicBuild],al
 
-    spawn_INI_Get_Bool str_Settings, str_ParabombsInMultiplayer, 0
+    spawn_INI_Get_Bool str_Settings,str_ParabombsInMultiplayer,0
     mov  [Rules.General.ParabombsInMultiplayer],al
 
-    spawn_INI_Get_Bool str_Settings, str_FixAIAlly, 0
+    spawn_INI_Get_Bool str_Settings,str_FixAIAlly,0
     mov  [Rules.AI.FixAIAlly],al
 
-    spawn_INI_Get_Bool str_Settings, str_MCVUndeploy, 0
+    spawn_INI_Get_Bool str_Settings,str_MCVUndeploy,0
     mov  [Spawn.Settings.MCVUndeploy],al
 
-    spawn_INI_Get_Bool str_Settings, str_AllyReveal, 0
+    spawn_INI_Get_Bool str_Settings,str_AllyReveal,0
     mov  [Spawn.Settings.AllyReveal],al
 
-    spawn_INI_Get_Bool str_Settings, str_ForcedAlliances, 0
+    spawn_INI_Get_Bool str_Settings,str_ForcedAlliances,0
     mov  [Spawn.Settings.ForcedAlliances],al
 
-    spawn_INI_Get_Bool str_Settings, str_TechCenterBugFix, 0
+    spawn_INI_Get_Bool str_Settings,str_TechCenterBugFix,0
     mov  [Spawn.Settings.TechCenterBugFix],al
 
-    spawn_INI_Get_Bool str_Settings, str_BuildOffAlly, 0
+    spawn_INI_Get_Bool str_Settings,str_BuildOffAlly,0
     mov  [Rules.General.BuildOffAlly],al
 
-    spawn_INI_Get_Bool str_Settings, str_SouthAdvantageFix, 0
+    spawn_INI_Get_Bool str_Settings,str_SouthAdvantageFix,0
     mov  [Spawn.Settings.SouthAdvantageFix],al
 
-    spawn_INI_Get_Bool str_Settings, str_NoScreenShake, 0
+    spawn_INI_Get_Bool str_Settings,str_NoScreenShake,0
     mov  [Rules.General.NoScreenShake],al
 
-    spawn_INI_Get_Bool str_Settings, str_NoTeslaZapEffectDelay, 0
+    spawn_INI_Get_Bool str_Settings,str_NoTeslaZapEffectDelay,0
     mov  [Rules.General.NoTeslaZapEffectDelay],al
 
-    spawn_INI_Get_Bool str_Settings, str_ShortGame, 0
+    spawn_INI_Get_Bool str_Settings,str_ShortGame,0
     mov  [Spawn.Settings.ShortGame],al
 
-    spawn_INI_Get_Bool str_Settings, str_DeadPlayersRadar, 0
+    spawn_INI_Get_Bool str_Settings,str_DeadPlayersRadar,0
     mov  [Spawn.Settings.DeadPlayersRadar],al
 
     ; For an AI paranoid setting?
-;    spawn_INI_Get_Bool Globals___RuleINI, str_AI, str_FixAIParanoid, 0
+;    spawn_INI_Get_Bool Globals___RuleINI,str_AI,str_FixAIParanoid,0
 ;    mov        [Rules.AI.FixAIParanoid],al
 
 
@@ -752,11 +815,11 @@ Initialize_Spawn:
     xor  edx,edx
     call MessageListClass__Init
 
-    spawn_INI_Get_Bool str_Settings, str_LoadSaveGame, 0
+    spawn_INI_Get_Bool str_Settings,str_LoadSaveGame,0
     cmp  al,0
     jz   .Dont_Load_Save_Game
 
-    spawn_INI_Get_Int str_Settings, str_SaveGameNumber, 1000
+    spawn_INI_Get_Int str_Settings,str_SaveGameNumber,1000
 
     mov  eax,803
     call 0x00537D10 ; Load_Game
@@ -767,7 +830,7 @@ Initialize_Spawn:
 
 .Dont_Load_Save_Game:
 
-    spawn_INI_Get_Bool str_Settings, str_IsSinglePlayer, 0
+    spawn_INI_Get_Bool str_Settings,str_IsSinglePlayer,0
     cmp  al,0
     jz   .Dont_Set_Single_Player
 
@@ -823,65 +886,3 @@ Initialize_Spawn:
     pop  ebp
     retn
 %pop
-
-Select_Game:
-    push ebp
-    mov  ebp,esp
-    push ebx
-    push ecx
-    push edx
-    push esi
-    push edi
-
-    call Initialize_Spawn
-    cmp  eax,-1
-
-    ; if spawn not initialized, go to main menu
-    je   0x004F44E4
-
-    pop  edi
-    pop  esi
-    pop  edx
-    pop  ecx
-    pop  ebx
-    pop  ebp
-    retn
-
-SendFix:
-    push ebx
-    mov  ebx,dword[ebp-0x18]
-    mov  eax,[ebx]
-
-    push eax
-    call htonl
-
-    test eax,eax
-    jne  .have_port
-    mov  AX,1234
-.have_port:
-    pop  ebx
-    jmp  0x005A8AE5
-
-ReceiveFix:
-    sub  esi,4
-    lea  edx,[ebp-0x18]
-
-    ; cleanup crap from port as using it as dword
-    mov  eax,[esi]
-    AND  eax,0xFFFF0000
-    mov  [esi],eax
-
-    push edi
-    mov  eax,ecx
-    mov  ecx,2
-    jmp  0x005A8A81
-
-_Wait_For_Players_Hack_Wait_Time:
-    cmp  byte[spawner_is_active],0
-    jz   .Ret
-    mov  edx,120 ; NOT HEX
-
-.Ret:
-    sub  eax,[ebx+1]
-    cmp  eax,edx
-    jmp  0x00529720

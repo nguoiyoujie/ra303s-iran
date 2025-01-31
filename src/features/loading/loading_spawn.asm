@@ -5,7 +5,7 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x00551A87, _Startup_Function_Hook_Early_Load ; for some spawn.ini stuff
+@LJMP 0x00551A87,_Startup_Function_Hook_Early_Load ; for some spawn.ini stuff
 
 
 
