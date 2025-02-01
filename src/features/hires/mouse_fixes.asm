@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/fixes/mouse_fixes.asm
+; src/features/hires/mouse_fixes.asm
 ;
 ; Perform mouse coordinate fixes, in case the requested coordinates are outside the screen bounds.
 ;
@@ -9,9 +9,9 @@
 ;----------------------------------------------------------------
 
 @HACK 0x005D8F79,0x005D8F7F,_ASM_Set_Mouse_Cursor_Mouse_Coords_Check
-    cmp  dword eax,[ScreenWidth]
+    cmp  dword eax,[Globals___ScreenWidth]
     JG   .Exit
-    cmp  dword ebx,[ScreenHeight]
+    cmp  dword ebx,[Globals___ScreenHeight]
     JG   .Exit
     mov  [ebp-4h],eax ; y
     mov  [ebp-8h],ebx ; x

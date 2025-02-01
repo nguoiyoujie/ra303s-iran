@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/hires/multiplayer_print_is_aftermath_game.asm
+; src/features/hires/multiplayer_print_is_aftermath_game.asm
 ;
 ; Show whether an MP game is an aftermath game
 ;

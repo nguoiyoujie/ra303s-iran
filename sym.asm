@@ -20,6 +20,10 @@ setcglob 0x005D6148,start
 setcglob 0x005E66A8,_imp__timeGetTime
 setcglob 0x005E667C,_imp__Sleep
 
+setcglob 0x005C23F0,_Buffer_Fill_Rect
+setcglob 0x005C4DE0,_Buffer_Clear
+setcglob 0x005C9D60,Set_Video_Mode
+
 ; AUDIO.CPP
 setcglob 0x00425CA0,Audio___Voc_From_Name                                      ; VocType Voc_From_Name(char const * name)
 setcglob 0x00425D1C,Audio___Sound_Effect_At_Coord                              ; void Sound_Effect(VocType voc, COORDINATE coord, int variation, HousesType house)
@@ -310,7 +314,12 @@ setcglob 0x005BCF44,PaletteClass__Set                                          ;
 ; REINF.CPP
 setcglob 0x00533178,Reinf___Do_Reinforcements                                  ; bool Do_Reinforcements(TeamTypeClass const * teamtype)
          
+; DIPTHONG.CPP
+setcglob 0x005C5070,Extract_String                                             ; char *Extract_String(void const *data, int string)
+
 ; GLOBALS.CPP
+setcglob 0x006016B0,Globals___ScreenWidth
+setcglob 0x006016B4,Globals___ScreenHeight
 setcglob 0x006017F0,Globals___Houses                                           ; TFixedIHeapClass<HouseClass> Houses;
 setcglob 0x00601818,Globals___HouseTypes                                       ; TFixedIHeapClass<HouseTypeClass> HouseTypeClass;
 setcglob 0x0060181C,Globals___BuildingTypes                                    ; TFixedIHeapClass<BuildingTypeClass> BuildingTypes;
@@ -392,7 +401,6 @@ setcglob 0x0066826C,Globals___Map_Array                                        ;
 setcglob 0x00668E9A,Globals___Map_IsZoomed_Address                             ; unsigned RadarClass::IsZoomed:1;
 setcglob 0x01      ,Globals___Map_IsZoomed_Bitmask                             ; unsigned RadarClass::IsZoomed:1;
 setcglob 0x00668EC7,Globals___Map_IsTargettingMode                             ; SpecialWeaponType DisplayClass::IsTargettingMode;
-
 ;ScoreClass Score;
 ;CreditClass CreditDisplay;
 ;SpecialClass Special;
@@ -406,11 +414,8 @@ setcglob 0x00669F5C,Globals___BlackPalette                                     ;
 setcglob 0x0066A25C,Globals___WhitePalette                                     ; PaletteClass WhitePalette(RGBClass(RGBClass::MAX_VALUE, RGBClass::MAX_VALUE, RGBClass::MAX_VALUE));
 ; Globals___OriginalPalette
 ; Globals___ScorePalette
-
 setcglob 0x0067F28C,Globals___Base                                             ; BaseClass Base;
 setcglob 0x0067F2A4,Globals___Base_House                                       ; HousesType House;
-
-
 ;setcglob 0x0067F2B4,Globals___Session                                         ; SessionClass Session;
 setcglob 0x0067F2B4,Globals___Session_Type                                     ; GameType SessionClass::Type;
 setcglob 0x0067F325,Globals___Session_MaxAhead                                 ; GameType SessionClass::MaxAhead;
@@ -421,7 +426,15 @@ setcglob 0x00680654,Globals___Seed
 setcglob 0x00680658,Globals___CustomSeed                                      
 setcglob 0x0068065C,Globals___VisiblePage                                      ; GraphicBufferClass VisiblePage;
 setcglob 0x00680700,Globals___HiddenPage                                       ; GraphicBufferClass HiddenPage;
-         
+setcglob 0x006807A4,Globals___SeenBuff                                         ; GraphicViewPortClass	SeenBuff(&VisiblePage, 0, 0, 3072, 3072);
+setcglob 0x006807CC,Globals___HidPage                                          ; GraphicViewPortClass	HidPage(&HiddenPage, 0, 0, 3072, 3072);
+
+; SIDEBAR.CPP
+setcglob 0x0068A1E4,SidebarClass__StripClass__UpButton                         ; ShapeButtonClass SidebarClass::StripClass::UpButton[COLUMNS];
+setcglob 0x0068A254,SidebarClass__StripClass__DownButton                       ; ShapeButtonClass SidebarClass::StripClass::DownButton[COLUMNS];
+setcglob 0x0068A2C4,SidebarClass__StripClass__SelectButton                     ; SidebarClass::StripClass::SelectClass SidebarClass::StripClass::SelectButton[COLUMNS][MAX_VISIBLE];
+
+
 ; are you sure?
 setcglob 0x006017D8,Globals___UnitBuildPenalty                                 ; int UnitBuildPenalty;
          
@@ -431,4 +444,7 @@ setcglob 0x006ABBB0,Internet___PlanetWestwoodStartTime                         ;
 
 ; BUFFGLBL.CPP
 setcglob 0x006AC274,BuffGlbl___LogicPage                                       ; GraphicViewPortClass *LogicPage;
+
+; DDRAW.CPP
+setcglob 0x006B1498,DDraw___MainWindow      
 

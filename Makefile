@@ -19,6 +19,8 @@ NFLAGS      = -Iinc/ -f elf
 
 OBJS        = res/res.o
 OBJS       += sym.o
+OBJS       += strings.o
+OBJS       += src/features/hires/_hires.o
 OBJS       += src/main.o
 
 PETOOL      = petool

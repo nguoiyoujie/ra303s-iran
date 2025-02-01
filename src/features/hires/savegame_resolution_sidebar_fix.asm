@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/hires/savegame_resolution_sidebar_fix.asm
+; src/features/hires/savegame_resolution_sidebar_fix.asm
 ;
 ; Fix the sidebar being incorrectly positioned after loading a save game
 ;
@@ -10,17 +10,14 @@
 extern SidebarClass__Init_IO
 extern Globals___Map
 
-
-%define stripbariconswidthoffset        0x0060174C
-%define selectbuttons                    0x0068A2C4
-%define downbuttons                        0x0068A254
-%define upbuttons                        0x0068A1E4
+%define Hires.IconWidthOffset        0x0060174C
+%define Hires.SelectButton           0x0068A2C4
 
 @HACK 0x00538748,0x0053874D,_Load_Game_Init_IO
 ;    call    SidebarClass__One_Time
 ;    mov        eax,Globals___Map
     call SidebarClass__Init_IO
-;    mov        dword[stripbariconswidthoffset],0x50
+;    mov        dword[Hires.IconWidthOffset],0x50
     mov  eax,Globals___Map
     push eax
     push ebx
@@ -94,37 +91,37 @@ extern Globals___Map
     xor  eax,eax
 .Loop:
     inc  ebx
-    mov  [ExtendedSelectButtons+12+eax],ecx
+    mov  [Hires.ExtSidebarButtons+12+eax],ecx
     add  eax,52
     cmp  ebx,CAMEO_ITEMS
     jle  .Loop
     sub  eax,52
 .Loop2:
     inc  ebx
-    mov  [ExtendedSelectButtons+12+eax],edx
+    mov  [Hires.ExtSidebarButtons+12+eax],edx
     add  eax,52
     cmp  ebx,CAMEO_ITEMS*2
     jle  .Loop2
-    mov  [selectbuttons+12],ecx
-    mov  [selectbuttons+52+12],ecx
-    mov  [selectbuttons+104+12],ecx
-    mov  [selectbuttons+156+12],ecx
-    mov  [selectbuttons+208+12],edx
-    mov  [selectbuttons+260+12],edx
-    mov  [selectbuttons+312+12],edx
-    mov  [selectbuttons+364+12],edx
+    mov  [Hires.SelectButton+12],ecx
+    mov  [Hires.SelectButton+52+12],ecx
+    mov  [Hires.SelectButton+104+12],ecx
+    mov  [Hires.SelectButton+156+12],ecx
+    mov  [Hires.SelectButton+208+12],edx
+    mov  [Hires.SelectButton+260+12],edx
+    mov  [Hires.SelectButton+312+12],edx
+    mov  [Hires.SelectButton+364+12],edx
     mov  ecx,532
     add  ecx,[Hires.DeltaWidth]
-    mov  [downbuttons+12],ecx
+    mov  [SidebarClass__StripClass__DownButton+12],ecx
     mov  ecx,602
     add  ecx,[Hires.DeltaWidth]
-    mov  [downbuttons+12+56],ecx
+    mov  [SidebarClass__StripClass__DownButton+12+56],ecx
     mov  ecx,500
     add  ecx,[Hires.DeltaWidth]
-    mov  [upbuttons+12],ecx
+    mov  [SidebarClass__StripClass__UpButton+12],ecx
     mov  ecx,570
     add  ecx,[Hires.DeltaWidth]
-    mov  [upbuttons+12+56],ecx
+    mov  [SidebarClass__StripClass__UpButton+12+56],ecx
     pop  eax
     pop  ebx
     pop  edx

@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/hires/extended_sidebar.asm
+; src/features/hires/gamesidebar_extension.asm
 ;
 ; Bulk code for extending the sidebar in custom resolutions
 ;
@@ -26,12 +26,7 @@ extern SidebarClass__StripClass__Add
 extern GScreenClass__Flag_To_Redraw
 extern Globals___Map
 
-
-%define CAMEO_ITEMS    30
-%define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
-
 %define StripBarAreaVerticalSize 0x00601758
-%define IngameHeight 0x006016B4
 
 [section .data]
 CameoItems dd 0 ; Cameo icons to draw the per strip
@@ -44,7 +39,6 @@ PowerBarBottomPos dd 0 ; variable used for
 PowerTileShape dd 0
 Side4Shape dd 0
 Strip2Shape dd 0
-ExtendedSelectButtons TIMES 824 dd 0
 
 
 [section .rdata]
@@ -263,7 +257,7 @@ strip2us_str db"STRIP2US.SHP",0
     call Conquer___CC_Draw_Shape
     add  dword[CurrentStripDrawPosition],48
     mov  dword ecx,[CurrentStripDrawPosition]
-    mov  dword ebx,[IngameHeight]
+    mov  dword ebx,[Globals___ScreenHeight]
     sub  ebx,75
     cmp  ecx,ebx
     jle  .Loop
@@ -282,10 +276,10 @@ strip2us_str db"STRIP2US.SHP",0
     mov  dword ebx,[CameoItems]
     imul ebx,48
     add  ebx,180
-    mov  [downbuttons+16],ebx ; Up and down buttons height
-    mov  [downbuttons+16+56],ebx
-    mov  [upbuttons+16],ebx
-    mov  [upbuttons+16+56],ebx
+    mov  [SidebarClass__StripClass__DownButton+16],ebx ; Up and down buttons height
+    mov  [SidebarClass__StripClass__DownButton+16+56],ebx
+    mov  [SidebarClass__StripClass__UpButton+16],ebx
+    mov  [SidebarClass__StripClass__UpButton+16+56],ebx
     ;Scroll up cameo list to top for right sidebar if it would be glitched
     mov  eax,Globals___Map
     lea  eax,[eax+0x131A]
@@ -355,7 +349,7 @@ strip2us_str db"STRIP2US.SHP",0
     call Conquer___CC_Draw_Shape
     add  dword[CurrentStripIndex],48
     mov  dword ecx,[CurrentStripIndex]
-    mov  dword ebx,[IngameHeight]
+    mov  dword ebx,[Globals___ScreenHeight]
     sub  ebx,75
     cmp  ecx,ebx
     jle  .Loop
@@ -376,10 +370,10 @@ strip2us_str db"STRIP2US.SHP",0
     mov  dword ebx,[CameoItems]
     imul ebx,48
     add  ebx,181
-    mov  [downbuttons+16],ebx ; Up and down buttons height
-    mov  [downbuttons+16+56],ebx
-    mov  [upbuttons+16],ebx
-    mov  [upbuttons+16+56],ebx
+    mov  [SidebarClass__StripClass__DownButton+16],ebx ; Up and down buttons height
+    mov  [SidebarClass__StripClass__DownButton+16+56],ebx
+    mov  [SidebarClass__StripClass__UpButton+16],ebx
+    mov  [SidebarClass__StripClass__UpButton+16+56],ebx
     pop  edi
     pop  esi
     pop  ecx
@@ -398,14 +392,14 @@ strip2us_str db"STRIP2US.SHP",0
 
 @HACK 0x0054E142,0x0054E14E,_StripClass_Activate_hires
     imul eax,[ecx+0x19],CAMEOS_SIZE
-    add  eax,ExtendedSelectButtons
+    add  eax,Hires.ExtSidebarButtons
     jmp  0x0054E14E
 @ENDHACK
 
 
 @HACK 0x0054E156,0x0054E163,_StripClass_Activate_hires2
     imul edx,[ecx+0x19],CAMEOS_SIZE
-    add  edx,ExtendedSelectButtons
+    add  edx,Hires.ExtSidebarButtons
     jmp  0x0054E163
 @ENDHACK
 
@@ -421,7 +415,7 @@ strip2us_str db"STRIP2US.SHP",0
 @HACK 0x0054CF47,0x0054CF51,_SidebarClass_fn_init_hires
     ; Initialize extended invisible select buttons
     mov  edx,CAMEO_ITEMS*2 ; amount of total items to init
-    mov  eax,ExtendedSelectButtons
+    mov  eax,Hires.ExtSidebarButtons
     mov  [0x00604D68],eax
     jmp  0x0054CF51
 @ENDHACK
@@ -429,7 +423,7 @@ strip2us_str db"STRIP2US.SHP",0
 
 @HACK 0x0054DFAE,0x0054DFBA,_StripClass_Init_IO_hires
     imul eax,[ecx+0x19],CAMEOS_SIZE
-    add  eax,ExtendedSelectButtons
+    add  eax,Hires.ExtSidebarButtons
     jmp  0x0054DFBA
 @ENDHACK
 
@@ -443,7 +437,7 @@ strip2us_str db"STRIP2US.SHP",0
 
 @HACK 0x0054E1CC,0x0054E1D9,_StripClass_Deactivate_hires
     imul edx,[ecx+0x19],CAMEOS_SIZE
-    add  edx,ExtendedSelectButtons
+    add  edx,Hires.ExtSidebarButtons
     jmp  0x0054E1D9
 @ENDHACK
 
@@ -479,7 +473,7 @@ strip2us_str db"STRIP2US.SHP",0
     push eax
     push esi
     push edi
-    mov  eax,[IngameHeight]
+    mov  eax,[Globals___ScreenHeight]
     sub  eax,180
     sub  eax,27
     cdq  ; sign-extend eax into edx

@@ -27,11 +27,12 @@
 ; /include
 %include "macros/patch.inc"
 %include "macros/hack.inc"
-;%include "macros/setsym.inc"
 ;%include "macros/datatypes.inc"
 %include "libc.inc"
 %include "types/INIClass.inc"
 %include "types/CCINIClass.inc"
+%include "types/common.inc"
+
 
 ; Version
 %include "src/version.asm"
@@ -73,13 +74,9 @@
 %include "src/macros/houseclass.asm"
 ;%include "src/macros/animtypeclass.asm" ;wip
 
-%ifdef USE_HIRES
-%include "src/hires/hires.asm"
-%include "src/hires/savegame_resolution_sidebar_fix.asm"
-%include "src/hires/multiplayer_print_is_aftermath_game.asm"
-%include "src/hires/extended_sidebar.asm"
-%include "src/fixes/mouse_fixes.asm"
-%endif
+;%ifdef USE_HIRES
+;%include "src/features/hires/hires.asm"
+;%endif
 
 ;loading code
 ;%include "src/loading.asm" ; now empty, split to features/loading/
