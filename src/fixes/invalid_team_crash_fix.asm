@@ -5,8 +5,6 @@
 ; The check is performed by checking specifically for -1. 
 ;
 ; This function is enabled by default and is not controllable.
-;
-;
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 

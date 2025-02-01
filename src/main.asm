@@ -313,6 +313,7 @@
 %include "src/fixes/infantry_infinite_deathloop_fix.asm"
 %include "src/fixes/infantry_range_check.asm"
 %include "src/fixes/invalid_team_crash_fix.asm"
+%include "src/fixes/invalid_techno_crash_fix.asm"
 %include "src/fixes/invisible_explosions_fix.asm" ; Causes desync with 3.03
 %include "src/fixes/localise_draw_strings.asm"
 %include "src/fixes/map_sight_no_incremental.asm" 
