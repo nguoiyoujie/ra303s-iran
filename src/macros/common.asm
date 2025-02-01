@@ -1,5 +1,7 @@
 
 extern Audio___Voc_From_Name
+extern Globals___RuleINI
+
 
 [section .data] 
 Loop_Entry_Buffer: TIMES 256 DB 0

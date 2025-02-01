@@ -23,6 +23,13 @@
 ;
 
 ; derived from ra95-hires
+extern Dialog___Draw_Box
+extern MapClass__In_Radar
+extern GaugeClass__GaugeClass
+extern GScreenClass__Flag_To_Redraw
+extern Globals___Keyboard
+extern Globals___Map
+
 
 ; These are per strip,there's a left and right strip in the sidebar
 %define CAMEO_ITEMS    30

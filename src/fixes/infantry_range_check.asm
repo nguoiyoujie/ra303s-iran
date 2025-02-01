@@ -11,6 +11,10 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern InfantryClass__Can_Fire
+extern Globals___Session_Type
+
+
 @HACK 0x004EEE3B,0x004EEE40,_InfantryClass__Fire_At_Range_Check
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix

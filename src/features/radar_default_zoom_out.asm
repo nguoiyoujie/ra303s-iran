@@ -9,6 +9,10 @@
 ;
 ;----------------------------------------------------------------
 
+extern Globals___Map_IsZoomed_Address
+extern Globals___Map_IsZoomed_Bitmask
+
+
 @HACK 0x0052D751,0x0052D759,_RadarClass__Init_Clear_Zoom_Out_Radar_By_Default
     or   dl,Globals___Map_IsZoomed_Bitmask
     mov  eax,dword[Globals___Map_IsZoomed_Address]

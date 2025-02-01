@@ -17,6 +17,16 @@
 ; 
 ;----------------------------------------------------------------
 
+extern FixedIHeapClass__Allocate
+extern HouseClass__Find_Building
+extern HouseClass__As_Pointer
+extern HouseClass__Can_Build
+extern BuildingTypeClass__As_Reference
+extern TechnoTypeClass__Legal_Placement
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
+
 %define UrgencyType.NONE                       0
 %define UrgencyType.LOW                        1
 %define UrgencyType.NORMAL                     2

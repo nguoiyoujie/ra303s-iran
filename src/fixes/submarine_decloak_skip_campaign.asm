@@ -7,6 +7,10 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
+
+extern Globals___Session_Type
+
+
 @HACK 0x004D4AE8,0x004D4AF0,_HouseClass__AI_Submarine_Decloak_Check
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     je   0x004D4C67

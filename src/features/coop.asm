@@ -6,6 +6,16 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
+
+extern HouseClass__As_Pointer
+extern HouseClass__MPlayer_Defeated
+extern Scenario___Create_Units
+extern Globals___Rule_MaxIQ
+extern Globals___PlayerWins
+extern Globals___PlayerLoses
+extern Globals___Session_Type
+
+
 ; Remove game single player game mode check when checking for win/lose flags set in HouseClass::AI()
 @SJMP  0x004D415D,0x004D416A
 @SJMP  0x004D41D4,0x004D41DD

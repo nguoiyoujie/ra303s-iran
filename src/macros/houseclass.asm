@@ -5,6 +5,8 @@
 ;
 ;----------------------------------------------------------------
 
+extern HouseTypeClass__new
+
 ; define house class field definitions
 %define HouseClass.Offset.RTTI                   0x000    ; byte (0B)
 %define HouseClass.Offset.ID                     0x001    ; INT
@@ -373,7 +375,6 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     pop  ecx
     pop  edx
 %endmacro
-
 
 
 %macro HouseTypeClass.new    2

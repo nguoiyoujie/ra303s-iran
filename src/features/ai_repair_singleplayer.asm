@@ -7,6 +7,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+extern Globals___Session_Type
+
+
 @HACK 0x00460073,0x0046007A,_BuildingClass_Repair_AI_SingleplayerRepair
     cmp  dword[InCoopMode],1 ; inherited from coop mode
     je   0x0046007C

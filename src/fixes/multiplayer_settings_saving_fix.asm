@@ -7,6 +7,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+extern Globals___Session_Type
+
+
 @HACK 0x0051614C,0x00516153,_Skirmish_Menu_Write_Multiplayer_Settings
     mov  eax,Globals___Session_Type
     jmp  0x00516153

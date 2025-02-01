@@ -25,6 +25,13 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern Init___Select_Game
+extern ScenarioClass__Set_Scenario_Name
+extern Globals___AntsEnabled
+extern Globals___Scen
+extern Globals___Session_Type
+
+
 %define recording_mode                               0x00680151
 
 [section .data] 

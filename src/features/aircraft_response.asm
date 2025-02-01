@@ -8,6 +8,10 @@
 ; 
 ;----------------------------------------------------------------
 
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
+
 @HACK 0x0042315F,0x00423164,_AircraftClass__Response_Select_CustomVoice
     ; edx is the unit/vessel class
     mov  al,byte[ecx+0x146] ; ID

@@ -10,6 +10,9 @@
 ; No compatibility issues is expected, as this is a new feature.
 ;----------------------------------------------------------------
 
+extern Globals___Frame
+
+
 [section .data] 
 Temp.TurretFrameStart                                dw 0 
 Temp.TurretFrameCount                                dw 0 

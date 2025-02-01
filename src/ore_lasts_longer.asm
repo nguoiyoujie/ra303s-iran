@@ -1,4 +1,6 @@
 
+extern Globals___Session_Type
+
 
 [section .data]
 ReduceEveryOneCell dd 0

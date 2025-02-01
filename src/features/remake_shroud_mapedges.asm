@@ -10,6 +10,10 @@
 ;
 ;----------------------------------------------------------------
 
+extern MapClass__In_Radar
+extern Globals___Map
+
+
 @LJMP 0x0053A75A,0x0053A971 ; _ScenarioClass_Fill_In_Data_Skip_MapEdge_Setup
 
 [section .data] 

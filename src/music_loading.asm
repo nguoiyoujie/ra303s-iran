@@ -1,11 +1,16 @@
 
 
-@SJMP 0x004F4B83,0x004F4B88 ; _Load_Game_Menu_Queue_Song_Call_Patch_Out
-@SJMP 0x0056C40C,0x0056C412 ; _ThemeClass_Scan_Jump_Over
 
 extern CCFileClass__CCFileClass
 extern CCFileClass__Is_Available
 extern CCINIClass__Load
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
+
+@SJMP 0x004F4B83,0x004F4B88 ; _Load_Game_Menu_Queue_Song_Call_Patch_Out
+@SJMP 0x0056C40C,0x0056C412 ; _ThemeClass_Scan_Jump_Over
+
 
 [section .data]
 SongsAvailable: dd 0

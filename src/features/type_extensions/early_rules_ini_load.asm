@@ -10,6 +10,7 @@
 
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
+extern Globals___RuleINI
 
 
 @HACK 0x004F419C,0x004F41BA,_Init_Game_Patch_Out_Later_RULES_INI_Load

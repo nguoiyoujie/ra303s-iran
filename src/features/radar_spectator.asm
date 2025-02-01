@@ -9,7 +9,11 @@
 ; No compatibility issues is expected.
 ;
 ;----------------------------------------------------------------
+
 extern Audio___Sound_Effect
+extern Globals___Map
+extern Globals___PlayerPtr
+
 
 @HACK 0x004D4EEF,0x004D4EF8,_HouseClass__AI_Radar1
     push eax

@@ -7,6 +7,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
+
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
+
 [section .data] 
 Temp.DeathInfantryID db 0
 Temp.ResponseMission db 0

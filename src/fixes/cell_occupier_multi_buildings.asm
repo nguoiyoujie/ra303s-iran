@@ -8,6 +8,16 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern Coord___Coord_Cell
+extern BuildingTypeClass__Bib_And_Offset
+extern MapClass__Place_Down
+extern SmudgeClass__new
+extern SmudgeClass__SmudgeClass
+extern Globals___Houses
+extern Globals___HouseTypes
+extern Globals___Map
+
+
 [section .data] 
 _occupier_building dd 0
 _bib_cell dd 0

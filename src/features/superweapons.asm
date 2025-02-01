@@ -8,6 +8,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern HouseClass__Find_Building
+extern Globals___Map_IsTargettingMode
 
 %define        SpecialChrono2        0xFE
 

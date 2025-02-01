@@ -19,6 +19,14 @@
 ;[23:58:21] <iran> so
 ;[23:58:42] <iran> IngameHeight-181-27 / 48 for total amount of possible icons
 
+extern Conquer___CC_Draw_Shape
+extern MFCD__Retrieve
+extern SidebarClass__StripClass__Flag_To_Redraw
+extern SidebarClass__StripClass__Add
+extern GScreenClass__Flag_To_Redraw
+extern Globals___Map
+
+
 %define CAMEO_ITEMS    30
 %define CAMEOS_SIZE    1560 ; memory size of all cameos in byte
 

@@ -8,6 +8,12 @@
 ; 
 ;----------------------------------------------------------------
 
+extern GScreenClass__Flag_To_Redraw
+extern Globals___Options_KeyResign
+extern Globals___Map
+extern Globals___Session_Type
+
+
 @SJMP 0x0054D916,0x0054D91B ; _Patch_Out_Erroneous_Sidebar_Activate_CALL
 @SJMP 0x004A6206,0x004A6221 ; _UnhardCode_Keyboard_Key0
 @SJMP 0x004A61D3,0x004A61EE ; _UnhardCode_Keyboard_Key9

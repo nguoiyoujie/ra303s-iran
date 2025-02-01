@@ -7,6 +7,10 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+extern SidebarClass__Init_IO
+extern Globals___Map
+
+
 %define stripbariconswidthoffset        0x0060174C
 %define selectbuttons                    0x0068A2C4
 %define downbuttons                        0x0068A254

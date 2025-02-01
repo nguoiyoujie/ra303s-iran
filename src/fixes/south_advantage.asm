@@ -9,6 +9,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern Coord___Distance_As_Coord
+extern Face_Desired_Facing8
+extern Face_Desired_Facing256
+
+
 ; args: <ObjectClass pointer to check facing for>, <ObjectClass pointer to check facing compared to>
 ; NOTE:
 %macro Get_Facing_For_Objects 2

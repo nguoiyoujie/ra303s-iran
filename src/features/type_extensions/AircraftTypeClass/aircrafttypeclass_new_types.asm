@@ -11,6 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern AircraftTypeClass__AircraftTypeClass
+extern AircraftTypeClass__new
+extern Globals___RuleINI
+
+
 @HACK 0x00403EE3,0x00403EE9,_AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes
     Loop_Over_RULES_INI_Section_Entries str_AircraftTypes,Init_AircraftTypeClass
     ;mov  edx,[AircraftTypeClass.Count]

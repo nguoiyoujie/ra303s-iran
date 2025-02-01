@@ -48,7 +48,7 @@
 %include "src/defines/specialtypes.asm"
 %include "src/defines/tracktypes.asm"
 %include "src/defines/aibuildtypes.asm"
-%include "src/defines/functions.asm"
+;%include "src/defines/functions.asm"
 %include "src/defines/fixediheapclass_templates.asm"
 
 ; stored variables

@@ -10,6 +10,11 @@
 ; 
 ;----------------------------------------------------------------
 
+extern HouseClass__Can_Build
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
+
 ; for old AI_Aircraft implementation, in case we need to restore it. 
 ; this corrects the quantity offsets to use the new HouseClass offsets
 %define HouseClass.Offset.NewBQuantity_Helipad 0x1848

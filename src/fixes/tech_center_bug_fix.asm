@@ -11,6 +11,9 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern HouseClass__Can_Build
+extern Globals___PlayerPtr
+
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>
 ; returns: eax is 2 if side is Soviet, 0 if Allies

@@ -11,6 +11,10 @@
 
 ;There is no Read_INI in VesselTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 
+extern MFCD__Retrieve
+extern TechnoTypeClass__Read_INI
+
+
 [section .data] 
 Buffer_VesselType           times 512 db 0 
 

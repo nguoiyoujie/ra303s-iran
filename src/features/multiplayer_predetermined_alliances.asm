@@ -11,6 +11,9 @@
 ;
 ;----------------------------------------------------------------
 
+extern HouseClass__As_Pointer
+extern HouseClass__Make_Ally
+
 
 [section .rdata]
 str_HouseAllyOne        db"HouseAllyOne",0

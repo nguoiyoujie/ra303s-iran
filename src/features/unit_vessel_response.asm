@@ -8,9 +8,9 @@
 ; 
 ;----------------------------------------------------------------
 
-; This code assumes that UnitTypeClass.Offset.Response_Select and VesselTypeClass.Offset.Response_Select are the same.
-; This is because we use their common type class DriveClass to run the logic for both.
-; Ensure that this assumption is upheld
+extern RandomClass_Random
+extern Globals___NonCriticalRandomNumber
+
 
 @HACK 0x004B6207,0x004B620C,_DriveClass__Response_Select_CustomVoice
     ; ecx is the unit/vessel class

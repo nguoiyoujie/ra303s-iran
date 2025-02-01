@@ -7,6 +7,11 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ; 
 ;----------------------------------------------------------------
+
+extern Globals___Rule_IsMCVDeploy_Address
+extern Globals___Rule_IsMCVDeploy_BitMask
+
+
 ;@HACK 0x0045A71A,0x0045A723,_BuildingClass__What_Action_MCV_Undeploy
 ;    cmp  byte[Spawn.Settings.MCVUndeploy],1
 ;    jz   0x0045A725

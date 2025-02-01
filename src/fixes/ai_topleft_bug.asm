@@ -13,6 +13,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern Coord___Coord_Cell
+extern MapClass__Nearby_Location
+extern Globals___Session_Type
+
+
 @HACK 0x004DDA00,0x004DDA05,_HouseClass__Where_To_Go_Save_CurrentObject
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     je   .Apply_Fix

@@ -7,6 +7,10 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
+
+extern Globals___Rule_MessageDelay
+
+
 @HACK 0x004A731C,0x004A7321,_Message_Input_Display_Message_After_Sending_To_Players
     Save_Registers
     ; Calculate duration the message is displayed for

@@ -1,4 +1,7 @@
 
+extern HouseClass__As_Pointer
+extern HouseClass__Assign_Handicap
+
 
 [section .data] 
 Multi1_Colour:   db 0xFF

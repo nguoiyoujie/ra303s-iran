@@ -43,6 +43,11 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern MixFileClass_CCFileClass_Retrieve
+extern MixFileClass_CCFileClass_Cache
+extern Globals___FastKey
+
+
 ; Loads without caching in memory
 ; args: <mix file name string>
 %macro Load_Mix_File 1

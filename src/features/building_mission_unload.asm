@@ -8,6 +8,7 @@
 ;----------------------------------------------------------------
 
 extern BuildingClass__Exit_Coord
+extern Coord___Coord_Cell
 
 [section .data] 
 Cache_WarFactory_DoorAnim       dd 0

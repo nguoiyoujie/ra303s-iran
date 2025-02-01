@@ -27,6 +27,9 @@
 ;
 ;----------------------------------------------------------------
 
+extern Globals___Map_Array
+
+
 @HACK 0x004A0219,0x004A0227,_fence_bug
     push eax
     push ebx

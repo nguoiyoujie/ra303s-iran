@@ -1,3 +1,7 @@
+
+extern Globals___PlayerPtr
+
+
 @HACK 0x0054E871,0x0054E87B,_StripClass__Draw_it_Dont_Destroy_EAX
     mov  ecx,[ebp-0x1C]
     jmp  0x0054E87B

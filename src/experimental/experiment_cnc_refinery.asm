@@ -6,6 +6,8 @@
 ;
 ;----------------------------------------------------------------
 extern BuildingClass__Begin_Mode
+extern Globals___ScenarioInit
+
 
 [section .data] 
 temp.This     dd 0

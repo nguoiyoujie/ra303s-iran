@@ -9,6 +9,11 @@
 ;
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
+
+extern HouseClass__As_Pointer
+extern HouseClass__Is_Ally
+
+
 ; args <HouseType to check whose alliances will be checked>, <HouseType to check for>
 %macro Is_Ally 2
     mov  eax,%1

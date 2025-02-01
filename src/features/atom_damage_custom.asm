@@ -13,6 +13,11 @@
 ;----------------------------------------------------------------
 
 extern Conquer___Call_Back
+extern PaletteClass__Set
+extern Globals___Rule_AtomDamage
+extern Globals___WhitePalette
+extern Globals___Session_Type
+
 
 @HACK 0x00425BA8,0x00425BAD,_AnimClass__Override_Atom_Range
     cmp  dword[Rules.General.AtomRadius],0

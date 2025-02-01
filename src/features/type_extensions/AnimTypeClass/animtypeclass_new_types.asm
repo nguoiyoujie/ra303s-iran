@@ -14,6 +14,10 @@
 ;
 ;----------------------------------------------------------------
 
+extern AnimTypeClass__AnimTypeClass
+extern AnimTypeClass__new
+
+
 ; There are two classes of animations
 ; One of them is a full animation loaded from a single file
 ; The other is a set of 8 directional animations loaded from a single file.

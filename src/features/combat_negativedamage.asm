@@ -10,6 +10,9 @@
 ;
 ;----------------------------------------------------------------
 
+extern TechnoClass__Combat_Damage
+
+
 ; don't consider any distance or warhead checks, just apply the negative damage
 @SJMP 0x004A321B,0x004A323E ; _Combat_Modify_Damage_NegativeDamage_Always_Count
 

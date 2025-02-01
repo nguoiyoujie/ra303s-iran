@@ -8,6 +8,10 @@
 ;
 ;----------------------------------------------------------------
 
+extern Globals___Scen_ScenarioName
+extern Globals___Session_Type
+
+
 @SJMP 0x004C9F80,0x004C9F85 ;  _RedrawOptionsMenu_Skirmish_Savegames2
 @SJMP 0x004C9FA7,0x004C9FB5 ; _RedrawOptionsMenu_Skirmish_Savegames4
 

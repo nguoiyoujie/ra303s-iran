@@ -1,4 +1,9 @@
 
+extern HouseClass__Flag_To_Die
+extern HouseClass__As_Pointer
+extern Globals___Session_Type
+
+
 @SJMP 0x004D3C95,0x004D3C9E ; _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner
 @SJMP 0x004D3E52,0x004D3E5F ; _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner
 @SJMP 0x0045AF9F,0x0045AFA8 ; _BuildingClass__Captured_Increment_Unit_Total

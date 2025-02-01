@@ -4,8 +4,12 @@
 ; Load an AI.ini containing AI settings after loading aftermath.ini before loading a scenario's rules changes
 ;
 ;----------------------------------------------------------------
+
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
+extern RulesClass__AI
+extern Globals___Rule
+
 
 @HACK 0x0053D645,0x0053D64A,_Read_Scenario_INI_Load_AI_INI
     call 0x00537564

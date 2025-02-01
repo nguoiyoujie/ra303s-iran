@@ -9,6 +9,7 @@
 ; 
 ;----------------------------------------------------------------
 extern CargoClass__Attached_Object
+extern Globals___Houses
 
 
 @HACK 0x0058B862,0x0058B868,_VesselClass__Greatest_Threat_Carrier_AutoAcquire

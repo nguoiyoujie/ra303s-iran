@@ -11,6 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern VesselTypeClass_VesselTypeClass
+extern VesselTypeClass_new
+extern Globals___RuleINI
+
+
 @HACK 0x00459661,0x00459666,_BuildingClass__Update_Buildables_Unhardcode_VesselTypes
     mov  byte al,[VesselTypeClass.Count]
     cmp  dl,al

@@ -7,6 +7,12 @@
 
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
+extern Vortex___ChronalVortex
+extern ChronalVortexClass__Stop
+extern Globals___NewUnitsEnabled
+extern Globals___SessionType
+extern Globals___Scen_Scenario
+extern Globals___Session_Type
 
 
 @HACK 0x0053D081,0x0053D086,_Map_Load_Before_Hook ; For map loading stuff

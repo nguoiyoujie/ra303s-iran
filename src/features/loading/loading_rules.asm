@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+extern Globals___RuleINI
+
+
 ; only loaded once on game init, not per map
 @HACK 0x004F446C,0x004F4471,_Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.
     push ecx

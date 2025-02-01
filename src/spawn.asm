@@ -17,6 +17,43 @@
 ; Spawn code for CnCNet, reads SPAWN.INI for options
 
 extern Conquer___Call_Back
+extern Init___Random
+extern IPXAddressClass__IPXAddressClass
+extern IPXManagerClass__Set_Timing
+extern Scenario___Start_Scenario
+extern SessionClass__Create_Connections
+extern SidebarClass__Activate
+extern GScreenClass__Flag_To_Redraw
+extern GScreenClass__Render
+extern GraphicBufferClass__Lock
+extern GraphicBufferClass__Unlock
+extern NetDlg___Init_Network
+extern UDPInterfaceClass__UDPInterfaceClass
+extern UDPInterfaceClass__Open_Socket
+extern WinsockInterfaceClass__Init
+extern WinsockInterfaceClass__Start_Listening
+extern WinsockInterfaceClass__Discard_In_Buffers
+extern WinsockInterfaceClass__Discard_Out_Buffers
+extern PaletteClass__Set
+extern Globals___NewUnitsEnabled
+extern Globals___Scen_Difficulty
+extern Globals___Scen_CDifficulty
+extern Globals___Scen_ScenarioName
+extern Globals___Map
+extern Globals___BlackPalette
+extern Globals___WhitePalette
+extern Globals___Session_Type
+extern Globals___Session_MaxAhead
+extern Globals___Session_FrameSendRate
+extern Globals___Ipx
+extern Globals___Seed
+extern Globals___CustomSeed
+extern Globals___VisiblePage
+extern Globals___HiddenPage
+extern Globals___UnitBuildPenalty
+extern Internet___PlanetWestwoodGameID
+extern Internet___PlanetWestwoodStartTime
+
 
 %define GetCommandLineA                             0x005E5904
 %define calloc                                      0x005E1EF6

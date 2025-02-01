@@ -8,6 +8,8 @@
 ; No compatibility issues is expected. To not use this logic, simply refrain from including NOICON.SHP.
 ;----------------------------------------------------------------
 
+extern MFCD__Retrieve
+
 
 [section .rdata] 
 str_NoIcon_SHP       db"NOICON.SHP", 0

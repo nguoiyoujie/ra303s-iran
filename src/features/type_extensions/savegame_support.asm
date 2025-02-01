@@ -1,4 +1,6 @@
 
+extern Globals___Session_Type
+
 
 %define New_Savegame_Version    0x1007000
 %define Old_Savegame_Version    0x100618B

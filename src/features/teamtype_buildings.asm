@@ -11,6 +11,7 @@
 ;   Perhaps this could be useful for undeploying an MCV?
 
 extern BuildingTypeClass__From_Name
+extern BuildingTypeClass__As_Reference
 
 @HACK 0x0056069C,0x005606A3,_TeamTypeClass__Read_Add_BuildingTypes_Reading
 	; use movzx to support 255 buildings

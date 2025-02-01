@@ -1,4 +1,8 @@
 
+extern Coord___Distance_As_Coord
+extern Globals___BuildingTypes
+
+
 @HACK 0x004C3343,0x004C336D,_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell
     ; ebx contains FootClass this pointer
     Save_Registers

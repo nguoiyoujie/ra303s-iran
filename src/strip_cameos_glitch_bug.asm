@@ -7,6 +7,10 @@
 
 ; Need to also check "Hack_Prevented" local function variable because I patch out a check whether a factory for a TechnoTypeClass actually exists.
 
+extern FactoryClass__Get_Object
+extern HouseClass__Fetch_Factory
+extern Globals___PlayerPtr
+
 
 @CLEAR 0x0054EA80,0x90,0x0054EA82 ; was 0x0054EA81,why not 0x0054EA82... 
 

@@ -1,4 +1,7 @@
 
+extern HouseClass__As_Pointer
+extern Globals___EngineerCaptureLevel
+
 ; no buildingcrew if the house has no building crew set
 ; this requires the extended houseclass option NoBuildingCrew
 @HACK 0x0045E429,0x0045E42F,_BuildingClass__Building_Crew_House_NoBuildingCrew

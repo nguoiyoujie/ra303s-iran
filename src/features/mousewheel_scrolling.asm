@@ -10,6 +10,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern SidebarClass__Scroll
+extern Globals___Map
+extern Globals___PlayerPtr
+
+
 [section .data] 
 Scrolling db 0
 

@@ -13,6 +13,10 @@
 ; 
 ;----------------------------------------------------------------
 
+extern HouseClass__Can_Build
+extern UnitTypeClass__As_Reference
+
+
 ;added by lovalmidas
 ; hook into AI_Unit() to change how AI weights units in order to make its choices. This is done to support the additional units beyond the original UNIT_COUNT
 ; Note that AI behavior depends on Can_Build() checks and new units will be treated similar to Aftermath units due to being placed after them

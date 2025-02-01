@@ -11,6 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern BuildingTypeClass__BuildingTypeClass
+extern BuildingTypeClass__new
+extern Globals___RuleINI
+
+
 ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr,edx,18
 @SET 0x00429D42,{shr edx,0x18} 
 @SET 0x00429D4A,{shr edx,0x18}

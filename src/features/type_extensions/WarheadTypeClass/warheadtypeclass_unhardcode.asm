@@ -11,6 +11,12 @@
 ;
 ;----------------------------------------------------------------
 
+extern Warhead___Warheads
+extern WarheadTypeClass__WarheadTypeClass
+extern WarheadTypeClass__new
+extern Weapon__Weapons
+
+
 @HACK 0x0046360D,0x00463615,_CCINIClass__Get_WarheadType_Unhardcode_WarheadTypes_Count
     mov  [ebp-0x8],dl
     Get_RULES_INI_Section_Entry_Count str_Warheads

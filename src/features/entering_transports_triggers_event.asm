@@ -9,7 +9,10 @@
 ; No compatibility issues is expected.
 ;
 ;----------------------------------------------------------------
-; Remove existing triggers; the above code includes both Engineer and Spy
+
+extern TriggerClass__Spring
+
+; Remove existing triggers; the below code includes both Engineer and Spy
 @SJMP 0x004EC5A2,0x004EC5E6 ; _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip
 @SJMP 0x004EC723,0x004EC765 ; _InfantryClass__Per_Cell_Process_Spy_Trigger_Skip
 

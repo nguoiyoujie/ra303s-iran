@@ -1,5 +1,28 @@
 
 extern Audio___Sound_Effect_At_Coord
+extern Coord___Coord_Cell
+extern HouseClass__As_Pointer
+extern BuildingTypeClass__Create_And_Place
+extern BuildingTypeClass__As_Reference
+extern BulletClass__BulletClass
+extern BulletClass__new
+extern MapClass__In_Radar
+extern _Create_Group
+extern ScenarioClass__Do_BW_Fade
+extern SidebarClass__Add
+extern SidebarClass__StripClass__Flag_To_Redraw
+extern Vortex___ChronalVortex
+extern ChronalVortexClass__Appear
+extern GScreenClass__Flag_To_Redraw
+extern Globals___Rule_MaxIQ
+extern Globals___Rule_IronCurtainDuration
+extern Globals___Scen
+extern Globals___Frame
+extern Globals___Map
+extern Globals___Map_Array
+extern Globals___ScenarioInit
+extern Globals___PlayerPtr
+
 
 %macro TAction__Operator__Epilogue 0
     mov  eax,[ebp+-0x30]

@@ -17,6 +17,13 @@
 ;
 ;----------------------------------------------------------------
 
+extern HouseClass__Make_Ally
+extern HouseClass__HousesType
+extern HouseClass__As_Pointer
+extern HouseClass__Computer_Paranoid
+extern Globals___Session_Type
+
+
 ; Suppress IsHuman check, allowing AI alliances to be published to the in-game UI message system
 @SJMP 0x004D62DD,0x004D62E3 ; _HouseClass__Make_Ally_Show_Computer_Has_Allied
 

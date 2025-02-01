@@ -8,6 +8,13 @@
 ;
 ;----------------------------------------------------------------
 
+extern HouseTypeClass__From_Name
+extern HouseClass__As_Pointer
+extern HouseClass__Available_Money
+extern HouseClass__HousesType
+extern Globals___PlayerPtr
+
+
 @HACK 0x00567048,0x0056704E,_TechnoClass_Visual_Character_Spectator_Stuff
     cmp  cl,5
     jnz  .Ret

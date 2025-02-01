@@ -11,6 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern UnitTypeClass_UnitTypeClass
+extern UnitTypeClass_new
+extern Globals___RuleINI
+
+
 @HACK 0x00459715,0x0045971A,_BuildingClass__Update_Buildables_UnhardCode_UnitTypes
     mov  byte al,[UnitTypeClass.Count]
     cmp  bl,al

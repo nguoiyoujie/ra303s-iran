@@ -11,6 +11,9 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+extern Globals___Session_Type
+
+
 @HACK 0x004AFF0D,0x004AFF16,_DisplayClass_Set_Cursor_Pos_Magic_Build_Fix
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .Apply_Fix

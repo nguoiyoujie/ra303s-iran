@@ -10,6 +10,10 @@
 ; 
 ;----------------------------------------------------------------
 
+extern Globals___NewUnitsEnabled
+extern Globals___Session_Type
+
+
 @HACK 0x005611F3,0x005611FC,_Time_To_Build_NewUnitsEnabled_Check
     cmp  byte[Rules.Aftermath.AftermathFastBuildSpeed],1
     jz   0x00561206

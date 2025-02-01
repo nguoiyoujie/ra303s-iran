@@ -1,4 +1,8 @@
 
+extern Globals___Houses
+extern Globals___PlayerPtr
+
+
 @SJMP 0x004D6538,0x004D6542 ; _HouseClass__Remap_Table_Use_RemapType_Arg2
 ; use Points instead of Risk
 @SET 0x00568596,{mov dword eax,[eax+TechnoTypeClass.Offset.Points]} ; _TechnoClass_Risk_UsePoints

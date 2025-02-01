@@ -32,6 +32,19 @@
 
 extern CCFileClass__CCFileClass
 extern CCINIClass__Load
+extern RulesClass__General
+extern RulesClass__Recharge
+extern RulesClass__AI
+extern RulesClass__Powerups
+extern RulesClass__Land_Types
+extern RulesClass__Themes
+extern RulesClass__IQ
+extern RulesClass__Objects
+extern RulesClass__Difficulty
+extern Globals___RuleINI
+extern Globals___Rule
+
+
 
 @HACK 0x00538B73,0x00538B7D,_Load_Game_Load_OOS_FIX_INI
     Save_Registers

@@ -15,6 +15,11 @@
 ;
 ;----------------------------------------------------------------
 
+extern HouseClass__As_Pointer
+extern Globals___Rule_GoldValue
+extern Globals___Rule_GemValue
+
+
 @HACK 0x0058144B,0x00581451,_UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
     push eax
     mov  dword eax,[eax+0x93]

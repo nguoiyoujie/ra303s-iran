@@ -1,4 +1,6 @@
 
+extern Scenario___Start_Scenario
+
 
 @SJMP 0x00538764,0x00538771
 

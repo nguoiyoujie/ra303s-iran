@@ -10,6 +10,11 @@
 ; Fixes repairing on enemy naval yard and repairing on the move
 ; Taken from AlexB's Arda, with AlexB's help
 
+extern HouseClass__As_Pointer
+extern HouseClass__Make_Ally
+extern Globals___Session_Type
+
+
 %define        Event_Execute_NULL    0x004BDFED
 
 @HACK 0x004BD891,0x004BD89B,_EventClass__Execute_Vessel_Repair_Fixes
