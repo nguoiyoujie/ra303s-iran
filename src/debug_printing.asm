@@ -1,23 +1,3 @@
-@LJMP 0x0052C2B8,_Print_CRCs_Debug_On_Check
-@LJMP 0x005C3548,_Mono_Printf_Redirect
-@LJMP 0x005CD97B,_Printf_Hook
-@LJMP 0x005B3914,_WWDebugString_Hook
-@LJMP 0x005C4720,_IconCacheClass__Draw_It_Debug
-@LJMP 0x005A8E00,_IPXInterfaceClass__Open_Socket_Debug
-@LJMP 0x005A8E72,_IPXInterfaceClass__Open_Socket_Debug2
-@LJMP 0x005A8EDA,_IPXInterfaceClass__Open_Socket_Debug3
-@LJMP 0x005A8F22,_IPXInterfaceClass__Open_Socket_Debug4
-@LJMP 0x005A8F6A,_IPXInterfaceClass__Open_Socket_Debug5
-@LJMP 0x005BBE3F,_WinTimerClass__WinTimerClass_Debug
-@LJMP 0x005D2A18,_WinModemClass__Serial_Port_Open_Debug
-@LJMP 0x005D2A8C,_WinModemClass__Serial_Port_Open_Debug2
-@LJMP 0x005A87DB,_UDPInterfaceClass__Open_Socket_Debug
-@LJMP 0x005A84A8,_WinsockInterfaceClass__Set_Socket_Options_Debug
-@LJMP 0x005A84F1,_WinsockInterfaceClass__Set_Socket_Options_Debug2
-@LJMP 0x005A81FA,_WinsockInterfaceClass__Init_Debug
-@LJMP 0x005A822D,_WinsockInterfaceClass__Init_Debug2
-@LJMP 0x0059E770,_OutputDebugStringW95_Hook
-@LJMP 0x005CDF08,_assert_Debug
 
 %define    AssertionFailed        0x005F588C
 
@@ -50,14 +30,12 @@ str_test2 db"test2",0
     Restore_Registers
 %endmacro
 
-[section .text]
-_assert_Debug:
 
+@HACK 0x005CDF08,0x005CDF21,_assert_Debug
     mov  edx,str_fopenmode
     push str_assertlog
     call fopen
     mov  ebx,eax
-
     push eax
     push ecx
     push ebx
@@ -66,79 +44,111 @@ _assert_Debug:
     push ebx
     call fprintf
     add  esp,0x14
-
     mov  eax,ebx
     call fclose
-
     jmp  0x005CDF21
+@ENDHACK
 
-_OutputDebugStringW95_Hook:
+
+@HACK 0x0059E770,0x0059E776,_OutputDebugStringW95_Hook
     pop  eax
     Debug_Log str_debuglog,eax,0
     sub  esp,4
     retn
+@ENDHACK
 
-_WinsockInterfaceClass__Init_Debug2:
+
+@HACK 0x005A822D,0x005A8234,_WinsockInterfaceClass__Init_Debug2
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8234
+@ENDHACK
 
-_WinsockInterfaceClass__Init_Debug:
+
+@HACK 0x005A81FA,0x005A8201,_WinsockInterfaceClass__Init_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8201
+@ENDHACK
 
-_WinsockInterfaceClass__Set_Socket_Options_Debug2:
+
+@HACK 0x005A84F1,0x005A84F8,_WinsockInterfaceClass__Set_Socket_Options_Debug2
     Debug_Log str_debuglog,eax,0
     jmp  0x005A84F8
+@ENDHACK
 
-_WinsockInterfaceClass__Set_Socket_Options_Debug:
+
+@HACK 0x005A84A8,0x005A84AF,_WinsockInterfaceClass__Set_Socket_Options_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005A84AF
+@ENDHACK
 
-_UDPInterfaceClass__Open_Socket_Debug
+
+@HACK 0x005A87DB,0x005A87E2,_UDPInterfaceClass__Open_Socket_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005A87E2
+@ENDHACK
 
-_WinModemClass__Serial_Port_Open_Debug2:
+
+@HACK 0x005D2A8C,0x005D2A93,_WinModemClass__Serial_Port_Open_Debug2
     Debug_Log str_debuglog,eax,0
     jmp  0x005D2A93
+@ENDHACK
 
-_WinModemClass__Serial_Port_Open_Debug:
+
+@HACK 0x005D2A18,0x005D2A1F,_WinModemClass__Serial_Port_Open_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005D2A1F
+@ENDHACK
 
-_WinTimerClass__WinTimerClass_Debug:
+
+@HACK 0x005BBE3F,0x005BBE46,_WinTimerClass__WinTimerClass_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005BBE46
+@ENDHACK
 
-_IPXInterfaceClass__Open_Socket_Debug5:
+
+@HACK 0x005A8F6A,0x005A8F71,_IPXInterfaceClass__Open_Socket_Debug5
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8F71
+@ENDHACK
 
-_IPXInterfaceClass__Open_Socket_Debug4:
+
+@HACK 0x005A8F22,0x005A8F29,_IPXInterfaceClass__Open_Socket_Debug4
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8F29
+@ENDHACK
 
-_IPXInterfaceClass__Open_Socket_Debug3:
+
+@HACK 0x005A8EDA,0x005A8EE1,_IPXInterfaceClass__Open_Socket_Debug3
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8EE1
+@ENDHACK
 
-_IPXInterfaceClass__Open_Socket_Debug2:
+
+@HACK 0x005A8E72,0x005A8E79,_IPXInterfaceClass__Open_Socket_Debug2
     Debug_Log str_debuglog,eax,0
     jmp  0x005A8E79
+@ENDHACK
 
-_IPXInterfaceClass__Open_Socket_Debug:
+
+@HACK 0x005A8E00,0x005A8E07,_IPXInterfaceClass__Open_Socket_Debug
     Debug_Log str_debuglog,eax,0
-    jmp  0x005A8DEA
+    jmp  0x005A8E07 ; 0x005A8DEA
+@ENDHACK
 
-_IconCacheClass__Draw_It_Debug:
+
+@HACK 0x005C4720,0x005C4727,_IconCacheClass__Draw_It_Debug
     Debug_Log str_debuglog,eax,0
     jmp  0x005C4727
+@ENDHACK
 
-_WWDebugString_Hook:
+
+@HACK 0x005B3914,0x005B391A,_WWDebugString_Hook
     Debug_Log str_debuglog,eax,0
     retn
+@ENDHACK
 
-_Printf_Hook:
+
+@HACK 0x005CD97B,0x005CD980,_Printf_Hook
     mov  edx,[esp+8]
     Debug_Log str_debuglog,edx,edi
 .Ret:
@@ -146,25 +156,26 @@ _Printf_Hook:
     push edx
     sub  esp,4
     jmp  0x005CD980
+@ENDHACK
+
 
 ;Mono_PrintF() 0x005C3548: arg 1 = format, arg 2 = varargs
-_Mono_Printf_Redirect:
+@HACK 0x005C3548,0x005C35CF,_Mono_Printf_Redirect
     mov  eax,[esp+8]
     mov  ecx,[esp+12]
     Debug_Log str_debuglog,ecx,ebx
     sub  esp,4
     retn
+@ENDHACK
 
-_Print_CRCs_Debug_On_Check:
+
+@HACK 0x0052C2B8,0x0052C2BF,_Print_CRCs_Debug_On_Check
     ; do cmp
     cmp  byte[RedAlert.Options.DebugLogging],1
     jz   .Debug_On
-
     retn
-
 .Debug_On:
     Debug_Log str_debuglog,str_test2,0
-
     push ebp
     mov  ebp,esp
     push ebx
@@ -172,3 +183,5 @@ _Print_CRCs_Debug_On_Check:
     push edx
     push esi
     jmp  0x0052C2BF
+@ENDHACK
+

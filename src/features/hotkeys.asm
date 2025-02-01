@@ -24,7 +24,7 @@
 ResignKeyPressed: dd 0
 
 
-@HACK 0x004A5753,_Keyboard_Process_Home_Key_Overwrite
+@HACK 0x004A5753,0x004A5760,_Keyboard_Process_Home_Key_Overwrite
     cmp  word ax,[RedAlert.WinHotKeys.KeySidebarToggle]
     jz   .Toggle_Sidebar
     cmp  word ax,[RedAlert.WinHotKeys.KeyMapSnapshot]

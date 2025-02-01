@@ -12,11 +12,14 @@
 ;; arg2 : address to clear to (exclusive). Typically this is the start of the first instruction you do not want to override.
 ;; arg3 : name of patch (for ease of debugging)
 ;;
+%define __hack_label "NULL"
+
 %macro @HACK 2
     %ifctx __hack2
-        %error "nesting `@HACK(2)' is not allowed" (%2)
+        %error "nesting `@HACK(2)' is not allowed" (%2) (existing=__hack_label)
     %else
         %push __hack2
+        %define __hack_label %2
 
         %$begin equ %1
 
@@ -29,9 +32,12 @@
 
 %macro @HACK 3
     %ifctx __hack3
-        %error "nesting `@HACK(3)' is not allowed" (%3)
+        %error "nesting `@HACK(3)' is not allowed" (%3) (existing=__hack_label)
+    %elifctx __hack2
+        %error "nesting `@HACK(3)' in `@HACK(2)' is not allowed" (%3) (existing=__hack_label)
     %else
         %push __hack3
+        %define __hack_label %3
 
         %if %2 - ((%1) + 5) < 0
             %error "end must be at least 5 bytes after start" (%3)
@@ -57,4 +63,5 @@
     %else
         %error "no corrosponding `@HACK'"
     %endif
+    %define __hack_label "NULL"
 %endmacro

@@ -10,20 +10,6 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x0057B953,_UnitClass_Try_To_Deploy_MCVUnhardcode
-@LJMP 0x0057B9BC,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
-@LJMP 0x0057BA4D,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2
-@LJMP 0x0057BB03,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3
-
-@LJMP 0x0057F4AD,_UnitClass_What_Action_MCVUnhardcode
-@LJMP 0x0057F509,_UnitClass_What_Action_ConstructionYardUnhardcode
-
-@LJMP 0x0057FC97,_UnitClass_Mission_Guard_MCVUnhardcode
-
-@LJMP 0x0057D9A6,_UnitClass_Mission_Unload_IsRotating_IsDriving_Check
-@LJMP 0x0057DA64,_UnitClass_Mission_Unload_DeploysInto_Status2_Check
-;@LJMP 0x0057D3C8,_UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
-
 ; TO-DO: MCV check on Mission_Hunt
 ; TO-DO: MCV check on TeamClass::TMission_Deploy
 
@@ -33,7 +19,7 @@ Cache_UnitType_DeploysInto       db 0
 
 [section .text] 
 ;Replaces the MCV check with a DeploysInto=xx check
-_UnitClass_Try_To_Deploy_MCVUnhardcode:
+@HACK 0x0057B953,0x0057B95F,_UnitClass_Try_To_Deploy_MCVUnhardcode
     movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al,byte[eax+UnitTypeClass.Offset.DeploysInto]
@@ -41,25 +27,32 @@ _UnitClass_Try_To_Deploy_MCVUnhardcode:
     cmp  al,0
     jle  0x0057BD03 
     jmp  0x0057B95F
+@ENDHACK
 
-_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1:
+
+@HACK 0x0057B9BC,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
     xor  eax,eax
     mov  al,byte[Cache_UnitType_DeploysInto]
     jmp  0x0057B9C1
+@ENDHACK
 
-_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2:
+
+@HACK 0x0057BA4D,0x0057BA52,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode2
     xor  eax,eax
     mov  al,byte[Cache_UnitType_DeploysInto]
     jmp  0x0057BA52
+@ENDHACK
 
-_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3:
+
+@HACK 0x0057BB03,0x0057BB08,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode3
     xor  edx,edx
     mov  dl,byte[Cache_UnitType_DeploysInto]
     jmp  0x0057BB08
+@ENDHACK
 
 
 ;Replaces the MCV check with a DeploysInto=xx check
-_UnitClass_What_Action_MCVUnhardcode:
+@HACK 0x0057F4AD,0x0057F4B9,_UnitClass_What_Action_MCVUnhardcode
     movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al,byte[eax+UnitTypeClass.Offset.DeploysInto]
@@ -67,15 +60,18 @@ _UnitClass_What_Action_MCVUnhardcode:
     cmp  al,0
     jle  0x0057F535
     jmp  0x0057F4B9
+@ENDHACK
 
-_UnitClass_What_Action_ConstructionYardUnhardcode:
+
+@HACK 0x0057F509,0x0057F50E,_UnitClass_What_Action_ConstructionYardUnhardcode
     xor  eax,eax
     mov  al,byte[Cache_UnitType_DeploysInto]
     jmp  0x0057F50E
+@ENDHACK
 
 
 ;Replaces the MCV check with a DeploysInto=xx check
-_UnitClass_Mission_Guard_MCVUnhardcode:
+@HACK 0x0057FC97,0x0057FCA3,_UnitClass_Mission_Guard_MCVUnhardcode
     movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al,byte[eax+UnitTypeClass.Offset.DeploysInto]
@@ -83,22 +79,25 @@ _UnitClass_Mission_Guard_MCVUnhardcode:
     cmp  al,0
     jle  0x0057FD34
     jmp  0x0057FCA3
+@ENDHACK
 
 
-_UnitClass_Mission_Unload_IsRotating_IsDriving_Check:
+@HACK 0x0057D9A6,0x0057D9AD,_UnitClass_Mission_Unload_IsRotating_IsDriving_Check
     test byte[eax+0xCD],0xC0 ; originally only IsDriving is checked.
     jmp  0x0057D9AD
+@ENDHACK
 
-_UnitClass_Mission_Unload_DeploysInto_Status2_Check:
+
+@HACK 0x0057DA5D,0x0057DA66,_UnitClass_Mission_Unload_DeploysInto_Status2_Check
     test byte[eax+0xCD],0x10
     jnz  .StillDeploying
     jmp  0x0057DA66
-
 .StillDeploying:
     mov  dword[eax+0x2A],0x1 ; allow the code to try again
     jmp  0x0057DAB0
+@ENDHACK
 
-
+;@HACK 0x0057D3C8,_UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 ; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
 ;Replaces the MCV check with a DeploysInto=xx check
 ;_UnitClass_Mission_Unload_MCVUnhardcode:
@@ -113,5 +112,5 @@ _UnitClass_Mission_Unload_DeploysInto_Status2_Check:
 ;    cmp  al,UnitType.MCV
 ;    jc   0x0057E246
 ;    jmp  0x0057D3D0
-
+;@ENDHACK
 

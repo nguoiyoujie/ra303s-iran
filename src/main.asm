@@ -78,6 +78,7 @@
 %include "src/hires/savegame_resolution_sidebar_fix.asm"
 %include "src/hires/multiplayer_print_is_aftermath_game.asm"
 %include "src/hires/extended_sidebar.asm"
+%include "src/fixes/mouse_fixes.asm"
 %endif
 
 ;loading code
@@ -319,7 +320,6 @@
 %include "src/fixes/magic_build_fix.asm"
 %include "src/fixes/mcv_undeploy_fix.asm"
 %include "src/fixes/modem_menu_remove.asm"
-%include "src/fixes/mouse_fixes.asm"
 %include "src/fixes/multiplayer_settings_saving_fix.asm"
 %include "src/fixes/naval_repair_fix.asm"
 ;%include "src/fixes/south_advantage.asm" ; test fix

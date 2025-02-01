@@ -1,21 +1,7 @@
-@LJMP 0x004F4B83,_Load_Game_Menu_Queue_Song_Call_Patch_Out
-@LJMP 0x00538EF0,_Load_Game_Queue_Song
-@LJMP 0x0056C15A,_ThemeClass_Track_Length
-@LJMP 0x0056C439,_ThemClass_Scan
-@LJMP 0x0056C40C,_ThemeClass_Scan_Jump_Over
-@LJMP 0x0056C115,_ThemeClass_File_Name
-@LJMP 0x0056BEA4,_ThemeClass_Full_Name
-@LJMP 0x0056BFC4,_ThemeClass_Next_Song_RNG
-@LJMP 0x0056BFF8,_ThemeClass_Next_Song_CMP
-@LJMP 0x0056BFA3,_ThemeClass_Next_Song_Cond_Jump
-@LJMP 0x0055066B,_SoundControlsClass_Process
-@LJMP 0x0056C240,_ThemeClass_Is_Allowed
-@LJMP 0x0056BFEC,_ThemeClass_Next_Song_BL_Register_Change
-@LJMP 0x0053A36F,_Start_Scenario_Queue_Theme
-@LJMP 0x004C7798,_TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
-;@LJMP 0x00550668,_SoundControlClass_Process_Jump_Over_Looping_Themes
-@LJMP 0x0056C3FE,_ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
-@LJMP 0x0056BF08,_ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
+
+
+@SJMP 0x004F4B83,0x004F4B88 ; _Load_Game_Menu_Queue_Song_Call_Patch_Out
+@SJMP 0x0056C40C,0x0056C412 ; _ThemeClass_Scan_Jump_Over
 
 extern CCFileClass__CCFileClass
 extern CCFileClass__Is_Available
@@ -58,7 +44,6 @@ str_backstab db"Backstab",0
 str_twincannon db"Twin Cannon",0
 
 
-[section .text]
 ; args: <section>, <key>, <default>
 %macro this3_INI_Get_Int 3
     call_INIClass__Get_Int INIClass_this3,{%1},{%2},{%3}
@@ -76,25 +61,27 @@ str_twincannon db"Twin Cannon",0
     je   0x0056BEF8
 %endmacro
 
-_ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available:
+
+@HACK 0x0056BF08,0x0056BF12,_ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
     cmp  dword[SongsAvailable],0
     jz   0x0056BF76
-
     cmp  word[0x006ABFDA],0 ; ds:int SampleType
     jz   0x0056BF76
     jmp  0x0056BF12
+@ENDHACK
 
-_ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available:
+
+@HACK 0x0056C3FE,0x0056C403,_ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
     call 0x00462A30;  CCFileClass::Is_Available(int)
     cmp  byte al,0
     jz   .Dont_Set_Atleast_One_Available
-
     mov  dword[SongsAvailable],1
-
 .Dont_Set_Atleast_One_Available:
     jmp  0x0056C403
+@ENDHACK
 
-_TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber:
+
+@HACK 0x004C7798,0x004C779D,_TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber
     xor  eax,eax
     call 0x005CEDA1 ; time_
     call 0x005CEDFE ; srand_
@@ -102,15 +89,12 @@ _TFixedIHeapClass__fn_init_Seed_NonCriticalRandomNumber:
     mov  edx,eax
     mov  eax,Globals___NonCriticalRandomNumber
     jmp  0x004C779D
+@ENDHACK
 
 
-_Load_Game_Menu_Queue_Song_Call_Patch_Out:
-    jmp  0x004F4B88
-
-_Load_Game_Queue_Song:
+@HACK 0x00538EF0,_Load_Game_Queue_Song
     cmp  byte[RedAlert.Options.RandomStartingSong],0
     jz   .Ret
-
 .Select_Random_Song:
     mov  eax,INIClass_this3
     mov  edx,str_filenames
@@ -125,19 +109,19 @@ _Load_Game_Queue_Song:
     call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
     test al,al
     jz   .Select_Random_Song
-
 .Ret:
     mov  eax,0x00668248 ; ThemeClass Theme
     call 0x0056C090 ; ThemeClass::Play_Song(ThemeType)
     jmp  0x00538EF5
+@ENDHACK
 
-_Start_Scenario_Queue_Theme:
+
+@HACK 0x0053A36F,0x0053A376,_Start_Scenario_Queue_Theme
     xor  edx,edx
     cmp  byte[RedAlert.Options.RandomStartingSong],0
     jz   .Ret
     cmp  dword[SongsAvailable],0
     jz   .Ret
-
 .Select_Random_Song:
     mov  eax,INIClass_this3
     mov  edx,str_filenames
@@ -152,51 +136,49 @@ _Start_Scenario_Queue_Theme:
     call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
     test al,al
     jz   .Select_Random_Song
-
 .Ret:
     mov  eax,0x00668248 ; ThemeClass Theme
     call 0x0056C020 ; ThemeClass::Queue_Song(ThemeType)
     jmp  0x0053A376
+@ENDHACK
 
-_SoundControlClass_Process_Jump_Over_Looping_Themes:
-    sar  edx,0x18
-    cmp  edx,0x13
-    jz   0x00550662
-    cmp  edx,0x14
-    jz   0x00550662
-    cmp  edx,0x15
-    jz   0x00550662
-    cmp  edx,0x16
-    jz   0x00550662
 
-    cmp  edx,0x27
-    jge  0x00550727
-    jmp  0x00550674
+;@HACK 0x00550668,0x00550674,_SoundControlClass_Process_Jump_Over_Looping_Themes
+;    sar  edx,0x18
+;    cmp  edx,0x13
+;    jz   0x00550662
+;    cmp  edx,0x14
+;    jz   0x00550662
+;    cmp  edx,0x15
+;    jz   0x00550662
+;    cmp  edx,0x16
+;    jz   0x00550662
+;    cmp  edx,0x27
+;    jge  0x00550727
+;    jmp  0x00550674
+;@ENDHACK
 
-_ThemeClass_Next_Song_BL_Register_Change:
+
+@HACK 0x0056BFEC,0x0056BFF1,_ThemeClass_Next_Song_BL_Register_Change
     mov  [ebp-0xC],dl
     jmp  0x0056C013
+@ENDHACK
 
 
-_ThemeClass_Is_Allowed:
+@HACK 0x0056C240,0x0056C247,_ThemeClass_Is_Allowed
     Save_Registers
-
     mov  eax,edx
     call 0x0056C110 ; char * ThemeClass::Theme_File_Name(ThemeType)
-
     mov  edx,eax
     mov  eax,FileClass_THEMEAVAILABLE
     call CCFileClass__CCFileClass
-
     ; check ini exists
     mov  eax,FileClass_THEMEAVAILABLE
     xor  edx,edx
     call CCFileClass__Is_Available
     test eax,eax
     je   .Ret_False_File_Not_Available
-
     Restore_Registers
-
     cmp  dl,0x13
     jz   .Ret_False2
     cmp  dl,0x14
@@ -205,40 +187,32 @@ _ThemeClass_Is_Allowed:
     jz   .Ret_False2
     cmp  dl,0x16
     jz   .Ret_False2
-
     push edx
     push edx
-
     mov  eax,[FileClass_redalertini]
     test eax,eax
     jnz  .Done_INIClass_Loading
-
     mov  edx,str_redalert_ini
     mov  eax,FileClass_redalertini
     call CCFileClass__CCFileClass
-
     ; check ini exists
     mov  eax,FileClass_redalertini
     xor  edx,edx
     call CCFileClass__Is_Available
 ;    test eax,eax
 ;    je .exit_error
-
     ; initialize CCINIClass
     mov  eax,CCINIClass_redalertini
     call CCINIClass__CCINIClass
-
     ; load FileClass to CCINIClass
     mov  edx,FileClass_redalertini
     mov  eax,CCINIClass_redalertini
     call CCINIClass__Load
-
 .Done_INIClass_Loading:
     call_INIClass__Get_Bool CCINIClass_redalertini, str_options2, str_showallmusic, 1
     pop  edx
     cmp  eax,0
     je   .Ret_Original_Function
-
     pop  edx
     mov  eax,1
     retn
@@ -246,72 +220,64 @@ _ThemeClass_Is_Allowed:
     pop  edx
     xor  eax,eax
     retn
-
 .Ret_False2:
     xor  eax,eax
     retn
-
 .Ret_False_File_Not_Available:
     Restore_Registers
     xor  eax,eax
     retn
-
 .Ret_Original_Function:
     pop  edx
-
     push ebp
     mov  ebp,esp
     push ebx
     push ecx
     push esi
     push edi
-
     jmp  0x0056C247
+@ENDHACK
 
-_ThemeClass_Next_Song_Cond_Jump:
+
+@HACK 0x0056BFA3,0x0056BFA9,_ThemeClass_Next_Song_Cond_Jump
     sar  eax,0x18
     shl  eax,5
-
     cmp  dl,0x26
     jge  0x0056BFB2
-
     jmp  0x0056BFA9
+@ENDHACK
 
-_ThemeClass_Next_Song_CMP:
+
+@HACK 0x0056BFF8,0x0056BFFD,_ThemeClass_Next_Song_CMP
     mov  [ebp-0xC],al
-
     push ebx
     push eax
     push edx
-
     mov  eax,INIClass_this3
     mov  edx,str_filenames
     call INIClass__Entry_Count
-
     mov  ebx,0x26
     add  ebx,eax
-
     pop  edx
     pop  eax
-
     cmp  al,bl
     pop  ebx
     jle  0x0056C002
-
     jmp  0x0056BFFD
+@ENDHACK
 
-_ThemeClass_Next_Song_RNG:
 
+@HACK 0x0056BFC4,0x0056BFC9,_ThemeClass_Next_Song_RNG
     mov  eax,INIClass_this3
     mov  edx,str_filenames
     call INIClass__Entry_Count
-
     mov  ebx,0x26
     add  ebx,eax
-
     jmp  0x0056BFC9
+@ENDHACK
 
-_SoundControlsClass_Process:
+
+@HACK 0x0055066B,0x00550674,_SoundControlsClass_Process
 ;    cmp        edx,0x13
 ;    jz        0x00550662
 ;    cmp        edx,0x14
@@ -320,24 +286,22 @@ _SoundControlsClass_Process:
 ;    jz        0x00550662
 ;    cmp        edx,0x16
 ;    jz        0x00550662
-
     push edx
 ;    push    ebx
-
     mov  eax,INIClass_this3
     mov  edx,str_filenames
     call INIClass__Entry_Count
 ;    add        ebx,eax
-
     mov  ebx,0x27
     add  ebx,eax
     pop  edx
     cmp  edx,ebx
-
     jge  0x00550727
     jmp  0x00550674
+@ENDHACK
 
-_ThemeClass_Full_Name:
+
+@HACK 0x0056BEA4,0x0056BEA9,_ThemeClass_Full_Name
 ;    Correct_Song_Index_Name str_twincannon, 17
 ;    Correct_Song_Index_Name str_thesecondhand, 23
 ;    Correct_Song_Index_Name str_backstab, 25
@@ -349,12 +313,9 @@ _ThemeClass_Full_Name:
 
 ;    cmp     dl,0x26
 ;    jge        Return_Custom_Name
-
     cmp  dl,0x27
     jge  Return_Custom_Name
-
     jmp  0x0056BEA9
-
 Return_Custom_Name:
 ;    mov eax,bigfoot_str
 
@@ -425,83 +386,71 @@ Return_Custom_Name:
     pop  ecx
     pop  ebx
     pop  edx
-
     jmp  0x0056BEF8
+@ENDHACK
 
-_ThemeClass_Scan_Jump_Over:
-    jmp  0x0056C412
 
-_ThemeClass_Track_Length:
+@HACK 0x0056C15A,0x0056C15F,_ThemeClass_Track_Length
     cmp  eax,0x27
     jnb  .Return_Custom_Length
     jmp  0x0056C15F
-
 .Return_Custom_Length:
     push edx
     push ebx
     push ecx
     push esi
     push edi
-
     sub  eax,0x26    ; substract so we get 1 for the first index..
-
     push eax             ; Format
     push str_sprintf_format ; %d
     lea  esi,[sprintf_buffer]
     push esi             ; Dest
-
     call _sprintf
     add  esp,0xC
-
     this3_INI_Get_Int str_tracklength, sprintf_buffer, 0
-
     pop  edi
     pop  esi
     pop  ecx
     pop  ebx
     pop  edx
-
     mov  esp,ebp
     pop  ebp
     retn
+@ENDHACK
 
-_ThemClass_Scan:
+
+@HACK 0x0056C439,0x0056C43F,_ThemClass_Scan
     mov  [ebp-0xC],dl
     cmp  dl,100 ; Amount of indexes to scan for?
     jmp  0x0056C43F
+@ENDHACK
 
-_ThemeClass_File_Name:
+
+@HACK 0x0056C115,0x0056C11E,_ThemeClass_File_Name
     push edx
     test al,al
     jl   0x0056C144
-
     cmp  al,0x18
     je   .Arazoid_Fix
-
     cmp  al,0x27
     jge  Return_Custom_String
 ;    cmp     al,0x27
 ;    jge     0x0056C144
     jmp  0x0056C11E
-
 .Arazoid_Fix:
     mov  edx,str_arazoidaud
     mov  eax,FileClass_Arazoid
     call CCFileClass__CCFileClass
-
     mov  eax,FileClass_Arazoid
     xor  edx,edx
     call CCFileClass__Is_Available
     test eax,eax
     jnz  .Arazoid
-
     mov  eax,str_araziodaud
     jmp  .Ret_Arazoid_Fix
-
 .Arazoid:
     mov  eax,str_arazoidaud
     jmp  .Ret_Arazoid_Fix
-
 .Ret_Arazoid_Fix:
     lea  esp,[ebp-0xC]
     pop  edx
@@ -509,7 +458,6 @@ _ThemeClass_File_Name:
     pop  ebx
     pop  ebp
     retn
-
 Return_Custom_String:
 
     push eax ; save value of index
@@ -571,3 +519,5 @@ Return_Custom_String:
 
 File_Not_Available:
     int  3
+@ENDHACK
+

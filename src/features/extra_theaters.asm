@@ -9,30 +9,34 @@
 ;
 ;----------------------------------------------------------------
 
-@LJMP 0x004F7805,_Init_Heaps_Larger_Theater_Buffer
-;@LJMP 0x0041C6A1,_AnimTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0056AAE9,_TerrainClass__Unlimbo_Theater_Check_NOP
-;@LJMP 0x00524B68,_OverlayTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0049EAF3,_TemplateTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0055B8FA,_TerrainTypeClass__Init_Theater_Check_NOP
-@LJMP 0x0055B909,_TerrainTypeClass__Init_Theater
-@LJMP 0x00549E0A,_SmudgeTypeClass__Init_Theater
-@LJMP 0x00524B76,_OverlayTypeClass__Init_Theater
-@LJMP 0x004AF0D4,_DisplayClass__Init_Theater2
-@LJMP 0x004AF057,_DisplayClass__Init_Theater
-@LJMP 0x004A9450,_Fading_Table_Name_Theater
-@LJMP 0x0049EB02,_TemplateTypeClass__Init_Theater
-@LJMP 0x004638A4,_CCINIClass__Put_TheaterType_Theater
-@LJMP 0x00453988,_BuildingTypeClass__Init_Theater2
-@LJMP 0x00453943,_BuildingTypeClass__Init_Theater
-@LJMP 0x0041C6AF,_AnimTypeClass__Init_Theater
-@LJMP 0x004A7AEB,_Theater_From_Name_New_Theaters_Array
-@LJMP 0x004A7AD4,_Theater_From_Name_New_Theaters_Counter_Check
+%define THEATERS_COUNT 12 ; was 3
+
+@SET 0x004F7805,{mov edx,5500000} ; _Init_Heaps_Larger_Theater_Buffer
+;@SJMP 0x0041C6A1,0x0041C6A6 ; _AnimTypeClass__Init_Theater_Check_NOP
+@SJMP 0x0056AAE9,0x0056AAF1 ; _TerrainClass__Unlimbo_Theater_Check_NOP
+;@SJMP 0x00524B68,0x00524B8B ; _OverlayTypeClass__Init_Theater_Check_NOP
+@SJMP 0x0049EAF5,0x0049EAF9 ; _TemplateTypeClass__Init_Theater_Check_NOP
+@SJMP 0x0055B8FA,0x0055B900 ; _TerrainTypeClass__Init_Theater_Check_NOP
+
+; point to our array instead of the pre-existing one
+@SET 0x0055B909,{add eax,Temperate_Name} ; _TerrainTypeClass__Init_Theater
+@SET 0x00549E0A,{add eax,Temperate_Name} ; _SmudgeTypeClass__Init_Theater
+@SET 0x00524B76,{add eax,Temperate_Name} ; _OverlayTypeClass__Init_Theater
+@SET 0x004AF0D4,{add eax,Temperate_Name} ; _DisplayClass__Init_Theater2
+@SET 0x004AF057,{add eax,Temperate_Name} ; _DisplayClass__Init_Theater
+@SET 0x004A9450,{add eax,Temperate_Name} ; _Fading_Table_Name_Theater
+@SET 0x0049EB02,{add eax,Temperate_Name} ; _TemplateTypeClass__Init_Theater
+@SET 0x004638A4,{mov ecx,Temperate_Name} ; _CCINIClass__Put_TheaterType_Theater
+@SET 0x00453988,{add eax,Temperate_Name} ; _BuildingTypeClass__Init_Theater2
+@SET 0x00453943,{add edx,Temperate_Name} ; _BuildingTypeClass__Init_Theater
+@SET 0x0041C6AF,{add eax,Temperate_Name} ; _AnimTypeClass__Init_Theater
+@SET 0x004A7AEB,{add edx,Temperate_Name} ; _Theater_From_Name_New_Theaters_Array
+@SET 0x004A7AD4,{cmp dl,THEATERS_COUNT} ; _Theater_From_Name_New_Theaters_Counter_Check
 ; If no match is found, revert to TEMPERATE instead of crashing the game
 @SET 0x004A7AFF,{mov al,0x1}
 
-%define THEATERS_COUNT 12 ; was 3
 
+[section .rdata]
 ; Recreating theatre array
 ; <16 byte name>, <10 byte mix reference>, <4 byte extension>
 ; All entries must be NULL-terminated.
@@ -76,76 +80,5 @@ Custom4_Root    db"CUSTOM4", 0, 0, 0 ; 10 bytes
 Custom4_Ext     db"CM4",0 ; 4 bytes
 
 
-_TerrainClass__Unlimbo_Theater_Check_NOP:
-    jmp  0x0056AAF1
 
-_AnimTypeClass__Init_Theater_Check_NOP:
-    jmp  0x0041C6A6
 
-_OverlayTypeClass__Init_Theater_Check_NOP:
-    jmp  0x00524B8B
-
-_Init_Heaps_Larger_Theater_Buffer:
-    mov  edx,5500000
-    jmp  0x004F780A
-
-_TemplateTypeClass__Init_Theater_Check_NOP:
-    shl  eax,cl
-    jmp  0x0049EAF9
-
-_TerrainTypeClass__Init_Theater_Check_NOP:
-    shl  eax,cl
-    jmp  0x0055B900
-
-_TerrainTypeClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x0055B90E
-
-_SmudgeTypeClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x00549E0F
-
-_OverlayTypeClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x00524B7B
-
-_DisplayClass__Init_Theater2:
-    add  eax,Temperate_Name
-    jmp  0x004AF0D9
-
-_DisplayClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x004AF05C
-
-_Fading_Table_Name_Theater:
-    add  eax,Temperate_Name
-    jmp  0x004A9455
-
-_TemplateTypeClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x0049EB07
-
-_CCINIClass__Put_TheaterType_Theater:
-    mov  ecx,Temperate_Name
-    jmp  0x004638A9
-
-_Theater_From_Name_New_Theaters_Array:
-    add  edx,Temperate_Name
-    jmp  0x004A7AF1
-
-_Theater_From_Name_New_Theaters_Counter_Check:
-    cmp  dl,THEATERS_COUNT
-    jl   0x004A7AE0
-    jmp  0x004A7AFF
-
-_AnimTypeClass__Init_Theater:
-    add  eax,Temperate_Name
-    jmp  0x0041C6B4
-
-_BuildingTypeClass__Init_Theater:
-    add  edx,Temperate_Name
-    jmp  0x00453949
-
-_BuildingTypeClass__Init_Theater2:
-    add  eax,Temperate_Name
-    jmp  0x0045398D

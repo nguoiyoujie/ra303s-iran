@@ -12,13 +12,14 @@
 @SJMP 0x0054BD30,0x0054BD3D ; _Patch_Out_Counterstrike_Installed_Check in favor of RedAlert.Options
 @SJMP 0x0054BE9E,0x0054BEAB ; _Patch_Out_Aftermath_Installed_Check in favor of RedAlert.Options
 
+[section .rdata]
 str_blankpkt db"BLANK.PKT",0
 
 %define missionspkt_str   0x005F06FD ; "MISSIONS.PKT"
 %define cstrikepkt_str    0x005F0748 ; "CSTRIKE.PKT"
 %define aftmathpkt_str    0x005F0770 ; "AFTMATH.PKT"
 
-@HACK 0x0054BA32,_Conditionally_Load_Missions_PKT
+@HACK 0x0054BA32,0x0054BA37,_Conditionally_Load_Missions_PKT
     cmp  byte[RedAlert.Options.DisplayOriginalMultiplayerMaps],1
     jnz  .No_Load
     mov  edx,missionspkt_str
@@ -29,7 +30,7 @@ str_blankpkt db"BLANK.PKT",0
 @ENDHACK
 
 
-@HACK 0x0054BD3D,_Conditionally_Load_Cstrike_PKT
+@HACK 0x0054BD3D,0x0054BD42,_Conditionally_Load_Cstrike_PKT
     cmp  byte[RedAlert.Options.DisplayCounterstrikeMultiplayerMaps],1
     jnz  .No_Load
     mov  edx,cstrikepkt_str
@@ -40,7 +41,7 @@ str_blankpkt db"BLANK.PKT",0
 @ENDHACK
 
 
-@HACK 0x0054BEAB,_Conditionally_Load_Aftmath_PKT
+@HACK 0x0054BEAB,0x0054BEB0,_Conditionally_Load_Aftmath_PKT
     cmp  byte[RedAlert.Options.DisplayAftermathMultiplayerMaps],1
     jnz  .No_Load
     mov  edx,aftmathpkt_str

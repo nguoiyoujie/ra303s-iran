@@ -9,26 +9,15 @@ extern CCFileClass__CCFileClass
 extern CCINIClass__Load
 
 
-@LJMP 0x0053D081,_Map_Load_Before_Hook ; For map loading stuff
-@LJMP 0x0053A568,_Map_Load_Late_Hook  ; For map loading stuff
-@LJMP 0x0053D6AA,_Custom_Missions_Load_Map_Specific_Tutorial_Text
-@LJMP 0x00538CE1,_Custom_Missions_Load_Game_Map_Specific_Tutorial_Text
-@LJMP 0x0055B84B,_Ore_Mine_Foundation_Voodoo ; retrieve address
-@LJMP 0x00408005,_FRAG1_Data_Voodoo ; retrieve address
-
-
-_Map_Load_Before_Hook:
+@HACK 0x0053D081,0x0053D086,_Map_Load_Before_Hook ; For map loading stuff
     call 0x0053AA94 ; Clear_Scenario(void)
     Save_Registers
-
     cmp  byte[spawner_is_active],1
     jz   .Dont_Clear_Savegame_Values
     ; disable some spawn.INI and rules.ini stuff that could be loaded
     ; e.g. from savegame
     call Clear_Extended_Savegame_Values
-
 .Dont_Clear_Savegame_Values:
-
     mov  dword[Rules.AI.EasyAIGoldValue],-1
     mov  dword[Rules.AI.EasyAIGemValue],-1
     mov  dword[Rules.AI.NormalAIGoldValue],-1
@@ -48,25 +37,22 @@ _Map_Load_Before_Hook:
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jne  .No_Skirmish_Mine_Fix
     mov  dword[eax],0x800080 ; Set to fixed Ore Mine foundation
-
 .No_Skirmish_Mine_Fix:
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jne  .No_Skirmish_Mine_Fix2
     mov  dword[eax],0x800080 ; Set to fixed Ore Mine foundation
-
 .No_Skirmish_Mine_Fix2:
     cmp  byte[spawner_is_active],0
     je   .No_Skirmish_Mine_Fix3
     mov  dword[eax],0x800080 ; Set to fixed Ore Mine foundation
-
 .No_Skirmish_Mine_Fix3:
     Restore_Registers
     jmp  0x0053D086
+@ENDHACK
 
 
-_Map_Load_Late_Hook:
+@HACK 0x0053A568,0x0053A56D,_Map_Load_Late_Hook  ; For map loading stuff
     Save_Registers
-
     ; Enable AM units in single player if option is turned on
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jne  .Dont_Force_AM_Units_In_Missions
@@ -76,7 +62,6 @@ _Map_Load_Late_Hook:
     cmp  dword eax,1
     jne  .Dont_Force_AM_Units_In_Missions
     mov  dword[Globals___NewUnitsEnabled],1 ; NewUnitsEnabled
-
 .Dont_Force_AM_Units_In_Missions:
     ; FRAG1 explosion anim fix code
     mov  eax,dword[FRAG1AnimData]
@@ -88,38 +73,57 @@ _Map_Load_Late_Hook:
     cmp  byte[spawner_is_active],1
     jz   .Fix_FRAG1
     jmp  .Dont_Fix_FRAG1
-
 .Fix_FRAG1:
     mov  byte[eax],0xC1 ; Set to fixed FRAG1 anim data
-
 .Dont_Fix_FRAG1:
     Restore_Registers
     call 0x0053A5C8 ; Fill_In_Data(void)
     jmp  0x0053A56D
+@ENDHACK
 
 
-_Custom_Missions_Load_Game_Map_Specific_Tutorial_Text:
+@HACK 0x00538CE1,_Custom_Missions_Load_Game_Map_Specific_Tutorial_Text
     Save_Registers
-
     lea  eax,[ebp-0x16C] ; ScenarioFileClass
     call Read_Map_Specific_Tutorial_Text
-
     Restore_Registers
     lea  edx,[ebp-0x16C]
     jmp  0x00538CE7
+@ENDHACK
 
 
-_Custom_Missions_Load_Map_Specific_Tutorial_Text:
+@HACK 0x0053D6AA,0x0053D6B0,_Custom_Missions_Load_Map_Specific_Tutorial_Text
     Save_Registers
-
     lea  eax,[ebp-0x8C] ; ScenarioFileClass
     call Read_Map_Specific_Tutorial_Text
-
     Restore_Registers
     lea  edx,[ebp-0x8C]
     jmp  0x0053D6B0
+@ENDHACK
 
 
+@HACK 0x00408005,0x00408011,_FRAG1_Data_Voodoo ; retrieve address
+    mov  edx,[0x00625B48]
+    push edx
+    lea  ecx,[eax+0x138]
+    mov  dword[FRAG1AnimData],ecx
+    mov  [eax+0x138],cl
+    pop  edx
+    jmp  0x00408011
+@ENDHACK
+
+
+@HACK 0x0055B84B,0x0055B851,_Ore_Mine_Foundation_Voodoo ; retrieve address
+    push ecx
+    lea  ecx,[eax+0x139]
+    mov  dword[OreMineFoundation],ecx
+    mov  [eax+0x139],edx
+    pop  ecx
+    jmp  0x0055B851
+@ENDHACK
+
+
+[section .text]
 Read_Map_Specific_Tutorial_Text:
 ;    push 512             ; dst len
 ;    push tutorial_text_buffer             ; dst
@@ -277,20 +281,3 @@ Read_Map_Specific_Tutorial_Text:
     retn
 
 
-_FRAG1_Data_Voodoo:
-    mov  edx,[0x00625B48]
-    push edx
-    lea  ecx,[eax+0x138]
-    mov  dword[FRAG1AnimData],ecx
-    mov  [eax+0x138],cl
-    pop  edx
-    jmp  0x00408011
-
-
-_Ore_Mine_Foundation_Voodoo:
-    push ecx
-    lea  ecx,[eax+0x139]
-    mov  dword[OreMineFoundation],ecx
-    mov  [eax+0x139],edx
-    pop  ecx
-    jmp  0x0055B851

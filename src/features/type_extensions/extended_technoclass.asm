@@ -1,26 +1,27 @@
-@LJMP 0x00567383,_TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units
-@LJMP 0x004D6542,_HouseClass__Remap_Table_Use_RemapType_Arg
-@LJMP 0x004D6538,_HouseClass__Remap_Table_Use_RemapType_Arg2
-@LJMP 0x005671D1,_Patch_Unit_Drawing
-@LJMP 0x00568596,_TechnoClass_Risk_UsePoints
-@LJMP 0x00567632,_TechnoClass_Value_UsePointsInsteadOfReward
-@LJMP 0x0046078A,_BuildingClass_Value_UsePointsInsteadOfRiskOrReward
+
+@SJMP 0x004D6538,0x004D6542 ; _HouseClass__Remap_Table_Use_RemapType_Arg2
+; use Points instead of Risk
+@SET 0x00568596,{mov dword eax,[eax+TechnoTypeClass.Offset.Points]} ; _TechnoClass_Risk_UsePoints
+; use Points instead of Reward
+@SET 0x00567632,{mov dword eax,[eax+TechnoTypeClass.Offset.Points]} ; _TechnoClass_Value_UsePointsInsteadOfReward
 
 [section .rdata] 
 temp.fakes.fakeof db 2,11,27,28,6
 
 
 [section .text] 
-_Patch_Unit_Drawing:
+@HACK 0x005671D1,0x005671D6,_Patch_Unit_Drawing
     mov  eax,[Globals___PlayerPtr]
     xor  ebx,ebx
     mov  bl,byte[eax+HouseClass.Offset.RemapColor]
     sar  ebx,0x18
     jmp  0x005671D6
+@ENDHACK
+
 
 ; offset 0x196 is UnitType of a UnitTypeClass, UnitTypes are 0x1D of offset 0 of TechnoTypeClass,
 ; buildings are 0x6 of offset 0
-_TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
+@HACK 0x00567383,0x00567393,_TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units
     push edi
     mov  edi,edx
     sub  edi,0x93 ; TechnoClass pointer
@@ -73,26 +74,17 @@ _TechnoClass__Remap_Table_Secondary_Colour_Scheme_For_Units:
     mov  edx,ecx
     call 0x004D6528 ;  char * const HouseClass::Remap_Table(int,RemapType)const  proc near
     jmp  0x0056739A
+@ENDHACK
 
-_HouseClass__Remap_Table_Use_RemapType_Arg:
+
+@HACK 0x004D6542,0x004D654B,_HouseClass__Remap_Table_Use_RemapType_Arg
     mov  eax,ebx
     jmp  0x004D654B
+@ENDHACK
 
-_HouseClass__Remap_Table_Use_RemapType_Arg2:
-    jmp  0x004D6542
-
-; use Points instead of Risk
-_TechnoClass_Risk_UsePoints:
-    mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
-    jmp  0x0056859C
-
-; use Points instead of Reward
-_TechnoClass_Value_UsePointsInsteadOfReward:
-    mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
-    jmp  0x00567638
 
 ; use Points instead of Risk/Reward
-_BuildingClass_Value_UsePointsInsteadOfRiskOrReward:
+@HACK 0x0046078A,0x00460790,_BuildingClass_Value_UsePointsInsteadOfRiskOrReward
 ; Fake structures are from 0x20 to 0x24
     cmp  dl,0x20
     jl   0x00460880
@@ -107,4 +99,4 @@ _BuildingClass_Value_UsePointsInsteadOfRiskOrReward:
     call 0x00453A6C
     mov  eax,dword[eax+TechnoTypeClass.Offset.Points]
     jmp  0x00460885
-
+@ENDHACK
