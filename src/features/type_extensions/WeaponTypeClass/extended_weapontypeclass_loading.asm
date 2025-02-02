@@ -8,7 +8,7 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
-extern Audio___Voc_From_Name
+cextern Audio___Voc_From_Name
 
 ;Read INI settings
 @HACK 0x0059004D,0x00590052,_WeaponTypeClass__Read_INI_Extended

@@ -1,5 +1,5 @@
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 @HACK 0x0041CB90,0x0041CB95,Count_as_Civ_Evac_Check
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL

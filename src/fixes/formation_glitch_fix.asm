@@ -9,9 +9,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern Globals___FormSpeed
-extern Globals___FormMaxSpeed
-extern Globals___Session_Type
+cextern Globals___FormSpeed
+cextern Globals___FormMaxSpeed
+cextern Globals___Session_Type
 
 
 [section .data] 

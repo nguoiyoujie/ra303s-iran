@@ -7,7 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern Globals___Base_House
+cextern Globals___Base_House
 
 
 @HACK 0x004593AB,_BuildingClass_ExitObject_Base_HouseCheck

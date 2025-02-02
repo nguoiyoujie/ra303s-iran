@@ -5,6 +5,22 @@
 %assign true 1
 %assign false 0
 
+;; global generic data -> arg1 = name, arg2 = definition. Supply dd/dw/db yourself
+%macro gvar 2
+    cglobal %1
+    [section .data] 
+    %1 %2
+    __SECT__
+%endmacro
+
+;; global buffer data -> arg1 = name, arg2 = length. "times X db 0"
+%macro gbuf 2
+    cglobal %1
+    [section .data] 
+    %1 times %2 db 0
+    __SECT__
+%endmacro
+
 ;; global const string -> arg1 = name, arg2 = value
 %macro gstring 2
     cglobal %1
@@ -38,6 +54,11 @@
         %1 resb %3
         __SECT__
     %endif
+%endmacro
+
+;; global int -> arg1 = name
+%macro gint 1
+    gint %1, {0}
 %endmacro
 
 ;; global int -> arg1 = name, arg2 = value
@@ -78,6 +99,11 @@
     %endif
 %endmacro
 
+;; global short -> arg1 = name
+%macro gshort 1
+    gshort %1, {0}
+%endmacro
+
 ;; global short -> arg1 = name, arg2 = value
 %macro gshort 2
     cglobal %1
@@ -116,6 +142,11 @@
     %endif
 %endmacro
 
+;; global bool -> arg1 = name
+%macro gbool 1
+    gbyte %1, {0}
+%endmacro
+
 ;; global bool -> arg1 = name, arg2 = value
 %macro gbool 2
     cglobal %1
@@ -136,6 +167,11 @@
 ;; static (local) bool array -> arg1 = name, arg2 = value, arg3 = length
 %macro sbool 3
     sbyte %1, {%2}, %3
+%endmacro
+
+;; global byte -> arg1 = name
+%macro gbyte 1
+    gbyte %1, {0}
 %endmacro
 
 ;; global byte -> arg1 = name, arg2 = value

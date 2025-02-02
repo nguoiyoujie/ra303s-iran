@@ -26,34 +26,35 @@
 ; /include
 %include "macros/patch.inc"
 %include "macros/hack.inc"
-;%include "macros/datatypes.inc"
+%include "macros/datatypes.inc"
 %include "libc.inc"
 %include "types/INIClass.inc"
 %include "types/CCINIClass.inc"
 %include "types/common.inc"
 
-extern _Buffer_Fill_Rect
-extern _Buffer_Clear
-extern Dialog___Draw_Box
-extern MapClass__In_Radar
-extern GaugeClass__GaugeClass
-extern GScreenClass__Flag_To_Redraw
-extern Globals___ScreenWidth
-extern Globals___ScreenHeight
-extern Globals___Keyboard
-extern Globals___Map
-extern Globals___VisiblePage
-extern Globals___SeenBuff
-extern Globals___HidPage
-extern DDraw___MainWindow
-extern SidebarClass__StripClass__SelectButton
-extern SidebarClass__StripClass__DownButton
-extern SidebarClass__StripClass__UpButton
+cextern _Buffer_Fill_Rect
+cextern _Buffer_Clear
+cextern Dialog___Draw_Box
+cextern MapClass__In_Radar
+cextern GaugeClass__GaugeClass
+cextern GScreenClass__Flag_To_Redraw
+cextern Globals___ScreenWidth
+cextern Globals___ScreenHeight
+cextern Globals___Keyboard
+cextern Globals___Map
+cextern Globals___VisiblePage
+cextern Globals___SeenBuff
+cextern Globals___HidPage
+cextern DDraw___MainWindow
+cextern SidebarClass__StripClass__SelectButton
+cextern SidebarClass__StripClass__DownButton
+cextern SidebarClass__StripClass__UpButton
 
-extern str_Options
-extern str_Width
-extern str_Height
-extern str_Internet
+cextern str_Options
+cextern str_Width
+cextern str_Height
+
+cextern RedAlert.Options.VideoInterlaceMode
 
 
 ; These are per strip,there's a left and right strip in the sidebar
@@ -185,6 +186,7 @@ Hires.ExtSidebarButtons TIMES 824 dd 0
 %include "src/features/hires/selectmultiplayerdialog.asm"
 %include "src/features/hires/skirmishdialog.asm"
 %include "src/features/hires/soundcontrolsdialog.asm"
+%include "src/features/hires/video_enhancements.asm"
 ; color options dialog?
 %include "src/features/hires/surrenderdialog.asm"
 
@@ -192,4 +194,4 @@ Hires.ExtSidebarButtons TIMES 824 dd 0
 %include "src/features/hires/multiplayer_print_is_aftermath_game.asm"
 ; fixes
 %include "src/features/hires/savegame_resolution_sidebar_fix.asm"
-%include "src/features/hires/mouse_fixes.asm"
+%include "src/features/hires/clamp_mouse_position.asm"

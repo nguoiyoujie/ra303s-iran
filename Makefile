@@ -20,7 +20,10 @@ NFLAGS      = -Iinc/ -f elf
 OBJS        = res/res.o
 OBJS       += sym.o
 OBJS       += strings.o
+OBJS       += data.o
 OBJS       += src/features/hires/_hires.o
+OBJS       += src/features/prerequisitesystem/_prerequisite_system.o
+OBJS       += src/features/specialweapons/_specialweapons.o
 OBJS       += src/main.o
 
 PETOOL      = petool

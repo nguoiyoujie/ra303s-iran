@@ -1,5 +1,5 @@
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 
 %define New_Savegame_Version    0x1007000
@@ -126,8 +126,8 @@ extern Globals___Session_Type
     mov  eax,%1
     add  eax,%3
     xor  edx,edx
-    mov  ebx,%2-%3
-
+    mov  ebx,%2
+    sub  ebx,%3
     call 0x005C4E50 ; memset_
 %endmacro
 
@@ -162,7 +162,7 @@ Clear_Extended_Savegame_Values:
     mov  byte[Spawn.Settings.FixMagicBuild],0
     mov  byte[Spawn.Settings.FixRangeExploit],0
     mov  byte[Rules.AI.ComputerParanoidForceDisabledSkirmish],1
-    mov  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    mov  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],0
     mov  byte[Rules.AI.FixAIParanoid],0
     mov  byte[Rules.AI.FixAIAlly],0
     mov  byte[Rules.General.FixFormationSpeed],0

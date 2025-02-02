@@ -8,6 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 
+cextern str_Internet
+
 ; select multiplayer dialog
 @HACK 0x0050347C,0x00503486,_Select__MPLayer_Game__Dialog_Adjustment
     mov  ecx,0xA6

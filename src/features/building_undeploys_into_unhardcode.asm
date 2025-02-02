@@ -10,8 +10,8 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___Rule_IsMCVDeploy_Address
-extern Globals___Rule_IsMCVDeploy_BitMask
+cextern Globals___Rule_IsMCVDeploy_Address
+cextern Globals___Rule_IsMCVDeploy_BitMask
 
 [section .data] 
 Cache_BuildingType_UndeploysInto       db 0

@@ -13,8 +13,8 @@
 ; 
 ;----------------------------------------------------------------
 
-extern HouseClass__Can_Build
-extern UnitTypeClass__As_Reference
+cextern HouseClass__Can_Build
+cextern UnitTypeClass__As_Reference
 
 
 ;added by lovalmidas

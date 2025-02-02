@@ -11,9 +11,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern InfantryTypeClass__InfantryTypeClass
-extern InfantryTypeClass__new
-extern Globals___RuleINI
+cextern InfantryTypeClass__InfantryTypeClass
+cextern InfantryTypeClass__new
+cextern Globals___RuleINI
+
+cextern str_InfantryTypes
+cextern str_StringTableOffsets
+cextern str_Infantry
 
 
 @HACK 0x004597F2,0x004597FB,_BuildingClass__Update_Buildables_UnhardCode_InfantryTypes

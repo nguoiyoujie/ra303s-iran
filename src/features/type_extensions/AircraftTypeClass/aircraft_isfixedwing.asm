@@ -8,7 +8,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseClass__Is_No_YakMig
+cextern HouseClass__Is_No_YakMig
 
 ; Note: IsFixedWing=yes is not fully functional, as there are several locations to decouple YAK/MIG checks and replace with IsFixedWing=yes
 ; // HouseClass::Is_No_YakMig

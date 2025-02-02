@@ -8,7 +8,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___Rule_MessageDelay
+cextern Globals___Rule_MessageDelay
 
 
 @HACK 0x004A731C,0x004A7321,_Message_Input_Display_Message_After_Sending_To_Players

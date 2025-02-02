@@ -1,27 +1,27 @@
 
-extern Audio___Sound_Effect_At_Coord
-extern Coord___Coord_Cell
-extern HouseClass__As_Pointer
-extern BuildingTypeClass__Create_And_Place
-extern BuildingTypeClass__As_Reference
-extern BulletClass__BulletClass
-extern BulletClass__new
-extern MapClass__In_Radar
-extern _Create_Group
-extern ScenarioClass__Do_BW_Fade
-extern SidebarClass__Add
-extern SidebarClass__StripClass__Flag_To_Redraw
-extern Vortex___ChronalVortex
-extern ChronalVortexClass__Appear
-extern GScreenClass__Flag_To_Redraw
-extern Globals___Rule_MaxIQ
-extern Globals___Rule_IronCurtainDuration
-extern Globals___Scen
-extern Globals___Frame
-extern Globals___Map
-extern Globals___Map_Array
-extern Globals___ScenarioInit
-extern Globals___PlayerPtr
+cextern Audio___Sound_Effect_At_Coord
+cextern Coord___Coord_Cell
+cextern HouseClass__As_Pointer
+cextern BuildingTypeClass__Create_And_Place
+cextern BuildingTypeClass__As_Reference
+cextern BulletClass__BulletClass
+cextern BulletClass__new
+cextern MapClass__In_Radar
+cextern _Create_Group
+cextern ScenarioClass__Do_BW_Fade
+cextern SidebarClass__Add
+cextern SidebarClass__StripClass__Flag_To_Redraw
+cextern Vortex___ChronalVortex
+cextern ChronalVortexClass__Appear
+cextern GScreenClass__Flag_To_Redraw
+cextern Globals___Rule_MaxIQ
+cextern Globals___Rule_IronCurtainDuration
+cextern Globals___Scen
+cextern Globals___Frame
+cextern Globals___Map
+cextern Globals___Map_Array
+cextern Globals___ScenarioInit
+cextern Globals___PlayerPtr
 
 
 %macro TAction__Operator__Epilogue 0

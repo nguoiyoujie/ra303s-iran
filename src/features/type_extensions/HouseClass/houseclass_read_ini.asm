@@ -9,7 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseClass__Make_Ally
+cextern HouseClass__Make_Ally
 
 
 @HACK 0x004DDD31,0x004DDD39,_HouseClass__Read_INI

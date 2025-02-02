@@ -1,6 +1,6 @@
 
-extern Coord___Distance_As_Coord
-extern Globals___BuildingTypes
+cextern Coord___Distance_As_Coord
+cextern Globals___BuildingTypes
 
 
 @HACK 0x004C3343,0x004C336D,_FootClass__Can_Demolish_Patch_Service_Depot_Vehicle_Sell

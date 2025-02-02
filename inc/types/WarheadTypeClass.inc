@@ -1,9 +1,12 @@
 ;----------------------------------------------------------------
-; src/macros/warheadtypeclass.asm
+; inc/types/warheadtypeclass.asm
 ;
 ; Macros to access WarheadTypeClass offsets
 ;
 ;----------------------------------------------------------------
+
+cextern WarheadTypeClass.Count
+cextern WarheadTypeClass.Array
 
 ; define warhead type field definitions
 %define WarheadTypeClass.Offset.ID                        0x000    ; INT // ID
@@ -98,32 +101,32 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-%define WarheadTypeClass.IsWallDestroyer.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, WarheadTypeClass.Offset.IsWallDestroyer, WarheadTypeClass.Bit.IsWallDestroyer, reg_output
-%define WarheadTypeClass.IsWallDestroyer.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, WarheadTypeClass.Offset.IsWallDestroyer, WarheadTypeClass.Bit.IsWallDestroyer, value
+%define WarheadTypeClass.IsWallDestroyer.Get(ptr_type,reg_output)             GetBool                                ptr_type, WarheadTypeClass.Offset.IsWallDestroyer, WarheadTypeClass.Bit.IsWallDestroyer, reg_output
+%define WarheadTypeClass.IsWallDestroyer.Set(ptr_type,value)                  SetBool                                ptr_type, WarheadTypeClass.Offset.IsWallDestroyer, WarheadTypeClass.Bit.IsWallDestroyer, value
 %define WarheadTypeClass.IsWallDestroyer.Read(ptr_type,ptr_rules)             WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsWallDestroyer, WarheadTypeClass.Bit.IsWallDestroyer, str.WarheadTypeClass.IsWallDestroyer  
 
-%define WarheadTypeClass.IsWoodDestroyer.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, WarheadTypeClass.Offset.IsWoodDestroyer, WarheadTypeClass.Bit.IsWoodDestroyer, reg_output
-%define WarheadTypeClass.IsWoodDestroyer.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, WarheadTypeClass.Offset.IsWoodDestroyer, WarheadTypeClass.Bit.IsWoodDestroyer, value
+%define WarheadTypeClass.IsWoodDestroyer.Get(ptr_type,reg_output)             GetBool                                ptr_type, WarheadTypeClass.Offset.IsWoodDestroyer, WarheadTypeClass.Bit.IsWoodDestroyer, reg_output
+%define WarheadTypeClass.IsWoodDestroyer.Set(ptr_type,value)                  SetBool                                ptr_type, WarheadTypeClass.Offset.IsWoodDestroyer, WarheadTypeClass.Bit.IsWoodDestroyer, value
 %define WarheadTypeClass.IsWoodDestroyer.Read(ptr_type,ptr_rules)             WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsWoodDestroyer, WarheadTypeClass.Bit.IsWoodDestroyer, str.WarheadTypeClass.IsWoodDestroyer
 
-%define WarheadTypeClass.IsTiberiumDestroyer.Get(ptr_type,reg_output)         ObjectTypeClass.GetBool                ptr_type, WarheadTypeClass.Offset.IsTiberiumDestroyer, WarheadTypeClass.Bit.IsTiberiumDestroyer, reg_output
-%define WarheadTypeClass.IsTiberiumDestroyer.Set(ptr_type,value)              ObjectTypeClass.SetBool                ptr_type, WarheadTypeClass.Offset.IsTiberiumDestroyer, WarheadTypeClass.Bit.IsTiberiumDestroyer, value
+%define WarheadTypeClass.IsTiberiumDestroyer.Get(ptr_type,reg_output)         GetBool                                ptr_type, WarheadTypeClass.Offset.IsTiberiumDestroyer, WarheadTypeClass.Bit.IsTiberiumDestroyer, reg_output
+%define WarheadTypeClass.IsTiberiumDestroyer.Set(ptr_type,value)              SetBool                                ptr_type, WarheadTypeClass.Offset.IsTiberiumDestroyer, WarheadTypeClass.Bit.IsTiberiumDestroyer, value
 %define WarheadTypeClass.IsTiberiumDestroyer.Read(ptr_type,ptr_rules)         WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsTiberiumDestroyer, WarheadTypeClass.Bit.IsTiberiumDestroyer, str.WarheadTypeClass.IsTiberiumDestroyer
 
-%define WarheadTypeClass.IsOrganic.Get(ptr_type,reg_output)                   ObjectTypeClass.GetBool                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, reg_output
-%define WarheadTypeClass.IsOrganic.Set(ptr_type,value)                        ObjectTypeClass.SetBool                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, value
+%define WarheadTypeClass.IsOrganic.Get(ptr_type,reg_output)                   GetBool                                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, reg_output
+%define WarheadTypeClass.IsOrganic.Set(ptr_type,value)                        SetBool                                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, value
 %define WarheadTypeClass.IsOrganic.Read(ptr_type,ptr_rules)                   WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, str.WarheadTypeClass.IsOrganic
 
-;%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               ObjectTypeClass.GetByte                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
-;%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    ObjectTypeClass.SetByte                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
+;%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
+;%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
 ;%define WarheadTypeClass.ExplosionAnim.Read(ptr_type,ptr_rules,function)       WarheadTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, WarheadTypeClass.Offset.ExplosionAnim, str.WarheadTypeClass.ExplosionAnim, function
 
-%define WarheadTypeClass.ExplosionSet.Get(ptr_type,reg_output)                ObjectTypeClass.GetByte                ptr_type, WarheadTypeClass.Offset.ExplosionSet, reg_output
-%define WarheadTypeClass.ExplosionSet.Set(ptr_type,value)                     ObjectTypeClass.SetByte                ptr_type, WarheadTypeClass.Offset.ExplosionSet, value
+%define WarheadTypeClass.ExplosionSet.Get(ptr_type,reg_output)                GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionSet, reg_output
+%define WarheadTypeClass.ExplosionSet.Set(ptr_type,value)                     SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionSet, value
 %define WarheadTypeClass.ExplosionSet.Read(ptr_type,ptr_rules)                WarheadTypeClass.ReadByte              ptr_type, ptr_rules, WarheadTypeClass.Offset.ExplosionSet, str.WarheadTypeClass.ExplosionSet
 
-%define WarheadTypeClass.InfantryDeath.Get(ptr_type,reg_output)               ObjectTypeClass.GetByte                ptr_type, WarheadTypeClass.Offset.InfantryDeath, reg_output
-%define WarheadTypeClass.InfantryDeath.Set(ptr_type,value)                    ObjectTypeClass.SetByte                ptr_type, WarheadTypeClass.Offset.InfantryDeath, value
+%define WarheadTypeClass.InfantryDeath.Get(ptr_type,reg_output)               GetByte                                ptr_type, WarheadTypeClass.Offset.InfantryDeath, reg_output
+%define WarheadTypeClass.InfantryDeath.Set(ptr_type,value)                    SetByte                                ptr_type, WarheadTypeClass.Offset.InfantryDeath, value
 %define WarheadTypeClass.InfantryDeath.Read(ptr_type,ptr_rules)               WarheadTypeClass.ReadByte              ptr_type, ptr_rules, WarheadTypeClass.Offset.InfantryDeath, str.WarheadTypeClass.InfantryDeath
 
 ;  method of getting ID differs from ObjectTypeClass
@@ -133,11 +136,11 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 
 %macro WarheadTypeClass.ReadBool    5
     WarheadTypeClass.ID %1,edx
-    Get_Bit byte[%1+%3],%4
+    GetBit byte[%1+%3],%4
     xor  ecx,ecx
     mov  cl,al
     call_INIClass__Get_Bool %2,edx,%5,ecx
-    Set_Bit_Byte[%1+%3],%4,al
+    SetBit[%1+%3],%4,al
 %endmacro
 
 %macro WarheadTypeClass.ReadByte    4

@@ -5,11 +5,11 @@
 ;
 ;----------------------------------------------------------------
 
-extern Conquer___Call_Back
-extern Vortex___ChronalVortex
-extern ChronalVortexClass__Stop
-extern Globals___NewUnitsEnabled
-extern Globals___Session_Type
+cextern Conquer___Call_Back
+cextern Vortex___ChronalVortex
+cextern ChronalVortexClass__Stop
+cextern Globals___NewUnitsEnabled
+cextern Globals___Session_Type
 
 
 @HACK 0x00538F07,0x00538F0C,_Load_Game_Late_Hook  ; For savegame loading stuff

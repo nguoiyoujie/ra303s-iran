@@ -10,7 +10,7 @@
 ; No compatibility issues is expected, as this is a new feature.
 ;----------------------------------------------------------------
 
-extern Globals___Frame
+cextern Globals___Frame
 
 
 [section .data] 

@@ -11,9 +11,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern BuildingTypeClass__BuildingTypeClass
-extern BuildingTypeClass__new
-extern Globals___RuleINI
+cextern BuildingTypeClass__BuildingTypeClass
+cextern BuildingTypeClass__new
+cextern Globals___RuleINI
+
+cextern str_StringTableOffsets
+cextern str_Building
+cextern str_BuildingTypes
 
 
 ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr,edx,18

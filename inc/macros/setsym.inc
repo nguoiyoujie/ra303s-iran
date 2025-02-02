@@ -1,7 +1,7 @@
 ; for C
 %macro setcglob 2
-    global %2
-    %2 equ %1
+    global _%2
+    _%2 equ %1
 %endmacro
 
 ; for c++

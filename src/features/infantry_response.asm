@@ -8,8 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 
-extern RandomClass_Random
-extern Globals___NonCriticalRandomNumber
+cextern RandomClass_Random
+cextern Globals___NonCriticalRandomNumber
 
 
 [section .data] 

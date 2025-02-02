@@ -8,8 +8,8 @@
 ; No compatibility issues is expected as Helicarriers were not expected to be used by the AI in the original game. Modders and mappers beware though.
 ; 
 ;----------------------------------------------------------------
-extern CargoClass__Attached_Object
-extern Globals___Houses
+cextern CargoClass__Attached_Object
+cextern Globals___Houses
 
 
 @HACK 0x0058B862,0x0058B868,_VesselClass__Greatest_Threat_Carrier_AutoAcquire

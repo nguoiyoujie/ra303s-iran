@@ -9,7 +9,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern TechnoTypeClass__Read_INI
+cextern TechnoTypeClass__Read_INI
 
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HACK 0x005374C5,0x005374D4,_RulesClass_Objects_Replace_AircraftTypes_Read_INI
@@ -56,7 +56,7 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.Response_Attack.Read(esi,edi,_GetAircraftResponseAttackFromString)
 
     lea  edx,[esi+5]
-    Get_Bit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
+    GetBit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
     xor  ecx,ecx
     mov  cl,al
     call_INIClass__Get_Bool edi,edx,str.AircraftTypeClass.IsFixedWing,ecx
@@ -68,7 +68,7 @@ AircraftTypes_Read_INI:
 .SetPreferredBuilding_Airstrip:
     mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.AFLD
 .After_SetPreferredBuilding:
-    Set_Bit_Byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
+    SetBit[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
 
     pop  edi
     pop  esi

@@ -5,6 +5,11 @@
 ;
 ;----------------------------------------------------------------
 
+cextern str_ini_Spawn
+cextern str_Settings
+cextern str_Aftermath
+
+
 @HACK 0x00551A87,0x00551A8D,_Startup_Function_Hook_Early_Load ; for some spawn.ini stuff
     xor  edx,edx
     mov  [0x006ABBC8],edx

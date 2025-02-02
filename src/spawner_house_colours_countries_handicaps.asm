@@ -1,6 +1,6 @@
 
-extern HouseClass__As_Pointer
-extern HouseClass__Assign_Handicap
+cextern HouseClass__As_Pointer
+cextern HouseClass__Assign_Handicap
 
 
 [section .data] 

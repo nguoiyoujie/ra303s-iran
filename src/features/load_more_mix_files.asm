@@ -43,9 +43,52 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-extern MixFileClass_CCFileClass_Retrieve
-extern MixFileClass_CCFileClass_Cache
-extern Globals___FastKey
+cextern MixFileClass_CCFileClass_Retrieve
+cextern MixFileClass_CCFileClass_Cache
+cextern Globals___FastKey
+
+cextern str_mix_DOSInterfaceMod
+cextern str_mix_BetaCruiser
+cextern str_mix_BetaGunboat
+cextern str_mix_BetaSubmarine
+cextern str_mix_BetaDestroyer
+cextern str_mix_BetaTeslaTank
+cextern str_mix_SmallInfantry
+cextern str_arg_Spawn
+cextern str_mix_Spawn1
+cextern str_ini_RedAlert
+cextern str_Options
+cextern str_GameLanguage
+cextern str_mix_GermanLanguagePack
+cextern str_mix_GermanCensoredLanguagePack
+cextern str_mix_GermanUncensoredLanguagePack
+cextern str_mix_FrenchLanguagePack
+cextern str_mix_SpanishLanguagePack
+cextern str_mix_RussianLanguagePack
+cextern str_mix_Campaign
+cextern str_mix_Aftermath
+cextern str_mix_Counterstrike
+cextern str_mix_MoviesTLF
+cextern str_mix_OOSFix
+cextern str_mix_Movies_10
+cextern str_mix_Movies_9
+cextern str_mix_Movies_8
+cextern str_mix_Movies_7
+cextern str_mix_Movies_6
+cextern str_mix_Movies_5
+cextern str_mix_Movies_4
+cextern str_mix_Movies_3
+cextern str_mix_Movies_2
+cextern str_mix_Movies_1
+cextern str_mix_Expand9
+cextern str_mix_Expand8
+cextern str_mix_Expand7
+cextern str_mix_Expand6
+cextern str_mix_Expand5
+cextern str_mix_Expand4
+cextern str_mix_Expand3
+cextern str_mix_Expand2
+cextern str_mix_Expand1
 
 
 ; Loads without caching in memory

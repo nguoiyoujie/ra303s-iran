@@ -1,11 +1,16 @@
 ;----------------------------------------------------------------
-; src/macros/houseclass.asm
+; inc/types/houseclass.asm
 ;
 ; Macros to access HouseClass offsets
 ;
 ;----------------------------------------------------------------
 
-extern HouseTypeClass__new
+cextern HouseTypeClass__new
+cextern HouseClass.Count
+cextern HouseClass.Array
+cextern INI_Read_Value_Buffer
+cextern INI_Read_String_Buffer
+
 
 ; define house class field definitions
 %define HouseClass.Offset.RTTI                   0x000    ; byte (0B)
@@ -290,37 +295,37 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-%define HouseClass.RemapColor.Get(ptr_type,reg_output)                             ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.RemapColor, reg_output
-%define HouseClass.RemapColor.Set(ptr_type,value)                                  ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.RemapColor, value
+%define HouseClass.RemapColor.Get(ptr_type,reg_output)                             GetByte                                ptr_type, HouseClass.Offset.RemapColor, reg_output
+%define HouseClass.RemapColor.Set(ptr_type,value)                                  SetByte                                ptr_type, HouseClass.Offset.RemapColor, value
 %define HouseClass.RemapColor.Read1(ptr_type,ptr_rules,str_section,function)       HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.RemapColor, str_section, str.HouseClass.RemapColor1, function
 %define HouseClass.RemapColor.Read2(ptr_type,ptr_rules,str_section,function)       HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.RemapColor, str_section, str.HouseClass.RemapColor2, function
 
-%define HouseClass.ActLike.Get(ptr_type,reg_output)                                ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.ActLike, reg_output
-%define HouseClass.ActLike.Set(ptr_type,value)                                     ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.ActLike, value
+%define HouseClass.ActLike.Get(ptr_type,reg_output)                                GetByte                                ptr_type, HouseClass.Offset.ActLike, reg_output
+%define HouseClass.ActLike.Set(ptr_type,value)                                     SetByte                                ptr_type, HouseClass.Offset.ActLike, value
 %define HouseClass.ActLike.Read(ptr_type,ptr_rules,str_section,function)           HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.ActLike, str_section, str.HouseClass.ActLike, function
 
-%define HouseClass.InstantCapture.Get(ptr_type,reg_output)                         ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, reg_output
-%define HouseClass.InstantCapture.Set(ptr_type,value)                              ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, value
+%define HouseClass.InstantCapture.Get(ptr_type,reg_output)                         GetBool                                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, reg_output
+%define HouseClass.InstantCapture.Set(ptr_type,value)                              SetBool                                ptr_type, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, value
 %define HouseClass.InstantCapture.Read(ptr_type,ptr_rules,str_section)             HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.InstantCapture, HouseClass.Bit.InstantCapture, str_section, str.HouseClass.InstantCapture
 
-%define HouseClass.NoBuildingCrew.Get(ptr_type,reg_output)                         ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, reg_output
-%define HouseClass.NoBuildingCrew.Set(ptr_type,value)                              ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, value
+%define HouseClass.NoBuildingCrew.Get(ptr_type,reg_output)                         GetBool                                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, reg_output
+%define HouseClass.NoBuildingCrew.Set(ptr_type,value)                              SetBool                                ptr_type, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, value
 %define HouseClass.NoBuildingCrew.Read(ptr_type,ptr_rules,str_section)             HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.NoBuildingCrew, HouseClass.Bit.NoBuildingCrew, str_section, str.HouseClass.NoBuildingCrew
 
-%define HouseClass.SecondaryColorScheme.Get(ptr_type,reg_output)                      ObjectTypeClass.GetByte             ptr_type, HouseClass.Offset.SecondaryColorScheme, reg_output
-%define HouseClass.SecondaryColorScheme.Set(ptr_type,value)                           ObjectTypeClass.SetByte             ptr_type, HouseClass.Offset.SecondaryColorScheme, value
+%define HouseClass.SecondaryColorScheme.Get(ptr_type,reg_output)                      GetByte                             ptr_type, HouseClass.Offset.SecondaryColorScheme, reg_output
+%define HouseClass.SecondaryColorScheme.Set(ptr_type,value)                           SetByte                             ptr_type, HouseClass.Offset.SecondaryColorScheme, value
 %define HouseClass.SecondaryColorScheme.Read(ptr_type,ptr_rules,str_section,function) HouseClass.ReadStringToByteExt      ptr_type, ptr_rules, HouseClass.Offset.SecondaryColorScheme, str_section, str.HouseClass.SecondaryColorScheme, function
 
-%define HouseClass.AllyTheNeutralHouse.Get(ptr_type,reg_output)                    ObjectTypeClass.GetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, reg_output
-%define HouseClass.AllyTheNeutralHouse.Set(ptr_type,value)                         ObjectTypeClass.SetBool                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, value
+%define HouseClass.AllyTheNeutralHouse.Get(ptr_type,reg_output)                    GetBool                                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, reg_output
+%define HouseClass.AllyTheNeutralHouse.Set(ptr_type,value)                         SetBool                                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, value
 %define HouseClass.AllyTheNeutralHouse.Read(ptr_type,ptr_rules,str_section)        HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, str_section, str.HouseClass.AllyTheNeutralHouse
 
-%define HouseClass.HeliUnit.Get(ptr_type,reg_output)                               ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.HeliUnit, reg_output
-%define HouseClass.HeliUnit.Set(ptr_type,value)                                    ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.HeliUnit, value
+%define HouseClass.HeliUnit.Get(ptr_type,reg_output)                               GetByte                                ptr_type, HouseClass.Offset.HeliUnit, reg_output
+%define HouseClass.HeliUnit.Set(ptr_type,value)                                    SetByte                                ptr_type, HouseClass.Offset.HeliUnit, value
 %define HouseClass.HeliUnit.Read(ptr_type,ptr_rules,str_section,function)          HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.HeliUnit, str_section, str.HouseClass.HeliUnit, function
 
-%define HouseClass.MCVUnit.Get(ptr_type,reg_output)                                ObjectTypeClass.GetByte                ptr_type, HouseClass.Offset.MCVUnit, reg_output
-%define HouseClass.MCVUnit.Set(ptr_type,value)                                     ObjectTypeClass.SetByte                ptr_type, HouseClass.Offset.MCVUnit, value
+%define HouseClass.MCVUnit.Get(ptr_type,reg_output)                                GetByte                                ptr_type, HouseClass.Offset.MCVUnit, reg_output
+%define HouseClass.MCVUnit.Set(ptr_type,value)                                     SetByte                                ptr_type, HouseClass.Offset.MCVUnit, value
 %define HouseClass.MCVUnit.Read(ptr_type,ptr_rules,str_section,function)           HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.MCVUnit, str_section, str.HouseClass.MCVUnit, function
 
 
@@ -328,11 +333,11 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
 %macro HouseClass.ReadBool    6
     push edx
     push ecx
-    Get_Bit byte[%1+%3],%4
+    GetBit byte[%1+%3],%4
     xor  ecx,ecx
     mov  cl,al
     call_INIClass__Get_Bool %2,%5,%6,ecx
-    Set_Bit_Byte[%1+%3],%4,al
+    SetBit[%1+%3],%4,al
     pop  ecx
     pop  edx
 %endmacro
@@ -356,22 +361,22 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     push ecx
     xor  ecx,ecx
     mov  byte cl,[%1+%3]
-    mov  byte[ObjectTypeClass.ValueBuffer],cl
+    mov  byte[INI_Read_Value_Buffer],cl
     xor  ecx,ecx
-    call_INIClass__Get_String %2,%4,%5,ecx,ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  byte al,[ObjectTypeClass.StringBuffer] ;just check if the first byte is NULL / 0
+    call_INIClass__Get_String %2,%4,%5,ecx,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  byte al,[INI_Read_String_Buffer] ;just check if the first byte is NULL / 0
     test al,al
     jz   %%null_string
   %%valid_string:
-    mov  eax,ObjectTypeClass.StringBuffer
+    mov  eax,INI_Read_String_Buffer
     call %6
     mov  byte[%1+%3],al
     jmp  %%done
   %%null_string:
-    ;mov  byte al,[ObjectTypeClass.ValueBuffer]
+    ;mov  byte al,[INI_Read_Value_Buffer]
     ;mov  byte[%1+%3],al
   %%done:
-    mov  dword[ObjectTypeClass.ValueBuffer],0
+    mov  dword[INI_Read_Value_Buffer],0
     pop  ecx
     pop  edx
 %endmacro

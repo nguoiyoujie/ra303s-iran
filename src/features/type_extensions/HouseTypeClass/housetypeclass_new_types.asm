@@ -11,10 +11,36 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseTypeClass__HouseTypeClass
-extern HouseTypeClass__Read_INI
+cextern HouseTypeClass__HouseTypeClass
+cextern HouseTypeClass__Read_INI
 
-;@CLEAR 0x004F4095,HouseTypeClass.NEW_COUNT,0x004F4096 ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
+cextern str_Multi9
+cextern str_Multi10
+cextern str_Multi11
+cextern str_Multi12
+cextern str_Multi13
+cextern str_Multi14
+cextern str_Multi15
+cextern str_Multi16
+cextern str_Multi17
+cextern str_Multi18
+cextern str_Multi19
+cextern str_Multi20
+cextern str_MP9
+cextern str_MP10
+cextern str_MP11
+cextern str_MP12
+cextern str_MP13
+cextern str_MP14
+cextern str_MP15
+cextern str_MP16
+cextern str_MP17
+cextern str_MP18
+cextern str_MP19
+cextern str_MP20
+
+
+;@SET 0x004F4095,{dd HouseTypeClass.NEW_COUNT} ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
 
 @HACK 0x004CB760,0x004CB76A,_HouseTypeClass__AddNewHouseTypes
 ;Multi9

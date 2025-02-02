@@ -11,8 +11,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-extern HouseClass__Can_Build
-extern Globals___PlayerPtr
+cextern HouseClass__Can_Build
+cextern Globals___PlayerPtr
 
 ; Gets a side based on a country type
 ; arg: <eax: country to get side for>

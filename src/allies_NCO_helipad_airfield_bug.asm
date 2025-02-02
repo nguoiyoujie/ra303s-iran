@@ -4,7 +4,7 @@
 
 ; Fix will desync online with 3.03 most likely in the very rare occasion that this situation occurs. That's because Hind and Transport Helicopter will spawn for players with this fix but without those two helicopters won't spawn because both the Helipad and Airfield aren't considered valid factories for those two helicopters in this situation.
 
-;@CLEAR 0x0051EBBD,0x90,0x0051EBC2
+;@CLEAR_NOP 0x0051EBBD,0x0051EBC2
 
 ; Checks were failing because of building ownership/ActLike checks. Aircrafts can dock in airstrips that cannot build them.
 ; However, Who_Can_Build_Me() serves dual purpose. It is used to test if a techno can be built, and it is also used to test which factory can build it for exit and docking purposes.

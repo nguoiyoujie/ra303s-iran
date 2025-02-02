@@ -8,8 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 
-extern RandomClass_Random
-extern Globals___NonCriticalRandomNumber
+cextern RandomClass_Random
+cextern Globals___NonCriticalRandomNumber
 
 
 @HACK 0x004B6207,0x004B620C,_DriveClass__Response_Select_CustomVoice

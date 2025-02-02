@@ -46,7 +46,7 @@
 
 ; convert sar eax,18 to shr eax,18
 @SET 0x004DC5BF,{shr eax,0x18} 
-@CLEAR 0x004DC5C5,0x90,0x004DC5CA ; don't reduce by INFANTRY_RA_COUNT
+@SJMP 0x004DC5C5,0x004DC5CA ; don't reduce by INFANTRY_RA_COUNT
 @SET 0x004DC5D6,{mov eax,dword[edi+eax*1+HouseClass.Offset.NewIQuantity]}
 @SET 0x004DC5DD,{cmp eax,dword[edx+HouseClass.Offset.NewIQuantity]}
 

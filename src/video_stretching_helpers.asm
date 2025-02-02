@@ -13,9 +13,9 @@
 ;use the unused 'Processor' byte at 0x00607D78 (in MMX_Single_Line_Trans / KEYFBUFF.ASM), this is supposed to be used to store CPU procressor info
 ;but isn't actually used
 
-extern MapSel___Map_Selection
-extern ScoreClass__Presentation
-extern Score___Multi_Score_Presentation
+cextern MapSel___Map_Selection
+cextern ScoreClass__Presentation
+cextern Score___Multi_Score_Presentation
 
 %define __processor 0x00607D78
 

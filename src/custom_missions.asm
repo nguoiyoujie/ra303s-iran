@@ -1,6 +1,9 @@
 
-extern Scenario___Start_Scenario
+cextern Scenario___Start_Scenario
 
+[section .rdata]
+str_sprintf_format3 db"cmu%02dea",0
+str_s_format  db"%s",0
 
 @SJMP 0x00538764,0x00538771
 

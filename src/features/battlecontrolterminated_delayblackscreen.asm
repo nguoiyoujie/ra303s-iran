@@ -8,9 +8,9 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern _imp__timeGetTime
-extern _imp__Sleep
-extern Conquer___Call_Back
+cextern _imp__timeGetTime
+cextern _imp__Sleep
+cextern Conquer___Call_Back
 
 %define BCTDelayms          4000 ; 4 seconds
 

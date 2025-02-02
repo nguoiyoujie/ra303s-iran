@@ -20,9 +20,9 @@
 %define    Crates                                        0x0067F2C6
 %define Special                                        0x00669908
 
-extern CCFileClass__CCFileClass
-extern CCFileClass__Is_Available
-extern CCINIClass__Load
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Is_Available
+cextern CCINIClass__Load
 
 [section .data]
 FirstLoad:            db 1
@@ -70,8 +70,8 @@ mapindex_str db"MapIndex",0
 
 
 @SJMP 0x00513480,0x00513485 ; _Skirmish_Unit_Count_Change
-@CLEAR 0x00513534,0x90,0x00513538 ; _Skirmish_Add_CTF_Check_List
-@CLEAR 0x00514AA8,0x90,0x00514AAC ; _Skirmish_Check_CTF_Check_List
+@SJMP 0x00513534,0x00513538 ; _Skirmish_Add_CTF_Check_List
+@SJMP 0x00514AA8,0x00514AAC ; _Skirmish_Check_CTF_Check_List
 @SJMP 0x0050BC36,0x0050BC3B ; _LAN_Unit_Count_Change
 @SJMP 0x005135AC,0x005135B5 ; _Skirmish_Check_CTF_Check_Item
 ;@LJMP 0x00514854,0x00514928 ; _Skirmish_Check_CTF_Check_Item2 ; Doesn't work

@@ -5,14 +5,27 @@
 ;
 ;----------------------------------------------------------------
 
-extern CCFileClass__CCFileClass
-extern CCINIClass__Load
-extern Vortex___ChronalVortex
-extern ChronalVortexClass__Stop
-extern Globals___NewUnitsEnabled
-extern Globals___SessionType
-extern Globals___Scen_Scenario
-extern Globals___Session_Type
+cextern CCFileClass__CCFileClass
+cextern CCINIClass__Load
+cextern Vortex___ChronalVortex
+cextern ChronalVortexClass__Stop
+cextern Globals___NewUnitsEnabled
+cextern Globals___SessionType
+cextern Globals___Scen_Scenario
+cextern Globals___Session_Type
+
+cextern str_Basic
+cextern str_EmptyString
+cextern str_NextMissionInCampaign
+cextern str_MapSelectionAnimation
+cextern str_MapSelectA
+cextern str_MapSelectB
+cextern str_MapSelectC
+cextern str_ScenarioNumber
+cextern str_ChronoReinforceTanks
+cextern str_UseAtomWhiteScreenEffectInMP
+cextern str_UseSinglePlayerAtomDamage
+cextern str_UseCustomTutorialText
 
 
 @HACK 0x0053D081,0x0053D086,_Map_Load_Before_Hook ; For map loading stuff
@@ -30,7 +43,7 @@ extern Globals___Session_Type
     mov  dword[Rules.AI.NormalAIGemValue],-1
     mov  dword[Rules.AI.HardAIGoldValue],-1
     mov  dword[Rules.AI.HardAIGemValue],-1
-    mov  dword[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    mov  dword[Rules.AI.BuildRadarWithoutAirThreatCheck],0
     mov  dword[Rules.AI.SingleplayerAIObeyPrerequisites],0
     ; Reset credit display to 0
     mov  dword[0x0066984E],0

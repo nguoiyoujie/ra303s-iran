@@ -8,7 +8,7 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
-extern UnitTypeClass__One_Time
+cextern UnitTypeClass__One_Time
 
 ; for some reason the game can't find the graphics third time loading them..
 ; work around this by not updating graphics if they cant be found

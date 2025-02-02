@@ -1,11 +1,15 @@
 
 
 
-extern CCFileClass__CCFileClass
-extern CCFileClass__Is_Available
-extern CCINIClass__Load
-extern RandomClass_Random
-extern Globals___NonCriticalRandomNumber
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Is_Available
+cextern CCINIClass__Load
+cextern RandomClass_Random
+cextern Globals___NonCriticalRandomNumber
+
+cextern str_EmptyString
+cextern str_Options
+cextern str_RedAlertIni
 
 
 @SJMP 0x004F4B83,0x004F4B88 ; _Load_Game_Menu_Queue_Song_Call_Patch_Out
@@ -33,8 +37,6 @@ str_filenames db"Filenames",0
 str_fullnames db"Fullnames",0
 str_tracklength db"Tracklength",0
 str_showallmusic db"ShowAllMusic",0
-str_options2 db"Options",0
-str_redalert_ini db"REDALERT.INI",0
 str_arazoidaud    db"ARAZOID.AUD",0
 str_araziodaud    db"ARAZIOD.AUD",0
 str_sprintf_format2 db"%d",0
@@ -197,7 +199,7 @@ str_twincannon db"Twin Cannon",0
     mov  eax,[FileClass_redalertini]
     test eax,eax
     jnz  .Done_INIClass_Loading
-    mov  edx,str_redalert_ini
+    mov  edx,str_RedAlertIni
     mov  eax,FileClass_redalertini
     call CCFileClass__CCFileClass
     ; check ini exists
@@ -214,7 +216,7 @@ str_twincannon db"Twin Cannon",0
     mov  eax,CCINIClass_redalertini
     call CCINIClass__Load
 .Done_INIClass_Loading:
-    call_INIClass__Get_Bool CCINIClass_redalertini, str_options2, str_showallmusic, 1
+    call_INIClass__Get_Bool CCINIClass_redalertini, str_Options, str_showallmusic, 1
     pop  edx
     cmp  eax,0
     je   .Ret_Original_Function

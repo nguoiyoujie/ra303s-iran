@@ -11,8 +11,8 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___ScenarioInit
-extern Globals___Session_Type
+cextern Globals___ScenarioInit
+cextern Globals___Session_Type
 
 @HACK 0x004B07E0,0x004B07E7,_DisplayClass__Map_Cell_Share_Shroud
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL

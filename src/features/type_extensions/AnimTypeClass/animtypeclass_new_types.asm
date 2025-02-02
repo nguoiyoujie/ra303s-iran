@@ -14,8 +14,11 @@
 ;
 ;----------------------------------------------------------------
 
-extern AnimTypeClass__AnimTypeClass
-extern AnimTypeClass__new
+cextern AnimTypeClass__AnimTypeClass
+cextern AnimTypeClass__new
+
+cextern str_AnimTypes
+cextern str_DirectionalAnimTypes
 
 
 ; There are two classes of animations

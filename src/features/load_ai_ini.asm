@@ -5,10 +5,12 @@
 ;
 ;----------------------------------------------------------------
 
-extern CCFileClass__CCFileClass
-extern CCINIClass__Load
-extern RulesClass__AI
-extern Globals___Rule
+cextern CCFileClass__CCFileClass
+cextern CCINIClass__Load
+cextern RulesClass__AI
+cextern Globals___Rule
+
+cextern str_ini_AI
 
 
 @HACK 0x0053D645,0x0053D64A,_Read_Scenario_INI_Load_AI_INI

@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/hires/video_fixes.asm
+; src/features/hires/video_enhancements.asm
 ;
 ; Apply hi-res enhancements to video/movie playback
 ;

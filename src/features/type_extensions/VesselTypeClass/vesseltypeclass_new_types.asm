@@ -11,9 +11,16 @@
 ;
 ;----------------------------------------------------------------
 
-extern VesselTypeClass_VesselTypeClass
-extern VesselTypeClass_new
-extern Globals___RuleINI
+cextern VesselTypeClass_VesselTypeClass
+cextern VesselTypeClass_new
+cextern Globals___RuleINI
+
+cextern str_StringTableOffsets
+cextern str_Vessel
+cextern str_VesselTypes
+cextern str_TURR
+cextern str_SSAM
+cextern str_MGUN
 
 
 @HACK 0x00459661,0x00459666,_BuildingClass__Update_Buildables_Unhardcode_VesselTypes

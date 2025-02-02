@@ -11,9 +11,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern UnitTypeClass_UnitTypeClass
-extern UnitTypeClass_new
-extern Globals___RuleINI
+cextern UnitTypeClass_UnitTypeClass
+cextern UnitTypeClass_new
+cextern Globals___RuleINI
+
+cextern str_StringTableOffsets
+cextern str_Unit
+cextern str_UnitTypes
 
 
 @HACK 0x00459715,0x0045971A,_BuildingClass__Update_Buildables_UnhardCode_UnitTypes

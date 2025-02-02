@@ -9,15 +9,14 @@
 ;
 ;----------------------------------------------------------------
 
-extern BuildingTypeClass__From_Name
+cextern BuildingTypeClass__From_Name
+
+cextern str_Comma
 
 ; Expose other technotype fields that already exist
 ;Read INI settings
 @SJMP 0x00569B6A,0x00569B72 ;_TechnoTypeClass__SkipReading_Prerequisite
-
-@CLEAR 0x00569B6F,0x90,0x00569B72
-@CLEAR 0x00569B7B,0x90,0x00569B81 ; bug-fix: remove actual writing of value into prerequisite
-
+@SJMP 0x00569B7B,0x00569B81 ; bug-fix: remove actual writing of value into prerequisite
 
 @HACK 0x00569E1F,0x00569E24,_TechnoTypeClass__Read_INI_Extended
 ;========= start loading from INI ==============

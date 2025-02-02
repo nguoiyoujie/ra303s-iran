@@ -10,9 +10,9 @@
 ; Fixes repairing on enemy naval yard and repairing on the move
 ; Taken from AlexB's Arda, with AlexB's help
 
-extern HouseClass__As_Pointer
-extern HouseClass__Make_Ally
-extern Globals___Session_Type
+cextern HouseClass__As_Pointer
+cextern HouseClass__Make_Ally
+cextern Globals___Session_Type
 
 
 %define        Event_Execute_NULL    0x004BDFED

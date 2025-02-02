@@ -1,9 +1,13 @@
 ;----------------------------------------------------------------
-; src/macros/housetypeclass.asm
+; inc/types/housetypeclass.asm
 ;
 ; Macros to access HouseTypeClass offsets
 ;
 ;----------------------------------------------------------------
+
+cextern HouseTypeClass.Count
+cextern HouseTypeClass.Array
+cextern str_Zero
 
 ; define house type class field definitions
 ; abstract type
@@ -35,13 +39,13 @@ str.HouseTypeClass.MCVUnit                       db"MCVUnit",0              ;new
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-%define HouseTypeClass.HeliUnit.Get(ptr_type,reg_output)                    ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, reg_output
-%define HouseTypeClass.HeliUnit.Set(ptr_type,value)                         ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.HeliUnit, value
-%define HouseTypeClass.HeliUnit.Read(ptr_type,ptr_rules,function)           ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, HouseTypeClass.Offset.HeliUnit, str.HouseTypeClass.HeliUnit, function
+%define HouseTypeClass.HeliUnit.Get(ptr_type,reg_output)                    GetByte                                ptr_type, HouseTypeClass.Offset.HeliUnit, reg_output
+%define HouseTypeClass.HeliUnit.Set(ptr_type,value)                         SetByte                                ptr_type, HouseTypeClass.Offset.HeliUnit, value
+%define HouseTypeClass.HeliUnit.Read(ptr_type,ptr_rules,function)           AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, HouseTypeClass.Offset.HeliUnit, str.HouseTypeClass.HeliUnit, function
 
-%define HouseTypeClass.MCVUnit.Get(ptr_type,reg_output)                     ObjectTypeClass.GetByte                ptr_type, HouseTypeClass.Offset.MCVUnit, reg_output
-%define HouseTypeClass.MCVUnit.Set(ptr_type,value)                          ObjectTypeClass.SetByte                ptr_type, HouseTypeClass.Offset.MCVUnit, value
-%define HouseTypeClass.MCVUnit.Read(ptr_type,ptr_rules,function)            ObjectTypeClass.ReadStringToByteExt    ptr_type, ptr_rules, HouseTypeClass.Offset.MCVUnit, str.HouseTypeClass.MCVUnit, function
+%define HouseTypeClass.MCVUnit.Get(ptr_type,reg_output)                     GetByte                                ptr_type, HouseTypeClass.Offset.MCVUnit, reg_output
+%define HouseTypeClass.MCVUnit.Set(ptr_type,value)                          SetByte                                ptr_type, HouseTypeClass.Offset.MCVUnit, value
+%define HouseTypeClass.MCVUnit.Read(ptr_type,ptr_rules,function)            AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, HouseTypeClass.Offset.MCVUnit, str.HouseTypeClass.MCVUnit, function
 
 
 _GetHouseTypeIDFromString:
@@ -54,7 +58,6 @@ _GetHouseTypeIDFromString:
     test ebx,ebx
     jz   .Retn ; just return 0
     mov  ebx,dword[ebx+1]; index
-	;ObjectTypeClass.ID ebx,ebx
     mov  eax,ebx
 .Retn:
     pop ebx
@@ -88,7 +91,6 @@ _GetHouseTypeIDFromIntOrString:
     test ebx,ebx
     jz   .Retn ; just return 0
     mov  ebx,dword[ebx+1]; index
-	;ObjectTypeClass.ID ebx,ebx
     mov  eax,ebx
 .Retn:
     pop  edx

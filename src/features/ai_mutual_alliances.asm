@@ -17,11 +17,11 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseClass__Make_Ally
-extern HouseClass__HousesType
-extern HouseClass__As_Pointer
-extern HouseClass__Computer_Paranoid
-extern Globals___Session_Type
+cextern HouseClass__Make_Ally
+cextern HouseClass__HousesType
+cextern HouseClass__As_Pointer
+cextern HouseClass__Computer_Paranoid
+cextern Globals___Session_Type
 
 
 ; Suppress IsHuman check, allowing AI alliances to be published to the in-game UI message system

@@ -11,10 +11,12 @@
 ;
 ;----------------------------------------------------------------
 
-extern Warhead___Warheads
-extern WarheadTypeClass__WarheadTypeClass
-extern WarheadTypeClass__new
-extern Weapon__Weapons
+cextern Warhead___Warheads
+cextern WarheadTypeClass__WarheadTypeClass
+cextern WarheadTypeClass__new
+cextern Weapon__Weapons
+
+cextern str_Warheads
 
 
 @HACK 0x0046360D,0x00463615,_CCINIClass__Get_WarheadType_Unhardcode_WarheadTypes_Count

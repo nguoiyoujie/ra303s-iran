@@ -1,6 +1,6 @@
 
-extern HouseClass__As_Pointer
-extern Globals___EngineerCaptureLevel
+cextern HouseClass__As_Pointer
+cextern Globals___EngineerCaptureLevel
 
 ; no buildingcrew if the house has no building crew set
 ; this requires the extended houseclass option NoBuildingCrew

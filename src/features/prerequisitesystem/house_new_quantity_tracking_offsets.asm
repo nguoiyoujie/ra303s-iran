@@ -147,17 +147,3 @@
 @ENDHACK
 
 
-@HACK 0x004D496F,0x004D49B2,_HouseClass__AI_Replace_AAPowerCheck
-    test dword[eax+HouseClass.Offset.BPreGroupScan],0x800 ; ADV.DEFENSE
-    jz   .TeslaOffline
-    test dword[eax+HouseClass.Offset.BPreGroupScan],0x1000 ; AA.DEFENSE
-    jz   .AAOffline
-    mov  edx,0x203
-    jmp  0x004D49B2
-.TeslaOffline:
-    mov  edx,0x202
-    jmp  0x004D49B2
-.AAOffline:
-    mov  edx,0x201
-    jmp  0x004D49B2
-@ENDHACK

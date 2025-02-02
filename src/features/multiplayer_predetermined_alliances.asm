@@ -11,27 +11,24 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseClass__As_Pointer
-extern HouseClass__Make_Ally
+cextern HouseClass__As_Pointer
+cextern HouseClass__Make_Ally
 
-
-[section .rdata]
-str_HouseAllyOne        db"HouseAllyOne",0
-str_HouseAllyTwo        db"HouseAllyTwo",0
-str_HouseAllyThree      db"HouseAllyThree",0
-str_HouseAllyFour       db"HouseAllyFour",0
-str_HouseAllyFive       db"HouseAllyFive",0
-str_HouseAllySix        db"HouseAllySix",0
-str_HouseAllySeven      db"HouseAllySeven",0
-
-str_Multi1_Alliances    db"Multi1_Alliances",0
-str_Multi2_Alliances    db"Multi2_Alliances",0
-str_Multi3_Alliances    db"Multi3_Alliances",0
-str_Multi4_Alliances    db"Multi4_Alliances",0
-str_Multi5_Alliances    db"Multi5_Alliances",0
-str_Multi6_Alliances    db"Multi6_Alliances",0
-str_Multi7_Alliances    db"Multi7_Alliances",0
-str_Multi8_Alliances    db"Multi8_Alliances",0
+cextern str_HouseAllyOne
+cextern str_HouseAllyTwo
+cextern str_HouseAllyThree
+cextern str_HouseAllyFour
+cextern str_HouseAllyFive
+cextern str_HouseAllySix
+cextern str_HouseAllySeven
+cextern str_Multi1_Alliances
+cextern str_Multi2_Alliances
+cextern str_Multi3_Alliances
+cextern str_Multi4_Alliances
+cextern str_Multi5_Alliances
+cextern str_Multi6_Alliances
+cextern str_Multi7_Alliances
+cextern str_Multi8_Alliances
 
 
 ; args <HouseType that will ally>, <HouseType to ally>

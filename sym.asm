@@ -448,3 +448,208 @@ setcglob 0x006AC274,BuffGlbl___LogicPage                                       ;
 ; DDRAW.CPP
 setcglob 0x006B1498,DDraw___MainWindow      
 
+;---------------------------------------------------------------------------
+; Heap arrays
+;---------------------------------------------------------------------------
+; FixedHeapClass
+;   size 0x??
+;     unsigned IsAllocated:1  offset 0
+;     int Size offset 4
+;     int TotalCount offset 8
+;     int ActiveCount offset 12
+;     void* array Buffer offset 16
+;     ? FreeFlag offset 20
+;
+; FixedIHeapClass
+;   size 0x4C
+;     FixedHeapClass 
+;     + DynamicVectorClass<void *> ActivePointers (
+;        void * * Vector 
+;        unsigned VectorMax
+;        unsigned IsAllocated:1
+;        int ActiveCount 
+;        int GrowthStep 
+
+; GLOBALS.CPP
+; AircraftClass              0x0065D818
+setcglob 0x0065D824,AircraftClass.Count       
+setcglob 0x0065D84C,AircraftClass.Array       
+setcglob 0x15F     ,AircraftClass.ORIGINAL_SIZE        
+; Count controlled by [Maximums]
+
+; AnimClass                  0x0065D864
+setcglob 0x0065D870,AnimClass.Count           
+setcglob 0x0065D898,AnimClass.Array           
+setcglob 0x4C      ,AnimClass.ORIGINAL_SIZE   
+; Count controlled by [Maximums]
+
+; BuildingClass              0x0065D8B0
+setcglob 0x0065D8BC,BuildingClass.Count       
+setcglob 0x0065D8E4,BuildingClass.Array       
+setcglob 0xFB      ,BuildingClass.ORIGINAL_SIZE        
+; Count controlled by [Maximums]
+
+; BulletClass                0x0065D8FC
+setcglob 0x0065D908,BulletClass.Count         
+setcglob 0x0065D930,BulletClass.Array         
+setcglob 0x4B      ,BulletClass.ORIGINAL_SIZE 
+; Count controlled by [Maximums]
+
+; FactoryClass               0x0065D948
+setcglob 0x0065D954,FactoryClass.Count        
+setcglob 0x0065DA7C,FactoryClass.Array        
+setcglob 0x2E      ,FactoryClass.ORIGINAL_SIZE
+; Count controlled by [Maximums]
+
+; HouseClass                 0x0065D994
+setcglob 0x0065D9A0,HouseClass.Count          
+setcglob 0x0065D9C8,HouseClass.Array          
+setcglob 0x17A8    ,HouseClass.ORIGINAL_SIZE  
+setcglob 0x2C11    ,HouseClass.NEW_SIZE       
+; Count controlled by [Maximums]
+
+; InfantryClass              0x0065D9E0
+setcglob 0x0065D9EC,InfantryClass.Count       
+setcglob 0x0065DA14,InfantryClass.Array       
+setcglob 0x154     ,InfantryClass.ORIGINAL_SIZE        
+; Count controlled by [Maximums]
+
+; OverlayClass               0x0065DA2C
+setcglob 0x0065DA38,OverlayClass.Count        
+setcglob 0x0065DA60,OverlayClass.Array        
+setcglob 0x2B      ,OverlayClass.ORIGINAL_SIZE
+; Count controlled by [Maximums]
+
+; SmudgeClass                0x0065DA78
+setcglob 0x0065DA84,SmudgeClass.Count         
+setcglob 0x0065DAAC,SmudgeClass.Array         
+setcglob 0x2B      ,SmudgeClass.ORIGINAL_SIZE 
+; Count controlled by [Maximums]
+
+; TeamClass                  0x0065DAC4
+setcglob 0x0065DAD0,TeamClass.Count           
+setcglob 0x0065DAF8,TeamClass.Array           
+setcglob 0x5D      ,TeamClass.ORIGINAL_SIZE   
+; Count controlled by [Maximums]
+
+; TeamTypeClass              0x0065DB10
+setcglob 0x0065DB1C,TeamTypeClass.Count       
+setcglob 0x0065DB44,TeamTypeClass.Array       
+setcglob 0xD1      ,TeamTypeClass.ORIGINAL_SIZE        
+; Count controlled by [Maximums]
+
+; TemplateClass              0x0065DB5C
+setcglob 0x0065DB68,TemplateClass.Count       
+setcglob 0x0065DB90,TemplateClass.Array       
+setcglob 0x2B      ,TemplateClass.ORIGINAL_SIZE        
+; Count controlled by [Maximums]
+
+; TerrainClass               0x0065DBA8
+setcglob 0x0065DBB4,TerrainClass.Count        
+setcglob 0x0065DBDC,TerrainClass.Array        
+setcglob 0x40      ,TerrainClass.ORIGINAL_SIZE
+; Count controlled by [Maximums]
+
+; TriggerClass               0x0065DBF4
+setcglob 0x0065DC00,TriggerClass.Count        
+setcglob 0x0065DC28,TriggerClass.Array        
+setcglob 0x2D      ,TriggerClass.ORIGINAL_SIZE
+; Count controlled by [Maximums]
+
+; UnitClass                  0x0065DC40
+setcglob 0x0065DC4C,UnitClass.Count           
+setcglob 0x0065DC74,UnitClass.Array           
+setcglob 0x17A     ,UnitClass.ORIGINAL_SIZE   
+; Count controlled by [Maximums]
+
+; VesselClass                0x0065DC8C
+setcglob 0x0065DC98,VesselClass.Count         
+setcglob 0x0065DCC0,VesselClass.Array         
+setcglob 0x178     ,VesselClass.ORIGINAL_SIZE 
+; Count controlled by [Maximums]
+
+; TriggerTypeClass           0x0065DCD8
+setcglob 0x0065DCE4,TriggerTypeClass.Count    
+setcglob 0x0065DD0C,TriggerTypeClass.Array    
+setcglob 0x59      ,TriggerTypeClass.ORIGINAL_SIZE     
+; Count controlled by [Maximums]
+
+; HouseTypeClass             0x0065DD24
+setcglob 0x0065DD30,HouseTypeClass.Count      
+setcglob 0x0065DD58,HouseTypeClass.Array      
+setcglob 0x14      ,HouseTypeClass.ORIGINAL_COUNT      
+setcglob 0x20      ,HouseTypeClass.NEW_COUNT  
+setcglob 0x21      ,HouseTypeClass.NEW_COUNT_PLUS_ONE    ; for that one SETD function
+setcglob 0x13A     ,HouseTypeClass.ORIGINAL_SIZE       
+setcglob 0x14A     ,HouseTypeClass.NEW_SIZE   
+
+; BuildingTypeClass          0x0065DD70
+setcglob 0x0065DD7C,BuildingTypeClass.Count   
+setcglob 0x0065DDA4,BuildingTypeClass.Array   
+setcglob 0x57,      BuildingTypeClass.ORIGINAL_COUNT   
+setcglob 0x207,     BuildingTypeClass.ORIGINAL_SIZE    
+setcglob 0x2CC,     BuildingTypeClass.NEW_SIZE
+
+; AircraftTypeClass          0x0065DDBC
+setcglob 0x0065DDC8,AircraftTypeClass.Count   
+setcglob 0x0065DDF0,AircraftTypeClass.Array   
+setcglob 0x7       ,AircraftTypeClass.ORIGINAL_COUNT   
+setcglob 0x19D     ,AircraftTypeClass.ORIGINAL_SIZE    
+setcglob 0x289     ,AircraftTypeClass.NEW_SIZE
+
+; InfantryTypeClass          0x0065DE08
+setcglob 0x0065DE14,InfantryTypeClass.Count   
+setcglob 0x0065DE3C,InfantryTypeClass.Array   
+setcglob 0x1A      ,InfantryTypeClass.ORIGINAL_COUNT   
+setcglob 0x1A2     ,InfantryTypeClass.ORIGINAL_SIZE    
+setcglob 0x3B0     ,InfantryTypeClass.NEW_SIZE
+
+; BulletTypeClass            0x0065DE54
+setcglob 0x0065DE60,BulletTypeClass.Count     
+setcglob 0x0065DE88,BulletTypeClass.Array     
+setcglob 0x12      ,BulletTypeClass.ORIGINAL_COUNT     
+setcglob 0x146     ,BulletTypeClass.ORIGINAL_SIZE      
+setcglob 0x146     ,BulletTypeClass.NEW_SIZE ; size change not yet implemented
+
+; AnimTypeClass              0x0065DEA0
+setcglob 0x0065DEAC,AnimTypeClass.Count       
+setcglob 0x0065DED4,AnimTypeClass.Array       
+setcglob 0x50      ,AnimTypesHeap.ORIGINAL_COUNT       
+setcglob 0x162     ,AnimTypeClass.ORIGINAL_SIZE        
+setcglob 0x180     ,AnimTypeClass.NEW_SIZE    
+													   
+; UnitTypeClass              0x0065DEEC  
+setcglob 0x0065DEF8,UnitTypeClass.Count       
+setcglob 0x0065DF20,UnitTypeClass.Array       
+setcglob 0x16      ,UnitTypeClass.ORIGINAL_COUNT       
+setcglob 0x19E     ,UnitTypeClass.ORIGINAL_SIZE        
+setcglob 0x316     ,UnitTypeClass.NEW_SIZE    
+													   
+; VesselTypeClass            0x0065DF38  
+setcglob 0x0065DF44,VesselTypeClass.Count     
+setcglob 0x0065DF6C,VesselTypeClass.Array     
+setcglob 0x7       ,VesselTypeClass.ORIGINAL_COUNT     
+setcglob 0x19E     ,VesselTypeClass.ORIGINAL_SIZE      
+setcglob 0x30E     ,VesselTypeClass.NEW_SIZE  
+
+; TemplateTypeClass
+
+; TerrainTypeClass
+
+; OverlayTypeClass
+
+; SmudgeTypeClass
+
+
+; SoundEffects
+setcglob 0xA5      ,SoundEffects.ORIGINAL_COUNT        
+
+; WarheadTypeClass in WARHEAD.CPP
+setcglob 0x0069160C,WarheadTypeClass.Count    
+setcglob 0x00691634,WarheadTypeClass.Array    
+setcglob 0x22      ,WarheadTypeClass.ORIGINAL_SIZE     
+setcglob 0x22      ,WarheadTypeClass.NEW_SIZE            ; size change not implemented
+
+; WeaponTypeClass in WEAPOM.CPP
+setcglob 0x00691680,WeaponTypeClass.Array     
+setcglob 0x00691658,WeaponTypeClass.Count              

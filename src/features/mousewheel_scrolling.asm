@@ -10,9 +10,9 @@
 ;
 ;----------------------------------------------------------------
 
-extern SidebarClass__Scroll
-extern Globals___Map
-extern Globals___PlayerPtr
+cextern SidebarClass__Scroll
+cextern Globals___Map
+cextern Globals___PlayerPtr
 
 
 [section .data] 

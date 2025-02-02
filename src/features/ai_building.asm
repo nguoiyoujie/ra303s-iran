@@ -17,14 +17,14 @@
 ; 
 ;----------------------------------------------------------------
 
-extern FixedIHeapClass__Allocate
-extern HouseClass__Find_Building
-extern HouseClass__As_Pointer
-extern HouseClass__Can_Build
-extern BuildingTypeClass__As_Reference
-extern TechnoTypeClass__Legal_Placement
-extern RandomClass_Random
-extern Globals___NonCriticalRandomNumber
+cextern FixedIHeapClass__Allocate
+cextern HouseClass__Find_Building
+cextern HouseClass__As_Pointer
+cextern HouseClass__Can_Build
+cextern BuildingTypeClass__As_Reference
+cextern TechnoTypeClass__Legal_Placement
+cextern RandomClass_Random
+cextern Globals___NonCriticalRandomNumber
 
 
 %define UrgencyType.NONE                       0

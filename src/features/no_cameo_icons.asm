@@ -8,11 +8,9 @@
 ; No compatibility issues is expected. To not use this logic, simply refrain from including NOICON.SHP.
 ;----------------------------------------------------------------
 
-extern MFCD__Retrieve
+cextern MFCD__Retrieve
 
-
-[section .rdata] 
-str_NoIcon_SHP       db"NOICON.SHP", 0
+cextern str_shp_NoIcon
 
 [section .data] 
 chk_NoIcon_SHP       db 0
@@ -88,7 +86,7 @@ Load_NoIcon_SHP:
     test al,al
     jnz  .Fetch_Icon
 .Load_Icon:
-    mov  eax,str_NoIcon_SHP 
+    mov  eax,str_shp_NoIcon 
     call MFCD__Retrieve
     mov  dword[obj_NoIcon_SHP],eax
     mov  byte[chk_NoIcon_SHP],1

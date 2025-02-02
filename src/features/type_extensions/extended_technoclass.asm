@@ -1,6 +1,6 @@
 
-extern Globals___Houses
-extern Globals___PlayerPtr
+cextern Globals___Houses
+cextern Globals___PlayerPtr
 
 
 @SJMP 0x004D6538,0x004D6542 ; _HouseClass__Remap_Table_Use_RemapType_Arg2

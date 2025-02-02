@@ -76,7 +76,7 @@ Rules.AI.NormalAIGemValue dd -1
 Rules.AI.HardAIGoldValue dd -1
 Rules.AI.HardAIGemValue dd -1
 
-Rules.AI.BuildRadarWithoutAirThreatCheck db -1
+Rules.AI.BuildRadarWithoutAirThreatCheck db 0
 Rules.AI.ComputerParanoidForceDisabledSkirmish db 1
 Rules.AI.FixAISendingTanksTopLeft db 0
 Rules.AI.FixAIParanoid db 0
@@ -166,8 +166,7 @@ strdup_text_buffer TIMES 512 db 0
 tutorial_text_buffer  TIMES 512 db 0
 
 ; custom_missions.asm
-str_sprintf_format3 db"cmu%02dea",0
-str_s_format  db"%s",0
+
 sprintf_buffer3 TIMES 512 db 0
 MissionCounter    dd    0
 

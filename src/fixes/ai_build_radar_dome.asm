@@ -17,12 +17,12 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 
 @HACK 0x004DAFA4,0x004DAFAA,_HouseClass__AI_Building_Build_Radar_Dome
     jnz  0x004DB0E4
-    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],0
     jz   .Normal_Code
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     je   .No_Techup_Check
@@ -38,7 +38,7 @@ extern Globals___Session_Type
 @HACK 0x004DAFD5,0x004DAFDB,_HouseClass__AI_Building_Build_Radar_Dome_Have_War_Check
     jnz  0x004DB050
     ; do we need to do this check twice?
-    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],-1
+    cmp  byte[Rules.AI.BuildRadarWithoutAirThreatCheck],0
     jz   .Normal_Code
     cmp  byte[Globals___Session_Type],GameType.GAME_SKIRMISH
     jz   .War_Check

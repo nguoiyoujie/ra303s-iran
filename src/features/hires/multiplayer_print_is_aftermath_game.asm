@@ -6,7 +6,7 @@
 ; This function is enabled by default and is not controllable.
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
-extern Fancy_Text_Print
+cextern Fancy_Text_Print
 
 %define Is_Aftermath_Installed    0x004AC024
 %define bAftermathMultiplayer     0x00680538

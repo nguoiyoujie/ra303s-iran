@@ -42,6 +42,11 @@
 
 %macro @SJMP 2
     @PATCH (%1)
+    %if ((%2) - (%1) - 2) > 127
+        %error "@SJMP cannot jump forward more than 127 bytes!" (%1, %2)
+    %elif ((%2) - (%1) - 2) < -128
+        %error "@SJMP cannot jump backwards more than 128 bytes!" (%1, %2)
+    %endif
     db 0xEB                     ; short jump
     db (%2) - (%1) - 2          ; relative offset
     @ENDPATCH

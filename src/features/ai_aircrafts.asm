@@ -10,9 +10,9 @@
 ; 
 ;----------------------------------------------------------------
 
-extern HouseClass__Can_Build
-extern RandomClass_Random
-extern Globals___NonCriticalRandomNumber
+cextern HouseClass__Can_Build
+cextern RandomClass_Random
+cextern Globals___NonCriticalRandomNumber
 
 
 ; for old AI_Aircraft implementation, in case we need to restore it. 

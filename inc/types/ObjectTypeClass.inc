@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/macros/objecttypeclass.asm
+; inc/types/objecttypeclass.asm
 ;
 ; Macros to access ObjectTypeClass offsets
 ;
@@ -52,24 +52,24 @@ str.ObjectTypeClass.RadarIcon                 db"RadarIcon",0              ;inte
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-%define ObjectTypeClass.IsSelectable.Get(ptr_type,reg_output)                ObjectTypeClass.GetBool                ptr_type, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, reg_output
-%define ObjectTypeClass.IsSelectable.Set(ptr_type,value)                     ObjectTypeClass.SetBool                ptr_type, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, value
-%define ObjectTypeClass.IsSelectable.Read(ptr_type,ptr_rules)                ObjectTypeClass.ReadBool               ptr_type, ptr_rules, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, str.ObjectTypeClass.IsSelectable
+%define ObjectTypeClass.IsSelectable.Get(ptr_type,reg_output)                GetBool                                ptr_type, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, reg_output
+%define ObjectTypeClass.IsSelectable.Set(ptr_type,value)                     SetBool                                ptr_type, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, value
+%define ObjectTypeClass.IsSelectable.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, ObjectTypeClass.Offset.IsSelectable, ObjectTypeClass.Bit.IsSelectable, str.ObjectTypeClass.IsSelectable
 
-%define ObjectTypeClass.IsInsignificant.Get(ptr_type,reg_output)             ObjectTypeClass.GetBool                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, reg_output
-%define ObjectTypeClass.IsInsignificant.Set(ptr_type,value)                  ObjectTypeClass.SetBool                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, value
-%define ObjectTypeClass.IsInsignificant.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadBool               ptr_type, ptr_rules, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, str.ObjectTypeClass.IsSelectable
+%define ObjectTypeClass.IsInsignificant.Get(ptr_type,reg_output)             GetBool                                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, reg_output
+%define ObjectTypeClass.IsInsignificant.Set(ptr_type,value)                  SetBool                                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, value
+%define ObjectTypeClass.IsInsignificant.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadBool             ptr_type, ptr_rules, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, str.ObjectTypeClass.IsSelectable
 
 
-;%define ObjectTypeClass.RTTI.Get(ptr_type,reg_output)                        ObjectTypeClass.GetByte                ptr_type, ObjectTypeClass.Offset.RTTI, reg_output
-;%define ObjectTypeClass.RTTI.Set(ptr_type,value)                             ObjectTypeClass.SetByte                ptr_type, ObjectTypeClass.Offset.RTTI, value
-;%define ObjectTypeClass.RTTI.Read(ptr_type,ptr_rules)                        ObjectTypeClass.ReadByte               ptr_type, ptr_rules, ObjectTypeClass.Offset.RTTI, str.ObjectTypeClass.RTTI  
+;%define ObjectTypeClass.RTTI.Get(ptr_type,reg_output)                        GetByte                                ptr_type, ObjectTypeClass.Offset.RTTI, reg_output
+;%define ObjectTypeClass.RTTI.Set(ptr_type,value)                             SetByte                                ptr_type, ObjectTypeClass.Offset.RTTI, value
+;%define ObjectTypeClass.RTTI.Read(ptr_type,ptr_rules)                        AbstractTypeClass.ReadByte             ptr_type, ptr_rules, ObjectTypeClass.Offset.RTTI, str.ObjectTypeClass.RTTI  
 
-;%define ObjectTypeClass.Index.Get(ptr_type,reg_output)                       ObjectTypeClass.GetInt                 ptr_type, ObjectTypeClass.Offset.Index, reg_output
-;%define ObjectTypeClass.Index.Set(ptr_type,value)                            ObjectTypeClass.SetInt                 ptr_type, ObjectTypeClass.Offset.Index, value
-;%define ObjectTypeClass.Index.Read(ptr_type,ptr_rules)                       ObjectTypeClass.ReadInt                ptr_type, ptr_rules, ObjectTypeClass.Offset.Index, str.ObjectTypeClass.Index
+;%define ObjectTypeClass.Index.Get(ptr_type,reg_output)                       GetInt                                 ptr_type, ObjectTypeClass.Offset.Index, reg_output
+;%define ObjectTypeClass.Index.Set(ptr_type,value)                            SetInt                                 ptr_type, ObjectTypeClass.Offset.Index, value
+;%define ObjectTypeClass.Index.Read(ptr_type,ptr_rules)                       AbstractTypeClass.ReadInt              ptr_type, ptr_rules, ObjectTypeClass.Offset.Index, str.ObjectTypeClass.Index
 
-;%define ObjectTypeClass.StringTableName.Get(ptr_type,reg_output)             ObjectTypeClass.GetInt                 ptr_type, ObjectTypeClass.Offset.StringTableName, reg_output
-;%define ObjectTypeClass.StringTableName.Set(ptr_type,value)                  ObjectTypeClass.SetInt                 ptr_type, ObjectTypeClass.Offset.StringTableName, value
-;%define ObjectTypeClass.StringTableName.Read(ptr_type,ptr_rules)             ObjectTypeClass.ReadInt                ptr_type, ptr_rules, ObjectTypeClass.Offset.StringTableName, str.ObjectTypeClass.StringTableName
+;%define ObjectTypeClass.StringTableName.Get(ptr_type,reg_output)             GetInt                                 ptr_type, ObjectTypeClass.Offset.StringTableName, reg_output
+;%define ObjectTypeClass.StringTableName.Set(ptr_type,value)                  SetInt                                 ptr_type, ObjectTypeClass.Offset.StringTableName, value
+;%define ObjectTypeClass.StringTableName.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadInt              ptr_type, ptr_rules, ObjectTypeClass.Offset.StringTableName, str.ObjectTypeClass.StringTableName
 

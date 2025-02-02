@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern BuildingClass__Exit_Coord
-extern Coord___Coord_Cell
+cextern BuildingClass__Exit_Coord
+cextern Coord___Coord_Cell
 
 [section .data] 
 Cache_WarFactory_DoorAnim       dd 0

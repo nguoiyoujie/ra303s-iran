@@ -11,9 +11,15 @@
 %define _Play_Movie_                                  0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
-extern CCFileClass__CCFileClass
-extern CCFileClass__Is_Available
-extern CCINIClass__Load
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Is_Available
+cextern CCINIClass__Load
+
+cextern str_RedAlertIni
+cextern str_Options
+cextern str_PlayEnglishIntro
+cextern str_arg_Spawn
+
 
 [section .rdata] 
 ; TLF moviessizzle3 and sizzle4
@@ -45,9 +51,6 @@ TANESCP_str db"TANESCP",0
 TESLATNK_str db"TESLATNK",0
 SIZZLE3_str db"SIZZLE3",0
 SIZZLE4_str db"SIZZLE4",0
-str_playenglishintro db"PlayEnglishIntro",0
-;str_redalert_ini db"REDALERT.INI",0
-;str_options2 db"Options",0
 
 
 [section .data] 
@@ -86,7 +89,7 @@ CCINIClass_redalertini2 TIMES 128 db 0
     push edx
     push eax
     push ebx
-    mov  edx,str_redalert_ini
+    mov  edx,str_RedAlertIni
     mov  eax,FileClass_redalertini2
     call CCFileClass__CCFileClass
     ; check ini exists
@@ -102,7 +105,7 @@ CCINIClass_redalertini2 TIMES 128 db 0
     mov  edx,FileClass_redalertini2
     mov  eax,CCINIClass_redalertini2
     call CCINIClass__Load
-    call_INIClass__Get_Bool CCINIClass_redalertini2, str_options2, str_playenglishintro, 1
+    call_INIClass__Get_Bool CCINIClass_redalertini2, str_Options, str_PlayEnglishIntro, 1
     cmp  eax,0
     pop  ebx
     pop  eax

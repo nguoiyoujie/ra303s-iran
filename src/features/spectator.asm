@@ -8,11 +8,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseTypeClass__From_Name
-extern HouseClass__As_Pointer
-extern HouseClass__Available_Money
-extern HouseClass__HousesType
-extern Globals___PlayerPtr
+cextern HouseTypeClass__From_Name
+cextern HouseClass__As_Pointer
+cextern HouseClass__Available_Money
+cextern HouseClass__HousesType
+cextern Globals___PlayerPtr
+
+cextern str_Comma
 
 
 @HACK 0x00567048,0x0056704E,_TechnoClass_Visual_Character_Spectator_Stuff

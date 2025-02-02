@@ -7,13 +7,16 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-extern HouseClass__As_Pointer
-extern HouseClass__MPlayer_Defeated
-extern Scenario___Create_Units
-extern Globals___Rule_MaxIQ
-extern Globals___PlayerWins
-extern Globals___PlayerLoses
-extern Globals___Session_Type
+cextern HouseClass__As_Pointer
+cextern HouseClass__MPlayer_Defeated
+cextern Scenario___Create_Units
+cextern Globals___Rule_MaxIQ
+cextern Globals___PlayerWins
+cextern Globals___PlayerLoses
+cextern Globals___Session_Type
+
+cextern str_Basic
+cextern str_IsCoopMode
 
 
 ; Remove game single player game mode check when checking for win/lose flags set in HouseClass::AI()

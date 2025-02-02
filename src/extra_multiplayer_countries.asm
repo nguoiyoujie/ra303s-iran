@@ -8,7 +8,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern MFCD__Retrieve
+cextern MFCD__Retrieve
 
 %define Extract_String                    0x005C5070
 %define SystemStrings                    0x0066991C

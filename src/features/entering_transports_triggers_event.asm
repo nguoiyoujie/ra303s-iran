@@ -10,7 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern TriggerClass__Spring
+cextern TriggerClass__Spring
 
 ; Remove existing triggers; the below code includes both Engineer and Spy
 @SJMP 0x004EC5A2,0x004EC5E6 ; _InfantryClass__Per_Cell_Process_Engineer_Trigger_Skip

@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/hires/mouse_fixes.asm
+; src/features/hires/clamp_mouse_position.asm
 ;
 ; Perform mouse coordinate fixes, in case the requested coordinates are outside the screen bounds.
 ;

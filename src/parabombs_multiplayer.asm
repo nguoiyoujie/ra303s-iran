@@ -1,5 +1,5 @@
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 
 @HACK 0x004D5B13,0x004D5B1A,_Parabombs_Single_Player_Check

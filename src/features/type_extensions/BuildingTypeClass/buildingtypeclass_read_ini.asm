@@ -9,7 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
-extern MFCD__Retrieve
+cextern MFCD__Retrieve
+
+cextern str_Comma
 
 
 [section .rdata] 

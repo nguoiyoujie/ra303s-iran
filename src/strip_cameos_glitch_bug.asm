@@ -7,12 +7,12 @@
 
 ; Need to also check "Hack_Prevented" local function variable because I patch out a check whether a factory for a TechnoTypeClass actually exists.
 
-extern FactoryClass__Get_Object
-extern HouseClass__Fetch_Factory
-extern Globals___PlayerPtr
+cextern FactoryClass__Get_Object
+cextern HouseClass__Fetch_Factory
+cextern Globals___PlayerPtr
 
 
-@CLEAR 0x0054EA80,0x90,0x0054EA82 ; was 0x0054EA81,why not 0x0054EA82... 
+@CLEAR_NOP 0x0054EA80,0x0054EA82 ; was 0x0054EA81,why not 0x0054EA82... 
 
 ; eax = 1,"being built" is set to true,eax = 0xFFFFFFFF,"being built" is set to false
 Set_Is_Being_Built:

@@ -8,9 +8,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern CCFileClass__CCFileClass
-extern CCINIClass__Load
-extern Globals___RuleINI
+cextern CCFileClass__CCFileClass
+cextern CCINIClass__Load
+cextern Globals___RuleINI
+
+cextern str_arg_Spawn
+cextern str_xdp_Spawn
+cextern str_ini_Rules
 
 
 @HACK 0x004F419C,0x004F41BA,_Init_Game_Patch_Out_Later_RULES_INI_Load

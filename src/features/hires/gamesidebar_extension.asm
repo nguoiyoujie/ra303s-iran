@@ -19,12 +19,12 @@
 ;[23:58:21] <iran> so
 ;[23:58:42] <iran> IngameHeight-181-27 / 48 for total amount of possible icons
 
-extern Conquer___CC_Draw_Shape
-extern MFCD__Retrieve
-extern SidebarClass__StripClass__Flag_To_Redraw
-extern SidebarClass__StripClass__Add
-extern GScreenClass__Flag_To_Redraw
-extern Globals___Map
+cextern Conquer___CC_Draw_Shape
+cextern MFCD__Retrieve
+cextern SidebarClass__StripClass__Flag_To_Redraw
+cextern SidebarClass__StripClass__Add
+cextern GScreenClass__Flag_To_Redraw
+cextern Globals___Map
 
 %define StripBarAreaVerticalSize 0x00601758
 

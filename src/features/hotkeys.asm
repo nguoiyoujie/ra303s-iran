@@ -8,10 +8,10 @@
 ; 
 ;----------------------------------------------------------------
 
-extern GScreenClass__Flag_To_Redraw
-extern Globals___Options_KeyResign
-extern Globals___Map
-extern Globals___Session_Type
+cextern GScreenClass__Flag_To_Redraw
+cextern Globals___Options_KeyResign
+cextern Globals___Map
+cextern Globals___Session_Type
 
 
 @SJMP 0x0054D916,0x0054D91B ; _Patch_Out_Erroneous_Sidebar_Activate_CALL

@@ -1,5 +1,5 @@
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 
 [section .data]

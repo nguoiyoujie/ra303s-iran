@@ -10,8 +10,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern HouseClass__As_Pointer
-extern HouseClass__Is_Ally
+cextern HouseClass__As_Pointer
+cextern HouseClass__Is_Ally
 
 
 ; args <HouseType to check whose alliances will be checked>, <HouseType to check for>

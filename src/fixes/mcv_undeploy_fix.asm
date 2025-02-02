@@ -8,8 +8,8 @@
 ; 
 ;----------------------------------------------------------------
 
-extern Globals___Rule_IsMCVDeploy_Address
-extern Globals___Rule_IsMCVDeploy_BitMask
+cextern Globals___Rule_IsMCVDeploy_Address
+cextern Globals___Rule_IsMCVDeploy_BitMask
 
 
 ;@HACK 0x0045A71A,0x0045A723,_BuildingClass__What_Action_MCV_Undeploy

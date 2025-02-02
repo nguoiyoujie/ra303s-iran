@@ -30,20 +30,21 @@
 ;
 ;----------------------------------------------------------------
 
-extern CCFileClass__CCFileClass
-extern CCINIClass__Load
-extern RulesClass__General
-extern RulesClass__Recharge
-extern RulesClass__AI
-extern RulesClass__Powerups
-extern RulesClass__Land_Types
-extern RulesClass__Themes
-extern RulesClass__IQ
-extern RulesClass__Objects
-extern RulesClass__Difficulty
-extern Globals___RuleINI
-extern Globals___Rule
+cextern CCFileClass__CCFileClass
+cextern CCINIClass__Load
+cextern RulesClass__General
+cextern RulesClass__Recharge
+cextern RulesClass__AI
+cextern RulesClass__Powerups
+cextern RulesClass__Land_Types
+cextern RulesClass__Themes
+cextern RulesClass__IQ
+cextern RulesClass__Objects
+cextern RulesClass__Difficulty
+cextern Globals___RuleINI
+cextern Globals___Rule
 
+cextern str_ini_OOSFix
 
 
 @HACK 0x00538B73,0x00538B7D,_Load_Game_Load_OOS_FIX_INI

@@ -7,8 +7,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern SidebarClass__Init_IO
-extern Globals___Map
+cextern SidebarClass__Init_IO
+cextern Globals___Map
 
 %define Hires.IconWidthOffset        0x0060174C
 %define Hires.SelectButton           0x0068A2C4

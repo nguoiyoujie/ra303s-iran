@@ -7,14 +7,14 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern CellClass__Cell_Coord
-extern CellClass__Adjacent_Cell
-extern CellClass__Is_Bridge_Here
-extern Coord___Coord_Cell
-extern OverlayTypeClass__As_Reference
-extern SmudgeTypeClass__As_Reference
-extern Globals___Map_Array
-extern Globals___Session_Type
+cextern CellClass__Cell_Coord
+cextern CellClass__Adjacent_Cell
+cextern CellClass__Is_Bridge_Here
+cextern Coord___Coord_Cell
+cextern OverlayTypeClass__As_Reference
+cextern SmudgeTypeClass__As_Reference
+cextern Globals___Map_Array
+cextern Globals___Session_Type
 
 
 [section .data] 

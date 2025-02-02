@@ -26,7 +26,7 @@
 ;----------------------------------------------------------------
 ; Internet button in the main menu goes to cncnet.org instead of WOL
 
-extern Globals___Session_Type
+cextern Globals___Session_Type
 
 
 %define ShellExecuteA           0x005E653C

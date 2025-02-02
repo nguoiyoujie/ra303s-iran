@@ -14,7 +14,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___ScenarioInit
+cextern Globals___ScenarioInit
 
 ; allow building placement outside of play area, only during scenario setup
 @HACK 0x0045BA09,0x0045BA12,_BuildingClass_Can_Enter_Cell_OK_if_ScenarioInit

@@ -10,7 +10,7 @@
 ;
 ;----------------------------------------------------------------
 
-extern TechnoClass__Combat_Damage
+cextern TechnoClass__Combat_Damage
 
 
 ; don't consider any distance or warhead checks, just apply the negative damage

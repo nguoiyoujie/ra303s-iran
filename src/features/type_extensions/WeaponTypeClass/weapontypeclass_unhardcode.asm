@@ -11,9 +11,11 @@
 ;
 ;----------------------------------------------------------------
 
-extern Weapon__Weapons
-extern WeaponTypeClass__WeaponTypeClass
-extern WeaponTypeClass__new
+cextern Weapon__Weapons
+cextern WeaponTypeClass__WeaponTypeClass
+cextern WeaponTypeClass__new
+
+cextern str_Weapons
 
 
 @HACK 0x0053668A,0x0053668F,_RulesClass__Heap_Maxiums_Init_Extra_WeaponTypes

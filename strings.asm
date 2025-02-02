@@ -14,7 +14,6 @@ setcglob 0x005EC01F,str_EmptyString                            ; ""
 setcglob 0x005E82C5,str_Comma                                  ; ","
 gstring str_Zero                                               ,"0"
         
-setcglob 0x005EBB45,str_AftermathIni                           ; "AFTRMATH.INI"
 setcglob 0x00605CD0,str_Internet                               ; "Internet"
 
 setcglob 0x005EFFB2,str_Name                                   ; "Name"
@@ -156,6 +155,14 @@ gstring str_ini_AI                                             , "AI.INI"
 gstring str_ini_OOSFix                                         , "OOS-FIX.INI"
 gstring str_ini_Spawn                                          , "SPAWN.INI"
 
+setcglob 0x005EBB45,str_AftermathIni                           ; "AFTRMATH.INI"
+setcglob 0x005EDE12,str_RedAlertIni                            ; "REDALERT.INI" ; repeated
+gstring str_BlankPkt                                           ,"BLANK.PKT"
+setcglob 0x005F06FD,str_MissionPkt                             ; "MISSIONS.PKT"
+setcglob 0x005F0748,str_CStrikePkt                             ; "CSTRIKE.PKT"
+setcglob 0x005F0770,str_AftmathPkt                             ; "AFTMATH.PKT"
+
+
 ; DLL file references
 setcglob 0x005E6947,str_dll_Kernel32                           ; "KERNEL32.DLL"
 
@@ -183,7 +190,7 @@ gstring str_arg_AntMissions                                    , "-ANTMISSIONS"
 gstring str_arg_MissionPrefix                                  , "-M:"
 gstring str_arg_Record                                         , "-RECORD"
 gstring str_arg_Playback                                       , "-PLAYBACK"
-gstring str_arg_Skiptitle                                      , "-NOTITLE" 
+gstring str_arg_SkipTitle                                      , "-NOTITLE" 
 gstring str_arg_Onetime                                        , "-ONETIME" 
 gstring str_arg_Easy                                           , "-EASY"           ; Difficult option
 gstring str_arg_EasyF                                          , "-EASY.FINE"      ; Difficult option
@@ -238,6 +245,8 @@ gstring str_FastAMBuildSpeed                                   , "FastAMBuildSpe
 gstring str_ColorRemapSidebarIcons                             , "ColorRemapSidebarIcons"
 gstring str_UseDOSInterfaceMod                                 , "UseDOSInterfaceMod"
 gstring str_EnableWOL                                          , "EnableWOL"
+gstring str_PlayEnglishIntro                                   , "PlayEnglishIntro"
+
 
 ; RedAlert.ini > [WinHotkeys]
 gstring str_KeySidebarToggle                                   , "KeySidebarToggle"
@@ -304,7 +313,21 @@ gstring str_DeadPlayersRadar                                   , "DeadPlayersRad
 gstring str_LoadSaveGame                                       , "LoadSaveGame"
 gstring str_SaveGameNumber                                     , "SaveGameNumber"
 gstring str_IsSinglePlayer                                     , "IsSinglePlayer"
-
+gstring str_HouseAllyOne                                       , "HouseAllyOne"
+gstring str_HouseAllyTwo                                       , "HouseAllyTwo"
+gstring str_HouseAllyThree                                     , "HouseAllyThree"
+gstring str_HouseAllyFour                                      , "HouseAllyFour"
+gstring str_HouseAllyFive                                      , "HouseAllyFive"
+gstring str_HouseAllySix                                       , "HouseAllySix"
+gstring str_HouseAllySeven                                     , "HouseAllySeven"
+gstring str_Multi1_Alliances                                   , "Multi1_Alliances"
+gstring str_Multi2_Alliances                                   , "Multi2_Alliances"
+gstring str_Multi3_Alliances                                   , "Multi3_Alliances"
+gstring str_Multi4_Alliances                                   , "Multi4_Alliances"
+gstring str_Multi5_Alliances                                   , "Multi5_Alliances"
+gstring str_Multi6_Alliances                                   , "Multi6_Alliances"
+gstring str_Multi7_Alliances                                   , "Multi7_Alliances"
+gstring str_Multi8_Alliances                                   , "Multi8_Alliances"
 
 ; Rules.ini -------------------------------------------------------------------------------------------------
 ; Rules.ini Sections
@@ -371,3 +394,9 @@ gstring str_MapSelectA                                         , "MapSelectA"
 gstring str_MapSelectB                                         , "MapSelectB"
 gstring str_MapSelectC                                         , "MapSelectC"
 gstring str_IsCoopMode                                         , "IsCoopMode"
+
+
+
+gstring str_shp_NoIcon                                         , "NOICON.SHP"
+
+

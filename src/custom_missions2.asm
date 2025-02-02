@@ -1,8 +1,11 @@
 
-extern CCFileClass__CCFileClass
-extern CCFileClass__Is_Available
-extern CCINIClass__CCINIClass
-extern CCINIClass__Load
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Is_Available
+cextern CCINIClass__CCINIClass
+cextern CCINIClass__Load
+
+cextern str_General
+cextern str_EmptyString
 
 
 [section .data]
@@ -17,11 +20,10 @@ newmissions_array TIMES 0x4096 db 0; char newmissions_array[256][64] = 0x4000
 herpini_str db"ffg101ea",0
 newmissions_str db"New Missions",0
 str_newmissions_ini db"NEWMISSIONS.INI",0
-str_one db"1",0
 str_sprintf_format db"%d",0
 
 
-;EXTERN newmissionsenabled ; defined in arguments.asm
+;cextern newmissionsenabled ; defined in arguments.asm
 [section .text]
 @HACK 0x004BE468,0x004BE46E,_Hook_Expansion_Mission_Loading
     cmp  byte[ebp-0x24],1 ; Expansion type check

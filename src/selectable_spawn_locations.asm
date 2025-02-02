@@ -1,4 +1,14 @@
 
+cextern str_SpawnLocations
+cextern str_Multi1
+cextern str_Multi2
+cextern str_Multi3
+cextern str_Multi4
+cextern str_Multi5
+cextern str_Multi6
+cextern str_Multi7
+cextern str_Multi8
+
 
 [section .data]
 multi1_Spawn    dd -1

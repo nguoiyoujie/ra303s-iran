@@ -7,6 +7,40 @@
 
 @SJMP 0x004F4462,0x004F446C ; Don't call OptionsClass::Load_Settings() again, patch calls it at start of Init_Game()
 
+cextern str_Options
+cextern str_ForceSingleCPU
+cextern str_MouseWheelScrolling
+cextern str_DisplayOriginalMultiplayerMaps
+cextern str_DisplayAftermathMultiplayerMaps
+cextern str_DisplayCounterstrikeMultiplayerMaps
+cextern str_UseSmallInfantry
+cextern str_AftermathEnabled
+cextern str_CounterstrikeEnabled
+cextern str_NoCD
+cextern str_DebugLogging
+cextern str_VideoInterlaceMode
+cextern str_SkipScoreScreen
+cextern str_RandomStartingSong
+cextern str_AlternativeRifleSound
+cextern str_UseGrenadeThrowingSound
+cextern str_UseBetaTeslaTank
+cextern str_UseBetaDestroyer
+cextern str_UseBetaCruiser
+cextern str_UseBetaSubmarine
+cextern str_UseBetaGunboat
+cextern str_GenerateMemoryDump
+cextern str_ForceAMUnitsInMissions
+cextern str_FastAMBuildSpeed
+cextern str_ColorRemapSidebarIcons
+cextern str_UseDOSInterfaceMod
+cextern str_EnableWOL
+cextern str_WinHotkeys
+cextern str_KeySidebarToggle
+cextern str_KeyMapSnapshot
+cextern str_dll_Kernel32
+cextern str_SetProcessAffinityMask
+
+
 %define        ebp_RedAlertINI        [ebp-0x74] ; for _OptionsClass__Load_Settings
 
 @HACK 0x004F406D,0x004F4072,_Init_Game_Early_Hook ; For loading REDALERT.INI stuff early

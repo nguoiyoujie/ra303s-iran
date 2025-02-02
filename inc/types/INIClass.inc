@@ -23,20 +23,36 @@
 
 ; args: <INIClass>, <section>, <key>, <default>, <dst>
 %macro call_INIClass__Get_Bool 4
-    mov  ecx, dword %4
-    mov  ebx, dword %3
-    mov  edx, dword %2
+  %ifnidni %4,ecx
+    mov  ecx, dword %4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx, dword %3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx, dword %2  ; section
+  %endif
+  %ifnidni %1,eax
     lea  eax, [%1]
+  %endif
     call INIClass__Get_Bool
 %endmacro
 
 ; args: <INIClass>, <section>, <key>, <default>, <dst>
 ; Get_Int can interpret three formats: decimal, hexadecimal 00h, and hexadecimal $00
 %macro call_INIClass__Get_Int 4
-    mov  ecx, dword %4
-    mov  ebx, dword %3
-    mov  edx, dword %2
+  %ifnidni %4,ecx
+    mov  ecx, dword %4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx, dword %3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx, dword %2  ; section
+  %endif
+  %ifnidni %1,eax
     lea  eax, [%1]
+  %endif
     call INIClass__Get_Int
 %endmacro
 
@@ -44,10 +60,18 @@
 %macro call_INIClass__Get_String 6
     push %6             ; dst len
     push %5             ; dst
+  %ifnidni %4,ecx
     mov  ecx, dword %4  ; default
+  %endif
+  %ifnidni %3,ebx
     mov  ebx, dword %3  ; key
+  %endif
+  %ifnidni %2,edx
     mov  edx, dword %2  ; section
+  %endif
+  %ifnidni %1,eax
     lea  eax, [%1]
+  %endif
     call INIClass__Get_String
 %endmacro
 

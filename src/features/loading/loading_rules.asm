@@ -5,7 +5,49 @@
 ;
 ;----------------------------------------------------------------
 
-extern Globals___RuleINI
+cextern Globals___RuleINI
+cextern INI_Read_String_Buffer
+
+cextern str_mix_Aftermath
+cextern str_AftermathFastBuildSpeed
+cextern str_General
+cextern str_FixFormationSpeed
+cextern str_ParabombsInMultiplayer
+cextern str_EvacInMP
+cextern str_RemapJammedBuildings
+cextern str_FixWideAreaDamage
+cextern str_ScalePowerBar
+cextern str_AI
+cextern str_FixAIParanoid
+cextern str_FixAIAlly
+cextern str_FixAISendingTanksTopLeft
+cextern str_ComputerParanoidForceDisabledSkirmish
+cextern str_DeathReport
+cextern str_DeathReport1
+cextern str_DeathReport2
+cextern str_DeathReport3
+cextern str_DeathReport4
+cextern str_DeathReport5
+cextern str_TanyaDeathReport
+cextern str_DogDeathReport
+cextern str_EasyAIGoldValue
+cextern str_EasyAIGemValue
+cextern str_NormalAIGoldValue
+cextern str_NormalAIGemValue
+cextern str_HardAIGoldValue
+cextern str_HardAIGemValue
+cextern str_BuildRadarWithoutAirThreatCheck
+cextern str_SingleplayerAIObeyPrerequisites
+cextern str_UseNewBuildingAI
+cextern str_ForceSingleTileClearing
+cextern str_GuardAreaLoadTransportsInSingleplayer
+cextern str_RepairConstructedBuildingsInSingleplayer
+cextern str_PowerExcess
+cextern str_PowerEmergencyMinimum
+cextern str_AtomRadius
+cextern str_NoScreenShake
+cextern str_NoTeslaZapEffectDelay
+cextern str_BuildOffAlly
 
 
 ; only loaded once on game init, not per map
@@ -67,64 +109,64 @@ extern Globals___RuleINI
 
     ; [General]
 .DeathReport1:
-    call_INIClass__Get_String esi,str_General, str_DeathReport1, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport1,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DeathReport2
     GetVocArrayFromString Rules.General.DeathReport1_Data,16
     mov  [Rules.General.DeathReport1],eax
 
 .DeathReport2:
-    call_INIClass__Get_String esi,str_General, str_DeathReport2, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport2,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DeathReport3
     GetVocArrayFromString Rules.General.DeathReport2_Data,16
     mov  [Rules.General.DeathReport2],eax
 
 .DeathReport3:
-    call_INIClass__Get_String esi,str_General, str_DeathReport3, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport3,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DeathReport4
     GetVocArrayFromString Rules.General.DeathReport3_Data,16
     mov  [Rules.General.DeathReport3],eax
 
 .DeathReport4:
-    call_INIClass__Get_String esi,str_General, str_DeathReport4, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport4,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DeathReport5
     GetVocArrayFromString Rules.General.DeathReport4_Data,16
     mov  [Rules.General.DeathReport4],eax
 
 .DeathReport5:
-    call_INIClass__Get_String esi,str_General, str_DeathReport5, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport5,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DeathReport
     GetVocArrayFromString Rules.General.DeathReport5_Data,16
     mov  [Rules.General.DeathReport5],eax
 
 .DeathReport:
-    call_INIClass__Get_String esi,str_General, str_DeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DeathReport,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .TanyaDeathReport
     GetVocArrayFromString Rules.General.DeathReport_Data,16
     mov  [Rules.General.DeathReport],eax
 
 .TanyaDeathReport:
-    call_INIClass__Get_String esi,str_General, str_TanyaDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_TanyaDeathReport,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .DogDeathReport
     GetVocArrayFromString Rules.General.TanyaDeathReport_Data,16
     mov  [Rules.General.TanyaDeathReport],eax
 
 .DogDeathReport:
-    call_INIClass__Get_String esi,str_General, str_DogDeathReport, 0, ObjectTypeClass.StringBuffer, ObjectTypeClass.StringBuffer.Length
-    mov  eax,ObjectTypeClass.StringBuffer
+    call_INIClass__Get_String esi,str_General,str_DogDeathReport,0,INI_Read_String_Buffer,INI_STRING_BUFFER_LENGTH
+    mov  eax,INI_Read_String_Buffer
     cmp  byte[eax],0
     je   .AI
     GetVocArrayFromString Rules.General.DogDeathReport_Data,16

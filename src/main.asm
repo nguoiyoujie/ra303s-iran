@@ -25,20 +25,22 @@
 %include "config.inc"
 
 ; /include
+%include "const.inc"
 %include "macros/patch.inc"
 %include "macros/hack.inc"
-;%include "macros/datatypes.inc"
+%include "macros/datatypes.inc"
 %include "libc.inc"
 %include "types/INIClass.inc"
 %include "types/CCINIClass.inc"
 %include "types/common.inc"
 
+%include "types/ini.inc"
 
 ; Version
 %include "src/version.asm"
 
 ; definitions ; added by lovalmidas
-%include "src/defines/generic.asm"
+;%include "src/defines/generic.asm"
 %include "src/defines/gametypes.asm"
 %include "src/defines/rttitypes.asm"
 %include "src/defines/missiontypes.asm"
@@ -57,21 +59,98 @@
 
 ; macros ; added by lovalmidas
 %include "src/macros/common.asm"
-%include "src/macros/generic.asm"
+;%include "src/macros/generic.asm"
+
 
 ; typeclass_macros ; added by lovalmidas
-%include "src/macros/abstracttypeclass.asm"
-%include "src/macros/objecttypeclass.asm"
-%include "src/macros/technotypeclass.asm"
-%include "src/macros/aircrafttypeclass.asm"
-%include "src/macros/buildingtypeclass.asm"
-%include "src/macros/infantrytypeclass.asm"
-%include "src/macros/unittypeclass.asm"
-%include "src/macros/vesseltypeclass.asm"
-%include "src/macros/warheadtypeclass.asm"
-%include "src/macros/weapontypeclass.asm"
-%include "src/macros/housetypeclass.asm"
-%include "src/macros/houseclass.asm"
+%include "types/AbstractTypeClass.inc"
+%include "types/ObjectTypeClass.inc"
+%include "types/TechnoTypeClass.inc"
+%include "types/AircraftTypeClass.inc"
+%include "types/BuildingTypeClass.inc"
+%include "types/HouseClass.inc"
+%include "types/HouseTypeClass.inc"
+%include "types/InfantryTypeClass.inc"
+%include "types/UnitTypeClass.inc"
+%include "types/VesselTypeClass.inc"
+%include "types/WarheadTypeClass.inc"
+%include "types/WeaponTypeClass.inc"
+
+cextern AircraftClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern BuildingClass.ORIGINAL_SIZE
+cextern BulletClass.ORIGINAL_SIZE
+cextern FactoryClass.ORIGINAL_SIZE
+cextern HouseClass.ORIGINAL_SIZE
+cextern HouseClass.NEW_SIZE
+cextern InfantryClass.ORIGINAL_SIZE
+cextern OverlayClass.ORIGINAL_SIZE
+cextern SmudgeClass.ORIGINAL_SIZE
+cextern TeamClass.ORIGINAL_SIZE
+cextern TeamTypeClass.ORIGINAL_SIZE
+cextern TemplateClass.ORIGINAL_SIZE
+cextern TerrainClass.ORIGINAL_SIZE
+cextern TriggerClass.ORIGINAL_SIZE
+cextern VesselClass.ORIGINAL_SIZE
+cextern TriggerTypeClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern AnimClass.ORIGINAL_SIZE
+cextern HouseTypeClass.ORIGINAL_COUNT      
+cextern HouseTypeClass.NEW_COUNT  
+cextern HouseTypeClass.NEW_COUNT_PLUS_ONE
+cextern HouseTypeClass.ORIGINAL_SIZE       
+cextern HouseTypeClass.NEW_SIZE   
+cextern BuildingTypeClass.ORIGINAL_COUNT   
+cextern BuildingTypeClass.ORIGINAL_SIZE    
+cextern BuildingTypeClass.NEW_SIZE
+cextern AircraftTypeClass.ORIGINAL_COUNT   
+cextern AircraftTypeClass.ORIGINAL_SIZE    
+cextern AircraftTypeClass.NEW_SIZE
+cextern InfantryTypeClass.ORIGINAL_COUNT   
+cextern InfantryTypeClass.ORIGINAL_SIZE    
+cextern InfantryTypeClass.NEW_SIZE
+cextern BulletTypeClass.ORIGINAL_COUNT     
+cextern BulletTypeClass.ORIGINAL_SIZE      
+cextern BulletTypeClass.NEW_SIZE 
+cextern AnimTypesHeap.ORIGINAL_COUNT       
+cextern AnimTypeClass.ORIGINAL_SIZE        
+cextern AnimTypeClass.NEW_SIZE    
+cextern UnitTypeClass.ORIGINAL_COUNT       
+cextern UnitTypeClass.ORIGINAL_SIZE        
+cextern UnitTypeClass.NEW_SIZE    
+cextern VesselTypeClass.ORIGINAL_COUNT     
+cextern VesselTypeClass.ORIGINAL_SIZE      
+cextern VesselTypeClass.NEW_SIZE  
+cextern SoundEffects.ORIGINAL_COUNT  
+cextern WarheadTypeClass.ORIGINAL_SIZE  
+cextern WarheadTypeClass.NEW_SIZE  
+
+cextern BuildingClass.Count  
+cextern BuildingClass.Array  
+cextern AnimTypeClass.Count  
+cextern BulletTypeClass.Count  
+ 
+
+
+
+
+;%include "src/macros/abstracttypeclass.asm"
+;%include "src/macros/objecttypeclass.asm"
+;%include "src/macros/technotypeclass.asm"
+;%include "src/macros/aircrafttypeclass.asm"
+;%include "src/macros/buildingtypeclass.asm"
+;%include "src/macros/infantrytypeclass.asm"
+;%include "src/macros/unittypeclass.asm"
+;%include "src/macros/vesseltypeclass.asm"
+;%include "src/macros/warheadtypeclass.asm"
+;%include "src/macros/weapontypeclass.asm"
+;%include "src/macros/housetypeclass.asm"
+;%include "src/macros/houseclass.asm"
 ;%include "src/macros/animtypeclass.asm" ;wip
 
 ;%ifdef USE_HIRES
@@ -157,8 +236,8 @@
 %include "src/features/ai_aircrafts.asm" 
 
 ;feature: new prerequisite system
-%include "src/features/new_prerequisite_system.asm" 
-%include "src/features/superweapons.asm" 
+;%include "src/features/new_prerequisite_system.asm" 
+;%include "src/features/superweapons.asm" 
 
 ; features
 ;%include "src/ore_lasts_longer.asm" ; ONLY ENABLE FOR TESTING
@@ -258,7 +337,7 @@
 %include "src/features/units_v2rl_dehardcode.asm" 
 %include "src/features/ai_load_infantry_to_any_transport.asm" 
 %include "src/features/ai_repair_singleplayer.asm"
-%include "src/features/house_new_quantity_tracking_offsets.asm"
+;%include "src/features/house_new_quantity_tracking_offsets.asm"
 %include "src/features/building_powerplant_pips.asm"
 %include "src/features/building_kennel_unhardcode.asm"
 %include "src/features/building_repairpad_unhardcode.asm"

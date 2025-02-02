@@ -11,9 +11,13 @@
 ;
 ;----------------------------------------------------------------
 
-extern AircraftTypeClass__AircraftTypeClass
-extern AircraftTypeClass__new
-extern Globals___RuleINI
+cextern AircraftTypeClass__AircraftTypeClass
+cextern AircraftTypeClass__new
+cextern Globals___RuleINI
+
+cextern str_StringTableOffsets
+cextern str_Aircraft
+cextern str_AircraftTypes
 
 
 @HACK 0x00403EE3,0x00403EE9,_AircraftTypeClass__Init_Heap_Unhardcode_AircraftTypes

@@ -1,7 +1,9 @@
 
-extern HouseClass__Flag_To_Die
-extern HouseClass__As_Pointer
-extern Globals___Session_Type
+cextern HouseClass__Flag_To_Die
+cextern HouseClass__As_Pointer
+cextern Globals___Session_Type
+
+cextern str_dmp_Stats
 
 
 @SJMP 0x004D3C95,0x004D3C9E ; _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner
@@ -36,10 +38,10 @@ extern Globals___Session_Type
 @SJMP 0x004DCE04,0x004DCE0D ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 @SJMP 0x004DCE72,0x004DCE77 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
-extern CCFileClass__CCFileClass
-extern CCFileClass__Write
-extern CCFileClass__Close
-extern CCFileClass__Open
+cextern CCFileClass__CCFileClass
+cextern CCFileClass__Write
+cextern CCFileClass__Close
+cextern CCFileClass__Open
 
 ; PlanetWestwoodStartTime & PlanetWestwoodGameID are global int32 variables that probably need to be filled in by spawner code
 

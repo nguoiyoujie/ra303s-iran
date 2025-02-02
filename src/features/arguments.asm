@@ -25,11 +25,28 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-extern Init___Select_Game
-extern ScenarioClass__Set_Scenario_Name
-extern Globals___AntsEnabled
-extern Globals___Scen
-extern Globals___Session_Type
+cextern Init___Select_Game
+cextern ScenarioClass__Set_Scenario_Name
+cextern Globals___AntsEnabled
+cextern Globals___Scen
+cextern Globals___Session_Type
+
+cextern str_arg_MissionPrefix
+cextern str_arg_LAN
+cextern str_arg_Skirmish
+cextern str_arg_AntMissions
+cextern str_arg_SkipTitle
+cextern str_arg_Onetime
+cextern str_arg_Easy
+cextern str_arg_EasyF
+cextern str_arg_Norm
+cextern str_arg_HardF
+cextern str_arg_Hard
+cextern str_arg_NewMissions
+cextern str_arg_Internet
+cextern str_arg_Record
+cextern str_arg_Playback
+cextern str_arg_Attract
 
 
 %define recording_mode                               0x00680151
@@ -107,7 +124,7 @@ presetscenarioname                                   times 128 db 0
     mov  byte[antmissionsenabled],1
     jmp  .Ret
 .skiptitle:
-    mov  edx,str_arg_Skiptitle
+    mov  edx,str_arg_SkipTitle
     mov  eax,esi
     call _stristr
     test eax,eax

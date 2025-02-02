@@ -5,8 +5,8 @@
 ; This is not yet a working prototype. Enable at your own risk
 ;
 ;----------------------------------------------------------------
-extern BuildingClass__Begin_Mode
-extern Globals___ScenarioInit
+cextern BuildingClass__Begin_Mode
+cextern Globals___ScenarioInit
 
 
 [section .data] 

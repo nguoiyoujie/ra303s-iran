@@ -8,14 +8,14 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
-extern Coord___Coord_Cell
-extern BuildingTypeClass__Bib_And_Offset
-extern MapClass__Place_Down
-extern SmudgeClass__new
-extern SmudgeClass__SmudgeClass
-extern Globals___Houses
-extern Globals___HouseTypes
-extern Globals___Map
+cextern Coord___Coord_Cell
+cextern BuildingTypeClass__Bib_And_Offset
+cextern MapClass__Place_Down
+cextern SmudgeClass__new
+cextern SmudgeClass__SmudgeClass
+cextern Globals___Houses
+cextern Globals___HouseTypes
+cextern Globals___Map
 
 
 [section .data] 

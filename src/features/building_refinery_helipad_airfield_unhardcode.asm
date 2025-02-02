@@ -12,8 +12,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-extern Coord___Distance_As_Coord
-extern Globals___ScenarioInit
+cextern Coord___Distance_As_Coord
+cextern Globals___ScenarioInit
 
 
 [section .data] 

@@ -9,9 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
-extern Coord___Distance_As_Coord
-extern Face_Desired_Facing8
-extern Face_Desired_Facing256
+cextern Coord___Distance_As_Coord
+cextern Face_Desired_Facing8
+cextern Face_Desired_Facing256
 
 
 ; args: <ObjectClass pointer to check facing for>, <ObjectClass pointer to check facing compared to>

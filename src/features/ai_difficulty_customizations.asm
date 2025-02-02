@@ -15,9 +15,9 @@
 ;
 ;----------------------------------------------------------------
 
-extern HouseClass__As_Pointer
-extern Globals___Rule_GoldValue
-extern Globals___Rule_GemValue
+cextern HouseClass__As_Pointer
+cextern Globals___Rule_GoldValue
+cextern Globals___Rule_GemValue
 
 
 @HACK 0x0058144B,0x00581451,_UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties

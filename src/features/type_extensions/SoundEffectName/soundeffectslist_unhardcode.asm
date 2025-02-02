@@ -17,7 +17,9 @@
 ;
 ;----------------------------------------------------------------
 
-extern Audio___SoundEffectName
+cextern Audio___SoundEffectName
+
+cextern str_SoundEffects
 
 @HACK 0x00425CB9,0x00425CBE,_Voc_From_Name_Add_Unhardcoded_Sound_Effects
     cmp  cx,SoundEffects.ORIGINAL_COUNT 
@@ -127,7 +129,6 @@ extern Audio___SoundEffectName
     mov  dl,1
     jmp  0x004260FC
 @ENDHACK
-
 
 
 Init_SoundEffect:

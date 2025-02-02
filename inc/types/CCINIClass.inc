@@ -4,11 +4,11 @@
 ; Common CCINIClass functions and helper macros
 ;
 ;----------------------------------------------------------------
-extern CCINIClass__CCINIClass
-extern CCINIClass__Load
-extern CCINIClass__Put_HousesType
-extern CCINIClass__Put_VQType
-extern CCINIClass__Put_ThemeType
+cextern CCINIClass__CCINIClass
+cextern CCINIClass__Load
+cextern CCINIClass__Put_HousesType
+cextern CCINIClass__Put_VQType
+cextern CCINIClass__Put_ThemeType
 
 
 ; args: <INI Name>, <FileClass>, <INIClass>

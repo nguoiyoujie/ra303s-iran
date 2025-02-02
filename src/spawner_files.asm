@@ -7,6 +7,13 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+cextern str_AftermathIni
+cextern str_arg_Spawn
+cextern str_xdp_Spawnam
+cextern str_ext_mmm
+cextern str_ext_mpr
+
+
 @HACK 0x004F420D,0x004F4212,_Init_Game_AFTRMATH_INI_File
     mov  edx,str_AftermathIni
     Save_Registers
@@ -66,7 +73,7 @@
     push str_ext_mmm ; ".MMM"
     jmp  0x0054C018
 .Ret_MPR_extension:
-    push 0x005F0798 ; ".MPR"
+    push str_ext_mpr ; ".MPR"
     jmp  0x0054C018
 @ENDHACK
 
