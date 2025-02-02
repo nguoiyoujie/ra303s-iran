@@ -28,7 +28,9 @@ cextern Extract_String
 
 
 %macro Extract_Conquer_Eng_String 1
+  %ifnidni %1,edx
     mov  edx,%1
+  %endif
     mov  eax,[0x0066991C] ; ds:char *SystemStrings
     call Extract_String
 %endmacro
@@ -38,7 +40,7 @@ cextern Extract_String
 
 ; args <What to turn bit on, <what bit to turn on>
 %macro SetBit 2
-    mov  al,   1
+    mov  al,1
     shl  al,byte %2-1
     or   byte %1,al
 %endmacro Set_Bit 3
@@ -66,7 +68,9 @@ cextern Extract_String
 
 ; args <What to clear bit on>, <what bit>, <turn on or off>, <identifier for branch>
 %macro SetBit 3
+  %ifnidni %3,al
     mov  al,%3
+  %endif
     cmp  al,0
     jz   %%turn_off
     SetBit    %1,%2
@@ -88,7 +92,6 @@ cextern Extract_String
 %endmacro
 
 ; args <Pointer to type class>,<offset of data>,<bit of data>,<new value>
-; Register eax istrashed in the process
 %macro SetBool 4
     SetBit[%1+%2],%3,%4
 %endmacro

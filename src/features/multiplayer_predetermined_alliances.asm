@@ -33,7 +33,9 @@ cextern str_Multi8_Alliances
 
 ; args <HouseType that will ally>, <HouseType to ally>
 %macro Ally_House 2
+  %ifnidni %1,eax
     mov  eax,%1 ; House that will ally another house
+  %endif
     call HouseClass__As_Pointer
     mov  edx,%2    ; House to be allied
     call HouseClass__Make_Ally

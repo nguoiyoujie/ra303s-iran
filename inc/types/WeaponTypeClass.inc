@@ -65,7 +65,9 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
     push edx
 
     xor  edx,edx
+  %ifnidni %1,eax
     mov  eax,%1
+  %endif
 
   %%loop:
     push edx

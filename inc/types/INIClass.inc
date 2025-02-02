@@ -11,103 +11,233 @@
 %assign        INIClass__Get_Bool                                   0x004F3ACC ; const INIClass::Get_Bool(char *,char *,int)
 %assign        INIClass__Get_Int                                    0x004F3660 ; const INIClass::Get_Int(char *,char *,int)
 %assign        INIClass__Get_String                                 0x004F3A34
-%assign        INIClass__Get_Entry                                  0x004F31EC ; char * const INIClass::Get_Entry(char *, int)
+%assign        INIClass__Get_Entry                                  0x004F31EC ; char * const INIClass::Get_Entry(char *,int)
 %assign        INIClass__Get_Textblock                              0x004F3528
 %assign        INIClass__Get_UUBlock                                0x004F3338
-%assign        INIClass__Put_Bool                                   0x004F3AB0 ; int INIClass::Put_Bool(char *, char *, int)
+%assign        INIClass__Put_Bool                                   0x004F3AB0 ; int INIClass::Put_Bool(char *,char *,int)
 %assign        INIClass__Put_Int                                    0x004F35E8 ; int INIClass::Put_Int(char *,char *,int,int)
 %assign        INIClass__Put_String                                 0x004F3760 ; int INIClass::Put_String(char *,char *,char *)
-%assign        INIClass__Put_Fixed                                  0x004F3D80 ; int INIClass::Put_Fixed(char *, char *, fixed)
+%assign        INIClass__Put_Fixed                                  0x004F3D80 ; int INIClass::Put_Fixed(char *,char *,fixed)
 
 ; use lea [<INIClass>], so we can do stuff like "call_INIClass__Get_Int ebp-4,..."
 
-; args: <INIClass>, <section>, <key>, <default>, <dst>
+; args: <INIClass>,<section>,<key>,<default>,<dst>
 %macro call_INIClass__Get_Bool 4
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
   %ifnidni %4,ecx
-    mov  ecx, dword %4  ; default
+    mov  ecx,dword %4  ; default
   %endif
   %ifnidni %3,ebx
-    mov  ebx, dword %3  ; key
+    mov  ebx,dword %3  ; key
   %endif
   %ifnidni %2,edx
-    mov  edx, dword %2  ; section
+    mov  edx,dword %2  ; section
   %endif
   %ifnidni %1,eax
-    lea  eax, [%1]
+    lea  eax,[%1]
   %endif
     call INIClass__Get_Bool
 %endmacro
 
-; args: <INIClass>, <section>, <key>, <default>, <dst>
-; Get_Int can interpret three formats: decimal, hexadecimal 00h, and hexadecimal $00
+; args: <INIClass>,<section>,<key>,<default>,<dst>
+; Get_Int can interpret three formats: decimal,hexadecimal 00h,and hexadecimal $00
 %macro call_INIClass__Get_Int 4
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
   %ifnidni %4,ecx
-    mov  ecx, dword %4  ; default
+    mov  ecx,dword %4  ; default
   %endif
   %ifnidni %3,ebx
-    mov  ebx, dword %3  ; key
+    mov  ebx,dword %3  ; key
   %endif
   %ifnidni %2,edx
-    mov  edx, dword %2  ; section
+    mov  edx,dword %2  ; section
   %endif
   %ifnidni %1,eax
-    lea  eax, [%1]
+    lea  eax,[%1]
   %endif
     call INIClass__Get_Int
 %endmacro
 
-; args: <INICLAS> <section>, <key>, <default>, <dst>, <dst_len>
+; args: <INICLAS> <section>,<key>,<default>,<dst>,<dst_len>
 %macro call_INIClass__Get_String 6
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
     push %6             ; dst len
     push %5             ; dst
   %ifnidni %4,ecx
-    mov  ecx, dword %4  ; default
+    mov  ecx,dword %4  ; default
   %endif
   %ifnidni %3,ebx
-    mov  ebx, dword %3  ; key
+    mov  ebx,dword %3  ; key
   %endif
   %ifnidni %2,edx
-    mov  edx, dword %2  ; section
+    mov  edx,dword %2  ; section
   %endif
   %ifnidni %1,eax
-    lea  eax, [%1]
+    lea  eax,[%1]
   %endif
     call INIClass__Get_String
 %endmacro
 
-; args: <INIClass>, <Section>, <Key>, <Bool Value>
+; args: <INIClass>,<Section>,<Key>,<Bool Value>
 %macro call_INIClass__Put_Bool 4
-    mov  ecx, %4
-    mov  ebx, %3
-    mov  edx, %2
-    lea  eax, [%1]
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
+  %ifnidni %4,ecx
+    mov  ecx,%4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx,%3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx,%2  ; section
+  %endif
+  %ifnidni %1,eax
+    lea  eax,[%1]
+  %endif
     call INIClass__Put_Bool
 %endmacro
 
-; args: <INIClass>, <Section>, <Key>, <Int Value>
+; args: <INIClass>,<Section>,<Key>,<Int Value>
 %macro call_INIClass__Put_Int 4
-    push 0 ; 0=decimal, 1=hexadecimal 00h, 2=hexadecimal $00
-    mov  ecx, %4
-    mov  ebx, %3
-    mov  edx, %2
-    lea  eax, [%1]
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
+    push 0 ; 0=decimal,1=hexadecimal 00h,2=hexadecimal $00
+  %ifnidni %4,ecx
+    mov  ecx,%4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx,%3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx,%2  ; section
+  %endif
+  %ifnidni %1,eax
+    lea  eax,[%1]
+  %endif
     call INIClass__Put_Int
 %endmacro
 
-; args: <INIClass>, <Section>, <Key>, <String Value>
+; args: <INIClass>,<Section>,<Key>,<String Value>
 %macro call_INIClass__Put_String 4
-    mov  ecx, %4
-    mov  ebx, %3
-    mov  edx, %2
-    lea  eax, [%1]
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
+  %ifnidni %4,ecx
+    mov  ecx,%4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx,%3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx,%2  ; section
+  %endif
+  %ifnidni %1,eax
+    lea  eax,[%1]
+  %endif
     call INIClass__Put_String
 %endmacro
 
-; args: <INIClass>, <Section>, <Key>, <Fixed Value>
+; args: <INIClass>,<Section>,<Key>,<Fixed Value>
 %macro call_INIClass__Put_Fixed 4
-    mov  ecx, %4
-    mov  ebx, %3
-    mov  edx, %2
-    lea  eax, [%1]
+  %ifidn %1,ebx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,ecx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %1,edx
+    %error "call_INIClass__Get_Bool: param 1 cannot be ebx, ecx or edx"
+  %elifidn %2,ebx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %2,ecx
+    %error "call_INIClass__Get_Bool: param 2 cannot be ebx or ecx"
+  %elifidn %3,ecx
+    %error "call_INIClass__Get_Bool: param 3 cannot be ecx"
+  %endif
+
+  %ifnidni %4,ecx
+    mov  ecx,%4  ; default
+  %endif
+  %ifnidni %3,ebx
+    mov  ebx,%3  ; key
+  %endif
+  %ifnidni %2,edx
+    mov  edx,%2  ; section
+  %endif
+  %ifnidni %1,eax
+    lea  eax,[%1]
+  %endif
     call INIClass__Put_Fixed
 %endmacro

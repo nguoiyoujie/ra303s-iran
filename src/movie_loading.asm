@@ -61,7 +61,9 @@ CCINIClass_redalertini2 TIMES 128 db 0
 ; args: <video name no extension>, <index to return>
 %macro Video_Name_To_Index 2
     lea  eax,[ebp-0x88]
+  %ifnidni %1,edx
     mov  edx,%1
+  %endif
     call _strcmpi
     test eax,eax
     mov  al,%2
@@ -81,7 +83,9 @@ CCINIClass_redalertini2 TIMES 128 db 0
 %macro Play_Movie 1
     mov  ebx,1
     mov  edx,0xFFFFFFFF
+  %ifnidni %1,eax
     mov  eax,%1
+  %endif
     call _Play_Movie_
 %endmacro
 

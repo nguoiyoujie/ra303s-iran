@@ -64,7 +64,9 @@ str_twincannon db"Twin Cannon",0
 ; args: <corrected song full name>, <index>
 %macro Correct_Song_Index_Name 2
     cmp  dl,%2
+  %ifnidni %1,eax
     mov  eax,%1
+  %endif
     je   0x0056BEF8
 %endmacro
 

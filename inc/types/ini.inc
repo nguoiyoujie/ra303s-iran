@@ -14,7 +14,9 @@ cextern INI_Read_Value_Buffer
 ; args <RULES.INI Section Name to get entry count for>
 %macro Get_RULES_INI_Section_Entry_Count 1
     push edx
+  %ifnidni %1,edx
     mov  edx,%1
+  %endif
     mov  eax,Globals___RuleINI
     call INIClass__Entry_Count
     pop  edx
@@ -25,8 +27,12 @@ cextern INI_Read_Value_Buffer
 %macro Loop_Over_RULES_INI_Section_Entries 2
     push edx
     push eax
+  %ifnidni %1,edx
     mov  edx,%1
+  %endif
+  %ifnidni %2,eax
     mov  eax,%2
+  %endif
     call Loop_Over_RULES_INI_Section_Entries_
     pop  eax
     pop  edx

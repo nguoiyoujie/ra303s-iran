@@ -10,6 +10,9 @@ cextern Globals___Session_Type
 
 ;ARGS: <offset/pointer to value to SAVE>, <size in byte>
 %macro Save_Global_Value 2
+  %ifidn %1,ebx
+    %error "Save_Global_Value: param 1 cannot be ebx"
+  %endif
     mov  ebx,%2
     mov  esi,[ecx+8]
     mov  edx,%1
@@ -19,6 +22,9 @@ cextern Globals___Session_Type
 
 ;ARGS: <offset/pointer to value to LOAD>, <size in byte>
 %macro Load_Global_Value 2
+  %ifidn %1,ebx
+    %error "Load_Global_Value: param 1 cannot be ebx"
+  %endif
     mov  ebx,%2
     mov  esi,[ecx+8]
     mov  edx,%1

@@ -76,7 +76,9 @@
     push edx
 
     xor  edx,edx
+  %ifnidni %1,eax
     mov  eax,%1
+  %endif
 
   %%loop:
     AbstractTypeClass.FromIndex  edx,%2,%3,edi
