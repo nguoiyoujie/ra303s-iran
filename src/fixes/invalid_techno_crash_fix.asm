@@ -18,33 +18,6 @@
 @SET 0x004EDA2B,{jz 0x004EDAD6}  ; InfantryClass__Can_Enter_Cell, exact 6 bytes
 
 
-;<register holding possible techno object>
-; returns eax=1 if legal, eax=0 otherwise
-%macro Techno_Target_Legal_Check 1
-    ; edx holds target, which is AABBBBBB, where AA is the RTTI and BBBBBB is the ID
-    push edx
-    mov  eax,%1
-    test eax,eax ; check for TARGET_NONE
-    jz   %%done
-    ; get the object from target
-    xor  edx,edx
-    call 0x00555190 ; As_Object()
-    test eax,eax ; check if it is object
-    je   %%ret1 ; if not an object, it is valid (e.g. template layer)
-  %%isTechno:
-    ; Check IsActive
-    mov  byte dl,[eax+0xD]
-    test dl,1 ; bit
-    jz   %%ret0
-  %%ret1:
-    mov  eax,1
-    jmp  %%done
-  %%ret0:
-    xor  eax,eax
-  %%done:
-    pop  edx
-%endmacro
-
 ; also consider non-buildings being invalid. Remastered seems to have this fix applied.
 @HACK 0x005626BF,0x005626CF,_TechnoClass_In_Range_Do_Target_Legal_Check_1
     ; edx is the techno object

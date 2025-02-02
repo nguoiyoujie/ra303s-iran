@@ -46,3 +46,21 @@
 @ENDHACK
 
 
+@HACK 0x0041DBD6,0x0041DBDE,_AircraftClass_Mission_Hunt_Regroup_Selectable_Bombers
+    ; the parabomber doesn't check the status of the target, and will continue to fly forward if it is dead. This is not a problem with the support power, because the target (ground) is always alive.
+    ; for our custom selectable bombers, we want them to return to the airport
+    cmp  eax,6 ; REGROUP
+    ja   .Next
+    jmp  0x0041DBDE
+.Next:
+    cmp  eax,8
+    jne  0x0041DB48 ; continue
+    ; perform Target_Legal check
+    mov  eax,[esi+0xB2]
+    Techno_Target_Legal_Check eax
+    test eax,eax
+    jnz   0x0041DB48 ; continue
+    jmp  0x0041DB06 ; REGROUP
+@ENDHACK
+
+
