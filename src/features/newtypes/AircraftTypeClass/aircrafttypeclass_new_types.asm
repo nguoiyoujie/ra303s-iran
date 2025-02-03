@@ -19,6 +19,8 @@ cextern str_StringTableOffsets
 cextern str_Aircraft
 cextern str_AircraftTypes
 
+cextern AircraftTypeClass.ORIGINAL_COUNT
+cextern AircraftTypeClass.NEW_SIZE
 cextern Rules.StringTableOffsets.AircraftTypes
 
 

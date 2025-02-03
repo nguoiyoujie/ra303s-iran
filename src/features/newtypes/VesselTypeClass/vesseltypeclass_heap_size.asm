@@ -9,6 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
+cextern VesselTypeClass.ORIGINAL_SIZE
+cextern VesselTypeClass.NEW_SIZE
+
 ;Read INI settings
 @SET 0x004C750C,{mov edx,VesselTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_VesselTypes_Heap
 @SET 0x004D1533,{mov ebx,VesselTypeClass.NEW_SIZE} ; _TFixedIHeapClass__VesselTypeClass__Save_New_Size

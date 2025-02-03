@@ -7,6 +7,8 @@
 ; A good deal of testing is needed to check for compatibility issues, as many things are tied to the affected values
 ;----------------------------------------------------------------
 
+cextern VesselTypeClass.Count
+
 ; _HouseClass__Tracking_Remove_New_Building_Tracking
 @SET 0x004DCB58,{shr eax,0x18}
 @SET 0x004DCB5B,{dec dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]}

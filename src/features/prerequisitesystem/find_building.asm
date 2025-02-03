@@ -6,6 +6,9 @@
 ; This function is enabled by default and is not controllable.
 ;----------------------------------------------------------------
 
+cextern Houses.BScan
+cextern Houses.BSignificantScan
+
 @HACK 0x0056B4E7,0x0056B4F9,_TEventClass__Operator_BuildingExists_Check
     ; don't use ActiveBScan anymore, since that is used by the new prerequisite system
     ; eax is houseclass, ecx right shifted 18-bits is structtype id

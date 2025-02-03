@@ -20,6 +20,9 @@ cextern AnimTypeClass__new
 cextern str_AnimTypes
 cextern str_DirectionalAnimTypes
 
+cextern AnimTypeClass.ORIGINAL_COUNT
+cextern AnimTypeClass.NEW_SIZE
+cextern AnimTypeClass.Count
 
 ; There are two classes of animations
 ; One of them is a full animation loaded from a single file
@@ -85,7 +88,7 @@ Temp.Anim.typeclass_constructor_arg dd 0
 @HACK 0x004F40E9,0x004F40EE,_Init_Game_Set_AnimTypes_Heap_Count
     Get_RULES_INI_Section_Entry_Count str_AnimTypes
     mov  edx,eax
-    add  edx,AnimTypesHeap.ORIGINAL_COUNT
+    add  edx,AnimTypeClass.ORIGINAL_COUNT
     mov  byte[FirstDirectionalAnim],dl
 
     Get_RULES_INI_Section_Entry_Count str_DirectionalAnimTypes
@@ -134,7 +137,7 @@ Init_AnimTypeClass:
     pop  eax
 
     mov  edx,ebx
-    add  edx,AnimTypesHeap.ORIGINAL_COUNT ; AnimType
+    add  edx,AnimTypeClass.ORIGINAL_COUNT ; AnimType
     mov  ebx,ecx ; Name/ID
 
     ; mimic AnimType ANIM_FBALL1 / FBALL1, but muted

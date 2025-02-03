@@ -11,6 +11,7 @@
 
 cextern Houses.HouseTriggers
 
+cextern HouseTypeClass.NEW_COUNT
 
 ; moving Globals::HouseTriggers[x] to Houses.HouseTriggers
 @SET 0x004C7966,{mov eax,Houses.HouseTriggers} ; fn_init

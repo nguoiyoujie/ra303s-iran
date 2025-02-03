@@ -18,6 +18,10 @@
 ; This function is enabled by default and is not controllable.
 ;----------------------------------------------------------------
 
+cextern Houses.BScan
+cextern Houses.SpecialScan
+cextern Houses.Radar
+
 ; AI will use the same memory as human players, since we maintain one BScan in the future
 @SET 0x004D4096,{mov eax,[esi+HouseClass.Offset.BPreGroupScan]} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Can_Build
 @SJMP 0x004D409C,0x004D40A7 ;_HouseClass__Can_Build ; skip AI using OldBScan

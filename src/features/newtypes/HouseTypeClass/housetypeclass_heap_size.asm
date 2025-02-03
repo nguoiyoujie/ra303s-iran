@@ -9,6 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
+cextern HouseTypeClass.ORIGINAL_SIZE
+cextern HouseTypeClass.NEW_SIZE
+
 ;_HouseTypeClass__Init_Heap_NewSize (one for each of the 20 originally allocated houses)
 @SET 0x004CB853,{mov eax,HouseTypeClass.NEW_SIZE}
 @SET 0x004CB98D,{mov eax,HouseTypeClass.NEW_SIZE}

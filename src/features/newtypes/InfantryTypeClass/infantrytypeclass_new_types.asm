@@ -19,6 +19,8 @@ cextern str_InfantryTypes
 cextern str_StringTableOffsets
 cextern str_Infantry
 
+cextern InfantryTypeClass.ORIGINAL_COUNT
+cextern InfantryTypeClass.NEW_SIZE
 cextern Rules.StringTableOffsets.InfantryTypes
 
 @HACK 0x004597F2,0x004597FB,_BuildingClass__Update_Buildables_UnhardCode_InfantryTypes

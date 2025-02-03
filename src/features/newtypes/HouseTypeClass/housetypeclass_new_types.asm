@@ -39,6 +39,7 @@ cextern str_MP18
 cextern str_MP19
 cextern str_MP20
 
+cextern HouseTypeClass.NEW_COUNT
 cextern HouseTypeClass.Multi9
 cextern HouseTypeClass.Multi10
 cextern HouseTypeClass.Multi11

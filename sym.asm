@@ -618,7 +618,7 @@ setcglob 0x146     ,BulletTypeClass.NEW_SIZE ; size change not yet implemented
 ; AnimTypeClass              0x0065DEA0
 setcglob 0x0065DEAC,AnimTypeClass.Count       
 setcglob 0x0065DED4,AnimTypeClass.Array       
-setcglob 0x50      ,AnimTypesHeap.ORIGINAL_COUNT       
+setcglob 0x50      ,AnimTypeClass.ORIGINAL_COUNT       
 setcglob 0x162     ,AnimTypeClass.ORIGINAL_SIZE        
 setcglob 0x180     ,AnimTypeClass.NEW_SIZE    
 													   

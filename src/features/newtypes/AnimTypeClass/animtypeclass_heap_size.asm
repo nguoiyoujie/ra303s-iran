@@ -8,6 +8,10 @@
 ; No compatibility issues is expected. However, changes to the allocated memory renders older savegames incompatible. It is generally a good idea to allocate more than is needed to avoid that incompatibility
 ;
 ;----------------------------------------------------------------
+
+cextern AnimTypeClass.ORIGINAL_SIZE
+cextern AnimTypeClass.NEW_SIZE
+
 ;Read INI settings
 @SET 0x004C74A2,{mov edx,AnimTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_AnimTypes_Heap
 @SET 0x004C9575,{mov edx,AnimTypeClass.NEW_SIZE} ; _TFixedIHeapClass__AnimTypeClass__Constructor_New_Size

@@ -23,6 +23,7 @@ cextern Audio___SoundEffectName
 
 cextern str_SoundEffects
 
+cextern SoundEffects.ORIGINAL_COUNT 
 cextern SoundEffectsList
 cextern SoundEffects.Count
 

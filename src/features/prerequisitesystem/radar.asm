@@ -6,6 +6,8 @@
 ; This function is enabled by default and is not controllable.
 ;----------------------------------------------------------------
 
+cextern Houses.Radar
+
 @HACK 0x004D4EAA,0x004D4EB1,_HouseClass__AI_RadarMap_Check1
     push eax
     push ecx

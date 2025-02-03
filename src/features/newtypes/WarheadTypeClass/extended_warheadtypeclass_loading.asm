@@ -9,6 +9,8 @@
 ;
 ;----------------------------------------------------------------
 
+cextern strlist.ArmorTypes
+
 ;Read INI settings
 ;We want to expand the modifiers, so we move all offsets after modifiers to clear the way for future expansion. Turns out that there are only two int values, which both may as well be byte values. They can fit into the space that holds bool values. Very convenient, as we do not need to worry about moving the heavily used Modifier
 @HACK 0x0058FB6D,0x0058FBA3,_WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath

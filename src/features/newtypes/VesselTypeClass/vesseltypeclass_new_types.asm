@@ -22,6 +22,8 @@ cextern str_TURR
 cextern str_SSAM
 cextern str_MGUN
 
+cextern VesselTypeClass.ORIGINAL_COUNT
+cextern VesselTypeClass.NEW_SIZE
 cextern Rules.StringTableOffsets.VesselTypes
 
 @HACK 0x00459661,0x00459666,_BuildingClass__Update_Buildables_Unhardcode_VesselTypes

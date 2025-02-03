@@ -28,12 +28,6 @@
 %include "types/HouseClass.inc"
 ;%include "types/HouseTypeClass.inc"
 
-cextern Houses.BScan
-cextern Houses.BSignificantScan
-cextern Houses.SpecialScan
-cextern Houses.Radar
-cextern VesselTypeClass.Count
-
 ; subsections
 %include "src/features/prerequisitesystem/prerequisite_groups.asm"
 %include "src/features/prerequisitesystem/building_group_unhardcodes.asm"

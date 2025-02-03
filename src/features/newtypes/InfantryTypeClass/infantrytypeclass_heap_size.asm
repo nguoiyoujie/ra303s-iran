@@ -9,6 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
+cextern InfantryTypeClass.ORIGINAL_SIZE
+cextern InfantryTypeClass.NEW_SIZE
+
 ;Read INI settings
 @SET 0x004C7445,{mov edx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_InfantryTypes_Heap
 @SET 0x004C9355,{mov edx,InfantryTypeClass.NEW_SIZE} ; _TFixedIHeapClass__InfantryTypeClass__Constructor_New_Size

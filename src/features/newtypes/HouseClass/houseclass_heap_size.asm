@@ -11,6 +11,10 @@
 
 cextern Globals___SaveGameVersion
 
+cextern HouseClass.ORIGINAL_SIZE
+cextern HouseClass.NEW_SIZE
+
+
 @SET 0x004C7175,{mov edx,HouseClass.NEW_SIZE} ; _TFixedHeapClass_fn_init_HouseClass
 @SET 0x004C8365,{mov edx,HouseClass.NEW_SIZE} ; _TFixedHeapClass__HouseClass__Constructor_HouseClass
 @SET 0x004CED13,{mov ebx,HouseClass.NEW_SIZE} ; _TFixedHeapClass__HouseClass__Save_HouseClass

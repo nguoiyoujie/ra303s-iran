@@ -9,6 +9,9 @@
 ;
 ;----------------------------------------------------------------
 
+cextern UnitTypeClass.ORIGINAL_SIZE
+cextern UnitTypeClass.NEW_SIZE
+
 ; Extended memory size of the class, with save and load support
 @SET 0x004C74D2,{mov edx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__fn_init_UnitTypes_Heap
 @SET 0x004C9685,{mov edx,UnitTypeClass.NEW_SIZE} ; _TFixedIHeapClass__UnitTypeClass__Constructor_New_Size

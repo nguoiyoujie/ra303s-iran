@@ -19,6 +19,8 @@ cextern str_StringTableOffsets
 cextern str_Building
 cextern str_BuildingTypes
 
+cextern BuildingTypeClass.ORIGINAL_COUNT
+cextern BuildingTypeClass.NEW_SIZE
 cextern Rules.StringTableOffsets.BuildingTypes
 
 ; BuildingTypeClass::BuildingTypeClass ; convert sar edx,18 to shr,edx,18

@@ -16,6 +16,10 @@ cextern BulletTypeClass__new
 
 cextern str_BulletTypes
 
+cextern BulletTypeClass.ORIGINAL_COUNT
+cextern BulletTypeClass.NEW_SIZE
+cextern BulletTypeClass.Count
+
 
 @HACK 0x00426C90,0x00426C95,_BulletTypeClass__Init_Heap_Init_Extra_BulletTypes
     Loop_Over_RULES_INI_Section_Entries str_BulletTypes,Init_BulletTypeClass

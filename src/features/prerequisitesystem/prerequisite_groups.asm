@@ -12,6 +12,8 @@
 ;   Soviet/Allied Tech Center will also no longer fulfill prerequisites that require the other.
 ;----------------------------------------------------------------
 
+cextern Houses.BScan
+
 @HACK 0x004D40DF,0x004D40E4,_HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
     ; edx is the technotype pointer 
     ; esi is the houseclass pointer 

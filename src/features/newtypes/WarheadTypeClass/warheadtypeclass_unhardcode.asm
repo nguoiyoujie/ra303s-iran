@@ -18,6 +18,7 @@ cextern Weapon__Weapons
 
 cextern str_Warheads
 
+cextern WarheadTypeClass.NEW_SIZE
 
 @HACK 0x0046360D,0x00463615,_CCINIClass__Get_WarheadType_Unhardcode_WarheadTypes_Count
     mov  [ebp-0x8],dl

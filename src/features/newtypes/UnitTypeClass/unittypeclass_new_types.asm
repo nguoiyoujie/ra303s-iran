@@ -19,6 +19,8 @@ cextern str_StringTableOffsets
 cextern str_Unit
 cextern str_UnitTypes
 
+cextern UnitTypeClass.ORIGINAL_COUNT
+cextern UnitTypeClass.NEW_SIZE
 cextern Rules.StringTableOffsets.UnitTypes
 
 @HACK 0x00459715,0x0045971A,_BuildingClass__Update_Buildables_UnhardCode_UnitTypes
