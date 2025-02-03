@@ -9,6 +9,8 @@
 
 cextern Globals___Session_Type
 
+cextern Rules.AI.RepairConstructedBuildingsInSingleplayer
+
 
 @HACK 0x00460073,0x0046007A,_BuildingClass_Repair_AI_SingleplayerRepair
     cmp  dword[InCoopMode],1 ; inherited from coop mode

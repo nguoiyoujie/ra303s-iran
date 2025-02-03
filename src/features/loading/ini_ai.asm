@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/load_ai_ini.asm
+; src/features/loading/ini_ai.asm
 ;
 ; Load an AI.ini containing AI settings after loading aftermath.ini before loading a scenario's rules changes
 ;

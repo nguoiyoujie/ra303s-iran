@@ -148,7 +148,7 @@ cextern Toggle_Fix_NavalRepairExploit
 cextern FRAG1AnimData
 cextern OreMineFoundation
 cextern buildingcrewstuckfix
-
+cextern RedAlert.Options.AftermathEnabled
 cextern spawn_INI_Get_Bool
 cextern spawn_INI_Get_Int
 cextern spawn_INI_Get_String

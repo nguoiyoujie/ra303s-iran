@@ -13,6 +13,8 @@
 
 cextern ColorRemaps.ExtendedColors
 
+cglobal _InitializeExtendedColors
+
 %assign ColorRemaps.White.Offset                               0
 %assign ColorRemaps.Black.Offset                               REMAPCONTROLTYPE_SIZE
 %assign ColorRemaps.FlamingBlue.Offset                         REMAPCONTROLTYPE_SIZE * 2

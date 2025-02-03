@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/loading/loading_map.asm
+; src/features/loading/ini_map.asm
 ;
 ; Load setting keys from Mission Maps
 ;
@@ -42,6 +42,7 @@ cextern Rules.AI.SingleplayerAIObeyPrerequisites
 cextern RedAlert.Options.ForceAMUnitsInMissions
 cextern TutorialINIPointer
 cextern NextCampaignMissionBuf
+cextern MapSelectionAnimationBuf
 cextern MapSelectABuf
 cextern MapSelectBBuf
 cextern MapSelectCBuf
@@ -49,6 +50,10 @@ cextern CCFileClass_TutorialText
 cextern CCINIClass_TutorialText
 cextern sprintf_key_buffer
 cextern strdup_text_buffer
+
+cextern Map.Basic.ChronoReinforceTanks
+cextern Map.Basic.UseAtomWhiteScreenEffectInMP
+cextern Map.Basic.UseSinglePlayerAtomDamage
 
 
 @HACK 0x0053D081,0x0053D086,_Map_Load_Before_Hook ; For map loading stuff

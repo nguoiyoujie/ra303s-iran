@@ -32,6 +32,11 @@
 cextern GetCommandLineA
 cextern str_arg_Spawn
 
+cextern Spawn.Settings.Aftermath
+cextern RedAlert.Options.AftermathEnabled
+cextern RedAlert.Options.CounterstrikeEnabled
+
+
 @HACK 0x004AC024,0x004AC029,_Is_Aftermath_Installed
     Save_Registers
     call GetCommandLineA

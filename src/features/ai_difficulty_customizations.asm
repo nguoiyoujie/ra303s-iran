@@ -19,6 +19,13 @@ cextern HouseClass__As_Pointer
 cextern Globals___Rule_GoldValue
 cextern Globals___Rule_GemValue
 
+cextern Rules.AI.EasyAIGoldValue
+cextern Rules.AI.EasyAIGemValue
+cextern Rules.AI.NormalAIGoldValue
+cextern Rules.AI.NormalAIGemValue
+cextern Rules.AI.HardAIGoldValue
+cextern Rules.AI.HardAIGemValue
+
 
 @HACK 0x0058144B,0x00581451,_UnitClass__Load_Credits_Credit_Values_For_AI_Difficulties
     push eax

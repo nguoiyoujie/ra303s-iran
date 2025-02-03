@@ -23,6 +23,8 @@
 ; 
 ;----------------------------------------------------------------
 
+cextern RedAlert.Options.NoCDMode
+
 @SJMP 0x004C7B2A,0x004C7B40 ; _Patch_Out_Early_GetCDClass_Init
 
 %define GetCDClass__GetCDClass    0x005CDD10

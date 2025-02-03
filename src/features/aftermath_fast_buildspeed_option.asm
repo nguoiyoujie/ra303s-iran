@@ -13,6 +13,9 @@
 cextern Globals___NewUnitsEnabled
 cextern Globals___Session_Type
 
+cextern Rules.Aftermath.AftermathFastBuildSpeed
+cextern RedAlert.Options.FastAMBuildSpeed
+
 
 @HACK 0x005611F3,0x005611FC,_Time_To_Build_NewUnitsEnabled_Check
     cmp  byte[Rules.Aftermath.AftermathFastBuildSpeed],1

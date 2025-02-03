@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/load_more_mix_files.asm
+; src/features/loading/mix_files.asm
 ;
 ; Allow additional mix files to be loaded. This includes 
 ;   spawn1.MIX

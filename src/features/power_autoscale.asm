@@ -7,6 +7,8 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+cextern Rules.General.ScalePowerBar
+
 @SJMP 0x00527D11,0x00527D15 ; _PowerClass__AI_Record_Power_Drain2
 
 [section .data] 

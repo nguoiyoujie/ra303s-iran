@@ -10,6 +10,8 @@
 ;
 ;----------------------------------------------------------------
 
+cextern Rules.General.RemapJammedBuildings
+
 %define FadingJammed 0x006561E0 ; FadingShade
 ; FadingBrighten  0x006560E0
 ; FadingShade     0x006561E0

@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/loading/loading_redalert.asm
+; src/features/loading/ini_redalert.asm
 ;
 ; Load setting keys from RedAlert.ini
 ;

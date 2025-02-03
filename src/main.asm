@@ -70,15 +70,6 @@
 %include "types/WarheadTypeClass.inc"
 %include "types/WeaponTypeClass.inc"
 
-;loading code
-;%include "src/loading.asm" ; now empty, split to features/loading/
-%include "src/features/ini_load_longer_lines.asm"
-%include "src/features/loading/loading_redalert.asm"
-%include "src/features/loading/loading_spawn.asm"
-%include "src/features/loading/loading_rules.asm"
-%include "src/features/loading/loading_savegame.asm"
-%include "src/features/loading/loading_map.asm"
-
 ;map snapshot code
 %include "src/map_snapshot.asm"
 
@@ -130,7 +121,6 @@
 %include "src/singleplayer_custom_colours_countries.asm"
 %include "src/sidebar_special_houses.asm"
 %include "src/video_stretching_helpers.asm"
-%include "src/features/load_more_mix_files.asm"
 %include "src/spawner_house_colours_countries_handicaps.asm"
 %include "src/spawner_stats.asm"
 ;%include "src/debug_printing.asm" ; Seems to cause crashes
@@ -139,10 +129,7 @@
 %include "src/features/extra_sounds.asm"
 %include "src/evac_in_mp.asm"
 ;%include "src/custom_paradrop_superweapon.asm"
-%include "src/pkt_loading.asm"
 %include "src/expansions.asm"
-%include "src/music_loading.asm"
-%include "src/movie_loading.asm"
 %include "src/custom_missions.asm"
 %include "src/features/ally_shroud_reveal.asm"
 %include "src/ingame_chat_improvments.asm"
@@ -282,7 +269,6 @@
 %include "src/image_keyword_fix.asm"
 %include "src/allies_NCO_helipad_airfield_bug.asm"
 %include "src/tags_bug.asm"
-%include "src/movies2_loading_bug.asm"
 %endif
 
 

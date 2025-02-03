@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/loading/loading_spawn.asm
+; src/features/loading/ini_spawn.asm
 ;
 ; Load setting keys from spawn.ini (used for multiplayer settings)
 ;
@@ -10,6 +10,7 @@ cextern str_Settings
 cextern str_Aftermath
 
 cextern CCFileClass_Spawn
+cextern CCINIClass_Spawn
 cextern Spawn.Settings.Aftermath
 
 

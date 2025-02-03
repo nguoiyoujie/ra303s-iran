@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/loading/loading_savegame.asm
+; src/features/loading/savegame.asm
 ;
 ; Load setting keys from savegames. 
 ;

@@ -19,6 +19,8 @@
 
 cextern Globals___Session_Type
 
+cextern Rules.AI.BuildRadarWithoutAirThreatCheck
+
 
 @HACK 0x004DAFA4,0x004DAFAA,_HouseClass__AI_Building_Build_Radar_Dome
     jnz  0x004DB0E4

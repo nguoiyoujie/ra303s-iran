@@ -24,6 +24,7 @@ OBJS       += data.o
 OBJS       += src/features/hires/_hires.o
 OBJS       += src/features/prerequisitesystem/_prerequisite_system.o
 OBJS       += src/features/specialweapons/_specialweapons.o
+OBJS       += src/features/loading/_loading.o
 OBJS       += src/features/newtypes/_new_types.o
 OBJS       += src/main.o
 

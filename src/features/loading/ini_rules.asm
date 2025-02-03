@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/features/loading/loading_rules.asm
+; src/features/loading/ini_rules.asm
 ;
 ; Load setting keys from rules.ini. Some of the logic may be called again when loading from map
 ;
@@ -7,6 +7,7 @@
 
 cextern Globals___RuleINI
 cextern INI_Read_String_Buffer
+cextern _InitializeExtendedColors
 
 cextern str_mix_Aftermath
 cextern str_AftermathFastBuildSpeed
