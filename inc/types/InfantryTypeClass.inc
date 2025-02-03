@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_INFANTRYTYPECLASS
+%define TYPES_INFANTRYTYPECLASS
+
 cextern InfantryTypeClass.Count
 cextern InfantryTypeClass.Array
 
@@ -580,6 +583,4 @@ str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define InfantryTypeClass.AIBuildWeight.Set(ptr_type,value)                    SetInt                                 ptr_type, InfantryTypeClass.Offset.AIBuildWeight, value
 %define InfantryTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadInt              ptr_type, ptr_rules, InfantryTypeClass.Offset.AIBuildWeight, str.InfantryTypeClass.AIBuildWeight
 	
-	
-
-
+%endif

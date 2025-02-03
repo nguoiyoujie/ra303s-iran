@@ -40,6 +40,37 @@ cextern str_KeyMapSnapshot
 cextern str_dll_Kernel32
 cextern str_SetProcessAffinityMask
 
+cextern RedAlert.Options.AftermathEnabled                   
+cextern RedAlert.Options.AlternativeRifleSound              
+cextern RedAlert.Options.ColorRemapSidebarIcons             
+cextern RedAlert.Options.CounterstrikeEnabled               
+cextern RedAlert.Options.DebugLogging                       
+cextern RedAlert.Options.DisplayAftermathMultiplayerMaps    
+cextern RedAlert.Options.DisplayCounterstrikeMultiplayerMaps
+cextern RedAlert.Options.DisplayOriginalMultiplayerMaps     
+cextern RedAlert.Options.EnableWOL                          
+cextern RedAlert.Options.FastAMBuildSpeed                   
+cextern RedAlert.Options.ForceAMUnitsInMissions             
+cextern RedAlert.Options.ForceSingleCPU                     
+cextern RedAlert.Options.GameLanguage                       
+cextern RedAlert.Options.GenerateMemoryDump                 
+cextern RedAlert.Options.MouseWheelScrolling                
+cextern RedAlert.Options.NoCDMode                           
+cextern RedAlert.Options.RandomStartingSong                 
+cextern RedAlert.Options.SkipScoreScreen                    
+cextern RedAlert.Options.UseGrenadeThrowingSound            
+cextern RedAlert.Options.UseBetaCruiser                     
+cextern RedAlert.Options.UseBetaDestroyer                   
+cextern RedAlert.Options.UseBetaGunboat                     
+cextern RedAlert.Options.UseBetaSubmarine                   
+cextern RedAlert.Options.UseBetaTeslaTank                   
+cextern RedAlert.Options.UseDOSInterfaceMod                 
+cextern RedAlert.Options.UseSmallInfantry                   
+cextern RedAlert.Options.VideoInterlaceMode                 
+cextern RedAlert.WinHotKeys.KeyMapSnapshot                  
+cextern RedAlert.WinHotKeys.KeySidebarToggle   
+cextern SetProcessAffinityMask             
+
 
 %define        ebp_RedAlertINI        [ebp-0x74] ; for _OptionsClass__Load_Settings
 

@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_BUILDINGTYPECLASS
+%define TYPES_BUILDINGTYPECLASS
+
 cextern BuildingTypeClass.Count
 cextern BuildingTypeClass.Array
 
@@ -429,19 +432,4 @@ str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0    
 %define BuildingTypeClass.AILowMoneySellPriority.Set(ptr_type,value)              SetByte                                ptr_type, BuildingTypeClass.Offset.AILowMoneySellPriority, value
 %define BuildingTypeClass.AILowMoneySellPriority.Read(ptr_type,ptr_rules)         AbstractTypeClass.ReadByte             ptr_type, ptr_rules, BuildingTypeClass.Offset.AILowMoneySellPriority, str.BuildingTypeClass.AILowMoneySellPriority
 
-
-_GetBuildingTypeIDFromString:
-    ;select BuildingType by performing string compare on eax
-    push ebx
-    cmp  eax,0
-    jle  .Retn ; just return 0
-    BuildingTypeClass.FromID(eax,ebx)
-    ;in case the ID was invalid...
-    test ebx,ebx
-    jz   .Retn ; just return 0
-    mov  ebx,dword[ebx+1]; index
-	;AbstractTypeClass.ID ebx,ebx
-    mov  eax,ebx
-.Retn:
-    pop ebx
-    retn
+%endif

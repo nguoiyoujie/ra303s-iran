@@ -11,6 +11,12 @@
 ;
 ;----------------------------------------------------------------
 
+cextern Spawn.Settings.ShortGame
+
+cextern Houses.BScan
+cextern Houses.BSignificantScan
+
+
 @HACK 0x004D4C79,0x004D4C82,_HouseClass__AI_MPlayerDefeated_Check
     ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities

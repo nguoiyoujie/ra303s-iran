@@ -4,6 +4,10 @@
 ; Common INIClass functions and helper macros
 ;
 ;----------------------------------------------------------------
+
+%ifndef TYPES_INICLASS
+%define TYPES_INICLASS
+
 %assign        INIClass__~INIClass                                  0x004F25D0 ; INIClass::~INIClass(void)
 %assign        INIClass__Load                                       0x004F28C4
 %assign        INIClass__Save                                       0x004F2F08 ; int const INIClass::Save(FileClass &)
@@ -241,3 +245,5 @@
   %endif
     call INIClass__Put_Fixed
 %endmacro
+
+%endif

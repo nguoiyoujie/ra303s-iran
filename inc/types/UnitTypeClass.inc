@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_UNITTYPECLASS
+%define TYPES_UNITTYPECLASS
+
 cextern UnitTypeClass.Count
 cextern UnitTypeClass.Array
 
@@ -271,18 +274,4 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.AIBuildWeight.Set(ptr_type,value)                    SetInt                                 ptr_type, UnitTypeClass.Offset.AIBuildWeight, value
 %define UnitTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadInt              ptr_type, ptr_rules, UnitTypeClass.Offset.AIBuildWeight, str.UnitTypeClass.AIBuildWeight
 	
-    
-_GetUnitTypeIDFromString:
-    ;select UnitType by performing string compare on eax
-    push ebx
-    cmp  eax,0
-    jle  .Retn ; just return 0
-    UnitTypeClass.FromID(eax,ebx)
-    ;in case the ID was invalid...
-    test ebx,ebx
-    jz   .Retn ; just return 0
-    mov  ebx,dword[ebx+1]; index
-    mov  eax,ebx
-.Retn:
-    pop ebx
-    retn
+%endif

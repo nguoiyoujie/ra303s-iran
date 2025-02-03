@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef INC_COMMON
+%define INC_COMMON
+
 cextern Extract_String
 
 %macro Save_Registers 0
@@ -27,6 +30,8 @@ cextern Extract_String
 %endmacro
 
 
+; args <the string ID>
+; returns the string on EAX
 %macro Extract_Conquer_Eng_String 1
   %ifnidni %1,edx
     mov  edx,%1
@@ -141,3 +146,4 @@ cextern Extract_String
     mov  dword[%1+%2],%3
 %endmacro
 
+%endif

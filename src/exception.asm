@@ -14,6 +14,8 @@
 ; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;
 
+cextern RedAlert.Options.GenerateMemoryDump
+
 struc MINIDUMP_EXCEPTION_INFORMATION
     .ThreadId           RESD 1
     .ExceptionPointers  RESD 1

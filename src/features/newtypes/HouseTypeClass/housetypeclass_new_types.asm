@@ -1,0 +1,390 @@
+;----------------------------------------------------------------
+; src/features/type_extensions/HouseTypeClass/housetypeclass_new_types.asm
+;
+; Allocate new HouseTypeClass.
+; The new houses are named 'Multi9' to 'Multi20', filling the roster to a total of 32 houses. 
+; This is the maximum that can be supported by the game logic without radical changes (32-bit fields)
+; 
+; This function is not configurable.
+; 
+; No compatibility issues is expected as the original game lack the ability to add new types.
+;
+;----------------------------------------------------------------
+
+cextern HouseTypeClass__HouseTypeClass
+cextern HouseTypeClass__Read_INI
+
+cextern str_Multi9
+cextern str_Multi10
+cextern str_Multi11
+cextern str_Multi12
+cextern str_Multi13
+cextern str_Multi14
+cextern str_Multi15
+cextern str_Multi16
+cextern str_Multi17
+cextern str_Multi18
+cextern str_Multi19
+cextern str_Multi20
+cextern str_MP9
+cextern str_MP10
+cextern str_MP11
+cextern str_MP12
+cextern str_MP13
+cextern str_MP14
+cextern str_MP15
+cextern str_MP16
+cextern str_MP17
+cextern str_MP18
+cextern str_MP19
+cextern str_MP20
+
+cextern HouseTypeClass.Multi9
+cextern HouseTypeClass.Multi10
+cextern HouseTypeClass.Multi11
+cextern HouseTypeClass.Multi12
+cextern HouseTypeClass.Multi13
+cextern HouseTypeClass.Multi14
+cextern HouseTypeClass.Multi15
+cextern HouseTypeClass.Multi16
+cextern HouseTypeClass.Multi17
+cextern HouseTypeClass.Multi18
+cextern HouseTypeClass.Multi19
+cextern HouseTypeClass.Multi20
+cextern HouseTypeClass.DestructorPtrs
+
+;@SET 0x004F4095,{dd HouseTypeClass.NEW_COUNT} ; void Init_Game(void), set heap // alaredy hooked by _Init_Game_Early_RULES_INI_Load
+
+@HACK 0x004CB760,0x004CB76A,_HouseTypeClass__AddNewHouseTypes
+;Multi9
+    push 0x4D
+    push 0x7
+    mov  edx,0x14 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi9
+    push str_MP9
+    mov  eax,HouseTypeClass.Multi9
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi10
+    push 0x4D
+    push 0x7
+    mov  edx,0x15 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi10
+    push str_MP10
+    mov  eax,HouseTypeClass.Multi10
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi11
+    push 0x4D
+    push 0x7
+    mov  edx,0x16 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi11
+    push str_MP11
+    mov  eax,HouseTypeClass.Multi11
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi12
+    push 0x4D
+    push 0x7
+    mov  edx,0x17 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi12
+    push str_MP12
+    mov  eax,HouseTypeClass.Multi12
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi13
+    push 0x4D
+    push 0x7
+    mov  edx,0x18 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi13
+    push str_MP13
+    mov  eax,HouseTypeClass.Multi13
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi14
+    push 0x4D
+    push 0x7
+    mov  edx,0x19 ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi14
+    push str_MP14
+    mov  eax,HouseTypeClass.Multi14
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi15
+    push 0x4D
+    push 0x7
+    mov  edx,0x1A ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi15
+    push str_MP15
+    mov  eax,HouseTypeClass.Multi15
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi16
+    push 0x4D
+    push 0x7
+    mov  edx,0x1B ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi16
+    push str_MP16
+    mov  eax,HouseTypeClass.Multi16
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi17
+    push 0x4D
+    push 0x7
+    mov  edx,0x1C ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi17
+    push str_MP17
+    mov  eax,HouseTypeClass.Multi17
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi18
+    push 0x4D
+    push 0x7
+    mov  edx,0x1D ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi18
+    push str_MP18
+    mov  eax,HouseTypeClass.Multi18
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi19
+    push 0x4D
+    push 0x7
+    mov  edx,0x1E ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi19
+    push str_MP19
+    mov  eax,HouseTypeClass.Multi19
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;Multi20
+    push 0x4D
+    push 0x7
+    mov  edx,0x1F ;ID
+    push 0
+    mov  ecx,0x15 ;TXT_CIVILIAN
+    mov  ebx,str_Multi20
+    push str_MP20
+    mov  eax,HouseTypeClass.Multi20
+    mov  dword[0x006018B4],edx
+    call HouseTypeClass__HouseTypeClass
+;End
+; move array pointer at 0x006018B0 to new location
+    mov  eax,dword[0x006018B0]
+    xor  ecx,ecx
+.Fill:
+    mov  edx,dword[eax+ecx*4]
+    mov  dword[HouseTypeClass.DestructorPtrs+ecx*4],edx
+    inc  ecx
+    cmp  ecx,0x14 * 2
+    jl   .Fill
+    mov  dword[HouseTypeClass.DestructorPtrs-0x14*8],0x004CD4F0 ; HouseTypeClass::~HouseTypeClass(void)
+    mov  dword[HouseTypeClass.DestructorPtrs-0x14*8+4],HouseTypeClass.Multi9
+    mov  dword[HouseTypeClass.DestructorPtrs-0x15*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x15*8+4],HouseTypeClass.Multi10
+    mov  dword[HouseTypeClass.DestructorPtrs-0x16*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x16*8+4],HouseTypeClass.Multi11
+    mov  dword[HouseTypeClass.DestructorPtrs-0x17*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x17*8+4],HouseTypeClass.Multi12
+    mov  dword[HouseTypeClass.DestructorPtrs-0x18*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x18*8+4],HouseTypeClass.Multi13
+    mov  dword[HouseTypeClass.DestructorPtrs-0x19*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x19*8+4],HouseTypeClass.Multi14
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1A*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1A*8+4],HouseTypeClass.Multi15
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1B*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1B*8+4],HouseTypeClass.Multi16
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1C*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1C*8+4],HouseTypeClass.Multi17
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1D*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1D*8+4],HouseTypeClass.Multi18
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1E*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1E*8+4],HouseTypeClass.Multi19
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1F*8],0x004CD4F0
+    mov  dword[HouseTypeClass.DestructorPtrs-0x1F*8+4],HouseTypeClass.Multi20
+    mov  dword[0x006018B0],HouseTypeClass.DestructorPtrs
+    mov  dword[0x006018B4],HouseTypeClass.NEW_COUNT 
+    jmp  0x004CB76A
+@ENDHACK
+
+
+@HACK 0x004CD0DB,0x004CD0E0,_HouseTypeClass__Init_Heap_AddNewHouseTypes
+    HouseTypeClass.new HouseTypeClass.Multi9,0x14
+    HouseTypeClass.new HouseTypeClass.Multi10,0x15
+    HouseTypeClass.new HouseTypeClass.Multi11,0x16
+    HouseTypeClass.new HouseTypeClass.Multi12,0x17
+    HouseTypeClass.new HouseTypeClass.Multi13,0x18
+    HouseTypeClass.new HouseTypeClass.Multi14,0x19
+    HouseTypeClass.new HouseTypeClass.Multi15,0x1A
+    HouseTypeClass.new HouseTypeClass.Multi16,0x1B
+    HouseTypeClass.new HouseTypeClass.Multi17,0x1C
+    HouseTypeClass.new HouseTypeClass.Multi18,0x1D
+    HouseTypeClass.new HouseTypeClass.Multi19,0x1E
+    HouseTypeClass.new HouseTypeClass.Multi20,0x1F
+    call Init_OverrideExistingHouseTypes
+.Ret:
+    lea  esp,[ebp-0x10]
+    pop  edi
+    pop  esi
+    jmp  0x004CD0E0
+@ENDHACK
+
+
+@HACK 0x00537513,0x00537518,_RulesClass__Objects_ReadIni_Fix
+    mov  edx,ebx
+    call HouseTypeClass__Read_INI
+    jmp  0x00537518
+@ENDHACK
+
+
+[section .text]
+Init_OverrideExistingHouseTypes:
+
+    HouseTypeClass.FromIndex(HouseType.Spain,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Greece,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.USSR,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.England,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Ukraine,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Germany,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.France,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Turkey,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.GoodGuy,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.BadGuy,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HIND)
+	HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Neutral,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Special,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi1,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi2,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi3,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi4,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi5,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi6,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi7,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi8,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi9,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi10,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi11,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi12,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi13,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi14,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi15,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+	
+    HouseTypeClass.FromIndex(HouseType.Multi16,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi17,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi18,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi19,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+
+    HouseTypeClass.FromIndex(HouseType.Multi20,edi)
+    HouseTypeClass.HeliUnit.Set(edi,AircraftType.HELI)
+    HouseTypeClass.MCVUnit.Set(edi,UnitType.MCV)
+    retn

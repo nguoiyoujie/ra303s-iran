@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_ABSTRACTYPECLASS
+%define TYPES_ABSTRACTYPECLASS
+
 ; define abstract type field definitions
 %define AbstractTypeClass.Offset.RTTI                      0x000    ; byte
 %define AbstractTypeClass.Offset.Index                     0x001    ; INT
@@ -240,37 +243,4 @@
     pop  edx
 %endmacro
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%endif

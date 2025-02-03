@@ -16,6 +16,8 @@ cextern Globals___PlayerPtr
 
 cextern str_Comma
 
+cextern spawner_is_active
+
 
 @HACK 0x00567048,0x0056704E,_TechnoClass_Visual_Character_Spectator_Stuff
     cmp  cl,5

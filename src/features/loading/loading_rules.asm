@@ -49,6 +49,52 @@ cextern str_NoScreenShake
 cextern str_NoTeslaZapEffectDelay
 cextern str_BuildOffAlly
 
+cextern Rules.Aftermath.AftermathFastBuildSpeed
+cextern Rules.General.FixFormationSpeed
+cextern Rules.General.ParabombsInMultiplayer
+cextern Rules.General.EvacInMP
+cextern Rules.General.RemapJammedBuildings
+cextern Rules.General.FixWideAreaDamage
+cextern Rules.General.ScalePowerBar
+cextern Rules.AI.FixAIParanoid
+cextern Rules.AI.FixAIAlly
+cextern Rules.AI.FixAISendingTanksTopLeft
+cextern Rules.AI.ComputerParanoidForceDisabledSkirmish
+cextern Rules.General.DeathReport
+cextern Rules.General.DeathReport1
+cextern Rules.General.DeathReport2
+cextern Rules.General.DeathReport3
+cextern Rules.General.DeathReport4
+cextern Rules.General.DeathReport5
+cextern Rules.General.TanyaDeathReport
+cextern Rules.General.DogDeathReport
+cextern Rules.General.DeathReport_Data
+cextern Rules.General.DeathReport1_Data
+cextern Rules.General.DeathReport2_Data
+cextern Rules.General.DeathReport3_Data
+cextern Rules.General.DeathReport4_Data
+cextern Rules.General.DeathReport5_Data
+cextern Rules.General.TanyaDeathReport_Data
+cextern Rules.General.DogDeathReport_Data
+cextern Rules.AI.EasyAIGoldValue
+cextern Rules.AI.EasyAIGemValue
+cextern Rules.AI.NormalAIGoldValue
+cextern Rules.AI.NormalAIGemValue
+cextern Rules.AI.HardAIGoldValue
+cextern Rules.AI.HardAIGemValue
+cextern Rules.AI.BuildRadarWithoutAirThreatCheck
+cextern Rules.AI.SingleplayerAIObeyPrerequisites
+cextern Rules.AI.UseNewBuildingAI
+cextern Rules.AI.ForceSingleTileClearing
+cextern Rules.AI.GuardAreaLoadTransportsInSingleplayer
+cextern Rules.AI.RepairConstructedBuildingsInSingleplayer
+cextern Rules.AI.PowerExcess
+cextern Rules.AI.PowerEmergencyMinimum
+cextern Rules.General.AtomRadius
+cextern Rules.General.NoScreenShake
+cextern Rules.General.NoTeslaZapEffectDelay
+cextern Rules.General.BuildOffAlly
+
 
 ; only loaded once on game init, not per map
 @HACK 0x004F446C,0x004F4471,_Init_Game_Hook_Load ; For one-time rules.ini stuff. Intended for logic that should load only on startup and not per map.

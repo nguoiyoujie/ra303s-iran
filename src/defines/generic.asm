@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/defines/generic.asm
+; defines/generic.asm
 ;
 ; Generic Definitions
 ;   Generic definitions are loaded after version, before all else

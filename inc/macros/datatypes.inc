@@ -86,6 +86,14 @@
     sint %1, {%2}, %3
 %endmacro
 
+;; global int fixed array -> arg1 = name, arg2-argX = values
+%macro gintarr 2+
+    cglobal %1
+    [section .data]
+    %1 dd %2
+    __SECT__
+%endmacro
+
 ;; static (local) int array -> arg1 = name, arg2 = value, arg3 = length
 %macro sint 3
     %ifidni %2,0
@@ -238,4 +246,15 @@
     %1 incbin %2
     %1Length dd $-%1
     __SECT__
+%endmacro
+
+;; global enum -> arg1 = enum type, arg2 = enum name, arg3 = (byte) value
+;; generates the following:
+;;    enum values (starting from 0) - accessed via %name%.$enum%
+;;    enum strings - accessed via str.%name%.$enum%
+%macro gbyteenum 3
+    %defstr __STRNAME__ %2
+    cglobal %1.%2
+    %1.%2 db %3
+    gstring str.%1.%2,__STRNAME__
 %endmacro

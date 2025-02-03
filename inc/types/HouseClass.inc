@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_HOUSECLASS
+%define TYPES_HOUSECLASS
+
 cextern HouseTypeClass__new
 cextern HouseClass.Count
 cextern HouseClass.Array
@@ -452,3 +455,5 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
     ;mov  dword[eax+0x21],HouseTypeClass.DestructorPtrs;+0xC*8 ;0x005FA8A8
 %%skip:
 %endmacro
+
+%endif

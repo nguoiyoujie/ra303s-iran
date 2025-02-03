@@ -23,6 +23,10 @@ cextern Globals___Map_Array
 cextern Globals___ScenarioInit
 cextern Globals___PlayerPtr
 
+cextern Map.Basic.ChronoReinforceTanks
+cextern BuildingClass.Count
+cextern BuildingClass.Array
+
 
 %macro TAction__Operator__Epilogue 0
     mov  eax,[ebp+-0x30]

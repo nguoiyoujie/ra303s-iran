@@ -13,6 +13,7 @@ cextern Globals___NewUnitsEnabled
 cextern Globals___SessionType
 cextern Globals___Scen_Scenario
 cextern Globals___Session_Type
+cextern Clear_Extended_Savegame_Values
 
 cextern str_Basic
 cextern str_EmptyString
@@ -26,6 +27,28 @@ cextern str_ChronoReinforceTanks
 cextern str_UseAtomWhiteScreenEffectInMP
 cextern str_UseSinglePlayerAtomDamage
 cextern str_UseCustomTutorialText
+
+cextern spawner_is_active
+cextern OreMineFoundation
+cextern FRAG1AnimData
+cextern Rules.AI.EasyAIGoldValue
+cextern Rules.AI.EasyAIGemValue
+cextern Rules.AI.NormalAIGoldValue
+cextern Rules.AI.NormalAIGemValue
+cextern Rules.AI.HardAIGoldValue
+cextern Rules.AI.HardAIGemValue
+cextern Rules.AI.BuildRadarWithoutAirThreatCheck
+cextern Rules.AI.SingleplayerAIObeyPrerequisites
+cextern RedAlert.Options.ForceAMUnitsInMissions
+cextern TutorialINIPointer
+cextern NextCampaignMissionBuf
+cextern MapSelectABuf
+cextern MapSelectBBuf
+cextern MapSelectCBuf
+cextern CCFileClass_TutorialText
+cextern CCINIClass_TutorialText
+cextern sprintf_key_buffer
+cextern strdup_text_buffer
 
 
 @HACK 0x0053D081,0x0053D086,_Map_Load_Before_Hook ; For map loading stuff

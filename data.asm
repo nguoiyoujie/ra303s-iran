@@ -151,14 +151,7 @@ gbool  Spawn.Settings.SouthAdvantageFix                       ,0
 gbool  Spawn.Settings.TechCenterBugFix                        ,0
 
 ; Color remaps
-%assign RemapControlType.SIZE                                 282 ; only use within this file
-gbuf   ColorRemaps.ExtendedColors                             ,RemapControlType.SIZE * 5 ; 3600
-
-gint   ColorRemaps.White.Offset                               ,0
-gint   ColorRemaps.Black.Offset                               ,RemapControlType.SIZE
-gint   ColorRemaps.FlamingBlue.Offset                         ,RemapControlType.SIZE * 2
-gint   ColorRemaps.TrueGrey.Offset                            ,RemapControlType.SIZE * 3
-gint   ColorRemaps.DirtyGreen.Offset                          ,RemapControlType.SIZE * 4
+gbuf   ColorRemaps.ExtendedColors                             ,REMAPCONTROLTYPE_SIZE * 5 ; 3600
 
 ; unsorted
 gbool  Toggle_Fix_NavalRepairExploit                          ,0 ; 'hardcoded' and not settable?
@@ -176,6 +169,9 @@ gbuf   tutorial_text_buffer                                   ,512
 ; custom_missions.asm
 gbuf   sprintf_buffer3                                        ,512
 gint   MissionCounter                                         ,0
+
+; coop.asm
+gint    InCoopMode                                            ,0
 
 ; Map [Basic]
 gint   Map.Basic.ChronoReinforceTanks                         ,0

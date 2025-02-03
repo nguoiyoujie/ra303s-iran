@@ -11,6 +11,22 @@
 cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
 
+cextern Rules.General.DeathReport
+cextern Rules.General.DeathReport1
+cextern Rules.General.DeathReport2
+cextern Rules.General.DeathReport3
+cextern Rules.General.DeathReport4
+cextern Rules.General.DeathReport5
+cextern Rules.General.TanyaDeathReport
+cextern Rules.General.DogDeathReport
+cextern Rules.General.DeathReport_Data
+cextern Rules.General.DeathReport1_Data
+cextern Rules.General.DeathReport2_Data
+cextern Rules.General.DeathReport3_Data
+cextern Rules.General.DeathReport4_Data
+cextern Rules.General.DeathReport5_Data
+cextern Rules.General.TanyaDeathReport_Data
+cextern Rules.General.DogDeathReport_Data
 
 [section .data] 
 Temp.DeathInfantryID db 0

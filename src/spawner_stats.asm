@@ -5,6 +5,9 @@ cextern Globals___Session_Type
 
 cextern str_dmp_Stats
 
+cextern Globals___SaveGameVersion
+
+
 
 @SJMP 0x004D3C95,0x004D3C9E ; _HouseClass__HouseClass_Enable_Unit_Trackers_Spawner
 @SJMP 0x004D3E52,0x004D3E5F ; _HouseClass__Deconstructor_Delete_Unit_Trackers_Spawner
@@ -204,7 +207,7 @@ Statistics_Packet_Sent: db    0
 @HACK 0x005B6544,0x005B654A,_Send_Statistics_Packet_Send_Only_Once
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL ; if single player dont send statistics
     jz   .Early_Ret
-    cmp  dword[SaveGameVersion],0 ; if we loaded from savegame dont send statistics
+    cmp  dword[Globals___SaveGameVersion],0 ; if we loaded from savegame dont send statistics
     jnz  .Early_Ret
     cmp  byte[spawner_is_active],0
     jz   .Normal_Code
@@ -328,7 +331,7 @@ Statistics_Packet_Sent: db    0
 .Hack_For_Old_Skirmish_Savegames:
     cmp  byte[spawner_is_active],0
     jz   .Early_Return
-    cmp  dword[SaveGameVersion],0
+    cmp  dword[Globals___SaveGameVersion],0
     jnz  .Early_Return
     jmp  .Normal_Code
 @ENDHACK
@@ -352,7 +355,7 @@ Statistics_Packet_Sent: db    0
 .Hack_For_Old_Skirmish_Savegames:
     cmp  byte[spawner_is_active],0
     jz   .Early_Return
-    cmp  dword[SaveGameVersion],0
+    cmp  dword[Globals___SaveGameVersion],0
     jnz  .Early_Return
     jmp  .Normal_Code
 @ENDHACK

@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef INC_INI
+%define INC_INI
+
 cextern Globals___RuleINI
 
 cextern INI_Loop_Entry_Buffer
@@ -329,3 +332,5 @@ Loop_Over_RULES_INI_Section_Entries_:
     pop  edx
     Restore_Registers
     retn
+
+%endif

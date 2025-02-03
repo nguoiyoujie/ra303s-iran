@@ -16,6 +16,7 @@
 
 ; Spawn code for CnCNet, reads SPAWN.INI for options
 
+cextern GetCommandLineA
 cextern Conquer___Call_Back
 cextern Init___Random
 cextern IPXAddressClass__IPXAddressClass
@@ -121,8 +122,38 @@ cextern str_IsSpectator
 cextern str_Seed
 cextern str_AIPlayers
 
+cextern CCFileClass_Spawn
+cextern CCINIClass_Spawn
+cextern CCFileClass_Map
+cextern CCINIClass_Map
+cextern Rules.Aftermath.AftermathFastBuildSpeed
+cextern Rules.General.FixFormationSpeed
+cextern Spawn.Settings.FixRangeExploit
+cextern Spawn.Settings.FixMagicBuild
+cextern Rules.General.ParabombsInMultiplayer
+cextern Rules.AI.FixAIAlly
+cextern Spawn.Settings.MCVUndeploy
+cextern Spawn.Settings.AllyReveal
+cextern Spawn.Settings.ForcedAlliances
+cextern Spawn.Settings.TechCenterBugFix
+cextern Rules.General.BuildOffAlly
+cextern Spawn.Settings.SouthAdvantageFix
+cextern Rules.General.NoScreenShake
+cextern Rules.General.NoTeslaZapEffectDelay
+cextern Spawn.Settings.ShortGame
+cextern Spawn.Settings.DeadPlayersRadar
+cextern Rules.AI.FixAISendingTanksTopLeft
+cextern Rules.General.EvacInMP
+cextern Toggle_Fix_NavalRepairExploit
+cextern FRAG1AnimData
+cextern OreMineFoundation
+cextern buildingcrewstuckfix
 
-%define GetCommandLineA                             0x005E5904
+cextern spawn_INI_Get_Bool
+cextern spawn_INI_Get_Int
+cextern spawn_INI_Get_String
+
+
 %define calloc                                      0x005E1EF6
 %define operator_new                                0x005BBF80
 %define DynamicVectorClass__Add                     0x004B9DA0

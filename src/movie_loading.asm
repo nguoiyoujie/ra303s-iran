@@ -11,6 +11,7 @@
 %define _Play_Movie_                                  0x004A8DCC
 %define Play_Intro                                    0x004F55B0
 
+cextern GetCommandLineA
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Is_Available
 cextern CCINIClass__Load

@@ -12,6 +12,10 @@
 ;
 ;----------------------------------------------------------------
 
+cextern RedAlert.Options.UseGrenadeThrowingSound
+cextern RedAlert.Options.AlternativeRifleSound
+
+
 @HACK 0x0058FF40,0x0058FF45,_Change_Weapon_Sounds
     call 0x00463428
     cmp  byte[esi],12 ; [M1Carbine]

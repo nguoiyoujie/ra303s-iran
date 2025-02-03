@@ -5,6 +5,8 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_OBJECTTYPECLASS
+%define TYPES_OBJECTTYPECLASS
 
 ; define object type field definitions
 %define ObjectTypeClass.Offset.Unknown                   0x021    ; INT // 5FAAD0 for infantry
@@ -60,16 +62,4 @@ str.ObjectTypeClass.RadarIcon                 db"RadarIcon",0              ;inte
 %define ObjectTypeClass.IsInsignificant.Set(ptr_type,value)                  SetBool                                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, value
 %define ObjectTypeClass.IsInsignificant.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadBool             ptr_type, ptr_rules, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, str.ObjectTypeClass.IsSelectable
 
-
-;%define ObjectTypeClass.RTTI.Get(ptr_type,reg_output)                        GetByte                                ptr_type, ObjectTypeClass.Offset.RTTI, reg_output
-;%define ObjectTypeClass.RTTI.Set(ptr_type,value)                             SetByte                                ptr_type, ObjectTypeClass.Offset.RTTI, value
-;%define ObjectTypeClass.RTTI.Read(ptr_type,ptr_rules)                        AbstractTypeClass.ReadByte             ptr_type, ptr_rules, ObjectTypeClass.Offset.RTTI, str.ObjectTypeClass.RTTI  
-
-;%define ObjectTypeClass.Index.Get(ptr_type,reg_output)                       GetInt                                 ptr_type, ObjectTypeClass.Offset.Index, reg_output
-;%define ObjectTypeClass.Index.Set(ptr_type,value)                            SetInt                                 ptr_type, ObjectTypeClass.Offset.Index, value
-;%define ObjectTypeClass.Index.Read(ptr_type,ptr_rules)                       AbstractTypeClass.ReadInt              ptr_type, ptr_rules, ObjectTypeClass.Offset.Index, str.ObjectTypeClass.Index
-
-;%define ObjectTypeClass.StringTableName.Get(ptr_type,reg_output)             GetInt                                 ptr_type, ObjectTypeClass.Offset.StringTableName, reg_output
-;%define ObjectTypeClass.StringTableName.Set(ptr_type,value)                  SetInt                                 ptr_type, ObjectTypeClass.Offset.StringTableName, value
-;%define ObjectTypeClass.StringTableName.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadInt              ptr_type, ptr_rules, ObjectTypeClass.Offset.StringTableName, str.ObjectTypeClass.StringTableName
-
+%endif

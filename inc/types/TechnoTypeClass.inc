@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_TECHNOTYPECLASS
+%define TYPES_TECHNOTYPECLASS
+
 ; define techno type field definitions
 %define TechnoTypeClass.Offset.Remap                  0x138    ; byte
 %define TechnoTypeClass.Offset.IsDoubleOwned          0x139    ; BOOL // Already supported by game INI
@@ -233,3 +236,5 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.SecondaryLateral.Get(ptr_type,reg_output)            GetInt                                 ptr_type, TechnoTypeClass.Offset.SecondaryLateral, reg_output
 %define TechnoTypeClass.SecondaryLateral.Set(ptr_type,value)                 SetInt                                 ptr_type, TechnoTypeClass.Offset.SecondaryLateral, value
 %define TechnoTypeClass.SecondaryLateral.Read(ptr_type,ptr_rules)            AbstractTypeClass.ReadInt              ptr_type, ptr_rules, TechnoTypeClass.Offset.SecondaryLateral, str.TechnoTypeClass.SecondaryLateral
+
+%endif

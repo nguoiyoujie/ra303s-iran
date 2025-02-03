@@ -13,6 +13,9 @@ cextern Globals___Options_KeyResign
 cextern Globals___Map
 cextern Globals___Session_Type
 
+cextern RedAlert.WinHotKeys.KeySidebarToggle
+cextern RedAlert.WinHotKeys.KeyMapSnapshot
+
 
 @SJMP 0x0054D916,0x0054D91B ; _Patch_Out_Erroneous_Sidebar_Activate_CALL
 @SJMP 0x004A6206,0x004A6221 ; _UnhardCode_Keyboard_Key0

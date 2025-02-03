@@ -43,6 +43,7 @@
 ; No compatibility issues is expected.
 ;----------------------------------------------------------------
 
+cextern GetCommandLineA
 cextern MixFileClass_CCFileClass_Retrieve
 cextern MixFileClass_CCFileClass_Cache
 cextern Globals___FastKey
@@ -89,6 +90,16 @@ cextern str_mix_Expand4
 cextern str_mix_Expand3
 cextern str_mix_Expand2
 cextern str_mix_Expand1
+
+cextern RedAlert.Options.UseDOSInterfaceMod
+cextern RedAlert.Options.UseBetaCruiser
+cextern RedAlert.Options.UseBetaGunboat
+cextern RedAlert.Options.UseBetaSubmarine
+cextern RedAlert.Options.UseBetaDestroyer
+cextern RedAlert.Options.UseBetaTeslaTank
+cextern RedAlert.Options.UseSmallInfantry
+cextern CCFileClass_RedAlert
+cextern CCINIClass_RedAlert
 
 
 ; Loads without caching in memory

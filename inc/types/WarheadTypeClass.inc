@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_WARHEADTYPECLASS
+%define TYPES_WARHEADTYPECLASS
+
 cextern WarheadTypeClass.Count
 cextern WarheadTypeClass.Array
 
@@ -171,19 +174,4 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
     pop  edx
 %endmacro
 
-
-_GetWarheadTypeIDFromString:
-    ;select WarheadType by performing string compare on eax
-    push ebx
-    cmp  eax,0
-    jle  .Retn ; just return 0
-    WarheadTypeClass.FromID(eax,ebx)
-    ;in case the ID was invalid...
-    test ebx,ebx
-    jz   .Retn ; just return 0
-    mov  ebx,dword[ebx]; index
-    mov  eax,ebx
-.Retn:
-    pop ebx
-    retn
-  
+%endif

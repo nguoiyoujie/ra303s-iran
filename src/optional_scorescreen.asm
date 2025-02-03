@@ -1,6 +1,8 @@
 
 
-; RedAlert.Options.SkipScoreScreen
+cextern RedAlert.Options.SkipScoreScreen
+
+
 @HACK 0x00540670,0x00540678,_Campaign_Do_Win_Score_Screen
     cmp  byte[RedAlert.Options.SkipScoreScreen],1
     jnz  .No_Early_Ret

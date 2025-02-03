@@ -18,15 +18,15 @@ cextern Globals___Session_Type
 cextern str_Basic
 cextern str_IsCoopMode
 
+cextern InCoopMode
+cextern Rules.AI.SingleplayerAIObeyPrerequisites
+cextern HouseTypeClass.NEW_COUNT
 
 ; Remove game single player game mode check when checking for win/lose flags set in HouseClass::AI()
 @SJMP  0x004D415D,0x004D416A
 @SJMP  0x004D41D4,0x004D41DD
 
 ;@HACK 0x004D8CAE,_HouseClass__Init_Data_Dont_Set_Credits_In_Coop_Mode ; combined with _HouseClass__Init_Data_Reset_NewData
-
-[section .data] 
-InCoopMode    dd 0
 
 
 ; Crates stuff?

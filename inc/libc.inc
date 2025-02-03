@@ -1,5 +1,5 @@
-%define _fopen                                                        0x005D40B9
-%define _fclose                                                       0x005D41C6
+%assign _fopen                                                        0x005D40B9
+%assign _fclose                                                       0x005D41C6
 
 %assign _printf                                                       0x005CD97B
 %assign _sprintf                                                      0x005B8BAA

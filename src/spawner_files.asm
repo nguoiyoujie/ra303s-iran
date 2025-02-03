@@ -7,6 +7,7 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+cextern GetCommandLineA
 cextern str_AftermathIni
 cextern str_arg_Spawn
 cextern str_xdp_Spawnam

@@ -12,7 +12,7 @@
 
 setcglob 0x005EC01F,str_EmptyString                            ; ""
 setcglob 0x005E82C5,str_Comma                                  ; ","
-gstring str_Zero                                               ,"0"
+gstring str_Zero                                               , "0"
         
 setcglob 0x00605CD0,str_Internet                               ; "Internet"
 
@@ -51,50 +51,16 @@ setcglob 0x005EFFA5,str_Basic                                  ; "Basic"
 setcglob 0x005EF3EE,str_General                                ; "General"
 setcglob 0x005EFC29,str_AI                                     ; "AI"
 setcglob 0x005EF3F6,str_Aftermath                              ; "Aftermath"
-gstring str_SetProcessAffinityMask                             ,"SetProcessAffinityMask"
+gstring str_SetProcessAffinityMask                             , "SetProcessAffinityMask"
 
 setcglob 0x005EFE41,str_Weapons                                ; "Super"^"Weapons"
 
-gstring str_Skirmish                                           ,"Skirmish"
-gstring str_Multi1                                             ,"Multi1"
-gstring str_Multi2                                             ,"Multi2"
-gstring str_Multi3                                             ,"Multi3"
-gstring str_Multi4                                             ,"Multi4"
-gstring str_Multi5                                             ,"Multi5"
-gstring str_Multi6                                             ,"Multi6"
-gstring str_Multi7                                             ,"Multi7"
-gstring str_Multi8                                             ,"Multi8"
-
-;Additional houses
-gstring str_Multi9                                             ,"Multi9"
-gstring str_Multi10                                            ,"Multi10"
-gstring str_Multi11                                            ,"Multi11"
-gstring str_Multi12                                            ,"Multi12"
-gstring str_Multi13                                            ,"Multi13"
-gstring str_Multi14                                            ,"Multi14"
-gstring str_Multi15                                            ,"Multi15"
-gstring str_Multi16                                            ,"Multi16"
-gstring str_Multi17                                            ,"Multi17"
-gstring str_Multi18                                            ,"Multi18"
-gstring str_Multi19                                            ,"Multi19"
-gstring str_Multi20                                            ,"Multi20"
-gstring str_MP9                                                ,"MP9"
-gstring str_MP10                                               ,"M10"
-gstring str_MP11                                               ,"M11"
-gstring str_MP12                                               ,"M12"
-gstring str_MP13                                               ,"M13"
-gstring str_MP14                                               ,"M14"
-gstring str_MP15                                               ,"M15"
-gstring str_MP16                                               ,"M16"
-gstring str_MP17                                               ,"M17"
-gstring str_MP18                                               ,"M18"
-gstring str_MP19                                               ,"M19"
-gstring str_MP20                                               ,"M20"
+gstring str_Skirmish                                           , "Skirmish"
 
 ; Hardcoded naval turrets
-gstring str_TURR                                               ,"TURR"
-gstring str_SSAM                                               ,"SSAM"
-gstring str_MGUN                                               ,"MGUN"
+gstring str_TURR                                               , "TURR"
+gstring str_SSAM                                               , "SSAM"
+gstring str_MGUN                                               , "MGUN"
 
 ; Multi-use Strings
 ; If a string is used in more than one location, put them here, and reference them in comment in their respective use locations
@@ -203,10 +169,8 @@ gstring str_arg_Hard                                           , "-HARD"        
 ; RedAlert.ini Sections
 setcglob 0x005EDE1F,str_Options                                ; "Options"
 setcglob 0x005EE3E4,str_WinHotkeys                             ; "WinHotkeys"
-
 setcglob 0x005EB3AB,str_Width                                  ; "Width"
 setcglob 0x005EB3B1,str_Height                                 ; "Height"
-
 gstring str_Colour                                             , "Colour" ; Used in lieu with [<House>] > Color
 gstring str_Country                                            , "Country"
 gstring str_BuildingsGetInstantlyCaptured                      , "BuildingsGetInstantlyCaptured"
@@ -396,7 +360,259 @@ gstring str_MapSelectC                                         , "MapSelectC"
 gstring str_IsCoopMode                                         , "IsCoopMode"
 
 
-
 gstring str_shp_NoIcon                                         , "NOICON.SHP"
+
+; Defines -------------------------------------------------------------------------------------------------
+; ---- AIBuildTypes ----
+gstring str.AIBuildType.NONE                                   , "NONE"
+gstring str.AIBuildType.POWER                                  , "POWER"
+gstring str.AIBuildType.REFINERY                               , "REFINERY"
+gstring str.AIBuildType.BARRACKS                               , "BARRACKS"
+gstring str.AIBuildType.WARFACTORY                             , "WARFACTORY"
+gstring str.AIBuildType.TECH                                   , "TECH"
+gstring str.AIBuildType.DEFENSE                                , "DEFENSE"
+gstring str.AIBuildType.ADV.DEFENSE                            , "ADV.DEFENSE"
+gstring str.AIBuildType.AA.DEFENSE                             , "AA.DEFENSE"
+gstring str.AIBuildType.AIRSTRIP                               , "AIRSTRIP"
+gstring str.AIBuildType.HELIPAD                                , "HELIPAD"
+gstring str.AIBuildType.GENERIC                                , "GENERIC"
+
+gintarr strlist.AIBuildTypes                      			   , str.AIBuildType.NONE \
+                                                               , str.AIBuildType.POWER \
+                                                               , str.AIBuildType.REFINERY \
+                                                               , str.AIBuildType.BARRACKS \
+                                                               , str.AIBuildType.WARFACTORY \
+                                                               , str.AIBuildType.TECH \
+                                                               , str.AIBuildType.DEFENSE \
+                                                               , str.AIBuildType.ADV.DEFENSE \
+                                                               , str.AIBuildType.AA.DEFENSE \
+                                                               , str.AIBuildType.AIRSTRIP \
+                                                               , str.AIBuildType.HELIPAD \
+                                                               , str.AIBuildType.GENERIC \
+                                                               , 0
+
+; ---- ArmorTypes ----
+gstring str.ArmorType.None                                     , "none"
+gstring str.ArmorType.Wood                                     , "wood"
+gstring str.ArmorType.Light                                    , "light"
+gstring str.ArmorType.Heavy                                    , "heavy"
+gstring str.ArmorType.Concrete                                 , "concrete"
+; new ArmorTypes names, inspired from RA2. Beware that they are added after the original and the order of armor types does not match that of RA2
+gstring str.ArmorType.Flak                                     , "flak"
+gstring str.ArmorType.Plate                                    , "plate"
+gstring str.ArmorType.Medium                                   , "medium"
+gstring str.ArmorType.Steel                                    , "steel"
+; unimplemented ArmorTypes. On implementation of expansion to the warheadtype class memory size, additional armor types can be implemented to match RA2
+gstring str.ArmorType.Special_1                                , "special_1"
+gstring str.ArmorType.Special_2                                , "special_2"
+
+gintarr strlist.ArmorTypes                                     , str.ArmorType.None \
+                                                               , str.ArmorType.Wood \
+                                                               , str.ArmorType.Light \
+                                                               , str.ArmorType.Heavy \
+                                                               , str.ArmorType.Concrete \
+                                                               , str.ArmorType.Flak \
+                                                               , str.ArmorType.Plate \
+                                                               , str.ArmorType.Medium \
+                                                               , str.ArmorType.Steel \
+                                                               , str.ArmorType.Special_1 \
+                                                               , str.ArmorType.Special_2 \
+                                                               , 0
+
+gstring str.ArmorDefault                                       , "100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%"
+
+; ---- HouseTypes ----
+gstring str_Multi1                                             , "Multi1"
+gstring str_Multi2                                             , "Multi2"
+gstring str_Multi3                                             , "Multi3"
+gstring str_Multi4                                             , "Multi4"
+gstring str_Multi5                                             , "Multi5"
+gstring str_Multi6                                             , "Multi6"
+gstring str_Multi7                                             , "Multi7"
+gstring str_Multi8                                             , "Multi8"
+;Additional houses
+gstring str_Multi9                                             , "Multi9"
+gstring str_Multi10                                            , "Multi10"
+gstring str_Multi11                                            , "Multi11"
+gstring str_Multi12                                            , "Multi12"
+gstring str_Multi13                                            , "Multi13"
+gstring str_Multi14                                            , "Multi14"
+gstring str_Multi15                                            , "Multi15"
+gstring str_Multi16                                            , "Multi16"
+gstring str_Multi17                                            , "Multi17"
+gstring str_Multi18                                            , "Multi18"
+gstring str_Multi19                                            , "Multi19"
+gstring str_Multi20                                            , "Multi20"
+gstring str_MP9                                                , "MP9"
+gstring str_MP10                                               , "M10"
+gstring str_MP11                                               , "M11"
+gstring str_MP12                                               , "M12"
+gstring str_MP13                                               , "M13"
+gstring str_MP14                                               , "M14"
+gstring str_MP15                                               , "M15"
+gstring str_MP16                                               , "M16"
+gstring str_MP17                                               , "M17"
+gstring str_MP18                                               , "M18"
+gstring str_MP19                                               , "M19"
+gstring str_MP20                                               , "M20"
+
+; ---- PlayerColorTypes ----
+gstring str.PlayerColorType.YELLOW                             , "YELLOW"
+gstring str.PlayerColorType.LTBLUE                             , "LTBLUE"
+gstring str.PlayerColorType.RED                                , "RED"
+gstring str.PlayerColorType.GREEN                              , "GREEN"
+gstring str.PlayerColorType.ORANGE                             , "ORANGE"
+gstring str.PlayerColorType.GREY                               , "GREY"
+gstring str.PlayerColorType.BLUE                               , "BLUE"
+gstring str.PlayerColorType.BROWN                              , "BROWN"
+gstring str.PlayerColorType.WHITE                              , "WHITE"
+gstring str.PlayerColorType.BLACK                              , "BLACK"
+gstring str.PlayerColorType.FLAMING_BLUE                       , "FLAMING_BLUE"
+gstring str.PlayerColorType.TRUE_GREY                          , "TRUE_GREY"
+gstring str.PlayerColorType.DIRTY_GREEN                        , "DIRTY_GREEN"
+
+gintarr strlist.PlayerColorTypes		                       , str.PlayerColorType.YELLOW \
+										                       , str.PlayerColorType.LTBLUE \
+										                       , str.PlayerColorType.RED \
+										                       , str.PlayerColorType.GREEN \
+										                       , str.PlayerColorType.ORANGE \
+										                       , str.PlayerColorType.GREY \
+										                       , str.PlayerColorType.BLUE \
+										                       , str.PlayerColorType.BROWN \
+										                       , str.PlayerColorType.WHITE \
+										                       , str.PlayerColorType.BLACK \
+										                       , str.PlayerColorType.FLAMING_BLUE \
+										                       , str.PlayerColorType.TRUE_GREY \
+										                       , str.PlayerColorType.DIRTY_GREEN \
+										                       , 0
+
+; ---- PrereqTypes ----
+gstring str.PrereqType.NONE                                    , "NONE"
+gstring str.PrereqType.CONYARD                                 , "CONYARD"
+gstring str.PrereqType.POWER                                   , "POWER"
+gstring str.PrereqType.ADV.POWER                               , "ADV.POWER"
+gstring str.PrereqType.REFINERY                                , "REFINERY"
+gstring str.PrereqType.ORESILO                                 , "ORESILO"
+gstring str.PrereqType.BARRACKS                                , "BARRACKS"
+gstring str.PrereqType.WARFACTORY                              , "WARFACTORY"
+gstring str.PrereqType.RADAR                                   , "RADAR"
+gstring str.PrereqType.REPAIR                                  , "REPAIR"
+gstring str.PrereqType.DEFENSE                                 , "DEFENSE"
+gstring str.PrereqType.ADV.DEFENSE                             , "ADV.DEFENSE"
+gstring str.PrereqType.AA.DEFENSE                              , "AA.DEFENSE"
+gstring str.PrereqType.TECH                                    , "TECH"
+gstring str.PrereqType.AIRSTRIP                                , "AIRSTRIP"
+gstring str.PrereqType.HELIPAD                                 , "HELIPAD"
+gstring str.PrereqType.SHIPYARD                                , "SHIPYARD"
+gstring str.PrereqType.LAB                                     , "LAB"
+gstring str.PrereqType.ADV.LAB                                 , "ADV.LAB"
+gstring str.PrereqType.ADV.WEAPON1                             , "ADV.WEAPON1"
+gstring str.PrereqType.ADV.WEAPON2                             , "ADV.WEAPON2"
+gstring str.PrereqType.FAKES                                   , "FAKES"
+gstring str.PrereqType.USER.22                                 , "USER.22"
+gstring str.PrereqType.USER.23                                 , "USER.23"
+gstring str.PrereqType.USER.24                                 , "USER.24"
+gstring str.PrereqType.USER.25                                 , "USER.25"
+gstring str.PrereqType.USER.26                                 , "USER.26"
+gstring str.PrereqType.USER.27                                 , "USER.27"
+gstring str.PrereqType.USER.28                                 , "USER.28"
+gstring str.PrereqType.USER.29                                 , "USER.29"
+gstring str.PrereqType.MISC                                    , "MISC"
+gstring str.PrereqType.CIVBUILDING                             , "CIVBUILDING"
+
+gintarr strlist.PrereqTypes                                    , str.PrereqType.NONE \
+                                                               , str.PrereqType.CONYARD \
+                                                               , str.PrereqType.POWER \
+                                                               , str.PrereqType.ADV.POWER \
+                                                               , str.PrereqType.REFINERY \
+                                                               , str.PrereqType.ORESILO \
+                                                               , str.PrereqType.BARRACKS \
+                                                               , str.PrereqType.WARFACTORY \
+                                                               , str.PrereqType.RADAR \
+                                                               , str.PrereqType.REPAIR \
+                                                               , str.PrereqType.DEFENSE \
+                                                               , str.PrereqType.ADV.DEFENSE \
+                                                               , str.PrereqType.AA.DEFENSE \
+                                                               , str.PrereqType.TECH \
+                                                               , str.PrereqType.AIRSTRIP \
+                                                               , str.PrereqType.HELIPAD \
+                                                               , str.PrereqType.SHIPYARD \
+                                                               , str.PrereqType.LAB \
+                                                               , str.PrereqType.ADV.LAB \
+                                                               , str.PrereqType.ADV.WEAPON1 \
+                                                               , str.PrereqType.ADV.WEAPON2 \
+                                                               , str.PrereqType.FAKES \
+                                                               , str.PrereqType.USER.22 \
+                                                               , str.PrereqType.USER.23 \
+                                                               , str.PrereqType.USER.24 \
+                                                               , str.PrereqType.USER.25 \
+                                                               , str.PrereqType.USER.26 \
+                                                               , str.PrereqType.USER.27 \
+                                                               , str.PrereqType.USER.28 \
+                                                               , str.PrereqType.USER.29 \
+                                                               , str.PrereqType.MISC \
+                                                               , str.PrereqType.CIVBUILDING \
+                                                               , 0
+
+; ---- RTTITypes ----
+gstring str.RTTIType.None                                      , "None"
+gstring str.RTTIType.Aircraft                                  , "Aircraft"
+gstring str.RTTIType.AircraftType                              , "AircraftType"
+gstring str.RTTIType.Anim                                      , "Anim"
+gstring str.RTTIType.AnimType                                  , "AnimType"
+gstring str.RTTIType.Building                                  , "Building"
+gstring str.RTTIType.BuildingType                              , "BuildingType"
+gstring str.RTTIType.Bullet                                    , "Bullet"
+gstring str.RTTIType.BulletType                                , "BulletType"
+gstring str.RTTIType.Cell                                      , "Cell"
+gstring str.RTTIType.Factory                                   , "Factory"
+gstring str.RTTIType.House                                     , "House"
+gstring str.RTTIType.HouseType                                 , "HouseType"
+gstring str.RTTIType.Infantry                                  , "Infantry"
+gstring str.RTTIType.InfantryType                              , "InfantryType"
+gstring str.RTTIType.Overlay                                   , "Overlay"
+gstring str.RTTIType.OverlayType                               , "OverlayType"
+gstring str.RTTIType.Smudge                                    , "Smudge"
+gstring str.RTTIType.SmudgeType                                , "SmudgeType"
+gstring str.RTTIType.Special                                   , "Special"
+gstring str.RTTIType.Team                                      , "Team"
+gstring str.RTTIType.TeamType                                  , "TeamType"
+gstring str.RTTIType.Template                                  , "Template"
+gstring str.RTTIType.TemplateType                              , "TemplateType"
+gstring str.RTTIType.Terrain                                   , "Terrain"
+gstring str.RTTIType.TerrainType                               , "TerrainType"
+gstring str.RTTIType.Trigger                                   , "Trigger"
+gstring str.RTTIType.TriggerType                               , "TriggerType"
+gstring str.RTTIType.Unit                                      , "Unit"
+gstring str.RTTIType.UnitType                                  , "UnitType"
+gstring str.RTTIType.Vessel                                    , "Vessel"
+gstring str.RTTIType.VesselType                                , "VesselType"
+
+; ---- SpecialTypes ----
+gstring str.SpecialType.NONE                                   , "NONE"
+gstring str.SpecialType.SONAR_PULSE                            , "SONARPULSE"
+gstring str.SpecialType.NUCLEAR_BOMB                           , "NUCLEARBOMB" 
+gstring str.SpecialType.CHRONOSPHERE                           , "CHRONOSPHERE"
+gstring str.SpecialType.PARA_BOMB                              , "PARABOMB"
+gstring str.SpecialType.PARA_INFANTRY                          , "PARAINFANTRY"
+gstring str.SpecialType.SPY_MISSION                            , "SPYPLANE"
+gstring str.SpecialType.IRON_CURTAIN                           , "IRONCURTAIN"
+gstring str.SpecialType.GPS                                    , "GPS"
+
+gintarr strlist.SpecialTypes                                   , str.SpecialType.NONE \
+                                                               , str.SpecialType.SONAR_PULSE \
+                                                               , str.SpecialType.NUCLEAR_BOMB \
+                                                               , str.SpecialType.CHRONOSPHERE \
+                                                               , str.SpecialType.PARA_BOMB \
+                                                               , str.SpecialType.PARA_INFANTRY \
+                                                               , str.SpecialType.SPY_MISSION \
+                                                               , str.SpecialType.IRON_CURTAIN \
+                                                               , str.SpecialType.GPS \
+                                                               , 0
+
+
+; -------------------------------------------------------------------------------------------------
+
+
 
 

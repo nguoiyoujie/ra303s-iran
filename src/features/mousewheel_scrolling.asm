@@ -14,6 +14,8 @@ cextern SidebarClass__Scroll
 cextern Globals___Map
 cextern Globals___PlayerPtr
 
+cextern RedAlert.Options.MouseWheelScrolling
+
 
 [section .data] 
 Scrolling db 0

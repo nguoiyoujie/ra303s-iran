@@ -1,5 +1,5 @@
 ;----------------------------------------------------------------
-; src/defines/storeddata.asm
+; defines/storeddata.asm
 ;
 ; Stored Data Definitions
 ;   Variable storage for variables that span more than one assembly page

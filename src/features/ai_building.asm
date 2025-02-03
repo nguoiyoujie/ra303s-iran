@@ -26,6 +26,11 @@ cextern TechnoTypeClass__Legal_Placement
 cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
 
+cextern Rules.AI.PowerExcess
+cextern Rules.AI.PowerEmergencyMinimum
+cextern Rules.AI.UseNewBuildingAI
+cextern Rules.AI.ForceSingleTileClearing
+
 
 %define UrgencyType.NONE                       0
 %define UrgencyType.LOW                        1

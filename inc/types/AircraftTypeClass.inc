@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_AIRCRAFTTYPECLASS
+%define TYPES_AIRCRAFTTYPECLASS
+
 cextern AircraftTypeClass.Count
 cextern AircraftTypeClass.Array
 
@@ -95,19 +98,5 @@ str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0            
 %define AircraftTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        GetWord                                ptr_type, AircraftTypeClass.Offset.Response_Attack_Data, reg_output
 %define AircraftTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Attack, str.AircraftTypeClass.Response_Attack, function
 
+%endif
 
-_GetAircraftTypeIDFromString:
-    ;select UnitType by performing string compare on eax
-    push ebx
-    cmp  eax,0
-    jle  .Retn ; just return 0
-    AircraftTypeClass.FromID(eax,ebx)
-    ;in case the ID was invalid...
-    test ebx,ebx
-    jz   .Retn ; just return 0
-    mov  ebx,dword[ebx+1]; index
-	;AbstractTypeClass.ID ebx,ebx
-    mov  eax,ebx
-.Retn:
-    pop ebx
-    retn

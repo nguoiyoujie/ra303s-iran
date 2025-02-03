@@ -18,7 +18,7 @@
 %include "macros/datatypes.inc"
 %include "types/common.inc"
 
-%include "src/defines/housetypes.asm"
+%include "defines/housetypes.inc"
 
 %include "types/INIClass.inc"
 %include "types/ini.inc"

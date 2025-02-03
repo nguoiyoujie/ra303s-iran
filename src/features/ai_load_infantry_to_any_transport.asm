@@ -12,6 +12,8 @@
 
 cextern Globals___Session_Type
 
+cextern Rules.AI.GuardAreaLoadTransportsInSingleplayer
+
 
 @HACK 0x005819F5,0x005819FC,_UnitClass__Mission_Guard_Area_Enable_For_Singleplayer
     cmp  byte[Globals___Session_Type],0

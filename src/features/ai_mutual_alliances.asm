@@ -23,6 +23,11 @@ cextern HouseClass__As_Pointer
 cextern HouseClass__Computer_Paranoid
 cextern Globals___Session_Type
 
+cextern Rules.AI.ComputerParanoidForceDisabledSkirmish
+cextern Rules.AI.FixAIAlly
+cextern Rules.AI.FixAIParanoid
+cextern Spawn.Settings.ForcedAlliances
+
 
 ; Suppress IsHuman check, allowing AI alliances to be published to the in-game UI message system
 @SJMP 0x004D62DD,0x004D62E3 ; _HouseClass__Make_Ally_Show_Computer_Has_Allied

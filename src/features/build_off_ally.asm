@@ -13,6 +13,7 @@
 cextern HouseClass__As_Pointer
 cextern HouseClass__Is_Ally
 
+cextern Rules.General.BuildOffAlly
 
 ; args <HouseType to check whose alliances will be checked>, <HouseType to check for>
 %macro Is_Ally 2

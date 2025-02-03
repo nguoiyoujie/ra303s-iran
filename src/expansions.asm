@@ -29,6 +29,7 @@
 ;
 ;----------------------------------------------------------------
 
+cextern GetCommandLineA
 cextern str_arg_Spawn
 
 @HACK 0x004AC024,0x004AC029,_Is_Aftermath_Installed

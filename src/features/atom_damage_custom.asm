@@ -18,6 +18,10 @@ cextern Globals___Rule_AtomDamage
 cextern Globals___WhitePalette
 cextern Globals___Session_Type
 
+cextern Rules.General.AtomRadius
+cextern Map.Basic.UseAtomWhiteScreenEffectInMP
+cextern Map.Basic.UseSinglePlayerAtomDamage
+
 
 @HACK 0x00425BA8,0x00425BAD,_AnimClass__Override_Atom_Range
     cmp  dword[Rules.General.AtomRadius],0

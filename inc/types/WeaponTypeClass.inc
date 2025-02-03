@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_WEAPONTYPECLASS
+%define TYPES_WEAPONTYPECLASS
+
 cextern WeaponTypeClass.Count
 cextern WeaponTypeClass.Array
 cextern INI_Read_Value_Buffer
@@ -236,3 +239,5 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
   %%done:
     pop  edx
 %endmacro
+
+%endif

@@ -46,6 +46,10 @@ cextern Globals___Rule
 
 cextern str_ini_OOSFix
 
+cextern CCFileClass_OOSFix
+cextern CCINIClass_OOSFix
+cextern spawner_is_active
+
 
 @HACK 0x00538B73,0x00538B7D,_Load_Game_Load_OOS_FIX_INI
     Save_Registers

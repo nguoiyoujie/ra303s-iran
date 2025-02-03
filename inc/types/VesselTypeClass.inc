@@ -5,6 +5,9 @@
 ;
 ;----------------------------------------------------------------
 
+%ifndef TYPES_VESSELTYPECLASS
+%define TYPES_VESSELTYPECLASS
+
 cextern VesselTypeClass.Count
 cextern VesselTypeClass.Array
 
@@ -145,3 +148,5 @@ str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            
 %define VesselTypeClass.Response_Deploy.Get(ptr_type,reg_output)             GetInt                                 ptr_type, VesselTypeClass.Offset.Response_Deploy, reg_output
 %define VesselTypeClass.Response_Deploy_Data.Get(ptr_type,reg_output)        GetWord                                ptr_type, VesselTypeClass.Offset.Response_Deploy_Data, reg_output
 %define VesselTypeClass.Response_Deploy.Read(ptr_type,ptr_rules,function)    AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Deploy, str.VesselTypeClass.Response_Deploy, function
+
+%endif

@@ -28,6 +28,7 @@
 
 cextern Globals___Session_Type
 
+cextern RedAlert.Options.EnableWOL
 
 %define ShellExecuteA           0x005E653C
 %define ShowWindow              0x005E6884

@@ -14,6 +14,8 @@ cextern Audio___Sound_Effect
 cextern Globals___Map
 cextern Globals___PlayerPtr
 
+cextern Spawn.Settings.DeadPlayersRadar
+
 
 @HACK 0x004D4EEF,0x004D4EF8,_HouseClass__AI_Radar1
     push eax

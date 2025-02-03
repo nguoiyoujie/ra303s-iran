@@ -10,6 +10,15 @@
 ; Care should be taken that the color index is not exceeded
 ;
 ;----------------------------------------------------------------
+
+cextern ColorRemaps.ExtendedColors
+
+%assign ColorRemaps.White.Offset                               0
+%assign ColorRemaps.Black.Offset                               REMAPCONTROLTYPE_SIZE
+%assign ColorRemaps.FlamingBlue.Offset                         REMAPCONTROLTYPE_SIZE * 2
+%assign ColorRemaps.TrueGrey.Offset                            REMAPCONTROLTYPE_SIZE * 3
+%assign ColorRemaps.DirtyGreen.Offset                          REMAPCONTROLTYPE_SIZE * 4
+
 %macro Initialize_Remap_Table 1
     xor  eax,eax
 

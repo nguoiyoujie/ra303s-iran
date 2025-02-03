@@ -16,6 +16,8 @@
 %include "macros/setsym.inc"
 
 setcglob 0x005D6148,start
+setcglob 0x005E5904,GetCommandLineA                             
+
 
 setcglob 0x005E66A8,_imp__timeGetTime
 setcglob 0x005E667C,_imp__Sleep
@@ -323,10 +325,12 @@ setcglob 0x006016B4,Globals___ScreenHeight
 setcglob 0x006017F0,Globals___Houses                                           ; TFixedIHeapClass<HouseClass> Houses;
 setcglob 0x00601818,Globals___HouseTypes                                       ; TFixedIHeapClass<HouseTypeClass> HouseTypeClass;
 setcglob 0x0060181C,Globals___BuildingTypes                                    ; TFixedIHeapClass<BuildingTypeClass> BuildingTypes;
+setcglob 0x0065D7C0,Globals___SaveGameVersion
 setcglob 0x0065E0D0,Globals___FormSpeed                                       
 setcglob 0x0065E0D1,Globals___FormMaxSpeed                                    
 setcglob 0x00665DDC,Globals___AntsEnabled                                     
 setcglob 0x00665DE0,Globals___NewUnitsEnabled                                 
+
 setcglob 0x00665E04,Globals___EngineerCaptureLevel                            
 setcglob 0x00665F68,Globals___FastKey                                          ; PKey FastKey;
 ;setcglob ??????????,Globals___Options                                          ; GameOptionsClass Options;

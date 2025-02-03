@@ -11,6 +11,11 @@ cextern ChronalVortexClass__Stop
 cextern Globals___NewUnitsEnabled
 cextern Globals___Session_Type
 
+cextern RedAlert.Options.ForceAMUnitsInMissions
+cextern OreMineFoundation
+cextern spawner_is_active
+cextern FRAG1AnimData
+
 
 @HACK 0x00538F07,0x00538F0C,_Load_Game_Late_Hook  ; For savegame loading stuff
     Save_Registers

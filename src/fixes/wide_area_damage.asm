@@ -11,6 +11,8 @@
 ;
 ;----------------------------------------------------------------
 
+cextern Rules.General.FixWideAreaDamage
+
 ; Genius move by Westwood.
 ; In Combat::Wide_Area_Damage
 ; 	int damage = rawdamage * Inverse(fixed(cell_radius, dist_from_center)); 

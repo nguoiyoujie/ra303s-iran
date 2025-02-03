@@ -4,6 +4,10 @@
 ; Common CCINIClass functions and helper macros
 ;
 ;----------------------------------------------------------------
+
+%ifndef TYPES_CCINICLASS
+%define TYPES_CCINICLASS
+
 cextern CCINIClass__CCINIClass
 cextern CCINIClass__Load
 cextern CCINIClass__Put_HousesType
@@ -93,3 +97,5 @@ cextern CCINIClass__Put_ThemeType
   %endif
     call CCINIClass__Put_ThemeType
 %endmacro
+
+%endif

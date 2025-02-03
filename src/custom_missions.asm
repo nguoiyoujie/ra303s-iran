@@ -1,6 +1,15 @@
 
 cextern Scenario___Start_Scenario
 
+cextern MapSelectionAnimationBuf
+cextern NextCampaignMissionBuf
+cextern MapSelectABuf
+cextern MapSelectBBuf
+cextern MapSelectCBuf
+cextern MissionCounter
+cextern sprintf_buffer3
+
+
 [section .rdata]
 str_sprintf_format3 db"cmu%02dea",0
 str_s_format  db"%s",0
