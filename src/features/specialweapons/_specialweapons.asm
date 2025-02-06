@@ -22,13 +22,6 @@
 %include "types/TechnoTypeClass.inc"
 %include "types/BuildingTypeClass.inc"
 %include "types/HouseClass.inc"
-;%include "types/HouseTypeClass.inc"
-
-cextern Houses.BScan
-;cextern Houses.BSignificantScan
-cextern Houses.SpecialScan
-cextern Houses.Radar
-;cextern VesselTypeClass.Count
 
 cextern HouseClass__Find_Building
 cextern Globals___Map_IsTargettingMode
@@ -49,19 +42,11 @@ cextern Globals___Map_IsTargettingMode
     mov  dword[eax+HouseClass.Offset.VScan],ecx
     mov  dword[eax+HouseClass.Offset.ActiveVScan],ecx
     mov  dword[eax+HouseClass.Offset.BPreGroupScan],ecx
-    ; zero out 32-bit SpecialScan
-    lea  eax,[Houses.SpecialScan]
-    lea  eax,[eax+edx*4]
-    mov  dword[eax],ecx
-    ; zero out 8-bit Radar
-    lea  eax,[Houses.Radar]
-    lea  eax,[eax+edx]
-    mov  byte[eax],cl
-    ; zero out 256-bit BScan
-    lea  eax,[Houses.BScan]
+    ;push eax
+    HouseClass.SpecialScan.Set(eax,ecx)
+    HouseClass.Radar.Set(eax,cl)
+    lea  eax,[eax+HouseClass.Offset.NewBScan]
     push edx
-    shl  edx,5
-    lea  eax,[eax+edx]
     mov  edx,8
 .RepeatZero:
     mov  dword[eax],ecx

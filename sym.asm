@@ -509,7 +509,7 @@ setcglob 0x2E      ,FactoryClass.ORIGINAL_SIZE
 setcglob 0x0065D9A0,HouseClass.Count          
 setcglob 0x0065D9C8,HouseClass.Array          
 setcglob 0x17A8    ,HouseClass.ORIGINAL_SIZE  
-setcglob 0x2C11    ,HouseClass.NEW_SIZE       
+setcglob 0x4110    ,HouseClass.NEW_SIZE       
 ; Count controlled by [Maximums]
 
 ; InfantryClass              0x0065D9E0
@@ -592,7 +592,7 @@ setcglob 0x0065DD7C,BuildingTypeClass.Count
 setcglob 0x0065DDA4,BuildingTypeClass.Array   
 setcglob 0x57,      BuildingTypeClass.ORIGINAL_COUNT   
 setcglob 0x207,     BuildingTypeClass.ORIGINAL_SIZE    
-setcglob 0x2CC,     BuildingTypeClass.NEW_SIZE
+setcglob 0x2CE,     BuildingTypeClass.NEW_SIZE
 
 ; AircraftTypeClass          0x0065DDBC
 setcglob 0x0065DDC8,AircraftTypeClass.Count   

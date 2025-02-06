@@ -21,9 +21,10 @@ cextern Houses.BSignificantScan
     ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
     push eax
-    mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
-    shl  eax,5 ; ID * 32 bytes
-    lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
+    lea  esi,[eax+HouseClass.Offset.NewBScan]
+    ;mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
+    ;shl  eax,5 ; ID * 32 bytes
+    ;lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
     lea  ecx,[Houses.BSignificantScan]
     xor  edi,edi ; start with offset 0
 .Scan:

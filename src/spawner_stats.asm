@@ -17,7 +17,7 @@ cextern Globals___SaveGameVersion
 
 ; HouseClass::Tracking_Add ; convert movsx to,movzx
 @SET 0x004DCC7C,{movzx ecx,al}
-@SET 0x004DCC85,{movzx ecx,al}
+;@SET 0x004DCC85,{movzx ecx,al}
 @SET 0x004DCCE5,{movzx ecx,al}
 @SET 0x004DCCEE,{movzx ecx,al}
 @SET 0x004DCDA2,{movzx ecx,cl}

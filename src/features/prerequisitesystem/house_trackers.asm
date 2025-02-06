@@ -18,9 +18,10 @@
 ; This function is enabled by default and is not controllable.
 ;----------------------------------------------------------------
 
-cextern Houses.BScan
-cextern Houses.SpecialScan
-cextern Houses.Radar
+;cextern Houses.BScan
+;cextern Houses.SpecialScan
+;cextern Houses.Radar
+cextern BuildingClass.Count
 
 ; AI will use the same memory as human players, since we maintain one BScan in the future
 @SET 0x004D4096,{mov eax,[esi+HouseClass.Offset.BPreGroupScan]} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::Can_Build
@@ -44,6 +45,7 @@ cextern Houses.Radar
 @SET 0x004B4BD9,{cmp dword[edx+HouseClass.Offset.BPreGroupScan],0} ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Sell_Mode_Control
 @SET 0x004B4C81,{cmp dword[edx+HouseClass.Offset.BPreGroupScan],0} ; 0x137 (HouseClass.Offset.BScan) // DisplayClass::Repair_Mode_Control
 
+;@SET 0x004DD0DC,{ret} ; test skip HouseClass__Recalc_Attributes
 
 @HACK 0x00456AC1,0x00456ACA,_BuildingClass__Unlimbo_Skip_ActiveBScan
     lea  eax,[esi+0x93]
@@ -68,16 +70,15 @@ cextern Houses.Radar
     shr  ecx,0x18
     ; ecx is now the building type ID
     ; eax+0x93 (TechnoClass->House) contains the id of the house it belongs to
-    mov  esi,[eax+0x93]
+    mov  eax,[eax+0x93]
     push ecx
-    push esi
+    HouseClass.FromIndex(eax,ebx)
+    push ebx
+    lea  ebx,[ebx+HouseClass.Offset.NewBScan]
     ; we want to set Houses.BScan[<houseID> * 256<buildingtypeID>]
     ; SetBit <byte> <Bit>
     ;   <byte> = <houseID> * 32<buildingtypeID> >> 3
     ;   <Bit>  = <buildingtypeID> & 0x7
-    lea  ebx,[Houses.BScan]
-    shl  esi,5
-    add  ebx,esi
     mov  esi,ecx
     shr  esi,3
     add  ebx,esi
@@ -85,23 +86,19 @@ cextern Houses.Radar
     mov  al,1
     shl  al,cl
     or   byte[ebx],al
-    pop  ebx ; House ID
+    pop  ebx ; House class
     pop  ecx ; building type ID
     BuildingTypeClass.FromIndex(ecx,eax)
     mov  ecx,eax
     ; Set special types
-    xor  eax,eax
-    push ecx
-    BuildingTypeClass.SpecialWeapons.Get(ecx,ax)
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    or   dword[ecx],eax   
+    BuildingTypeClass.SpecialWeapons.Get(ecx,eax)
+    or   dword[ebx+HouseClass.Offset.SpecialScan],eax
     ; Set IsRadar
-    pop  ecx ; building type ID
     BuildingTypeClass.IsRadar.Get(ecx,al)
-    lea  ecx,[Houses.Radar]
-    lea  ecx,[ecx+ebx]
-    or   byte[ecx],al   
+    test al,al
+    jz   .NoRadar
+    HouseClass.Radar.Set(ebx,al)  
+.NoRadar:
     pop  eax
     pop  ebx
     pop  ecx
@@ -129,7 +126,7 @@ cextern Houses.Radar
 ;    mov  bl,byte[eax+1] ; ID
 ;    xor  eax,eax
 ;    push ecx
-;    BuildingTypeClass.SpecialWeapons.Get(ecx,ax)
+;    BuildingTypeClass.SpecialWeapons.Get(ecx,eax)
 ;    lea  ecx,[Houses.SpecialScan]
 ;    lea  ecx,[ecx+ebx*4]
 ;    or   dword[ecx],eax   
@@ -148,4 +145,128 @@ cextern Houses.Radar
 ;    mov  ecx,dword[eax+TechnoTypeClass.Offset.PrereqType-3]
 ;    jmp  0x00456B07
 ;@ENDHACK
+
+
+[section .text]
+; reimplementation, basing on Tracking_Add and Tracking_Remove
+; ebx is house, al is technotype id, edx is techno (note: not technotype)
+House_Recalc_Attributes_Buildings:
+    push edx
+    push ecx
+    push ebx
+    push eax
+    push esi
+    movzx eax,al
+    mov  esi,eax
+    ;jmp  .ClearAll
+    ; test if we need to clear and scan all, or just handle scan only
+    BuildingTypeClass.FromIndex(eax,edx)
+    BuildingTypeClass.SpecialWeapons.Get(edx,ecx)
+    test ecx,ecx
+    jnz  .ClearAll
+    BuildingTypeClass.IsRadar.Get(edx,cl)
+    test cl,cl
+    jnz  .ClearAll
+    mov  dword edx,[ebx+HouseClass.Offset.NewBQuantity+esi*4] ; if this is a removal, we should clear all anyway since we need to requery multiple types for BPreGroupScan.
+    test edx,edx
+    jz   .ClearAll
+.CheckOne:
+    ; Building does not require refreshing of special fields (e.g. Radar). Just update the BScan and BPreGroupScan fields accordingly
+    ;mov  dword eax,[ebx+HouseClass.Offset.ID]
+    ;lea  ebx,[Houses.BScan]
+    ;shl  eax,5
+    ;add  ebx,eax
+    lea  ebx,[ebx+HouseClass.Offset.NewBScan]
+    mov  eax,ecx
+    shr  eax,3
+    add  ebx,eax
+    and  ecx,7
+    mov  al,1
+    shl  al,cl
+    test edx,edx
+    jnz  .SetOne
+.ClearOne:
+    inc  al
+    neg  al
+    and  byte[ebx],al
+    jmp  .Ret
+.SetOne:
+    or   byte[ebx],al
+    jmp  .Ret
+
+.ClearAll:
+    ;Reset for recalc
+    mov  dword edx,[ebx+HouseClass.Offset.ID]
+    xor  ecx,ecx
+    ;mov  dword[ebx+HouseClass.Offset.BScan],ecx
+    ;mov  dword[ebx+HouseClass.Offset.ActiveBScan],ecx
+    ; zero out 32-bit SpecialScan
+    HouseClass.SpecialScan.Set(ebx,ecx)
+    ; zero out 8-bit Radar
+    HouseClass.Radar.Set(ebx,cl)
+    ; zero out 256-bit BScan
+    push edx
+    lea  eax,[ebx+HouseClass.Offset.NewBScan]
+    mov  edx,8
+.RepeatZero:
+    mov  dword[eax],ecx
+    dec  edx
+    add  eax,4
+    cmp  edx,0
+    jg   .RepeatZero
+    pop  edx
+    ; ebx = houseclass, edx = house id, ecx = 0
+
+.Repeat:
+    mov  dword eax,[ebx+HouseClass.Offset.NewBQuantity+ecx*4]
+    test eax,eax
+    jz   .Next
+    push ebx
+    push ecx
+    ; ebx = houseclass, ecx = techno index
+    mov  dword eax,[ebx+HouseClass.Offset.ID]
+    push ebx
+    ;lea  ebx,[Houses.BScan]
+    ;shl  eax,5
+    ;add  ebx,eax
+    lea  ebx,[ebx+HouseClass.Offset.NewBScan]
+    mov  eax,ecx
+    shr  eax,3
+    add  ebx,eax
+    and  ecx,7
+    mov  al,1
+    shl  al,cl
+    or   byte[ebx],al
+    pop  ebx ; House ID
+    pop  ecx ; building type ID
+    push ecx
+    BuildingTypeClass.FromIndex(ecx,edx)
+    ; Set special types
+    BuildingTypeClass.SpecialWeapons.Get(edx,eax)
+    or   dword[ebx+HouseClass.Offset.SpecialScan],eax
+    ; Set IsRadar
+    BuildingTypeClass.IsRadar.Get(edx,al)
+    test al,al
+    jz   .NoRadar
+    HouseClass.Radar.Set(ebx,al)  
+.NoRadar:
+    ; Set Prereq group
+    TechnoTypeClass.PrereqType.Get(edx,al)
+    mov  cl,al
+    mov  eax,1
+    shl  eax,cl
+    pop  ecx ; building type ID
+    pop  ebx ; house
+    or   dword [ebx+HouseClass.Offset.BPreGroupScan],eax
+.Next:
+    inc  cl
+    cmp  cl,[BuildingTypeClass.Count]
+    jb   .Repeat
+.Ret:
+    pop  esi
+    pop  eax
+    pop  ebx
+    pop  ecx
+    pop  edx
+    ret
 

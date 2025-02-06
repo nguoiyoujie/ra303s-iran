@@ -113,12 +113,11 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Offset.AIBuildLimit              0x2C2    ; INT
 %define BuildingTypeClass.Offset.AIBuildType               0x2C6    ; byte (enum)
 ;0x2C7
-%define BuildingTypeClass.Offset.SpecialWeapons            0x2C7    ; word, SpecialType flags, up to 16 values
-%define BuildingTypeClass.Offset.FreeUnit                  0x2C9    ; byte
-;0x2CA
-%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x2CA    ; byte
-%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x2CB    ; byte
-;0x2CC
+%define BuildingTypeClass.Offset.SpecialWeapons            0x2C7    ; int, SpecialType flags, up to 32 values
+%define BuildingTypeClass.Offset.FreeUnit                  0x2CB    ; byte
+%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x2CC    ; byte
+%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x2CD    ; byte
+;0x2CE
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -257,9 +256,9 @@ str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0    
 %define BuildingTypeClass.IsRepairPad.Set(ptr_type,value)                      SetBool                                ptr_type, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, value
 %define BuildingTypeClass.IsRepairPad.Read(ptr_type,ptr_rules)                 AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, str.BuildingTypeClass.IsRepairPad
 
-%define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              GetWord                                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
-%define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   SetWord                                ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
-%define BuildingTypeClass.SpecialWeapons.Read(ptr_type,ptr_rules,function)     AbstractTypeClass.ReadStringToWordExt    ptr_type, ptr_rules, BuildingTypeClass.Offset.SpecialWeapons, str.BuildingTypeClass.SpecialWeapons, function
+%define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              GetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
+%define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   SetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
+%define BuildingTypeClass.SpecialWeapons.Read(ptr_type,ptr_rules,function)     AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, BuildingTypeClass.Offset.SpecialWeapons, str.BuildingTypeClass.SpecialWeapons, function
 
 
 ; read and translate to value, AircraftType=2, BuildingType=6, InfantryType=14, UnitType=29, VesselType=31

@@ -9,9 +9,9 @@
 
 cextern VesselTypeClass.Count
 
-; _HouseClass__Tracking_Remove_New_Building_Tracking
-@SET 0x004DCB58,{shr eax,0x18}
-@SET 0x004DCB5B,{dec dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]}
+
+;@SET 0x004DCB58,{shr eax,0x18}
+;@SET 0x004DCB5B,{dec dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]}
 
 ; _HouseClass__Tracking_Remove_New_Planes_Tracking
 @SET 0x004DCB79,{shr eax,0x18}
@@ -51,16 +51,36 @@ cextern VesselTypeClass.Count
 @SET 0x004D4B95,{add eax,[edx+HouseClass.Offset.NewVQuantity]}
 
 
-@HACK 0x004DCC8F,0x004DCC95,_HouseClass__Tracking_Add_New_Building_Tracking
-    inc  dword[esi+HouseClass.Offset.NewBQuantity]
-    mov  byte[esi+HouseClass.Offset.BuildStructure],-1 ; I just built something. Recheck my build order.
+@HACK 0x004DCB52,0x004DCB62,_HouseClass__Tracking_Remove_New_Building_Tracking
+    mov  edx,eax
+    mov  eax,[eax+0x1A4]
+    movzx eax,al
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
+    jne  .Skip
+    ;call House_Recalc_Attributes_Buildings
+.Skip:
+    jmp  0x004DCB62
+@ENDHACK
+
+
+@HACK 0x004DCC85,0x004DCC95,_HouseClass__Tracking_Add_New_Building_Tracking
+    movzx eax,al
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
+    mov  byte[ebx+HouseClass.Offset.BuildStructure],-1 ; I just built something. Recheck my build order.
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity],1
+    jne  .Skip
+    ;call House_Recalc_Attributes_Buildings
+.Skip:
+    movzx ecx,al
+    mov  al,1
+    shl  eax,cl
     jmp  0x004DCC95
 @ENDHACK
 
 
 @HACK 0x004DCCF8,0x004DCCFE,_HouseClass__Tracking_Add_New_Planes_Tracking
     inc  dword[esi+HouseClass.Offset.NewAQuantity]
-    mov  byte[esi+HouseClass.Offset.BuildAircraft],-1 ; I just built something. Recheck my limits.
+    mov  byte[ebx+HouseClass.Offset.BuildAircraft],-1 ; I just built something. Recheck my limits.
     jmp  0x004DCCFE
 @ENDHACK
 
@@ -68,7 +88,7 @@ cextern VesselTypeClass.Count
 @HACK 0x004DCD5B,0x004DCD6D,_HouseClass__Tracking_Add_New_Infantry_Tracking
     movzx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
-    mov  byte[esi+HouseClass.Offset.BuildInfantry],-1 ; I just built something. Recheck my limits.
+    mov  byte[ebx+HouseClass.Offset.BuildInfantry],-1 ; I just built something. Recheck my limits.
     jmp  0x004DCD6D
 @ENDHACK
 
@@ -76,7 +96,7 @@ cextern VesselTypeClass.Count
 @HACK 0x004DCDD2,0x004DCDF0,_HouseClass__Tracking_Add_New_Vehicle_Tracking
     movzx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
-    mov  byte[esi+HouseClass.Offset.BuildUnit],-1 ; I just built something. Recheck my limits.
+    mov  byte[ebx+HouseClass.Offset.BuildUnit],-1 ; I just built something. Recheck my limits.
     jmp  0x004DCDF0
 @ENDHACK
 
@@ -84,7 +104,7 @@ cextern VesselTypeClass.Count
 @HACK 0x004DCE40,0x004DCE5E,_HouseClass__Tracking_Add_New_Vessels_Tracking
     movsx eax,cl
     inc  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
-    mov  byte[esi+HouseClass.Offset.BuildVessel],-1 ; I just built something. Recheck my limits.
+    mov  byte[ebx+HouseClass.Offset.BuildVessel],-1 ; I just built something. Recheck my limits.
     jmp  0x004DCE5E
 @ENDHACK
 

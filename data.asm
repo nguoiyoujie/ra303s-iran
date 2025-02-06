@@ -181,17 +181,17 @@ gint   Map.Basic.UseSinglePlayerAtomDamage                    ,0
 ;;; Temporary location until the House macros are completed
 ; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)
 ; 20 houses are supported, we introduce Multi9-20 to support up to 32 houses
-gbuf   Houses.SpecialScan                                     ,128  
-gbuf   Houses.Radar                                           ,32 
-gbuf   Houses.Factory                                         ,32 
+;gbuf   Houses.SpecialScan                                     ,128  
+;gbuf   Houses.Radar                                           ,32 
+;gbuf   Houses.Factory                                         ,32 
 gbuf   Houses.BSignificantScan                                ,32      ; 256 entries, 32 bytes
-gbuf   Houses.BScan                                           ,1024    ; 32 houses * (256 entries, 32 bytes)
+;gbuf   Houses.BScan                                           ,1024    ; 32 houses * (256 entries, 32 bytes)
 ;gbuf   Houses.BGroupScan                                      ,1024    ; 32 houses * (256 entries, 32 bytes)
-gbuf   Houses.BQuantity                                       ,8192    ; 32 houses  * 256 entries
-gbuf   Houses.UQuantity                                       ,8192    ; 32 houses  * 256 entries
-gbuf   Houses.IQuantity                                       ,8192    ; 32 houses  * 256 entries
-gbuf   Houses.AQuantity                                       ,8192    ; 32 houses  * 256 entries
-gbuf   Houses.VQuantity                                       ,8192    ; 32 houses  * 256 entries
+;gbuf   Houses.BQuantity                                       ,8192    ; 32 houses  * 256 entries
+;gbuf   Houses.UQuantity                                       ,8192    ; 32 houses  * 256 entries
+;gbuf   Houses.IQuantity                                       ,8192    ; 32 houses  * 256 entries
+;gbuf   Houses.AQuantity                                       ,8192    ; 32 houses  * 256 entries
+;gbuf   Houses.VQuantity                                       ,8192    ; 32 houses  * 256 entries
 gbuf   Houses.HouseTriggers                                   ,768     ; 32 houses * 24 bytes
 gbuf   HouseTypeClass.Multi9                                  ,316
 gbuf   HouseTypeClass.Multi10                                 ,316

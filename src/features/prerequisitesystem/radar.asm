@@ -6,18 +6,13 @@
 ; This function is enabled by default and is not controllable.
 ;----------------------------------------------------------------
 
-cextern Houses.Radar
+;cextern Houses.Radar
 
 @HACK 0x004D4EAA,0x004D4EB1,_HouseClass__AI_RadarMap_Check1
-    push eax
     push ecx
-    lea  ecx,[Houses.Radar]
-    mov  al,byte[eax+1]
-    and  eax,0xFF
-    mov  cl,byte[ecx+eax]
-    test cl,0x1  
+    HouseClass.Radar.Get(eax,cl)
+    test cl,cl
     pop  ecx
-    pop  eax
     jmp  0x004D4EB1
 @ENDHACK
 
@@ -25,11 +20,8 @@ cextern Houses.Radar
 @HACK 0x004D4E49,0x004D4E50,_HouseClass__AI_RadarMap_Check2
     push eax
     push ecx
-    lea  ecx,[Houses.Radar]
-    mov  al,byte[eax+1]
-    and  eax,0xFF
-    mov  cl,byte[ecx+eax]
-    test cl,0x1  
+    HouseClass.Radar.Get(eax,cl)
+    test cl,cl
     pop  ecx
     pop  eax
     jmp  0x004D4E50

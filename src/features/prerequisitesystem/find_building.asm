@@ -12,9 +12,10 @@ cextern Houses.BSignificantScan
 @HACK 0x0056B4E7,0x0056B4F9,_TEventClass__Operator_BuildingExists_Check
     ; don't use ActiveBScan anymore, since that is used by the new prerequisite system
     ; eax is houseclass, ecx right shifted 18-bits is structtype id
-    mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
-    shl  eax,5 ; ID * 32 bytes
-    lea  eax,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
+    lea  eax,[eax+HouseClass.Offset.NewBScan]
+    ;mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
+    ;shl  eax,5 ; ID * 32 bytes
+    ;lea  eax,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
     shr  ecx,0x18
     mov  edx,ecx 
     shr  edx,3
@@ -31,9 +32,10 @@ cextern Houses.BSignificantScan
 @HACK 0x0056B615,0x0056B622,_TEventClass__Operator_BuildingsDestroyed_Check
     ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
-    mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
-    shl  eax,5 ; ID * 32 bytes
-    lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
+    lea  esi,[eax+HouseClass.Offset.NewBScan]
+    ;mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
+    ;shl  eax,5 ; ID * 32 bytes
+    ;lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
     lea  ecx,[Houses.BSignificantScan]
     xor  edi,edi ; start with offset 0
 .Scan:
@@ -54,6 +56,7 @@ cextern Houses.BSignificantScan
 ;@HACK 0x0056B64A,_TEventClass__Operator_AllDestroyed_Check
 ;    ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
 ;    ; this filters out any Insignificant=yes entities
+;    lea  esi,[eax+HouseClass.Offset.NewBScan]
 ;    mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
 ;    shl  eax,5 ; ID * 32 bytes
 ;    lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields

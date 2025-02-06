@@ -249,36 +249,58 @@ cextern INI_Read_String_Buffer
 ; 0x17A8
 
 ; Extended
-%define HouseClass.Offset.BPreGroupScan          0x17A8   ; INT (32 bit-field)
+%define HouseClass.Offset.BPreGroupScan          0x17A8   ; 32-bit (dword)
 
-%define HouseClass.Offset.IsSpectator            0x17AC   ; byte (should be BOOL)
+%define HouseClass.Offset.IsSpectator            0x17AC   ; bool
 %define HouseClass.Bit.IsSpectator               1  
-%define HouseClass.Offset.ConnectionLost         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Offset.ConnectionLost         0x17AC   ; bool
 %define HouseClass.Bit.ConnectionLost            2
-%define HouseClass.Offset.Resigned               0x17AC   ; byte (should be BOOL)
+%define HouseClass.Offset.Resigned               0x17AC   ; bool
 %define HouseClass.Bit.Resigned                  3  
-%define HouseClass.Offset.InstantCapture         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Offset.InstantCapture         0x17AC   ; bool
 %define HouseClass.Bit.InstantCapture            4  
-%define HouseClass.Offset.NoBuildingCrew         0x17AC   ; byte (should be BOOL)
+%define HouseClass.Offset.NoBuildingCrew         0x17AC   ; bool
 %define HouseClass.Bit.NoBuildingCrew            5  
-%define HouseClass.Offset.AllyTheNeutralHouse    0x17AC    ; BOOL
+%define HouseClass.Offset.AllyTheNeutralHouse    0x17AC   ; bool
 %define HouseClass.Bit.AllyTheNeutralHouse       6  
+%define HouseClass.Offset.FreeRadar              0x17AC   ; bool
+%define HouseClass.Bit.FreeRadar                 7  
+%define HouseClass.Offset.Radar                  0x17AC   ; bool (tracker)
+%define HouseClass.Bit.Radar                     8  
 
-; some empty space 0x17AD-0x17AF
+; some empty space 0x17AD-0x17AE
+%define HouseClass.Offset.SecondaryColorScheme   0x17AF   ; byte
 %define HouseClass.Offset.HouseTriggers          0x17B0   ; 24 bytes
+%define HouseClass.Offset.SpecialScan            0x17C8   ; 32-bit (dword)
 
-%define HouseClass.Offset.SpawnLocation          0x17C8   ; word
-%define HouseClass.Offset.SecondaryColorScheme   0x17CA   ; byte
-%define HouseClass.Offset.HeliUnit               0x17CB   ; byte
-%define HouseClass.Offset.MCVUnit                0x17CC   ; byte
-; some empty space 0x17CD-0x180F
-%define HouseClass.Offset.NewBQuantity           0x1810   ; should be 256 * 4 bytes
-%define HouseClass.Offset.NewUQuantity           0x1C10   ; should be 256 * 4 bytes
-%define HouseClass.Offset.NewIQuantity           0x2010   ; should be 256 * 4 bytes
-%define HouseClass.Offset.NewAQuantity           0x2410   ; should be 256 * 4 bytes
-%define HouseClass.Offset.NewVQuantity           0x2810   ; should be 256 * 4 bytes
-; 0x2C10
-; 0x2C11
+%define HouseClass.Offset.SpawnLocation          0x17CC   ; word
+%define HouseClass.Offset.HeliUnit               0x17CE   ; byte
+%define HouseClass.Offset.MCVUnit                0x17CF   ; byte
+; some empty space 0x17CD-0x17CF
+%define HouseClass.Offset.NewBScan               0x17D0   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewUScan               0x17F0   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewIScan               0x1810   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewAScan               0x1830   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewVScan               0x1850   ; 256-bit (32 bytes / 8 dwords)
+
+%define HouseClass.Offset.NewActiveBScan         0x1870   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewActiveUScan         0x1890   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewActiveIScan         0x18B0   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewActiveAScan         0x18D0   ; 256-bit (32 bytes / 8 dwords)
+%define HouseClass.Offset.NewActiveVScan         0x18F0   ; 256-bit (32 bytes / 8 dwords)
+
+%define HouseClass.Offset.NewBQuantity           0x1910   ; 256 * 4 bytes
+%define HouseClass.Offset.NewUQuantity           0x1D10   ; 256 * 4 bytes
+%define HouseClass.Offset.NewIQuantity           0x2110   ; 256 * 4 bytes
+%define HouseClass.Offset.NewAQuantity           0x2510   ; 256 * 4 bytes
+%define HouseClass.Offset.NewVQuantity           0x2910   ; 256 * 4 bytes
+
+%define HouseClass.Offset.NewActiveBQuantity     0x2D10   ; 256 * 4 bytes
+%define HouseClass.Offset.NewActiveUQuantity     0x3110   ; 256 * 4 bytes
+%define HouseClass.Offset.NewActiveIQuantity     0x3510   ; 256 * 4 bytes
+%define HouseClass.Offset.NewActiveAQuantity     0x3910   ; 256 * 4 bytes
+%define HouseClass.Offset.NewActiveVQuantity     0x3D10   ; 256 * 4 bytes
+; 0x4110
 
 ; INI String controls
 str.HouseClass.RemapColor1                       db"Colour",0                          ;new ini feature
@@ -322,6 +344,16 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
 %define HouseClass.AllyTheNeutralHouse.Get(ptr_type,reg_output)                    GetBool                                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, reg_output
 %define HouseClass.AllyTheNeutralHouse.Set(ptr_type,value)                         SetBool                                ptr_type, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, value
 %define HouseClass.AllyTheNeutralHouse.Read(ptr_type,ptr_rules,str_section)        HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.AllyTheNeutralHouse, HouseClass.Bit.AllyTheNeutralHouse, str_section, str.HouseClass.AllyTheNeutralHouse
+
+%define HouseClass.SpecialScan.Get(ptr_type,reg_output)                            GetInt                                 ptr_type, HouseClass.Offset.SpecialScan, reg_output
+%define HouseClass.SpecialScan.Set(ptr_type,value)                                 SetInt                                 ptr_type, HouseClass.Offset.SpecialScan, value
+
+%define HouseClass.Radar.Get(ptr_type,reg_output)                                  GetBool                                ptr_type, HouseClass.Offset.Radar, HouseClass.Bit.Radar, reg_output
+%define HouseClass.Radar.Set(ptr_type,value)                                       SetBool                                ptr_type, HouseClass.Offset.Radar, HouseClass.Bit.Radar, value
+
+%define HouseClass.FreeRadar.Get(ptr_type,reg_output)                              GetBool                                ptr_type, HouseClass.Offset.FreeRadar, HouseClass.Bit.FreeRadar, reg_output
+%define HouseClass.FreeRadar.Set(ptr_type,value)                                   SetBool                                ptr_type, HouseClass.Offset.FreeRadar, HouseClass.Bit.FreeRadar, value
+%define HouseClass.FreeRadar.Read(ptr_type,ptr_rules,str_section)                  HouseClass.ReadBool                    ptr_type, ptr_rules, HouseClass.Offset.FreeRadar, HouseClass.Bit.FreeRadar, str_section, str.HouseClass.FreeRadar
 
 %define HouseClass.HeliUnit.Get(ptr_type,reg_output)                               GetByte                                ptr_type, HouseClass.Offset.HeliUnit, reg_output
 %define HouseClass.HeliUnit.Set(ptr_type,value)                                    SetByte                                ptr_type, HouseClass.Offset.HeliUnit, value

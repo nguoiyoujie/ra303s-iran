@@ -22,11 +22,12 @@ cextern Houses.BScan
     cmp  ax,0
     jz   .Fulfilled
     lea  eax,[edx+eax] ; eax is now pointer to start of the prerequisite fields
-    mov  ebx,dword[esi+HouseClass.Offset.ID] ; HouseClass->ID     
+    ;mov  ebx,dword[esi+HouseClass.Offset.ID] ; HouseClass->ID     
     ; AND over 256-bit BScan
-    lea  ecx,[Houses.BScan]
-    shl  ebx,5
-    lea  ecx,[ecx+ebx] ; ecx is now pointer to start of the house's new BScan fields
+    ;lea  ecx,[Houses.BScan]
+    ;shl  ebx,5
+    ;lea  ecx,[ecx+ebx] ; ecx is now pointer to start of the house's new BScan fields
+    lea  ecx,[esi+HouseClass.Offset.NewBScan]
     mov  edx,8
 .RepeatIter:
     mov  ebx,dword[eax]
