@@ -45,7 +45,7 @@ AircraftTypes_Read_INI:
 	TechnoTypeClass.ExtPrerequisiteOffset.Set(esi,AircraftTypeClass.Offset.ExtendedPrerequisite)
 	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
 
-    ;AircraftTypeClass.IsFixedWing.Read(esi,edi)
+    AircraftTypeClass.IsFixedWing.Read(esi,edi)
     AircraftTypeClass.IsLandable.Read(esi,edi)
     AircraftTypeClass.IsRotorEquipped.Read(esi,edi)
     AircraftTypeClass.IsRotorCustom.Read(esi,edi)
@@ -55,20 +55,20 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.Response_Move.Read(esi,edi,_GetAircraftResponseMoveFromString)
     AircraftTypeClass.Response_Attack.Read(esi,edi,_GetAircraftResponseAttackFromString)
 
-    lea  edx,[esi+5]
-    GetBit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
-    xor  ecx,ecx
-    mov  cl,al
-    call_INIClass__Get_Bool edi,edx,str.AircraftTypeClass.IsFixedWing,ecx
-    test al,al
-    jnz  .SetPreferredBuilding_Airstrip
-.SetPreferredBuilding_Helipad:
-    mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.HPAD
-    jmp .After_SetPreferredBuilding
-.SetPreferredBuilding_Airstrip:
-    mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.AFLD
-.After_SetPreferredBuilding:
-    SetBit[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
+;    lea  edx,[esi+5]
+;    GetBit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing
+;    xor  ecx,ecx
+;    mov  cl,al
+;    call_INIClass__Get_Bool edi,edx,str.AircraftTypeClass.IsFixedWing,ecx
+;    test al,al
+;    jnz  .SetPreferredBuilding_Airstrip
+;.SetPreferredBuilding_Helipad:
+;    mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.HPAD
+;    jmp .After_SetPreferredBuilding
+;.SetPreferredBuilding_Airstrip:
+;    mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.AFLD
+;.After_SetPreferredBuilding:
+;    SetBit[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
 
     pop  edi
     pop  esi

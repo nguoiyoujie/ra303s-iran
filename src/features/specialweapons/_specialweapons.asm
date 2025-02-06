@@ -14,6 +14,7 @@
 %include "macros/hack.inc"
 %include "macros/datatypes.inc"
 
+%include "defines/specialtypes.inc"
 %include "types/common.inc"
 
 %include "types/INIClass.inc"

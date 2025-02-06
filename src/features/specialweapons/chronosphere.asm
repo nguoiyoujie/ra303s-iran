@@ -9,13 +9,8 @@
 
 @HACK 0x004D5418,0x004D541F,_HouseClass__Super_Weapon_Handler_Chronosphere_Check1
     push ecx
-    push ebx
-    xor  ebx,ebx
-    mov  bl,byte[esi+1] ; ID
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    test dword[ecx],0x8   ; CHRONOSPHERE 1 << 3
-    pop  ebx   
+    HouseClass.SpecialScan.Get(esi,ecx)
+    test ecx,1<<SpecialType.CHRONOSPHERE
     pop  ecx   
     jmp  0x004D541F
 @ENDHACK
@@ -23,13 +18,8 @@
 
 @HACK 0x004D54DE,0x004D54E5,_HouseClass__Super_Weapon_Handler_Chronosphere_Check2
     push ecx
-    push ebx
-    xor  ebx,ebx
-    mov  bl,byte[esi+1] ; ID
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    test dword[ecx],0x8   ; CHRONOSPHERE 1 << 3
-    pop  ebx   
+    HouseClass.SpecialScan.Get(esi,ecx)
+    test ecx,1<<SpecialType.CHRONOSPHERE
     pop  ecx   
     jmp  0x004D54E5
 @ENDHACK

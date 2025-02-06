@@ -10,13 +10,8 @@
 
 @HACK 0x004D5193,0x004D519A,_HouseClass__Super_Weapon_Handler_GPS_Check1
     push ecx
-    push ebx
-    xor  ebx,ebx
-    mov  bl,byte[esi+1] ; ID
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    test dword[ecx],0x100   ; GPS 1 << 8
-    pop  ebx   
+    HouseClass.SpecialScan.Get(esi,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx   
     jmp  0x004D519A
 @ENDHACK
@@ -24,13 +19,8 @@
 
 @HACK 0x004D51C9,0x004D51D0,_HouseClass__Super_Weapon_Handler_GPS_Check2
     push ecx
-    push ebx
-    xor  ebx,ebx
-    mov  bl,byte[esi+1] ; ID
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    test dword[ecx],0x100   ; GPS 1 << 8
-    pop  ebx   
+    HouseClass.SpecialScan.Get(esi,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx   
     jmp  0x004D51D0
 @ENDHACK
@@ -38,13 +28,8 @@
 
 @HACK 0x004D52E3,0x004D52EA,_HouseClass__Super_Weapon_Handler_GPS_Check3
     push ecx
-    push ebx
-    xor  ebx,ebx
-    mov  bl,byte[esi+1] ; ID
-    lea  ecx,[Houses.SpecialScan]
-    lea  ecx,[ecx+ebx*4]
-    test dword[ecx],0x100   ; GPS 1 << 8
-    pop  ebx   
+    HouseClass.SpecialScan.Get(esi,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx   
     jmp  0x004D52EA
 @ENDHACK
@@ -56,8 +41,8 @@
     push ebx
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
-    BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx,0x100; SpecialType.GPS (8)
+    BuildingTypeClass.SpecialWeapons.Get(ebx,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx
     pop  ebx
     jz   0x004D525E
@@ -71,8 +56,8 @@
     push ebx
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
-    BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx,0x100; SpecialType.GPS (8)
+    BuildingTypeClass.SpecialWeapons.Get(ebx,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx
     pop  ebx
     jz   0x004D5327
@@ -86,8 +71,8 @@
     push ebx
     push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
-    BuildingTypeClass.SpecialWeapons.Get(ebx,cx)
-    test cx,0x100; SpecialType.GPS (8)
+    BuildingTypeClass.SpecialWeapons.Get(ebx,ecx)
+    test ecx,1<<SpecialType.GPS
     pop  ecx
     pop  ebx
     jnz  0x0045D8A6

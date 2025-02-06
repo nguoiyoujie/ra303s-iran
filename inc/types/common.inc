@@ -43,42 +43,47 @@ cextern Extract_String
 
 ;;;;;;;;;;;;;;; BIT methods ;;;;;;;;;;;;;;;
 
-; args <What to turn bit on, <what bit to turn on>
+; args <What to turn bit on,<what bit to turn on>
 %macro SetBit 2
-    mov  al,1
-    shl  al,byte %2-1
-    or   byte %1,al
+    ;mov  al,1
+    ;shl  al,byte %2-1
+    ;or   byte %1,al
+    or   byte %1,1<<(%2-1)
 %endmacro Set_Bit 3
 
 
-; args <What to check bit on>, <what bit to check>
+; args <What to check bit on>,<what bit to check>
 %macro GetBit 2
-    mov  al,1
-    shl  al,byte %2-1
-    test byte %1,al
+    ;mov  al,1
+    ;shl  al,byte %2-1
+    ;test byte %1,al
+    test byte %1,1<<(%2-1)
     setnz al
 %endmacro
 
 
 ;number &= ~(1 << x);
-; args <What to clear bit on>, <what bit to clear>
+; args <What to clear bit on>,<what bit to clear>
 %macro ClearBit 2
-    mov  al,1
-    shl  al,byte %2-1
-    add  al,1
-    neg  al
-    and  byte %1,al
+    ;mov  al,1
+    ;shl  al,byte %2-1
+    ;add  al,1
+    ;neg  al
+    ;and  byte %1,al
+    and  byte %1,~(1<<(%2-1))
 %endmacro
 
 
-; args <What to clear bit on>, <what bit>, <turn on or off>, <identifier for branch>
+; args <What to clear bit on>,<what bit>,<turn on or off>,<identifier for branch>
 %macro SetBit 3
+    push eax
   %ifnidni %3,al
     mov  al,%3
   %endif
     cmp  al,0
+    pop  eax
     jz   %%turn_off
-    SetBit    %1,%2
+    SetBit   %1,%2
     jmp  %%done
   %%turn_off:
     ClearBit %1,%2
@@ -98,7 +103,7 @@ cextern Extract_String
 
 ; args <Pointer to type class>,<offset of data>,<bit of data>,<new value>
 %macro SetBool 4
-    SetBit[%1+%2],%3,%4
+    SetBit byte[%1+%2],%3,%4
 %endmacro
 
 ;;;;;;;;;;;;;;; BYTE methods ;;;;;;;;;;;;;;;

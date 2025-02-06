@@ -15,30 +15,6 @@ cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
 
 
-; for old AI_Aircraft implementation, in case we need to restore it. 
-; this corrects the quantity offsets to use the new HouseClass offsets
-%define HouseClass.Offset.NewBQuantity_Helipad 0x1848
-%define HouseClass.Offset.NewBQuantity_Airfield 0x1850
-%define HouseClass.Offset.NewAQuantity_Mig 0x241C
-%define HouseClass.Offset.NewAQuantity_Yak 0x2420
-%define HouseClass.Offset.NewAQuantity_Longbow 0x2424
-%define HouseClass.Offset.NewAQuantity_Hind 0x2428
-
-; no longer needed as all of AI_Aircraft() has been replaced
-;@SET 0x004DC7E1,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-;@SET 0x004DC7E7,{mov edi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-;@SET 0x004DC7ED,{mov edx,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-;@SET 0x004DC83C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Longbow]}
-;@SET 0x004DC842,{mov esi,dword[ecx+HouseClass.Offset.NewAQuantity_Hind]}
-;@SET 0x004DC848,{mov edi,dword[ecx+HouseClass.Offset.NewBQuantity_Helipad]}
-;@SET 0x004DC89C,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-;@SET 0x004DC8A2,{mov ebx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-;@SET 0x004DC8A8,{mov esi,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
-;@SET 0x004DC8FC,{mov eax,dword[ecx+HouseClass.Offset.NewAQuantity_Mig]}
-;@SET 0x004DC902,{mov edx,dword[ecx+HouseClass.Offset.NewAQuantity_Yak]}
-;@SET 0x004DC908,{mov ebx,dword[ecx+HouseClass.Offset.NewBQuantity_Airfield]}
-
-
 [section .data] 
 Temp.AIAircraft.Airfields        dd 0
 Temp.AIAircraft.Helipads         dd 0
