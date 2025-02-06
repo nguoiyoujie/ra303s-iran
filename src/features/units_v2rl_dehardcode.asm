@@ -21,7 +21,7 @@
     UnitTypeClass.AmmoImageCount.Get(edi,dl)
     cmp  dl,0
     je   .Done
-    mov  ebx,[ebx+0xC5] ; Ammo
+    mov  ebx,[ebx+TechnoClass.Offset.Ammo] ; Ammo
     sub  dl,bl
     cmp  dl,0
     jle  .Done 

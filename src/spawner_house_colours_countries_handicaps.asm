@@ -40,7 +40,7 @@ Multi8_Handicap:   db 0xFF
     mov  dl,%2    ; Colour
     cmp  dl,0xFF
     je   .Set_House_Colour_Ret_%1
-    mov  [eax+0x178F],dl
+    mov  [eax+HouseClass.Offset.RemapColor],dl
 .Set_House_Colour_Ret_%1:
 %endmacro
 
@@ -53,7 +53,7 @@ Multi8_Handicap:   db 0xFF
     mov  dl,%2    ; Country
     cmp  dl,0xFF
     je   .Set_House_Country_Ret_%1
-    mov  [eax+0x41],dl
+    mov  [eax+HouseClass.Offset.ActLike],dl
 .Set_House_Country_Ret_%1:
 %endmacro
 

@@ -58,7 +58,7 @@
     shl  edi,2
     add  esi,edi
     pop  edi
-    mov  %4, [esi] 
+    mov  %4,[esi] 
     jmp  %%done
 
   %%invalid_type:

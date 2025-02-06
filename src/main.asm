@@ -70,6 +70,9 @@
 %include "types/WarheadTypeClass.inc"
 %include "types/WeaponTypeClass.inc"
 
+%include "types/TechnoClass.inc"
+
+
 ;map snapshot code
 %include "src/map_snapshot.asm"
 

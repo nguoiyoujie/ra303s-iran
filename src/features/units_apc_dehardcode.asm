@@ -98,7 +98,7 @@
     UnitTypeClass.AmmoTurretCount.Get(edi,dl)
     cmp  dl,0
     je   .Done
-    mov  ebx,[esi+0xC5] ; Ammo ; esi is unit class
+    mov  ebx,[esi+TechnoClass.Offset.Ammo] ; Ammo ; esi is unit class
     sub  dl,bl
     cmp  dl,0
     jle  .Done 

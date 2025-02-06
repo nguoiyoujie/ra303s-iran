@@ -46,7 +46,7 @@ cextern Globals___Houses
     push ebx
     push ecx
     push edx
-    mov  ecx,dword[eax+0xC5] ; object->Ammo 
+    mov  ecx,dword[eax+TechnoClass.Offset.Ammo] ; object->Ammo 
     push eax
     push ecx
     mov  ecx,dword[eax+0x11]

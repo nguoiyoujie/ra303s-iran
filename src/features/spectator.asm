@@ -137,7 +137,7 @@ cextern spawner_is_active
 
 @HACK 0x004D8CB4,0x004D8CBA,_HouseClass__Init_Data_Spectator_Stuff
     Save_Registers
-    mov  byte[eax+0x178F],dl
+    mov  byte[eax+HouseClass.Offset.RemapColor],dl
     cmp  byte[spawner_is_active],0
     jz   .Ret
     mov  ebx,eax
