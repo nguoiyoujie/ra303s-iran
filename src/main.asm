@@ -240,6 +240,7 @@
 %include "src/fixes/explosion_no_anim_crash_fix.asm"
 %include "src/fixes/fence_bug.asm"
 %include "src/fixes/formation_glitch_fix.asm"
+%include "src/fixes/get_occupy_dimensions_bug_fix.asm"
 %include "src/fixes/gnrl_ukraine_voice.asm"
 %include "src/fixes/infantry_infinite_deathloop_fix.asm"
 %include "src/fixes/infantry_range_check.asm"
