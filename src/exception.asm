@@ -53,6 +53,8 @@ ThreadId                    dd 0
 MiniDumpWriteDump           dd 0
 ExitCode                    dd 0
 CommandLineArg              dd 0 ; Fuck it just copy it, too many stack corruption issues
+ExceptionAddress            dd 0
+LogOnlyOnce                 db 0
 
 exception_info:
     istruc MINIDUMP_EXCEPTION_INFORMATION
@@ -67,10 +69,13 @@ exception_pointers:
     at EXCEPTION_POINTERS.ContextRecord,    dd 0
     iend
 
+
+sstring str_exception_message_format, "Red Alert crashed at address 0x%08x. A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to lovalmidas for debugging, thanks."
+sstring str_memdump_message_format, "Red Alert crashed at address 0x%08x. A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give it to lovalmidas for debugging, thanks."
+sstring str_exception_message, "", 256
+
 [section .rdata]
 str_exception_title         db"Command & Conquer: Red Alert just crashed!",0
-str_exception_message       db"A crash dump file with the name 'ra95crash.dmp' has been saved. Give it to lovalmidas for debugging, thanks.",0
-str_exception_message2      db"A crash dump file with the name 'ra95crash.dmp' has been saved. In addition a memory dump with the name 'ra95crash_memory.dmp' has been created. Give these files to lovalmidas for debugging, thanks.",0
 str_dbghelp_dll             db"dbghelp.dll",0
 str_MiniDumpWriteDump       db"MiniDumpWriteDump",0
 str_dump_name               db"ra95crash.dmp",0
@@ -164,10 +169,11 @@ str_memory_dump_name        db"ra95crash_memory.dmp",0
     jmp  _exit
 
 _exception_handler:
-    mov  ebx,dword[esp+0x4]
-    mov  edx,dword[esp+0xC]
+    mov  dword ebx,[esp+0x4]
+    mov  dword edx,[esp+0xC]
+    mov  dword[ExceptionAddress],edx
     mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
-    mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
+    ;mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
     mov  [exception_pointers+EXCEPTION_POINTERS.ContextRecord],edx
 
     mov  dword[exception_info+MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers],exception_pointers
@@ -184,9 +190,9 @@ _exception_handler:
 
     push 0                  ; CallbackParam
     push 0                  ; UserStreamParam
-    push exception_info                ; ExceptionParam
+    push exception_info     ; ExceptionParam
     push 0                  ; DumpType, normal dump
-;    push 2                  ; DumpType, normal dump with full memory dump
+;    push 2                 ; DumpType, normal dump with full memory dump
     push eax                ; hFile
     push dword[ProcessId]
     push dword[hProcess]
@@ -194,6 +200,12 @@ _exception_handler:
 
     cmp  byte[RedAlert.Options.GenerateMemoryDump],1
     jz   .Generate_Memory_Dump
+
+    push dword[ExceptionAddress]
+    push str_exception_message_format
+    push str_exception_message
+    call _sprintf
+    add esp, 12
 
     push 0
     push str_exception_title
@@ -231,9 +243,15 @@ _exception_handler:
     push dword[hProcess]
     call [MiniDumpWriteDump]
 
+    push dword[ExceptionAddress]
+    push str_memdump_message_format
+    push str_exception_message
+    call _sprintf
+    add esp, 12
+
     push 0
     push str_exception_title
-    push str_exception_message2
+    push str_exception_message
     push 0
     call [MessageBoxA]
 
