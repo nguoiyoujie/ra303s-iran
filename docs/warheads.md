@@ -74,6 +74,8 @@ The first nine values will be read, to determine the warhead's effectiveness aga
 
 If the end of the entry is reached before the last armortype, effectiveness against remaining armortypes default to 100%.
 
+If a value of 0% is supplied, the unit will not be able to target objects of that armor. Ground and terrain count as `wood` armor.
+
 Defaults to 100% for all armor types.
 </details></td></tr></table>
 

@@ -207,6 +207,8 @@
 %include "src/features/building_freeunit.asm"
 %include "src/features/building_construction_yard_unhardcode.asm"
 
+%include "src/features/weapon_zeroversus.asm"
+
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
 %include "src/experimental/experiment_jam_remap.asm" 
