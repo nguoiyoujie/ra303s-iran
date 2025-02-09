@@ -70,7 +70,7 @@ cextern HouseTypeClass.NEW_COUNT
     HouseClass.SecondaryColorScheme.Set(edx,0xFF) 
     HouseClass.InstantCapture.Set(edx,0) 
     HouseClass.NoBuildingCrew.Set(edx,0) 
-    HouseClass.AllyTheNeutralHouse.Set(edx,0) 
+    HouseClass.AllyTheNeutralHouse.Set(edx,1) 
 
     push edi
     mov  eax,dword[edx+HouseClass.Offset.ID]

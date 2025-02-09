@@ -45,7 +45,7 @@ cextern HouseClass__Make_Ally
 @HACK 0x004DDE56,0x004DDE62,_HouseClass__Read_INI_Optional_House_Neutral_Ally
     mov  edx,0xA
     mov  eax,esi
-    test byte[esi+HouseClass.Offset.AllyTheNeutralHouse],1 ; offset 1
+    test byte[esi+HouseClass.Offset.AllyTheNeutralHouse],1<<(HouseClass.Bit.AllyTheNeutralHouse-1)
     jz   .Ret
     call HouseClass__Make_Ally
 .Ret:
@@ -53,6 +53,7 @@ cextern HouseClass__Make_Ally
 @ENDHACK
 
 
+; We still want Allies=Neutral to be functional
 @HACK 0x004DDE80,0x004DDE85,_HouseClass__Read_INI_Optional_House_Neutral_Ally_Patch_Out_Double
     cmp  edx,0xA ; Neutral house
     jz   .Ret
