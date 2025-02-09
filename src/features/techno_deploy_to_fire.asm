@@ -17,7 +17,7 @@
     test al,al
     jz   .Ret
     mov  eax,[ebp-0x18] ; TechnoClass
-    mov  byte[eax+MissionClass.Offset.Misison],MissionType.MISSION_UNLOAD
+    mov  byte[eax+MissionClass.Offset.MisisonQueue],MissionType.MISSION_UNLOAD ; Queue?
     jmp  0x0056583A
 .Ret:
     pop  eax
