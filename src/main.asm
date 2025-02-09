@@ -70,7 +70,16 @@
 %include "types/WarheadTypeClass.inc"
 %include "types/WeaponTypeClass.inc"
 
+
+%include "types/AbstractClass.inc"
+%include "types/HouseClass.inc"
 %include "types/TechnoClass.inc"
+%include "types/MissionClass.inc"
+%include "types/UnitClass.inc"
+%include "types/InfantryClass.inc"
+%include "types/VesselClass.inc"
+%include "types/BuildingClass.inc"
+%include "types/AircraftClass.inc"
 
 
 ;map snapshot code

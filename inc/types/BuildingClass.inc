@@ -63,4 +63,8 @@
 ;%define BuildingClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, BuildingClass.Offset.Index, reg_output
 ;%define BuildingClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, BuildingClass.Offset.Index, value
 
+%define BuildingClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, BuildingClass.Offset.Class, reg_output
+%define BuildingClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, BuildingClass.Offset.Class, value
+
+
 %endif

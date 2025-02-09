@@ -351,6 +351,9 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
 %define HouseClass.SpecialScan.Get(ptr_type,reg_output)                            GetInt                                 ptr_type, HouseClass.Offset.SpecialScan, reg_output
 %define HouseClass.SpecialScan.Set(ptr_type,value)                                 SetInt                                 ptr_type, HouseClass.Offset.SpecialScan, value
 
+%define HouseClass.BPreGroupScan.Get(ptr_type,reg_output)                          GetInt                                 ptr_type, HouseClass.Offset.BPreGroupScan, reg_output
+%define HouseClass.BPreGroupScan.Set(ptr_type,value)                               SetInt                                 ptr_type, HouseClass.Offset.BPreGroupScan, value
+
 %define HouseClass.Radar.Get(ptr_type,reg_output)                                  GetBool                                ptr_type, HouseClass.Offset.Radar, HouseClass.Bit.Radar, reg_output
 %define HouseClass.Radar.Set(ptr_type,value)                                       SetBool                                ptr_type, HouseClass.Offset.Radar, HouseClass.Bit.Radar, value
 

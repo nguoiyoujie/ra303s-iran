@@ -15,13 +15,6 @@ cextern Globals___SaveGameVersion
 @SJMP 0x004A0B00,0x004A0B09 ; _CellClass__Goodie_Check_Track_Crates_Spawner
 @SJMP 0x0052B8F0,0x0052B916 ; _Execute_DoList_No_Special_End_Game_Statistics_Logic_For_Two_Players_Game
 
-; HouseClass::Tracking_Add ; convert movsx to,movzx
-@SET 0x004DCC7C,{movzx ecx,al}
-;@SET 0x004DCC85,{movzx ecx,al}
-@SET 0x004DCCE5,{movzx ecx,al}
-@SET 0x004DCCEE,{movzx ecx,al}
-@SET 0x004DCDA2,{movzx ecx,cl}
-
 @SJMP 0x005B654A,0x005B6557 ; jump over pWOLobject == NULL check
 @SJMP 0x005B6574,0x005B659C ; jump over SDFX WOL code
 @SJMP 0x005B6636,0x005B666C ; jump over WOL code
@@ -35,11 +28,6 @@ cextern Globals___SaveGameVersion
 @SJMP 0x00566A65,0x00566A6E ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 @SJMP 0x005669A3,0x005669AC ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
-@SJMP 0x004DCCA9,0x004DCCB2 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@SJMP 0x004DCD12,0x004DCD1B ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@SJMP 0x004DCD7E,0x004DCD87 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@SJMP 0x004DCE04,0x004DCE0D ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
-@SJMP 0x004DCE72,0x004DCE77 ; jump over SessionClass == 4 check for UnitTrackerClass::Increment_Unit_Total
 
 cextern CCFileClass__CCFileClass
 cextern CCFileClass__Write

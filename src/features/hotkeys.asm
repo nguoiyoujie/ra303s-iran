@@ -56,7 +56,7 @@ ResignKeyPressed: dd 0
     call 0x0054DA70 ;  SidebarClass::Activate(int)
 
     mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
-    call 0x005C101A ; GraphicBufferClass::Lock(void)
+    call GraphicBufferClass__Lock ; GraphicBufferClass::Lock(void)
     test eax,eax
     jz   .Clear_Buffer
     mov  edx,[0x006807E8] ;  ds:GraphicBufferClass__Something
@@ -69,7 +69,7 @@ ResignKeyPressed: dd 0
     push ecx             ; __int32
     mov  ebx,[0x006807DC]
     mov  ecx,[0x006807E0]
-    call 0x005C094F ; GraphicViewPortClass::Attach(GraphicBufferClass *,int,int,int,int)
+    call GraphicViewPortClass__Attach
 
 .EAX_One:
     mov  eax,1
@@ -82,7 +82,7 @@ ResignKeyPressed: dd 0
 
 .Unlock_Graphics_Buffer:
     mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
-    call 0x005C1191 ; GraphicBufferClass::Unlock(void)
+    call GraphicBufferClass__Unlock ; GraphicBufferClass::Unlock(void)
     test eax,eax
     jz   .Redraw_Screen
     mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something

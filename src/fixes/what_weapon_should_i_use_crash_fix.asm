@@ -10,7 +10,7 @@
 ;----------------------------------------------------------------
 @HACK 0x00560B62,0x00560B67,_TechnoClass__What_Weapon_Should_I_Use_Object_Reference_Check
     call 0x00555190 ; As_Object(long)
-    cmp  eax,dword 0
-    je   0x00560C91
+    test eax,eax
+    je   0x00560C93
     jmp  0x00560B67
 @ENDHACK

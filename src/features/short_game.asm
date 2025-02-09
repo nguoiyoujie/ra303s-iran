@@ -13,18 +13,14 @@
 
 cextern Spawn.Settings.ShortGame
 
-cextern Houses.BScan
 cextern Houses.BSignificantScan
 
 
 @HACK 0x004D4C79,0x004D4C82,_HouseClass__AI_MPlayerDefeated_Check
-    ; scan each byte of Houses.BScan (house-specific) ANDed over Houses.BSignificantScan
+    ; scan each byte of BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
     push eax
-    lea  esi,[eax+HouseClass.Offset.NewBScan]
-    ;mov  eax,dword[eax+HouseClass.Offset.ID] ; HouseClass->ID     
-    ;shl  eax,5 ; ID * 32 bytes
-    ;lea  esi,[Houses.BScan+eax] ; eax is now pointer to start of the house's new BScan fields
+    lea  esi,[eax+HouseClass.Offset.NewActiveBScan]
     lea  ecx,[Houses.BSignificantScan]
     xor  edi,edi ; start with offset 0
 .Scan:

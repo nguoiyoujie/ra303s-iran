@@ -7,30 +7,10 @@
 ; A good deal of testing is needed to check for compatibility issues, as many things are tied to the affected values
 ;----------------------------------------------------------------
 
+cextern UnitTrackerClass__Increment_Unit_Total
+cextern UnitTrackerClass__Decrement_Unit_Total
+
 cextern VesselTypeClass.Count
-
-
-;@SET 0x004DCB58,{shr eax,0x18}
-;@SET 0x004DCB5B,{dec dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]}
-
-; _HouseClass__Tracking_Remove_New_Planes_Tracking
-@SET 0x004DCB79,{shr eax,0x18}
-@SET 0x004DCB7C,{dec dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]}
-
-; _HouseClass__Tracking_Remove_New_Infantry_Tracking
-@SET 0x004DCBA7,{shr eax,0x18}
-@SJMP 0x004DCBAA,0x004DCBB2
-@SET 0x004DCBB2,{dec dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]}
-
-; _HouseClass__Tracking_Remove_New_Vehicle_Tracking
-@SET 0x004DCBD1,{shr eax,0x18}
-@SJMP 0x004DCBD4,0x004DCBDC
-@SET 0x004DCBDC,{dec dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]}
-
-; _HouseClass__Tracking_Remove_New_Vessels_Tracking
-@SET 0x004DCBFB,{shr eax,0x18}
-@SJMP 0x004DCBFE,0x004DCC06
-@SET 0x004DCC06,{dec dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]}
 
 ; HouseClass::Get_Quantity
 @SET 0x004DDBC2,{mov eax,[eax+edx*4+HouseClass.Offset.NewAQuantity]}
@@ -50,62 +30,307 @@ cextern VesselTypeClass.Count
 @SET 0x004D4B82,{add eax,[edx+HouseClass.Offset.NewVQuantity]}
 @SET 0x004D4B95,{add eax,[edx+HouseClass.Offset.NewVQuantity]}
 
+@HACK 0x004DCB14,0x004DCC2F,_HouseClass__Tracking_Remove_Reimplementation
+    ; eax = HouseClass, edx = TechnoClass
+    push ebp
+    mov  ebp,esp
+    push ebx
 
-@HACK 0x004DCB52,0x004DCB62,_HouseClass__Tracking_Remove_New_Building_Tracking
-    mov  edx,eax
-    mov  eax,[eax+0x1A4]
-    movzx eax,al
+    AbstractClass.RTTI.Get(edx,bl)
+    cmp  bl,RTTIType.Infantry
+    je   .Update.Infantry  
+    cmp  bl,RTTIType.Unit
+    je   .Update.Unit  
+    cmp  bl,RTTIType.Building
+    je   .Update.Building  
+    cmp  bl,RTTIType.Aircraft
+    je   .Update.Aircraft      
+    cmp  bl,RTTIType.Vessel
+    je   .Update.Vessel
+    jmp  .Ret
+
+.Update.Infantry:
+    mov  ebx,eax
+    InfantryClass.Class.Get(edx,eax)
+    dec  dword[ebx+HouseClass.Offset.CurInfantry]
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
+    jnz  .Update.Infantry.CheckActive
+    call House_Recalc_Attributes_Infantry
+.Update.Infantry.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Infantry.Done
+    TechnoClass.IsInPlay.Set(edx,0)
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewActiveIQuantity]
+    jnz  .Update.Infantry.Done
+    call House_Recalc_Attributes_ActiveInfantry
+.Update.Infantry.Done:
+    mov  eax,[ebx+HouseClass.Offset.InfantryTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Decrement_Unit_Total
+    jmp  .Ret
+
+.Update.Unit:
+    mov  ebx,eax
+    UnitClass.Class.Get(edx,eax)
+    dec  dword[ebx+HouseClass.Offset.CurUnits]
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
+    jnz  .Update.Unit.CheckActive
+    call House_Recalc_Attributes_Unit
+.Update.Unit.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Unit.Done
+    TechnoClass.IsInPlay.Set(edx,0)
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewActiveUQuantity]
+    jnz  .Update.Unit.Done
+    call House_Recalc_Attributes_ActiveUnit
+.Update.Unit.Done:
+    mov  eax,[ebx+HouseClass.Offset.UnitTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Decrement_Unit_Total
+    jmp  .Ret
+
+.Update.Building:
+    mov  ebx,eax
+    BuildingClass.Class.Get(edx,eax)
+    dec  dword[ebx+HouseClass.Offset.CurBuildings]
     dec  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
-    jne  .Skip
-    ;call House_Recalc_Attributes_Buildings
-.Skip:
-    jmp  0x004DCB62
+    jnz  .Update.Building.CheckActive
+    call House_Recalc_Attributes_Building
+.Update.Building.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Building.Done
+    TechnoClass.IsInPlay.Set(edx,0)
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewActiveBQuantity]
+    jnz  .Update.Building.Done
+    call House_Recalc_Attributes_ActiveBuilding
+.Update.Building.Done:
+    mov  eax,[ebx+HouseClass.Offset.BuildingTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Decrement_Unit_Total
+    jmp  .Ret
+
+.Update.Aircraft:
+    mov  ebx,eax
+    AircraftClass.Class.Get(edx,eax)
+    dec  dword[ebx+HouseClass.Offset.CurAircraft]
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]
+    jnz  .Update.Aircraft.CheckActive
+    call House_Recalc_Attributes_Aircraft
+.Update.Aircraft.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Aircraft.Done
+    TechnoClass.IsInPlay.Set(edx,0)
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewActiveAQuantity]
+    jnz  .Update.Aircraft.Done
+    call House_Recalc_Attributes_ActiveAircraft
+.Update.Aircraft.Done:
+    mov  eax,[ebx+HouseClass.Offset.AircraftTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Decrement_Unit_Total
+    jmp  .Ret
+
+.Update.Vessel:
+    mov  ebx,eax
+    VesselClass.Class.Get(edx,eax)
+    dec  dword[ebx+HouseClass.Offset.CurVessels]
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
+    jnz  .Update.Vessel.CheckActive
+    call House_Recalc_Attributes_Vessel
+.Update.Vessel.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Vessel.Done
+    TechnoClass.IsInPlay.Set(edx,0)
+    dec  dword[ebx+eax*4+HouseClass.Offset.NewActiveVQuantity]
+    jnz  .Update.Vessel.Done
+    call House_Recalc_Attributes_ActiveVessel
+.Update.Vessel.Done:
+    mov  eax,[ebx+HouseClass.Offset.VesselTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Decrement_Unit_Total
+    jmp  .Ret
+
+.Ret:
+    lea  esp,[ebp-0x4]
+    pop  ebx
+    pop  ebp
+    ret
 @ENDHACK
 
 
-@HACK 0x004DCC85,0x004DCC95,_HouseClass__Tracking_Add_New_Building_Tracking
-    movzx eax,al
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
-    mov  byte[ebx+HouseClass.Offset.BuildStructure],-1 ; I just built something. Recheck my build order.
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity],1
-    jne  .Skip
-    ;call House_Recalc_Attributes_Buildings
-.Skip:
-    movzx ecx,al
-    mov  al,1
-    shl  eax,cl
-    jmp  0x004DCC95
-@ENDHACK
+@HACK 0x004DCC30,0x004DCEB3,_HouseClass__Tracking_Add_Reimplementation
+    ; eax = HouseClass, edx = TechnoClass
+    push ebp
+    mov  ebp,esp
+    push ebx
 
+    AbstractClass.RTTI.Get(edx,bl)
+    cmp  bl,RTTIType.Infantry
+    je   .Update.Infantry  
+    cmp  bl,RTTIType.Unit
+    je   .Update.Unit  
+    cmp  bl,RTTIType.Building
+    je   .Update.Building  
+    cmp  bl,RTTIType.Aircraft
+    je   .Update.Aircraft      
+    cmp  bl,RTTIType.Vessel
+    je   .Update.Vessel
+    jmp  .Ret
 
-@HACK 0x004DCCF8,0x004DCCFE,_HouseClass__Tracking_Add_New_Planes_Tracking
-    inc  dword[esi+HouseClass.Offset.NewAQuantity]
-    mov  byte[ebx+HouseClass.Offset.BuildAircraft],-1 ; I just built something. Recheck my limits.
-    jmp  0x004DCCFE
-@ENDHACK
-
-
-@HACK 0x004DCD5B,0x004DCD6D,_HouseClass__Tracking_Add_New_Infantry_Tracking
-    movzx eax,cl
+.Update.Infantry:
+    mov  ebx,eax
+    InfantryClass.Class.Get(edx,eax)
+    inc  dword[ebx+HouseClass.Offset.CurInfantry]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
-    mov  byte[ebx+HouseClass.Offset.BuildInfantry],-1 ; I just built something. Recheck my limits.
-    jmp  0x004DCD6D
-@ENDHACK
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity],1
+    jne  .Update.Infantry.CheckActive
+    call House_Recalc_Attributes_Infantry
+.Update.Infantry.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Infantry.Done
+    TechnoClass.IsInPlay.Set(edx,1)
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveIQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveIQuantity],1
+    jne  .Update.Infantry.Done
+    call House_Recalc_Attributes_ActiveInfantry
+.Update.Infantry.Done:
+    mov  eax,[ebx+HouseClass.Offset.InfantryTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Increment_Unit_Total
+    jmp  .Ret
 
-
-@HACK 0x004DCDD2,0x004DCDF0,_HouseClass__Tracking_Add_New_Vehicle_Tracking
-    movzx eax,cl
+.Update.Unit:
+    mov  ebx,eax
+    UnitClass.Class.Get(edx,eax)
+    inc  dword[ebx+HouseClass.Offset.CurUnits]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
-    mov  byte[ebx+HouseClass.Offset.BuildUnit],-1 ; I just built something. Recheck my limits.
-    jmp  0x004DCDF0
-@ENDHACK
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity],1
+    jne  .Update.Unit.CheckActive
+    call House_Recalc_Attributes_Unit
+.Update.Unit.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Unit.Done
+    TechnoClass.IsInPlay.Set(edx,1)
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveUQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveUQuantity],1
+    jne  .Update.Unit.Done
+    call House_Recalc_Attributes_ActiveUnit
+.Update.Unit.Done:
+    mov  eax,[ebx+HouseClass.Offset.UnitTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Increment_Unit_Total
+    jmp  .Ret
 
+.Update.Building:
+    mov  ebx,eax
+    BuildingClass.Class.Get(edx,eax)
+    inc  dword[ebx+HouseClass.Offset.CurBuildings]
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity],1
+    ;jne  .Update.Building.CheckActive
+    call House_Recalc_Attributes_Building
+.Update.Building.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Building.Done
+    TechnoClass.IsInPlay.Set(edx,1)
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveBQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveBQuantity],1
+    ;jne  .Update.Building.Done
+    call House_Recalc_Attributes_ActiveBuilding
+.Update.Building.Done:
+    mov  eax,[ebx+HouseClass.Offset.BuildingTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Increment_Unit_Total
+    jmp  .Ret
 
-@HACK 0x004DCE40,0x004DCE5E,_HouseClass__Tracking_Add_New_Vessels_Tracking
-    movsx eax,cl
+.Update.Aircraft:
+    mov  ebx,eax
+    AircraftClass.Class.Get(edx,eax)
+    inc  dword[ebx+HouseClass.Offset.CurAircraft]
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity],1
+    jne  .Update.Aircraft.CheckActive
+    call House_Recalc_Attributes_Aircraft
+.Update.Aircraft.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Aircraft.Done
+    TechnoClass.IsInPlay.Set(edx,1)
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveAQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveAQuantity],1
+    jne  .Update.Aircraft.Done
+    call House_Recalc_Attributes_ActiveAircraft
+.Update.Aircraft.Done:
+    mov  eax,[ebx+HouseClass.Offset.AircraftTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Increment_Unit_Total
+    jmp  .Ret
+
+.Update.Vessel:
+    mov  ebx,eax
+    VesselClass.Class.Get(edx,eax)
+    inc  dword[ebx+HouseClass.Offset.CurVessels]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
-    mov  byte[ebx+HouseClass.Offset.BuildVessel],-1 ; I just built something. Recheck my limits.
-    jmp  0x004DCE5E
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity],1
+    jne  .Update.Vessel.CheckActive
+    call House_Recalc_Attributes_Vessel
+.Update.Vessel.CheckActive:
+    push eax
+    TechnoClass.IsInPlay.Get(edx,ah)
+    test ah,ah
+    pop  eax
+    jz   .Update.Vessel.Done
+    TechnoClass.IsInPlay.Set(edx,1)
+    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveVQuantity]
+    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveVQuantity],1
+    jne  .Update.Vessel.Done
+    call House_Recalc_Attributes_ActiveVessel
+.Update.Vessel.Done:
+    mov  eax,[ebx+HouseClass.Offset.VesselTotals]
+    test eax,eax
+    jz   .Ret
+    call UnitTrackerClass__Increment_Unit_Total
+    jmp  .Ret
+
+.Ret:
+    lea  esp,[ebp-0x4]
+    pop  ebx
+    pop  ebp
+    ret
 @ENDHACK
 
 

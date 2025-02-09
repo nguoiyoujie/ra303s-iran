@@ -18,6 +18,7 @@
 %include "macros/datatypes.inc"
 %include "types/common.inc"
 
+%include "defines/rttitypes.inc"
 %include "defines/housetypes.inc"
 
 %include "types/INIClass.inc"
@@ -26,6 +27,15 @@
 %include "types/TechnoTypeClass.inc"
 %include "types/BuildingTypeClass.inc"
 %include "types/HouseClass.inc"
+%include "types/AbstractClass.inc"
+%include "types/ObjectClass.inc"
+%include "types/TechnoClass.inc"
+%include "types/AircraftClass.inc"
+%include "types/BuildingClass.inc"
+%include "types/InfantryClass.inc"
+%include "types/UnitClass.inc"
+%include "types/VesselClass.inc"
+
 ;%include "types/HouseTypeClass.inc"
 
 ; subsections

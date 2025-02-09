@@ -98,7 +98,9 @@ cextern Extract_String
 ; return <output>: 1 if true, 0 otherwise
 %macro GetBool 4
     GetBit byte[%1+%2],%3
+  %ifnidni %4,al
     mov  %4,al
+  %endif
 %endmacro
 
 ; args <Pointer to type class>,<offset of data>,<bit of data>,<new value>

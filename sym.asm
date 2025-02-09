@@ -236,6 +236,7 @@ setcglob 0x0056076C,TeamTypeClass__Write_INI                                   ;
 
 ; TECHNO.CPP
 setcglob 0x00560CBC,TechnoClass__Combat_Damage                                 ; int TechnoClass::Combat_Damage(int which) 
+setcglob 0x00560B14,TechnoClass__What_Weapon_Should_I_Use
 setcglob 0x00564358,TechnoClass__Owner                                         ; HouseType TechnoClass::Owner(void)  
 setcglob 0x00569914,TechnoTypeClass__Read_INI                                  ;
 setcglob 0x00569E30,TechnoTypeClass__Legal_Placement                           ;
@@ -278,6 +279,10 @@ setcglob 0x0069164C,Weapon__Weapons                                            ;
 setcglob 0x0058FD98,WeaponTypeClass__WeaponTypeClass                           ; WeaponTypeClass::WeaponTypeClass(char const * name)
 setcglob 0x0058FE18,WeaponTypeClass__new                                       ; void * WeaponTypeClass::operator new(size_t)
 
+; UTRACKER.CPP
+setcglob 0x00581C98,UnitTrackerClass__Increment_Unit_Total                     ; void UnitTrackerClass::Increment_Unit_Total(int unit_type)
+setcglob 0x00581CA4,UnitTrackerClass__Decrement_Unit_Total                     ; void UnitTrackerClass::Increment_Unit_Total(int unit_type)
+
 ; GAUGE.CPP
 setcglob 0x004C4CF0,GaugeClass__GaugeClass                                     ; GaugeClass::GaugeClass(unsigned id, int x, int y, int w, int h)
 
@@ -286,9 +291,17 @@ setcglob 0x004CAFF4,GScreenClass__Flag_To_Redraw                               ;
 setcglob 0x004CB110,GScreenClass__Render                                       ; void GScreenClass::Render(void)
 
 ; GBUFFER.CPP
+setcglob 0x005C0850,GraphicViewPortClass__GraphicViewPortClass
+setcglob 0x005C094F,GraphicViewPortClass__Attach                               ; GraphicViewPortClass::Attach(GraphicBufferClass *,int,int,int,int)
 setcglob 0x005C0FE7,GraphicBufferClass__Set_Logic_Page                         ; GraphicViewPortClass *Set_Logic_Page(GraphicViewPortClass &ptr)
 setcglob 0x005C101A,GraphicBufferClass__Lock                                   ; BOOL GraphicBufferClass::Lock(void)
 setcglob 0x005C1191,GraphicBufferClass__Unlock                                 ; BOOL GraphicBufferClass::Unlock(void)
+
+setcglob 0x005C13E4,Buffer_Draw_Line
+
+; MOUSEWW.CPP
+setcglob 0x005C1980,WWMouseClass__Process_Mouse
+setcglob 0x005C2180,Process_Mouse
 
 ; NETDLG.CPP
 setcglob 0x005063C8,NetDlg___Init_Network                                      ; bool Init_Network (void)
@@ -322,6 +335,9 @@ setcglob 0x005C5070,Extract_String                                             ;
 ; GLOBALS.CPP
 setcglob 0x006016B0,Globals___ScreenWidth
 setcglob 0x006016B4,Globals___ScreenHeight
+
+setcglob 0x006016CC,Globals___WindowList
+
 setcglob 0x006017F0,Globals___Houses                                           ; TFixedIHeapClass<HouseClass> Houses;
 setcglob 0x00601818,Globals___HouseTypes                                       ; TFixedIHeapClass<HouseTypeClass> HouseTypeClass;
 setcglob 0x0060181C,Globals___BuildingTypes                                    ; TFixedIHeapClass<BuildingTypeClass> BuildingTypes;
@@ -332,6 +348,7 @@ setcglob 0x00665DDC,Globals___AntsEnabled
 setcglob 0x00665DE0,Globals___NewUnitsEnabled                                 
 
 setcglob 0x00665E04,Globals___EngineerCaptureLevel                            
+setcglob 0x00665E08,Globals___WWMouse                            
 setcglob 0x00665F68,Globals___FastKey                                          ; PKey FastKey;
 ;setcglob ??????????,Globals___Options                                          ; GameOptionsClass Options;
 setcglob 0x006681C0,Globals___Options_KeyResign                                ; KeyNumType KeyResign;
@@ -451,6 +468,9 @@ setcglob 0x006AC274,BuffGlbl___LogicPage                                       ;
 
 ; DDRAW.CPP
 setcglob 0x006B1498,DDraw___MainWindow      
+
+
+setcglob 0x005D0F10,Delay                                                      ; Delay(int)
 
 ;---------------------------------------------------------------------------
 ; Heap arrays

@@ -62,8 +62,7 @@
 ;%define TechnoClass.Offset.ElectricZapWhich            0x0D1    ; int
 %define TechnoClass.Offset.PurchasePrice               0x0C9    ; int
 ;%define TechnoClass.Offset.IsDiscoveredByPlayerMask               0x037    ; bool
-
-; 0x0D9
+; 0x0CD
 
 ; Generally, object instances are not read by INI
 
@@ -74,6 +73,18 @@
 
 ;%define TechnoClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, TechnoClass.Offset.Index, reg_output
 ;%define TechnoClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, TechnoClass.Offset.Index, value
+
+%define TechnoClass.IsLocked.Get(ptr_type,reg_output)                    GetBool                                ptr_type, TechnoClass.Offset.IsLocked, TechnoClass.Bit.IsLocked, reg_output
+%define TechnoClass.IsLocked.Set(ptr_type,value)                         SetBool                                ptr_type, TechnoClass.Offset.IsLocked, TechnoClass.Bit.IsLocked, value
+
+%define TechnoClass.IsDiscoveredByPlayer.Get(ptr_type,reg_output)        GetBool                                ptr_type, TechnoClass.Offset.IsDiscoveredByPlayer, TechnoClass.Bit.IsDiscoveredByPlayer, reg_output
+%define TechnoClass.IsDiscoveredByPlayer.Set(ptr_type,value)             SetBool                                ptr_type, TechnoClass.Offset.IsDiscoveredByPlayer, TechnoClass.Bit.IsDiscoveredByPlayer, value
+
+%define TechnoClass.IsInPlay.Get(ptr_type,reg_output)                    GetBool                                ptr_type, TechnoClass.Offset.IsInPlay, TechnoClass.Bit.IsInPlay, reg_output
+%define TechnoClass.IsInPlay.Set(ptr_type,value)                         SetBool                                ptr_type, TechnoClass.Offset.IsInPlay, TechnoClass.Bit.IsInPlay, value
+
+%define TechnoClass.IsInTransport.Get(ptr_type,reg_output)               GetBool                                ptr_type, TechnoClass.Offset.IsInTransport, TechnoClass.Bit.IsInTransport, reg_output
+%define TechnoClass.IsInTransport.Set(ptr_type,value)                    SetBool                                ptr_type, TechnoClass.Offset.IsInTransport, TechnoClass.Bit.IsInTransport, value
 
 %define TechnoClass.House.Get(ptr_type,reg_output)                       GetInt                                 ptr_type, TechnoClass.Offset.House, reg_output
 %define TechnoClass.House.Set(ptr_type,value)                            SetInt                                 ptr_type, TechnoClass.Offset.House, value

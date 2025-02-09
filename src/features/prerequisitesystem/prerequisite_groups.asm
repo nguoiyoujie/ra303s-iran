@@ -12,8 +12,6 @@
 ;   Soviet/Allied Tech Center will also no longer fulfill prerequisites that require the other.
 ;----------------------------------------------------------------
 
-cextern Houses.BScan
-
 @HACK 0x004D40DF,0x004D40E4,_HouseClass__Can_Build_ReimplementExtendedPrerequisiteCheck
     ; edx is the technotype pointer 
     ; esi is the houseclass pointer 
@@ -24,10 +22,7 @@ cextern Houses.BScan
     lea  eax,[edx+eax] ; eax is now pointer to start of the prerequisite fields
     ;mov  ebx,dword[esi+HouseClass.Offset.ID] ; HouseClass->ID     
     ; AND over 256-bit BScan
-    ;lea  ecx,[Houses.BScan]
-    ;shl  ebx,5
-    ;lea  ecx,[ecx+ebx] ; ecx is now pointer to start of the house's new BScan fields
-    lea  ecx,[esi+HouseClass.Offset.NewBScan]
+    lea  ecx,[esi+HouseClass.Offset.NewActiveBScan]
     mov  edx,8
 .RepeatIter:
     mov  ebx,dword[eax]
