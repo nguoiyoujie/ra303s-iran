@@ -75,4 +75,8 @@
 ;%define TechnoClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, TechnoClass.Offset.Index, reg_output
 ;%define TechnoClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, TechnoClass.Offset.Index, value
 
+%define TechnoClass.House.Get(ptr_type,reg_output)                       GetInt                                 ptr_type, TechnoClass.Offset.House, reg_output
+%define TechnoClass.House.Set(ptr_type,value)                            SetInt                                 ptr_type, TechnoClass.Offset.House, value
+
+
 %endif

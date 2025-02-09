@@ -13,6 +13,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [General Settings](#general-settings) 
  - [Firing Offsets](#firing-offsets) 
  - [Death Weapons](#death-weapons) 
+ - [Manual Targeting](#manual-targeting) 
 
 
 -------
@@ -310,6 +311,20 @@ Determines the offset of the firing animation perpendicular to the unit's line o
 Determines the damage and warhead that is released on this technotype's death. Setting this entry overrides the original behavior of using the technotype's Primary weapon and the technotype's MaxStrength.
 
 Note that the explosion type and spread of the damage is still determined by the damage value (the stellar examples being Mammoth Tank explosion and the Monster Tank explosion), though this is now tied to the weapon's damage.
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### Manual Targeting
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► ManualAcquire
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If set, the unit will ignore its environment, and must target using the player's actions. AI players will use the unit as normal.
+
 </details></td></tr></table>
 
 
