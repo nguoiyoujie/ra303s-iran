@@ -26,7 +26,7 @@ cextern BuildingClass.Count
 ; with the new system, do not combine the STRUCTF_ADVANCED_POWER with STRUCTF_POWER, or STRUCTF_SOVIET_TECH with STRUCTF_ADVANCED_TECH
 @SJMP 0x004D40AD,0x004D40CE ;_HouseClass__Can_Build ; skip hardcoded flag combinations
 
-@SET 0x00456A86,{add ebx,HouseClass.Offset.BPreGroupScan} ; 0x137 (HouseClass.Offset.BScan) // BuildingClass::Unlimbo
+;@SET 0x00456A86,{add ebx,HouseClass.Offset.BPreGroupScan} ; 0x137 (HouseClass.Offset.BScan) // BuildingClass::Unlimbo
 ;@SET 0x00456AE2,{add edx,HouseClass.Offset.BPreGroupScan} ; 0x13B (HouseClass.Offset.ActiveBScan) // BuildingClass::Unlimbo // skipped
 
 @SET 0x004D46DF,{cmp dword[edi+HouseClass.Offset.BPreGroupScan],0} ; 0x13B (HouseClass.Offset.ActiveBScan) // HouseClass::AI (Sell control)
@@ -227,16 +227,31 @@ cextern BuildingClass.Count
 %endmacro
 
 
-@HACK 0x00456AC1,0x00456ACA,_BuildingClass__Unlimbo_Skip_ActiveBScan
+@HACK 0x00456A62,0x00456A69,_BuildingClass__Unlimbo_Set_NewActiveBScan
+    HouseClass.FromIndex([eax],ebx)
+    ; esi is the buildingclass
+    BuildingClass.Class.Get(esi,edx)
+    BuildingTypeClass.FromIndex(edx,ecx)
+    TechnoTypeClass.PrereqType.Get(ecx,al)
+    mov  cl,al
+    mov  eax,1
+    shl  eax,cl
+    or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
     lea  eax,[esi+0x93]
     jmp  0x00456B1D
 @ENDHACK
 
 
-@HACK 0x00456AA5,0x00456AAB,_BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1
-    mov  ecx,[eax+TechnoTypeClass.Offset.PrereqType-3]
-    jmp  0x00456AAB
-@ENDHACK
+;@HACK 0x00456AC1,0x00456ACA,_BuildingClass__Unlimbo_Skip_ActiveBScan
+;    lea  eax,[esi+0x93]
+;    jmp  0x00456B1D
+;@ENDHACK
+
+
+;@HACK 0x00456AA5,0x00456AAB,_BuildingClass__Unlimbo_ReplaceTypeWithPrereqType1
+;    mov  ecx,[eax+TechnoTypeClass.Offset.PrereqType-3]
+;    jmp  0x00456AAB
+;@ENDHACK
 
 
 ;@HACK 0x00456B01,0x00456B07,_BuildingClass__Unlimbo_ReplaceTypeWithPrereqType2 ; skipped
@@ -318,12 +333,16 @@ House_Recalc_Attributes_ActiveBuilding:
     BuildingTypeClass.IsRadar.Get(edx,cl)
     test cl,cl
     jnz  .ClearAll
+    TechnoTypeClass.PrereqType.Get(edx,cl)
     mov  dword edx,[ebx+HouseClass.Offset.NewActiveBQuantity+esi*4] ; if this is a removal, we should clear all anyway since we need to requery multiple types for BPreGroupScan.
     test edx,edx
     jz   .ClearAll
-.CheckOne:
-    mov  ecx,esi
+.SetOne:
     ; Building does not require refreshing of special fields (e.g. Radar). Just update the BScan and BPreGroupScan fields accordingly
+    mov  eax,1
+    shl  eax,cl
+    or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
+    mov  ecx,esi
     lea  ebx,[ebx+HouseClass.Offset.NewActiveBScan]
     mov  eax,ecx
     shr  eax,3
@@ -331,14 +350,6 @@ House_Recalc_Attributes_ActiveBuilding:
     and  ecx,7
     mov  al,1
     shl  al,cl
-    test edx,edx
-    jnz  .SetOne
-.ClearOne:
-    inc  al
-    neg  al
-    and  byte[ebx],al
-    jmp  .Ret
-.SetOne:
     or   byte[ebx],al
     jmp  .Ret
 
@@ -398,7 +409,7 @@ House_Recalc_Attributes_ActiveBuilding:
     shl  eax,cl
     pop  ecx ; building type ID
     pop  ebx ; house
-    or   dword [ebx+HouseClass.Offset.BPreGroupScan],eax
+    or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
 .Next:
     inc  cl
     cmp  cl,[BuildingTypeClass.Count]
