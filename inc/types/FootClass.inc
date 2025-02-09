@@ -38,7 +38,9 @@
 %define FootClass.Offset.IsMovingOntoBridge        0x0CE    ; bool
 %define FootClass.Bit.IsMovingOntoBridge           5
 
-; 0x0CF, 0x0D0 empty
+%define FootClass.Offset.PathAbandon               0x0CF    ; byte
+
+; 0x0D0 empty
 %define FootClass.Offset.Speed                     0x0D1    ; int
 %define FootClass.Offset.SpeedBias                 0x0D5    ; fixed (word)
 %define FootClass.Offset.XFormOffset               0x0D7    ; int
@@ -47,18 +49,18 @@
 %define FootClass.Offset.SuspendedNavCom           0x0E3    ; TARGET (dword)
 %define FootClass.Offset.NavQueue                  0x0E7    ; TARGET (dword) * 10, 40 bytes
 
-%define FootClass.Offset.Team                      0x07F    ; CCPtr<TeamClass>
-%define FootClass.Offset.Group                     0x083    ; byte
-%define FootClass.Offset.Member                    0x084    ; FootClass * (ptr)
-%define FootClass.Offset.Path                      0x088    ; FacingType (byte) * 12, 12 bytes
-%define FootClass.Offset.PathThreshhold            0x094    ; MoveType (byte)
-%define FootClass.Offset.PathDelay                 0x095    ; CDTimerClass<FrameTimerClass>
-%define FootClass.Offset.PathTryAgain              0x09E    ; int
-%define FootClass.Offset.BaseAttackTimer           0x0A2    ; CDTimerClass<FrameTimerClass>
-%define FootClass.Offset.FormationSpeed            0x0AB    ; byte
-%define FootClass.Offset.FormationMaxSpeed         0x0AC    ; byte
-%define FootClass.Offset.HeadToCoord               0x0AD    ; COORDINATE (dword)
-; 0x0B1
+%define FootClass.Offset.Team                      0x10F    ; CCPtr<TeamClass>
+%define FootClass.Offset.Group                     0x113    ; byte
+%define FootClass.Offset.Member                    0x114    ; FootClass * (ptr)
+%define FootClass.Offset.Path                      0x118    ; FacingType (byte) * 12, 12 bytes
+%define FootClass.Offset.PathThreshhold            0x124    ; MoveType (byte)
+%define FootClass.Offset.PathDelay                 0x125    ; CDTimerClass<FrameTimerClass>
+%define FootClass.Offset.PathTryAgain              0x12E    ; int
+%define FootClass.Offset.BaseAttackTimer           0x132    ; CDTimerClass<FrameTimerClass>
+%define FootClass.Offset.FormationSpeed            0x13B    ; byte
+%define FootClass.Offset.FormationMaxSpeed         0x13C    ; byte
+%define FootClass.Offset.HeadToCoord               0x13D    ; COORDINATE (dword)
+; 0x141
 
 ; Generally, object instances are not read by INI
 

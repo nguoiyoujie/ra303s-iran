@@ -19,6 +19,7 @@ cextern str_CounterstrikeEnabled
 cextern str_NoCD
 cextern str_DebugLogging
 cextern str_VideoInterlaceMode
+cextern str_ViewTargetingLines
 cextern str_SkipScoreScreen
 cextern str_RandomStartingSong
 cextern str_AlternativeRifleSound
@@ -63,10 +64,11 @@ cextern RedAlert.Options.UseBetaCruiser
 cextern RedAlert.Options.UseBetaDestroyer                   
 cextern RedAlert.Options.UseBetaGunboat                     
 cextern RedAlert.Options.UseBetaSubmarine                   
-cextern RedAlert.Options.UseBetaTeslaTank                   
-cextern RedAlert.Options.UseDOSInterfaceMod                 
-cextern RedAlert.Options.UseSmallInfantry                   
-cextern RedAlert.Options.VideoInterlaceMode                 
+cextern RedAlert.Options.UseBetaTeslaTank
+cextern RedAlert.Options.UseDOSInterfaceMod
+cextern RedAlert.Options.UseSmallInfantry
+cextern RedAlert.Options.VideoInterlaceMode
+cextern RedAlert.Options.ViewTargetingLines
 cextern RedAlert.WinHotKeys.KeyMapSnapshot                  
 cextern RedAlert.WinHotKeys.KeySidebarToggle   
 cextern SetProcessAffinityMask             
@@ -136,6 +138,10 @@ cextern SetProcessAffinityMask
     lea  eax,ebp_RedAlertINI
     call_INIClass__Get_Int eax,str_Options,str_VideoInterlaceMode,2 ; 2 = deinterlace videos
     mov  [RedAlert.Options.VideoInterlaceMode],al
+
+    lea  eax,ebp_RedAlertINI
+    call_INIClass__Get_Bool eax,str_Options,str_ViewTargetingLines,0
+    mov  [RedAlert.Options.ViewTargetingLines],al
 
     lea  eax,ebp_RedAlertINI
     call_INIClass__Get_Bool eax,str_Options,str_SkipScoreScreen,0

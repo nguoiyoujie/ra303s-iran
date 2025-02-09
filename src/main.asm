@@ -73,8 +73,10 @@
 
 %include "types/AbstractClass.inc"
 %include "types/HouseClass.inc"
+%include "types/ObjectClass.inc"
 %include "types/TechnoClass.inc"
 %include "types/MissionClass.inc"
+%include "types/FootClass.inc"
 %include "types/UnitClass.inc"
 %include "types/InfantryClass.inc"
 %include "types/VesselClass.inc"
@@ -220,6 +222,7 @@
 %include "src/features/techno_manual_acquire.asm"
 %include "src/features/weapon_islaser.asm"
 %include "src/features/weapon_zeroversus.asm"
+%include "src/features/view_targeting_lines.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

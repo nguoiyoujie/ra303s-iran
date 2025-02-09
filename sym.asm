@@ -184,6 +184,9 @@ setcglob 0x00533098,_Consists_Only_Of_Infantry                                 ;
 setcglob 0x005330C4,_Who_Can_Pop_Out_Of                                        ; static TechnoClass * _Who_Can_Pop_Out_Of(CELL origin)
 setcglob 0x00533178,Do_Reinforcements                                          ; bool Do_Reinforcements(TeamTypeClass const * teamtype)
 
+; RADAR.CPP
+setcglob 0x005329EC,RadarClass__Flag_Cell
+
 ; RULES.CPP
 setcglob 0x005342DC,RulesClass__General                                       
 setcglob 0x00535CF0,RulesClass__Recharge                                      
@@ -227,6 +230,9 @@ setcglob 0x00549F34,SmudgeTypeClass__As_Reference                              ;
 setcglob 0x0054FC10,SmudgeClass__new                                           ; void * SmudgeClass::operator new(size_t )
 setcglob 0x0054FC50,SmudgeClass__SmudgeClass                                   ; SmudgeClass::SmudgeClass(SmudgeType type, COORDINATE pos, HousesType house) :
 setcglob 0x005501E4,SmudgeClass__Write_INI                                     ; void SmudgeClass::Write_INI(CCINIClass & ini)
+
+; TARGET.CPP
+setcglob 0x00555384,As_Coord                                                   ; COORDINATE As_Coord(TARGET target)
 
 ; TERRAIN.CPP
 setcglob 0x0056AD6C,TerrainClass__Write_INI                                    ; void TerrainClass::Write_INI(CCINIClass & ini)

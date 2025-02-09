@@ -135,6 +135,7 @@ gbool  RedAlert.Options.UseBetaTeslaTank                      ,0
 gbool  RedAlert.Options.UseDOSInterfaceMod                    ,0
 gbool  RedAlert.Options.UseSmallInfantry                      ,0
 gint   RedAlert.Options.VideoInterlaceMode                    ,2
+gbool  RedAlert.Options.ViewTargetingLines                    ,0
 gshort RedAlert.WinHotKeys.KeyMapSnapshot                     ,0
 gshort RedAlert.WinHotKeys.KeySidebarToggle                   ,0
 

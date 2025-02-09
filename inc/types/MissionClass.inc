@@ -9,11 +9,11 @@
 %define TYPES_MISSIONCLASS
 
 ; define object type field definitions
-%define MissionClass.Offset.Misison                   0x029    ; byte
-%define MissionClass.Offset.SuspendedMisison          0x02A    ; byte
-%define MissionClass.Offset.MisisonQueue              0x02B    ; byte
-%define MissionClass.Offset.Status                    0x02C    ; int
-; 0x030
+%define MissionClass.Offset.Misison                   0x027    ; byte
+%define MissionClass.Offset.SuspendedMisison          0x028    ; byte
+%define MissionClass.Offset.MisisonQueue              0x029    ; byte
+%define MissionClass.Offset.Status                    0x02A    ; int
+; 0x02D
 
 ; Generally, object instances are not read by INI
 

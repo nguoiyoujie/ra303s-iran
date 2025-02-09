@@ -27,7 +27,7 @@
 %define ObjectClass.Offset.Riser                     0x01D    ; ?
 %define ObjectClass.Offset.Trigger                   0x021    ; Ptr
 %define ObjectClass.Offset.Strength                  0x025    ; word
-; 0x029
+; 0x027
 
 ; Generally, object instances are not read by INI
 

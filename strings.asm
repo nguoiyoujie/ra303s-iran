@@ -193,6 +193,7 @@ gstring str_DisplayOriginalMultiplayerMaps                     , "DisplayOrigina
 gstring str_DisplayAftermathMultiplayerMaps                    , "DisplayAftermathMultiplayerMaps"
 gstring str_DisplayCounterstrikeMultiplayerMaps                , "DisplayCounterstrikeMultiplayerMaps"
 gstring str_MouseWheelScrolling                                , "MouseWheelScrolling"
+gstring str_ViewTargetingLines                                 , "ViewTargetingLines"
 ; str_FixFormationSpeed (multi-use)
 ; str_ParabombsInMultiplayer (multi-use)
 gstring str_ForceSingleCPU                                     , "ForceSingleCPU"
