@@ -7,9 +7,6 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
-; test: see if this releases blocking units
-@SJMP 0x0057F0C5,0x0057F0FB ;_UnitClass_Can_Enter_Cell_SkipNavCom_Check
-
 ; test mouse crash fix?
 ;@SJMP 0x005C17B0,0x005C17B7 ; WWMouseClass_WWMouseClass_SkipWINMM
 

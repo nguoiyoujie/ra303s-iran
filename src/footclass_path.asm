@@ -32,4 +32,6 @@ cextern Process_Mouse
 ; TO-DO: Check if this actually does anything useful...
 ;@SJMP 0x004C0A88,0x004C0A8E ; _FootClass__BasicPath_AlwaysPathToExactNavCom
 
+; test: see if this releases blocking units
+@SJMP 0x0057F0C5,0x0057F0FB ;_UnitClass_Can_Enter_Cell_SkipNavCom_Check
 
