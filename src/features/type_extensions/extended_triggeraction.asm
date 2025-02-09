@@ -1083,7 +1083,8 @@ Set_Map_Dimensions:
     ; force full refresh (includes shroud refresh)
     mov  edx,1
     mov  eax,Globals___Map ; MouseClass Map
-    call 0x0052DA14 ; RadarClass::Draw_It
+    call GScreenClass__Flag_To_Redraw
+    ;call 0x0052DA14 ; RadarClass::Draw_It
 .Ret:
     Restore_Registers
     retn
