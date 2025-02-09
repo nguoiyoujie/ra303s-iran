@@ -31,8 +31,14 @@
 
 
 @HACK 0x005C2184,0x005C218A,_WWMouseClass_Process_Mouse_SpecialDialog_Only
-	cmp  byte [0x00680834],0
-	jz   0x005C21B0
+	cmp  byte[0x00680834],0
+	jnz  .Continue
+    ; also check Session.Play
+	test byte[0x00680151],2
+    jnz  .Skip
+.Continue:
 	mov  dword edx,[0x006AC284]
 	jmp  0x005C218A
+.Skip:
+    jmp  0x005C21B0
 @ENDHACK
