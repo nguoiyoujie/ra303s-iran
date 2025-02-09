@@ -11,6 +11,14 @@
 
 cextern TechnoClass__What_Weapon_Should_I_Use
 
+@HACK 0x004C1665,0x004C166A,_FootClass__Approach_Target_CheckInvalidWeapon
+    call TechnoClass__What_Weapon_Should_I_Use
+    cmp  dword eax,-1
+    je   0x004C1910
+    jmp  0x004C166A
+@ENDHACK
+
+
 @HACK 0x004F0E83,0x004F0E88,_InfantryClass__Firing_AI_CheckInvalidWeapon
     call TechnoClass__What_Weapon_Should_I_Use
     cmp  dword eax,-1
