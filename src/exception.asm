@@ -170,10 +170,11 @@ str_memory_dump_name        db"ra95crash_memory.dmp",0
 
 _exception_handler:
     mov  dword ebx,[esp+0x4]
-    mov  dword edx,[esp+0xC]
+    mov  dword edx,[ebx+0xC]
     mov  dword[ExceptionAddress],edx
+    mov  dword edx,[esp+0xC]
     mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
-    ;mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
+    mov  [exception_pointers+EXCEPTION_POINTERS.ExceptionRecord],ebx
     mov  [exception_pointers+EXCEPTION_POINTERS.ContextRecord],edx
 
     mov  dword[exception_info+MINIDUMP_EXCEPTION_INFORMATION.ExceptionPointers],exception_pointers
