@@ -267,6 +267,7 @@
 %include "src/fixes/magic_build_fix.asm"
 %include "src/fixes/mcv_undeploy_fix.asm"
 %include "src/fixes/modem_menu_remove.asm"
+%include "src/fixes/mouse_buffer_fix.asm"
 %include "src/fixes/multiplayer_settings_saving_fix.asm"
 %include "src/fixes/naval_repair_fix.asm"
 ;%include "src/fixes/south_advantage.asm" ; test fix
