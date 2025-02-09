@@ -15,6 +15,7 @@ cextern Audio___Voc_From_Name
 ;========= start loading from INI ==============
     push esi
     WeaponTypeClass.ChargeSound.Read(esi,edi,_GetVocTypeFromString)
+    WeaponTypeClass.DeployToFire.Read(esi,edi)
     pop  esi
 .Ret:
     lea  esp,[ebp-0x10]

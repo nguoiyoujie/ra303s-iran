@@ -25,6 +25,9 @@ cextern INI_Read_String_Buffer
 %define WeaponTypeClass.Offset.IsElectric                0x008    ; BOOL // Already supported by game INI
 %define WeaponTypeClass.Bit.IsElectric                   4    
 ; 0x009, 0x00A and 0x00B are empty
+%define WeaponTypeClass.Offset.DeployToFire              0x008    ; BOOL
+%define WeaponTypeClass.Bit.DeployToFire                 6   
+
 %define WeaponTypeClass.Offset.ChargeSound               0x00A    ; word
 
 %define WeaponTypeClass.Offset.Burst                     0x00C    ; INT (0,1)
@@ -42,6 +45,7 @@ str.WeaponTypeClass.IsTurboBoosted            db"TurboBoost",0          ;existin
 str.WeaponTypeClass.IsElectric                db"Charges",0             ;existing ini
 str.WeaponTypeClass.IsCamera                  db"Camera",0              ;existing ini
 str.WeaponTypeClass.IsSupressed               db"Supress",0             ;existing ini
+str.WeaponTypeClass.DeployToFire              db"DeployToFire",0        ;new ini
 str.WeaponTypeClass.Burst                     db"Burst",0               ;existing ini
 str.WeaponTypeClass.Bullet                    db"Projectile",0          ;existing ini
 str.WeaponTypeClass.Damage                    db"Damage",0              ;existing ini
@@ -120,6 +124,10 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 %define WeaponTypeClass.IsElectric.Get(ptr_type,reg_output)                  GetBool                                ptr_type, WeaponTypeClass.Offset.IsElectric, WeaponTypeClass.Bit.IsElectric, reg_output
 %define WeaponTypeClass.IsElectric.Set(ptr_type,value)                       SetBool                                ptr_type, WeaponTypeClass.Offset.IsElectric, WeaponTypeClass.Bit.IsElectric, value
 %define WeaponTypeClass.IsElectric.Read(ptr_type,ptr_rules)                  WeaponTypeClass.ReadBool               ptr_type, ptr_rules, WeaponTypeClass.Offset.IsElectric, WeaponTypeClass.Bit.IsElectric, str.WeaponTypeClass.IsElectric
+
+%define WeaponTypeClass.DeployToFire.Get(ptr_type,reg_output)                GetBool                                ptr_type, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, reg_output
+%define WeaponTypeClass.DeployToFire.Set(ptr_type,value)                     SetBool                                ptr_type, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, value
+%define WeaponTypeClass.DeployToFire.Read(ptr_type,ptr_rules)                WeaponTypeClass.ReadBool               ptr_type, ptr_rules, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, str.WeaponTypeClass.DeployToFire
 
 %define WeaponTypeClass.Burst.Get(ptr_type,reg_output)                       GetInt                                 ptr_type, WeaponTypeClass.Offset.Burst, reg_output
 %define WeaponTypeClass.Burst.Set(ptr_type,value)                            SetInt                                 ptr_type, WeaponTypeClass.Offset.Burst, value

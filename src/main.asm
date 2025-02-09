@@ -207,6 +207,7 @@
 %include "src/features/building_freeunit.asm"
 %include "src/features/building_construction_yard_unhardcode.asm"
 
+%include "src/features/techno_deploy_to_fire.asm"
 %include "src/features/weapon_zeroversus.asm"
 
 ; experimental

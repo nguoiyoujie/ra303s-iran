@@ -9,6 +9,7 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It also in
  - [New Entries](#new-entries) 
  - [Negative Damage](#negative-damage) 
  - [Tesla Charge Settings](#tesla-charge-settings) 
+ - [Deploy To Fire](#deploy-to-fire) 
 
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
@@ -74,6 +75,22 @@ The mechanics of healing is not yet fully unraveled, so negative damage weapons 
 </samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If used on a weapon with `Charges`=true, overrides the charging sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+</details></td></tr></table>
+
+
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
+-------
+### Deploy To Fire
+<br>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► DeployToFire
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+The unit will approach targets with the weapon's range. Instead of firing a bullet, the unit shall perform the mission `Unload` instead.  
+
+Only effective on certain types, as some do not have a response to the Unload mission.
 </details></td></tr></table>
 
 
