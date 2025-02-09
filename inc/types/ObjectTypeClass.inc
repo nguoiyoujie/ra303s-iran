@@ -62,4 +62,9 @@ str.ObjectTypeClass.RadarIcon                 db"RadarIcon",0              ;inte
 %define ObjectTypeClass.IsInsignificant.Set(ptr_type,value)                  SetBool                                ptr_type, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, value
 %define ObjectTypeClass.IsInsignificant.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadBool             ptr_type, ptr_rules, ObjectTypeClass.Offset.IsInsignificant, ObjectTypeClass.Bit.IsInsignificant, str.ObjectTypeClass.IsSelectable
 
+%define ObjectTypeClass.Armor.Get(ptr_type,reg_output)                       GetByte                                ptr_type, ObjectTypeClass.Offset.Armor, reg_output
+%define ObjectTypeClass.Armor.Set(ptr_type,value)                            SetByte                                ptr_type, ObjectTypeClass.Offset.Armor, value
+%define ObjectTypeClass.Armor.Read(ptr_type,ptr_rules)                       ObjectTypeClass.ReadByte               ptr_type, ptr_rules, ObjectTypeClass.Offset.Armor, str.ObjectTypeClass.Armor
+
+
 %endif

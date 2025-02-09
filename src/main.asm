@@ -209,6 +209,7 @@
 
 %include "src/features/techno_deploy_to_fire.asm"
 %include "src/features/techno_manual_acquire.asm"
+%include "src/features/weapon_islaser.asm"
 %include "src/features/weapon_zeroversus.asm"
 
 ; experimental

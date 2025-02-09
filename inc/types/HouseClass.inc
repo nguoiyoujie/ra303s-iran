@@ -320,6 +320,9 @@ str.HouseClass.MCVUnit                           db"MCVUnit",0                  
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
+%define HouseClass.IsHuman.Get(ptr_type,reg_output)                                GetBool                                ptr_type, HouseClass.Offset.IsHuman, HouseClass.Bit.IsHuman, reg_output
+%define HouseClass.IsHuman.Set(ptr_type,value)                                     SetBool                                ptr_type, HouseClass.Offset.IsHuman, HouseClass.Bit.IsHuman, value
+
 %define HouseClass.RemapColor.Get(ptr_type,reg_output)                             GetByte                                ptr_type, HouseClass.Offset.RemapColor, reg_output
 %define HouseClass.RemapColor.Set(ptr_type,value)                                  SetByte                                ptr_type, HouseClass.Offset.RemapColor, value
 %define HouseClass.RemapColor.Read1(ptr_type,ptr_rules,str_section,function)       HouseClass.ReadStringToByteExt         ptr_type, ptr_rules, HouseClass.Offset.RemapColor, str_section, str.HouseClass.RemapColor1, function

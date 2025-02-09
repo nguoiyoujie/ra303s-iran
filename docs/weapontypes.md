@@ -78,6 +78,23 @@ If used on a weapon with `Charges`=true, overrides the charging sound. This stri
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► IsLaser
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If used on a weapon with `Charges`=true, overrides the tesla zap drawing, and draws a straight line from firing offset to target. This can be used to emulate the C&C Nod Obelisk. Defaults to the charging sound of the Tesla Coil.
+
+Note: `Charges`=true is required on the weapon, else this control does nothing!
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► LaserColor
+</samp></td><td width="120"><samp>Byte</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If used on a weapon with `Charges`=true and `IsLaser`=true, overrides the laser color sound. The color is the indexed color on the game palatte, except for index 0, which defaults to the red color. This can be used to emulate the C&C Nod Obelisk. Defaults to the red color (index 8).
+</details></td></tr></table>
+
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
 ### Deploy To Fire

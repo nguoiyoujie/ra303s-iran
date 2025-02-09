@@ -15,6 +15,8 @@ cextern Audio___Voc_From_Name
 ;========= start loading from INI ==============
     push esi
     WeaponTypeClass.ChargeSound.Read(esi,edi,_GetVocTypeFromString)
+    WeaponTypeClass.IsLaser.Read(esi,edi)
+    WeaponTypeClass.LaserColor.Read(esi,edi)
     WeaponTypeClass.DeployToFire.Read(esi,edi)
     pop  esi
 .Ret:
