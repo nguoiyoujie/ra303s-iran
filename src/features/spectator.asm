@@ -23,9 +23,9 @@ cextern spawner_is_active
     cmp  cl,5
     jnz  .Ret
     mov  eax,[Globals___PlayerPtr]
-    test byte[eax+HouseClass.Offset.IsSpectator],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsSpectator],1<<(HouseClass.Bit.IsSpectator-1)
     jz   .Ret
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jz   .Ret
     mov  cl,3
 .Ret:
@@ -38,7 +38,7 @@ cextern spawner_is_active
 @HACK 0x00532855,0x0053285A,_RadarClass__Draw_Names__Draw_Credits_Count_For_Specator
     push eax
     mov  dword eax,[Globals___PlayerPtr]
-    test byte[eax+HouseClass.Offset.IsSpectator],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsSpectator],1<<(HouseClass.Bit.IsSpectator-1)
     pop  eax
     jnz  .Draw_Credits_Count
     add  eax,edi
@@ -54,7 +54,7 @@ cextern spawner_is_active
 
 @HACK 0x005326A2,0x005326A7,_RadarClass__Draw_Names__Draw_Credits_Text_For_Specator
     mov  dword eax,[Globals___PlayerPtr]
-    test byte[eax+HouseClass.Offset.IsSpectator],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsSpectator],1<<(HouseClass.Bit.IsSpectator-1)
     jnz  .Draw_Credits_Text
     push 0x12A
 .Ret:
@@ -74,7 +74,7 @@ cextern spawner_is_active
     jz   0x0045EF2E ; Code is different for buildings than for other stuff like infantry
     Save_Registers
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jnz  .Next_Iteration
     Restore_Registers
     jmp  0x0045EF2E
@@ -91,7 +91,7 @@ cextern spawner_is_active
     jz   0x004F0913
     Save_Registers
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jnz  .Next_Iteration
     Restore_Registers
     jmp  0x004F0966
@@ -108,7 +108,7 @@ cextern spawner_is_active
     jz   0x0058CA8B
     Save_Registers
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jnz  .Next_Iteration
     Restore_Registers
     jmp  0x0058CADE
@@ -125,7 +125,7 @@ cextern spawner_is_active
     jz   0x0058110B
     Save_Registers
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jnz  .Next_Iteration
     Restore_Registers
     jmp  0x0058115E
@@ -145,8 +145,8 @@ cextern spawner_is_active
     cmp  byte[SpectatorsArray+eax],0
     jz   .Ret
     mov  eax,ebx
-    or   byte[eax+HouseClass.Offset.IsDefeated],1 ; Make house dead
-    mov  byte[eax+HouseClass.Offset.IsSpectator],1
+    or   byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
+    or   byte[eax+HouseClass.Offset.IsSpectator],1<<(HouseClass.Bit.IsSpectator-1)
 ;    mov     eax,Globals___Map
 ;    mov     edx,1
 ;    call    0x0052D790
@@ -162,7 +162,7 @@ cextern spawner_is_active
 @HACK 0x0053E4FB,0x0053E502,_Create_Units_Skip_Dead_Houses
     cmp  byte[spawner_is_active],0
     jz   .Ret
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jnz  .Spectator
 .Ret:
     cmp  dword[ebp-0x8C],0
@@ -176,7 +176,7 @@ cextern spawner_is_active
     mov  dword[Globals___PlayerPtr],edi
     cmp  byte[spawner_is_active],0
     jz   .Ret
-    test byte[eax+HouseClass.Offset.IsDefeated],1 ; offset 1
+    test byte[eax+HouseClass.Offset.IsDefeated],1<<(HouseClass.Bit.IsDefeated-1)
     jz   .Ret
     mov  dword[0x0065D7F0],1
     mov  dword[0x0067F315],1

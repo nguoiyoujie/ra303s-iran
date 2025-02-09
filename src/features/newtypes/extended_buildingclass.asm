@@ -10,7 +10,7 @@ cextern Globals___EngineerCaptureLevel
     mov  edx,[eax+0x11]  ; vtable
     call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.NoBuildingCrew],0x10 ; offset 5
+    test byte[eax+HouseClass.Offset.NoBuildingCrew],1<<(HouseClass.Bit.NoBuildingCrew-1) ; offset 5
     Restore_Registers
     jnz  .No_Building_Crew
 
@@ -30,7 +30,7 @@ cextern Globals___EngineerCaptureLevel
     mov  edx,[eax+0x11]  ; vtable
     call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.InstantCapture],0x8 ; offset 4
+    test byte[eax+HouseClass.Offset.InstantCapture],1<<(HouseClass.Bit.InstantCapture-1) ; offset 4
     Restore_Registers
     jnz  .Capture_Building
 
@@ -50,7 +50,7 @@ cextern Globals___EngineerCaptureLevel
     mov  edx,[eax+0x11]  ; vtable
     call dword[edx+8] ; HousesType const TechnoClass::Owner(void)
     call HouseClass__As_Pointer
-    test byte[eax+HouseClass.Offset.InstantCapture],0x8 ; offset 4
+    test byte[eax+HouseClass.Offset.InstantCapture],1<<(HouseClass.Bit.InstantCapture-1) ; offset 4
     Restore_Registers
     jnz  .Capture_Building
 
