@@ -70,9 +70,12 @@ Temp.IsEnterBuilding db 0
 @ENDHACK
 
 
-@SJMP 0x00565BE2,0x00565BF1 ; _TechnoClass__What_Action_ResetTemp
-
-@HACK 0x00565C04,0x00565C09,_TechnoClass__What_Action_InfiltratorOverride
+@HACK 0x00565BE2,0x00565BF1,_TechnoClass__What_Action_ResetTemp
+    mov  byte al,[ecx]
+    cmp  al,RTTIType.Infantry
+    jnz  .CheckWeapon
+    mov  eax,[ebp-0x18]
+    mov  byte dl,[eax+0x192]
     test dl,0x24 ; IsBomber / IsCapture
     jz   .CheckWeapon
     mov  byte[Temp.IsEnterBuilding],1 
@@ -83,7 +86,7 @@ Temp.IsEnterBuilding db 0
     mov  eax,ecx
     call dword[edx+0x180]
     test eax,eax
-    jz   0x00565C12
+    jnz   0x00565C12
     jmp  0x00565D04
 @ENDHACK
 
