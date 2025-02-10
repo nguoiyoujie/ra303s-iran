@@ -58,9 +58,11 @@ cextern BuildingClass.Count
     test dl,dl
     jnz  %%CompareInPlay
     TechnoClass.House.Get(ecx,edx)
-    HouseClass.FromIndex(edx,ebx)
-    HouseClass.IsHuman.Get(ebx,dl)
-    and  bh,dl
+    mov  eax,edx
+    HouseClass.FromIndex(eax,edx)
+    HouseClass.IsHuman.Get(edx,bl)
+    dec  bl
+    and  bh,bl
   %%CompareInPlay:
     TechnoClass.IsInPlay.Get(ecx,al)
     cmp  bh,al
@@ -228,15 +230,15 @@ cextern BuildingClass.Count
 
 
 @HACK 0x00456A62,0x00456A69,_BuildingClass__Unlimbo_Set_NewActiveBScan
-    HouseClass.FromIndex([eax],ebx)
+    ;HouseClass.FromIndex([eax],ebx)
     ; esi is the buildingclass
-    BuildingClass.Class.Get(esi,edx)
-    BuildingTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.PrereqType.Get(ecx,al)
-    mov  cl,al
-    mov  eax,1
-    shl  eax,cl
-    or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
+    ;BuildingClass.Class.Get(esi,edx)
+    ;BuildingTypeClass.FromIndex(edx,ecx)
+    ;TechnoTypeClass.PrereqType.Get(ecx,al)
+    ;mov  cl,al
+    ;mov  eax,1
+    ;shl  eax,cl
+    ;or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
     lea  eax,[esi+0x93]
     jmp  0x00456B1D
 @ENDHACK
