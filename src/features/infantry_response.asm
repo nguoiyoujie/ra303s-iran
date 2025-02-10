@@ -10,6 +10,7 @@
 
 cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
+cextern Audio___Sound_Effect
 
 cextern Rules.General.DeathReport
 cextern Rules.General.DeathReport1
@@ -157,7 +158,6 @@ Temp.ResponseMission db 0
 @ENDHACK
 
 
-
 @HACK 0x004EBFD6,0x004EBFDB,_InfantryClass__Take_Damage_DeathReport4
     ; ebx is the sound
     GetCustomInfDeathReport 4,bx
@@ -240,3 +240,71 @@ Temp.ResponseMission db 0
     jmp  0x004EF932
 @ENDHACK
 
+
+@HACK 0x004ECF7F,0x004ECF85,_InfantryClass__Per_Cell_Process_Custom_ActionReport
+    movzx eax,al
+    InfantryTypeClass.FromIndex(eax,edx) 
+    InfantryTypeClass.ActionReport.Get(edx,ax)
+    movzx eax,ax
+    test ax,ax
+    jz   0x004ECFA1
+    mov  edx,[ebp-0x1C]
+    mov  dword ecx,-1
+    mov  ebx,1
+    jmp  0x004ECF99
+@ENDHACK
+
+
+@HACK 0x004EE548,0x004EE54E,_InfantryClass__Random_Animate_Custom_RandomReport
+    movzx eax,al
+    InfantryTypeClass.FromIndex(eax,edx) 
+    InfantryTypeClass.RandomReport.Get(edx,ax)
+    movzx eax,ax
+    test ax,ax
+    jz   0x004EE332
+    push eax
+    mov  ebx,2
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    test eax,eax
+    pop  eax
+    jnz  0x004EE332
+    mov  edx,[ebp-0x18]
+    mov  dword ecx,-1
+    mov  ebx,1
+    jmp  0x004EE57F
+@ENDHACK
+
+
+@HACK 0x004ED744,0x004ED74A,_InfantryClass__AI_Custom_StokedReport
+    test eax,eax
+    jz   0x004ED795
+    push edx
+    push ebx
+    InfantryClass.Class.Get(ecx,eax)
+    movzx eax,al
+    InfantryTypeClass.FromIndex(eax,edx) 
+    InfantryTypeClass.StokedReport.Get(edx,ax)
+    test eax,eax
+    jz   .Retn
+    lea  ebx,[ecx+InfantryTypeClass.Offset.StokedReport_Data]
+    lea  ebx,[eax-1]
+    mov  eax,Globals___NonCriticalRandomNumber
+    xor  edx,edx
+    call RandomClass_Random
+    mov  dx,word[ebx+eax*2]
+    jmp  .Retn
+    push ecx
+    movzx eax,dx
+    mov  edx,[ecx+AbstractClass.Offset.Coord]
+    mov  dword ecx,-1
+    mov  ebx,1
+    call Audio___Sound_Effect
+    pop  ecx
+.Retn:
+    pop  ebx
+    pop  edx
+    mov  edi,ecx
+    jmp  0x004ED74A
+@ENDHACK

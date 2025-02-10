@@ -119,6 +119,9 @@ str.CUSTOM                           db"CUSTOM",0
     InfantryTypeClass.DeathReport4.Read(esi,edi,_GetDeathReport4FromString)
     InfantryTypeClass.DeathReport5.Read(esi,edi,_GetDeathReport5FromString)
     InfantryTypeClass.DeathReport.Read(esi,edi,_GetDeathReportFromString)
+    InfantryTypeClass.ActionReport.Read(esi,edi,_GetVocTypeFromString)
+    InfantryTypeClass.RandomReport.Read(esi,edi,_GetVocTypeFromString)
+    InfantryTypeClass.StokedReport.Read(esi,edi,_GetStokedReportFromString)
     InfantryTypeClass.AIBuildLimit.Read(esi,edi)
     InfantryTypeClass.AIBuildWeight.Read(esi,edi)
 
@@ -212,3 +215,6 @@ _GetDeathReportFromString:
     GetVocArrayFromString esi+InfantryTypeClass.Offset.DeathReport_Data,16
     retn
 
+_GetStokedReportFromString:
+    GetVocArrayFromString esi+InfantryTypeClass.Offset.StokedReport_Data,16
+    retn

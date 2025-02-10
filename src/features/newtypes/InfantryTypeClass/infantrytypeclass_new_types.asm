@@ -144,6 +144,8 @@ Init_Heap_OverrideExistingInfantryTypes:
     InfantryTypeClass.AIBuildWeight.Set(edi,1)
 
     InfantryTypeClass.FromIndex(InfantryType.E7,edi)
+    InfantryTypeClass.ActionReport.Set(edi,0x60) ; VOC_TANYA_LAUGH
+    InfantryTypeClass.RandomReport.Set(edi,0x61) ; VOC_TANYA_SHAKE
     InfantryTypeClass.AIBuildLimit.Set(edi,1)
     InfantryTypeClass.AIBuildWeight.Set(edi,1)
     TechnoTypeClass.ManualAcquire.Set(edi,1)

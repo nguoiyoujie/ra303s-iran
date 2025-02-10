@@ -125,10 +125,14 @@ cextern InfantryTypeClass.Array
 %define InfantryTypeClass.Offset.DeathReport5_Data                 0x364    ; word x16
 %define InfantryTypeClass.Offset.DeathReport                       0x384    ; INT
 %define InfantryTypeClass.Offset.DeathReport_Data                  0x388    ; word x16
-;0x3A8
-%define InfantryTypeClass.Offset.AIBuildLimit                      0x3A8    ; INT
-%define InfantryTypeClass.Offset.AIBuildWeight                     0x3AC    ; INT
-;0x3B0
+%define InfantryTypeClass.Offset.StokedReport                      0x3A8    ; INT
+%define InfantryTypeClass.Offset.StokedReport_Data                 0x3AC    ; word x16
+%define InfantryTypeClass.Offset.ActionReport                      0x3CC    ; word
+%define InfantryTypeClass.Offset.RandomReport                      0x3CE    ; word
+;0x3F0
+%define InfantryTypeClass.Offset.AIBuildLimit                      0x3D0    ; INT
+%define InfantryTypeClass.Offset.AIBuildWeight                     0x3D4    ; INT
+;0x3D8
 
 
 ; INI String controls
@@ -219,6 +223,9 @@ str.InfantryTypeClass.DeathReport3                  db"DeathReport3",0
 str.InfantryTypeClass.DeathReport4                  db"DeathReport4",0         
 str.InfantryTypeClass.DeathReport5                  db"DeathReport5",0         
 str.InfantryTypeClass.DeathReport                   db"DeathReport",0         
+str.InfantryTypeClass.StokedReport                  db"StokedReport",0         
+str.InfantryTypeClass.ActionReport                  db"ActionReport",0         
+str.InfantryTypeClass.RandomReport                  db"RandomReport",0         
 str.InfantryTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0         
 
@@ -574,6 +581,18 @@ str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define InfantryTypeClass.DeathReport5.Get(ptr_type,reg_output)                GetInt                                 ptr_type, InfantryTypeClass.Offset.DeathReport5, reg_output
 %define InfantryTypeClass.DeathReport5_Data.Get(ptr_type,reg_output)           GetWord                                ptr_type, InfantryTypeClass.Offset.DeathReport5_Data, reg_output
 %define InfantryTypeClass.DeathReport5.Read(ptr_type,ptr_rules,function)       AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, InfantryTypeClass.Offset.DeathReport5, str.InfantryTypeClass.DeathReport5, function
+
+%define InfantryTypeClass.StokedReport.Get(ptr_type,reg_output)                GetInt                                 ptr_type, InfantryTypeClass.Offset.StokedReport, reg_output
+%define InfantryTypeClass.StokedReport_Data.Get(ptr_type,reg_output)           GetWord                                ptr_type, InfantryTypeClass.Offset.StokedReport_Data, reg_output
+%define InfantryTypeClass.StokedReport.Read(ptr_type,ptr_rules,function)       AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, InfantryTypeClass.Offset.StokedReport, str.InfantryTypeClass.StokedReport, function
+
+%define InfantryTypeClass.ActionReport.Get(ptr_type,reg_output)                GetWord                                ptr_type, InfantryTypeClass.Offset.ActionReport, reg_output
+%define InfantryTypeClass.ActionReport.Set(ptr_type,value)                     SetWord                                ptr_type, InfantryTypeClass.Offset.ActionReport, value
+%define InfantryTypeClass.ActionReport.Read(ptr_type,ptr_rules,function)       AbstractTypeClass.ReadStringToWordExt  ptr_type, ptr_rules, InfantryTypeClass.Offset.ActionReport, str.InfantryTypeClass.ActionReport, function
+
+%define InfantryTypeClass.RandomReport.Get(ptr_type,reg_output)                GetWord                                ptr_type, InfantryTypeClass.Offset.RandomReport, reg_output
+%define InfantryTypeClass.RandomReport.Set(ptr_type,value)                     SetWord                                ptr_type, InfantryTypeClass.Offset.RandomReport, value
+%define InfantryTypeClass.RandomReport.Read(ptr_type,ptr_rules,function)       AbstractTypeClass.ReadStringToWordExt  ptr_type, ptr_rules, InfantryTypeClass.Offset.RandomReport, str.InfantryTypeClass.RandomReport, function
 
 %define InfantryTypeClass.AIBuildLimit.Get(ptr_type,reg_output)                GetInt                                 ptr_type, InfantryTypeClass.Offset.AIBuildLimit, reg_output
 %define InfantryTypeClass.AIBuildLimit.Set(ptr_type,value)                     SetInt                                 ptr_type, InfantryTypeClass.Offset.AIBuildLimit, value

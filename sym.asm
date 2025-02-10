@@ -116,6 +116,7 @@ setcglob 0x004DDEB0,HouseClass__Write_INI                                      ;
 setcglob 0x004DE094,HouseClass__Is_No_YakMig                                   ; bool HouseClass::Is_No_YakMig(void) const
 setcglob 0x004DE640,HouseClass__Computer_Paranoid                              ; void HouseClass::Computer_Paranoid(void)
 
+
 ; ADATA.CPP
 setcglob 0x00407388,AnimTypeClass__AnimTypeClass                               ; AnimTypeClass::AnimTypeClass(AnimType,char *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
 setcglob 0x00407564,AnimTypeClass__new                                         ; AnimTypeClass::operator new(uint)
@@ -633,7 +634,7 @@ setcglob 0x0065DE14,InfantryTypeClass.Count
 setcglob 0x0065DE3C,InfantryTypeClass.Array   
 setcglob 0x1A      ,InfantryTypeClass.ORIGINAL_COUNT   
 setcglob 0x1A2     ,InfantryTypeClass.ORIGINAL_SIZE    
-setcglob 0x3B0     ,InfantryTypeClass.NEW_SIZE
+setcglob 0x3D8     ,InfantryTypeClass.NEW_SIZE
 
 ; BulletTypeClass            0x0065DE54
 setcglob 0x0065DE60,BulletTypeClass.Count     

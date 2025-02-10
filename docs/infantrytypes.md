@@ -347,6 +347,9 @@ Determines the frame offset from the begining of the firing sequence when the we
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport3<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport4<br>
 <code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► DeathReport5<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► ActionReport<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► RandomReport<br>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► StokedReport<br>
 <code>{Rules/Map}</code> ► [General]  ► TanyaDeathReport<br>
 <code>{Rules/Map}</code> ► [General]  ► DogDeathReport<br>
 <code>{Rules/Map}</code> ► [General]  ► DeathReport<br>
@@ -364,6 +367,9 @@ List<br>
 List<br>
 List<br>
 List<br>
+List<br>
+String<br>
+String<br>
 List<br>
 List<br>
 List<br>
@@ -394,8 +400,12 @@ Each entry are as follows:
 |`DeathReport3`    |Report when killed by HE explosion (Warhead ► InfDeath=3)<br>If not defined, falls back to `DeathReport`
 |`DeathReport4`    |Report when killed by fire (Warhead ► InfDeath=4)<br>If not defined, falls back to `DeathReport`
 |`DeathReport5`    |Report when killed by shock (Warhead ► InfDeath=5)<br>If not defined, falls back to `DeathReport`
-
+|`ActionReport`    |Report when appearing on the map - either trained from a structure, or kicked out of a transport
+|`RandomReport`    |Report when a custom animation (DO_IDLE2) is played. This was used by Tanya to periodically say 'Shake a baby'
+|`StokedReport`    |Report when a savor animation (DO_GESTURE/DO_GESTURE2) is played. This was used in TD by the Commando to comment after a good kill.
 </samp>
+
+Note that `ActionReport` and `RandomReport` accept only one sound, not a list.
 
 Death reports are supported in `[General]` as well, the difference being that `Tanya` and `Dog` have special keys to emulate their special voices in the base game.
 
