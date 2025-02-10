@@ -398,28 +398,28 @@ Initialize_Spawn:
 
     ; spawn locations
     spawn_INI_Get_Int str_SpawnLocations,str_Multi1,-1
-    mov  dword[multi1_Spawn],eax
+    mov  dword[multi_Spawns],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi2,-1
-    mov  dword[multi2_Spawn],eax
+    mov  dword[multi_Spawns+4],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi3,-1
-    mov  dword[multi3_Spawn],eax
+    mov  dword[multi_Spawns+8],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi4,-1
-    mov  dword[multi4_Spawn],eax
+    mov  dword[multi_Spawns+0xC],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi5,-1
-    mov  dword[multi5_Spawn],eax
+    mov  dword[multi_Spawns+0x10],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi6,-1
-    mov  dword[multi6_Spawn],eax
+    mov  dword[multi_Spawns+0x14],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi7,-1
-    mov  dword[multi7_Spawn],eax
+    mov  dword[multi_Spawns+0x18],eax
 
     spawn_INI_Get_Int str_SpawnLocations,str_Multi8,-1
-    mov  dword[multi8_Spawn],eax
+    mov  dword[multi_Spawns+0xC],eax
 
     ; multi1-8 colours
     spawn_INI_Get_Int str_HouseColors,str_Multi1,0xFF

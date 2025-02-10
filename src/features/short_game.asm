@@ -19,19 +19,15 @@ cextern Houses.BSignificantScan
 @HACK 0x004D4C79,0x004D4C82,_HouseClass__AI_MPlayerDefeated_Check
     ; scan each byte of BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
-    push eax
-    lea  esi,[eax+HouseClass.Offset.NewActiveBScan]
-    lea  ecx,[Houses.BSignificantScan]
+    ;lea  esi,[eax+HouseClass.Offset.NewActiveBScan]
+    ;lea  ecx,[Houses.BSignificantScan]
     xor  edi,edi ; start with offset 0
 .Scan:
-    mov  eax,[esi] 
-    mov  edx,[ecx] 
-    and  eax,edx
-    test eax,eax
-    pop  eax
+    mov  ecx,[eax+HouseClass.Offset.NewActiveBScan+edi*4] 
+    mov  edx,[Houses.BSignificantScan+edi*4] 
+    and  ecx,edx
+    test ecx,ecx
     jnz  0x004D4CB4 ; ret 1; abort check
-    add  eax,4
-    add  ecx,4  
     inc  edi
     cmp  edi,8
     jl   .Scan

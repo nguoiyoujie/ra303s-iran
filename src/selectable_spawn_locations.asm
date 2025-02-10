@@ -11,16 +11,7 @@ cextern str_Multi8
 
 
 [section .data]
-multi1_Spawn    dd -1
-multi2_Spawn    dd -1
-multi3_Spawn    dd -1
-multi4_Spawn    dd -1
-multi5_Spawn    dd -1
-multi6_Spawn    dd -1
-multi7_Spawn    dd -1
-multi8_Spawn    dd -1
-
-multi_Spawns    times 8 dd 0 ; Multi1-8
+multi_Spawns    times 8 dd -1 ; Multi1-8
 
 
 @HACK 0x0053E4CE,0x0053E4D4,_Create_Units_Set_Selected_Spawn_Locations
