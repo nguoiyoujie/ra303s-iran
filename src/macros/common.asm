@@ -102,3 +102,10 @@ cextern str_Comma
     pop edi
 %endmacro
 
+
+[section .text]
+_GetVocTypeFromString:
+    ;create voc type with string from eax
+    call Audio___Voc_From_Name    ; Voc_From_Name
+    retn
+

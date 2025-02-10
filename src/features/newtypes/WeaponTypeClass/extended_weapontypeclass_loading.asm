@@ -8,7 +8,6 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
-cextern Audio___Voc_From_Name
 
 ;Read INI settings
 @HACK 0x0059004D,0x00590052,_WeaponTypeClass__Read_INI_Extended
@@ -25,11 +24,4 @@ cextern Audio___Voc_From_Name
     pop  esi
     jmp  0x00590052
 @ENDHACK
-
-
-[section .text]
-_GetVocTypeFromString:
-   ;create voc type with string from eax
-    call Audio___Voc_From_Name    ; Voc_From_Name
-    retn
 

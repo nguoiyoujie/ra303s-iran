@@ -51,6 +51,7 @@ cextern str_Comma
     TechnoTypeClass.SecondaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.DeathWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.PrereqType.Read(esi,edi,_SelectPrereqTypeFromString)
+    TechnoTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
     TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteFromString)
 
     pop  edi

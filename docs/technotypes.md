@@ -14,6 +14,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Firing Offsets](#firing-offsets) 
  - [Death Weapons](#death-weapons) 
  - [Manual Targeting](#manual-targeting) 
+ - [Cloaking](#cloaking) 
 
 
 -------
@@ -323,7 +324,21 @@ Note that the explosion type and spread of the damage is still determined by the
 <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► ManualAcquire
 </samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
-If set, the unit will ignore its environment, and must target using the player's actions. AI players will use the unit as normal.
+If set, the unit will ignore its environment, and must target using the player's actions. AI players will target as normal.
+
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### Cloaking
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► CloakSound
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If used, overrides the stealth transition sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Stealth Tank. Defaults to the submarine submerge sound for VesselTypes, and the Phase Transport's stealth sound for all others.
 
 </details></td></tr></table>
 

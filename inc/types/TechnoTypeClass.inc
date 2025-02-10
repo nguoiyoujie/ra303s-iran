@@ -40,8 +40,9 @@
 %define TechnoTypeClass.Offset.ManualAcquire          0x13A    ; BOOL
 %define TechnoTypeClass.Bit.ManualAcquire             6    
 
-; (to check) 0x13B and 0x13C are empty... 
+; 0x13B and 0x13C were empty... 
 %define TechnoTypeClass.Offset.PrereqType             0x13B    ; byte, new variable, occupying unused location
+%define TechnoTypeClass.Offset.CloakSound             0x13C    ; byte, new variable, occupying unused location
 
 ;Risk/0x154, Reward/0x158 and Points/0x18E are assigned the same values. Collapse them to the same variable to free up 2 INTs worth of memory
 %define TechnoTypeClass.Offset.MZone                  0x13D    ; byte
@@ -93,7 +94,8 @@ str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 
 str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
 str.TechnoTypeClass.ManualAcquire             db"ManualAcquire",0               ;new feature
 
-str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0                  ;new feature
+str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0            ;new feature
+str.TechnoTypeClass.CloakSound                db"CloakSound",0                  ;new feature
 
 str.TechnoTypeClass.MZone                     db"MovementZone",0                ;internal feature
 str.TechnoTypeClass.ThreatRange               db"GuardRange",0                  ;existing feature
@@ -182,6 +184,10 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.PrereqType.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, reg_output
 %define TechnoTypeClass.PrereqType.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, value
 %define TechnoTypeClass.PrereqType.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, TechnoTypeClass.Offset.PrereqType, str.TechnoTypeClass.PrereqType, function
+
+%define TechnoTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.CloakSound, reg_output
+%define TechnoTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.CloakSound, value
+%define TechnoTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, TechnoTypeClass.Offset.CloakSound, str.TechnoTypeClass.CloakSound, function
 
 %define TechnoTypeClass.Prerequisite.Get(ptr_type,reg_output)                GetInt                                ptr_type, TechnoTypeClass.Offset.Prerequisite, reg_output
 %define TechnoTypeClass.Prerequisite.Set(ptr_type,value)                     SetInt                                ptr_type, TechnoTypeClass.Offset.Prerequisite, value
