@@ -285,7 +285,7 @@ Temp.ResponseMission db 0
     InfantryClass.Class.Get(ecx,eax)
     movzx eax,al
     InfantryTypeClass.FromIndex(eax,edx) 
-    InfantryTypeClass.StokedReport.Get(edx,ax)
+    InfantryTypeClass.StokedReport.Get(edx,eax)
     test eax,eax
     jz   .Retn
     lea  ebx,[ecx+InfantryTypeClass.Offset.StokedReport_Data]
