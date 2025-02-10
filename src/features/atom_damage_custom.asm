@@ -25,7 +25,7 @@ cextern Map.Basic.UseSinglePlayerAtomDamage
 
 @HACK 0x00425BA8,0x00425BAD,_AnimClass__Override_Atom_Range
     cmp  dword[Rules.General.AtomRadius],0
-    jge   .Override_Range
+    jg   .Override_Range
     mov  ecx,4
     jmp  .After_Override_Range
 .Override_Range:
@@ -44,7 +44,7 @@ cextern Map.Basic.UseSinglePlayerAtomDamage
     call PaletteClass__Set
 .No_Whiten_Screen_Effect:
     cmp  dword[Rules.General.AtomRadius],0
-    jge   .Override_Range
+    jge  .Override_Range
     mov  ecx,3
     jmp  .After_Override_Range
 .Override_Range:
