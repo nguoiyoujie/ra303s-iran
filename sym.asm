@@ -108,6 +108,7 @@ setcglob 0x004D6060,HouseClass__Make_Ally                                      ;
 setcglob 0x004D8270,HouseClass__MPlayer_Defeated                               ; void HouseClass::MPlayer_Defeated(void)
 setcglob 0x004D8F34,HouseClass__Find_Building                                  ; BuildingClass * HouseClass::Find_Building(StructType type, ZoneType zone) const
 setcglob 0x004D8B40,HouseClass__Flag_To_Die                                    ; bool HouseClass::Flag_To_Die(void)
+setcglob 0x004DCC30,HouseClass__Tracking_Add                             
 setcglob 0x004DD9FC,HouseClass__Where_To_Go                                    ; CELL HouseClass::Where_To_Go(FootClass const * object)
 setcglob 0x004DDBD0,HouseClass__Fetch_Factory                                  ; FactoryClass * HouseClass::Fetch_Factory(RTTIType rtti) const
 setcglob 0x004DDCE8,HouseClass__Get_Quantity                                   ; int HouseClass::Get_Quantity(StructType building) - Warning: Only works up original Building count!

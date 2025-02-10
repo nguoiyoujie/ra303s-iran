@@ -37,6 +37,7 @@ cextern BuildingClass.Count
 @CLEAR_INT 0x004DD0DC,0x004DD907 ; clear HouseClass__Recalc_Attributes
 
 ; ecx is the techno
+; IsInPlay = IsLocked &&  (!IsInLimbo | IsInTransport) && (!Owner->IsHuman | IsDiscoveredByPlayer)
 %macro Techno_CheckInPlay 0
     push eax
     push ebx
@@ -47,7 +48,6 @@ cextern BuildingClass.Count
     jz   %%CompareInPlay
   %%CheckLimboAndTransport:
     ObjectClass.IsInLimbo.Get(ecx,dl)
-    ;dec  dl
     test dl,dl
     jz   %%CheckHouseAndDiscovery
     TechnoClass.IsInTransport.Get(ecx,dh)
@@ -62,13 +62,13 @@ cextern BuildingClass.Count
     HouseClass.IsHuman.Get(ebx,dl)
     and  bh,dl
   %%CompareInPlay:
-    TechnoClass.IsInPlay.Get(ecx,bl)
-    mov  ah,bh
-    cmp  bh,bl
+    TechnoClass.IsInPlay.Get(ecx,al)
+    cmp  bh,al
     je   %%Ret
   %%Update:
     TechnoClass.IsInPlay.Set(ecx,bh)
     AbstractClass.RTTI.Get(ecx,al)
+    mov  ah,bh
     cmp  al,RTTIType.Infantry
     je   %%Update.Infantry  
     cmp  al,RTTIType.Unit
@@ -262,7 +262,6 @@ cextern BuildingClass.Count
 
 
 ; Update IsInPlay
-; IsInPlay = IsLocked &&  (!IsInLimbo | IsInTransport) && (!Owner->IsHuman | IsDiscoveredByPlayer)
 @HACK 0x005643D0,0x005643D5,_TechnoClass__AI_Update_PlayState
     sub  esp,0x10
     mov  ecx,eax
@@ -325,23 +324,28 @@ House_Recalc_Attributes_ActiveBuilding:
     push esi
     movzx eax,al
     mov  esi,eax
-    ; test if we need to clear and scan all, or just handle scan only
+
+    ; if the building is removed, we should clear all and rescan everything, since we will need to requery multiple types for BPreGroupScan. 
     BuildingTypeClass.FromIndex(eax,edx)
-    BuildingTypeClass.SpecialWeapons.Get(edx,ecx)
-    test ecx,ecx
-    jnz  .ClearAll
-    BuildingTypeClass.IsRadar.Get(edx,cl)
-    test cl,cl
-    jnz  .ClearAll
-    TechnoTypeClass.PrereqType.Get(edx,cl)
-    mov  dword edx,[ebx+HouseClass.Offset.NewActiveBQuantity+esi*4] ; if this is a removal, we should clear all anyway since we need to requery multiple types for BPreGroupScan.
-    test edx,edx
-    jz   .ClearAll
+    cmp  dword[ebx+HouseClass.Offset.NewActiveBQuantity+esi*4],0
+    je   .ClearAll
 .SetOne:
-    ; Building does not require refreshing of special fields (e.g. Radar). Just update the BScan and BPreGroupScan fields accordingly
+    ; All special fields can be ORed.
+    ; BPreGroupScan
+    TechnoTypeClass.PrereqType.Get(edx,cl)
     mov  eax,1
     shl  eax,cl
     or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
+    ; SpecialScan
+    BuildingTypeClass.SpecialWeapons.Get(edx,eax)
+    or   dword[ebx+HouseClass.Offset.SpecialScan],eax
+    ; IsRadar
+    BuildingTypeClass.IsRadar.Get(edx,al)
+    test al,al
+    jz   .SetOne.NoRadar
+    HouseClass.Radar.Set(ebx,al) 
+.SetOne.NoRadar:
+    ; ActiveBScan
     mov  ecx,esi
     lea  ebx,[ebx+HouseClass.Offset.NewActiveBScan]
     mov  eax,ecx
@@ -403,8 +407,7 @@ House_Recalc_Attributes_ActiveBuilding:
     HouseClass.Radar.Set(ebx,al)  
 .NoRadar:
     ; Set Prereq group
-    TechnoTypeClass.PrereqType.Get(edx,al)
-    mov  cl,al
+    TechnoTypeClass.PrereqType.Get(edx,cl)
     mov  eax,1
     shl  eax,cl
     pop  ecx ; building type ID

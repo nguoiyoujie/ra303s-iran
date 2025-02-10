@@ -42,6 +42,6 @@
 %include "src/features/prerequisitesystem/prerequisite_groups.asm"
 %include "src/features/prerequisitesystem/building_group_unhardcodes.asm"
 %include "src/features/prerequisitesystem/find_building.asm"
-%include "src/features/prerequisitesystem/house_new_quantity_tracking_offsets.asm"
 %include "src/features/prerequisitesystem/house_trackers.asm"
+%include "src/features/prerequisitesystem/house_new_quantity_tracking_offsets.asm"
 %include "src/features/prerequisitesystem/radar.asm"

@@ -179,6 +179,10 @@ cextern VesselTypeClass.Count
 
 @HACK 0x004DCC30,0x004DCEB3,_HouseClass__Tracking_Add_Reimplementation
     ; eax = HouseClass, edx = TechnoClass
+    ; Note to self: Do not update ActiveXQuantity and Active Attributes here!
+    ; This is because code may call from areas where the House owner of the techno has not been updated yet
+    ; E.g. TechnoClass::Capture()
+    ; Use TechnoClass__AI to update active
     push ebp
     mov  ebp,esp
     push ebx
@@ -202,20 +206,7 @@ cextern VesselTypeClass.Count
     inc  dword[ebx+HouseClass.Offset.CurInfantry]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity]
     cmp  dword[ebx+eax*4+HouseClass.Offset.NewIQuantity],1
-    jne  .Update.Infantry.CheckActive
     call House_Recalc_Attributes_Infantry
-.Update.Infantry.CheckActive:
-    push eax
-    TechnoClass.IsInPlay.Get(edx,ah)
-    test ah,ah
-    pop  eax
-    jz   .Update.Infantry.Done
-    TechnoClass.IsInPlay.Set(edx,1)
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveIQuantity]
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveIQuantity],1
-    jne  .Update.Infantry.Done
-    call House_Recalc_Attributes_ActiveInfantry
-.Update.Infantry.Done:
     mov  eax,[ebx+HouseClass.Offset.InfantryTotals]
     test eax,eax
     jz   .Ret
@@ -228,20 +219,7 @@ cextern VesselTypeClass.Count
     inc  dword[ebx+HouseClass.Offset.CurUnits]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity]
     cmp  dword[ebx+eax*4+HouseClass.Offset.NewUQuantity],1
-    jne  .Update.Unit.CheckActive
     call House_Recalc_Attributes_Unit
-.Update.Unit.CheckActive:
-    push eax
-    TechnoClass.IsInPlay.Get(edx,ah)
-    test ah,ah
-    pop  eax
-    jz   .Update.Unit.Done
-    TechnoClass.IsInPlay.Set(edx,1)
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveUQuantity]
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveUQuantity],1
-    jne  .Update.Unit.Done
-    call House_Recalc_Attributes_ActiveUnit
-.Update.Unit.Done:
     mov  eax,[ebx+HouseClass.Offset.UnitTotals]
     test eax,eax
     jz   .Ret
@@ -254,20 +232,7 @@ cextern VesselTypeClass.Count
     inc  dword[ebx+HouseClass.Offset.CurBuildings]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity]
     cmp  dword[ebx+eax*4+HouseClass.Offset.NewBQuantity],1
-    ;jne  .Update.Building.CheckActive
     call House_Recalc_Attributes_Building
-.Update.Building.CheckActive:
-    push eax
-    TechnoClass.IsInPlay.Get(edx,ah)
-    test ah,ah
-    pop  eax
-    jz   .Update.Building.Done
-    TechnoClass.IsInPlay.Set(edx,1)
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveBQuantity]
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveBQuantity],1
-    ;jne  .Update.Building.Done
-    call House_Recalc_Attributes_ActiveBuilding
-.Update.Building.Done:
     mov  eax,[ebx+HouseClass.Offset.BuildingTotals]
     test eax,eax
     jz   .Ret
@@ -280,20 +245,7 @@ cextern VesselTypeClass.Count
     inc  dword[ebx+HouseClass.Offset.CurAircraft]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity]
     cmp  dword[ebx+eax*4+HouseClass.Offset.NewAQuantity],1
-    jne  .Update.Aircraft.CheckActive
     call House_Recalc_Attributes_Aircraft
-.Update.Aircraft.CheckActive:
-    push eax
-    TechnoClass.IsInPlay.Get(edx,ah)
-    test ah,ah
-    pop  eax
-    jz   .Update.Aircraft.Done
-    TechnoClass.IsInPlay.Set(edx,1)
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveAQuantity]
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveAQuantity],1
-    jne  .Update.Aircraft.Done
-    call House_Recalc_Attributes_ActiveAircraft
-.Update.Aircraft.Done:
     mov  eax,[ebx+HouseClass.Offset.AircraftTotals]
     test eax,eax
     jz   .Ret
@@ -306,20 +258,7 @@ cextern VesselTypeClass.Count
     inc  dword[ebx+HouseClass.Offset.CurVessels]
     inc  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity]
     cmp  dword[ebx+eax*4+HouseClass.Offset.NewVQuantity],1
-    jne  .Update.Vessel.CheckActive
     call House_Recalc_Attributes_Vessel
-.Update.Vessel.CheckActive:
-    push eax
-    TechnoClass.IsInPlay.Get(edx,ah)
-    test ah,ah
-    pop  eax
-    jz   .Update.Vessel.Done
-    TechnoClass.IsInPlay.Set(edx,1)
-    inc  dword[ebx+eax*4+HouseClass.Offset.NewActiveVQuantity]
-    cmp  dword[ebx+eax*4+HouseClass.Offset.NewActiveVQuantity],1
-    jne  .Update.Vessel.Done
-    call House_Recalc_Attributes_ActiveVessel
-.Update.Vessel.Done:
     mov  eax,[ebx+HouseClass.Offset.VesselTotals]
     test eax,eax
     jz   .Ret
