@@ -11,6 +11,9 @@
 
 cextern TechnoClass__What_Weapon_Should_I_Use
 
+[section .data]
+Temp.IsEnterBuilding db 0
+
 @HACK 0x004C1665,0x004C166A,_FootClass__Approach_Target_CheckInvalidWeapon
     call TechnoClass__What_Weapon_Should_I_Use
     cmp  dword eax,-1
@@ -67,10 +70,33 @@ cextern TechnoClass__What_Weapon_Should_I_Use
 @ENDHACK
 
 
+@SJMP 0x00565BE2,0x00565BF1 ; _TechnoClass__What_Action_ResetTemp
+
+@HACK 0x00565C04,0x00565C09,_TechnoClass__What_Action_InfiltratorOverride
+    test dl,0x24 ; IsBomber / IsCapture
+    jz   .CheckWeapon
+    mov  byte[Temp.IsEnterBuilding],1 
+    jmp  0x00565C12
+.CheckWeapon:
+    mov  byte[Temp.IsEnterBuilding],0
+    mov  edx,[ecx+0x11]
+    mov  eax,ecx
+    call dword[edx+0x180]
+    test eax,eax
+    jz   0x00565C12
+    jmp  0x00565D04
+@ENDHACK
+
+
 @HACK 0x00565C33,0x00565C38,_TechnoClass__What_Action_CheckInvalidWeapon
     call TechnoClass__What_Weapon_Should_I_Use
     cmp  dword eax,-1
-    je   0x00565CF6
+    je   .CheckIsEnterBuilding
+    jmp  0x00565C38
+.CheckIsEnterBuilding:
+    cmp  byte[Temp.IsEnterBuilding],1 
+    jne  0x00565CF6
+    xor  eax,eax
     jmp  0x00565C38
 @ENDHACK
 
