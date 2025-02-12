@@ -420,6 +420,7 @@ gintarr strlist.ArmorTypes                                     , str.ArmorType.N
                                                                , str.ArmorType.Special_2 \
                                                                , 0
 
+gstring str.ArmorOneDefault                                    , "100%%"
 gstring str.ArmorDefault                                       , "100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%"
 
 ; ---- HouseTypes ----

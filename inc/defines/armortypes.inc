@@ -35,10 +35,6 @@ cextern str.ArmorType.Plate
 cextern str.ArmorType.Medium      
 cextern str.ArmorType.Steel       
 cextern str.ArmorType.Special_1   
-cextern str.ArmorType.Special_2  
-
-cextern strlist.ArmorTypes   
-
-cextern str.ArmorDefault      
+cextern str.ArmorType.Special_2 
 
 %endif

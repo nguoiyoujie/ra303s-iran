@@ -5,11 +5,14 @@
 ; 
 ; This function is enabled by default and is not configurable.
 ; 
-; No compatibility issues is expected. 
+; Compatibility note: 
+; = In original RA1, if there are less verses entries specified than armors, the value defaults to 0%. Now, it defaults to 100%. This is only an issue in missions that specify a Verses= with less than 5 values for the original 5 armors.
 ;
 ;----------------------------------------------------------------
 
 cextern strlist.ArmorTypes
+cextern str.ArmorOneDefault 
+cextern str.ArmorDefault   
 
 ;Read INI settings
 ;We want to expand the modifiers, so we move all offsets after modifiers to clear the way for future expansion. Turns out that there are only two int values, which both may as well be byte values. They can fit into the space that holds bool values. Very convenient, as we do not need to worry about moving the heavily used Modifier
@@ -23,7 +26,12 @@ cextern strlist.ArmorTypes
 
 
 @HACK 0x0058FC04,0x0058FC09,_WarheadTypeClass__Read_INI_Expand_Modifier_5_to_9
-    ; the reading code can handle strings with less elements than expected, defaulting them to 0%
+    ; the reading code can handle strings with less elements than expected, defaulting them to 100% (used to default to 0%)
+    ; eax is the result from strtok. If it is NULL (0) then we default it to 100%
+    test eax,eax
+    jnz  .Continue
+    mov  eax,str.ArmorOneDefault
+.Continue:
     cmp  dl,9
     jl   0x0058FBDC
     jmp  0x0058FC09
