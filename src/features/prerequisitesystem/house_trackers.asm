@@ -328,6 +328,7 @@ House_Recalc_Attributes_ActiveBuilding:
     mov  esi,eax
 
     ; if the building is removed, we should clear all and rescan everything, since we will need to requery multiple types for BPreGroupScan. 
+    or   byte[ebx+HouseClass.Offset.IsRecalcNeeded],1<<(HouseClass.Bit.IsRecalcNeeded-1)
     BuildingTypeClass.FromIndex(eax,edx)
     cmp  dword[ebx+HouseClass.Offset.NewActiveBQuantity+esi*4],0
     je   .ClearAll
