@@ -12,7 +12,7 @@ cextern _imp__timeGetTime
 cextern _imp__Sleep
 cextern Conquer___Call_Back
 
-%define BCTDelayms          4000 ; 4 seconds
+%define BCTDelayms          2000 ; 2 seconds ; was 4
 
 
 @HACK 0x004BDAB5,_EventClass_Execute_BattleControlTerminated_DelayBlackScreen
