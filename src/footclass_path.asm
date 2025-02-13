@@ -2,6 +2,9 @@
     ; This may prevent a move from being initiated if the destination is too close. 
     ; Remove it, and rely on the game to check only when the unit is blocked
 
+[section .data]
+Temp.Path.Vessel dd 0 
+
 @HACK 0x004C37A1,0x004C37A6,_FootClass__Is_On_Priority_Mission_Units_Outside_Map_Have_Priority
     mov  ebp,esp
     push eax
@@ -34,52 +37,80 @@
 
 
 @HACK 0x004EDB70,0x004EDB79,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0
-	jg   .MoveMovingBlock
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	jle  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
     jmp  0x004EDB79
 .MoveMovingBlock:
+    inc  byte[ebx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
     jmp  0x004EDB79
 @ENDHACK
 
 
 @HACK 0x004EDB83,0x004EDB8C,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0
-	jg   .MoveTemp
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	jle  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
     jmp  0x004EDB8C
 .MoveTemp:
+    inc  byte[ebx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
     jmp  0x004EDB8C
 @ENDHACK
 
 
 @HACK 0x0057F00C,0x0057F015,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0
-	jg   .MoveMovingBlock
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	jle  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
     jmp  0x0057F015
 .MoveMovingBlock:
+    inc  byte[ebx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
     jmp  0x0057F015
 @ENDHACK
 
 
 @HACK 0x0057F0BC,0x0057F0C5,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0
-	jg   .MoveTemp
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	jle  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
     jmp  0x0057F0C5
 .MoveTemp:
+    inc  byte[ebx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
     jmp  0x0057F0C5
+@ENDHACK
+
+
+; this is not sufficient for Vessel class, as they might not have a scatter logic built for them
+@HACK 0x00589ED5,0x00589EDA,_VesselClass_Can_Enter_Cell_Save_VesselClass
+    mov  esi,eax
+    mov  [Temp.Path.Vessel],eax
+    movsx ecx,dx
+    jmp  0x00589EDA
+@ENDHACK
+
+@HACK 0x0058A02A,0x0058A030,_VesselClass_Can_Enter_Cell_HandleBlockedCell
+    jz   0x0058A030
+    mov  esi,[Temp.Path.Vessel]
+	cmp  byte[esi+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	jle  .MoveMovingBlock
+.MoveAbandon:
+    mov  byte[ebp-0x10],5 ; MOVE_NO
+	mov  byte[esi+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x0058A030
+.MoveMovingBlock:
+    inc  byte[esi+FootClass.Offset.PathAbandon]
+    mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
+    jmp  0x0058A030
 @ENDHACK
