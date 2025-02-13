@@ -262,6 +262,7 @@ setcglob 0x005789AC,UnitTypeClass__One_Time
 setcglob 0x00578C24,UnitTypeClass__As_Reference                                ; UnitTypeClass & UnitTypeClass::As_Reference(UnitType type)
 
 ; UNIT.CPP
+setcglob 0x0057FB98,UnitClass__Mission_Guard
 setcglob 0x00581298,UnitClass__Write_INI                                       ; void UnitClass::Write_INI(CCINIClass & ini)
 
 ; VDATA.CPP

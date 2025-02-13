@@ -28,6 +28,8 @@ cextern INI_Read_String_Buffer
 %define WeaponTypeClass.Bit.IsLaser                      5  
 %define WeaponTypeClass.Offset.DeployToFire              0x008    ; BOOL
 %define WeaponTypeClass.Bit.DeployToFire                 6   
+%define WeaponTypeClass.Offset.AIOnly                    0x008    ; BOOL
+%define WeaponTypeClass.Bit.AIOnly                       7
 
 %define WeaponTypeClass.Offset.LaserColor                0x009    ; byte
 %define WeaponTypeClass.Offset.ChargeSound               0x00A    ; word
@@ -50,6 +52,7 @@ str.WeaponTypeClass.IsCamera                  db"Camera",0              ;existin
 str.WeaponTypeClass.IsSupressed               db"Supress",0             ;existing ini
 str.WeaponTypeClass.DeployToFire              db"DeployToFire",0        ;new ini
 str.WeaponTypeClass.LaserColor                db"LaserColor",0          ;new ini
+str.WeaponTypeClass.AIOnly                    db"AIOnly",0              ;new ini
 str.WeaponTypeClass.Burst                     db"Burst",0               ;existing ini
 str.WeaponTypeClass.Bullet                    db"Projectile",0          ;existing ini
 str.WeaponTypeClass.Damage                    db"Damage",0              ;existing ini
@@ -136,6 +139,10 @@ str.WeaponTypeClass.ChargeSound               db"ChargeReport",0        ;new ini
 %define WeaponTypeClass.DeployToFire.Get(ptr_type,reg_output)                GetBool                                ptr_type, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, reg_output
 %define WeaponTypeClass.DeployToFire.Set(ptr_type,value)                     SetBool                                ptr_type, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, value
 %define WeaponTypeClass.DeployToFire.Read(ptr_type,ptr_rules)                WeaponTypeClass.ReadBool               ptr_type, ptr_rules, WeaponTypeClass.Offset.DeployToFire, WeaponTypeClass.Bit.DeployToFire, str.WeaponTypeClass.DeployToFire
+
+%define WeaponTypeClass.AIOnly.Get(ptr_type,reg_output)                      GetBool                                ptr_type, WeaponTypeClass.Offset.AIOnly, WeaponTypeClass.Bit.AIOnly, reg_output
+%define WeaponTypeClass.AIOnly.Set(ptr_type,value)                           SetBool                                ptr_type, WeaponTypeClass.Offset.AIOnly, WeaponTypeClass.Bit.AIOnly, value
+%define WeaponTypeClass.AIOnly.Read(ptr_type,ptr_rules)                      WeaponTypeClass.ReadBool               ptr_type, ptr_rules, WeaponTypeClass.Offset.AIOnly, WeaponTypeClass.Bit.AIOnly, str.WeaponTypeClass.AIOnly
 
 %define WeaponTypeClass.LaserColor.Get(ptr_type,reg_output)                  GetByte                                ptr_type, WeaponTypeClass.Offset.LaserColor, reg_output
 %define WeaponTypeClass.LaserColor.Set(ptr_type,value)                       SetByte                                ptr_type, WeaponTypeClass.Offset.LaserColor, value

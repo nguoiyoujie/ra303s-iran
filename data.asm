@@ -176,12 +176,14 @@ gbuf   sprintf_buffer3                                        ,512
 gint   MissionCounter                                         ,0
 
 ; coop.asm
-gint    InCoopMode                                            ,0
+gint   InCoopMode                                             ,0
 
 ; Map [Basic]
 gint   Map.Basic.ChronoReinforceTanks                         ,0
 gint   Map.Basic.UseAtomWhiteScreenEffectInMP                 ,0
 gint   Map.Basic.UseSinglePlayerAtomDamage                    ,0
+
+gbool  Capture.OverrideIsCapturable                           ,0
 
 ;;; Temporary location until the House macros are completed
 ; store the new specialtype record per house (use 32-bit instead of 16-bit in case we use a different location within BuildingType to store the special type)

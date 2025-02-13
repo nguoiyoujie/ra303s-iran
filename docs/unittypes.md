@@ -434,6 +434,25 @@ Note that the AI might surpass the limit if it has multiple factories.
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► AIDeployBuildLimit
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+This control is used for Units that have `DeployInto` set to some BuildingType.
+
+Determines the maximum number of unittype instances + their DeployInto buildings that the new AutoBase AI can build.
+If the value is 0, the AutoBase AI will treat the value as unlimited (no limit).
+Defaults to 0 (unlimited).
+
+This allows the modder to place a limit to the number of MCVs the AI can build, and the ConYards that are deployed from these MCVs would be counted in this configuration.
+
+The Harvester has special logic and will disregard these settings.
+
+Note that the AI might surpass the limit if it has multiple factories.
+
+</details></td></tr></table>
+
+
 <a href="#unittypes"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>UnitTypes</kbd></kbd><br>

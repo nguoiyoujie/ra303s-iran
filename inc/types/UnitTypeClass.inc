@@ -79,7 +79,8 @@ cextern UnitTypeClass.Array
 
 %define UnitTypeClass.Offset.AIBuildLimit                  0x30E    ; INT
 %define UnitTypeClass.Offset.AIBuildWeight                 0x312    ; INT
-;0x316
+%define UnitTypeClass.Offset.AIDeployBuildLimit            0x316    ; INT
+;0x31A
 
 ; INI String controls
 str.UnitTypeClass.IsCrateGoodie                 db"IsCrateGoodie",0               ;new ini feature
@@ -120,6 +121,7 @@ str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0           
 
 str.UnitTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0     
+str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0         
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 %define UnitTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
@@ -274,4 +276,8 @@ str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define UnitTypeClass.AIBuildWeight.Set(ptr_type,value)                    SetInt                                 ptr_type, UnitTypeClass.Offset.AIBuildWeight, value
 %define UnitTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadInt              ptr_type, ptr_rules, UnitTypeClass.Offset.AIBuildWeight, str.UnitTypeClass.AIBuildWeight
 	
+%define UnitTypeClass.AIDeployBuildLimit.Get(ptr_type,reg_output)          GetInt                                 ptr_type, UnitTypeClass.Offset.AIDeployBuildLimit, reg_output
+%define UnitTypeClass.AIDeployBuildLimit.Set(ptr_type,value)               SetInt                                 ptr_type, UnitTypeClass.Offset.AIDeployBuildLimit, value
+%define UnitTypeClass.AIDeployBuildLimit.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadInt              ptr_type, ptr_rules, UnitTypeClass.Offset.AIDeployBuildLimit, str.UnitTypeClass.AIDeployBuildLimit
+
 %endif

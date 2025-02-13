@@ -11,6 +11,7 @@
 ;----------------------------------------------------------------
 
 cextern Globals___Session_Type
+cextern UnitClass__Mission_Guard
 
 cextern Rules.AI.GuardAreaLoadTransportsInSingleplayer
 
@@ -27,19 +28,18 @@ cextern Rules.AI.GuardAreaLoadTransportsInSingleplayer
 
 
 @HACK 0x00581A28,0x00581A30,_UnitClass__Mission_Guard_Area_Check_Passengers ; check Passenges>0 instead of hardcoded ID
-    push eax
-    push ebx
-    push edx
     push edi
     movzx eax,al ; use movzx
     UnitTypeClass.FromIndex(eax,edi)
-    TechnoTypeClass.MaxPassengers.Get(edi,edx) 
-    cmp  edx,0
+    cmp  byte[edi+UnitTypeClass.Offset.DeploysInto],0 ; hijack for MCV code
+    jne   .MCVCode
+    cmp  dword[edi+TechnoTypeClass.Offset.MaxPassengers],0
     pop  edi
-    pop  edx
-    pop  ebx
-    pop  eax
     jnz  0x00581A64 ; enter
     jmp  0x00581C37 ; bail    
+.MCVCode:
+    mov  eax,ecx
+    call UnitClass__Mission_Guard
+    jmp  0x00581C3E ; exit    
 @ENDHACK
 

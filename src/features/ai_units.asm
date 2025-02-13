@@ -213,28 +213,42 @@ Temp.AIUnit.Harvester db 0
 @HACK 0x004DBC37,0x004DBC65,_HouseClass__AI_Unit_Set_Weight
     mov  eax,dword[ebp-0x1F]
     shr  eax,0x18
-    ; HouseClass us ebp-0x20
+    ; HouseClass is ebp-0x20
     push ebx 
+    push ecx 
     push edx 
     push edi
     mov  edx,dword[ebp-0x20]
-    lea  edx,[edx+eax*4+HouseClass.Offset.NewUQuantity] ; House->NewIQuantity[unit]
-.CheckLimit:
+    mov  ecx,[edx+eax*4+HouseClass.Offset.NewUQuantity]
+.CheckDeployLimit:
     UnitTypeClass.FromIndex(eax,edi)
+    UnitTypeClass.DeploysInto.Get(edi,bl)
+    movzx ebx,bl
+    test ebx,ebx
+    jz   .CheckLimit
+    mov  ebx,[edx+ebx*4+HouseClass.Offset.NewBQuantity]
+    add  ebx,ecx
+    UnitTypeClass.AIDeployBuildLimit.Get(edi,edx)
+    cmp  edx,0 ; 0 or negative values = no limit
+    jle  .CheckLimit
+    cmp  edx,ebx
+    jle  .Clear
+.CheckLimit:
     UnitTypeClass.AIBuildLimit.Get(edi,ebx)
     cmp  ebx,0 ; 0 or negative values = no limit
     jle  .Set
-    cmp  ebx,dword[edx]
+    cmp  ebx,ecx
     jle  .Clear
 .Set:
     UnitTypeClass.AIBuildWeight.Get(edi,ebx)
-    mov  dword[ebp+eax*4 -1276],ebx
+    mov  dword[ebp+eax*4-1276],ebx
     jmp  .Done
 .Clear:
-    mov  dword[ebp+eax*4 -1276],0
+    mov  dword[ebp+eax*4-1276],0
 .Done:
     pop  edi
     pop  edx
+    pop  ecx
     pop  ebx
     jmp  0x004DBC72    
 @ENDHACK

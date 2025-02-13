@@ -57,6 +57,7 @@
 
     UnitTypeClass.AIBuildLimit.Read(esi,edi)
     UnitTypeClass.AIBuildWeight.Read(esi,edi)
+    UnitTypeClass.AIDeployBuildLimit.Read(esi,edi)
 
     ; update Speed and MZone based on IsWaterBound
     push edx
