@@ -19,6 +19,8 @@ cextern str.ArmorDefault
 @HACK 0x0058FB6D,0x0058FBA3,_WarheadTypeClass__Read_INI_MoveNewOffsets_ExplosionSet_InfantryDeath
     WarheadTypeClass.ExplosionSet.Read(esi,edi)
     WarheadTypeClass.InfantryDeath.Read(esi,edi)
+    WarheadTypeClass.IsCapture.Read(esi,edi)
+
     push 0x80
     mov  ecx,str.ArmorDefault ;old: 0x005F1A04 ; ASCII "100%%,100%%,100%%,100%%,100%%"
     jmp  0x0058FBA3

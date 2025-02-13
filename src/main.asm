@@ -224,6 +224,7 @@
 %include "src/features/weapon_zeroversus.asm"
 %include "src/features/view_targeting_lines.asm"
 %include "src/features/techno_cloak_sound.asm"
+%include "src/features/warhead_capture.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

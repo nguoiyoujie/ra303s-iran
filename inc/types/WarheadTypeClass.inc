@@ -23,6 +23,8 @@ cextern WarheadTypeClass.Array
 %define WarheadTypeClass.Bit.IsTiberiumDestroyer          3    
 %define WarheadTypeClass.Offset.IsOrganic                 0x00C    ; BOOL// Already supported by game INI
 %define WarheadTypeClass.Bit.IsOrganic                    4    
+%define WarheadTypeClass.Offset.IsCapture                 0x008    ; BOOL
+%define WarheadTypeClass.Bit.IsCapture                    8
 ; 0x00D, 0x00E and 0x00F are empty
 
 ;%define WarheadTypeClass.Offset.ExplosionAnim             0x00D    ; new, animation override, byte
@@ -51,6 +53,7 @@ str.WarheadTypeClass.IsWoodDestroyer           db"Wood",0                   ;exi
 str.WarheadTypeClass.IsTiberiumDestroyer       db"Ore",0                    ;existing ini
 str.WarheadTypeClass.IsOrganic                 db"Organic",0                ;existing ini (not actually read by INI key, but derived from Verses)
 str.WarheadTypeClass.Modifier                  db"Verses",0                 ;existing ini
+str.WarheadTypeClass.IsCapture                  db"IsCapture",0              ;new ini
 ;str.WarheadTypeClass.ExplosionAnim             db"Anim",0                   ;new ini
 str.WarheadTypeClass.ExplosionSet              db"Explosion",0              ;existing ini
 str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;existing ini
@@ -119,6 +122,10 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 %define WarheadTypeClass.IsOrganic.Get(ptr_type,reg_output)                   GetBool                                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, reg_output
 %define WarheadTypeClass.IsOrganic.Set(ptr_type,value)                        SetBool                                ptr_type, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, value
 %define WarheadTypeClass.IsOrganic.Read(ptr_type,ptr_rules)                   WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsOrganic, WarheadTypeClass.Bit.IsOrganic, str.WarheadTypeClass.IsOrganic
+
+%define WarheadTypeClass.IsCapture.Get(ptr_type,reg_output)                   GetBool                                ptr_type, WarheadTypeClass.Offset.IsCapture, WarheadTypeClass.Bit.IsCapture, reg_output
+%define WarheadTypeClass.IsCapture.Set(ptr_type,value)                        SetBool                                ptr_type, WarheadTypeClass.Offset.IsCapture, WarheadTypeClass.Bit.IsCapture, value
+%define WarheadTypeClass.IsCapture.Read(ptr_type,ptr_rules)                   WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsCapture, WarheadTypeClass.Bit.IsCapture, str.WarheadTypeClass.IsCapture
 
 ;%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
 ;%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
