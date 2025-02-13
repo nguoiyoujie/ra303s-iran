@@ -9,6 +9,7 @@ Warheads contain special information for WeaponTypes, such as effectiveness agai
  - [New Entries](#new-entries) 
  - [New Armor-types](#new-armor-types) 
  - [Atomic Weapons](#atomic-weapons) 
+ - [Capture Weapons](#capture-weapons) 
 
 
 -------
@@ -112,6 +113,22 @@ Atom damage is generally reduced in multiplayer battles. Toggle this on to use s
 The radial range of nuclear warheards in the scenario, not including the center cell. Effectively the blast covers a square area of `AtomRadius * 2 + 1`. 
 
 Note that due to a bug in the original game, damage decreases in strength closer to the center; the lack of smudges will become apparent above range 40. Use [General]  ► `FixWideAreaDamage` to fix this bug.
+</details></td></tr></table>
+
+
+<a href="#warheads"><kbd>Top</kbd></a><br>
+-------
+### Capture Weapons
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;Warhead&gt;]  ► IsCapture
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+When an enemy is hit by this warhead, its ownership will be converted to the house that produced the warhead. Does nothing for warheads from weapons with no ownership. Damage calculation still apply.
+
+This can be used to emulate Mind Control behavior.
+
 </details></td></tr></table>
 
 

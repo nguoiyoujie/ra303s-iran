@@ -655,7 +655,7 @@ setcglob 0x0065DEF8,UnitTypeClass.Count
 setcglob 0x0065DF20,UnitTypeClass.Array       
 setcglob 0x16      ,UnitTypeClass.ORIGINAL_COUNT       
 setcglob 0x19E     ,UnitTypeClass.ORIGINAL_SIZE        
-setcglob 0x316     ,UnitTypeClass.NEW_SIZE    
+setcglob 0x31A     ,UnitTypeClass.NEW_SIZE    
 													   
 ; VesselTypeClass            0x0065DF38  
 setcglob 0x0065DF44,VesselTypeClass.Count     

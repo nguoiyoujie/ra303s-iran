@@ -30,6 +30,19 @@ Cache_UnitType_DeploysInto       db 0
 @ENDHACK
 
 
+;Replaces the MCV check with a DeploysInto=xx check
+@HACK 0x0057E803,0x0057E80D,_UnitClass__Mission_Hunt_MCVUnhardcode
+    movzx eax,al
+    UnitTypeClass.FromIndex(eax,eax)
+    mov  al,byte[eax+UnitTypeClass.Offset.DeploysInto]
+    mov  byte[Cache_UnitType_DeploysInto],al
+    cmp  al,0
+    jle  0x0057E84C 
+    jmp  0x0057E83E
+@ENDHACK
+
+
+
 @HACK 0x0057B9BC,_UnitClass_Try_To_Deploy_ConstructionYardUnhardcode1
     xor  eax,eax
     mov  al,byte[Cache_UnitType_DeploysInto]
@@ -71,7 +84,7 @@ Cache_UnitType_DeploysInto       db 0
 
 
 ;Replaces the MCV check with a DeploysInto=xx check
-@HACK 0x0057FC97,0x0057FCA3,_UnitClass_Mission_Guard_MCVUnhardcode
+@HACK 0x0057FC97,0x0057FCA3,_UnitClass__Mission_Guard_MCVUnhardcode
     movzx eax,al
     UnitTypeClass.FromIndex(eax,eax)
     mov  al,byte[eax+UnitTypeClass.Offset.DeploysInto]
@@ -81,14 +94,16 @@ Cache_UnitType_DeploysInto       db 0
     jmp  0x0057FCA3
 @ENDHACK
 
+@SET 0x0057FCCC,{mov edx,0xE} ; MISSION_HUNT instead of MISSION_UNLOAD
 
-@HACK 0x0057D9A6,0x0057D9AD,_UnitClass_Mission_Unload_IsRotating_IsDriving_Check
+
+@HACK 0x0057D9A6,0x0057D9AD,_UnitClass__Mission_Unload_IsRotating_IsDriving_Check
     test byte[eax+0xCD],0xC0 ; originally only IsDriving is checked.
     jmp  0x0057D9AD
 @ENDHACK
 
 
-@HACK 0x0057DA5D,0x0057DA66,_UnitClass_Mission_Unload_DeploysInto_Status2_Check
+@HACK 0x0057DA5D,0x0057DA66,_UnitClass__Mission_Unload_DeploysInto_Status2_Check
     test byte[eax+0xCD],0x10
     jnz  .StillDeploying
     jmp  0x0057DA66
@@ -97,10 +112,10 @@ Cache_UnitType_DeploysInto       db 0
     jmp  0x0057DAB0
 @ENDHACK
 
-;@HACK 0x0057D3C8,_UnitClass_Mission_Unload_MCVUnhardcode ; overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
-; Overlap with _UnitClass_Mission_Unload_PassengerUnhardcode
+;@HACK 0x0057D3C8,_UnitClass__Mission_Unload_MCVUnhardcode ; overlap with _UnitClass__Mission_Unload_PassengerUnhardcode
+; Overlap with _UnitClass__Mission_Unload_PassengerUnhardcode
 ;Replaces the MCV check with a DeploysInto=xx check
-;_UnitClass_Mission_Unload_MCVUnhardcode:
+;_UnitClass__Mission_Unload_MCVUnhardcode:
 ;    push eax
 ;    movzx eax,al
 ;    UnitTypeClass.FromIndex(eax,eax)

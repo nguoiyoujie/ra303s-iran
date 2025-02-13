@@ -128,6 +128,48 @@ Temp.IsEnterBuilding db 0
 @ENDHACK
 
 
+@HACK 0x00560BA6,0x00560BAB,_TechnoClass__What_Weapon_Should_I_Use_PrimaryWeapon_CheckIsAI
+    mov  word dx,[eax]
+    test dx,dx
+    jz   0x00560BF5 ; don't bother calculating stuff, it will always be zero
+    mov  ebx,[ebp-0x20]
+    mov  ebx,[ebx+0x172]
+    test byte[ebx+WeaponTypeClass.Offset.AIOnly],1<<(WeaponTypeClass.Bit.AIOnly-1)
+    jz   .Ret
+    mov  byte al,[ecx+TechnoClass.Offset.House]
+    movzx eax,al
+    push edx
+    HouseClass.FromIndex(eax,edx)
+    test byte[edx+HouseClass.Offset.IsHuman],1<<(HouseClass.Bit.IsHuman-1)
+    pop  edx
+    jnz   0x00560BF5 ; Human players cannot use AIOnly weapons
+.Ret:
+    mov  eax,edx
+    jmp  0x00560BAB
+@ENDHACK
+
+
+@HACK 0x00560C27,0x00560C2D,_TechnoClass__What_Weapon_Should_I_Use_SecondaryWeapon_CheckIsAI
+    mov  word dx,[edi+eax]
+    test dx,dx
+    jz   0x00560C7D ; don't bother calculating stuff, it will always be zero
+    mov  ebx,[ebp-0x20]
+    mov  ebx,[ebx+0x172]
+    test byte[ebx+WeaponTypeClass.Offset.AIOnly],1<<(WeaponTypeClass.Bit.AIOnly-1)
+    jz   .Ret
+    mov  byte al,[ecx+TechnoClass.Offset.House]
+    movzx eax,al
+    push edx
+    HouseClass.FromIndex(eax,edx)
+    test byte[edx+HouseClass.Offset.IsHuman],1<<(HouseClass.Bit.IsHuman-1)
+    pop  edx
+    jnz   0x00560C7D ; Human players cannot use AIOnly weapons
+.Ret:
+    mov  eax,edx
+    jmp  0x00560C2D
+@ENDHACK
+
+
 @HACK 0x00560C82,0x00560C93,_TechnoClass__What_Weapon_Should_I_Use_CheckNoScore
     mov  eax,[ebp-0x18]
     cmp  eax,[ebp-0x1C]

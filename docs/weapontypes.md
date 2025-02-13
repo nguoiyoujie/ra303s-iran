@@ -10,6 +10,7 @@ WeaponTypes represent the logical aspects of a damage-dealing object. It also in
  - [Negative Damage](#negative-damage) 
  - [Tesla Charge Settings](#tesla-charge-settings) 
  - [Deploy To Fire](#deploy-to-fire) 
+ - [AI-only weapons](#ai-only-weapons) 
 
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
@@ -108,6 +109,20 @@ If used on a weapon with `Charges`=true and `IsLaser`=true, overrides the laser 
 The unit will approach targets with the weapon's range. Instead of firing a bullet, the unit shall perform the mission `Unload` instead.  
 
 Only effective on certain types, as some do not have a response to the Unload mission.
+</details></td></tr></table>
+
+
+<a href="#weapontypes"><kbd>Top</kbd></a><br>
+-------
+### AI-only weapons
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;WeaponType&gt;] ► AIOnly
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Prevents a human player from using the weapon. Useful for modders who want to program AI-only targeting features such as `DeployToFire`, without revealing the attack cursor to the player.
+
 </details></td></tr></table>
 
 

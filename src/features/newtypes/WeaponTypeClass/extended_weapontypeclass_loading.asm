@@ -17,6 +17,7 @@
     WeaponTypeClass.IsLaser.Read(esi,edi)
     WeaponTypeClass.LaserColor.Read(esi,edi)
     WeaponTypeClass.DeployToFire.Read(esi,edi)
+    WeaponTypeClass.AIOnly.Read(esi,edi)
     pop  esi
 .Ret:
     lea  esp,[ebp-0x10]

@@ -22,6 +22,7 @@ cextern Globals___Map
 cextern Globals___Map_Array
 cextern Globals___ScenarioInit
 cextern Globals___PlayerPtr
+cextern Capture.OverrideIsCapturable
 
 cextern Map.Basic.ChronoReinforceTanks
 cextern BuildingClass.Count
@@ -472,8 +473,10 @@ Loop_Over_Object_Heap_And_Call_Captured_If_Trigger_Attached:
     mov  eax,edi
     mov  edi,[Capture_Attached_unk34]
     mov  edx,[HouseClass_Which_Captures]
+    mov  byte[Capture.OverrideIsCapturable],1
     ; mov        ebx,eax
     call dword[edi+0x1D4]    ; Call ::Captured()
+    mov  byte[Capture.OverrideIsCapturable],0
     ; call    Iron_Curtain_Object
     lea  edx,[Capture_Attached_unk38]
     jmp  .Next_Loop_Iteration

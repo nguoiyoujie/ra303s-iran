@@ -178,7 +178,7 @@ Drops a nuke at the specified <i>WAYPOINT</i>.
 <pre><code><samp>Parameters
 1: HOUSE (<a href="./defines.md#housetypes">HouseType</a>)
 </samp></code></pre>
-Causes the <i>HOUSE</i> to instantaneously capture structures, units and infantry that this trigger is attached to. Capturing structures only work for `Capturable`=true structures, akin to an engineer capturing them.
+Causes the <i>HOUSE</i> to instantaneously capture structures, units and infantry that this trigger is attached to. Capturing structures work even with `Capturable`=false structures.
 </details></td></tr></table>
 
 <table><tr><td width="160"><samp>Trigger Action 61</samp></td><td width="852"><samp>Iron Curtain attached objects</samp></td></tr><tr><td colspan="2"><details><summary><b>View</b></summary>
