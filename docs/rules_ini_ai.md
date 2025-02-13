@@ -238,6 +238,24 @@ The default value is 400.
 
 
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules}</code> ► [AI] ► UnitReserve
+<code>{Rules}</code> ► [AI] ► BuildingReserve
+<code>{Rules}</code> ► [AI] ► AircraftReserve
+</samp></td><td width="120"><samp>Integer<br>Integer<br>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+  
+*`BuildingReserve` is only effective when `UseNewBuildingAI` is enabled*
+
+There is an existing credits check that throttles infantry production, using `InfantryReserve`. The AI autobase will not train new infantry if their available money is below the specified amount.
+Now, similar controls are enabled for Units, Building and Aircraft production. This should help prevent the AI from being stuck in low money mode due to over-production.
+
+Note that this only determines when AI is starting production. The AI does not take into account the cost of the unit in its calculations. It can still overproduce when it has multiple factories.
+
+Refineries and Harvester units are exempt from this check.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules}</code> ► [AI] ► BuildRadarWithoutAirThreatCheck
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
   

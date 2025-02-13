@@ -331,6 +331,10 @@ gstring str_GuardAreaLoadTransportsInSingleplayer              , "GuardAreaLoadT
 gstring str_RepairConstructedBuildingsInSingleplayer           , "RepairConstructedBuildingsInSingleplayer"
 gstring str_PowerExcess                                        , "PowerExcess"
 gstring str_PowerEmergencyMinimum                              , "PowerEmergencyMinimum"
+gstring str_UnitReserve                                        , "UnitReserve"
+gstring str_BuildingReserve                                    , "BuildingReserve"
+gstring str_AircraftReserve                                    , "AircraftReserve"
+gstring str_VesselReserve                                      , "VesselReserve"
 
 ; Rules.ini new instance lists
 gstring str_AircraftTypes                                      , "AircraftTypes"

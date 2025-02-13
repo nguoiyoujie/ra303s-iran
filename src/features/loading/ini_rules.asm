@@ -45,6 +45,10 @@ cextern str_GuardAreaLoadTransportsInSingleplayer
 cextern str_RepairConstructedBuildingsInSingleplayer
 cextern str_PowerExcess
 cextern str_PowerEmergencyMinimum
+cextern str_UnitReserve
+cextern str_AircraftReserve
+cextern str_VesselReserve
+cextern str_BuildingReserve
 cextern str_AtomRadius
 cextern str_NoScreenShake
 cextern str_NoTeslaZapEffectDelay
@@ -91,6 +95,10 @@ cextern Rules.AI.GuardAreaLoadTransportsInSingleplayer
 cextern Rules.AI.RepairConstructedBuildingsInSingleplayer
 cextern Rules.AI.PowerExcess
 cextern Rules.AI.PowerEmergencyMinimum
+cextern Rules.AI.UnitReserve
+cextern Rules.AI.AircraftReserve
+cextern Rules.AI.VesselReserve
+cextern Rules.AI.BuildingReserve
 cextern Rules.General.AtomRadius
 cextern Rules.General.NoScreenShake
 cextern Rules.General.NoTeslaZapEffectDelay
@@ -262,6 +270,18 @@ cextern Rules.General.BuildOffAlly
 
     call_INIClass__Get_Int esi,str_AI,str_PowerEmergencyMinimum,[Rules.AI.PowerEmergencyMinimum]
     mov  [Rules.AI.PowerEmergencyMinimum],eax
+
+    call_INIClass__Get_Int esi,str_AI,str_UnitReserve,[Rules.AI.UnitReserve]
+    mov  [Rules.AI.UnitReserve],eax
+
+    call_INIClass__Get_Int esi,str_AI,str_AircraftReserve,[Rules.AI.AircraftReserve]
+    mov  [Rules.AI.AircraftReserve],eax
+
+    call_INIClass__Get_Int esi,str_AI,str_VesselReserve,[Rules.AI.VesselReserve]
+    mov  [Rules.AI.VesselReserve],eax
+
+    call_INIClass__Get_Int esi,str_AI,str_BuildingReserve,[Rules.AI.BuildingReserve]
+    mov  [Rules.AI.BuildingReserve],eax
 
     call_INIClass__Get_Int esi,str_General,str_AtomRadius,[Rules.General.AtomRadius]
     mov  [Rules.General.AtomRadius],eax

@@ -13,6 +13,7 @@
 cextern HouseClass__Can_Build
 cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
+cextern Rules.AI.AircraftReserve
 
 
 [section .data] 
@@ -27,10 +28,16 @@ Temp.AIAircraft.Count            db 0
 @HACK 0x004DC7AF,0x004DC92A,_HouseClass__AI_Aircraft_Implementation
 ; first count the buildings and aircrafts
 ; ecx is HouseClass
+    ; Check reserve
+    mov  eax,dword[ecx+HouseClass.Offset.Tiberium]
+    add  eax,dword[ecx+HouseClass.Offset.Credits]
+    cmp  eax,[Rules.AI.AircraftReserve]
+    jl   .Done
+
+.Continue:
     push esi
     push ebx
     push edx
-    push eax
     xor  esi,esi ; count Helipad
     xor  ebx,ebx ; count Airfield
     xor  edi,edi
@@ -82,7 +89,6 @@ Temp.AIAircraft.Count            db 0
 
     mov  dword[Temp.AIAircraft.CombatWings],ebx
     mov  dword[Temp.AIAircraft.CombatHelis],esi
-    pop  eax
     pop  edx
     pop  ebx
     pop  esi

@@ -30,6 +30,7 @@ cextern Rules.AI.PowerExcess
 cextern Rules.AI.PowerEmergencyMinimum
 cextern Rules.AI.UseNewBuildingAI
 cextern Rules.AI.ForceSingleTileClearing
+cextern Rules.AI.BuildingReserve
 
 
 %define UrgencyType.NONE                       0
@@ -170,11 +171,11 @@ Temp.FindCell.BuildingIsSingleCell db 0
 .CheckRefinery:
     mov  ebx,dword[ecx+HouseClass.Offset.IsTiberiumShort]
     test eax,0x80 ; IsTiberiumShort
-    jnz  .CheckEmergencyPower
+    jnz  .CheckReserve
     mov  eax,AIBuildType.REFINERY
     call GetBuildingCountMatchingAIBuildType ; eax is now refinery count
     cmp  eax,dword[0x0066673A] ; Rule.RefineryLimit
-    jge  .CheckEmergencyPower
+    jge  .CheckReserve
     push eax
     mov  ebx,dword[ecx+HouseClass.Offset.CurBuildings]
     xor  eax,eax
@@ -185,11 +186,11 @@ Temp.FindCell.BuildingIsSingleCell db 0
     or   edx,eax ; divide by 256, edx is now CurBuildings * Rule.RefineryRatio
     pop  eax
     cmp  eax,edx
-    jg   .CheckEmergencyPower ; use jg because numbers may round to 0, making AI build nothin
+    jg   .CheckReserve ; use jg because numbers may round to 0, making AI build nothin
     mov  eax,AIBuildType.REFINERY
     call GetRandomBuildingWithinAILimit
     test eax,eax
-    jz   .CheckEmergencyPower
+    jz   .CheckReserve
     test dword[ecx+HouseClass.Offset.BPreGroupScan],0x10 ; is there a refinery?
     jnz  .CheckRefinery_HaveRefinery
 .CheckRefinery_NoRefinery:
@@ -200,6 +201,13 @@ Temp.FindCell.BuildingIsSingleCell db 0
 .CheckRefinery_Alloc:
     call ChooseOneToBuildAlloc
     jmp  .Done ; this is a high priority item, don't bother checking the rest
+
+.CheckReserve:
+    ; Check reserve for anything that is not a refinery
+    mov  eax,dword[ecx+HouseClass.Offset.Tiberium]
+    add  eax,dword[ecx+HouseClass.Offset.Credits]
+    cmp  eax,[Rules.AI.BuildingReserve]
+    jl   .Done
 
 .CheckEmergencyPower:
     mov  eax,dword[ecx+HouseClass.Offset.Drain]
@@ -667,7 +675,7 @@ ChooseOneToBuildAlloc:
     call RandomClass_Random
     mov  ch,byte[esi+eax] ; ch is now our BuildingType
     ; cx is now UrgencyType/BuildingType, the struct for BuildChoiceClass
-    mov  eax,0x006821BC
+    lea  eax,[0x006821BC]
     call FixedIHeapClass__Allocate
     test eax,eax
     jz   .Done ; failed to allocate, just forget about it

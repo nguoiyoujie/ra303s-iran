@@ -96,6 +96,10 @@ gbool  Rules.AI.GuardAreaLoadTransportsInSingleplayer         ,0
 gbool  Rules.AI.RepairConstructedBuildingsInSingleplayer      ,0
 gint   Rules.AI.PowerExcess                                   ,-1
 gint   Rules.AI.PowerEmergencyMinimum                         ,-1
+gint   Rules.AI.UnitReserve                                   ,-1
+gint   Rules.AI.BuildingReserve                               ,-1
+gint   Rules.AI.AircraftReserve                               ,-1
+gint   Rules.AI.VesselReserve                                 ,-1
 
 ; [StringTableOffset]
 gint   Rules.StringTableOffsets.InfantryTypes                 ,-1

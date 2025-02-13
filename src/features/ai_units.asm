@@ -15,6 +15,7 @@
 
 cextern HouseClass__Can_Build
 cextern UnitTypeClass__As_Reference
+cextern Rules.AI.UnitReserve
 
 
 ;added by lovalmidas
@@ -157,6 +158,21 @@ Temp.AIUnit.Harvester db 0
     mov  al,byte[eax+ebp*0x1 - 1532] ; was -0x4C
     mov  byte[edx+HouseClass.Offset.BuildUnit],al
     jmp  0x004DBCF6 ; skip AutoBase
+@ENDHACK
+
+
+@HACK 0x004DBBEE,0x004DBBF5,_HouseClass__AI_Unit_Credits_Check
+    mov  eax,[ebp-0x20]
+    ; Check reserve
+    push ebx
+    mov  ebx,dword[eax+HouseClass.Offset.Tiberium]
+    add  ebx,dword[eax+HouseClass.Offset.Credits]
+    cmp  ebx,[Rules.AI.AircraftReserve]
+    pop  ebx
+    jl   0x004DBCF6 ; skip
+    mov  eax,[ebp-0x20]
+    test byte[eax+0x42],0x20
+    jmp  0x004DBBF5 
 @ENDHACK
 
 
