@@ -120,6 +120,9 @@ Buffer_BuildingType           times 512 db 0
     BuildingTypeClass.AIBuildLimit.Read(esi,edi)
     BuildingTypeClass.AIBuildType.Read(esi,edi,_GetAIBuildTypeFromString)
     BuildingTypeClass.FreeUnit.Read(esi,edi,_GetUnitTypeIDFromString)
+    BuildingTypeClass.AILowMoneySellPriority.Read(esi,edi)
+    BuildingTypeClass.AILowPowerSellPriority.Read(esi,edi)
+
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

@@ -172,10 +172,13 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.ATEK,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.TECH)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.IRON,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,2)
 
     BuildingTypeClass.FromIndex(BuildingType.WEAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.WARFACTORY)
@@ -187,6 +190,8 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.PDOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON1)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.PBOX,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.DEFENSE)
@@ -199,6 +204,7 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.DOME,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.RADAR)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,2)
 
     BuildingTypeClass.FromIndex(BuildingType.GAP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
@@ -220,6 +226,7 @@ Init_OverrideExistingBuildingTypes:
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.CONYARD)
     BuildingTypeClass.UndeploysInto.Set(edi,UnitType.MCV)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,4)
 
     BuildingTypeClass.FromIndex(BuildingType.PROC,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REFINERY)
@@ -232,11 +239,13 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.AIBuildLimit.Set(edi,4)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.GENERIC)
     BuildingTypeClass.IsSilo.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.HPAD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.HELIPAD)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.HELIPAD)
     BuildingTypeClass.IsHelipad.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,2)
 
     BuildingTypeClass.FromIndex(BuildingType.SAM,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AA.DEFENSE)
@@ -246,10 +255,12 @@ Init_OverrideExistingBuildingTypes:
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.AIRSTRIP)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.AIRSTRIP)
     BuildingTypeClass.IsAirfield.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,3)
 
     BuildingTypeClass.FromIndex(BuildingType.POWR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.POWER)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.POWER)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,3)
 
     BuildingTypeClass.FromIndex(BuildingType.APWR,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.POWER)
@@ -258,6 +269,8 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.STEK,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.TECH)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.HOSP,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
@@ -280,6 +293,8 @@ Init_OverrideExistingBuildingTypes:
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.REPAIR)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.TECH)
     BuildingTypeClass.IsRepairPad.Set(edi,1)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,2)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.BIO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
@@ -292,10 +307,14 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.SYRD,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.SHIPYARD)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.SPEN,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.SHIPYARD)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.MSLO,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.WEAPON2)
@@ -304,10 +323,14 @@ Init_OverrideExistingBuildingTypes:
     BuildingTypeClass.FromIndex(BuildingType.FCOM,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.NONE)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.NONE)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,1)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,1)
 
     BuildingTypeClass.FromIndex(BuildingType.TSLA,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.ADV.DEFENSE)
     BuildingTypeClass.AIBuildType.Set(edi,AIBuildType.ADV.DEFENSE)
+    BuildingTypeClass.AILowPowerSellPriority.Set(edi,3)
+    BuildingTypeClass.AILowMoneySellPriority.Set(edi,2)
 
     BuildingTypeClass.FromIndex(BuildingType.WEAF,edi)
     TechnoTypeClass.PrereqType.Set(edi,PrereqType.FAKES)

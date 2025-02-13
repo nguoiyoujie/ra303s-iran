@@ -633,6 +633,36 @@ To disable the building from being built by the AutoBase AI, use `AIBuildType`=N
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► AILowPowerSellPriority
+<code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► AILowMoneySellPriority
+</samp></td><td width="120"><samp>0 - 4<br>0 - 4</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+The AI may have a need to sell structures to control their money or power situation. The selection of buildings used to be hardcoded. Now they are available for configuration.
+
+Use the values 1 - 4 to determine at which urgency level the building is permitted to be sold. Lower value means that the building can be sold when the situation is less urgent, and higher values prevents the AI from selling the building at low urgency, reserving the control for greater emergencies.
+
+Use the value 0 to prevent the AI from selling it to recover power or money. The AI may still sell the structure by other means (e.g. when damaged to red health via `IQ` ► `Sellback`)
+
+NONE effectively excludes the building from being considered by the new autobase AI
+
+Defaults to the following values, depending on the building in question:
+<b>AILowPowerSellPriority</b>
+ > 1: [ATEK], [PDOX], [STEK], [SYRD], [SPEN], [FCOM]\
+ > 2: [IRON], [DOME], [FIX]\
+ > 3: [TSLA]\
+ > 0 (disabled): All other buildings
+
+<b>AILowMoneySellPriority</b>
+ > 1: [ATEK], [PDOX], [SILO], [STEK], [FIX], [SYRD], [SPEN], [FCOM]\
+ > 2: [HPAD], [TSLA]\
+ > 3: [AFLD], [POWR]\
+ > 4: [FACT]\
+ > 0 (disabled): All other buildings
+
+</details></td></tr></table>
+
+
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>
 -------
 <a href="../README.md"><kbd>ra303s</kbd></a> :: <a href="./features.md"><kbd>Features</kbd></a> :: <kbd><kbd>BuildingTypes</kbd></kbd><br>

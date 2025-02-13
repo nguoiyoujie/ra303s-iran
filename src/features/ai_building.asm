@@ -780,3 +780,65 @@ ChooseOneToBuildAlloc:
     mov  [ebp-0x2C],eax
     jmp  0x004DE8D0
 @ENDHACK
+
+
+@HACK 0x004DA1E0,0x004DA223,_HouseClass__AI_Raise_Power_Choose
+    ; ecx: 0, used as our index
+    ; ebp-0x10: Current urgency
+.Repeat:
+    BuildingTypeClass.FromIndex(ecx,edx)
+    BuildingTypeClass.AILowPowerSellPriority.Get(edx,al)
+    test al,al ; Priority of 0 = don't consider at all
+    je   .Next
+    cmp  byte al,[ebp-0x10]  ; Compare with existing Priority
+    jg   .Next
+    mov  eax,esi
+    mov  edx,ecx
+    mov  ebx,-1    
+    call HouseClass__Find_Building
+    test eax,eax
+    jz   .Next
+    mov  ecx,[eax+0x11]
+    mov  edx,1
+    call [ecx+0xEC]
+    mov  eax,1
+    jmp  .Ret
+.Next:
+    inc  cl
+    cmp  cl,[BuildingTypeClass.Count]
+    jb   .Repeat
+.Ret:
+    jmp  0x004DA223
+@ENDHACK
+
+
+
+@HACK 0x004DA23C,0x004DA27F,_HouseClass__AI_Raise_Money_Choose
+    ; ecx: 0, used as our index
+    ; ebp-0x10: Current urgency
+.Repeat:
+    BuildingTypeClass.FromIndex(ecx,edx)
+    BuildingTypeClass.AILowMoneySellPriority.Get(edx,al)
+    test al,al ; Priority of 0 = don't consider at all
+    je   .Next
+    cmp  byte al,[ebp-0x10]  ; Compare with existing Priority
+    jg   .Next
+    mov  eax,esi
+    mov  edx,ecx
+    mov  ebx,-1    
+    call HouseClass__Find_Building
+    test eax,eax
+    jz   .Next
+    mov  ecx,[eax+0x11]
+    mov  edx,1
+    call [ecx+0xEC]
+    mov  eax,1
+    jmp  .Ret
+.Next:
+    inc  cl
+    cmp  cl,[BuildingTypeClass.Count]
+    jb   .Repeat
+.Ret:
+    jmp  0x004DA27F
+@ENDHACK
+
