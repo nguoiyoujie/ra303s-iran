@@ -37,8 +37,16 @@ cextern Houses.BSignificantScan
     jmp  0x004D4C82 ; continue checking other technos
 .Short_Game:
     ; TO-DO: Adopt bitfield for DeploysInto to replace hardcoded MCV check
-    cmp  dword[eax+0x482],0 ; Does player still have an MCV left?
-    jnz  0x004D4CB4
+    xor  edi,edi
+.Repeat:
+    UnitTypeClass.FromIndex(edi,ecx)
+    cmp  byte[ecx+UnitTypeClass.Offset.DeploysInto],0
+    jne  0x004D4CB4 ; skip
+.Next:
+    inc  edi
+    cmp  edi,[UnitTypeClass.Count]
+    jl   .Repeat
+.BlowUp:
     call 0x004D8814  ; HouseClass::Blowup_All(void)
     mov  eax,[ebp-0x58] ; move HouseClass this pointer into eax again
     call 0x004D8270  ; HouseClass::MPlayer_Defeated(void)
