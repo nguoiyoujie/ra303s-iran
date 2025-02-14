@@ -76,6 +76,8 @@ Alternatively, you may retrieve the files from my mod hosted [here](https://gith
 
 You may find the features documentation [here](./docs/features.md).
 
+A rough plan is also indicated  [here](./docs/progress_tracking.md).
+
 -------
 
 ### Changelog
