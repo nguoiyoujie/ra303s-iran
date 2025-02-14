@@ -72,9 +72,9 @@ Generally, object classes have other classes inherit from them cannot be extende
 |`CellClass`                     |none                         |Partial     |Partial    |No           |NA
 |`AnimClass`                     |none                         |No          |No         |No           |Managed by <code>{Rules}</code> ► [Maximums] 
 |`FactoryClass`                  |`StageClass`                 |No          |No         |No           |Managed by <code>{Rules}</code> ► [Maximums] 
-|`HouseClass`                    |none                         |No          |No         |No           |32
+|`HouseClass`                    |none                         |Yes         |Yes        |Yes          |32
 |`FuseClass`                     |none                         |No          |No         |NA           |NA
-|`BulletClass`                   |`ObjectClass`,`FlyClass`,`FuseClass` |No          |No         |No           |32
+|`BulletClass`                   |`ObjectClass`,`FlyClass`,`FuseClass` |No          |No         |No           |?
 |`SmudgeClass`                   |`ObjectClass`                |No          |No         |No           |?
 |`TemplateClass`                 |`ObjectClass`                |No          |No         |No           |?
 |`TerrainClass`                  |`ObjectClass`                |No          |No         |No           |?
