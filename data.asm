@@ -192,6 +192,10 @@ gbool  Capture.OverrideIsCapturable                           ,0
 ;gbuf   Houses.Radar                                           ,32 
 ;gbuf   Houses.Factory                                         ,32 
 gbuf   Houses.BSignificantScan                                ,32      ; 256 entries, 32 bytes
+gbuf   Houses.ISignificantScan                                ,32      ; 256 entries, 32 bytes
+gbuf   Houses.USignificantScan                                ,32      ; 256 entries, 32 bytes
+gbuf   Houses.VSignificantScan                                ,32      ; 256 entries, 32 bytes
+gbuf   Houses.ASignificantScan                                ,32      ; 256 entries, 32 bytes
 ;gbuf   Houses.BScan                                           ,1024    ; 32 houses * (256 entries, 32 bytes)
 ;gbuf   Houses.BGroupScan                                      ,1024    ; 32 houses * (256 entries, 32 bytes)
 ;gbuf   Houses.BQuantity                                       ,8192    ; 32 houses  * 256 entries

@@ -8,6 +8,9 @@
 ; No compatibility issues is expected. 
 ;
 ;----------------------------------------------------------------
+
+cextern Houses.USignificantScan
+
 ;Read INI settings
 @HACK 0x00578DCE,0x00578DD3,_UnitTypeClass__Read_INI_Extended
     push esi
@@ -29,6 +32,7 @@
     UnitTypeClass.IsWaterBound.Read(esi,edi)
     UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
     UnitTypeClass.UsePrimaryColor.Read(esi,edi)
+    UnitTypeClass.IsChronoTank.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     ;UnitTypeClass.Type.Read(esi,edi)
@@ -58,6 +62,34 @@
     UnitTypeClass.AIBuildLimit.Read(esi,edi)
     UnitTypeClass.AIBuildWeight.Read(esi,edi)
     UnitTypeClass.AIDeployBuildLimit.Read(esi,edi)
+
+    ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
+    push edx
+    push ecx
+    push ebx
+    xor  edx,edx
+    ObjectTypeClass.IsInsignificant.Get(esi,dl)
+    mov  ebx,[esi+AbstractTypeClass.Offset.Index]
+    mov  ecx,ebx
+    shr  ebx,3
+    and  ecx,7
+    test dl,dl
+    je   .SetSignificantScan
+.ClearSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    add  al,1
+    neg  al
+    and  byte[Houses.USignificantScan+ebx],al
+    jmp  .ExitSignificantScan
+.SetSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    or   byte[Houses.USignificantScan+ebx],al
+.ExitSignificantScan:
+    pop  ebx
+    pop  ecx
+    pop  edx
 
     ; update Speed and MZone based on IsWaterBound
     push edx

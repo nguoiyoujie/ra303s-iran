@@ -13,6 +13,7 @@
 
 cextern MFCD__Retrieve
 cextern TechnoTypeClass__Read_INI
+cextern Houses.VSignificantScan
 
 
 [section .data] 
@@ -73,6 +74,33 @@ VesselTypes_Read_INI:
     VesselTypeClass.Response_Enter.Read(esi,edi,_GetVesselResponseEnterFromString)
     VesselTypeClass.Response_Deploy.Read(esi,edi,_GetVesselResponseDeployFromString)
     
+    ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
+    push edx
+    push ecx
+    push ebx
+    xor  edx,edx
+    ObjectTypeClass.IsInsignificant.Get(esi,dl)
+    mov  ebx,[esi+AbstractTypeClass.Offset.Index]
+    mov  ecx,ebx
+    shr  ebx,3
+    and  ecx,7
+    test dl,dl
+    je   .SetSignificantScan
+.ClearSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    add  al,1
+    neg  al
+    and  byte[Houses.VSignificantScan+ebx],al
+    jmp  .ExitSignificantScan
+.SetSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    or   byte[Houses.VSignificantScan+ebx],al
+.ExitSignificantScan:
+    pop  ebx
+    pop  ecx
+    pop  edx
     pop  edi
     pop  esi
 

@@ -10,6 +10,7 @@
 ;----------------------------------------------------------------
 
 cextern TechnoTypeClass__Read_INI
+cextern Houses.ASignificantScan
 
 ;There is no Read_INI in AircraftTypesClass; it moves straight to TechnoTypeClass. Therefore, we must hijack the location that calls it.
 @HACK 0x005374C5,0x005374D4,_RulesClass_Objects_Replace_AircraftTypes_Read_INI
@@ -69,6 +70,34 @@ AircraftTypes_Read_INI:
 ;    mov  byte  [esi+AircraftTypeClass.Offset.PreferredBuilding],BuildingType.AFLD
 ;.After_SetPreferredBuilding:
 ;    SetBit[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing,al
+
+    ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
+    push edx
+    push ecx
+    push ebx
+    xor  edx,edx
+    ObjectTypeClass.IsInsignificant.Get(esi,dl)
+    mov  ebx,[esi+AbstractTypeClass.Offset.Index]
+    mov  ecx,ebx
+    shr  ebx,3
+    and  ecx,7
+    test dl,dl
+    je   .SetSignificantScan
+.ClearSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    add  al,1
+    neg  al
+    and  byte[Houses.ASignificantScan+ebx],al
+    jmp  .ExitSignificantScan
+.SetSignificantScan:
+    mov  al,1
+    shl  eax,cl
+    or   byte[Houses.ASignificantScan+ebx],al
+.ExitSignificantScan:
+    pop  ebx
+    pop  ecx
+    pop  edx
 
     pop  edi
     pop  esi
