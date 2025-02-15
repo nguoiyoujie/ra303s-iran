@@ -52,10 +52,50 @@
     @ENDPATCH
 %endmacro
 
+%macro @SJZ 2
+    @PATCH (%1)
+    %if ((%2) - (%1) - 2) > 127
+        %error "@SJMP cannot jump forward more than 127 bytes!" (%1, %2)
+    %elif ((%2) - (%1) - 2) < -128
+        %error "@SJMP cannot jump backwards more than 128 bytes!" (%1, %2)
+    %endif
+    db 0x74                     ; short jz
+    db (%2) - (%1) - 2          ; relative offset
+    @ENDPATCH
+%endmacro
+
+%macro @SJNZ 2
+    @PATCH (%1)
+    %if ((%2) - (%1) - 2) > 127
+        %error "@SJMP cannot jump forward more than 127 bytes!" (%1, %2)
+    %elif ((%2) - (%1) - 2) < -128
+        %error "@SJMP cannot jump backwards more than 128 bytes!" (%1, %2)
+    %endif
+    db 0x75                     ; short jnz
+    db (%2) - (%1) - 2          ; relative offset
+    @ENDPATCH
+%endmacro
+
 %macro @LJMP 2
     @PATCH (%1)
-    db 0xE9                     ; far jump
-    dd (%2) - (%1) - 5          ; relative offset
+    db 0xE9                     ; far jump 
+    dd (%2) - (%1) - 5          ; relative offset 
+    @ENDPATCH
+%endmacro
+
+%macro @LJZ 2
+    @PATCH (%1)
+    db 0x0F                     ; far conditional jump
+    db 0x84                     
+    dd (%2) - (%1) - 6          ; relative offset (length 6)
+    @ENDPATCH
+%endmacro
+
+%macro @LJNZ 2
+    @PATCH (%1)
+    db 0x0F                     ; far conditional jump
+    db 0x85                     
+    dd (%2) - (%1) - 6          ; relative offset (length 6)
     @ENDPATCH
 %endmacro
 

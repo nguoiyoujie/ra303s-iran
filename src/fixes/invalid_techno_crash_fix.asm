@@ -10,12 +10,12 @@
 
 ; Building check failures. Building exists but is being reset, return -1. Rather than trying to extract information and crashing, exit the process in such a case.
 @SJMP 0x00405581,0x004055D1  ; AbstractClass__Distance
-@SET 0x005626FE,{jz 0x0056278D}  ; TechnoClass__In_Range, exact 6 bytes
-@SET 0x005627DC,{jz 0x0056286C}  ; TechnoClass__In_Range, exact 6 bytes
+@LJZ 0x005626FE,0x0056278D  ; TechnoClass__In_Range, exact 6 bytes
+@LJZ 0x005627DC,0x0056286C  ; TechnoClass__In_Range, exact 6 bytes
 @SJMP 0x004C16D1,0x004C171E  ; FootClass__Approach_Target
 
 @SJMP 0x0049EF1F,0x0049EF78  ; CellClass__Cell_Color
-@SET 0x004EDA2B,{jz 0x004EDAD6}  ; InfantryClass__Can_Enter_Cell, exact 6 bytes
+@LJZ 0x004EDA2B,0x004EDAD6  ; InfantryClass__Can_Enter_Cell, exact 6 bytes
 
 
 ; also consider non-buildings being invalid. Remastered seems to have this fix applied.
