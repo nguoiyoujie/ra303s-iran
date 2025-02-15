@@ -230,15 +230,8 @@ cextern BuildingClass.Count
 
 
 @HACK 0x00456A62,0x00456A69,_BuildingClass__Unlimbo_Set_NewActiveBScan
-    ;HouseClass.FromIndex([eax],ebx)
-    ; esi is the buildingclass
-    ;BuildingClass.Class.Get(esi,edx)
-    ;BuildingTypeClass.FromIndex(edx,ecx)
-    ;TechnoTypeClass.PrereqType.Get(ecx,al)
-    ;mov  cl,al
-    ;mov  eax,1
-    ;shl  eax,cl
-    ;or   dword[ebx+HouseClass.Offset.BPreGroupScan],eax
+    mov  ecx,esi
+    Techno_CheckInPlay
     lea  eax,[esi+0x93]
     jmp  0x00456B1D
 @ENDHACK
@@ -429,3 +422,8 @@ House_Recalc_Attributes_ActiveBuilding:
     ret
 
 
+;@HACK 0x0054EBA7,0x0054EBAC,_SidebarClass__StripClass__Recalc_Reenable_CanBuild_Check
+;    mov  ebx,1
+;    sar  ecx,0x18
+;    jmp  0x0054EBAC
+;@ENDHACK
