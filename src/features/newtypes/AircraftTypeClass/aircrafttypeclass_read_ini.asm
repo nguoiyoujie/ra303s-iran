@@ -50,6 +50,7 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.IsLandable.Read(esi,edi)
     AircraftTypeClass.IsRotorEquipped.Read(esi,edi)
     AircraftTypeClass.IsRotorCustom.Read(esi,edi)
+    AircraftTypeClass.IsGigundo.Read(esi,edi)
     ;AircraftTypeClass.PreferredBuilding.Read(esi,edi)
     AircraftTypeClass.LandingSpeed.Read(esi,edi)
     AircraftTypeClass.Response_Select.Read(esi,edi,_GetAircraftResponseSelectFromString)

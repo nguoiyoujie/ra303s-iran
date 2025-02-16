@@ -99,6 +99,16 @@ Has no impact on the unit or the game. Supposedly this determines whether this a
 </details></td></tr></table>
 
 
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► Large
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Determines if the image of this unit is larger than the cell size of 24x24 pixels. It also sets the selection box window to be 48x48 size. The maximum ammo pips is also increased to 15.\
+This allows the adjecent cells to be re-rendered and prevent clipping and other graphical distortions. Note that this is supported for images up to 96x96 pixels, due to the new refresh window of 3x3 cells.
+
+Defaults to true for the Badger Bomber, false for the rest.
+</details></td></tr></table>
+
 <a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### Rotor Wing Flight Controls

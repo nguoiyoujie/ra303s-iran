@@ -29,6 +29,7 @@ cextern Rules.StringTableOffsets.AircraftTypes
     ;mov  edx,[AircraftTypeClass.Count]
     ;dec  edx
     ;mov  [0x005FDF74],edx ; used by deconstructor
+    call Init_OverrideExistingAircraftTypes
 .Ret:
     lea  esp,[ebp-0x14]
     pop  edi
@@ -129,3 +130,9 @@ Init_AircraftTypeClass:
 .Ret:
     retn
 
+Init_OverrideExistingAircraftTypes:
+    ; explicit set default PrereqType values for compatibility
+    AircraftTypeClass.FromIndex(AircraftType.BADR,edi)
+    AircraftTypeClass.IsGigundo.Set(edi,1)
+
+    retn
