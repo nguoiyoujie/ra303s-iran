@@ -62,11 +62,16 @@
 %include "src/features/newtypes/savegame_support.asm" ; this needs to go first before other extended classes
 
 ;extended classses - loading / heap size
+%include "src/features/newtypes/AircraftClass/aircraftclass_heap_size.asm"
 %include "src/features/newtypes/AircraftTypeClass/aircrafttypeclass_heap_size.asm"
 %include "src/features/newtypes/AnimTypeClass/animtypeclass_heap_size.asm"
+%include "src/features/newtypes/BuildingClass/buildingclass_heap_size.asm"
 %include "src/features/newtypes/BuildingTypeClass/buildingtypeclass_heap_size.asm"
+%include "src/features/newtypes/InfantryClass/infantryclass_heap_size.asm"
 %include "src/features/newtypes/InfantryTypeClass/infantrytypeclass_heap_size.asm"
+%include "src/features/newtypes/UnitClass/unitclass_heap_size.asm"
 %include "src/features/newtypes/UnitTypeClass/unittypeclass_heap_size.asm"
+%include "src/features/newtypes/VesselClass/vesselclass_heap_size.asm"
 %include "src/features/newtypes/VesselTypeClass/vesseltypeclass_heap_size.asm"
 %include "src/features/newtypes/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/newtypes/WeaponTypeClass/extended_weapontypeclass_loading.asm"

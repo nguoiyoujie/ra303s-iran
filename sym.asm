@@ -518,6 +518,7 @@ setcglob 0x004ABF4C,List_Copy                                                  ;
 setcglob 0x0065D824,AircraftClass.Count       
 setcglob 0x0065D84C,AircraftClass.Array       
 setcglob 0x15F     ,AircraftClass.ORIGINAL_SIZE        
+setcglob 0x160     ,AircraftClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; AnimClass                  0x0065D864
@@ -529,7 +530,8 @@ setcglob 0x4C      ,AnimClass.ORIGINAL_SIZE
 ; BuildingClass              0x0065D8B0
 setcglob 0x0065D8BC,BuildingClass.Count       
 setcglob 0x0065D8E4,BuildingClass.Array       
-setcglob 0xFB      ,BuildingClass.ORIGINAL_SIZE        
+setcglob 0xFB      ,BuildingClass.ORIGINAL_SIZE
+setcglob 0x100     ,BuildingClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; BulletClass                0x0065D8FC
@@ -555,6 +557,7 @@ setcglob 0x4110    ,HouseClass.NEW_SIZE
 setcglob 0x0065D9EC,InfantryClass.Count       
 setcglob 0x0065DA14,InfantryClass.Array       
 setcglob 0x154     ,InfantryClass.ORIGINAL_SIZE        
+setcglob 0x156     ,InfantryClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; OverlayClass               0x0065DA2C
@@ -603,12 +606,14 @@ setcglob 0x2D      ,TriggerClass.ORIGINAL_SIZE
 setcglob 0x0065DC4C,UnitClass.Count           
 setcglob 0x0065DC74,UnitClass.Array           
 setcglob 0x17A     ,UnitClass.ORIGINAL_SIZE   
+setcglob 0x180     ,UnitClass.NEW_SIZE   
 ; Count controlled by [Maximums]
 
 ; VesselClass                0x0065DC8C
 setcglob 0x0065DC98,VesselClass.Count         
 setcglob 0x0065DCC0,VesselClass.Array         
 setcglob 0x178     ,VesselClass.ORIGINAL_SIZE 
+setcglob 0x180     ,VesselClass.NEW_SIZE 
 ; Count controlled by [Maximums]
 
 ; TriggerTypeClass           0x0065DCD8
