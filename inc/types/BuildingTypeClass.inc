@@ -104,20 +104,20 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Offset.UndeploysInto             0x235    ; byte
 %define BuildingTypeClass.Offset.CustomFoundationList      0x236    ; INT PTR to string, then to word*
 ; Custom storages
-%define BuildingTypeClass.Offset.CustomOccupyList          0x23A    ; word[32]
-%define BuildingTypeClass.Offset.CustomOverlapList         0x27A    ; word[32]
+%define BuildingTypeClass.Offset.CustomOccupyList          0x23A    ; word[640+1], was word[32]
+%define BuildingTypeClass.Offset.CustomOverlapList         0x4BC    ; word[640+1], was word[32]
 ;
-%define BuildingTypeClass.Offset.SpreadExplosionDamage     0x2BA    ; INT
-%define BuildingTypeClass.Offset.SpreadExplosionWarhead    0x2BE    ; INT PTR
+%define BuildingTypeClass.Offset.SpreadExplosionDamage     0x73E    ; INT
+%define BuildingTypeClass.Offset.SpreadExplosionWarhead    0x742    ; INT PTR
 ;0x2C2
-%define BuildingTypeClass.Offset.AIBuildLimit              0x2C2    ; INT
-%define BuildingTypeClass.Offset.AIBuildType               0x2C6    ; byte (enum)
+%define BuildingTypeClass.Offset.AIBuildLimit              0x746    ; INT
+%define BuildingTypeClass.Offset.AIBuildType               0x74A    ; byte (enum)
 ;0x2C7
-%define BuildingTypeClass.Offset.SpecialWeapons            0x2C7    ; int, SpecialType flags, up to 32 values
-%define BuildingTypeClass.Offset.FreeUnit                  0x2CB    ; byte
-%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x2CC    ; byte
-%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x2CD    ; byte
-;0x2CE
+%define BuildingTypeClass.Offset.SpecialWeapons            0x74B    ; int, SpecialType flags, up to 32 values
+%define BuildingTypeClass.Offset.FreeUnit                  0x74F    ; byte
+%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x750    ; byte
+%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x751    ; byte
+;0x752
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature

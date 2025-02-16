@@ -338,7 +338,7 @@ There are two methods to customize building foundations. One may be easier to us
 </samp></td><td width="120"><samp>String</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 Determines the combined occupy and visual overlap foundations for this building. Takes in a sequence of characters to move the cursor and build the foundation list.
-Up to 32 cells can be supported this way. Exceeding 32 cells may result in undefined behaviour.
+Up to 640 occupancy 'X' cells and 640 overlay 'O' cells can be supported this way. Exceeding the limit may result in undefined behaviour, likely a crash.
 
 The following characters are supported. Note that they are case sensitive.
 
