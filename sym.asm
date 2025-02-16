@@ -126,6 +126,10 @@ setcglob 0x00401210,AircraftTypeClass__AircraftTypeClass                       ;
 setcglob 0x00401324,AircraftTypeClass__new                                     ; AircraftTypeClass::operator new(uint)
 setcglob 0x004040F0,AircraftTypeClass__As_Reference                            ; AircraftTypeClass & AircraftTypeClass::As_Reference(AircraftType type)
 
+; AIRCRAFT.CPP
+setcglob 0x004229F8,AircraftClass__Mission_Guard
+setcglob 0x00422FC8,AircraftClass__Mission_Guard_Area
+
 ; BDATA.CPP
 setcglob 0x00429CEC,BuildingTypeClass__BuildingTypeClass                       ; BuildingTypeClass::BuildingTypeClass(StructType,int,char *,FacingType,ulong,RemapType,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,RTTIType,DirType,BSizeType,short *,short *,short *)
 setcglob 0x00429F0C,BuildingTypeClass__new                                     ; BuildingTypeClass::operator new(uint)
@@ -140,6 +144,9 @@ setcglob 0x00426AB0,BulletTypeClass__new                                       ;
 ; BULLET.CPP
 setcglob 0x00460B90,BulletClass__BulletClass                                   ; BulletClass::BulletClass(BulletType,long,TechnoClass *,int,WarheadType,int)
 setcglob 0x00460EAC,BulletClass__new                                           ; BulletClass::operator new(uint)
+
+; FOOT.CPP
+setcglob 0x004C1104,FootClass__Mission_Guard
 
 ; IDATA.CPP
 setcglob 0x004DF5E0,InfantryTypeClass__InfantryTypeClass                       ; InfantryTypeClass::InfantryTypeClass(InfantryType,int,char *,int,int,int,int,int,int,int,int,PipEnum,DoInfoStruct *,int,int,char *)
@@ -246,8 +253,10 @@ setcglob 0x0056076C,TeamTypeClass__Write_INI                                   ;
 setcglob 0x00560CBC,TechnoClass__Combat_Damage                                 ; int TechnoClass::Combat_Damage(int which) 
 setcglob 0x00560B14,TechnoClass__What_Weapon_Should_I_Use
 setcglob 0x00564358,TechnoClass__Owner                                         ; HouseType TechnoClass::Owner(void)  
-setcglob 0x00569914,TechnoTypeClass__Read_INI                                  ;
-setcglob 0x00569E30,TechnoTypeClass__Legal_Placement                           ;
+setcglob 0x00568610,TechnoClass__Target_Something_Nearby
+setcglob 0x00569914,TechnoTypeClass__Read_INI                                  
+setcglob 0x00569E30,TechnoTypeClass__Legal_Placement                           
+
 
 ; TRIGGER.CPP
 setcglob 0x0056CC54,TriggerClass__Spring                                       ; bool TriggerClass::Spring(TEventType event, ObjectClass * obj, CELL cell, bool forced)
@@ -621,7 +630,7 @@ setcglob 0x0065DD7C,BuildingTypeClass.Count
 setcglob 0x0065DDA4,BuildingTypeClass.Array   
 setcglob 0x57,      BuildingTypeClass.ORIGINAL_COUNT   
 setcglob 0x207,     BuildingTypeClass.ORIGINAL_SIZE    
-setcglob 0x2CE,     BuildingTypeClass.NEW_SIZE
+setcglob 0x752,     BuildingTypeClass.NEW_SIZE
 
 ; AircraftTypeClass          0x0065DDBC
 setcglob 0x0065DDC8,AircraftTypeClass.Count   

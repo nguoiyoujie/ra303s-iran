@@ -109,6 +109,17 @@ This allows the adjecent cells to be re-rendered and prevent clipping and other 
 Defaults to true for the Badger Bomber, false for the rest.
 </details></td></tr></table>
 
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;AircraftType&gt;]  ► SeekerGuard
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+When an AI-controlled aircraft destroys its target, it abandons its attack mission and returns to a dock (helipad or airfield). This is done even if the aircraft has ammo remaining to press the attack.
+
+Set this control to allow the AI-controlled aircraft to seek new targets while it is on the air. Only when it has no Ammo or targets remaining shall it return to base.
+</details></td></tr></table>
+
+
 <a href="#aircrafttypes"><kbd>Top</kbd></a><br>
 -------
 ### Rotor Wing Flight Controls
