@@ -11,11 +11,22 @@
 Temp.RefreshCells_Tracker db 0
 
 
-@HACK 0x004B0655,0x004B065B,_DisplayClass__Refresh_Cells__Bounds_Check_Fix
-    mov   byte[Temp.RefreshCells_Tracker],0x24 ; short tlist[36]
-    lea   ebx,[ebp-0x58]  
-    mov   dword[ebp-0x10],eax
-    jmp   0x004B065B
+@HACK 0x004B062E,0x004B0633,_DisplayClass__Refresh_Cells__ExpandStack
+    sub  esp,0x24C ; was 0x4C
+    mov  esi,eax
+    jmp  0x004B0633
+@ENDHACK
+
+
+@HACK 0x004B0645,0x004B065B,_DisplayClass__Refresh_Cells__Bounds_Check_Fix
+    lea  ebx,[ebp-0x258] ; was 0x58
+    mov  edx,0x124 ; was 0x24
+    call List_Copy
+    lea  eax,[esi+0x1C]
+    mov  byte[Temp.RefreshCells_Tracker],0x124 ; short tlist[0x100+36]
+    lea  ebx,[ebp-0x258] ; was 0x58
+    mov  dword[ebp-0x10],eax
+    jmp  0x004B065B
 @ENDHACK
 
 
