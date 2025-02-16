@@ -43,3 +43,31 @@ Temp.RefreshCells_Tracker db 0
     jmp   0x004B0663
 @ENDHACK
 
+
+@HACK 0x004ABF4C,0x004ABF79,_List_Copy__Reimplement
+    push ebp
+    mov  ebp,esp
+    push ecx
+    test ebx,ebx
+    jz   .Ret
+    test eax,eax
+    jz   .Ret
+.Cycle:
+    test edx,edx
+    jle  .End
+    mov  word cx,[eax]
+    mov  word[ebx],cx
+    cmp  word cx,0x7FFF
+    je   .Ret
+    add  ebx,2
+    add  eax,2
+    dec  edx
+    jmp  .Cycle
+.End:
+    mov  word[ebx],0x7FFF
+.Ret:
+    lea  esp,[ebp-4]
+    pop  ecx
+    pop  ebp
+    ret
+@ENDHACK
