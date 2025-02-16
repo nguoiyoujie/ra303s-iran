@@ -489,6 +489,7 @@ setcglob 0x006B1498,DDraw___MainWindow
 
 
 setcglob 0x005D0F10,Delay                                                      ; Delay(int)
+setcglob 0x004ABF4C,List_Copy                                                  ; void List_Copy(short const * source, int len, short * dest)
 
 ;---------------------------------------------------------------------------
 ; Heap arrays
@@ -630,7 +631,7 @@ setcglob 0x0065DD7C,BuildingTypeClass.Count
 setcglob 0x0065DDA4,BuildingTypeClass.Array   
 setcglob 0x57,      BuildingTypeClass.ORIGINAL_COUNT   
 setcglob 0x207,     BuildingTypeClass.ORIGINAL_SIZE    
-setcglob 0x752,     BuildingTypeClass.NEW_SIZE
+setcglob 0xC52,     BuildingTypeClass.NEW_SIZE
 
 ; AircraftTypeClass          0x0065DDBC
 setcglob 0x0065DDC8,AircraftTypeClass.Count   

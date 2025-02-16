@@ -227,6 +227,7 @@
 %include "src/features/warhead_capture.asm"
 %include "src/features/aircraft_large.asm"
 %include "src/features/aircraft_persistguard.asm"
+%include "src/features/building_large_foundations.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

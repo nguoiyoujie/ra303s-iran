@@ -60,6 +60,8 @@ d_ExitCCAirstrip              dw 0xFF7F,0xFFFF,0x7F,0xFF,0xFF80,0x100,0xFF81,0x1
 
 [section .data] 
 Buffer_BuildingType           times 512 db 0 
+Temp.OccupyListRemaining      dw 0
+Temp.OverlayListRemaining     dw 0
 
 
 ;Read INI settings
@@ -636,6 +638,8 @@ _CustomOccupyListFromString:
     add  edx,BuildingTypeClass.Offset.CustomOccupyList
     mov  edi,esi
     add  edi,BuildingTypeClass.Offset.CustomOverlapList
+    mov  word[Temp.OccupyListRemaining],0x280
+    mov  word[Temp.OverlayListRemaining],0x280
 .GetInstruction:
     mov  cl,byte[eax]
     inc  eax ; advance eax to the next character
@@ -663,17 +667,23 @@ _CustomOccupyListFromString:
 .CheckInstruction.X:
     cmp  cl,'X'
     jne  .CheckInstruction.O
+    cmp  word[Temp.OccupyListRemaining],0
+    jle  .GetInstruction
     mov  word[edx],bx
     add  edx,2
     inc  bx         ; add one column
+    dec  word[Temp.OccupyListRemaining]
     jmp  .GetInstruction
 
 .CheckInstruction.O:
     cmp  cl,'O'
     jne  .CheckInstruction.Abort
+    cmp  word[Temp.OverlayListRemaining],0
+    jle  .GetInstruction
     mov  word[edi],bx
     add  edi,2
     inc  bx         ; add one column
+    dec  word[Temp.OverlayListRemaining]
     jmp  .GetInstruction
 
 .CheckInstruction.Abort:

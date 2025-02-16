@@ -105,19 +105,17 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Offset.CustomFoundationList      0x236    ; INT PTR to string, then to word*
 ; Custom storages
 %define BuildingTypeClass.Offset.CustomOccupyList          0x23A    ; word[640+1], was word[32]
-%define BuildingTypeClass.Offset.CustomOverlapList         0x4BC    ; word[640+1], was word[32]
+%define BuildingTypeClass.Offset.CustomOverlapList         0x73C    ; word[640+1], was word[32]
 ;
-%define BuildingTypeClass.Offset.SpreadExplosionDamage     0x73E    ; INT
-%define BuildingTypeClass.Offset.SpreadExplosionWarhead    0x742    ; INT PTR
-;0x2C2
-%define BuildingTypeClass.Offset.AIBuildLimit              0x746    ; INT
-%define BuildingTypeClass.Offset.AIBuildType               0x74A    ; byte (enum)
-;0x2C7
-%define BuildingTypeClass.Offset.SpecialWeapons            0x74B    ; int, SpecialType flags, up to 32 values
-%define BuildingTypeClass.Offset.FreeUnit                  0x74F    ; byte
-%define BuildingTypeClass.Offset.AILowPowerSellPriority    0x750    ; byte
-%define BuildingTypeClass.Offset.AILowMoneySellPriority    0x751    ; byte
-;0x752
+%define BuildingTypeClass.Offset.SpreadExplosionDamage     0xC3E    ; INT
+%define BuildingTypeClass.Offset.SpreadExplosionWarhead    0xC42    ; INT PTR
+%define BuildingTypeClass.Offset.AIBuildLimit              0xC46    ; INT
+%define BuildingTypeClass.Offset.AIBuildType               0xC4A    ; byte (enum)
+%define BuildingTypeClass.Offset.SpecialWeapons            0xC4B    ; int, SpecialType flags, up to 32 values
+%define BuildingTypeClass.Offset.FreeUnit                  0xC4F    ; byte
+%define BuildingTypeClass.Offset.AILowPowerSellPriority    0xC50    ; byte
+%define BuildingTypeClass.Offset.AILowMoneySellPriority    0xC51    ; byte
+;0xC52
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
