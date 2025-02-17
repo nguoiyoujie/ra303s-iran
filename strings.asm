@@ -425,7 +425,7 @@ gintarr strlist.ArmorTypes                                     , str.ArmorType.N
                                                                , 0
 
 gstring str.ArmorOneDefault                                    , "100%%"
-gstring str.ArmorDefault                                       , "100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%"
+gstring str.ArmorDefault                                       , "100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%,100%%"
 
 ; ---- HouseTypes ----
 gstring str_Multi1                                             , "Multi1"

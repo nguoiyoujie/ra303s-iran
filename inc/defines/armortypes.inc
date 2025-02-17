@@ -25,6 +25,8 @@
 %assign ArmorType.Special_1   9
 %assign ArmorType.Special_2   10
 
+%assign ArmorType.MAX   10
+
 cextern str.ArmorType.None        
 cextern str.ArmorType.Wood        
 cextern str.ArmorType.Light       

@@ -41,9 +41,12 @@ cextern WarheadTypeClass.Array
 %define WarheadTypeClass.Offset.Modifier6                 0x01C    ; word ;added
 %define WarheadTypeClass.Offset.Modifier7                 0x01E    ; word ;added
 %define WarheadTypeClass.Offset.Modifier8                 0x020    ; word ;added
-;%define WarheadTypeClass.Offset.Modifier9                 0x022    ; word
-;%define WarheadTypeClass.Offset.Modifier10                0x024    ; word
-; 000 - 021
+; original: 0x22
+%define WarheadTypeClass.Offset.Modifier9                 0x022    ; word
+%define WarheadTypeClass.Offset.Modifier10                0x024    ; word
+
+%define WarheadTypeClass.Offset.ExplosionAnim             0x026    ; byte
+; 0x028
 
 
 ; INI String controls
@@ -53,8 +56,8 @@ str.WarheadTypeClass.IsWoodDestroyer           db"Wood",0                   ;exi
 str.WarheadTypeClass.IsTiberiumDestroyer       db"Ore",0                    ;existing ini
 str.WarheadTypeClass.IsOrganic                 db"Organic",0                ;existing ini (not actually read by INI key, but derived from Verses)
 str.WarheadTypeClass.Modifier                  db"Verses",0                 ;existing ini
-str.WarheadTypeClass.IsCapture                  db"IsCapture",0              ;new ini
-;str.WarheadTypeClass.ExplosionAnim             db"Anim",0                   ;new ini
+str.WarheadTypeClass.IsCapture                 db"IsCapture",0              ;new ini
+str.WarheadTypeClass.ExplosionAnim             db"Anim",0                   ;new ini
 str.WarheadTypeClass.ExplosionSet              db"Explosion",0              ;existing ini
 str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;existing ini
 
@@ -127,9 +130,9 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
 %define WarheadTypeClass.IsCapture.Set(ptr_type,value)                        SetBool                                ptr_type, WarheadTypeClass.Offset.IsCapture, WarheadTypeClass.Bit.IsCapture, value
 %define WarheadTypeClass.IsCapture.Read(ptr_type,ptr_rules)                   WarheadTypeClass.ReadBool              ptr_type, ptr_rules, WarheadTypeClass.Offset.IsCapture, WarheadTypeClass.Bit.IsCapture, str.WarheadTypeClass.IsCapture
 
-;%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
-;%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
-;%define WarheadTypeClass.ExplosionAnim.Read(ptr_type,ptr_rules,function)       WarheadTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, WarheadTypeClass.Offset.ExplosionAnim, str.WarheadTypeClass.ExplosionAnim, function
+%define WarheadTypeClass.ExplosionAnim.Get(ptr_type,reg_output)               GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, reg_output
+%define WarheadTypeClass.ExplosionAnim.Set(ptr_type,value)                    SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionAnim, value
+%define WarheadTypeClass.ExplosionAnim.Read(ptr_type,ptr_rules,function)      WarheadTypeClass.ReadStringToByteExt   ptr_type, ptr_rules, WarheadTypeClass.Offset.ExplosionAnim, str.WarheadTypeClass.ExplosionAnim, function
 
 %define WarheadTypeClass.ExplosionSet.Get(ptr_type,reg_output)                GetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionSet, reg_output
 %define WarheadTypeClass.ExplosionSet.Set(ptr_type,value)                     SetByte                                ptr_type, WarheadTypeClass.Offset.ExplosionSet, value
@@ -159,6 +162,13 @@ str.WarheadTypeClass.InfantryDeath             db"InfDeath",0               ;exi
     mov  byte cl,[%1+%3]
     call_INIClass__Get_Int %2,edx,%4,ecx
     mov  byte[%1+%3],al
+%endmacro
+
+%macro WarheadTypeClass.ReadStringToByteExt    5
+    push edx
+    WarheadTypeClass.ID %1,edx
+    ReadStringToByteExt %1,%2,%3,edx,%4,%5
+    pop  edx
 %endmacro
 
 ; args <Internal ID of type class>

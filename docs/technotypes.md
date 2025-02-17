@@ -63,9 +63,10 @@ You are expected to modify the existing Warhead entries to make use of them. See
  > 5 = Flak\
  > 6 = Plate\
  > 7 = Medium\
- > 8 = Steel
+ > 8 = Steel\
+ > 9 = Special_1\
+ > 10 = Special_2
 
-Special_1 and Special_2 are not yet supported in this version, but may be in the future.
 </details></td></tr></table>
 
 

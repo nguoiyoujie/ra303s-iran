@@ -77,7 +77,6 @@
 %include "src/features/newtypes/VesselTypeClass/vesseltypeclass_heap_size.asm"
 %include "src/features/newtypes/WarheadTypeClass/warheadtypeclass_heap_size.asm"
 %include "src/features/newtypes/WeaponTypeClass/weapontypeclass_heap_size.asm"
-%include "src/features/newtypes/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/newtypes/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 %include "src/features/newtypes/HouseTypeClass/housetypeclass_heap_size.asm"
 %include "src/features/newtypes/HouseClass/houseclass_heap_size.asm"
@@ -92,6 +91,7 @@
 %include "src/features/newtypes/TechnoTypeClass/technotypeclass_read_ini.asm"
 %include "src/features/newtypes/UnitTypeClass/unittypeclass_read_ini.asm"
 %include "src/features/newtypes/VesselTypeClass/vesseltypeclass_read_ini.asm"
+%include "src/features/newtypes/WarheadTypeClass/warheadtypeclass_read_ini.asm"
 %include "src/features/newtypes/HouseTypeClass/housetypeclass_read_ini.asm"
 %include "src/features/newtypes/HouseClass/houseclass_read_ini.asm"
 
@@ -111,7 +111,7 @@
 %include "src/features/newtypes/VesselTypeClass/vesseltypeclass_new_types.asm"
 %include "src/features/newtypes/HouseTypeClass/housetypeclass_new_types.asm"
 %include "src/features/newtypes/HouseClass/houseclass_new_types.asm"
+%include "src/features/newtypes/WarheadTypeClass/warheadtypeclass_new_types.asm"
 
-%include "src/features/newtypes/WarheadTypeClass/warheadtypeclass_unhardcode.asm"
 %include "src/features/newtypes/WeaponTypeClass/weapontypeclass_unhardcode.asm"
 %include "src/features/newtypes/SoundEffectName/soundeffectslist_unhardcode.asm"

@@ -10,6 +10,7 @@ Warheads contain special information for WeaponTypes, such as effectiveness agai
  - [New Armor-types](#new-armor-types) 
  - [Atomic Weapons](#atomic-weapons) 
  - [Capture Weapons](#capture-weapons) 
+ - [Visual Settings](#visual-settings) 
 
 
 -------
@@ -71,6 +72,8 @@ The first nine values will be read, to determine the warhead's effectiveness aga
 6 = Plate
 7 = Medium
 8 = Steel
+9 = Special_1
+10 = Special_2
 ```
 
 If the end of the entry is reached before the last armortype, effectiveness against remaining armortypes default to 100%.
@@ -129,6 +132,22 @@ When an enemy is hit by this warhead, its ownership will be converted to the hou
 
 This can be used to emulate Mind Control behavior.
 
+</details></td></tr></table>
+
+
+<a href="#warheads"><kbd>Top</kbd></a><br>
+-------
+### Visual Settings
+<br>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;Warhead&gt;]  ► ExplosionAnim
+</samp></td><td width="120"><samp>AnimType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Overrides the default explosion animation. Note that there is no damage threshold for explosion animation set this way; the same explosion will be used regardless of damage.
+
+</samp>
 </details></td></tr></table>
 
 
