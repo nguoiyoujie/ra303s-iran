@@ -7,6 +7,7 @@ BulletTypes represent projectiles that are emitted from WeaponTypes. They apply 
 
  - [Documentation Guide](#documentation-guide)
  - [New Entries](#new-entries) 
+ - [Visual Settings](#visual-settings) 
 
 
 -------
@@ -39,6 +40,22 @@ Example as follows:
 [BulletTypes]
 0=HeatSeekerAA
 ```
+</details></td></tr></table>
+
+
+<a href="#bullettypes"><kbd>Top</kbd></a><br>
+-------
+### Visual Settings
+<br>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;BulletType&gt;]  ► TrailAnim
+</samp></td><td width="120"><samp>AnimType</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Overrides the default trailing animation (`FB2` for `FB1`, `SMOKEY` for the rest). To show them, also requires that [&lt;BulletType&gt;] ► `Animates` is set to true.
+
+</samp>
 </details></td></tr></table>
 
 

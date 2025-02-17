@@ -32,6 +32,11 @@ setcglob 0x00425D1C,Audio___Sound_Effect_At_Coord                              ;
 setcglob 0x00425F24,Audio___Sound_Effect                                       ; int Sound_Effect(VocType voc, fixed volume, int variation, signed short pan_value, HousesType house)
 setcglob 0x005FE090,Audio___SoundEffectName                                    ; SoundEffectName[VOC_COUNT]
 
+; ANIM.CPP
+setcglob 0x00423ED0,Anim___Anim_From_Name                                      ; AnimType Anim_From_Name(char const * name)
+setcglob 0x00424608,AnimClass__new
+setcglob 0x00424648,AnimClass__AnimClass
+
 ; CCFile.CPP
 ; !!! FileClass is a base type, check what derived type these addresses really point to
 setcglob 0x004627D4,CCFileClass__CCFileClass                                   ; CCFileClass::CCFileClass(char const * filename)
@@ -525,6 +530,7 @@ setcglob 0x160     ,AircraftClass.NEW_SIZE
 setcglob 0x0065D870,AnimClass.Count           
 setcglob 0x0065D898,AnimClass.Array           
 setcglob 0x4C      ,AnimClass.ORIGINAL_SIZE   
+setcglob 0x4C      ,AnimClass.NEW_SIZE ;not adjustable yet
 ; Count controlled by [Maximums]
 
 ; BuildingClass              0x0065D8B0
@@ -657,7 +663,7 @@ setcglob 0x0065DE60,BulletTypeClass.Count
 setcglob 0x0065DE88,BulletTypeClass.Array     
 setcglob 0x12      ,BulletTypeClass.ORIGINAL_COUNT     
 setcglob 0x146     ,BulletTypeClass.ORIGINAL_SIZE      
-setcglob 0x146     ,BulletTypeClass.NEW_SIZE ; size change not yet implemented
+setcglob 0x147     ,BulletTypeClass.NEW_SIZE
 
 ; AnimTypeClass              0x0065DEA0
 setcglob 0x0065DEAC,AnimTypeClass.Count       

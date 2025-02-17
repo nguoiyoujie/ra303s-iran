@@ -69,6 +69,7 @@
 %include "types/VesselTypeClass.inc"
 %include "types/WarheadTypeClass.inc"
 %include "types/WeaponTypeClass.inc"
+%include "types/BulletTypeClass.inc"
 
 
 %include "types/AbstractClass.inc"
@@ -228,6 +229,7 @@
 %include "src/features/aircraft_large.asm"
 %include "src/features/aircraft_persistguard.asm"
 %include "src/features/building_large_foundations.asm"
+%include "src/features/bullet_custom_trailanims.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

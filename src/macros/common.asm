@@ -1,5 +1,6 @@
 
 cextern Audio___Voc_From_Name
+cextern Anim___Anim_From_Name
 cextern str_Comma
 
 
@@ -109,3 +110,8 @@ _GetVocTypeFromString:
     call Audio___Voc_From_Name    ; Voc_From_Name
     retn
 
+
+_GetAnimTypeFromString:
+    ;create anim type with string from eax
+    call Anim___Anim_From_Name    ; Anim_From_Name
+    retn

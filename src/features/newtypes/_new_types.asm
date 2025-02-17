@@ -54,6 +54,7 @@
 %include "types/VesselTypeClass.inc"
 %include "types/WarheadTypeClass.inc"
 %include "types/WeaponTypeClass.inc"
+%include "types/BulletTypeClass.inc"
 
 ; subsections
 %include "src/features/newtypes/converters.asm"
@@ -67,6 +68,7 @@
 %include "src/features/newtypes/AnimTypeClass/animtypeclass_heap_size.asm"
 %include "src/features/newtypes/BuildingClass/buildingclass_heap_size.asm"
 %include "src/features/newtypes/BuildingTypeClass/buildingtypeclass_heap_size.asm"
+%include "src/features/newtypes/BulletTypeClass/bullettypeclass_heap_size.asm"
 %include "src/features/newtypes/InfantryClass/infantryclass_heap_size.asm"
 %include "src/features/newtypes/InfantryTypeClass/infantrytypeclass_heap_size.asm"
 %include "src/features/newtypes/UnitClass/unitclass_heap_size.asm"
@@ -85,6 +87,7 @@
 ;extended classses - read ini
 %include "src/features/newtypes/AircraftTypeClass/aircrafttypeclass_read_ini.asm"
 %include "src/features/newtypes/BuildingTypeClass/buildingtypeclass_read_ini.asm"
+%include "src/features/newtypes/BulletTypeClass/bullettypeclass_read_ini.asm"
 %include "src/features/newtypes/InfantryTypeClass/infantrytypeclass_read_ini.asm"
 %include "src/features/newtypes/TechnoTypeClass/technotypeclass_read_ini.asm"
 %include "src/features/newtypes/UnitTypeClass/unittypeclass_read_ini.asm"
