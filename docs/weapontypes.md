@@ -96,6 +96,7 @@ Note: `Charges`=true is required on the weapon, else this control does nothing!
 If used on a weapon with `Charges`=true and `IsLaser`=true, overrides the laser color sound. The color is the indexed color on the game palatte, except for index 0, which defaults to the red color. This can be used to emulate the C&C Nod Obelisk. Defaults to the red color (index 8).
 </details></td></tr></table>
 
+
 <a href="#weapontypes"><kbd>Top</kbd></a><br>
 -------
 ### Deploy To Fire

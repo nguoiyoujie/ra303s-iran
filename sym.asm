@@ -708,6 +708,6 @@ setcglob 0x28      ,WarheadTypeClass.NEW_SIZE
 setcglob 0x00691680,WeaponTypeClass.Array     
 setcglob 0x00691658,WeaponTypeClass.Count
 setcglob 0x26      ,WeaponTypeClass.ORIGINAL_SIZE     
-setcglob 0x2A      ,WeaponTypeClass.NEW_SIZE            ; size change not implemented
+setcglob 0x2A      ,WeaponTypeClass.NEW_SIZE
 
 
