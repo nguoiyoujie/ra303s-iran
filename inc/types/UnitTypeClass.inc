@@ -209,7 +209,7 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 
 %define UnitTypeClass.Explosion.Get(ptr_type,reg_output)                   GetByte                                ptr_type, UnitTypeClass.Offset.Explosion, reg_output
 %define UnitTypeClass.Explosion.Set(ptr_type,value)                        SetByte                                ptr_type, UnitTypeClass.Offset.Explosion, value
-%define UnitTypeClass.Explosion.Read(ptr_type,ptr_rules)                   AbstractTypeClass.ReadByte             ptr_type, ptr_rules, UnitTypeClass.Offset.Explosion, str.UnitTypeClass.Explosion
+%define UnitTypeClass.Explosion.Read(ptr_type,ptr_rules,function)          AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, UnitTypeClass.Offset.Explosion, str.UnitTypeClass.Explosion, function
 
 %define UnitTypeClass.MaxSize.Get(ptr_type,reg_output)                     GetInt                                 ptr_type, UnitTypeClass.Offset.MaxSize, reg_output
 %define UnitTypeClass.MaxSize.Set(ptr_type,value)                          SetInt                                 ptr_type, UnitTypeClass.Offset.MaxSize, value
@@ -233,7 +233,7 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 
 %define UnitTypeClass.DeploysInto.Get(ptr_type,reg_output)                 GetByte                                ptr_type, UnitTypeClass.Offset.DeploysInto, reg_output
 %define UnitTypeClass.DeploysInto.Set(ptr_type,value)                      SetByte                                ptr_type, UnitTypeClass.Offset.DeploysInto, value
-%define UnitTypeClass.DeploysInto.Read(ptr_type,ptr_rules, function)       AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, UnitTypeClass.Offset.DeploysInto, str.UnitTypeClass.DeploysInto, function
+%define UnitTypeClass.DeploysInto.Read(ptr_type,ptr_rules,function)        AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, UnitTypeClass.Offset.DeploysInto, str.UnitTypeClass.DeploysInto, function
 
 %define UnitTypeClass.AmmoReloadRate.Get(ptr_type,reg_output)              GetInt                                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, reg_output
 %define UnitTypeClass.AmmoReloadRate.Set(ptr_type,value)                   SetInt                                 ptr_type, UnitTypeClass.Offset.AmmoReloadRate, value

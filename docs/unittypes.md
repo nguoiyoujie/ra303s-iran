@@ -329,6 +329,17 @@ Each entry are as follows:
 ### Visual Settings
 <br>
 
+<table><tr><td width="50"><a href="#"><img title="Exposed Reference" src="./img/30x15/ref.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► ExplosionAnim
+</samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+```Exposed UnitTypeClass->Explosion```
+
+Overrides the animation produced when the unit is destroyed.
+V2 Launchers with the ammo loaded will still produce a NAPALM3 animation when destroyed.
+</details></td></tr></table>
+
+
 <table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
 <code>{Rules/Map}</code> ► [&lt;UnitType&gt;]  ► UsePrimaryColor
 </samp></td><td width="120"><samp>Boolean</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>

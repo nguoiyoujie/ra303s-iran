@@ -35,10 +35,9 @@ cextern Houses.USignificantScan
     UnitTypeClass.IsChronoTank.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
-    ;UnitTypeClass.Type.Read(esi,edi)
     UnitTypeClass.TurretOffset.Read(esi,edi)
     ;UnitTypeClass.DefaultMission.Read(esi,edi)
-    ;UnitTypeClass.Explosion.Read(esi,edi)
+    UnitTypeClass.Explosion.Read(esi,edi,_GetAnimTypeFromString)
     ;UnitTypeClass.MaxSize.Read(esi,edi)
 
     UnitTypeClass.TurretAdjustX.Read(esi,edi)
