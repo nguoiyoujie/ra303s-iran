@@ -22,7 +22,7 @@ cextern BuildingClass.NEW_SIZE
 @SET 0x00453810,{mov eax,BuildingClass.NEW_SIZE} ; BuildingTypeClass__Create_And_Place
 @SET 0x00453897,{mov eax,BuildingClass.NEW_SIZE} ; BuildingTypeClass__Create_One_Of
 @SET 0x0046268C,{mov eax,BuildingClass.NEW_SIZE} ; CarryoverClass__Create
-@SET 0x0057BABD,{mov eax,BuildingClass.NEW_SIZE} ; UnitClass__Try_To_Deploy
+@SET 0x0057BAB8,{mov eax,BuildingClass.NEW_SIZE} ; UnitClass__Try_To_Deploy
 @SET 0x0057DC03,{mov eax,BuildingClass.NEW_SIZE} ; UnitClass__Mission_Unload
 @SET 0x0058EA9D,{mov eax,BuildingClass.NEW_SIZE} ; ChronalVortexClass__Zap_Target
 
