@@ -73,6 +73,8 @@
 %include "src/features/newtypes/UnitTypeClass/unittypeclass_heap_size.asm"
 %include "src/features/newtypes/VesselClass/vesselclass_heap_size.asm"
 %include "src/features/newtypes/VesselTypeClass/vesseltypeclass_heap_size.asm"
+%include "src/features/newtypes/WarheadTypeClass/warheadtypeclass_heap_size.asm"
+%include "src/features/newtypes/WeaponTypeClass/weapontypeclass_heap_size.asm"
 %include "src/features/newtypes/WarheadTypeClass/extended_warheadtypeclass_loading.asm"
 %include "src/features/newtypes/WeaponTypeClass/extended_weapontypeclass_loading.asm"
 %include "src/features/newtypes/HouseTypeClass/housetypeclass_heap_size.asm"

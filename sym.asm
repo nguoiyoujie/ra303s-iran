@@ -696,8 +696,12 @@ setcglob 0xA5      ,SoundEffects.ORIGINAL_COUNT
 setcglob 0x0069160C,WarheadTypeClass.Count    
 setcglob 0x00691634,WarheadTypeClass.Array    
 setcglob 0x22      ,WarheadTypeClass.ORIGINAL_SIZE     
-setcglob 0x22      ,WarheadTypeClass.NEW_SIZE            ; size change not implemented
+setcglob 0x26      ,WarheadTypeClass.NEW_SIZE            ; size change not implemented
 
 ; WeaponTypeClass in WEAPOM.CPP
 setcglob 0x00691680,WeaponTypeClass.Array     
-setcglob 0x00691658,WeaponTypeClass.Count              
+setcglob 0x00691658,WeaponTypeClass.Count
+setcglob 0x26      ,WeaponTypeClass.ORIGINAL_SIZE     
+setcglob 0x2A      ,WeaponTypeClass.NEW_SIZE            ; size change not implemented
+
+
