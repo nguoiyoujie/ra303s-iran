@@ -3,7 +3,7 @@
 ;
 ; Provides a simple emulation of 'mind-control', the act of turning enemy units to your side by means of a weapon/warhead.
 ; 
-; This function is enabled by proving [<Warhead>] IsCapture=yes. When inflicted against an enemy, the unit will be 'captured' by the attacking source.
+; This function is enabled by providing [<Warhead>] IsCapture=yes. When inflicted against an enemy, the unit will be 'captured' by the attacking source.
 ; Does nothing if there is no attacking source.
 ;
 ; No compatibility issues is expected.

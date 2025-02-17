@@ -3,7 +3,7 @@
 ;
 ; Emulate laser weapons like Obelisk.
 ; 
-; This function is enabled by proving [<WeaponType>] IsLaser=yes. The laser color can be customized with LaserColor=yes, defaulting to RED.
+; This function is enabled by providing [<WeaponType>] IsLaser=yes. The laser color can be customized with LaserColor=yes, defaulting to RED.
 ; Note that the weapon also requires Charges=yes. This is an alternative revisualization of the electric zap and several settings for the zap also apply here.
 ;
 ; No compatibility issues is expected.
