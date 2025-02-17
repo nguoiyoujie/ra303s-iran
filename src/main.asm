@@ -230,6 +230,7 @@
 %include "src/features/aircraft_large.asm"
 %include "src/features/aircraft_persistguard.asm"
 %include "src/features/building_large_foundations.asm"
+%include "src/features/ui_list_enhancements.asm"
 %include "src/features/bullet_custom_trailanims.asm"
 
 ; experimental
