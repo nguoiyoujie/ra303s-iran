@@ -39,21 +39,21 @@ Cache_BuildingType_UndeploysInto       db 0
     BuildingTypeClass.FromIndex(edx,edi)
     BuildingTypeClass.FactoryType.Get(edi,dl)
     cmp  dl,RTTIType.BuildingType
-    pop  edi    
     jnz  .Continue
 .Check_Is_MCV_Deploy:
     cmp  byte[Spawn.Settings.MCVUndeploy],1
     je   .Continue
     test byte[Globals___Rule_IsMCVDeploy_Address],Globals___Rule_IsMCVDeploy_BitMask
-    jz   0x0045A723
+    jz   .Exit
 .Continue:
-    BuildingTypeClass.FromIndex(edx,edx)
+    mov  dl,byte[edi+BuildingTypeClass.Offset.UndeploysInto]
     cmp  dl,0
-    je   0x0045A723
-    mov  dl,byte[edx+BuildingTypeClass.Offset.UndeploysInto]
-    cmp  dl,0
+    pop  edi    
     jle  0x0045A723
     jmp  0x0045A725
+.Exit:
+    pop  edi    
+    jmp  0x0045A723    
 @ENDHACK
 
 
