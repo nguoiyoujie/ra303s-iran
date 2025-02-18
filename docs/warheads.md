@@ -58,9 +58,9 @@ Example as follows:
   
 ```Modified WarheadTypeClass->Modifier[ARMOR_COUNT]```
 
-The number of supported types have been increased to 9, matching the first nine armortypes used in Red Alert 2. See [TechnoTypes ► New Armor-types](./technotypes.md#new-armor-types).
+The number of supported types have been increased to 11, matching the armortypes used in Red Alert 2. See [TechnoTypes ► New Armor-types](./technotypes.md#new-armor-types).
 
-The first nine values will be read, to determine the warhead's effectiveness against the armortypes in order:
+The values will be read in order, to determine the warhead's effectiveness against the armortypes in order:
 
 ```
 0 = None

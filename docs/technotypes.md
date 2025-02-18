@@ -51,7 +51,7 @@ Check the following specific types to learn how to introduce new types:
 
 ```Modified TechnoTypeClass->Armor```
 
-The number of supported types have been increased to 9, matching the first nine armortypes used in Red Alert 2. For compatibility, the original armor types are not changed.
+The number of supported types have been increased to 11, matching the armortypes used in Red Alert 2. For compatibility, the original armor types are not changed, therefore the order of armors are different from that of RA2.
 
 You are expected to modify the existing Warhead entries to make use of them. See [Warheads ► New Armor-types](./warheads.md#new-armor-types).
 

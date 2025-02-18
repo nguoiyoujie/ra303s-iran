@@ -25,7 +25,7 @@ cextern AnimClass__new
     mov  ecx,1
     mov  ebx,[ebp-0x24]
     jmp  0x0046120D
-.Original
+.Original:
     add  eax,0x25
     call _strcmpi
     jmp  0x004611D0
