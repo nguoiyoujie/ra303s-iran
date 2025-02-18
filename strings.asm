@@ -477,6 +477,16 @@ gstring str.PlayerColorType.BLACK                              , "BLACK"
 gstring str.PlayerColorType.FLAMING_BLUE                       , "FLAMING_BLUE"
 gstring str.PlayerColorType.TRUE_GREY                          , "TRUE_GREY"
 gstring str.PlayerColorType.DIRTY_GREEN                        , "DIRTY_GREEN"
+gstring str.PlayerColorType.DESERT                             , "DESERT"
+gstring str.PlayerColorType.STEEL                              , "STEEL"
+gstring str.PlayerColorType.NOD_GREY                           , "NOD_GREY"
+gstring str.PlayerColorType.PURPLE                             , "PURPLE"
+gstring str.PlayerColorType.DARK_GOLD                          , "DARK_GOLD"
+gstring str.PlayerColorType.DARK_BLUE                          , "DARK_BLUE"
+gstring str.PlayerColorType.DARK_RED                           , "DARK_RED"
+gstring str.PlayerColorType.DARK_GREEN                         , "DARK_GREEN"
+gstring str.PlayerColorType.DARK_ORANGE                        , "DARK_ORANGE"
+gstring str.PlayerColorType.CHOCOLATE                          , "CHOCOLATE"
 
 gintarr strlist.PlayerColorTypes		                       , str.PlayerColorType.YELLOW \
 										                       , str.PlayerColorType.LTBLUE \
@@ -491,6 +501,16 @@ gintarr strlist.PlayerColorTypes		                       , str.PlayerColorType.Y
 										                       , str.PlayerColorType.FLAMING_BLUE \
 										                       , str.PlayerColorType.TRUE_GREY \
 										                       , str.PlayerColorType.DIRTY_GREEN \
+										                       , str.PlayerColorType.DESERT \
+										                       , str.PlayerColorType.STEEL \
+										                       , str.PlayerColorType.NOD_GREY \
+										                       , str.PlayerColorType.PURPLE \
+										                       , str.PlayerColorType.DARK_GOLD \
+										                       , str.PlayerColorType.DARK_BLUE \
+										                       , str.PlayerColorType.DARK_RED \
+										                       , str.PlayerColorType.DARK_GREEN \
+										                       , str.PlayerColorType.DARK_ORANGE \
+										                       , str.PlayerColorType.CHOCOLATE \
 										                       , 0
 
 ; ---- PrereqTypes ----

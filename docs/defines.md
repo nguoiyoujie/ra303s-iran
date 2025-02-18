@@ -334,6 +334,16 @@ Original colors number from 0 to 7. New colors are added after this index.
 |10|[![#4495e6](./img/8x8/8_flamingblue.png)](#)  FLAMING_BLUE*
 |11|[![#7c7c7c](./img/8x8/11_truegrey.png)](#)    TRUE_GREY*    
 |12|[![#74785c](./img/8x8/12_dirtygreen.png)](#)  DIRTY_GREEN*  
+|13|[![#b8a884](./img/8x8/13_desert.png)](#)      DESERT*  
+|14|[![#648088](./img/8x8/14_steel.png)](#)       STEEL*  
+|15|[![#e0e4f4](./img/8x8/15_nodgrey.png)](#)     NOD_GREY*  
+|16|[![#b0acc8](./img/8x8/16_purple.png)](#)      PURPLE*  
+|17|[![#6c6438](./img/8x8/17_darkgold.png)](#)    DARK_GOLD*  
+|18|[![#304074](./img/8x8/18_darkblue.png)](#)    DARK_BLUE*  
+|19|[![#940000](./img/8x8/19_darkred.png)](#)     DARK_RED*  
+|20|[![#4c643c](./img/8x8/20_darkgreen.png)](#)   DARK_GREEN*  
+|21|[![#982400](./img/8x8/21_darkorange.png)](#)  DARK_ORANGE*  
+|22|[![#5c4840](./img/8x8/22_chocolate.png)](#)   CHOCOLATE*  
 
 * Extended colors
 </samp>

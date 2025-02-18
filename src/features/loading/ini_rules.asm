@@ -7,7 +7,6 @@
 
 cextern Globals___RuleINI
 cextern INI_Read_String_Buffer
-cextern _InitializeExtendedColors
 
 cextern str_mix_Aftermath
 cextern str_AftermathFastBuildSpeed
@@ -145,8 +144,6 @@ cextern Rules.General.BuildOffAlly
 
     call_INIClass__Get_Bool Globals___RuleINI,str_AI,str_ComputerParanoidForceDisabledSkirmish,1
     mov  byte[Rules.AI.ComputerParanoidForceDisabledSkirmish],al
-
-    call _InitializeExtendedColors
 
     pop  eax
     pop  edx

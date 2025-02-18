@@ -207,6 +207,14 @@
     sbyte %1, {%2}, %3
 %endmacro
 
+;; global byte fixed array -> arg1 = name, arg2-argX = values
+%macro gbytearr 2+
+    cglobal %1
+    [section .data]
+    %1 db %2
+    __SECT__
+%endmacro
+
 ;; static (local) byte array -> arg1 = name, arg2 = value, arg3 = length
 %macro sbyte 3
     %ifidni %2,0
