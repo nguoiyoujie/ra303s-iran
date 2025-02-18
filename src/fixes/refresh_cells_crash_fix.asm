@@ -8,7 +8,7 @@
 ;----------------------------------------------------------------
 
 [section .data] 
-Temp.RefreshCells_Tracker db 0
+Temp.RefreshCells_Tracker dw 0
 
 
 @HACK 0x004B062E,0x004B0633,_DisplayClass__Refresh_Cells__ExpandStack
@@ -23,7 +23,7 @@ Temp.RefreshCells_Tracker db 0
     mov  edx,0x124 ; was 0x24
     call List_Copy
     lea  eax,[esi+0x1C]
-    mov  byte[Temp.RefreshCells_Tracker],0x124 ; short tlist[0x100+36]
+    mov  word[Temp.RefreshCells_Tracker],0x124 ; short tlist[0x100+36]
     lea  ebx,[ebp-0x258] ; was 0x58
     mov  dword[ebp-0x10],eax
     jmp  0x004B065B
@@ -32,10 +32,10 @@ Temp.RefreshCells_Tracker db 0
 
 @HACK 0x004B065B,0x004B0663,_DisplayClass__Refresh_Cells__Bounds_Check_Fix_2
     push  eax
-    mov   al,byte[Temp.RefreshCells_Tracker]
-    test  al,al
-    dec   al
-    mov   byte[Temp.RefreshCells_Tracker],al
+    mov   word ax,[Temp.RefreshCells_Tracker]
+    test  ax,ax
+    dec   ax
+    mov   word[Temp.RefreshCells_Tracker],ax
     pop   eax
     jz    0x004B03AA
     movzx eax,word[ebx]  
