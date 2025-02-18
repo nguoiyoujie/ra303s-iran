@@ -216,6 +216,7 @@ gstring str_PlayEnglishIntro                                   , "PlayEnglishInt
 ; RedAlert.ini > [WinHotkeys]
 gstring str_KeySidebarToggle                                   , "KeySidebarToggle"
 gstring str_KeyMapSnapshot                                     , "KeyMapSnapshot"
+gstring str_KeyDeploy                                          , "KeyDeploy"
 
 
 ; Spawn.ini -------------------------------------------------------------------------------------------------

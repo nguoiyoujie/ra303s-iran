@@ -148,7 +148,7 @@ cextern str_ext_mpr
 
 
 @HACK 0x004CA9D0,0x004CA9D9,_RedrawOptionsMenu_Skirmish_Savegames8
-    cmp  dword[ResignKeyPressed],1
+    cmp  byte[ResignKeyPressed],1
     jz   0x004CA9D9
     cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
     jz   0x004CAA2E

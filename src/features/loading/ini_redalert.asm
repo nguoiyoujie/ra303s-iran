@@ -40,6 +40,7 @@ cextern str_KeySidebarToggle
 cextern str_KeyMapSnapshot
 cextern str_dll_Kernel32
 cextern str_SetProcessAffinityMask
+cextern str_KeyDeploy
 
 cextern RedAlert.Options.AftermathEnabled                   
 cextern RedAlert.Options.AlternativeRifleSound              
@@ -71,6 +72,7 @@ cextern RedAlert.Options.VideoInterlaceMode
 cextern RedAlert.Options.ViewTargetingLines
 cextern RedAlert.WinHotKeys.KeyMapSnapshot                  
 cextern RedAlert.WinHotKeys.KeySidebarToggle   
+cextern RedAlert.WinHotKeys.KeyDeploy
 cextern SetProcessAffinityMask             
 
 
@@ -210,6 +212,10 @@ cextern SetProcessAffinityMask
     lea  eax,ebp_RedAlertINI
     call_INIClass__Get_Int eax,str_WinHotkeys,str_KeyMapSnapshot,0
     mov  [RedAlert.WinHotKeys.KeyMapSnapshot],ax
+
+    lea  eax,ebp_RedAlertINI
+    call_INIClass__Get_Int eax,str_WinHotkeys,str_KeyDeploy,0
+    mov  [RedAlert.WinHotKeys.KeyDeploy],ax
 
     Restore_Registers
     jmp  0x00525AA4

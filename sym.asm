@@ -87,6 +87,9 @@ setcglob 0x004AE7FC,Fancy_Text_Print
 ; DISPLAY.CPP
 setcglob 0x004B545C,DisplayClass__Write_INI                                    ; void DisplayClass::Write_INI(CCINIClass & ini)
 
+; EVENT.CPP
+setcglob 0x004BCDF8,EventClass__EventClass
+
 ; FACE.CPP
 setcglob 0x004BEA20,Face_Desired_Facing8                                       ; DirType Desired_Facing8(int x1, int y1, int x2, int y2)
 setcglob 0x004BEA7C,Face_Desired_Facing256                                     ; int Desired_Facing256(int x1, int y1, int x2, int y2)
@@ -246,6 +249,10 @@ setcglob 0x0054FC50,SmudgeClass__SmudgeClass                                   ;
 setcglob 0x005501E4,SmudgeClass__Write_INI                                     ; void SmudgeClass::Write_INI(CCINIClass & ini)
 
 ; TARGET.CPP
+setcglob 0x00554EE0,TargetClass__TargetClass_Target
+setcglob 0x00554EEC,TargetClass__TargetClass_AbstractClass
+setcglob 0x00554F38,TargetClass__TargetClass_AbstractTypeClass
+setcglob 0x00554F84,TargetClass__TargetClass_CellClass
 setcglob 0x00555384,As_Coord                                                   ; COORDINATE As_Coord(TARGET target)
 
 ; TERRAIN.CPP
