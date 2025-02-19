@@ -43,3 +43,10 @@
     add  edi,[Hires.DeltaLeft]
     jmp  0x0051296F
 @ENDHACK
+
+
+@HACK 0x00512A21,0x00512A27,_Com_Scenario_Dialog__List_Adjustment ; not for hires, but to make space for more color choices
+    sub  edx,0x50 ; move left 80 pixels
+    mov  [ebp-0x17C],edx
+    jmp  0x00512A27
+@ENDHACK

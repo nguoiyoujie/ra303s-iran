@@ -87,7 +87,7 @@
 
 @HACK 0x004F75FB,0x004F7600,_hires_MainMenuClearPalette
     hires_Clear
-    mov  eax,[0x006807E8]
+    mov  eax,[Globals___HidPage+0x1C]
     jmp  0x004F7600
 @ENDHACK
 
