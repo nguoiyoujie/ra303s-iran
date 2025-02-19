@@ -26,5 +26,4 @@
 %define BulletClass.Offset.Warhead                0x04A    ; byte
 ;0x04B
 
-
 %endif

@@ -150,6 +150,14 @@
     %endif
 %endmacro
 
+;; global short fixed array -> arg1 = name, arg2-argX = values
+%macro gshortarr 2+
+    cglobal %1
+    [section .data]
+    %1 dw %2
+    __SECT__
+%endmacro
+
 ;; global bool -> arg1 = name
 %macro gbool 1
     gbyte %1, {0}

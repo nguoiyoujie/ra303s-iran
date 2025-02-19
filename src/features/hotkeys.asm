@@ -15,6 +15,8 @@ cextern Globals___Session_Type
 cextern TargetClass__TargetClass_Target
 cextern TargetClass__TargetClass_AbstractClass
 cextern EventClass__EventClass
+cextern Globals___HidPage
+cextern _Buffer_Clear
 
 cextern RedAlert.WinHotKeys.KeySidebarToggle
 cextern RedAlert.WinHotKeys.KeyMapSnapshot
@@ -60,20 +62,20 @@ ResignKeyPressed: db 0
     mov  edx,0xFFFFFFFF
     call 0x0054DA70 ;  SidebarClass::Activate(int)
 
-    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
+    mov  eax,[Globals___HidPage+0x1C] ; ds:GraphicBufferClass__Something
     call GraphicBufferClass__Lock ; GraphicBufferClass::Lock(void)
     test eax,eax
     jz   .Clear_Buffer
-    mov  edx,[0x006807E8] ;  ds:GraphicBufferClass__Something
-    cmp  edx,0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  edx,[Globals___HidPage+0x1C] ;  ds:GraphicBufferClass__Something
+    cmp  edx,Globals___HidPage
     jz   .EAX_One
-    mov  ebx,[0x006807D4]
+    mov  ebx,[Globals___HidPage+0x8]
     push ebx             ; __int32
-    mov  ecx,[0x006807D0]
-    mov  eax,0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  ecx,[Globals___HidPage+0x4]
+    mov  eax,Globals___HidPage
     push ecx             ; __int32
-    mov  ebx,[0x006807DC]
-    mov  ecx,[0x006807E0]
+    mov  ebx,[Globals___HidPage+0x10]
+    mov  ecx,[Globals___HidPage+0x14]
     call GraphicViewPortClass__Attach
 
 .EAX_One:
@@ -81,24 +83,24 @@ ResignKeyPressed: db 0
 
 .Clear_Buffer:
     push 0
-    push 0x006807CC; offset GraphicViewPortClass HidPage
-    call 0x005C4DE0 ; _Buffer_Clear
+    push Globals___HidPage
+    call _Buffer_Clear
     add  esp,8
 
 .Unlock_Graphics_Buffer:
-    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
+    mov  eax,[Globals___HidPage+0x1C] ; ds:GraphicBufferClass__Something
     call GraphicBufferClass__Unlock ; GraphicBufferClass::Unlock(void)
     test eax,eax
     jz   .Redraw_Screen
-    mov  eax,[0x006807E8] ; ds:GraphicBufferClass__Something
-    cmp  eax,0x006807CC ; offset GraphicViewPortClass HidPage
+    mov  eax,[Globals___HidPage+0x1C] ; ds:GraphicBufferClass__Something
+    cmp  eax,Globals___HidPage
     jz   .Redraw_Screen
-    cmp  dword[0x006807EC],0
+    cmp  dword[Globals___HidPage+0x20],0
     jz   .Redraw_Screen
     mov  ebx,[eax+0x24]
     test ebx,ebx
     jnz  .Redraw_Screen
-    mov  [0x006807CC],ebx
+    mov  [Globals___HidPage],ebx
 
 .Redraw_Screen:
     mov  edx,1

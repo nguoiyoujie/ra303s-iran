@@ -152,16 +152,16 @@ cextern RedAlert.Options.AftermathEnabled
 cextern spawn_INI_Get_Bool
 cextern spawn_INI_Get_Int
 cextern spawn_INI_Get_String
+cextern _Buffer_Clear
+cextern Globals___GameActive
 
 
 %define calloc                                      0x005E1EF6
 %define operator_new                                0x005BBF80
 %define DynamicVectorClass__Add                     0x004B9DA0
 %define nameTags                                    0x0068043A
-%define GameActive                                  0x00669924
 %define MessageListClass__Init                      0x00505244
 %define inet_addr                                   0x005E59B8
-%define _Buffer_Clear                               0x005C4DE0
 %define pWinsock_this                               0x0069172C
 %define chatColor                                   0x0067F313
 %define TechLevel                                   0x006016C8
@@ -762,7 +762,7 @@ Initialize_Spawn:
     mov  dword[0x00668188],eax
 
     ; start game
-    mov  [GameActive],dword 1
+    mov  [Globals___GameActive],dword 1
 
 
     ; initialize network

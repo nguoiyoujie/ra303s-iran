@@ -56,13 +56,6 @@
 ; Generally, object instances are not read by INI
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
-
-;%define BuildingClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, BuildingClass.Offset.RTTI, reg_output
-;%define BuildingClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, BuildingClass.Offset.RTTI, value
-
-;%define BuildingClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, BuildingClass.Offset.Index, reg_output
-;%define BuildingClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, BuildingClass.Offset.Index, value
-
 %define BuildingClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, BuildingClass.Offset.Class, reg_output
 %define BuildingClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, BuildingClass.Offset.Class, value
 

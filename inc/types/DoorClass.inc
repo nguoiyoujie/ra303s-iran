@@ -17,14 +17,4 @@
 %define DoorClass.Offset.IsToRedraw                0x06B    ; bool
 ; 0x06F
 
-; Generally, object instances are not read by INI
-
-;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
-
-;%define DoorClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, DoorClass.Offset.RTTI, reg_output
-;%define DoorClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, DoorClass.Offset.RTTI, value
-
-;%define DoorClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, DoorClass.Offset.Index, reg_output
-;%define DoorClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, DoorClass.Offset.Index, value
-
 %endif
