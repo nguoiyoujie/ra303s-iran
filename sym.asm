@@ -85,6 +85,7 @@ setcglob 0x004ADB5C,Dialog___Draw_Box                                          ;
 setcglob 0x004AE7FC,Fancy_Text_Print 
 
 ; DISPLAY.CPP
+setcglob 0x004AF7DC,DisplayClass__Passes_Proximity_Check
 setcglob 0x004B545C,DisplayClass__Write_INI                                    ; void DisplayClass::Write_INI(CCINIClass & ini)
 
 ; EVENT.CPP
@@ -117,13 +118,14 @@ setcglob 0x004D8270,HouseClass__MPlayer_Defeated                               ;
 setcglob 0x004D8F34,HouseClass__Find_Building                                  ; BuildingClass * HouseClass::Find_Building(StructType type, ZoneType zone) const
 setcglob 0x004D8B40,HouseClass__Flag_To_Die                                    ; bool HouseClass::Flag_To_Die(void)
 setcglob 0x004DCC30,HouseClass__Tracking_Add                             
+setcglob 0x004DD0A4,HouseClass__Which_Zone
 setcglob 0x004DD9FC,HouseClass__Where_To_Go                                    ; CELL HouseClass::Where_To_Go(FootClass const * object)
 setcglob 0x004DDBD0,HouseClass__Fetch_Factory                                  ; FactoryClass * HouseClass::Fetch_Factory(RTTIType rtti) const
 setcglob 0x004DDCE8,HouseClass__Get_Quantity                                   ; int HouseClass::Get_Quantity(StructType building) - Warning: Only works up original Building count!
 setcglob 0x004DDEB0,HouseClass__Write_INI                                      ; void HouseClass::Write_INI(CCINIClass & ini)
 setcglob 0x004DE094,HouseClass__Is_No_YakMig                                   ; bool HouseClass::Is_No_YakMig(void) const
 setcglob 0x004DE640,HouseClass__Computer_Paranoid                              ; void HouseClass::Computer_Paranoid(void)
-
+setcglob 0x004DD0A4,HouseClass__Which_Zone
 
 ; ADATA.CPP
 setcglob 0x00407388,AnimTypeClass__AnimTypeClass                               ; AnimTypeClass::AnimTypeClass(AnimType,char *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
@@ -176,6 +178,9 @@ setcglob 0x004F9950,IPXAddressClass__IPXAddressClass                           ;
 setcglob 0x004FA910,IPXManagerClass__Set_Timing                                ; void IPXManagerClass::Set_Timing (unsigned long retrydelta, unsigned long maxretries, unsigned long timeout)
 
 ; MAP.CPP
+setcglob 0x006025D0,Map__RadiusOffset                                          ; int const MapClass::RadiusOffset[]
+setcglob 0x00602AA4,Map__RadiusCount                                           ; int const MapClass::RadiusCount[11]
+
 setcglob 0x004FE8AC,MapClass__In_Radar                                         ; bool MapClass::In_Radar(CELL cell) const
 setcglob 0x004FE918,MapClass__Place_Down                                       ; void MapClass::Place_Down(CELL cell, ObjectClass * object)
 setcglob 0x004FEA28,MapClass__Pick_Up                                          ; void MapClass::Pick_Up(CELL cell, ObjectClass * object)
@@ -457,13 +462,13 @@ setcglob 0x00668EC7,Globals___Map_IsTargettingMode                             ;
 ;SpecialClass Special;
 setcglob 0x00669914,Globals___ScenarioInit                                     ; int ScenarioInit;
 ;int BuildLevel = 10;
-;bool GameActive;
+setcglob 0x00669924,Globals___GameActive
 setcglob 0x00669958,Globals___PlayerPtr                                        ; HouseClass * PlayerPtr;
-; Globals___CCPalette
-; Globals___GamePalette
+setcglob 0x0066995C,Globals___CCPalette
+setcglob 0x00669C5C,Globals___GamePalette
 setcglob 0x00669F5C,Globals___BlackPalette                                     ; PaletteClass BlackPalette(RGBClass(0, 0, 0));
 setcglob 0x0066A25C,Globals___WhitePalette                                     ; PaletteClass WhitePalette(RGBClass(RGBClass::MAX_VALUE, RGBClass::MAX_VALUE, RGBClass::MAX_VALUE));
-; Globals___OriginalPalette
+setcglob 0x0066A55C,Globals___OriginalPalette
 ; Globals___ScorePalette
 setcglob 0x0067F28C,Globals___Base                                             ; BaseClass Base;
 setcglob 0x0067F2A4,Globals___Base_House                                       ; HousesType House;

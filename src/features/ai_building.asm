@@ -25,6 +25,15 @@ cextern BuildingTypeClass__As_Reference
 cextern TechnoTypeClass__Legal_Placement
 cextern RandomClass_Random
 cextern Globals___NonCriticalRandomNumber
+cextern Globals___Map
+cextern Map__RadiusOffset
+cextern Map__RadiusCount
+cextern MapClass__In_Radar
+cextern HouseClass__Which_Zone
+cextern Globals___Houses
+cextern Globals___HouseTypes
+cextern DisplayClass__Passes_Proximity_Check
+
 
 cextern Rules.AI.PowerExcess
 cextern Rules.AI.PowerEmergencyMinimum
@@ -709,79 +718,6 @@ ChooseOneToBuildAlloc:
 @ENDHACK
 
 
-@HACK 0x004DE966,0x004DE97A,_HouseClass__Find_Cell_In_Zone_Force_Clearance
-    mov  edx,ebx
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-    cmp  byte[Temp.FindCell.BuildingIsSingleCell],1
-    jne  .Done
-.CheckN:    
-    mov  edx,ebx
-    sub  edx,0x80
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckNE:    
-    mov  edx,ebx
-    sub  edx,0x7F
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckE:    
-    mov  edx,ebx
-    inc  edx
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckSE:    
-    mov  edx,ebx
-    add  edx,0x81
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckS:    
-    mov  edx,ebx
-    add  edx,0x80
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckSW:    
-    mov  edx,ebx
-    add  edx,0x7F
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckW:    
-    mov  edx,ebx
-    dec  edx
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.CheckNW:    
-    mov  edx,ebx
-    sub  edx,0x81
-    mov  eax,edi
-    call TechnoTypeClass__Legal_Placement
-    test eax,eax
-    jz   .DoneCantPlace
-.Done:
-    mov  [ebp-0x2C],eax
-    jmp  0x004DE97A
-.DoneCantPlace:
-    mov  [ebp-0x2C],eax
-    jmp  0x004DE8D0
-@ENDHACK
-
-
 @HACK 0x004DA1E0,0x004DA223,_HouseClass__AI_Raise_Power_Choose
     ; ecx: 0, used as our index
     ; ebp-0x10: Current urgency
@@ -810,7 +746,6 @@ ChooseOneToBuildAlloc:
 .Ret:
     jmp  0x004DA223
 @ENDHACK
-
 
 
 @HACK 0x004DA23C,0x004DA27F,_HouseClass__AI_Raise_Money_Choose
@@ -842,3 +777,128 @@ ChooseOneToBuildAlloc:
     jmp  0x004DA27F
 @ENDHACK
 
+
+@HACK 0x004DE87B,0x004DE9A0,HouseClass__Find_Cell_In_Zone_Reimplementation ; optimization
+    xor  esi,esi
+    mov  [ebp-0x1C],ecx
+.Repeat:
+    mov  ebx,[Map__RadiusOffset+esi*4]
+    add  ebx,[ebp-0x10]
+    mov  eax,Globals___Map
+    mov  edx,ebx
+    call MapClass__In_Radar
+    test eax,eax
+    jz   .Next
+    mov  eax,[ebp-0x38]
+    mov  edx,ebx
+    call HouseClass__Which_Zone
+    cmp  al,0xFF
+    jz   .Next
+    mov  edx,ebx
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+    cmp  byte[Temp.FindCell.BuildingIsSingleCell],1
+    jne  .CheckDone
+.CheckN:    
+    mov  edx,ebx
+    sub  edx,0x80
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckNE:    
+    mov  edx,ebx
+    sub  edx,0x7F
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckE:    
+    mov  edx,ebx
+    inc  edx
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckSE:    
+    mov  edx,ebx
+    add  edx,0x81
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckS:    
+    mov  edx,ebx
+    add  edx,0x80
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckSW:    
+    mov  edx,ebx
+    add  edx,0x7F
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckW:    
+    mov  edx,ebx
+    dec  edx
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckNW:    
+    mov  edx,ebx
+    sub  edx,0x81
+    mov  eax,edi
+    call TechnoTypeClass__Legal_Placement
+    test eax,eax
+    jz   .Next
+.CheckDone:
+    mov  edx,[ebp-0x28]
+    test edx,edx
+    jz   .Next
+    mov  eax,[ebp-0x1C]
+    push ebx
+    mov  ebx,[eax]
+    mov  ecx,edx
+    cmp  dword ebx,-1
+    je   .Next
+.ProximityCheck:
+    mov  ebx,[ebp-0x1C]
+    mov  eax,[Globals___Houses]
+    mov  ebx,[ebx]
+    imul ebx,[eax+4]
+    mov  eax,[eax+0x10]
+    add  ebx,eax
+    mov  eax,[ebx+5]
+    add  ebx,0x5
+    cmp  dword eax,-1
+    je   .Next
+    mov  eax,[Globals___HouseTypes]
+    mov  ebx,[ebx]
+    imul ebx,[eax+4]
+    mov  eax,[eax+0x10]
+    add  ebx,eax
+    mov  eax,Globals___Map
+    mov  byte bl,[ebx+0x25]
+    mov  edx,edi
+    movzx ebx,bl
+    call DisplayClass__Passes_Proximity_Check
+    test eax,eax
+    jnz  .Found
+.Next:
+    inc  esi
+    cmp  esi,[Map__RadiusCount+0xA*4] ; RadiusCount[11]
+    jl   .Repeat
+.Done:
+    xor  eax,eax
+    jmp  0x004DE9A0
+.Found:
+    mov  eax,[Map__RadiusOffset+esi*4]
+    add  eax,[ebp-0x10]
+    jmp  0x004DE9A0
+@ENDHACK
