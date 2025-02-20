@@ -39,6 +39,9 @@
 %define TechnoTypeClass.Bit.IsExploding               5    
 %define TechnoTypeClass.Offset.ManualAcquire          0x13A    ; BOOL
 %define TechnoTypeClass.Bit.ManualAcquire             6    
+%define TechnoTypeClass.Offset.ToProtectWithSpecials  0x13A    ; BOOL
+%define TechnoTypeClass.Bit.ToProtectWithSpecials     7    
+
 
 ; 0x13B and 0x13C were empty... 
 %define TechnoTypeClass.Offset.PrereqType             0x13B    ; byte, new variable, occupying unused location
@@ -93,6 +96,7 @@ str.TechnoTypeClass.IsCloakable               db"Cloakable",0                   
 str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 ;existing feature
 str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
 str.TechnoTypeClass.ManualAcquire             db"ManualAcquire",0               ;new feature
+str.TechnoTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new feature
 
 str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0            ;new feature
 str.TechnoTypeClass.CloakSound                db"CloakSound",0                  ;new feature
@@ -177,9 +181,14 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.IsExploding.Set(ptr_type,value)                      SetBool                                ptr_type, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, value
 %define TechnoTypeClass.IsExploding.Read(ptr_type,ptr_rules)                 AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, str.TechnoTypeClass.IsExploding
 
-%define TechnoTypeClass.ManualAcquire.Get(ptr_type,reg_output)                 GetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, reg_output
-%define TechnoTypeClass.ManualAcquire.Set(ptr_type,value)                      SetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, value
-%define TechnoTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)                 AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, str.TechnoTypeClass.ManualAcquire
+%define TechnoTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, reg_output
+%define TechnoTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, value
+%define TechnoTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, str.TechnoTypeClass.ManualAcquire
+
+%define TechnoTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define TechnoTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, value
+%define TechnoTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, str.TechnoTypeClass.ToProtectWithSpecials
+
 
 %define TechnoTypeClass.PrereqType.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, reg_output
 %define TechnoTypeClass.PrereqType.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, value

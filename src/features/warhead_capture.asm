@@ -23,6 +23,9 @@ cextern Modify_Damage
     cmp  eax,0
     jle  .Ret ; do nothing if the damage doesn't do anything
     call CaptureCheck
+    cmp  dword[edi],0
+    jle  .Ret ; do nothing more if already captured
+    call IronCurtainCheck
 .Ret:
     mov  edx,[ebp+0x8]
     jmp  0x0051E10D

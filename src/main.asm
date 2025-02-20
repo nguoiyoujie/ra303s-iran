@@ -225,13 +225,14 @@
 %include "src/features/weapon_zeroversus.asm"
 %include "src/features/view_targeting_lines.asm"
 %include "src/features/techno_cloak_sound.asm"
-%include "src/features/warhead_capture.asm"
 %include "src/features/warhead_anim.asm"
 %include "src/features/aircraft_large.asm"
 %include "src/features/aircraft_persistguard.asm"
 %include "src/features/building_large_foundations.asm"
 %include "src/features/ui_list_enhancements.asm"
 %include "src/features/bullet_custom_trailanims.asm"
+%include "src/features/ai_ironcurtain.asm"
+%include "src/features/warhead_capture.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

@@ -15,6 +15,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Death Weapons](#death-weapons) 
  - [Manual Targeting](#manual-targeting) 
  - [Cloaking](#cloaking) 
+ - [AI Superweapons](#ai-superweapons) 
 
 
 -------
@@ -340,6 +341,20 @@ If set, the unit will ignore its environment, and must target using the player's
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If used, overrides the stealth transition sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Stealth Tank. Defaults to the submarine submerge sound for VesselTypes, and the Phase Transport's stealth sound for all others.
+
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### AI Superweapons
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► ToProtectWithSpecials
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If used, allows the AI to use its superweapon to protect it. Currently only the Iron Curtain may do that. The AI should meet the [IQ] Superweapons requirements, and will respect the superweapon charge/ready status.
 
 </details></td></tr></table>
 

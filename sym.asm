@@ -70,6 +70,9 @@ setcglob 0x0049FDE0,CellClass__Cell_Coord                                      ;
 setcglob 0x004A01EC,CellClass__Adjacent_Cell                                   ; CellClass const * CellClass::Adjacent_Cell(FacingType face) const
 setcglob 0x004A1BE8,CellClass__Is_Bridge_Here                                  ; bool CellClass::Is_Bridge_Here(void)
 
+; COMBAT.CPP
+setcglob 0x004A31F0,Modify_Damage                                              ; int Modify_Damage(int damage, WarheadType warhead, ArmorType armor, int distance)
+
 ; COORD.CPP
 setcglob 0x004AC3C0,Coord___Coord_Cell                                         ; CELL Coord_Cell(COORDINATE coord)
 ;setcglob ??????????,Coord___Distance_As_Target                                ; int Distance(TARGET target1, TARGET target2)
@@ -114,6 +117,7 @@ setcglob 0x004D4014,HouseClass__Can_Build                                      ;
 setcglob 0x004D5E00,HouseClass__Available_Money                                ; long HouseClass::Available_Money(void) const
 setcglob 0x004D5FC8,HouseClass__Is_Ally                                        ; bool HouseClass::Is_Ally(HousesType house)
 setcglob 0x004D6060,HouseClass__Make_Ally                                      ; void HouseClass::Make_Ally(HousesType house)
+setcglob 0x004D68CC,HouseClass__Place_Special_Blast
 setcglob 0x004D8270,HouseClass__MPlayer_Defeated                               ; void HouseClass::MPlayer_Defeated(void)
 setcglob 0x004D8F34,HouseClass__Find_Building                                  ; BuildingClass * HouseClass::Find_Building(StructType type, ZoneType zone) const
 setcglob 0x004D8B40,HouseClass__Flag_To_Die                                    ; bool HouseClass::Flag_To_Die(void)
