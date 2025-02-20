@@ -8,19 +8,13 @@
 ;----------------------------------------------------------------
 
 @HACK 0x004D5418,0x004D541F,_HouseClass__Super_Weapon_Handler_Chronosphere_Check1
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.CHRONOSPHERE
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.CHRONOSPHERE-1)
     jmp  0x004D541F
 @ENDHACK
 
 
 @HACK 0x004D54DE,0x004D54E5,_HouseClass__Super_Weapon_Handler_Chronosphere_Check2
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.CHRONOSPHERE
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.CHRONOSPHERE-1)
     jmp  0x004D54E5
 @ENDHACK
 

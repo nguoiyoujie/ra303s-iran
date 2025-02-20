@@ -8,19 +8,13 @@
 ;----------------------------------------------------------------
 
 @HACK 0x004D591D,0x004D5924,_HouseClass__Super_Weapon_Handler_NukeMissile_Check1
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.NUCLEAR_BOMB
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.NUCLEAR_BOMB-1)
     jmp  0x004D5924
 @ENDHACK
 
 
 @HACK 0x004D588C,0x004D5893,_HouseClass__Super_Weapon_Handler_NukeMissile_Check2
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.NUCLEAR_BOMB
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.NUCLEAR_BOMB-1)
     jmp  0x004D5893
 @ENDHACK
 
@@ -29,11 +23,8 @@
     movzx eax,al
     ; eax is the id
     push ebx
-    push ecx
     BuildingTypeClass.FromIndex(eax,ebx)
-    BuildingTypeClass.SpecialWeapons.Get(ebx,ecx)
-    test ecx,1<<SpecialType.NUCLEAR_BOMB
-    pop  ecx
+    test dword[ebx+BuildingTypeClass.Offset.SpecialWeapons],1<<(SpecialType.NUCLEAR_BOMB-1)
     pop  ebx
     jnz  0x0045DC1A
     jmp  0x0045D8EC
@@ -46,13 +37,10 @@
 .CheckSpecialWeapons:
     ; eax is the id
     push ebx
-    push ecx
     push eax
     BuildingTypeClass.FromIndex(eax,ebx)
-    BuildingTypeClass.SpecialWeapons.Get(ebx,ecx)
-    test ecx,1<<SpecialType.NUCLEAR_BOMB
+    test dword[ebx+BuildingTypeClass.Offset.SpecialWeapons],1<<(SpecialType.NUCLEAR_BOMB-1)
     pop  eax
-    pop  ecx
     pop  ebx
     mov  esi,eax
     jz   .Next

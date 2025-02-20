@@ -512,6 +512,7 @@ _GetSpecialsFromString:
     test eax,eax
     je   .Retn
     mov  cl,al
+    dec  cl
     xor  eax,eax
     mov  eax,1   
     shl  eax,cl
@@ -524,6 +525,7 @@ _GetSpecialsFromString:
     test eax,eax
     je   .Retn
     mov  cl,al
+    dec  cl
     xor  eax,eax
     mov  eax,1   
     shl  eax,cl

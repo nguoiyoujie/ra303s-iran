@@ -8,18 +8,12 @@
 ;----------------------------------------------------------------
 
 @HACK 0x004D59C4,0x004D59CB,_HouseClass__Super_Weapon_Handler_SpyPlane_Check1
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.SPY_MISSION
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.SPY_MISSION-1)
     jmp  0x004D59CB
 @ENDHACK
 
 
 @HACK 0x004D5A3D,0x004D5A44,_HouseClass__Super_Weapon_Handler_SpyPlane_Check2
-    push ecx
-    HouseClass.SpecialScan.Get(esi,ecx)
-    test ecx,1<<SpecialType.SPY_MISSION
-    pop  ecx   
+    test dword[esi+HouseClass.Offset.SpecialScan],1<<(SpecialType.SPY_MISSION-1)
     jmp  0x004D5A44
 @ENDHACK
