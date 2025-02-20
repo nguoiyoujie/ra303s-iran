@@ -62,14 +62,4 @@
 %define FootClass.Offset.HeadToCoord               0x13D    ; COORDINATE (dword)
 ; 0x141
 
-; Generally, object instances are not read by INI
-
-;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
-
-;%define FootClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, FootClass.Offset.RTTI, reg_output
-;%define FootClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, FootClass.Offset.RTTI, value
-
-;%define FootClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, FootClass.Offset.Index, reg_output
-;%define FootClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, FootClass.Offset.Index, value
-
 %endif

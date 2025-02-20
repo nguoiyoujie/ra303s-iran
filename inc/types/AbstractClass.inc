@@ -22,9 +22,7 @@
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
 %define AbstractClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, AbstractClass.Offset.RTTI, reg_output
-;%define AbstractClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, AbstractClass.Offset.RTTI, value
 
 %define AbstractClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, AbstractClass.Offset.Index, reg_output
-;%define AbstractClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, AbstractClass.Offset.Index, value
 
 %endif

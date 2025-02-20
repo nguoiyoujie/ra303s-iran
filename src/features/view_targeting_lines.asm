@@ -5,7 +5,6 @@
 cextern RedAlert.Options.ViewTargetingLines
 
 cextern As_Coord
-cextern Coord_Cell
 
 
 @HACK 0x00562536,0x0056253B,_TechnoClass__DrawIt_ShowHeadTo

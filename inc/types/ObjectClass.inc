@@ -33,12 +33,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define ObjectClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, ObjectClass.Offset.RTTI, reg_output
-;%define ObjectClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, ObjectClass.Offset.RTTI, value
-
-;%define ObjectClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, ObjectClass.Offset.Index, reg_output
-;%define ObjectClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, ObjectClass.Offset.Index, value
-
 %define ObjectClass.IsInLimbo.Get(ptr_type,reg_output)                    GetBool                                ptr_type, ObjectClass.Offset.IsInLimbo, ObjectClass.Bit.IsInLimbo, reg_output
 %define ObjectClass.IsInLimbo.Set(ptr_type,value)                         SetBool                                ptr_type, ObjectClass.Offset.IsInLimbo, ObjectClass.Bit.IsInLimbo, value
 

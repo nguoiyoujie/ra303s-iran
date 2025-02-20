@@ -57,12 +57,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define UnitClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, UnitClass.Offset.RTTI, reg_output
-;%define UnitClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, UnitClass.Offset.RTTI, value
-
-;%define UnitClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, UnitClass.Offset.Index, reg_output
-;%define UnitClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, UnitClass.Offset.Index, value
-
 %define UnitClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, UnitClass.Offset.Class, reg_output
 %define UnitClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, UnitClass.Offset.Class, value
 

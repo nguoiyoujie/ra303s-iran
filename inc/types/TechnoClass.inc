@@ -68,12 +68,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define TechnoClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, TechnoClass.Offset.RTTI, reg_output
-;%define TechnoClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, TechnoClass.Offset.RTTI, value
-
-;%define TechnoClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, TechnoClass.Offset.Index, reg_output
-;%define TechnoClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, TechnoClass.Offset.Index, value
-
 %define TechnoClass.IsLocked.Get(ptr_type,reg_output)                    GetBool                                ptr_type, TechnoClass.Offset.IsLocked, TechnoClass.Bit.IsLocked, reg_output
 %define TechnoClass.IsLocked.Set(ptr_type,value)                         SetBool                                ptr_type, TechnoClass.Offset.IsLocked, TechnoClass.Bit.IsLocked, value
 

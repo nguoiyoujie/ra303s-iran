@@ -57,12 +57,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define VesselClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, VesselClass.Offset.RTTI, reg_output
-;%define VesselClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, VesselClass.Offset.RTTI, value
-
-;%define VesselClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, VesselClass.Offset.Index, reg_output
-;%define VesselClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, VesselClass.Offset.Index, value
-
 %define VesselClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, VesselClass.Offset.Class, reg_output
 %define VesselClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, VesselClass.Offset.Class, value
 

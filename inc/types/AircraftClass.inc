@@ -31,12 +31,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define AircraftClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, AircraftClass.Offset.RTTI, reg_output
-;%define AircraftClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, AircraftClass.Offset.RTTI, value
-
-;%define AircraftClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, AircraftClass.Offset.Index, reg_output
-;%define AircraftClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, AircraftClass.Offset.Index, value
-
 %define AircraftClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, AircraftClass.Offset.Class, reg_output
 %define AircraftClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, AircraftClass.Offset.Class, value
 

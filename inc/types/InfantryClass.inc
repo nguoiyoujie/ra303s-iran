@@ -32,12 +32,6 @@
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
-;%define InfantryClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, InfantryClass.Offset.RTTI, reg_output
-;%define InfantryClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, InfantryClass.Offset.RTTI, value
-
-;%define InfantryClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, InfantryClass.Offset.Index, reg_output
-;%define InfantryClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, InfantryClass.Offset.Index, value
-
 %define InfantryClass.Class.Get(ptr_type,reg_output)                       GetInt                 ptr_type, InfantryClass.Offset.Class, reg_output
 %define InfantryClass.Class.Set(ptr_type,value)                            SetInt                 ptr_type, InfantryClass.Offset.Class, value
 

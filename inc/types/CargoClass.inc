@@ -15,12 +15,4 @@
 
 ; Generally, object instances are not read by INI
 
-;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
-
-;%define CargoClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, CargoClass.Offset.RTTI, reg_output
-;%define CargoClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, CargoClass.Offset.RTTI, value
-
-;%define CargoClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, CargoClass.Offset.Index, reg_output
-;%define CargoClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, CargoClass.Offset.Index, value
-
 %endif

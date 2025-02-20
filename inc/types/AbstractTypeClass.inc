@@ -15,26 +15,13 @@
 %define AbstractTypeClass.Offset.StringTableName           0x01D    ; INT
 ; 0x021
 
-; INI String controls
-;str.AbstractTypeClass.RTTI                         db"RTTI",0
-;str.AbstractTypeClass.Index                        db"Index",0
-;str.AbstractTypeClass.StringTableName              db"DefaultMission",0
-
-
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
 %define AbstractTypeClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, AbstractTypeClass.Offset.RTTI, reg_output
-;%define AbstractTypeClass.RTTI.Set(ptr_type,value)                             SetByte                ptr_type, AbstractTypeClass.Offset.RTTI, value
-;%define AbstractTypeClass.RTTI.Read(ptr_type,ptr_rules)                        AbstractTypeClass.ReadByte               ptr_type, ptr_rules, AbstractTypeClass.Offset.RTTI, str.AbstractTypeClass.RTTI  
 
 %define AbstractTypeClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, AbstractTypeClass.Offset.Index, reg_output
-;%define AbstractTypeClass.Index.Set(ptr_type,value)                            SetInt                 ptr_type, AbstractTypeClass.Offset.Index, value
-;%define AbstractTypeClass.Index.Read(ptr_type,ptr_rules)                       AbstractTypeClass.ReadInt                ptr_type, ptr_rules, AbstractTypeClass.Offset.Index, str.AbstractTypeClass.Index
 
 %define AbstractTypeClass.StringTableName.Get(ptr_type,reg_output)             GetInt                 ptr_type, AbstractTypeClass.Offset.StringTableName, reg_output
-;%define AbstractTypeClass.StringTableName.Set(ptr_type,value)                  SetInt                 ptr_type, AbstractTypeClass.Offset.StringTableName, value
-;%define AbstractTypeClass.StringTableName.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadInt                ptr_type, ptr_rules, AbstractTypeClass.Offset.StringTableName, str.AbstractTypeClass.StringTableName
-
 
 ; args <Pointer to type class>,<register to output the result to>
 ; return <output>: the pointer to the class ID (e.g. YARD)
