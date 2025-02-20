@@ -41,7 +41,8 @@
 %define TechnoTypeClass.Bit.ManualAcquire             6    
 %define TechnoTypeClass.Offset.ToProtectWithSpecials  0x13A    ; BOOL
 %define TechnoTypeClass.Bit.ToProtectWithSpecials     7    
-
+%define TechnoTypeClass.Offset.ToTeleportWithSpecials 0x13A    ; BOOL
+%define TechnoTypeClass.Bit.ToTeleportWithSpecials    8  
 
 ; 0x13B and 0x13C were empty... 
 %define TechnoTypeClass.Offset.PrereqType             0x13B    ; byte, new variable, occupying unused location
@@ -97,6 +98,7 @@ str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 
 str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
 str.TechnoTypeClass.ManualAcquire             db"ManualAcquire",0               ;new feature
 str.TechnoTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new feature
+str.TechnoTypeClass.ToTeleportWithSpecials    db"ToTeleportWithSpecials",0      ;new feature
 
 str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0            ;new feature
 str.TechnoTypeClass.CloakSound                db"CloakSound",0                  ;new feature
@@ -189,6 +191,9 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, value
 %define TechnoTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, str.TechnoTypeClass.ToProtectWithSpecials
 
+%define TechnoTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, reg_output
+%define TechnoTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, value
+%define TechnoTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, str.TechnoTypeClass.ToTeleportWithSpecials
 
 %define TechnoTypeClass.PrereqType.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, reg_output
 %define TechnoTypeClass.PrereqType.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, value

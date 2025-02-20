@@ -23,6 +23,7 @@ cextern Globals___Map_Array
 cextern Globals___ScenarioInit
 cextern Globals___PlayerPtr
 cextern Capture.OverrideIsCapturable
+cextern Target___As_Target
 
 cextern Map.Basic.ChronoReinforceTanks
 cextern BuildingClass.Count
@@ -362,7 +363,7 @@ Nuke_Strike_On_Waypoint:
     mov  edx,0x11        ; ; Bullet type
     push 0xC8
     xor  ecx,ecx
-    call 0x005558E8 ; As_Target(short)
+    call Target___As_Target
     mov  ebx,eax
     mov  eax,esi
     call BulletClass__BulletClass

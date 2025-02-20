@@ -232,6 +232,7 @@
 %include "src/features/ui_list_enhancements.asm"
 %include "src/features/bullet_custom_trailanims.asm"
 %include "src/features/ai_ironcurtain.asm"
+%include "src/features/ai_chronosphere.asm"
 %include "src/features/warhead_capture.asm"
 
 ; experimental

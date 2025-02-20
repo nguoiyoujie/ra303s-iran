@@ -4,7 +4,7 @@
 
 cextern RedAlert.Options.ViewTargetingLines
 
-cextern As_Coord
+cextern Target___As_Coord
 
 
 @HACK 0x00562536,0x0056253B,_TechnoClass__DrawIt_ShowHeadTo
@@ -18,7 +18,7 @@ cextern As_Coord
     mov  eax,[eax+FootClass.Offset.NavCom]
     test eax,eax
     jz   .TarCom
-    call As_Coord
+    call Target___As_Coord
     test eax,eax
     jz   .TarCom
     cmp  eax,-1
@@ -69,7 +69,7 @@ cextern As_Coord
     mov  eax,[eax+TechnoClass.Offset.TarCom]
     test eax,eax
     jz   .Ret
-    call As_Coord
+    call Target___As_Coord
     test eax,eax
     jz   .Ret
     cmp  eax,-1

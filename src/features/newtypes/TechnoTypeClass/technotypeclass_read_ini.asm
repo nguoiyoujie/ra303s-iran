@@ -47,6 +47,7 @@ cextern str_Comma
     TechnoTypeClass.SecondaryLateral.Read(esi,edi)
     TechnoTypeClass.ManualAcquire.Read(esi,edi)
     TechnoTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    TechnoTypeClass.ToTeleportWithSpecials.Read(esi,edi)
 ; somehow setting primary and secondary weapons remove Aftermath weapons.
     TechnoTypeClass.PrimaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.SecondaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)

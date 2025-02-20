@@ -356,6 +356,23 @@ If used, overrides the stealth transition sound. This string must be an existing
 
 If used, allows the AI to use its superweapon to protect it. Currently only the Iron Curtain may do that. The AI should meet the [IQ] Superweapons requirements, and will respect the superweapon charge/ready status.
 
+The AI will invoke the use of the superweapon when the unit is damaged by any warhead, even from allies.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► ToTeleportWithSpecials
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+If used, allows the AI to use its superweapon to teleport it. Currently only the Chronosphere may do that. The AI should meet the [IQ] Superweapons requirements, and will respect the superweapon charge/ready status.
+
+The AI will invoke the use of the superweapon when the unit wants to attack a new location.
+
+If set on the ChronoTank (`CTNK`), it will teleport the Chrono Tank without consuming the superweapon. 
+
+Obviously, the AI will ignore any attempts to teleport a building, an infantry or an aircraft to a different location.
+
 </details></td></tr></table>
 
 

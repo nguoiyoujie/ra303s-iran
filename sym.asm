@@ -262,7 +262,8 @@ setcglob 0x00554EE0,TargetClass__TargetClass_Target
 setcglob 0x00554EEC,TargetClass__TargetClass_AbstractClass
 setcglob 0x00554F38,TargetClass__TargetClass_AbstractTypeClass
 setcglob 0x00554F84,TargetClass__TargetClass_CellClass
-setcglob 0x00555384,As_Coord                                                   ; COORDINATE As_Coord(TARGET target)
+setcglob 0x00555384,Target___As_Coord                                          ; COORDINATE As_Coord(TARGET target)
+setcglob 0x005558E8,Target___As_Target                                         ; TARGET As_Target(CELL cell)
 
 ; TERRAIN.CPP
 setcglob 0x0056AD6C,TerrainClass__Write_INI                                    ; void TerrainClass::Write_INI(CCINIClass & ini)

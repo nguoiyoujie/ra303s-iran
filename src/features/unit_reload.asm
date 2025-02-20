@@ -10,6 +10,8 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+cextern Globals___Frame
+
 [section .data] 
 Temp.UnitReload           dd    0
 Temp.UnitReload.ID   db    0
@@ -105,7 +107,7 @@ Temp.UnitReload.Amount    dd    0
     UnitTypeClass.FromIndex(edx,edi)
     UnitTypeClass.AmmoReloadRate.Get(edi,edx) 
     imul edx,15 ; ticks in a second
-    mov  ebx,dword[0x006680C4]
+    mov  ebx,dword[Globals___Frame]
     ; set Reload timer (current tick, duration)
     mov  dword[eax+0x170],ebx
     mov  dword[eax+0x174],edx
