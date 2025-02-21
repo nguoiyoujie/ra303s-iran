@@ -236,6 +236,7 @@
 %include "src/features/warhead_capture.asm"
 %include "src/features/techno_static_disguise.asm"
 %include "src/features/infantry_retaliates.asm"
+%include "src/features/chain_timequakes.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"
