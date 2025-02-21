@@ -149,5 +149,6 @@ Init_Heap_OverrideExistingInfantryTypes:
     InfantryTypeClass.AIBuildLimit.Set(edi,1)
     InfantryTypeClass.AIBuildWeight.Set(edi,1)
     TechnoTypeClass.ManualAcquire.Set(edi,1)
+    InfantryTypeClass.Retaliates.Set(edi,1)
 
 	retn

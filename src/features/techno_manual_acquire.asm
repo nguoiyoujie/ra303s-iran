@@ -10,14 +10,6 @@
 ;
 ;----------------------------------------------------------------
 
-;@HACK 0x0056842F,0x00568434,_TechnoClass__Is_Allowed_To_Retaliate_CheckInvalidWeapon
-;    call TechnoClass__What_Weapon_Should_I_Use
-;    cmp  dword eax,-1
-;    je   0x0056855B
-;    jmp  0x00568434
-;@ENDHACK
-
-
 @HACK 0x004EF206,0x004EF20B,_InfantryClass__Greatest_Threat_ManualAcquire
     mov  edi,[edx]
     cmp  edi,-1

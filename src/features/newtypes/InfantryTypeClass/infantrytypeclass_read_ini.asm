@@ -126,6 +126,7 @@ str.CUSTOM                           db"CUSTOM",0
     InfantryTypeClass.StokedReport.Read(esi,edi,_GetStokedReportFromString)
     InfantryTypeClass.AIBuildLimit.Read(esi,edi)
     InfantryTypeClass.AIBuildWeight.Read(esi,edi)
+    InfantryTypeClass.Retaliates.Read(esi,edi)  
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

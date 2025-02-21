@@ -129,6 +129,20 @@ Sets the pip of the transport when carrying this infantry type. This refers to t
  > 7 = Red pip (commando)
 </details></td></tr></table>
 
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;InfantryType&gt;]  ► Retaliates
+</samp></td><td width="120"><samp>Integer</samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+ 
+Human-owned infantry do not automatically retaliate against incoming fire from infantry, unless `PlayerReturnFire` is on.
+Tanya was an exception to that, she ignores the setting and fires back. 
+
+Now you can instruct other infantry to be like Tanya.
+
+</details></td></tr></table>
+
+
+
 <a href="#infantrytypes"><kbd>Top</kbd></a><br>
 -------
 ### Infantry Animations

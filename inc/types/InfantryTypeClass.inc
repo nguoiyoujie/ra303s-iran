@@ -28,6 +28,8 @@ cextern InfantryTypeClass.Array
 %define InfantryTypeClass.Bit.IsDog                        7    
 %define InfantryTypeClass.Offset.IsRemapOverride           0x192    ; BOOL // Already supported by game INI
 %define InfantryTypeClass.Bit.IsRemapOverride              8    
+%define InfantryTypeClass.Offset.Retaliates                0x193    ; bool
+%define InfantryTypeClass.Bit.Retaliates                   1
 ; 0x193, 0x194 and 0x195 are empty... 
 %define InfantryTypeClass.Offset.Type                      0x196    ; byte
 %define InfantryTypeClass.Offset.Pip                       0x197    ; byte, PipEnum: 0 PIP_EMPTY, 1 PIP_FULL, 5 PIP_ENGINEER, 6 PIP_CIVILIAN, 7 PIP_COMMANDO, others for funky results, might be able to add new pips by extending pips.shp beyond 22 frames?
@@ -144,6 +146,7 @@ str.InfantryTypeClass.IsCivilian                    db"IsCivilian",0            
 str.InfantryTypeClass.IsBomber                      db"C4",0                          ;existing ini
 str.InfantryTypeClass.IsDog                         db"IsDog",0                       ;existing ini
 str.InfantryTypeClass.IsRemapOverride               db"IsRemapOverride",0             ;for civilian remap
+str.InfantryTypeClass.Retaliates                    db"Retaliates",0            
 str.InfantryTypeClass.Type                          db"Type",0                        ;?to check?
 str.InfantryTypeClass.Pip                           db"Pip",0                         ;new ini feature
 str.InfantryTypeClass.DoControls                    db"DoControls",0                  ;?to implement?
@@ -265,6 +268,10 @@ str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define InfantryTypeClass.IsRemapOverride.Get(ptr_type,reg_output)             GetBool                                ptr_type, InfantryTypeClass.Offset.IsRemapOverride, InfantryTypeClass.Bit.IsRemapOverride, reg_output
 %define InfantryTypeClass.IsRemapOverride.Set(ptr_type,value)                  SetBool                                ptr_type, InfantryTypeClass.Offset.IsRemapOverride, InfantryTypeClass.Bit.IsRemapOverride, value
 %define InfantryTypeClass.IsRemapOverride.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.IsRemapOverride, InfantryTypeClass.Bit.IsRemapOverride, str.InfantryTypeClass.IsRemapOverride
+
+%define InfantryTypeClass.Retaliates.Get(ptr_type,reg_output)                  GetBool                                ptr_type, InfantryTypeClass.Offset.Retaliates, InfantryTypeClass.Bit.Retaliates, reg_output
+%define InfantryTypeClass.Retaliates.Set(ptr_type,value)                       SetBool                                ptr_type, InfantryTypeClass.Offset.Retaliates, InfantryTypeClass.Bit.Retaliates, value
+%define InfantryTypeClass.Retaliates.Read(ptr_type,ptr_rules)                  AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.Retaliates, InfantryTypeClass.Bit.Retaliates, str.InfantryTypeClass.Retaliates
 
 %define InfantryTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, InfantryTypeClass.Offset.Type, reg_output
 %define InfantryTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, InfantryTypeClass.Offset.Type, value
