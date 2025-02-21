@@ -105,13 +105,14 @@ Disguise.TreeSHP db "T01.TEM",0 ; "T01" hardcoded
     push 0x00657CE4
     push 0x00657CE0
     push eax
+    mov  byte cl,[ebp-0x10]
     movsx eax,cl
     push eax
     xor  edi,edi
     mov  eax,Disguise.TreeSHP
     mov  ecx,[ebp-0x48]
     mov  ebx,[ebp-0x4C]
-    add  ecx,0x4 ; hardcoded shift
+    sub  ecx,0xC ; hardcoded shift
     add  ebx,0xC ; hardcoded shift
     xor  edx,edx
     call MFCD__Retrieve
