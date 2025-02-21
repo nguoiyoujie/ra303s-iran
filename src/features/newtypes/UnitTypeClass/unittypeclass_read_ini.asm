@@ -34,6 +34,7 @@ cextern Houses.USignificantScan
     UnitTypeClass.UsePrimaryColor.Read(esi,edi)
     UnitTypeClass.IsStaticDisguise.Read(esi,edi)
     UnitTypeClass.IsChronoTank.Read(esi,edi)
+    UnitTypeClass.IsOpenTopped.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     UnitTypeClass.TurretOffset.Read(esi,edi)

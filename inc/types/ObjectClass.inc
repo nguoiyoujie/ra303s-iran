@@ -23,8 +23,8 @@
 %define ObjectClass.Bit.IsAnimAttached               6
 %define ObjectClass.Offset.IsFalling                 0x015    ; bool
 %define ObjectClass.Bit.IsFalling                    7
-%define ObjectClass.Offset.Next                      0x019    ; Ptr
-%define ObjectClass.Offset.Riser                     0x01D    ; ?
+%define ObjectClass.Offset.Riser                     0x019    ; ?
+%define ObjectClass.Offset.Next                      0x01D    ; Ptr
 %define ObjectClass.Offset.Trigger                   0x021    ; Ptr
 %define ObjectClass.Offset.Strength                  0x025    ; word
 ; 0x027

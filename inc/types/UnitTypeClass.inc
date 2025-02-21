@@ -46,6 +46,8 @@ cextern UnitTypeClass.Array
 %define UnitTypeClass.Bit.IsStaticDisguise                 8
 %define UnitTypeClass.Offset.IsChronoTank                  0x194    ; bool
 %define UnitTypeClass.Bit.IsChronoTank                     1
+%define UnitTypeClass.Offset.IsOpenTopped                  0x194    ; bool
+%define UnitTypeClass.Bit.IsOpenTopped                     2
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -104,6 +106,7 @@ str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                
 str.UnitTypeClass.UsePrimaryColor               db"UsePrimaryColor",0             ;new ini feature
 str.UnitTypeClass.IsStaticDisguise              db"IsStaticDisguise",0            ;new ini feature
 str.UnitTypeClass.IsChronoTank                  db"IsChronoTank",0                ;new ini feature
+str.UnitTypeClass.IsOpenTopped                  db"OpenTopped",0                  ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
@@ -201,6 +204,10 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 %define UnitTypeClass.IsChronoTank.Get(ptr_type,reg_output)                GetBool                                ptr_type, UnitTypeClass.Offset.IsChronoTank, UnitTypeClass.Bit.IsChronoTank, reg_output
 %define UnitTypeClass.IsChronoTank.Set(ptr_type,value)                     SetBool                                ptr_type, UnitTypeClass.Offset.IsChronoTank, UnitTypeClass.Bit.IsChronoTank, value
 %define UnitTypeClass.IsChronoTank.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.IsChronoTank, UnitTypeClass.Bit.IsChronoTank, str.UnitTypeClass.IsChronoTank
+
+%define UnitTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, reg_output
+%define UnitTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, value
+%define UnitTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, str.UnitTypeClass.IsOpenTopped
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, UnitTypeClass.Offset.Type, value

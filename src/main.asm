@@ -237,6 +237,7 @@
 %include "src/features/techno_static_disguise.asm"
 %include "src/features/infantry_retaliates.asm"
 %include "src/features/chain_timequakes.asm"
+%include "src/features/unit_opentopped.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

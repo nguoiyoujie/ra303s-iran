@@ -16,6 +16,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Manual Targeting](#manual-targeting) 
  - [Cloaking](#cloaking) 
  - [Mirage](#mirage)
+ - [OpenTopped Transports](#opentopped-transports)
  - [AI Superweapons](#ai-superweapons) 
 
 
@@ -362,6 +363,22 @@ If used on UnitTypes, when the unit is stationary, turns into a tree (`[T01]`). 
 If used on InfantryTypes, when the infantry is stationary, shimmers against the ground. Likewise, enemies will not automatically acquire the infantry, but may retaliate.
 
 The stealth effect is momentarily broken when the unit takes damage, or whenever the unit moves. Enemies chasing after the unit will continue to chase after it regardless of the disguise.
+
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### OpenTopped Transports
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► OpenTopped
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that units within the transport unit can fire from within the tranpsort unit. This works for both InfantryType and UnitType passengers, but only InfantryType passengers are fully functional.
+
+Firing offset is fixed at the unit center.
 
 </details></td></tr></table>
 

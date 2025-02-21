@@ -52,7 +52,8 @@ VesselTypes_Read_INI:
 	TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteExtendedFromString)
 
     VesselTypeClass.IsPieceOfEight.Read(esi,edi)             
-    VesselTypeClass.HasSecondTurret.Read(esi,edi)             
+    VesselTypeClass.HasSecondTurret.Read(esi,edi)
+    VesselTypeClass.IsOpenTopped.Read(esi,edi)
     ;VesselTypeClass.Type.Read(esi,edi)                       
     VesselTypeClass.TurretOffset.Read(esi,edi)               
     VesselTypeClass.TurretFireOffset.Read(esi,edi)               

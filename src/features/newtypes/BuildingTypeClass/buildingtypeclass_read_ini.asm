@@ -83,6 +83,7 @@ Temp.OverlayListRemaining     dw 0
     BuildingTypeClass.IsAirfield.Read(esi,edi)
     BuildingTypeClass.IsRepairPad.Read(esi,edi)
     BuildingTypeClass.IsKennel.Read(esi,edi)
+    BuildingTypeClass.IsOpenTopped.Read(esi,edi)
 
     BuildingTypeClass.FactoryType.Read(esi,edi,_SelectFactoryType)
     BuildingTypeClass.ExitCoordX.Read(esi,edi)

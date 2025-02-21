@@ -23,7 +23,9 @@ cextern AircraftTypeClass.Array
 %define AircraftTypeClass.Offset.SeekerGuard                 0x192    ; bool
 %define AircraftTypeClass.Bit.SeekerGuard                    5   
 %define AircraftTypeClass.Offset.IsGigundo                   0x192    ; bool
-%define AircraftTypeClass.Bit.IsGigundo                      7    
+%define AircraftTypeClass.Bit.IsGigundo                      6    
+%define AircraftTypeClass.Offset.IsOpenTopped                0x192    ; bool
+%define AircraftTypeClass.Bit.IsOpenTopped                   7    
 ; 0x193, 0x194 and 0x195 are empty...                        
 %define AircraftTypeClass.Offset.Type                        0x196    ; byte
 %define AircraftTypeClass.Offset.DefaultMission              0x197    ; byte
@@ -45,8 +47,9 @@ str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0               
 str.AircraftTypeClass.IsLandable                db"IsLandable",0                  ;new ini feature
 str.AircraftTypeClass.IsRotorEquipped           db"IsRotorEquipped",0             ;new ini feature
 str.AircraftTypeClass.IsRotorCustom             db"IsRotorCustom",0               ;new ini feature
-str.AircraftTypeClass.SeekerGuard               db"SeekerGuard",0               ;new ini feature
+str.AircraftTypeClass.SeekerGuard               db"SeekerGuard",0                 ;new ini feature
 str.AircraftTypeClass.IsGigundo                 db"Large",0                       ;new ini feature
+str.AircraftTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new ini feature
 str.AircraftTypeClass.PreferredBuilding         db"PreferredBuilding",0           ;internal feature
 str.AircraftTypeClass.Type                      db"Type",0                        ;internal feature
 str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
@@ -83,6 +86,10 @@ str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0            
 %define AircraftTypeClass.IsGigundo.Get(ptr_type,reg_output)                   GetBool                                ptr_type, AircraftTypeClass.Offset.IsGigundo, AircraftTypeClass.Bit.IsGigundo, reg_output
 %define AircraftTypeClass.IsGigundo.Set(ptr_type,value)                        SetBool                                ptr_type, AircraftTypeClass.Offset.IsGigundo, AircraftTypeClass.Bit.IsGigundo, value
 %define AircraftTypeClass.IsGigundo.Read(ptr_type,ptr_rules)                   AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.IsGigundo, AircraftTypeClass.Bit.IsGigundo, str.AircraftTypeClass.IsGigundo
+
+%define AircraftTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, AircraftTypeClass.Offset.IsOpenTopped, AircraftTypeClass.Bit.IsOpenTopped, reg_output
+%define AircraftTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, AircraftTypeClass.Offset.IsOpenTopped, AircraftTypeClass.Bit.IsOpenTopped, value
+%define AircraftTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.IsOpenTopped, AircraftTypeClass.Bit.IsOpenTopped, str.AircraftTypeClass.IsOpenTopped
 
 %define AircraftTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, AircraftTypeClass.Offset.Type, reg_output
 %define AircraftTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, AircraftTypeClass.Offset.Type, value

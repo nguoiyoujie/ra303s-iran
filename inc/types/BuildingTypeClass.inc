@@ -58,7 +58,8 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Bit.IsHelipad                    8
 %define BuildingTypeClass.Offset.IsRepairPad               0x194    ; BOOL // 
 %define BuildingTypeClass.Bit.IsRepairPad                  1
-
+%define BuildingTypeClass.Offset.IsOpenTopped              0x194    ; bool
+%define BuildingTypeClass.Bit.IsOpenTopped                 2
 
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; byte, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
@@ -135,6 +136,7 @@ str.BuildingTypeClass.IsKennel                  db"IsKennel",0                  
 str.BuildingTypeClass.IsAirfield                db"IsAirfield",0                  ;new feature
 str.BuildingTypeClass.IsHelipad                 db"IsHelipad",0                   ;new feature
 str.BuildingTypeClass.IsRepairPad               db"IsRepairPad",0                 ;new feature
+str.BuildingTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
 str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0              ;new ini feature
@@ -253,6 +255,10 @@ str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0    
 %define BuildingTypeClass.IsRepairPad.Get(ptr_type,reg_output)                 GetBool                                ptr_type, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, reg_output
 %define BuildingTypeClass.IsRepairPad.Set(ptr_type,value)                      SetBool                                ptr_type, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, value
 %define BuildingTypeClass.IsRepairPad.Read(ptr_type,ptr_rules)                 AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.IsRepairPad, BuildingTypeClass.Bit.IsRepairPad, str.BuildingTypeClass.IsRepairPad
+
+%define BuildingTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, BuildingTypeClass.Offset.IsOpenTopped, BuildingTypeClass.Bit.IsOpenTopped, reg_output
+%define BuildingTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, BuildingTypeClass.Offset.IsOpenTopped, BuildingTypeClass.Bit.IsOpenTopped, value
+%define BuildingTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.IsOpenTopped, BuildingTypeClass.Bit.IsOpenTopped, str.BuildingTypeClass.IsOpenTopped
 
 %define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              GetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
 %define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   SetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
