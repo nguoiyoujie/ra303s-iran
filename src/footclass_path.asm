@@ -2,6 +2,8 @@
     ; This may prevent a move from being initiated if the destination is too close. 
     ; Remove it, and rely on the game to check only when the unit is blocked
 
+%assign PathAbandonLimit    0x96  ; 150 frames
+
 [section .data]
 Temp.Path.Vessel dd 0 
 
@@ -33,11 +35,11 @@ Temp.Path.Vessel dd 0
 ; AI units tend to get stuck. Here's how to unstick them...
 
 ; test: see if this releases blocking units
-@SJMP 0x0057F0C5,0x0057F0FB ;_UnitClass_Can_Enter_Cell_SkipNavCom_Check
+;@SJMP 0x0057F0C5,0x0057F0FB ;_UnitClass_Can_Enter_Cell_SkipNavCom_Check
 
 
 @HACK 0x004EDB70,0x004EDB79,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jle  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
@@ -51,7 +53,7 @@ Temp.Path.Vessel dd 0
 
 
 @HACK 0x004EDB83,0x004EDB8C,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jle  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
@@ -64,8 +66,16 @@ Temp.Path.Vessel dd 0
 @ENDHACK
 
 
+@HACK 0x004EDCA4,0x004EDCAA,_InfantryClass_Can_Enter_Cell_MoveOKResetCounter
+    cmp  byte[ebp-0x10],0
+    jne  0x004EDCE8
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x004EDCAA
+@ENDHACK
+
+
 @HACK 0x0057F00C,0x0057F015,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jle  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
@@ -79,7 +89,7 @@ Temp.Path.Vessel dd 0
 
 
 @HACK 0x0057F0BC,0x0057F0C5,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jle  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
@@ -92,6 +102,14 @@ Temp.Path.Vessel dd 0
 @ENDHACK
 
 
+@HACK 0x0057F198,0x0057F19E,_UnitClass_Can_Enter_Cell_MoveOKResetCounter
+    cmp  byte[ebp-0x24],0
+    jne  0x0057F208
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x0057F19E
+@ENDHACK
+
+
 ; this is not sufficient for Vessel class, as they might not have a scatter logic built for them
 @HACK 0x00589ED5,0x00589EDA,_VesselClass_Can_Enter_Cell_Save_VesselClass
     mov  esi,eax
@@ -100,10 +118,11 @@ Temp.Path.Vessel dd 0
     jmp  0x00589EDA
 @ENDHACK
 
+
 @HACK 0x0058A02A,0x0058A030,_VesselClass_Can_Enter_Cell_HandleBlockedCell
     jz   0x0058A030
     mov  esi,[Temp.Path.Vessel]
-	cmp  byte[esi+FootClass.Offset.PathAbandon],0x5A ; 90 frames
+	cmp  byte[esi+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jle  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
