@@ -42,8 +42,10 @@ cextern UnitTypeClass.Array
 %define UnitTypeClass.Bit.Anim_HasAPCDoor                  6   
 %define UnitTypeClass.Offset.UsePrimaryColor               0x193    ; BOOL
 %define UnitTypeClass.Bit.UsePrimaryColor                  7    
-%define UnitTypeClass.Offset.IsChronoTank                  0x0D7    ; bool
-%define UnitTypeClass.Bit.IsChronoTank                     8
+%define UnitTypeClass.Offset.IsStaticDisguise              0x193    ; bool
+%define UnitTypeClass.Bit.IsStaticDisguise                 8
+%define UnitTypeClass.Offset.IsChronoTank                  0x194    ; bool
+%define UnitTypeClass.Bit.IsChronoTank                     1
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -100,6 +102,7 @@ str.UnitTypeClass.IsNoSmoke                     db"IsNoSmoke",0                 
 str.UnitTypeClass.IsWaterBound                  db"WaterBound",0                  ;new ini feature
 str.UnitTypeClass.Anim_HasAPCDoor               db"HasAPCDoor",0                  ;new ini feature
 str.UnitTypeClass.UsePrimaryColor               db"UsePrimaryColor",0             ;new ini feature
+str.UnitTypeClass.IsStaticDisguise              db"IsStaticDisguise",0            ;new ini feature
 str.UnitTypeClass.IsChronoTank                  db"IsChronoTank",0                ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
@@ -190,6 +193,10 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 %define UnitTypeClass.UsePrimaryColor.Get(ptr_type,reg_output)             GetBool                                ptr_type, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, reg_output
 %define UnitTypeClass.UsePrimaryColor.Set(ptr_type,value)                  SetBool                                ptr_type, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, value
 %define UnitTypeClass.UsePrimaryColor.Read(ptr_type,ptr_rules)             AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.UsePrimaryColor, UnitTypeClass.Bit.UsePrimaryColor, str.UnitTypeClass.UsePrimaryColor
+
+%define UnitTypeClass.IsStaticDisguise.Get(ptr_type,reg_output)            GetBool                                ptr_type, UnitTypeClass.Offset.IsStaticDisguise, UnitTypeClass.Bit.IsStaticDisguise, reg_output
+%define UnitTypeClass.IsStaticDisguise.Set(ptr_type,value)                 SetBool                                ptr_type, UnitTypeClass.Offset.IsStaticDisguise, UnitTypeClass.Bit.IsStaticDisguise, value
+%define UnitTypeClass.IsStaticDisguise.Read(ptr_type,ptr_rules)            AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.IsStaticDisguise, UnitTypeClass.Bit.IsStaticDisguise, str.UnitTypeClass.IsStaticDisguise
 
 %define UnitTypeClass.IsChronoTank.Get(ptr_type,reg_output)                GetBool                                ptr_type, UnitTypeClass.Offset.IsChronoTank, UnitTypeClass.Bit.IsChronoTank, reg_output
 %define UnitTypeClass.IsChronoTank.Set(ptr_type,value)                     SetBool                                ptr_type, UnitTypeClass.Offset.IsChronoTank, UnitTypeClass.Bit.IsChronoTank, value

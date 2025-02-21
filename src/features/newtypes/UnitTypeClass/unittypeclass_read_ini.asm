@@ -32,6 +32,7 @@ cextern Houses.USignificantScan
     UnitTypeClass.IsWaterBound.Read(esi,edi)
     UnitTypeClass.Anim_HasAPCDoor.Read(esi,edi)
     UnitTypeClass.UsePrimaryColor.Read(esi,edi)
+    UnitTypeClass.IsStaticDisguise.Read(esi,edi)
     UnitTypeClass.IsChronoTank.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 

@@ -234,6 +234,7 @@
 %include "src/features/ai_ironcurtain.asm"
 %include "src/features/ai_chronosphere.asm"
 %include "src/features/warhead_capture.asm"
+%include "src/features/techno_static_disguise.asm"
 %include "src/features/infantry_retaliates.asm"
 
 ; experimental

@@ -22,6 +22,7 @@ cextern Modify_Damage
     mov  [edi],eax
     cmp  eax,0
     jle  .Ret ; do nothing if the damage doesn't do anything
+    mov  byte[esi+TechnoClass.Offset.StaticDisguiseShimmer],0
     call CaptureCheck
     cmp  dword[edi],0
     jle  .Ret ; do nothing more if already captured

@@ -15,6 +15,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Death Weapons](#death-weapons) 
  - [Manual Targeting](#manual-targeting) 
  - [Cloaking](#cloaking) 
+ - [Mirage](#mirage)
  - [AI Superweapons](#ai-superweapons) 
 
 
@@ -341,6 +342,26 @@ If set, the unit will ignore its environment, and must target using the player's
 </samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
 
 If used, overrides the stealth transition sound. This string must be an existing <a href="./defines.md#soundeffects">SoundEffect</a> or defined in `[SoundEffects]`. This can be used to emulate the C&C Stealth Tank. Defaults to the submarine submerge sound for VesselTypes, and the Phase Transport's stealth sound for all others.
+
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### Mirage
+<br>
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsStaticDisguise
+</samp></td><td width="120"><samp>String</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Usable on InfantryTypes and UnitTypes.
+
+If used on UnitTypes, when the unit is stationary, turns into a tree (`[T01]`). Enemies will not automatically acquire the unit, but may retaliate if attacked, akin to reacting to a Spy with a weapon.
+
+If used on InfantryTypes, when the infantry is stationary, shimmers against the ground. Likewise, enemies will not automatically acquire the infantry, but may retaliate.
+
+The stealth effect is momentarily broken when the unit takes damage, or whenever the unit moves. Enemies chasing after the unit will continue to chase after it regardless of the disguise.
 
 </details></td></tr></table>
 

@@ -41,6 +41,8 @@
 %define TechnoClass.Bit.IsInPlay                       6
 %define TechnoClass.Offset.IsInTransport               0x072    ; bool
 %define TechnoClass.Bit.IsInTransport                  7
+
+%define TechnoClass.Offset.StaticDisguiseShimmer       0x073    ; byte ;temp - should move to the individual class
 ; 0x073, 0x074 empty
 %define TechnoClass.Offset.ArmorBias                   0x075    ; short (fixed)
 %define TechnoClass.Offset.FirepowerBias               0x077    ; short (fixed)
