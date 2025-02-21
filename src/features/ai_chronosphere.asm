@@ -48,7 +48,7 @@ ChronosphereCheck:
     mov  ebx,[edx+1]
     mov  eax,[edx+5]
     cmp  ebx,-1
-    jz   .HouseCheck
+    jz   .Ret
     mov  edx,[Globals___Frame]
     sub  edx,ebx
     cmp  edx,eax
@@ -59,7 +59,7 @@ ChronosphereCheck:
     xor  eax,eax
 .MobiusCheck:
     test eax,eax
-    jne  .HouseCheck
+    jne  .Ret
     mov  byte al,[esi+TechnoClass.Offset.House]
     movzx eax,al
     HouseClass.FromIndex(eax,edx)
@@ -89,7 +89,7 @@ ChronosphereCheck:
 .Process:
     push edx
     ; Hack the house's UnitToTeleport
-    mov  dword ebx,[esi+HouseClass.Offset.ID]
+    mov  dword ebx,[esi+AbstractClass.Offset.Index]
     and  ebx,0xFFFFFF
     mov  byte al,[esi+AbstractClass.Offset.RTTI]
     shl  eax,0x18
