@@ -125,5 +125,5 @@ Temp.LimboFire db 0
 @ENDHACK
 
 
-@SJMP 0x00566870,0x0056688E,_TechnoClass__Record_The_Kill_CrashFix
+@SJMP 0x00566870,0x0056688E ;_TechnoClass__Record_The_Kill_CrashFix
 
