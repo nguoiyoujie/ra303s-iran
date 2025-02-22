@@ -15,9 +15,10 @@ cextern str_RedAlertIni
 @SJMP 0x004F4B83,0x004F4B88 ; _Load_Game_Menu_Queue_Song_Call_Patch_Out
 @SJMP 0x0056C40C,0x0056C412 ; _ThemeClass_Scan_Jump_Over
 
+%assign ThemeSearch.Tries 0x80
 
 [section .data]
-SongsAvailable: dd 0
+ThemeSearch.Remaining db 0
 FileClass_this3  TIMES 128 db 0
 INIClass_this3 TIMES 128 db 0
 FileClass_redalertini  TIMES 128 db 0
@@ -71,22 +72,36 @@ str_twincannon db"Twin Cannon",0
 %endmacro
 
 
-@HACK 0x0056BF08,0x0056BF12,_ThemeClass__AI_Dont_Do_Anything_If_No_Songs_Available
-    cmp  dword[SongsAvailable],0
-    jz   0x0056BF76
-    cmp  word[0x006ABFDA],0 ; ds:int SampleType
-    jz   0x0056BF76
-    jmp  0x0056BF12
+; Warning: In the old implementation is possible to still hang if there are only certain songs that are not available in gameplay.
+; For example, MAP.AUD
+
+@HACK 0x0056BF8A,0x0056BF90,_ThemeClass__NextSong_InitCounter
+    mov  byte[ebp-0xC],dl
+    cmp  dl,0xFF
+    mov  byte[ThemeSearch.Remaining],ThemeSearch.Tries
+    jmp  0x0056BF90
 @ENDHACK
 
 
-@HACK 0x0056C3FE,0x0056C403,_ThemeClass__Scan_Check_If_Atleast_One_Theme_Is_Available
-    call 0x00462A30;  CCFileClass::Is_Available(int)
-    cmp  byte al,0
-    jz   .Dont_Set_Atleast_One_Available
-    mov  dword[SongsAvailable],1
-.Dont_Set_Atleast_One_Available:
-    jmp  0x0056C403
+@HACK 0x00056BFE3,0x00056BFE8,_ThemeClass__NextSong_CheckCounter_Random
+    call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
+    test eax,eax
+    jnz  0x0056BFEC
+    dec  byte[ThemeSearch.Remaining]
+    jnz  0x0056BFC4
+    mov  dword eax,-1
+    jmp  0x0056C019
+@ENDHACK
+
+
+@HACK 0x0056C00A,0x0056C00F,_ThemeClass__NextSong_CheckCounter_Sequential
+    call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
+    test eax,eax
+    jnz  0x0056C013
+    dec  byte[ThemeSearch.Remaining]
+    jnz  0x0056BFF3
+    mov  dword eax,-1
+    jmp  0x0056C019
 @ENDHACK
 
 
@@ -129,8 +144,7 @@ str_twincannon db"Twin Cannon",0
     xor  edx,edx
     cmp  byte[RedAlert.Options.RandomStartingSong],0
     jz   .Ret
-    cmp  dword[SongsAvailable],0
-    jz   .Ret
+    mov  byte[ThemeSearch.Remaining],ThemeSearch.Tries
 .Select_Random_Song:
     mov  eax,INIClass_this3
     mov  edx,str_filenames
@@ -144,7 +158,10 @@ str_twincannon db"Twin Cannon",0
     mov  eax,0x00668248 ; ThemeClass Theme
     call 0x0056C240 ; ThemeClass::Is_Allowed(ThemeType)
     test al,al
-    jz   .Select_Random_Song
+    jnz  .Next
+.Next:
+    dec  byte[ThemeSearch.Remaining]
+    jnz  .Select_Random_Song
 .Ret:
     mov  eax,0x00668248 ; ThemeClass Theme
     call 0x0056C020 ; ThemeClass::Queue_Song(ThemeType)
