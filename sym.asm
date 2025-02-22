@@ -264,6 +264,7 @@ setcglob 0x00554F38,TargetClass__TargetClass_AbstractTypeClass
 setcglob 0x00554F84,TargetClass__TargetClass_CellClass
 setcglob 0x00555384,Target___As_Coord                                          ; COORDINATE As_Coord(TARGET target)
 setcglob 0x005558E8,Target___As_Target                                         ; TARGET As_Target(CELL cell)
+setcglob 0x0055514C,Target___As_Techno                                         ; TechnoClass * As_Techno(TARGET target, bool check_active)
 
 ; TERRAIN.CPP
 setcglob 0x0056AD6C,TerrainClass__Write_INI                                    ; void TerrainClass::Write_INI(CCINIClass & ini)
@@ -481,7 +482,6 @@ setcglob 0x0067F2A4,Globals___Base_House                                       ;
 setcglob 0x0067F2B4,Globals___Session_Type                                     ; GameType SessionClass::Type;
 setcglob 0x0067F325,Globals___Session_MaxAhead                                 ; GameType SessionClass::MaxAhead;
 setcglob 0x0067F329,Globals___Session_FrameSendRate                            ; GameType SessionClass::FrameSendRate;
-setcglob 0x0067F2B4,Globals___Session_Type                                     ; GameType SessionClass::Type;
 setcglob 0x006805B0,Globals___Ipx                                              ; IPXManagerClass Ipx;
 setcglob 0x00680654,Globals___Seed                                            
 setcglob 0x00680658,Globals___CustomSeed                                      

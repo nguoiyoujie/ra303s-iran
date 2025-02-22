@@ -303,6 +303,7 @@ gstring str_StringTableOffsets                                 , "StringTableOff
 gstring str_EvacInMP                                           , "EvacInMP"
 gstring str_RemapJammedBuildings                               , "RemapJammedBuildings"
 gstring str_AtomRadius                                         , "AtomRadius"
+gstring str_TimeWarpDuration                                   , "TimeWarpDuration"
 ; str_ParabombsInMultiplayer (multi-use)
 gstring str_DeathReport1                                       , "DeathReport1"         
 gstring str_DeathReport2                                       , "DeathReport2"         

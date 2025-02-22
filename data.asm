@@ -75,6 +75,7 @@ gint   Rules.General.TanyaDeathReport                         ,0
 gshort Rules.General.TanyaDeathReport_Data                    ,0,16
 gint   Rules.General.DogDeathReport                           ,0
 gshort Rules.General.DogDeathReport_Data                      ,0,16
+gint   Rules.General.TimeWarpDuration                         ,0
 
 ; [AI]
 gint   Rules.AI.EasyAIGoldValue                               ,-1

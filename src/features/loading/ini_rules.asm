@@ -52,6 +52,7 @@ cextern str_AtomRadius
 cextern str_NoScreenShake
 cextern str_NoTeslaZapEffectDelay
 cextern str_BuildOffAlly
+cextern str_TimeWarpDuration
 
 cextern Rules.Aftermath.AftermathFastBuildSpeed
 cextern Rules.General.FixFormationSpeed
@@ -80,6 +81,7 @@ cextern Rules.General.DeathReport4_Data
 cextern Rules.General.DeathReport5_Data
 cextern Rules.General.TanyaDeathReport_Data
 cextern Rules.General.DogDeathReport_Data
+cextern Rules.General.TimeWarpDuration
 cextern Rules.AI.EasyAIGoldValue
 cextern Rules.AI.EasyAIGemValue
 cextern Rules.AI.NormalAIGoldValue
@@ -291,6 +293,9 @@ cextern Rules.General.BuildOffAlly
 
     call_INIClass__Get_Bool esi,str_General,str_BuildOffAlly,[Rules.General.BuildOffAlly]
     mov  byte[Rules.General.BuildOffAlly],al
+
+    call_INIClass__Get_Int esi,str_General,str_TimeWarpDuration,[Rules.General.TimeWarpDuration]
+    mov  [Rules.General.TimeWarpDuration],eax
 
 .Ret:
     Restore_Registers
