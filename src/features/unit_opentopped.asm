@@ -32,38 +32,38 @@ Temp.LimboFire db 0
 
 .CheckInfantry:
     InfantryClass.Class.Get(ecx,eax)
-    InfantryTypeClass.FromIndex(eax,ebx)
-    test byte[ebx+InfantryTypeClass.Offset.IsOpenTopped],1<<(InfantryTypeClass.Bit.IsOpenTopped-1)
+    InfantryTypeClass.FromIndex(eax,edx)
+    test byte[edx+InfantryTypeClass.Offset.IsOpenTopped],1<<(InfantryTypeClass.Bit.IsOpenTopped-1)
     jz   .Ret
     jmp  .Proceed
 
 .CheckUnit:
     UnitClass.Class.Get(ecx,eax)
-    UnitTypeClass.FromIndex(eax,ebx)
-    test byte[ebx+UnitTypeClass.Offset.IsOpenTopped],1<<(UnitTypeClass.Bit.IsOpenTopped-1)
+    UnitTypeClass.FromIndex(eax,edx)
+    test byte[edx+UnitTypeClass.Offset.IsOpenTopped],1<<(UnitTypeClass.Bit.IsOpenTopped-1)
     jz   .Ret
     jmp  .Proceed
 
 .CheckVessel:
     VesselClass.Class.Get(ecx,eax)
-    VesselTypeClass.FromIndex(eax,ebx)
-    test byte[ebx+VesselTypeClass.Offset.IsOpenTopped],1<<(VesselTypeClass.Bit.IsOpenTopped-1)
+    VesselTypeClass.FromIndex(eax,edx)
+    test byte[edx+VesselTypeClass.Offset.IsOpenTopped],1<<(VesselTypeClass.Bit.IsOpenTopped-1)
     jz   .Ret
     jmp  .Proceed
 
 .CheckAircraft:
     AircraftClass.Class.Get(ecx,eax)
-    AircraftTypeClass.FromIndex(eax,ebx)
-    test byte[ebx+AircraftTypeClass.Offset.IsOpenTopped],1<<(AircraftTypeClass.Bit.IsOpenTopped-1)
+    AircraftTypeClass.FromIndex(eax,edx)
+    test byte[edx+AircraftTypeClass.Offset.IsOpenTopped],1<<(AircraftTypeClass.Bit.IsOpenTopped-1)
     jz   .Ret
     jmp  .Proceed
 
 .CheckBuilding:
     BuildingClass.Class.Get(ecx,eax)
-    BuildingTypeClass.FromIndex(eax,ebx)
-    test byte[ebx+BuildingTypeClass.Offset.IsOpenTopped],1<<(BuildingTypeClass.Bit.IsOpenTopped-1)
+    BuildingTypeClass.FromIndex(eax,edx)
+    test byte[edx+BuildingTypeClass.Offset.IsOpenTopped],1<<(BuildingTypeClass.Bit.IsOpenTopped-1)
     jz   .Ret
-    jmp  .Proceed
+    ;jmp  .Proceed
 
 .Proceed:
     lea  eax,[ecx+0x53]
