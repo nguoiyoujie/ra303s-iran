@@ -10,7 +10,6 @@ cextern CCINIClass__Load
 cextern Vortex___ChronalVortex
 cextern ChronalVortexClass__Stop
 cextern Globals___NewUnitsEnabled
-cextern Globals___SessionType
 cextern Globals___Scen_Scenario
 cextern Globals___Session_Type
 cextern Clear_Extended_Savegame_Values
