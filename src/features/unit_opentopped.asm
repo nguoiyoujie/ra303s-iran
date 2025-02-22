@@ -1,10 +1,9 @@
 ;----------------------------------------------------------------
 ; src/features/unit_opentopped.asm
 ;
-; Before, only certain units, such as the APC, Phase Tank or Supply Truck has in-built logic got unloading Passengers. Other units do not do anything, even if the deploy cursor is shown
-; Now, any unit with Passengers set to 1 or above may unload like the Supply Truck. APC and Phase Tank retain their special behavior.
+; A techno with passengers may be defined to be 'open-topped'. That is: Its passengers can fire from within the transport.
 ; 
-; This function is enabled by default. The new unit need only redefine Passengers=
+; This function is enabled by setting OpenTopped= for the transport in question.
 ;
 ; No compatibility issues is expected.
 ;
@@ -105,7 +104,7 @@ Temp.LimboFire db 0
     pop  ecx
     mov  eax,edx
     call 0x0057A0CC ; UnitClass__Firing_AI
-    mov  dword[edx+AbstractClass.Offset.Coord],-1
+    ;mov  dword[edx+AbstractClass.Offset.Coord],-1
     ;jmp  .Next
 .Next:
     mov  eax,[edx+ObjectClass.Offset.Next]
@@ -124,6 +123,8 @@ Temp.LimboFire db 0
     jmp  0x004F10E2
 @ENDHACK
 
+; should investigate why these values become invalid
 
 @SJMP 0x00566870,0x0056688E ;_TechnoClass__Record_The_Kill_CrashFix
 
+@SJMP 0x00566B13,0x00566B36 ;_TechnoClass__Record_The_Kill_CrashFix
