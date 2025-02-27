@@ -659,21 +659,21 @@ setcglob 0x0065DD7C,BuildingTypeClass.Count
 setcglob 0x0065DDA4,BuildingTypeClass.Array   
 setcglob 0x57,      BuildingTypeClass.ORIGINAL_COUNT   
 setcglob 0x207,     BuildingTypeClass.ORIGINAL_SIZE    
-setcglob 0xC52,     BuildingTypeClass.NEW_SIZE
+setcglob 0xC53,     BuildingTypeClass.NEW_SIZE
 
 ; AircraftTypeClass          0x0065DDBC
 setcglob 0x0065DDC8,AircraftTypeClass.Count   
 setcglob 0x0065DDF0,AircraftTypeClass.Array   
 setcglob 0x7       ,AircraftTypeClass.ORIGINAL_COUNT   
 setcglob 0x19D     ,AircraftTypeClass.ORIGINAL_SIZE    
-setcglob 0x289     ,AircraftTypeClass.NEW_SIZE
+setcglob 0x28A     ,AircraftTypeClass.NEW_SIZE
 
 ; InfantryTypeClass          0x0065DE08
 setcglob 0x0065DE14,InfantryTypeClass.Count   
 setcglob 0x0065DE3C,InfantryTypeClass.Array   
 setcglob 0x1A      ,InfantryTypeClass.ORIGINAL_COUNT   
 setcglob 0x1A2     ,InfantryTypeClass.ORIGINAL_SIZE    
-setcglob 0x3D8     ,InfantryTypeClass.NEW_SIZE
+setcglob 0x3D9     ,InfantryTypeClass.NEW_SIZE
 
 ; BulletTypeClass            0x0065DE54
 setcglob 0x0065DE60,BulletTypeClass.Count     
@@ -701,7 +701,7 @@ setcglob 0x0065DF44,VesselTypeClass.Count
 setcglob 0x0065DF6C,VesselTypeClass.Array     
 setcglob 0x7       ,VesselTypeClass.ORIGINAL_COUNT     
 setcglob 0x19E     ,VesselTypeClass.ORIGINAL_SIZE      
-setcglob 0x30E     ,VesselTypeClass.NEW_SIZE  
+setcglob 0x30F     ,VesselTypeClass.NEW_SIZE  
 
 ; TemplateTypeClass
 

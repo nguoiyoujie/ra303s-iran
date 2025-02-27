@@ -60,6 +60,10 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Bit.IsRepairPad                  1
 %define BuildingTypeClass.Offset.IsOpenTopped              0x194    ; bool
 %define BuildingTypeClass.Bit.IsOpenTopped                 2
+%define BuildingTypeClass.Offset.ManualAcquire             0x194    ; bool
+%define BuildingTypeClass.Bit.ManualAcquire                3
+%define BuildingTypeClass.Offset.ToProtectWithSpecials     0x194    ; bool
+%define BuildingTypeClass.Bit.ToProtectWithSpecials        4
 
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; byte, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
@@ -116,7 +120,8 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Offset.FreeUnit                  0xC4F    ; byte
 %define BuildingTypeClass.Offset.AILowPowerSellPriority    0xC50    ; byte
 %define BuildingTypeClass.Offset.AILowMoneySellPriority    0xC51    ; byte
-;0xC52
+%define BuildingTypeClass.Offset.CloakSound                0xC52    ; byte
+;0xC53
 
 ; INI String controls
 str.BuildingTypeClass.IsBase                    db"BaseNormal",0                  ;existing feature
@@ -137,6 +142,8 @@ str.BuildingTypeClass.IsAirfield                db"IsAirfield",0                
 str.BuildingTypeClass.IsHelipad                 db"IsHelipad",0                   ;new feature
 str.BuildingTypeClass.IsRepairPad               db"IsRepairPad",0                 ;new feature
 str.BuildingTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new feature
+str.BuildingTypeClass.ManualAcquire             db"ManualAcquire",0               ;new ini feature
+str.BuildingTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
 str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0              ;new ini feature
@@ -185,6 +192,7 @@ str.BuildingTypeClass.AIBuildType               db"AIBuildType",0               
 str.BuildingTypeClass.FreeUnit                  db"FreeUnit",0                    ;new ini feature
 str.BuildingTypeClass.AILowPowerSellPriority    db"AILowPowerSellPriority",0      ;new ini feature
 str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0      ;new ini feature
+str.BuildingTypeClass.CloakSound                db"CloakSound",0                  ;new ini feature
 
 
 %define BuildingTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, BuildingTypeClass.Count, BuildingTypeClass.Array, reg_output
@@ -260,10 +268,17 @@ str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0    
 %define BuildingTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, BuildingTypeClass.Offset.IsOpenTopped, BuildingTypeClass.Bit.IsOpenTopped, value
 %define BuildingTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.IsOpenTopped, BuildingTypeClass.Bit.IsOpenTopped, str.BuildingTypeClass.IsOpenTopped
 
+%define BuildingTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, BuildingTypeClass.Offset.ManualAcquire, BuildingTypeClass.Bit.ManualAcquire, reg_output
+%define BuildingTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, BuildingTypeClass.Offset.ManualAcquire, BuildingTypeClass.Bit.ManualAcquire, value
+%define BuildingTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.ManualAcquire, BuildingTypeClass.Bit.ManualAcquire, str.BuildingTypeClass.ManualAcquire
+
+%define BuildingTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define BuildingTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, value
+%define BuildingTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, str.BuildingTypeClass.ToProtectWithSpecials
+
 %define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              GetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
 %define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   SetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value
 %define BuildingTypeClass.SpecialWeapons.Read(ptr_type,ptr_rules,function)     AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, BuildingTypeClass.Offset.SpecialWeapons, str.BuildingTypeClass.SpecialWeapons, function
-
 
 ; read and translate to value, AircraftType=2, BuildingType=6, InfantryType=14, UnitType=29, VesselType=31
 %define BuildingTypeClass.FactoryType.Get(ptr_type,reg_output)                 GetByte                                ptr_type, BuildingTypeClass.Offset.FactoryType, reg_output
@@ -434,5 +449,9 @@ str.BuildingTypeClass.AILowMoneySellPriority    db"AILowMoneySellPriority",0    
 %define BuildingTypeClass.AILowMoneySellPriority.Get(ptr_type,reg_output)         GetByte                                ptr_type, BuildingTypeClass.Offset.AILowMoneySellPriority, reg_output
 %define BuildingTypeClass.AILowMoneySellPriority.Set(ptr_type,value)              SetByte                                ptr_type, BuildingTypeClass.Offset.AILowMoneySellPriority, value
 %define BuildingTypeClass.AILowMoneySellPriority.Read(ptr_type,ptr_rules)         AbstractTypeClass.ReadByte             ptr_type, ptr_rules, BuildingTypeClass.Offset.AILowMoneySellPriority, str.BuildingTypeClass.AILowMoneySellPriority
+
+%define BuildingTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, BuildingTypeClass.Offset.CloakSound, reg_output
+%define BuildingTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, BuildingTypeClass.Offset.CloakSound, value
+%define BuildingTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, BuildingTypeClass.Offset.CloakSound, str.BuildingTypeClass.CloakSound, function
 
 %endif

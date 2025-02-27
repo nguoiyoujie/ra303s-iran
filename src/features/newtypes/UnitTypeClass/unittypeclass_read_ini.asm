@@ -35,6 +35,10 @@ cextern Houses.USignificantScan
     UnitTypeClass.IsStaticDisguise.Read(esi,edi)
     UnitTypeClass.IsChronoTank.Read(esi,edi)
     UnitTypeClass.IsOpenTopped.Read(esi,edi)
+    UnitTypeClass.ManualAcquire.Read(esi,edi)
+    UnitTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    UnitTypeClass.ToTeleportWithSpecials.Read(esi,edi)
+    UnitTypeClass.IsImmuneToTimeWarp.Read(esi,edi)
     ;UnitTypeClass.IsNoFireWhileMoving.Read(esi,edi) ; already read by INI
 
     UnitTypeClass.TurretOffset.Read(esi,edi)
@@ -63,6 +67,7 @@ cextern Houses.USignificantScan
     UnitTypeClass.AIBuildLimit.Read(esi,edi)
     UnitTypeClass.AIBuildWeight.Read(esi,edi)
     UnitTypeClass.AIDeployBuildLimit.Read(esi,edi)
+    UnitTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

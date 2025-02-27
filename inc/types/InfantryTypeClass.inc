@@ -34,6 +34,10 @@ cextern InfantryTypeClass.Array
 %define InfantryTypeClass.Bit.IsStaticDisguise             2
 %define InfantryTypeClass.Offset.IsOpenTopped              0x193    ; bool
 %define InfantryTypeClass.Bit.IsOpenTopped                 3
+%define InfantryTypeClass.Offset.ManualAcquire             0x193    ; bool
+%define InfantryTypeClass.Bit.ManualAcquire                4
+%define InfantryTypeClass.Offset.ToProtectWithSpecials     0x193    ; bool
+%define InfantryTypeClass.Bit.ToProtectWithSpecials        5
 ; 0x193, 0x194 and 0x195 are empty... 
 %define InfantryTypeClass.Offset.Type                      0x196    ; byte
 %define InfantryTypeClass.Offset.Pip                       0x197    ; byte, PipEnum: 0 PIP_EMPTY, 1 PIP_FULL, 5 PIP_ENGINEER, 6 PIP_CIVILIAN, 7 PIP_COMMANDO, others for funky results, might be able to add new pips by extending pips.shp beyond 22 frames?
@@ -138,7 +142,8 @@ cextern InfantryTypeClass.Array
 ;0x3F0
 %define InfantryTypeClass.Offset.AIBuildLimit                      0x3D0    ; INT
 %define InfantryTypeClass.Offset.AIBuildWeight                     0x3D4    ; INT
-;0x3D8
+%define InfantryTypeClass.Offset.CloakSound                        0x3D8    ; byte
+;0x3D9
 
 
 ; INI String controls
@@ -153,6 +158,8 @@ str.InfantryTypeClass.IsRemapOverride               db"IsRemapOverride",0       
 str.InfantryTypeClass.Retaliates                    db"Retaliates",0            
 str.InfantryTypeClass.IsStaticDisguise              db"IsStaticDisguise",0            
 str.InfantryTypeClass.IsOpenTopped                  db"OpenTopped",0                  ;new ini feature
+str.InfantryTypeClass.ManualAcquire                 db"ManualAcquire",0               ;new ini feature
+str.InfantryTypeClass.ToProtectWithSpecials         db"ToProtectWithSpecials",0       ;new ini feature
 str.InfantryTypeClass.Type                          db"Type",0                        ;?to check?
 str.InfantryTypeClass.Pip                           db"Pip",0                         ;new ini feature
 str.InfantryTypeClass.DoControls                    db"DoControls",0                  ;?to implement?
@@ -237,6 +244,8 @@ str.InfantryTypeClass.ActionReport                  db"ActionReport",0
 str.InfantryTypeClass.RandomReport                  db"RandomReport",0         
 str.InfantryTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0         
+str.InfantryTypeClass.CloakSound                    db"CloakSound",0                  ;new ini feature
+
 
 %define InfantryTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
 %define InfantryTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, InfantryTypeClass.Count, InfantryTypeClass.Array, reg_output
@@ -286,6 +295,14 @@ str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define InfantryTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, InfantryTypeClass.Offset.IsOpenTopped, InfantryTypeClass.Bit.IsOpenTopped, reg_output
 %define InfantryTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, InfantryTypeClass.Offset.IsOpenTopped, InfantryTypeClass.Bit.IsOpenTopped, value
 %define InfantryTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.IsOpenTopped, InfantryTypeClass.Bit.IsOpenTopped, str.InfantryTypeClass.IsOpenTopped
+
+%define InfantryTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, InfantryTypeClass.Offset.ManualAcquire, InfantryTypeClass.Bit.ManualAcquire, reg_output
+%define InfantryTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, InfantryTypeClass.Offset.ManualAcquire, InfantryTypeClass.Bit.ManualAcquire, value
+%define InfantryTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.ManualAcquire, InfantryTypeClass.Bit.ManualAcquire, str.InfantryTypeClass.ManualAcquire
+
+%define InfantryTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define InfantryTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, value
+%define InfantryTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, str.InfantryTypeClass.ToProtectWithSpecials
 
 %define InfantryTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, InfantryTypeClass.Offset.Type, reg_output
 %define InfantryTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, InfantryTypeClass.Offset.Type, value
@@ -622,5 +639,9 @@ str.InfantryTypeClass.AIBuildWeight                 db"AIBuildWeight",0
 %define InfantryTypeClass.AIBuildWeight.Get(ptr_type,reg_output)               GetInt                                 ptr_type, InfantryTypeClass.Offset.AIBuildWeight, reg_output
 %define InfantryTypeClass.AIBuildWeight.Set(ptr_type,value)                    SetInt                                 ptr_type, InfantryTypeClass.Offset.AIBuildWeight, value
 %define InfantryTypeClass.AIBuildWeight.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadInt              ptr_type, ptr_rules, InfantryTypeClass.Offset.AIBuildWeight, str.InfantryTypeClass.AIBuildWeight
-	
+
+%define InfantryTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, InfantryTypeClass.Offset.CloakSound, reg_output
+%define InfantryTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, InfantryTypeClass.Offset.CloakSound, value
+%define InfantryTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, InfantryTypeClass.Offset.CloakSound, str.InfantryTypeClass.CloakSound, function
+
 %endif

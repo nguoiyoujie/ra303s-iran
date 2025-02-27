@@ -51,13 +51,16 @@ AircraftTypes_Read_INI:
     AircraftTypeClass.IsRotorEquipped.Read(esi,edi)
     AircraftTypeClass.IsRotorCustom.Read(esi,edi)
     AircraftTypeClass.IsGigundo.Read(esi,edi)
-    AircraftTypeClass.IsOpenTopped.Read(esi,edi)
     AircraftTypeClass.SeekerGuard.Read(esi,edi)
+    AircraftTypeClass.IsOpenTopped.Read(esi,edi)
+    AircraftTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    AircraftTypeClass.IsImmuneToTimeWarp.Read(esi,edi)
     ;AircraftTypeClass.PreferredBuilding.Read(esi,edi)
     AircraftTypeClass.LandingSpeed.Read(esi,edi)
     AircraftTypeClass.Response_Select.Read(esi,edi,_GetAircraftResponseSelectFromString)
     AircraftTypeClass.Response_Move.Read(esi,edi,_GetAircraftResponseMoveFromString)
     AircraftTypeClass.Response_Attack.Read(esi,edi,_GetAircraftResponseAttackFromString)
+    AircraftTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
 
 ;    lea  edx,[esi+5]
 ;    GetBit byte[esi+AircraftTypeClass.Offset.IsFixedWing],AircraftTypeClass.Bit.IsFixedWing

@@ -17,7 +17,7 @@
     push eax
     push ecx
     InfantryTypeClass.FromIndex([edx],ecx)
-    TechnoTypeClass.ManualAcquire.Get(ecx,al)
+    InfantryTypeClass.ManualAcquire.Get(ecx,al)
     test al,al
     pop  ecx
     pop  eax
@@ -33,7 +33,7 @@
     push eax
     ;mov  ecx,[ecx]
     UnitTypeClass.FromIndex([ecx],edx)
-    TechnoTypeClass.ManualAcquire.Get(edx,al)
+    UnitTypeClass.ManualAcquire.Get(edx,al)
     test al,al
     jz   .Continue
     pop  eax
@@ -64,7 +64,7 @@
     push eax
     ;mov  ecx,[ecx]
     VesselTypeClass.FromIndex([ecx],edx)
-    TechnoTypeClass.ManualAcquire.Get(edx,al)
+    VesselTypeClass.ManualAcquire.Get(edx,al)
     test al,al
     jz   .Continue
     pop  eax

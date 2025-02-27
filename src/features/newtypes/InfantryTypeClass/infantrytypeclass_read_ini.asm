@@ -129,6 +129,10 @@ str.CUSTOM                           db"CUSTOM",0
     InfantryTypeClass.Retaliates.Read(esi,edi)  
     InfantryTypeClass.IsStaticDisguise.Read(esi,edi)
     InfantryTypeClass.IsOpenTopped.Read(esi,edi)
+    InfantryTypeClass.ManualAcquire.Read(esi,edi)
+    InfantryTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    InfantryTypeClass.IsImmuneToTimeWarp.Read(esi,edi)
+    InfantryTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

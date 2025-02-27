@@ -37,16 +37,10 @@
 %define TechnoTypeClass.Bit.IsSelfHealing             4    
 %define TechnoTypeClass.Offset.IsExploding            0x13A    ; BOOL // Already supported by game INI
 %define TechnoTypeClass.Bit.IsExploding               5    
-%define TechnoTypeClass.Offset.ManualAcquire          0x13A    ; BOOL
-%define TechnoTypeClass.Bit.ManualAcquire             6    
-%define TechnoTypeClass.Offset.ToProtectWithSpecials  0x13A    ; BOOL
-%define TechnoTypeClass.Bit.ToProtectWithSpecials     7    
-%define TechnoTypeClass.Offset.ToTeleportWithSpecials 0x13A    ; BOOL
-%define TechnoTypeClass.Bit.ToTeleportWithSpecials    8  
+; space for 3 bools + 1 byte
 
 ; 0x13B and 0x13C were empty... 
 %define TechnoTypeClass.Offset.PrereqType             0x13B    ; byte, new variable, occupying unused location
-%define TechnoTypeClass.Offset.CloakSound             0x13C    ; byte, new variable, occupying unused location
 
 ;Risk/0x154, Reward/0x158 and Points/0x18E are assigned the same values. Collapse them to the same variable to free up 2 INTs worth of memory
 %define TechnoTypeClass.Offset.MZone                  0x13D    ; byte
@@ -96,12 +90,8 @@ str.TechnoTypeClass.IsRemappable              db"IsRemappable",0                
 str.TechnoTypeClass.IsCloakable               db"Cloakable",0                   ;existing feature
 str.TechnoTypeClass.IsSelfHealing             db"SelfHealing",0                 ;existing feature
 str.TechnoTypeClass.IsExploding               db"Explodes",0                    ;existing feature
-str.TechnoTypeClass.ManualAcquire             db"ManualAcquire",0               ;new feature
-str.TechnoTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new feature
-str.TechnoTypeClass.ToTeleportWithSpecials    db"ToTeleportWithSpecials",0      ;new feature
 
 str.TechnoTypeClass.PrereqType                db"PrerequisiteType",0            ;new feature
-str.TechnoTypeClass.CloakSound                db"CloakSound",0                  ;new feature
 
 str.TechnoTypeClass.MZone                     db"MovementZone",0                ;internal feature
 str.TechnoTypeClass.ThreatRange               db"GuardRange",0                  ;existing feature
@@ -183,25 +173,9 @@ str.TechnoTypeClass.DeathWeapon               db"DeathWeapon",0                 
 %define TechnoTypeClass.IsExploding.Set(ptr_type,value)                      SetBool                                ptr_type, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, value
 %define TechnoTypeClass.IsExploding.Read(ptr_type,ptr_rules)                 AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.IsExploding, TechnoTypeClass.Bit.IsExploding, str.TechnoTypeClass.IsExploding
 
-%define TechnoTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, reg_output
-%define TechnoTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, value
-%define TechnoTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ManualAcquire, TechnoTypeClass.Bit.ManualAcquire, str.TechnoTypeClass.ManualAcquire
-
-%define TechnoTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, reg_output
-%define TechnoTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, value
-%define TechnoTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ToProtectWithSpecials, TechnoTypeClass.Bit.ToProtectWithSpecials, str.TechnoTypeClass.ToProtectWithSpecials
-
-%define TechnoTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, reg_output
-%define TechnoTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, value
-%define TechnoTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, TechnoTypeClass.Offset.ToTeleportWithSpecials, TechnoTypeClass.Bit.ToTeleportWithSpecials, str.TechnoTypeClass.ToTeleportWithSpecials
-
 %define TechnoTypeClass.PrereqType.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, reg_output
 %define TechnoTypeClass.PrereqType.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.PrereqType, value
 %define TechnoTypeClass.PrereqType.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, TechnoTypeClass.Offset.PrereqType, str.TechnoTypeClass.PrereqType, function
-
-%define TechnoTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, TechnoTypeClass.Offset.CloakSound, reg_output
-%define TechnoTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, TechnoTypeClass.Offset.CloakSound, value
-%define TechnoTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, TechnoTypeClass.Offset.CloakSound, str.TechnoTypeClass.CloakSound, function
 
 %define TechnoTypeClass.Prerequisite.Get(ptr_type,reg_output)                GetInt                                ptr_type, TechnoTypeClass.Offset.Prerequisite, reg_output
 %define TechnoTypeClass.Prerequisite.Set(ptr_type,value)                     SetInt                                ptr_type, TechnoTypeClass.Offset.Prerequisite, value

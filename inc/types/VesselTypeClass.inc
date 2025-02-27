@@ -18,6 +18,12 @@ cextern VesselTypeClass.Array
 %define VesselTypeClass.Bit.HasSecondTurret                  2 
 %define VesselTypeClass.Offset.IsOpenTopped                  0x192    ; bool
 %define VesselTypeClass.Bit.IsOpenTopped                     3    
+%define VesselTypeClass.Offset.ManualAcquire                 0x192    ; bool
+%define VesselTypeClass.Bit.ManualAcquire                    4
+%define VesselTypeClass.Offset.ToProtectWithSpecials         0x192    ; bool
+%define VesselTypeClass.Bit.ToProtectWithSpecials            5
+%define VesselTypeClass.Offset.ToTeleportWithSpecials        0x192    ; bool
+%define VesselTypeClass.Bit.ToTeleportWithSpecials           6
 ; 0x193, 0x194 and 0x195 are empty...                   
 %define VesselTypeClass.Offset.Type                          0x196    ; byte
 %define VesselTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -48,13 +54,17 @@ cextern VesselTypeClass.Array
 %define VesselTypeClass.Offset.TurretShape                   0x302    ; int ptr to SHP file memory
 %define VesselTypeClass.Offset.TurretFireOffset              0x306    ; INT
 %define VesselTypeClass.Offset.TurretAdjustY                 0x30A    ; INT
-;0x30E
+%define VesselTypeClass.Offset.CloakSound                    0x30E    ; byte
+;0x30F
 
 
 ; INI String controls
 str.VesselTypeClass.IsPieceOfEight            db"IsPieceOfEight",0              ;internal feature
 str.VesselTypeClass.HasSecondTurret           db"HasSecondTurret",0             ;new ini feature
 str.VesselTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new ini feature
+str.VesselTypeClass.ManualAcquire             db"ManualAcquire",0               ;new ini feature
+str.VesselTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
+str.VesselTypeClass.ToTeleportWithSpecials    db"ToTeleportWithSpecials",0      ;new ini feature
 str.VesselTypeClass.Type                      db"Type",0                        ;internal feature
 str.VesselTypeClass.TurretOffset              db"TurretOffset",0                ;unused feature, now new ini feature (measured in pixels)
 str.VesselTypeClass.DefaultMission            db"DefaultMission",0              ;unused feature
@@ -71,6 +81,8 @@ str.VesselTypeClass.Response_Enter            db"ResponseEnter",0               
 str.VesselTypeClass.Response_Deploy           db"ResponseDeploy",0              ;new ini feature
 str.VesselTypeClass.AmmoReloadRate            db"AmmoReloadRate",0              ;new ini feature
 str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            ;new ini feature
+str.VesselTypeClass.CloakSound                db"CloakSound",0                  ;new ini feature
+
 
 %define VesselTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
 %define VesselTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, VesselTypeClass.Count, VesselTypeClass.Array, reg_output
@@ -88,6 +100,18 @@ str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            
 %define VesselTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, VesselTypeClass.Offset.IsOpenTopped, VesselTypeClass.Bit.IsOpenTopped, reg_output
 %define VesselTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, VesselTypeClass.Offset.IsOpenTopped, VesselTypeClass.Bit.IsOpenTopped, value
 %define VesselTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.IsOpenTopped, VesselTypeClass.Bit.IsOpenTopped, str.VesselTypeClass.IsOpenTopped
+
+%define VesselTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, VesselTypeClass.Offset.ManualAcquire, VesselTypeClass.Bit.ManualAcquire, reg_output
+%define VesselTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, VesselTypeClass.Offset.ManualAcquire, VesselTypeClass.Bit.ManualAcquire, value
+%define VesselTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.ManualAcquire, VesselTypeClass.Bit.ManualAcquire, str.VesselTypeClass.ManualAcquire
+
+%define VesselTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, VesselTypeClass.Offset.ToProtectWithSpecials, VesselTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define VesselTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, VesselTypeClass.Offset.ToProtectWithSpecials, VesselTypeClass.Bit.ToProtectWithSpecials, value
+%define VesselTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.ToProtectWithSpecials, VesselTypeClass.Bit.ToProtectWithSpecials, str.VesselTypeClass.ToProtectWithSpecials
+
+%define VesselTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, reg_output
+%define VesselTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, value
+%define VesselTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, str.VesselTypeClass.ToTeleportWithSpecials
 
 %define VesselTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, VesselTypeClass.Offset.Type, reg_output
 %define VesselTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, VesselTypeClass.Offset.Type, value
@@ -155,5 +179,9 @@ str.VesselTypeClass.AmmoReloadAmount          db"AmmoReloadAmount",0            
 %define VesselTypeClass.Response_Deploy.Get(ptr_type,reg_output)             GetInt                                 ptr_type, VesselTypeClass.Offset.Response_Deploy, reg_output
 %define VesselTypeClass.Response_Deploy_Data.Get(ptr_type,reg_output)        GetWord                                ptr_type, VesselTypeClass.Offset.Response_Deploy_Data, reg_output
 %define VesselTypeClass.Response_Deploy.Read(ptr_type,ptr_rules,function)    AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, VesselTypeClass.Offset.Response_Deploy, str.VesselTypeClass.Response_Deploy, function
+
+%define VesselTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, VesselTypeClass.Offset.CloakSound, reg_output
+%define VesselTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, VesselTypeClass.Offset.CloakSound, value
+%define VesselTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, VesselTypeClass.Offset.CloakSound, str.VesselTypeClass.CloakSound, function
 
 %endif

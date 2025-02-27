@@ -148,7 +148,7 @@ Init_Heap_OverrideExistingInfantryTypes:
     InfantryTypeClass.RandomReport.Set(edi,0x61) ; VOC_TANYA_SHAKE
     InfantryTypeClass.AIBuildLimit.Set(edi,1)
     InfantryTypeClass.AIBuildWeight.Set(edi,1)
-    TechnoTypeClass.ManualAcquire.Set(edi,1)
+    InfantryTypeClass.ManualAcquire.Set(edi,1)
     InfantryTypeClass.Retaliates.Set(edi,1)
 
 	retn

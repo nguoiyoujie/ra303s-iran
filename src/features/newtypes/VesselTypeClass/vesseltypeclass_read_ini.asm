@@ -54,6 +54,10 @@ VesselTypes_Read_INI:
     VesselTypeClass.IsPieceOfEight.Read(esi,edi)             
     VesselTypeClass.HasSecondTurret.Read(esi,edi)
     VesselTypeClass.IsOpenTopped.Read(esi,edi)
+    VesselTypeClass.ManualAcquire.Read(esi,edi)
+    VesselTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    VesselTypeClass.ToTeleportWithSpecials.Read(esi,edi)
+    VesselTypeClass.IsImmuneToTimeWarp.Read(esi,edi)
     ;VesselTypeClass.Type.Read(esi,edi)                       
     VesselTypeClass.TurretOffset.Read(esi,edi)               
     VesselTypeClass.TurretFireOffset.Read(esi,edi)               
@@ -61,6 +65,7 @@ VesselTypes_Read_INI:
     ;VesselTypeClass.Explosion.Read(esi,edi)                  
     ;VesselTypeClass.MaxSize.Read(esi,edi)                    
     VesselTypeClass.TurretName.Read(esi,edi,_LoadTurretShapeFromString)
+
     VesselTypeClass.TurretName.Get(esi,eax)
     call _LoadTurretShapeFromString
     
@@ -74,7 +79,8 @@ VesselTypes_Read_INI:
     VesselTypeClass.Response_Harvest.Read(esi,edi,_GetVesselResponseHarvestFromString)
     VesselTypeClass.Response_Enter.Read(esi,edi,_GetVesselResponseEnterFromString)
     VesselTypeClass.Response_Deploy.Read(esi,edi,_GetVesselResponseDeployFromString)
-    
+    VesselTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
+
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx
     push ecx

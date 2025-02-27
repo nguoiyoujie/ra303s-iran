@@ -84,6 +84,8 @@ Temp.OverlayListRemaining     dw 0
     BuildingTypeClass.IsRepairPad.Read(esi,edi)
     BuildingTypeClass.IsKennel.Read(esi,edi)
     BuildingTypeClass.IsOpenTopped.Read(esi,edi)
+    BuildingTypeClass.ToProtectWithSpecials.Read(esi,edi)
+    BuildingTypeClass.IsImmuneToTimeWarp.Read(esi,edi)
 
     BuildingTypeClass.FactoryType.Read(esi,edi,_SelectFactoryType)
     BuildingTypeClass.ExitCoordX.Read(esi,edi)
@@ -125,7 +127,7 @@ Temp.OverlayListRemaining     dw 0
     BuildingTypeClass.FreeUnit.Read(esi,edi,_GetUnitTypeIDFromString)
     BuildingTypeClass.AILowMoneySellPriority.Read(esi,edi)
     BuildingTypeClass.AILowPowerSellPriority.Read(esi,edi)
-
+    BuildingTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
 
     ; set global significant flag-field. This will be used for Building Destroyed checks (to exclude Insignificant=yes buildings)
     push edx

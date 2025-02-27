@@ -45,15 +45,11 @@ cextern str_Comma
     TechnoTypeClass.PrimaryLateral.Read(esi,edi)
     TechnoTypeClass.SecondaryOffset.Read(esi,edi)
     TechnoTypeClass.SecondaryLateral.Read(esi,edi)
-    TechnoTypeClass.ManualAcquire.Read(esi,edi)
-    TechnoTypeClass.ToProtectWithSpecials.Read(esi,edi)
-    TechnoTypeClass.ToTeleportWithSpecials.Read(esi,edi)
 ; somehow setting primary and secondary weapons remove Aftermath weapons.
     TechnoTypeClass.PrimaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.SecondaryWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.DeathWeapon.Read(esi,edi,_GetWeaponTypeFromString)
     TechnoTypeClass.PrereqType.Read(esi,edi,_SelectPrereqTypeFromString)
-    TechnoTypeClass.CloakSound.Read(esi,edi,_GetVocTypeFromString)
     TechnoTypeClass.Prerequisite.Read(esi,edi,_GetPrerequisiteFromString)
 
     pop  edi

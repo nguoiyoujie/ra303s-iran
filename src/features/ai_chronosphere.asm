@@ -37,7 +37,7 @@ ChronosphereCheck:
 .CheckUnit:
     UnitClass.Class.Get(esi,ebx)
     UnitTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToTeleportWithSpecials],1<<(TechnoTypeClass.Bit.ToTeleportWithSpecials-1)
+    test byte[eax+UnitTypeClass.Offset.ToTeleportWithSpecials],1<<(UnitTypeClass.Bit.ToTeleportWithSpecials-1)
     jnz  .CheckChronoTank
     jmp  .Ret
 
@@ -70,7 +70,7 @@ ChronosphereCheck:
 .CheckVessel:
     VesselClass.Class.Get(esi,ebx)
     VesselTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToTeleportWithSpecials],1<<(TechnoTypeClass.Bit.ToTeleportWithSpecials-1)
+    test byte[eax+VesselTypeClass.Offset.ToTeleportWithSpecials],1<<(VesselTypeClass.Bit.ToTeleportWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 

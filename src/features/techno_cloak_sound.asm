@@ -27,7 +27,7 @@
 .CheckInfantry:
     InfantryClass.Class.Get(ebx,edx)
     InfantryTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    InfantryTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566EB7
     movzx eax,al
@@ -37,7 +37,7 @@
 .CheckUnit:
     UnitClass.Class.Get(ebx,edx)
     UnitTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    UnitTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566EB7
     movzx eax,al
@@ -47,7 +47,7 @@
 .CheckBuilding:
     BuildingClass.Class.Get(ebx,edx)
     BuildingTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    BuildingTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566EB7
     movzx eax,al
@@ -57,7 +57,7 @@
 .CheckAircraft:
     AircraftClass.Class.Get(ebx,edx)
     AircraftTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    AircraftTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566EB7
     movzx eax,al
@@ -67,7 +67,7 @@
 .CheckVessel:
     VesselClass.Class.Get(ebx,edx)
     VesselTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    VesselTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566EBB ; special for subs 
     movzx eax,al
@@ -94,7 +94,7 @@
 .CheckInfantry:
     InfantryClass.Class.Get(ebx,edx)
     InfantryTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    InfantryTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566E12
     movzx eax,al
@@ -104,7 +104,7 @@
 .CheckUnit:
     UnitClass.Class.Get(ebx,edx)
     UnitTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    UnitTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566E12
     movzx eax,al
@@ -114,7 +114,7 @@
 .CheckBuilding:
     BuildingClass.Class.Get(ebx,edx)
     BuildingTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    BuildingTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566E12
     movzx eax,al
@@ -124,7 +124,7 @@
 .CheckAircraft:
     AircraftClass.Class.Get(ebx,edx)
     AircraftTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    AircraftTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566E12
     movzx eax,al
@@ -134,7 +134,7 @@
 .CheckVessel:
     VesselClass.Class.Get(ebx,edx)
     VesselTypeClass.FromIndex(edx,ecx)
-    TechnoTypeClass.CloakSound.Get(ecx,al)
+    VesselTypeClass.CloakSound.Get(ecx,al)
     test al,al
     jz   0x00566E06 ; special for subs 
     movzx eax,al

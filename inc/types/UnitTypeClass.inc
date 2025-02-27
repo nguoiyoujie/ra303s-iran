@@ -48,6 +48,12 @@ cextern UnitTypeClass.Array
 %define UnitTypeClass.Bit.IsChronoTank                     1
 %define UnitTypeClass.Offset.IsOpenTopped                  0x194    ; bool
 %define UnitTypeClass.Bit.IsOpenTopped                     2
+%define UnitTypeClass.Offset.ManualAcquire                 0x194    ; bool
+%define UnitTypeClass.Bit.ManualAcquire                    3
+%define UnitTypeClass.Offset.ToProtectWithSpecials         0x194    ; bool
+%define UnitTypeClass.Bit.ToProtectWithSpecials            4
+%define UnitTypeClass.Offset.ToTeleportWithSpecials        0x194    ; bool
+%define UnitTypeClass.Bit.ToTeleportWithSpecials           5
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -81,7 +87,7 @@ cextern UnitTypeClass.Array
 %define UnitTypeClass.Offset.DeploysInto                   0x30A    ; byte
 %define UnitTypeClass.Offset.AmmoImageCount                0x30B    ; byte
 %define UnitTypeClass.Offset.AmmoTurretCount               0x30C    ; byte
-;0x30D
+%define UnitTypeClass.Offset.CloakSound                    0x30D    ; byte
 
 %define UnitTypeClass.Offset.AIBuildLimit                  0x30E    ; INT
 %define UnitTypeClass.Offset.AIBuildWeight                 0x312    ; INT
@@ -107,6 +113,9 @@ str.UnitTypeClass.UsePrimaryColor               db"UsePrimaryColor",0           
 str.UnitTypeClass.IsStaticDisguise              db"IsStaticDisguise",0            ;new ini feature
 str.UnitTypeClass.IsChronoTank                  db"IsChronoTank",0                ;new ini feature
 str.UnitTypeClass.IsOpenTopped                  db"OpenTopped",0                  ;new ini feature
+str.UnitTypeClass.ManualAcquire                 db"ManualAcquire",0               ;new ini feature
+str.UnitTypeClass.ToProtectWithSpecials         db"ToProtectWithSpecials",0       ;new ini feature
+str.UnitTypeClass.ToTeleportWithSpecials        db"ToTeleportWithSpecials",0      ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
@@ -127,10 +136,11 @@ str.UnitTypeClass.AmmoReloadRate                db"AmmoReloadRate",0            
 str.UnitTypeClass.AmmoReloadAmount              db"AmmoReloadAmount",0            ;new ini feature
 str.UnitTypeClass.AmmoImageCount                db"AmmoImageCount",0              ;new ini feature
 str.UnitTypeClass.AmmoTurretCount               db"AmmoTurretCount",0             ;new ini feature
-
 str.UnitTypeClass.AIBuildLimit                  db"AIBuildLimit",0         
 str.UnitTypeClass.AIBuildWeight                 db"AIBuildWeight",0     
 str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0         
+str.UnitTypeClass.CloakSound                    db"CloakSound",0                  ;new ini feature
+
 
 %define UnitTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
 %define UnitTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, UnitTypeClass.Count, UnitTypeClass.Array, reg_output
@@ -208,6 +218,18 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 %define UnitTypeClass.IsOpenTopped.Get(ptr_type,reg_output)                GetBool                                ptr_type, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, reg_output
 %define UnitTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, value
 %define UnitTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.IsOpenTopped, UnitTypeClass.Bit.IsOpenTopped, str.UnitTypeClass.IsOpenTopped
+
+%define UnitTypeClass.ManualAcquire.Get(ptr_type,reg_output)               GetBool                                ptr_type, UnitTypeClass.Offset.ManualAcquire, UnitTypeClass.Bit.ManualAcquire, reg_output
+%define UnitTypeClass.ManualAcquire.Set(ptr_type,value)                    SetBool                                ptr_type, UnitTypeClass.Offset.ManualAcquire, UnitTypeClass.Bit.ManualAcquire, value
+%define UnitTypeClass.ManualAcquire.Read(ptr_type,ptr_rules)               AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.ManualAcquire, UnitTypeClass.Bit.ManualAcquire, str.UnitTypeClass.ManualAcquire
+
+%define UnitTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, UnitTypeClass.Offset.ToProtectWithSpecials, UnitTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define UnitTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, UnitTypeClass.Offset.ToProtectWithSpecials, UnitTypeClass.Bit.ToProtectWithSpecials, value
+%define UnitTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.ToProtectWithSpecials, UnitTypeClass.Bit.ToProtectWithSpecials, str.UnitTypeClass.ToProtectWithSpecials
+
+%define UnitTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, reg_output
+%define UnitTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, value
+%define UnitTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, str.UnitTypeClass.ToTeleportWithSpecials
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, UnitTypeClass.Offset.Type, value
@@ -300,5 +322,9 @@ str.UnitTypeClass.AIDeployBuildLimit            db"AIDeployBuildLimit",0
 %define UnitTypeClass.AIDeployBuildLimit.Get(ptr_type,reg_output)          GetInt                                 ptr_type, UnitTypeClass.Offset.AIDeployBuildLimit, reg_output
 %define UnitTypeClass.AIDeployBuildLimit.Set(ptr_type,value)               SetInt                                 ptr_type, UnitTypeClass.Offset.AIDeployBuildLimit, value
 %define UnitTypeClass.AIDeployBuildLimit.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadInt              ptr_type, ptr_rules, UnitTypeClass.Offset.AIDeployBuildLimit, str.UnitTypeClass.AIDeployBuildLimit
+
+%define UnitTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, UnitTypeClass.Offset.CloakSound, reg_output
+%define UnitTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, UnitTypeClass.Offset.CloakSound, value
+%define UnitTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, UnitTypeClass.Offset.CloakSound, str.UnitTypeClass.CloakSound, function
 
 %endif

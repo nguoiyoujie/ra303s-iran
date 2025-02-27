@@ -27,35 +27,35 @@ IronCurtainCheck:
 .CheckInfantry:
     InfantryClass.Class.Get(esi,ebx)
     InfantryTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToProtectWithSpecials],1<<(TechnoTypeClass.Bit.ToProtectWithSpecials-1)
+    test byte[eax+InfantryTypeClass.Offset.ToProtectWithSpecials],1<<(InfantryTypeClass.Bit.ToProtectWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 
 .CheckUnit:
     UnitClass.Class.Get(esi,ebx)
     UnitTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToProtectWithSpecials],1<<(TechnoTypeClass.Bit.ToProtectWithSpecials-1)
+    test byte[eax+UnitTypeClass.Offset.ToProtectWithSpecials],1<<(UnitTypeClass.Bit.ToProtectWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 
 .CheckBuilding:
     BuildingClass.Class.Get(esi,ebx)
     BuildingTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToProtectWithSpecials],1<<(TechnoTypeClass.Bit.ToProtectWithSpecials-1)
+    test byte[eax+BuildingTypeClass.Offset.ToProtectWithSpecials],1<<(BuildingTypeClass.Bit.ToProtectWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 
 .CheckAircraft:
     AircraftClass.Class.Get(esi,ebx)
     AircraftTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToProtectWithSpecials],1<<(TechnoTypeClass.Bit.ToProtectWithSpecials-1)
+    test byte[eax+AircraftTypeClass.Offset.ToProtectWithSpecials],1<<(AircraftTypeClass.Bit.ToProtectWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 
 .CheckVessel:
     VesselClass.Class.Get(esi,ebx)
     VesselTypeClass.FromIndex(ebx,eax)
-    test byte[eax+TechnoTypeClass.Offset.ToProtectWithSpecials],1<<(TechnoTypeClass.Bit.ToProtectWithSpecials-1)
+    test byte[eax+VesselTypeClass.Offset.ToProtectWithSpecials],1<<(VesselTypeClass.Bit.ToProtectWithSpecials-1)
     jnz  .HouseCheck
     jmp  .Ret
 

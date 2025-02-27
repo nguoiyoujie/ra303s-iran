@@ -25,7 +25,9 @@ cextern AircraftTypeClass.Array
 %define AircraftTypeClass.Offset.IsGigundo                   0x192    ; bool
 %define AircraftTypeClass.Bit.IsGigundo                      6    
 %define AircraftTypeClass.Offset.IsOpenTopped                0x192    ; bool
-%define AircraftTypeClass.Bit.IsOpenTopped                   7    
+%define AircraftTypeClass.Bit.IsOpenTopped                   7   
+%define AircraftTypeClass.Offset.ToProtectWithSpecials       0x192    ; bool
+%define AircraftTypeClass.Bit.ToProtectWithSpecials          8
 ; 0x193, 0x194 and 0x195 are empty...                        
 %define AircraftTypeClass.Offset.Type                        0x196    ; byte
 %define AircraftTypeClass.Offset.DefaultMission              0x197    ; byte
@@ -41,6 +43,8 @@ cextern AircraftTypeClass.Array
 %define AircraftTypeClass.Offset.Response_Attack             0x265    ; INT
 %define AircraftTypeClass.Offset.Response_Attack_Data        0x269    ; word x16
 ;0x289
+%define AircraftTypeClass.Offset.CloakSound                  0x289    ; byte
+;0x28A
 
 ; INI String controls
 str.AircraftTypeClass.IsFixedWing               db"IsFixedWing",0                 ;new ini feature
@@ -50,6 +54,7 @@ str.AircraftTypeClass.IsRotorCustom             db"IsRotorCustom",0             
 str.AircraftTypeClass.SeekerGuard               db"SeekerGuard",0                 ;new ini feature
 str.AircraftTypeClass.IsGigundo                 db"Large",0                       ;new ini feature
 str.AircraftTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new ini feature
+str.AircraftTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
 str.AircraftTypeClass.PreferredBuilding         db"PreferredBuilding",0           ;internal feature
 str.AircraftTypeClass.Type                      db"Type",0                        ;internal feature
 str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
@@ -57,6 +62,7 @@ str.AircraftTypeClass.LandingSpeed              db"LandingSpeed",0              
 str.AircraftTypeClass.Response_Select           db"ResponseSelect",0              ;new ini feature
 str.AircraftTypeClass.Response_Move             db"ResponseMove",0                ;new ini feature
 str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0              ;new ini feature
+str.AircraftTypeClass.CloakSound                db"CloakSound",0                  ;new ini feature
 
 %define AircraftTypeClass.FromIndex(d_index,reg_output)                        AbstractTypeClass.FromIndex              d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
 %define AircraftTypeClass.FromID(d_index,reg_output)                           AbstractTypeClass.FromID                 d_index, AircraftTypeClass.Count, AircraftTypeClass.Array, reg_output
@@ -91,6 +97,10 @@ str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0            
 %define AircraftTypeClass.IsOpenTopped.Set(ptr_type,value)                     SetBool                                ptr_type, AircraftTypeClass.Offset.IsOpenTopped, AircraftTypeClass.Bit.IsOpenTopped, value
 %define AircraftTypeClass.IsOpenTopped.Read(ptr_type,ptr_rules)                AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.IsOpenTopped, AircraftTypeClass.Bit.IsOpenTopped, str.AircraftTypeClass.IsOpenTopped
 
+%define AircraftTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, reg_output
+%define AircraftTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, value
+%define AircraftTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, str.AircraftTypeClass.ToProtectWithSpecials
+
 %define AircraftTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, AircraftTypeClass.Offset.Type, reg_output
 %define AircraftTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, AircraftTypeClass.Offset.Type, value
 %define AircraftTypeClass.Type.Read(ptr_type,ptr_rules)                        AbstractTypeClass.ReadInt              ptr_type, ptr_rules, AircraftTypeClass.Offset.Type, str.AircraftTypeClass.Type
@@ -118,6 +128,10 @@ str.AircraftTypeClass.Response_Attack           db"ResponseAttack",0            
 %define AircraftTypeClass.Response_Attack.Get(ptr_type,reg_output)             GetInt                                 ptr_type, AircraftTypeClass.Offset.Response_Attack, reg_output
 %define AircraftTypeClass.Response_Attack_Data.Get(ptr_type,reg_output)        GetWord                                ptr_type, AircraftTypeClass.Offset.Response_Attack_Data, reg_output
 %define AircraftTypeClass.Response_Attack.Read(ptr_type,ptr_rules,function)    AbstractTypeClass.ReadStringExt        ptr_type, ptr_rules, AircraftTypeClass.Offset.Response_Attack, str.AircraftTypeClass.Response_Attack, function
+
+%define AircraftTypeClass.CloakSound.Get(ptr_type,reg_output)                  GetByte                                ptr_type, AircraftTypeClass.Offset.CloakSound, reg_output
+%define AircraftTypeClass.CloakSound.Set(ptr_type,value)                       SetByte                                ptr_type, AircraftTypeClass.Offset.CloakSound, value
+%define AircraftTypeClass.CloakSound.Read(ptr_type,ptr_rules,function)         AbstractTypeClass.ReadStringToByteExt  ptr_type, ptr_rules, AircraftTypeClass.Offset.CloakSound, str.AircraftTypeClass.CloakSound, function
 
 %endif
 
