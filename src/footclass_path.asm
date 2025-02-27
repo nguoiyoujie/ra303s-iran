@@ -2,7 +2,8 @@
     ; This may prevent a move from being initiated if the destination is too close. 
     ; Remove it, and rely on the game to check only when the unit is blocked
 
-%assign PathAbandonLimit    0x96  ; 150 frames
+%assign PathAbandonLimit        0x96  ; 150 frames
+%assign PathAbandonSoftLimit    0x5A  ; 90 frames
 
 [section .data]
 Temp.Path.Vessel dd 0 
@@ -39,30 +40,36 @@ Temp.Path.Vessel dd 0
 
 
 @HACK 0x004EDB70,0x004EDB79,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
-	jle  .MoveMovingBlock
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
+	jbe  .MoveMovingBlock
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonSoftLimit
+    jbe  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x004EDB79
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x004EDC97
+.MoveTemp:
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    mov  byte[ebp-0x10],4 ; MOVE_TEMP
+    jmp  0x004EDC97
 .MoveMovingBlock:
-    inc  byte[ebx+FootClass.Offset.PathAbandon]
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
-    jmp  0x004EDB79
+    jmp  0x004EDC97
 @ENDHACK
 
 
 @HACK 0x004EDB83,0x004EDB8C,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
-	jle  .MoveTemp
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
+	jbe  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x004EDB8C
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x004EDC97
 .MoveTemp:
-    inc  byte[ebx+FootClass.Offset.PathAbandon]
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
-    jmp  0x004EDB8C
+    jmp  0x004EDC97
 @ENDHACK
 
 
@@ -75,38 +82,45 @@ Temp.Path.Vessel dd 0
 
 
 @HACK 0x0057F00C,0x0057F015,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
-	jle  .MoveMovingBlock
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
+	jbe  .MoveMovingBlock
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonSoftLimit
+    jbe  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x0057F015
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x0057F189
+.MoveTemp:
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    mov  byte[ebp-0x10],4 ; MOVE_TEMP
+    jmp  0x0057F189
 .MoveMovingBlock:
-    inc  byte[ebx+FootClass.Offset.PathAbandon]
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
-    jmp  0x0057F015
+    jmp  0x0057F189
 @ENDHACK
 
 
 @HACK 0x0057F0BC,0x0057F0C5,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
-	cmp  byte[ebx+FootClass.Offset.PathAbandon],PathAbandonLimit
-	jle  .MoveTemp
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
+	jbe  .MoveTemp
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
-	mov  byte[ebx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x0057F0C5
+	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
+    jmp  0x0057F189
 .MoveTemp:
-    inc  byte[ebx+FootClass.Offset.PathAbandon]
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
-    jmp  0x0057F0C5
+    jmp  0x0057F189
 @ENDHACK
 
 
-@HACK 0x0057F198,0x0057F19E,_UnitClass_Can_Enter_Cell_MoveOKResetCounter
-    cmp  byte[ebp-0x24],0
-    jne  0x0057F208
+;@HACK 0x0057F198,0x0057F19E,_UnitClass_Can_Enter_Cell_MoveOKResetCounter
+@HACK 0x0057F208,0x0057F212,_UnitClass_Can_Enter_Cell_MoveOKResetCounter
+    cmp  byte[ebp-0x10],0
+    jne  0x0057F316
 	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x0057F19E
+    jmp  0x0057F212
 @ENDHACK
 
 
@@ -123,7 +137,7 @@ Temp.Path.Vessel dd 0
     jz   0x0058A030
     mov  esi,[Temp.Path.Vessel]
 	cmp  byte[esi+FootClass.Offset.PathAbandon],PathAbandonLimit
-	jle  .MoveMovingBlock
+	jbe  .MoveMovingBlock
 .MoveAbandon:
     mov  byte[ebp-0x10],5 ; MOVE_NO
 	mov  byte[esi+FootClass.Offset.PathAbandon],0 ; reset
