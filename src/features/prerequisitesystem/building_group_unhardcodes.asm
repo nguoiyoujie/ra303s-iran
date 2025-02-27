@@ -121,15 +121,11 @@
 ; Fakes
 ;-------------------------------------------------
 
-@HACK 0x0056B259,0x0056B25E,_TEventClass__Operator_FakesDestroyed_Check
-    sub  esp,0xC
-    mov  esi,eax
-    mov  dword[0x0056B24C],.Check
-    jmp  0x0056B25E
-.Check:
+[section .text]
+_TEventClass__Operator_FakesDestroyed_Check:
     test dword[eax+HouseClass.Offset.BPreGroupScan],0x00200000 ; 1 << 21
     jmp  0x0056B412
-@ENDHACK
 
+@SET 0x0056B24C,{dd _TEventClass__Operator_FakesDestroyed_Check}
 
 

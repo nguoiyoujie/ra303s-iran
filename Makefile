@@ -46,15 +46,16 @@ rsrc.o: $(INPUT)
 
 $(OUTPUT): $(LDS) $(INPUT) $(OBJS)
 	$(LD) $(LDFLAGS) -T $(LDS) -o $@ $(OBJS)
-	$(PETOOL) setsc $@ .text 0xE0000020 || ($(RM) $@ && exit 1)
 	$(PETOOL) patch $@ || ($(RM) $@ && exit 1)
 	sleep 1
 	$(STRIP) -R .patch $@ || ($(RM) $@ && exit 1)
-	sleep 1
-	$(PETOOL) setsc $@ .p_text 0xE0000020 || ($(RM) $@ && exit 1)
-	$(PETOOL) setsc $@ .p_rdata 0xE0000020 || ($(RM) $@ && exit 1)
 	$(PETOOL) dump $@
 	$(RM) $(OBJS)
 
 clean:
 	$(RM) $(OUTPUT) $(OBJS)
+
+#	sleep 1
+#   $(PETOOL) setsc $@ .text 0xE0000020 || ($(RM) $@ && exit 1)
+#	$(PETOOL) setsc $@ .p_text 0xE0000020 || ($(RM) $@ && exit 1)
+#	$(PETOOL) setsc $@ .p_rdata 0xE0000020 || ($(RM) $@ && exit 1)
