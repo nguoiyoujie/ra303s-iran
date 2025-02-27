@@ -87,7 +87,7 @@ cextern HouseTypeClass.NEW_COUNT
 
 
 @HACK 0x004D8CAE,0x004D8CB4,_HouseClass__Init_Data_Reset_NewData ; for multiplayer, might not be necessary due to above hook to constructor
-    ; esi is the house
+    ; eax is the house
     ; bl is the actlike housetype
     ; trnasfer data
     ; Warning: this works only if you do not populate Multi1-8 houses with singleplayer data
@@ -99,7 +99,7 @@ cextern HouseTypeClass.NEW_COUNT
     push edi
     push esi
     push ebx
-    mov  esi,edi
+    mov  esi,eax
     movzx ebx,bl
     HouseClass.FromIndex(ebx,edi)
     HouseClass.SecondaryColorScheme.Get(edi,bl) 

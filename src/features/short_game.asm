@@ -22,8 +22,6 @@ cextern Houses.VSignificantScan
 @HACK 0x004D4C79,0x004D4C82,_HouseClass__AI_MPlayerDefeated_Check
     ; scan each byte of BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
-    ;lea  esi,[eax+HouseClass.Offset.NewActiveBScan]
-    ;lea  ecx,[Houses.BSignificantScan]
     xor  edi,edi ; start with offset 0
 .ScanB:
     mov  ecx,[eax+HouseClass.Offset.NewActiveBScan+edi*4] 
@@ -38,8 +36,6 @@ cextern Houses.VSignificantScan
     cmp  byte[Spawn.Settings.ShortGame],1
     jz   .Short_Game    
     ; for units
-    lea  esi,[eax+HouseClass.Offset.NewActiveUScan]
-    lea  ecx,[Houses.USignificantScan]
     xor  edi,edi ; start with offset 0
     jmp  .ScanU ; continue checking other technos
 .Short_Game:
@@ -70,6 +66,7 @@ cextern Houses.VSignificantScan
     inc  edi
     cmp  edi,8
     jl   .ScanU
+    xor  edi,edi
 .ScanI:
     mov  ecx,[eax+HouseClass.Offset.NewActiveIScan+edi*4] 
     mov  edx,[Houses.ISignificantScan+edi*4] 
@@ -79,6 +76,7 @@ cextern Houses.VSignificantScan
     inc  edi
     cmp  edi,8
     jl   .ScanI
+    xor  edi,edi
 .ScanV:
     mov  ecx,[eax+HouseClass.Offset.NewActiveVScan+edi*4] 
     mov  edx,[Houses.VSignificantScan+edi*4] 
