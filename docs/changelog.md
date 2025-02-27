@@ -23,6 +23,85 @@ Primary: Lovalmidas<br>
 Credits: See the <a href="../README.md/#credits">main page</a> for the full credit list 
 
 -------
+2025-02-28
+
+- 2025-02-28: Implement [`TechnoType`] IsImmuneToTimeWarp.
+- 2025-02-28: Fix multiplayer games not ending.
+- 2025-02-28: Implement special pips SHP with AMMOPIPS.SHP and HPPIPS.SHP
+- 2025-02-27: AI will ignore dead tracks
+- 2025-02-27: Fix AI path
+- 2025-02-27: Remove writable from non-data sections
+
+-------
+2025-02-23
+
+- 2025-02-23: Implement special Time Warp function from Chronosphere
+- 2025-02-23: Fix game freeze with missing songs.
+- 2025-02-22: Implement [`TechnoType`] OpenTopped.
+- 2025-02-22: Time Quakes and MAD Quakes may now be chained.
+- 2025-02-22: Implement [`InfantryType`] [`UnitType`] IsStaticDisguise.
+- 2025-02-22: Implement [`InfantryType`] Retaliates.
+- 2025-02-20: AI may use Chronoshift using both Chronosphere and ChronoTanks
+- 2025-02-20: AI may use Iron Curtain
+- 2025-02-20: Experimental: Add new color buttons on the Skirmish menu.
+- 2025-02-20: Optimize house build cell search.
+- 2025-02-19: Revise colormap implementation - data is now initialized instead of updated at runtime.
+- 2025-02-19: Implement KeyDeploy for deploy.
+
+-------
+2025-02-17
+
+- 2025-02-17: Using Up key on lists can now cycle to the last item.
+- 2025-02-17: Implement special_1 and special_2 armors, [`WarheadType`] ExplosionAnim
+- 2025-02-17: Implement [`BulletType`] TrailAnim
+- 2025-02-17: Fix deploy crash bug
+- 2025-02-17: Implement resizable technoclasses, warheadtype and weapontypes.
+- 2025-02-17: Fix List_Copy
+- 2025-02-16: Increase [`BuildingType`] CustomFoundation limts to 640 cells.
+- 2025-02-16: Implement [`AircraftType`] SeekerGuard, Large.
+- 2025-02-16: AI register their buildings.
+- 2025-02-15: Fix crashes.
+- 2025-02-14: Short Game now considers any DeploysInto= unit.
+- 2025-02-14: 'All Destroyed...' trigger event sall ignore Insignificant=yes units
+- 2025-02-14: Add a <a href="./progress_tracking.md">progress-tracking page</a>
+- 2025-02-14: Implement [`UnitType`] AIDeployBuildLimit
+- 2025-02-14: Implement [`Weapon`] AIOnly
+- 2025-02-14: Implement [`Warhead`] IsCapture
+- 2025-02-13: Reduce Battle Control Terminated delay from 4 to 2 seconds. 
+- 2025-02-13: Implement [`AI`] UnitReserve, BuildingReserve, AircraftReserve, VesselReserve, AILowPowerSellPriority, AILowMoneySellPriority.
+- 2025-02-13: Fix capture house recalculation
+- 2025-02-12: Weapon versus now default to 0%
+
+-------
+2025-02-10
+
+- 2025-02-10: Fix atom weapon defaults
+- 2025-02-10: Implement [`InfantryTypeClass`] ActionReport, RandomReport, StokedReport.
+- 2025-02-10: Implement [`TechnoTypeClass`] CloakSound.
+- 2025-02-10: Implement experimental feature: [Options] ViewTargetingLines
+- 2025-02-09: Implement a fix for mouse buffer crashes
+- 2025-02-09: Attempt to fix for endless waiting in pathfinding
+- 2025-02-09: Fix crash when map is resizing
+- 2025-02-09: Revise exception code
+- 2025-02-09: Revise and optimize unit tracking code
+- 2025-02-09: Implement Obelisk laser with customizable colors
+- 2025-02-09: Implement Manual Targeting. Remove the ability for certain units to autotarget its surroundings
+- 2025-02-09: Implement Deploy-to-fire weapons allowing units to auto-deploy (unload) to 'fire' their weapon
+- 2025-02-09: Implement armor filter: Warheads with 0% versus will block targeting
+- 2025-02-09: Fix Allies=Neutral being ignored
+- 2025-02-08: Implement NULL fix for Get_Occupy_Dimensions, credits to tomsons26
+- 2025-02-06: Move some house specific globals into `HouseClass`
+- 2025-02-06: Define `TechnoClass` / `BuildingClass`
+
+-------
+2025-02-04
+
+- 2025-02-03: Fix Parabomb aircrafts to now return to the airfield if the target is destroyed before ammo is depleted
+- 2025-02-01: Fix invalid techno crash
+- 2025-02-01: Fix aircraft docking bay crash
+- 2025-02-01: Adopt latest petool and build tools from Funkyfr3sh, and begin refactoring.
+
+-------
 2025-01-23
 
 - 2025-01-23: Pressing Home key will now center around any construction yard (`FactoryType`=BuildingTypes) or deployer unit (`DeploysInto`=), instead of just FACT or MCV
