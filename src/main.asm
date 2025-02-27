@@ -238,6 +238,7 @@
 %include "src/features/infantry_retaliates.asm"
 %include "src/features/chain_timequakes.asm"
 %include "src/features/unit_opentopped.asm"
+%include "src/features/techno_ignore_dead_threats.asm"
 
 ; experimental
 %include "src/experimental/bullet_scatter.asm"

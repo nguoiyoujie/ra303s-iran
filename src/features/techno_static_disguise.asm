@@ -26,6 +26,8 @@ Disguise.TreeSHP db "T01.TEM",0 ; "T01" hardcoded
 @HACK 0x00562F86,0x00562F8C,_TechnoClass__Evaluate_Object_StaticDisguise
     jz   0x0056349C
     ; eax=technotype target, dl=techno RTTI, esi=techno
+    cmp  word[esi+ObjectClass.Offset.Strength],0 ; for techno_ignore_dead_threats
+    je   0x0056349C ; invalid target
     cmp  byte[esi+TechnoClass.Offset.StaticDisguiseShimmer],MIRAGE_THRESHOLD
     jge  0x0056349C ; invalid target
     jmp  0x00562F8C
