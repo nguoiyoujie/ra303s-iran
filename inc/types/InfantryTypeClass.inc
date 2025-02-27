@@ -38,6 +38,8 @@ cextern InfantryTypeClass.Array
 %define InfantryTypeClass.Bit.ManualAcquire                4
 %define InfantryTypeClass.Offset.ToProtectWithSpecials     0x193    ; bool
 %define InfantryTypeClass.Bit.ToProtectWithSpecials        5
+%define InfantryTypeClass.Offset.IsImmuneToTimeWarp        0x193    ; bool
+%define InfantryTypeClass.Bit.IsImmuneToTimeWarp           6
 ; 0x193, 0x194 and 0x195 are empty... 
 %define InfantryTypeClass.Offset.Type                      0x196    ; byte
 %define InfantryTypeClass.Offset.Pip                       0x197    ; byte, PipEnum: 0 PIP_EMPTY, 1 PIP_FULL, 5 PIP_ENGINEER, 6 PIP_CIVILIAN, 7 PIP_COMMANDO, others for funky results, might be able to add new pips by extending pips.shp beyond 22 frames?
@@ -160,6 +162,7 @@ str.InfantryTypeClass.IsStaticDisguise              db"IsStaticDisguise",0
 str.InfantryTypeClass.IsOpenTopped                  db"OpenTopped",0                  ;new ini feature
 str.InfantryTypeClass.ManualAcquire                 db"ManualAcquire",0               ;new ini feature
 str.InfantryTypeClass.ToProtectWithSpecials         db"ToProtectWithSpecials",0       ;new ini feature
+str.InfantryTypeClass.IsImmuneToTimeWarp            db"IsImmuneToTimeWarp",0       ;new ini feature
 str.InfantryTypeClass.Type                          db"Type",0                        ;?to check?
 str.InfantryTypeClass.Pip                           db"Pip",0                         ;new ini feature
 str.InfantryTypeClass.DoControls                    db"DoControls",0                  ;?to implement?
@@ -303,6 +306,10 @@ str.InfantryTypeClass.CloakSound                    db"CloakSound",0            
 %define InfantryTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, reg_output
 %define InfantryTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, value
 %define InfantryTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.ToProtectWithSpecials, InfantryTypeClass.Bit.ToProtectWithSpecials, str.InfantryTypeClass.ToProtectWithSpecials
+
+%define InfantryTypeClass.IsImmuneToTimeWarp.Get(ptr_type,reg_output)          GetBool                                ptr_type, InfantryTypeClass.Offset.IsImmuneToTimeWarp, InfantryTypeClass.Bit.IsImmuneToTimeWarp, reg_output
+%define InfantryTypeClass.IsImmuneToTimeWarp.Set(ptr_type,value)               SetBool                                ptr_type, InfantryTypeClass.Offset.IsImmuneToTimeWarp, InfantryTypeClass.Bit.IsImmuneToTimeWarp, value
+%define InfantryTypeClass.IsImmuneToTimeWarp.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadBool             ptr_type, ptr_rules, InfantryTypeClass.Offset.IsImmuneToTimeWarp, InfantryTypeClass.Bit.IsImmuneToTimeWarp, str.InfantryTypeClass.IsImmuneToTimeWarp
 
 %define InfantryTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, InfantryTypeClass.Offset.Type, reg_output
 %define InfantryTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, InfantryTypeClass.Offset.Type, value

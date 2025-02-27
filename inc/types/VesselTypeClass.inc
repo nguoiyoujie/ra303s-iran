@@ -24,6 +24,8 @@ cextern VesselTypeClass.Array
 %define VesselTypeClass.Bit.ToProtectWithSpecials            5
 %define VesselTypeClass.Offset.ToTeleportWithSpecials        0x192    ; bool
 %define VesselTypeClass.Bit.ToTeleportWithSpecials           6
+%define VesselTypeClass.Offset.IsImmuneToTimeWarp            0x192    ; bool
+%define VesselTypeClass.Bit.IsImmuneToTimeWarp               7
 ; 0x193, 0x194 and 0x195 are empty...                   
 %define VesselTypeClass.Offset.Type                          0x196    ; byte
 %define VesselTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -65,6 +67,7 @@ str.VesselTypeClass.IsOpenTopped              db"OpenTopped",0                  
 str.VesselTypeClass.ManualAcquire             db"ManualAcquire",0               ;new ini feature
 str.VesselTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
 str.VesselTypeClass.ToTeleportWithSpecials    db"ToTeleportWithSpecials",0      ;new ini feature
+str.VesselTypeClass.IsImmuneToTimeWarp        db"IsImmuneToTimeWarp",0          ;new ini feature
 str.VesselTypeClass.Type                      db"Type",0                        ;internal feature
 str.VesselTypeClass.TurretOffset              db"TurretOffset",0                ;unused feature, now new ini feature (measured in pixels)
 str.VesselTypeClass.DefaultMission            db"DefaultMission",0              ;unused feature
@@ -112,6 +115,10 @@ str.VesselTypeClass.CloakSound                db"CloakSound",0                  
 %define VesselTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, reg_output
 %define VesselTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, value
 %define VesselTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.ToTeleportWithSpecials, VesselTypeClass.Bit.ToTeleportWithSpecials, str.VesselTypeClass.ToTeleportWithSpecials
+
+%define VesselTypeClass.IsImmuneToTimeWarp.Get(ptr_type,reg_output)          GetBool                                ptr_type, VesselTypeClass.Offset.IsImmuneToTimeWarp, VesselTypeClass.Bit.IsImmuneToTimeWarp, reg_output
+%define VesselTypeClass.IsImmuneToTimeWarp.Set(ptr_type,value)               SetBool                                ptr_type, VesselTypeClass.Offset.IsImmuneToTimeWarp, VesselTypeClass.Bit.IsImmuneToTimeWarp, value
+%define VesselTypeClass.IsImmuneToTimeWarp.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadBool             ptr_type, ptr_rules, VesselTypeClass.Offset.IsImmuneToTimeWarp, VesselTypeClass.Bit.IsImmuneToTimeWarp, str.VesselTypeClass.IsImmuneToTimeWarp
 
 %define VesselTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, VesselTypeClass.Offset.Type, reg_output
 %define VesselTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, VesselTypeClass.Offset.Type, value

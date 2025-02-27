@@ -28,6 +28,8 @@ cextern AircraftTypeClass.Array
 %define AircraftTypeClass.Bit.IsOpenTopped                   7   
 %define AircraftTypeClass.Offset.ToProtectWithSpecials       0x192    ; bool
 %define AircraftTypeClass.Bit.ToProtectWithSpecials          8
+%define AircraftTypeClass.Offset.IsImmuneToTimeWarp          0x193    ; bool
+%define AircraftTypeClass.Bit.IsImmuneToTimeWarp             1
 ; 0x193, 0x194 and 0x195 are empty...                        
 %define AircraftTypeClass.Offset.Type                        0x196    ; byte
 %define AircraftTypeClass.Offset.DefaultMission              0x197    ; byte
@@ -55,6 +57,7 @@ str.AircraftTypeClass.SeekerGuard               db"SeekerGuard",0               
 str.AircraftTypeClass.IsGigundo                 db"Large",0                       ;new ini feature
 str.AircraftTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new ini feature
 str.AircraftTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
+str.AircraftTypeClass.IsImmuneToTimeWarp        db"IsImmuneToTimeWarp",0          ;new ini feature
 str.AircraftTypeClass.PreferredBuilding         db"PreferredBuilding",0           ;internal feature
 str.AircraftTypeClass.Type                      db"Type",0                        ;internal feature
 str.AircraftTypeClass.DefaultMission            db"DefaultMission",0              ;internal feature
@@ -100,6 +103,10 @@ str.AircraftTypeClass.CloakSound                db"CloakSound",0                
 %define AircraftTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, reg_output
 %define AircraftTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, value
 %define AircraftTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.ToProtectWithSpecials, AircraftTypeClass.Bit.ToProtectWithSpecials, str.AircraftTypeClass.ToProtectWithSpecials
+
+%define AircraftTypeClass.IsImmuneToTimeWarp.Get(ptr_type,reg_output)          GetBool                                ptr_type, AircraftTypeClass.Offset.IsImmuneToTimeWarp, AircraftTypeClass.Bit.IsImmuneToTimeWarp, reg_output
+%define AircraftTypeClass.IsImmuneToTimeWarp.Set(ptr_type,value)               SetBool                                ptr_type, AircraftTypeClass.Offset.IsImmuneToTimeWarp, AircraftTypeClass.Bit.IsImmuneToTimeWarp, value
+%define AircraftTypeClass.IsImmuneToTimeWarp.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadBool             ptr_type, ptr_rules, AircraftTypeClass.Offset.IsImmuneToTimeWarp, AircraftTypeClass.Bit.IsImmuneToTimeWarp, str.AircraftTypeClass.IsImmuneToTimeWarp
 
 %define AircraftTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, AircraftTypeClass.Offset.Type, reg_output
 %define AircraftTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, AircraftTypeClass.Offset.Type, value

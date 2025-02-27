@@ -54,6 +54,8 @@ cextern UnitTypeClass.Array
 %define UnitTypeClass.Bit.ToProtectWithSpecials            4
 %define UnitTypeClass.Offset.ToTeleportWithSpecials        0x194    ; bool
 %define UnitTypeClass.Bit.ToTeleportWithSpecials           5
+%define UnitTypeClass.Offset.IsImmuneToTimeWarp            0x194    ; bool
+%define UnitTypeClass.Bit.IsImmuneToTimeWarp               6
 ; 0x194 and 0x195 are empty...  
 %define UnitTypeClass.Offset.Type                          0x196    ; byte
 %define UnitTypeClass.Offset.TurretOffset                  0x197    ; byte
@@ -116,6 +118,7 @@ str.UnitTypeClass.IsOpenTopped                  db"OpenTopped",0                
 str.UnitTypeClass.ManualAcquire                 db"ManualAcquire",0               ;new ini feature
 str.UnitTypeClass.ToProtectWithSpecials         db"ToProtectWithSpecials",0       ;new ini feature
 str.UnitTypeClass.ToTeleportWithSpecials        db"ToTeleportWithSpecials",0      ;new ini feature
+str.UnitTypeClass.IsImmuneToTimeWarp            db"IsImmuneToTimeWarp",0          ;new ini feature
 str.UnitTypeClass.Type                          db"Type",0                        ;internal feature
 str.UnitTypeClass.TurretOffset                  db"TurretOffset",0                ;internal feature
 str.UnitTypeClass.DefaultMission                db"DefaultMission",0              ;internal feature
@@ -230,6 +233,10 @@ str.UnitTypeClass.CloakSound                    db"CloakSound",0                
 %define UnitTypeClass.ToTeleportWithSpecials.Get(ptr_type,reg_output)      GetBool                                ptr_type, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, reg_output
 %define UnitTypeClass.ToTeleportWithSpecials.Set(ptr_type,value)           SetBool                                ptr_type, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, value
 %define UnitTypeClass.ToTeleportWithSpecials.Read(ptr_type,ptr_rules)      AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.ToTeleportWithSpecials, UnitTypeClass.Bit.ToTeleportWithSpecials, str.UnitTypeClass.ToTeleportWithSpecials
+
+%define UnitTypeClass.IsImmuneToTimeWarp.Get(ptr_type,reg_output)          GetBool                                ptr_type, UnitTypeClass.Offset.IsImmuneToTimeWarp, UnitTypeClass.Bit.IsImmuneToTimeWarp, reg_output
+%define UnitTypeClass.IsImmuneToTimeWarp.Set(ptr_type,value)               SetBool                                ptr_type, UnitTypeClass.Offset.IsImmuneToTimeWarp, UnitTypeClass.Bit.IsImmuneToTimeWarp, value
+%define UnitTypeClass.IsImmuneToTimeWarp.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadBool             ptr_type, ptr_rules, UnitTypeClass.Offset.IsImmuneToTimeWarp, UnitTypeClass.Bit.IsImmuneToTimeWarp, str.UnitTypeClass.IsImmuneToTimeWarp
 
 %define UnitTypeClass.Type.Get(ptr_type,reg_output)                        GetInt                                 ptr_type, UnitTypeClass.Offset.Type, reg_output
 %define UnitTypeClass.Type.Set(ptr_type,value)                             SetInt                                 ptr_type, UnitTypeClass.Offset.Type, value

@@ -18,6 +18,7 @@ Technotypes represent common elements between [BuildingTypes](../buildingtypes.m
  - [Mirage](#mirage)
  - [OpenTopped Transports](#opentopped-transports)
  - [AI Superweapons](#ai-superweapons) 
+ - [Chrono TimeWarp](#chrono-timewarp) 
 
 
 -------
@@ -410,6 +411,39 @@ The AI will invoke the use of the superweapon when the unit wants to attack a ne
 If set on the ChronoTank (`CTNK`), it will teleport the Chrono Tank without consuming the superweapon. 
 
 Obviously, the AI will ignore any attempts to teleport a building, an infantry or an aircraft to a different location.
+
+</details></td></tr></table>
+
+
+<a href="#technotypes"><kbd>Top</kbd></a><br>
+-------
+### Chrono TimeWarp
+<br>
+
+A new chrono-related feature is introduced: The ability to freeze your enemies in time, like the Chronosphere activation movie would suggest.
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [General]  ► TimeWarpDuration
+</samp></td><td width="120"><samp>Integer</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Determines the number of frames that the Time Warp will persist. During the Time Warp, all techno objects except for those belonging to the invoking house or having `IsImmuneToTimeWarp` will be frozen in time, and the battlefield is kept in black-and-white greyscale. When frozen, the unit cannot move, nor fire.
+
+House logic and factory production are still maintained at the moment.
+
+Color begins to return at the last 5 seconds of the Time Warp.
+
+At the moment, the Time Warp power is tied to the Chronoshift superweapon. There is a good possibility that this power be transferred to its own superweapon icon.
+
+Defaults to 0, which indicates that the Time Warp does not occur.
+
+</details></td></tr></table>
+
+
+<table><tr><td width="50"><a href="#"><img title="New logic" src="./img/30x15/new.png"></a></td><td width="842"><samp>
+<code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► IsImmuneToTimeWarp
+</samp></td><td width="120"><samp>Boolean</a></samp></td></tr><tr><td colspan="3"><details><summary><b>View</b></summary>
+
+Indicates that the techno is not subject to the effects of the Time Warp and will move as normal. Default to false.
 
 </details></td></tr></table>
 

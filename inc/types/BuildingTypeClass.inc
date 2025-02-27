@@ -64,6 +64,8 @@ cextern BuildingTypeClass.Array
 %define BuildingTypeClass.Bit.ManualAcquire                3
 %define BuildingTypeClass.Offset.ToProtectWithSpecials     0x194    ; bool
 %define BuildingTypeClass.Bit.ToProtectWithSpecials        4
+%define BuildingTypeClass.Offset.IsImmuneToTimeWarp        0x194    ; bool
+%define BuildingTypeClass.Bit.IsImmuneToTimeWarp           5
 
 %define BuildingTypeClass.Offset.FoundationFace            0x196    ; byte, FacingType (-1)-7
 %define BuildingTypeClass.Offset.Adjacent                  0x197    ; INT
@@ -144,6 +146,7 @@ str.BuildingTypeClass.IsRepairPad               db"IsRepairPad",0               
 str.BuildingTypeClass.IsOpenTopped              db"OpenTopped",0                  ;new feature
 str.BuildingTypeClass.ManualAcquire             db"ManualAcquire",0               ;new ini feature
 str.BuildingTypeClass.ToProtectWithSpecials     db"ToProtectWithSpecials",0       ;new ini feature
+str.BuildingTypeClass.IsImmuneToTimeWarp        db"IsImmuneToTimeWarp",0          ;new ini feature
 str.BuildingTypeClass.FoundationFace            db"FoundationFace",0              ;internal feature
 str.BuildingTypeClass.Adjacent                  db"Adjacent",0                    ;existing feature
 str.BuildingTypeClass.SpecialWeapons            db"SpecialWeapons",0              ;new ini feature
@@ -275,6 +278,10 @@ str.BuildingTypeClass.CloakSound                db"CloakSound",0                
 %define BuildingTypeClass.ToProtectWithSpecials.Get(ptr_type,reg_output)       GetBool                                ptr_type, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, reg_output
 %define BuildingTypeClass.ToProtectWithSpecials.Set(ptr_type,value)            SetBool                                ptr_type, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, value
 %define BuildingTypeClass.ToProtectWithSpecials.Read(ptr_type,ptr_rules)       AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.ToProtectWithSpecials, BuildingTypeClass.Bit.ToProtectWithSpecials, str.BuildingTypeClass.ToProtectWithSpecials
+
+%define BuildingTypeClass.IsImmuneToTimeWarp.Get(ptr_type,reg_output)          GetBool                                ptr_type, BuildingTypeClass.Offset.IsImmuneToTimeWarp, BuildingTypeClass.Bit.IsImmuneToTimeWarp, reg_output
+%define BuildingTypeClass.IsImmuneToTimeWarp.Set(ptr_type,value)               SetBool                                ptr_type, BuildingTypeClass.Offset.IsImmuneToTimeWarp, BuildingTypeClass.Bit.IsImmuneToTimeWarp, value
+%define BuildingTypeClass.IsImmuneToTimeWarp.Read(ptr_type,ptr_rules)          AbstractTypeClass.ReadBool             ptr_type, ptr_rules, BuildingTypeClass.Offset.IsImmuneToTimeWarp, BuildingTypeClass.Bit.IsImmuneToTimeWarp, str.BuildingTypeClass.IsImmuneToTimeWarp
 
 %define BuildingTypeClass.SpecialWeapons.Get(ptr_type,reg_output)              GetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, reg_output
 %define BuildingTypeClass.SpecialWeapons.Set(ptr_type,value)                   SetInt                                 ptr_type, BuildingTypeClass.Offset.SpecialWeapons, value

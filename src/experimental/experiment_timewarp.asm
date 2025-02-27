@@ -27,16 +27,67 @@ Temporal.House db 0
     je   .Ret
     AbstractClass.RTTI.Get(esi,al)
     cmp  al,RTTIType.Infantry
-    je   .IsTechno  
+    je   .Infantry  
     cmp  al,RTTIType.Unit
-    je   .IsTechno
+    je   .Unit
     cmp  al,RTTIType.Vessel
-    je   .IsTechno  
+    je   .Vessel  
     cmp  al,RTTIType.Aircraft
-    je   .IsTechno  
+    je   .Aircraft  
     cmp  al,RTTIType.Building
-    je   .IsTechno      
+    je   .Building      
     jmp  .Ret
+
+.Infantry:
+    mov  byte al,[Temporal.House]
+    cmp  byte[esi+TechnoClass.Offset.House],al
+    je   .Ret
+    InfantryClass.Class.Get(esi,edx)
+    InfantryTypeClass.FromIndex(edx,eax)
+    test byte[eax+InfantryTypeClass.Offset.IsImmuneToTimeWarp],1<<(InfantryTypeClass.Bit.IsImmuneToTimeWarp-1)
+    jz   0x004FE0F6 ; .SkipAI
+    jmp  .Ret
+
+.Unit:
+    mov  byte al,[Temporal.House]
+    cmp  byte[esi+TechnoClass.Offset.House],al
+    je   .Ret
+    UnitClass.Class.Get(esi,edx)
+    UnitTypeClass.FromIndex(edx,eax)
+    test byte[eax+UnitTypeClass.Offset.IsImmuneToTimeWarp],1<<(UnitTypeClass.Bit.IsImmuneToTimeWarp-1)
+    jz   0x004FE0F6 ; .SkipAI
+    jmp  .Ret
+
+.Vessel:
+    mov  byte al,[Temporal.House]
+    cmp  byte[esi+TechnoClass.Offset.House],al
+    je   .Ret
+    VesselClass.Class.Get(esi,edx)
+    VesselTypeClass.FromIndex(edx,eax)
+    test byte[eax+VesselTypeClass.Offset.IsImmuneToTimeWarp],1<<(VesselTypeClass.Bit.IsImmuneToTimeWarp-1)
+    jz   0x004FE0F6 ; .SkipAI
+    jmp  .Ret
+
+.Aircraft:
+    mov  byte al,[Temporal.House]
+    cmp  byte[esi+TechnoClass.Offset.House],al
+    je   .Ret
+    AircraftClass.Class.Get(esi,edx)
+    AircraftTypeClass.FromIndex(edx,eax)
+    test byte[eax+AircraftTypeClass.Offset.IsImmuneToTimeWarp],1<<(AircraftTypeClass.Bit.IsImmuneToTimeWarp-1)
+    jz   0x004FE0F6 ; .SkipAI
+    jmp  .Ret
+
+.Building:
+    mov  byte al,[Temporal.House]
+    cmp  byte[esi+TechnoClass.Offset.House],al
+    je   .Ret
+    BuildingClass.Class.Get(esi,edx)
+    BuildingTypeClass.FromIndex(edx,eax)
+    test byte[eax+BuildingTypeClass.Offset.IsImmuneToTimeWarp],1<<(BuildingTypeClass.Bit.IsImmuneToTimeWarp-1)
+    jz   0x004FE0F6 ; .SkipAI
+    jmp  .Ret
+
 ;.IsUnitTechno:
 ;    mov  byte al,[Temporal.House]
 ;    cmp  byte[esi+TechnoClass.Offset.House],al
