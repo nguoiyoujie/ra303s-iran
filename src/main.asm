@@ -244,6 +244,7 @@
 %include "src/experimental/bullet_scatter.asm"
 %include "src/experimental/experiment_jam_remap.asm" 
 %include "src/experimental/experiment_timewarp.asm"
+%include "src/experimental/experiment_pips_text.asm"
 ;%include "src/experimental/experiment_cnc_refinery.asm" 
 
 %ifdef USE_NOCD
