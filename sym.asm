@@ -535,112 +535,114 @@ setcglob 0x004ABF4C,List_Copy                                                  ;
 ;        int ActiveCount 
 ;        int GrowthStep 
 
+; Note we should be checking TotalCount instead of ActiveCount
+
 ; GLOBALS.CPP
 ; AircraftClass              0x0065D818
-setcglob 0x0065D824,AircraftClass.Count       
+setcglob 0x0065D820,AircraftClass.Count       
 setcglob 0x0065D84C,AircraftClass.Array       
 setcglob 0x15F     ,AircraftClass.ORIGINAL_SIZE        
 setcglob 0x160     ,AircraftClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; AnimClass                  0x0065D864
-setcglob 0x0065D870,AnimClass.Count           
+setcglob 0x0065D86C,AnimClass.Count           
 setcglob 0x0065D898,AnimClass.Array           
 setcglob 0x4C      ,AnimClass.ORIGINAL_SIZE   
 setcglob 0x4C      ,AnimClass.NEW_SIZE ;not adjustable yet
 ; Count controlled by [Maximums]
 
 ; BuildingClass              0x0065D8B0
-setcglob 0x0065D8BC,BuildingClass.Count       
+setcglob 0x0065D8B8,BuildingClass.Count       
 setcglob 0x0065D8E4,BuildingClass.Array       
 setcglob 0xFB      ,BuildingClass.ORIGINAL_SIZE
 setcglob 0x100     ,BuildingClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; BulletClass                0x0065D8FC
-setcglob 0x0065D908,BulletClass.Count         
+setcglob 0x0065D904,BulletClass.Count         
 setcglob 0x0065D930,BulletClass.Array         
 setcglob 0x4B      ,BulletClass.ORIGINAL_SIZE 
 ; Count controlled by [Maximums]
 
 ; FactoryClass               0x0065D948
-setcglob 0x0065D954,FactoryClass.Count        
-setcglob 0x0065DA7C,FactoryClass.Array        
+setcglob 0x0065D950,FactoryClass.Count        
+setcglob 0x0065D97C,FactoryClass.Array        
 setcglob 0x2E      ,FactoryClass.ORIGINAL_SIZE
 ; Count controlled by [Maximums]
 
 ; HouseClass                 0x0065D994
-setcglob 0x0065D9A0,HouseClass.Count          
+setcglob 0x0065D99C,HouseClass.Count          
 setcglob 0x0065D9C8,HouseClass.Array          
 setcglob 0x17A8    ,HouseClass.ORIGINAL_SIZE  
 setcglob 0x4110    ,HouseClass.NEW_SIZE       
 ; Count controlled by [Maximums]
 
 ; InfantryClass              0x0065D9E0
-setcglob 0x0065D9EC,InfantryClass.Count       
+setcglob 0x0065D9E8,InfantryClass.Count       
 setcglob 0x0065DA14,InfantryClass.Array       
 setcglob 0x154     ,InfantryClass.ORIGINAL_SIZE        
 setcglob 0x156     ,InfantryClass.NEW_SIZE        
 ; Count controlled by [Maximums]
 
 ; OverlayClass               0x0065DA2C
-setcglob 0x0065DA38,OverlayClass.Count        
+setcglob 0x0065DA34,OverlayClass.Count        
 setcglob 0x0065DA60,OverlayClass.Array        
 setcglob 0x2B      ,OverlayClass.ORIGINAL_SIZE
 ; Count controlled by [Maximums]
 
 ; SmudgeClass                0x0065DA78
-setcglob 0x0065DA84,SmudgeClass.Count         
+setcglob 0x0065DA80,SmudgeClass.Count         
 setcglob 0x0065DAAC,SmudgeClass.Array         
 setcglob 0x2B      ,SmudgeClass.ORIGINAL_SIZE 
 ; Count controlled by [Maximums]
 
 ; TeamClass                  0x0065DAC4
-setcglob 0x0065DAD0,TeamClass.Count           
+setcglob 0x0065DACC,TeamClass.Count           
 setcglob 0x0065DAF8,TeamClass.Array           
 setcglob 0x5D      ,TeamClass.ORIGINAL_SIZE   
 ; Count controlled by [Maximums]
 
 ; TeamTypeClass              0x0065DB10
-setcglob 0x0065DB1C,TeamTypeClass.Count       
+setcglob 0x0065DB18,TeamTypeClass.Count       
 setcglob 0x0065DB44,TeamTypeClass.Array       
 setcglob 0xD1      ,TeamTypeClass.ORIGINAL_SIZE        
 ; Count controlled by [Maximums]
 
 ; TemplateClass              0x0065DB5C
-setcglob 0x0065DB68,TemplateClass.Count       
+setcglob 0x0065DB64,TemplateClass.Count       
 setcglob 0x0065DB90,TemplateClass.Array       
 setcglob 0x2B      ,TemplateClass.ORIGINAL_SIZE        
 ; Count controlled by [Maximums]
 
 ; TerrainClass               0x0065DBA8
-setcglob 0x0065DBB4,TerrainClass.Count        
+setcglob 0x0065DBB0,TerrainClass.Count        
 setcglob 0x0065DBDC,TerrainClass.Array        
 setcglob 0x40      ,TerrainClass.ORIGINAL_SIZE
 ; Count controlled by [Maximums]
 
 ; TriggerClass               0x0065DBF4
-setcglob 0x0065DC00,TriggerClass.Count        
+setcglob 0x0065DBFC,TriggerClass.Count        
 setcglob 0x0065DC28,TriggerClass.Array        
 setcglob 0x2D      ,TriggerClass.ORIGINAL_SIZE
 ; Count controlled by [Maximums]
 
 ; UnitClass                  0x0065DC40
-setcglob 0x0065DC4C,UnitClass.Count           
+setcglob 0x0065DC48,UnitClass.Count           
 setcglob 0x0065DC74,UnitClass.Array           
 setcglob 0x17A     ,UnitClass.ORIGINAL_SIZE   
 setcglob 0x180     ,UnitClass.NEW_SIZE   
 ; Count controlled by [Maximums]
 
 ; VesselClass                0x0065DC8C
-setcglob 0x0065DC98,VesselClass.Count         
+setcglob 0x0065DC94,VesselClass.Count         
 setcglob 0x0065DCC0,VesselClass.Array         
 setcglob 0x178     ,VesselClass.ORIGINAL_SIZE 
 setcglob 0x180     ,VesselClass.NEW_SIZE 
 ; Count controlled by [Maximums]
 
 ; TriggerTypeClass           0x0065DCD8
-setcglob 0x0065DCE4,TriggerTypeClass.Count    
+setcglob 0x0065DCE0,TriggerTypeClass.Count    
 setcglob 0x0065DD0C,TriggerTypeClass.Array    
 setcglob 0x59      ,TriggerTypeClass.ORIGINAL_SIZE     
 ; Count controlled by [Maximums]
