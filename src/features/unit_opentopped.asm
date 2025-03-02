@@ -78,7 +78,9 @@ Temp.LimboFire db 0
     je   .Unit
     jmp  .Next
 .Infantry:
-    mov  eax,[ecx+AbstractClass.Offset.Coord]
+    mov  eax,ecx
+    mov  ebx,[ecx+0x11]
+    call [ebx+0xC] ; Center_Coord()
     mov  [edx+AbstractClass.Offset.Coord],eax ; set Coord
     mov  eax,[ecx+TechnoClass.Offset.TarCom]
     mov  [edx+TechnoClass.Offset.TarCom],eax ; set TarCom
@@ -93,7 +95,9 @@ Temp.LimboFire db 0
     mov  dword[edx+AbstractClass.Offset.Coord],-1
     jmp  .Next
 .Unit:
-    mov  eax,[ecx+AbstractClass.Offset.Coord]
+    mov  eax,ecx
+    mov  ebx,[ecx+0x11]
+    call [ebx+0xC] ; Center_Coord()
     mov  [edx+AbstractClass.Offset.Coord],eax ; set Coord
     mov  eax,[ecx+TechnoClass.Offset.TarCom]
     mov  [edx+TechnoClass.Offset.TarCom],eax ; set TarCom
@@ -128,3 +132,5 @@ Temp.LimboFire db 0
 @SJMP 0x00566870,0x0056688E ;_TechnoClass__Record_The_Kill_CrashFix
 
 @SJMP 0x00566B13,0x00566B36 ;_TechnoClass__Record_The_Kill_CrashFix
+
+@SJMP 0x00566B86,0x00566BAB ;_TechnoClass__Record_The_Kill_CrashFix
