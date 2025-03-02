@@ -260,13 +260,14 @@ Note: The Map Trigger Event [Destroyed, All Factories] as well as the Skirmish A
 
 Determines the exit destinations of an object produced from this building. Units created will attempt to move to these locations. Infantry and vehicles will attempt to scatter from these locations to make way for newly built units. The following values are supported:
 
- > -1 = No exit list\
- > 0 = Units exit the factory like it is leaving a Barracks\
- > 1 = Units exit the factory like it is leaving a Naval Yard or Sub Pen\
- > 2 = Units exit the factory like it is leaving a War Factory\
- > 3 = Units exit the factory like it is leaving a C&C Hand of Nod\
- > 4 = Units exit the factory like it is leaving a C&C Weapons Factory\
- > 5 = Units exit the factory like it is leaving a C&C Nod Airstrip
+ > 0 = No exit list - the game will construct a perimeter using the building's height and width as its exit list\
+ > 1 = Units exit the factory like it is leaving a Barracks\
+ > 2 = Units exit the factory like it is leaving a Naval Yard or Sub Pen\
+ > 3 = Units exit the factory like it is leaving a War Factory\
+ > 4 = Units exit the factory like it is leaving a C&C Hand of Nod\
+ > 5 = Units exit the factory like it is leaving a C&C Weapons Factory\
+ > 6 = Units exit the factory like it is leaving a C&C Nod Airstrip\
+ > Any other value will also be treated as no exit list
 </details></td></tr></table>
 
 

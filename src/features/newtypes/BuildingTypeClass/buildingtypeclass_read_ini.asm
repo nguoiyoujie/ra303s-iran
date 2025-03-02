@@ -233,7 +233,7 @@ _SelectFactoryType:
 
 _SelectExitList:
     ;select exitlist based on eax
-    cmp  eax,-1
+    cmp  eax,0
     jnz .Check_IsAddress
     xor  eax,eax             ;Occupy_NULL
     jmp .Retn
@@ -243,37 +243,37 @@ _SelectExitList:
     jge .Retn
 
 .Check_ExitPyle:
-    test eax,eax
+    cmp  eax,2
     jnz .Check_ExitSub
     mov  eax,d_ExitPyle
     jmp .Retn
 
 .Check_ExitSub:
-    cmp  eax,1
+    cmp  eax,3
     jnz .Check_ExitWeap
     mov  eax,d_ExitSub
     jmp .Retn
 
 .Check_ExitWeap:
-    cmp  eax,2
+    cmp  eax,4
     jnz .Check_ExitCCHand
     mov  eax,d_ExitWeap
     jmp .Retn
     
 .Check_ExitCCHand:
-    cmp  eax,3
+    cmp  eax,5
     jnz .Check_ExitCCWeap
     mov  eax,d_ExitCCHand
     jmp .Retn
 
 .Check_ExitCCWeap:
-    cmp  eax,4
+    cmp  eax,6
     jnz .Check_ExitCCAirstrip
     mov  eax,d_ExitCCWeap
     jmp .Retn
 
 .Check_ExitCCAirstrip:
-    cmp  eax,5
+    cmp  eax,7
     jnz .DefaultNull
     mov  eax,d_ExitCCAirstrip
     jmp .Retn
