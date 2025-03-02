@@ -459,6 +459,7 @@ The following hotkeys are supported. The values are keyboard codes, which loosel
 |KeyStop                 |83  (S)       |Stop move or attack of selected units
 |KeyGuard                |71  (G)       |Set selected units to `Area Guard` mission
 |KeyDeploy               |0   (unused)  |Order deployable units to deploy/unload
+|KeyPlaceBuilding        |0   (unused)  |Activate Build Placement mode, if a building is ready to be placed
 |KeyNext                 |78  (N)       |Select next unit by cell order
 |KeyPrevious             |66  (B)       |Select previous unit by cell order
 |KeyFormation            |70  (F)       |When units are in a team, toggle formation mode

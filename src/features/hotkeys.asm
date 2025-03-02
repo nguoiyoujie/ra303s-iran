@@ -17,11 +17,16 @@ cextern TargetClass__TargetClass_AbstractClass
 cextern EventClass__EventClass
 cextern Globals___HidPage
 cextern _Buffer_Clear
+cextern Globals___PlayerPtr
+cextern FactoryClass__Has_Completed
+cextern FactoryClass__Get_Object
+cextern HouseClass__Fetch_Factory
+cextern HouseClass__Manual_Place
 
 cextern RedAlert.WinHotKeys.KeySidebarToggle
 cextern RedAlert.WinHotKeys.KeyMapSnapshot
 cextern RedAlert.WinHotKeys.KeyDeploy
-
+cextern RedAlert.WinHotKeys.KeyPlaceBuilding
 
 @SJMP 0x0054D916,0x0054D91B ; _Patch_Out_Erroneous_Sidebar_Activate_CALL
 @SJMP 0x004A6206,0x004A6221 ; _UnhardCode_Keyboard_Key0
@@ -45,6 +50,8 @@ ResignKeyPressed: db 0
     je   .Toggle_Sidebar
     cmp  word ax,[RedAlert.WinHotKeys.KeyMapSnapshot]
     je   .Map_Snapshot
+    cmp  word ax,[RedAlert.WinHotKeys.KeyPlaceBuilding]
+    je   .Map_KeyPlaceBuilding
     cmp  word ax,[Globals___Options_KeyResign]
     je   .Resign_Key
 
@@ -122,6 +129,42 @@ ResignKeyPressed: db 0
 
 .Map_Snapshot:
     call Create_Map_Snapshot
+    jmp  .Out
+
+
+.Map_KeyPlaceBuilding:
+    mov  eax,[Globals___PlayerPtr]
+    test eax,eax
+    jz   .Out
+    mov  edx,RTTIType.Building
+    call HouseClass__Fetch_Factory
+    test eax,eax
+    jz   .Out
+    mov  edx,eax
+    call FactoryClass__Has_Completed
+    test eax,eax
+    jnz  .Continue
+    mov  eax,2 ; VOX_NO_FACTORY ; unable to comply, building in progress
+    call 0x00426158 ; void Speak(VoxType)
+    jmp  .Out
+.Continue:
+    mov  eax,edx
+    call FactoryClass__Get_Object
+    test eax,eax
+    jz   .Out
+    push esi
+    mov  esi,eax
+    mov  ecx,[esi+0x11]
+    xor  ebx,ebx
+    xor  edx,edx
+    call [ecx+0xDC] ; Who_Can_Build_Me
+    mov  ebx,esi
+    mov  edx,eax
+    pop  esi
+    test eax,eax
+    jz   .Out
+    mov  eax,[Globals___PlayerPtr]
+    call HouseClass__Manual_Place
     jmp  .Out
 @ENDHACK
 

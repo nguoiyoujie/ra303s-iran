@@ -217,6 +217,7 @@ gstring str_PlayEnglishIntro                                   , "PlayEnglishInt
 gstring str_KeySidebarToggle                                   , "KeySidebarToggle"
 gstring str_KeyMapSnapshot                                     , "KeyMapSnapshot"
 gstring str_KeyDeploy                                          , "KeyDeploy"
+gstring str_KeyPlaceBuilding                                   , "KeyPlaceBuilding"
 
 
 ; Spawn.ini -------------------------------------------------------------------------------------------------

@@ -146,6 +146,7 @@ gbool  RedAlert.Options.ViewTargetingLines                    ,0
 gshort RedAlert.WinHotKeys.KeyMapSnapshot                     ,0
 gshort RedAlert.WinHotKeys.KeySidebarToggle                   ,0
 gshort RedAlert.WinHotKeys.KeyDeploy                          ,0
+gshort RedAlert.WinHotKeys.KeyPlaceBuilding                   ,0
 
 ; Spawn.ini
 gbool  Spawn.Settings.Aftermath                               ,0
