@@ -2,6 +2,7 @@
     ; This may prevent a move from being initiated if the destination is too close. 
     ; Remove it, and rely on the game to check only when the unit is blocked
 
+%assign PathAbandonReset        0xD2  ; 210 frames
 %assign PathAbandonLimit        0x96  ; 150 frames
 %assign PathAbandonSoftLimit    0x5A  ; 90 frames
 
@@ -44,14 +45,31 @@ Temp.Path.Vessel dd 0
 	jbe  .MoveMovingBlock
 	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonSoftLimit
     jbe  .MoveTemp
-.MoveAbandon:
-    mov  byte[ebp-0x10],5 ; MOVE_NO
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonReset
+	jbe  .MoveAbandon
+.MoveReset:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
 	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x004EDC97
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD
+    je   .ResetNavCom
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD_AREA
+    je   .ResetNavCom
+    jmp  0x004EDCDB
+.ResetNavCom:
+    mov  byte al,[ebx+MissionClass.Offset.Mission]
+    mov  byte[ebx+MissionClass.Offset.MissionQueue],al
+    mov  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_MOVE
+    mov  dword[ebx+FootClass.Offset.NavCom],0
+    jmp  0x004EDCDB
+.MoveAbandon:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    jmp  0x004EDCDB
 .MoveTemp:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
-    mov  byte[ebp-0x10],4 ; MOVE_TEMP
-    jmp  0x004EDC97
+    ;mov  byte[ebp-0x10],4 ; MOVE_TEMP
+    mov  dword eax,4
+    jmp  0x004EDCE0
 .MoveMovingBlock:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
@@ -62,10 +80,26 @@ Temp.Path.Vessel dd 0
 @HACK 0x004EDB83,0x004EDB8C,_InfantryClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
 	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jbe  .MoveTemp
-.MoveAbandon:
-    mov  byte[ebp-0x10],5 ; MOVE_NO
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonReset
+	jbe  .MoveAbandon
+.MoveReset:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
 	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x004EDC97
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD
+    je   .ResetNavCom
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD_AREA
+    je   .ResetNavCom
+    jmp  0x004EDCDB
+.ResetNavCom:
+    mov  byte al,[ebx+MissionClass.Offset.Mission]
+    mov  byte[ebx+MissionClass.Offset.MissionQueue],al
+    mov  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_MOVE
+    mov  dword[ebx+FootClass.Offset.NavCom],0
+    jmp  0x004EDCDB
+.MoveAbandon:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    jmp  0x004EDCDB
 .MoveTemp:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
@@ -86,14 +120,31 @@ Temp.Path.Vessel dd 0
 	jbe  .MoveMovingBlock
 	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonSoftLimit
     jbe  .MoveTemp
-.MoveAbandon:
-    mov  byte[ebp-0x10],5 ; MOVE_NO
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonReset
+	jbe  .MoveAbandon
+.MoveReset:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
 	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x0057F189
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD
+    je   .ResetNavCom
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD_AREA
+    je   .ResetNavCom
+    jmp  0x0057F1FB
+.ResetNavCom:
+    mov  byte al,[ebx+MissionClass.Offset.Mission]
+    mov  byte[ebx+MissionClass.Offset.MissionQueue],al
+    mov  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_MOVE
+    mov  dword[ebx+FootClass.Offset.NavCom],0
+    jmp  0x0057F1FB
+.MoveAbandon:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    jmp  0x0057F1FB
 .MoveTemp:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
-    mov  byte[ebp-0x10],4 ; MOVE_TEMP
-    jmp  0x0057F189
+    ;mov  byte[ebp-0x10],4 ; MOVE_TEMP
+    mov  dword eax,4
+    jmp  0x0057F200
 .MoveMovingBlock:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],2 ; MOVE_MOVING_BLOCK
@@ -104,10 +155,26 @@ Temp.Path.Vessel dd 0
 @HACK 0x0057F0BC,0x0057F0C5,_UnitClass_Can_Enter_Cell_HandleFriendlyBlockedCell2
 	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonLimit
 	jbe  .MoveTemp
-.MoveAbandon:
-    mov  byte[ebp-0x10],5 ; MOVE_NO
+	cmp  byte[ecx+FootClass.Offset.PathAbandon],PathAbandonReset
+	jbe  .MoveAbandon
+.MoveReset:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
 	mov  byte[ecx+FootClass.Offset.PathAbandon],0 ; reset
-    jmp  0x0057F189
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD
+    je   .ResetNavCom
+    cmp  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_GUARD_AREA
+    je   .ResetNavCom
+    jmp  0x0057F1FB
+.ResetNavCom:
+    mov  byte al,[ebx+MissionClass.Offset.Mission]
+    mov  byte[ebx+MissionClass.Offset.MissionQueue],al
+    mov  byte[ebx+MissionClass.Offset.Mission],MissionType.MISSION_MOVE
+    mov  dword[ebx+FootClass.Offset.NavCom],0
+    jmp  0x0057F1FB
+.MoveAbandon:
+    ;mov  byte[ebp-0x10],5 ; MOVE_NO
+    inc  byte[ecx+FootClass.Offset.PathAbandon]
+    jmp  0x0057F1FB
 .MoveTemp:
     inc  byte[ecx+FootClass.Offset.PathAbandon]
     mov  byte[ebp-0x10],4 ; MOVE_TEMP
