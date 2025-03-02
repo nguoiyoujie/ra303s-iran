@@ -99,6 +99,7 @@ setcglob 0x004BEA20,Face_Desired_Facing8                                       ;
 setcglob 0x004BEA7C,Face_Desired_Facing256                                     ; int Desired_Facing256(int x1, int y1, int x2, int y2)
 
 ; FACTORY.CPP
+setcglob 0x004BF330,FactoryClass__Has_Completed
 setcglob 0x004BF368,FactoryClass__Get_Object                                   ; TechnoClass * FactoryClass::Get_Object(void) const
 
 ; HDATA.CPP
@@ -118,6 +119,7 @@ setcglob 0x004D5E00,HouseClass__Available_Money                                ;
 setcglob 0x004D5FC8,HouseClass__Is_Ally                                        ; bool HouseClass::Is_Ally(HousesType house)
 setcglob 0x004D6060,HouseClass__Make_Ally                                      ; void HouseClass::Make_Ally(HousesType house)
 setcglob 0x004D68CC,HouseClass__Place_Special_Blast
+setcglob 0x004D7A18,HouseClass__Manual_Place
 setcglob 0x004D8270,HouseClass__MPlayer_Defeated                               ; void HouseClass::MPlayer_Defeated(void)
 setcglob 0x004D8F34,HouseClass__Find_Building                                  ; BuildingClass * HouseClass::Find_Building(StructType type, ZoneType zone) const
 setcglob 0x004D8B40,HouseClass__Flag_To_Die                                    ; bool HouseClass::Flag_To_Die(void)
@@ -129,7 +131,6 @@ setcglob 0x004DDCE8,HouseClass__Get_Quantity                                   ;
 setcglob 0x004DDEB0,HouseClass__Write_INI                                      ; void HouseClass::Write_INI(CCINIClass & ini)
 setcglob 0x004DE094,HouseClass__Is_No_YakMig                                   ; bool HouseClass::Is_No_YakMig(void) const
 setcglob 0x004DE640,HouseClass__Computer_Paranoid                              ; void HouseClass::Computer_Paranoid(void)
-setcglob 0x004DD0A4,HouseClass__Which_Zone
 
 ; ADATA.CPP
 setcglob 0x00407388,AnimTypeClass__AnimTypeClass                               ; AnimTypeClass::AnimTypeClass(AnimType,char *,int,int,int,int,int,int,int,int,int,int,int,fixed,int,int,int,int,int,int,VocType,AnimType)
