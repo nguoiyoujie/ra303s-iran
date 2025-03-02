@@ -63,9 +63,11 @@ setcglob 0x0045A794,BuildingClass__Begin_Mode                                  ;
 setcglob 0x004537B4,BuildingTypeClass__From_Name                               
 
 ; CARGO.CPP
+setcglob 0x00462448,CargoClass__Detach_Object
 setcglob 0x0046247C,CargoClass__Attached_Object                                ; FootClass * CargoClass::Attached_Object(void) const
 
 ; CELL.CPP
+setcglob 0x0049F0B0,CellClass__Cell_Building
 setcglob 0x0049FDE0,CellClass__Cell_Coord                                      ; COORDINATE CellClass::Cell_Coord(void) const
 setcglob 0x004A01EC,CellClass__Adjacent_Cell                                   ; CellClass const * CellClass::Adjacent_Cell(FacingType face) const
 setcglob 0x004A1BE8,CellClass__Is_Bridge_Here                                  ; bool CellClass::Is_Bridge_Here(void)

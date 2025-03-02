@@ -8,6 +8,9 @@
 %ifndef TYPES_INFANTRYCLASS
 %define TYPES_INFANTRYCLASS
 
+cextern InfantryClass.Count
+cextern InfantryClass.Array
+
 ; define object type field definitions
 %define InfantryClass.Offset.Class                     0x141    ; CCPtr
 %define InfantryClass.Offset.Doing                     0x145    ; DoType (byte)
@@ -29,6 +32,9 @@
 ; 0x154 
 
 ; Generally, object instances are not read by INI
+
+%define InfantryClass.FromIndex(d_index,reg_output)                        AbstractClass.FromIndex              d_index, InfantryClass.Count, InfantryClass.Array, reg_output
+
 
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 

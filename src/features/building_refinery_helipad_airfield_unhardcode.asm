@@ -12,8 +12,15 @@
 ; No compatibility issues is expected as this was not an adjustable parameter
 ;----------------------------------------------------------------
 
+cextern Globals___ScenarioInit
 cextern Coord___Distance_As_Coord
 cextern Globals___ScenarioInit
+cextern CargoClass__Attached_Object
+cextern CargoClass__Detach_Object
+cextern InfantryClass.Count
+cextern CellClass__Cell_Building
+cextern Coord___Coord_Cell
+cextern Target___As_Target
 
 
 [section .data] 
@@ -239,7 +246,95 @@ Temp.FindDockingBayInitBuilding dd 0
     jnz  .Refinery
     BuildingTypeClass.IsRepairPad.Get(edi,al) ; RepairPad
     test al,al
-    jz   .Normal
+    jnz  .RepairPad
+    TechnoTypeClass.MaxPassengers.Get(edi,eax) ; Passengers
+    test eax,eax
+    jnz  .Bunker
+    jmp  .Normal
+.Bunker:
+    mov  ecx,eax
+    mov  ebx,esi
+    mov  eax,[ebx+RadioClass.Offset.Radio]
+    mov  edx,dword[ebp-0xC]
+    cmp  eax,edx
+    mov  edi,[esi+0x11]
+    je   .Bunker.Now
+.Bunker.Standby:
+    cmp  byte[ebx+CargoClass.Offset.Quantity],cl
+    jae  .Bunker.RetNegative
+    test eax,eax
+    jnz  .Bunker.RetRoger
+    mov  ecx,dword[ebp-0xC]
+    mov  edx,2 ; RADIO_HELLO
+    mov  eax,esi
+    mov  ebx,0x00669928
+    call [edi+0x158] ; Transmit_Message
+.Bunker.Now:
+    test byte[esi+TechnoClass.Offset.IsTethered],1<<(TechnoClass.Bit.IsTethered-1)
+    jnz  .Bunker.RetRoger
+    mov  ecx,[ebp-0xC]
+    mov  edx,0x13 ; RADIO_NEED_TO_MOVE
+    mov  eax,esi
+    mov  ebx,0x00669928
+    call [edi+0x158] ; Transmit_Message
+    cmp  al,1 ; RADIO_ROGER
+    jnz  .Bunker.RetRoger
+    ; prep nearby cell as As_Target()
+    mov  eax,esi
+    mov  edx,[ebp-0xC]
+    call [edi+0x16C] ; Find_Exit_Cell
+    test ax,ax
+    jz   .Bunker.Out
+    movzx eax,ax
+    call Target___As_Target
+    mov  ebx,[ebp-0x1C]
+    mov  [ebx],eax
+    mov  ecx,[ebp-0xC]
+    mov  edx,0x12 ; RADIO_MOVE_HERE
+    mov  eax,esi
+    call [edi+0x158] ; Transmit_Message
+    cmp  al,0x14 ; RADIO_YEA_NOW_WHAT
+    jnz  .Bunker.RetRoger
+    mov  edx,0x18 ; RADIO_TETHER
+    mov  eax,esi
+    xor  ecx,ecx
+    mov  ebx,0x00669928
+    call [edi+0x158] ; Transmit_Message
+    ; prep the building as As_Target()
+    mov  byte al,[esi]
+    movzx eax,al
+    mov  edx,[esi+1]
+    shl  eax,0x18
+    and  edx,0xFFFFFF
+    or   eax,edx
+    mov  ebx,[ebp-0x1C]
+    mov  [ebx],eax
+    mov  ecx,[ebp-0xC]
+    mov  edx,0x12 ; RADIO_MOVE_HERE
+    mov  eax,esi
+    call [edi+0x158] ; Transmit_Message
+    cmp  al,1 ; RADIO_ROGER
+    je   .Bunker.Unselect
+.Bunker.Out:
+    mov  edx,3 ; RADIO_OVER_OUT
+    mov  ecx,[ebp-0xC]
+    mov  eax,esi
+    mov  ebx,0x00669928
+    call [edi+0x158] ; Transmit_Message
+    jmp  .Bunker.RetRoger
+.Bunker.Unselect:
+    mov  eax,[esi+RadioClass.Offset.Radio]
+    mov  edi,[eax+0x11]
+    call [edi+0xB4] ; Unselect
+    jmp  .Bunker.RetRoger
+.Bunker.RetNegative:
+    pop  edi
+    mov  dword eax,0x10
+    jmp  0x00454D8D
+.Bunker.RetRoger:
+    pop  edi
+    mov  dword eax,1
+    jmp  0x00454D8D
 .RepairPad:
     pop  edi
     jmp  0x00454D33
@@ -317,7 +412,22 @@ Temp.FindDockingBayInitBuilding dd 0
     jnz  .Helipad    
     BuildingTypeClass.IsRepairPad.Get(edi,al) ; RepairPad
     test al,al
-    jz   .Normal
+    jnz  .RepairPad
+    TechnoTypeClass.MaxPassengers.Get(edi,eax) ; Passengers
+    test eax,eax
+    jnz  .Bunker
+    jmp  .Normal
+.Bunker:
+    cmp  byte[esi+CargoClass.Offset.Quantity],al
+    jb   .Bunker.RetRoger
+.Bunker.RetNegative:
+    pop  edi
+    mov  dword eax,0xA
+    jmp  0x00454AD4
+.Bunker.RetRoger:
+    pop  edi
+    mov  dword eax,1
+    jmp  0x00454AD4
 .RepairPad:
     pop  edi
     jmp  0x00454B1A
@@ -365,7 +475,15 @@ Temp.FindDockingBayInitBuilding dd 0
     jnz  .AirstripOrHelipad    
     BuildingTypeClass.IsRepairPad.Get(edi,al) ; RepairPad
     test al,al
-    jz   .Normal
+    jnz  .RepairPad
+    TechnoTypeClass.MaxPassengers.Get(edi,eax) ; Passengers
+    test eax,eax
+    jnz  .Bunker
+    jmp  .Normal
+.Bunker:
+    pop  edi
+    mov  dword eax,5 ; RADIO_ATTACH
+    jmp  0x00454CAA
 .RepairPad:
     pop  edi
     jmp  0x00454C18
@@ -610,3 +728,342 @@ Temp.FindDockingBayInitBuilding dd 0
     jmp  0x0057E71E
 @ENDHACK
 
+
+@HACK 0x00453C2D,0x00453C32,_BuildingTypeClass__Max_Pips_Passenger
+    cmp  dword[eax+TechnoTypeClass.Offset.MaxPassengers],0
+    jg   .PassengerPip
+    call 0x00453B6C ; BuildingTypeClass__Width
+    jmp  0x00453C32
+.PassengerPip:
+    mov  eax,[eax+TechnoTypeClass.Offset.MaxPassengers]
+    jmp  0x00453C69
+@ENDHACK
+
+
+@HACK 0x0045702B,0x00457034,_BuildingClass__Take_Damage_EjectPassengers_OnDestruction
+    mov  ecx,eax
+    push edx
+    BuildingClass.Class.Get(ecx,edx)
+    BuildingTypeClass.FromIndex(edx,eax)
+    cmp  dword[eax+TechnoTypeClass.Offset.MaxPassengers],0
+    pop  edx
+    je   .Normal
+    mov  ecx,[ebp-0x84]
+    add  ecx,0x53
+    push esi
+    push edi
+.Repeat:
+    mov  eax,ecx
+    call CargoClass__Attached_Object
+    test eax,eax
+    jz   .Done
+    mov  edi,[ebp-0x84]
+    mov  eax,ecx
+    mov  dword edx,1
+    call CargoClass__Detach_Object
+    mov  esi,eax
+    test eax,eax
+    jz   .Repeat
+    cmp  byte[eax],RTTIType.Infantry ; Check IsInfantry
+    jne  .Delete
+    inc  dword[Globals___ScenarioInit]
+    mov  edx,[edi+AbstractClass.Offset.Coord]
+    mov  edi,[esi+0x11]
+    xor  ebx,ebx
+    call [edi+0x64] ; Unlimbo
+    dec  dword[Globals___ScenarioInit]
+    test eax,eax
+    jz   .Delete
+.Eject:
+    mov  eax,esi
+    mov  edi,[esi+0x11]
+    xor  edx,edx
+    push ecx
+    xor  ecx,ecx
+    mov  ebx,1
+    call [edi+0xC4] ; Scatter
+    pop  ecx
+    jmp  .Repeat
+.Delete:
+    mov  edx,2   
+    mov  eax,esi
+    mov  esi,[esi+0x11]
+    call [esi]
+    jmp  .Repeat
+.Done:
+    pop  edi
+    pop  esi
+    jmp  0x00457071
+
+.Normal:
+    mov  ecx,[ebp-0x84]
+    add  ecx,0x53
+    jmp  0x00457034
+@ENDHACK
+
+
+@HACK 0x0045C42D,0x0045C438,_BuildingClass__Mission_Deconstruction_EjectPassengers_OnSell
+    push edx
+    BuildingClass.Class.Get(esi,edx)
+    BuildingTypeClass.FromIndex(edx,eax)
+    cmp  dword[eax+TechnoTypeClass.Offset.MaxPassengers],0
+    pop  edx
+    je   .Normal
+    mov  ecx,esi
+    add  ecx,0x53
+    push esi
+    push edi
+.Repeat:
+    mov  eax,ecx
+    call CargoClass__Attached_Object
+    test eax,eax
+    jz   .Done
+    mov  edi,[ebp-0x10]
+    mov  eax,ecx
+    mov  dword edx,1
+    call CargoClass__Detach_Object
+    mov  esi,eax
+    test eax,eax
+    jz   .Repeat
+    cmp  byte[eax],RTTIType.Infantry ; Check IsInfantry
+    jne  .Delete
+    inc  dword[Globals___ScenarioInit]
+    mov  edx,[edi+AbstractClass.Offset.Coord]
+    mov  edi,[esi+0x11]
+    xor  ebx,ebx
+    call [edi+0x64] ; Unlimbo
+    dec  dword[Globals___ScenarioInit]
+    test eax,eax
+    jz   .Delete
+.Eject:
+    mov  eax,esi
+    mov  edi,[esi+0x11]
+    xor  edx,edx
+    push ecx
+    xor  ecx,ecx
+    mov  ebx,1
+    call [edi+0xC4] ; Scatter
+    pop  ecx
+    jmp  .Repeat
+.Delete:
+    mov  edx,2   
+    mov  eax,esi
+    mov  esi,[esi+0x11]
+    call [esi]
+    jmp  .Repeat
+.Done:
+    pop  edi
+    pop  esi
+.Normal:
+    mov eax,esi
+    xor edx,edx
+    mov dword[esi+0x2A],2
+    jmp 0x0045C438
+@ENDHACK
+
+
+@HACK 0x0045A636,0x0045A63B,_BuildingClass__What_Action_Passengers_Deploy
+    ; ecx is techno
+    push edx
+    BuildingClass.Class.Get(ecx,edx)
+    BuildingTypeClass.FromIndex(edx,eax)
+    cmp  dword[eax+TechnoTypeClass.Offset.MaxPassengers],0
+    pop  edx
+    je   .Normal
+    cmp  byte[ecx+CargoClass.Offset.Quantity],0
+    je   .NoDeploy
+.Deploy:
+    mov  byte[ebp-0x18],4 ; ACTION_SELF
+    jmp  0x0045A63B
+.NoDeploy:
+    mov  byte[ebp-0x18],0x1D ; ACTION_NO_DEPLOY
+    jmp  0x0045A63B
+.Normal:
+    xor  ah,ah ; ACTION_NONE
+    mov  byte[ebp-0x18],ah
+    jmp  0x0045A63B
+@ENDHACK
+
+
+@HACK 0x0045876E,0x00458773,_BuildingClass__Active_Click_With_Passengers_Deploy
+    ; dl is action 
+    ; ecx is techno
+    cmp  dl,5 ; ACTION_ATTACK
+    je   0x00458773
+    cmp  dl,4 ; ACTION_SELF
+    jne  0x004587B0
+    test ebx,ebx
+    jz   0x004587B0
+    mov  dword edx,0xF
+    mov  edi,[eax+0x11]
+    xor  ecx,ecx
+    xor  ebx,ebx
+    mov  eax,esi
+    call [edi+0x1A8] ; Player_Assign_Mission
+    jmp  0x004587B0
+@ENDHACK
+
+
+@HACK 0x0045DFC6,0x0045DFCC,_BuildingClass__Mission_Unload_EjectPassengers_OnRequest
+    mov  esi,eax
+    BuildingClass.Class.Get(esi,edx)
+    BuildingTypeClass.FromIndex(edx,ebx)
+    cmp  dword[ebx+TechnoTypeClass.Offset.MaxPassengers],0
+    je   .Normal
+    mov  ecx,esi
+    add  ecx,0x53
+    push esi
+    push edi
+.Repeat:
+    mov  eax,ecx
+    call CargoClass__Attached_Object
+    test eax,eax
+    jz   .Done
+    mov  edi,[ebp-0x20]
+    mov  eax,ecx
+    mov  dword edx,1
+    call CargoClass__Detach_Object
+    mov  esi,eax
+    test eax,eax
+    jz   .Repeat
+    cmp  byte[eax],RTTIType.Infantry ; Check IsInfantry
+    jne  .Delete
+    inc  dword[Globals___ScenarioInit]
+    push ebx
+    mov  edx,[ebx+BuildingTypeClass.Offset.ExitCoordX]
+    add  edx,[edi+AbstractClass.Offset.Coord]
+    mov  edi,[esi+0x11]
+    xor  ebx,ebx
+    call [edi+0x64] ; Unlimbo
+    pop  ebx
+    dec  dword[Globals___ScenarioInit]
+    test eax,eax
+    jz   .Delete
+.Eject:
+    mov  eax,esi
+    mov  edi,[esi+0x11]
+    xor  edx,edx
+    push ecx
+    push ebx
+    xor  ecx,ecx
+    mov  ebx,1
+    call [edi+0xC4] ; Scatter
+    pop  ebx
+    pop  ecx
+    jmp  .Repeat
+.Delete:
+    mov  edx,2   
+    mov  eax,esi
+    mov  esi,[esi+0x11]
+    call [esi]
+    jmp  .Repeat
+.Done:
+    mov  eax,[ebp-0x20]
+    mov  ecx,[eax+0x11]
+    xor  edx,edx
+    mov  byte [eax+MissionClass.Offset.Mission],MissionType.MISSION_GUARD
+    call [ecx+0x1FC] ; Enter_Idle_Mode
+    pop  edi
+    pop  esi
+.Normal:
+    mov  eax,[ebp-0x20]
+    mov  edx,[eax+0xCD]
+    jmp  0x0045DFCC
+@ENDHACK
+
+
+@HACK 0x0045BB92,0x0045BB9B,_BuildingClass__Mission_Guard_AI_AutoGarrison
+    ; eax/esi = building techno
+    push eax
+    cmp  dword[esi+RadioClass.Offset.Radio],0
+    jne  .Normal
+    TechnoClass.House.Get(esi,ebx)
+    HouseClass.FromIndex(ebx,ecx)
+    HouseClass.IsHuman.Get(ecx,al)
+    test al,al
+    jnz  .Normal
+    BuildingClass.Class.Get(esi,edx)
+    BuildingTypeClass.FromIndex(edx,eax)
+    mov  ecx,dword[eax+TechnoTypeClass.Offset.MaxPassengers]
+    test ecx,ecx
+    je   .Normal
+    mov  byte dl,[esi+CargoClass.Offset.Quantity]
+    sub  cl,dl ; cl is the number of passengers pending
+    jz   .Normal ; full
+    xor  edi,edi
+.Repeat:
+    InfantryClass.FromIndex(edi,edx)
+    test edx,edx
+    jz   .Next
+    test byte[edx+AbstractClass.Offset.IsActive],1<<(AbstractClass.Bit.IsActive-1)
+    jz   .Next
+    test byte[edx+ObjectClass.Offset.IsInLimbo],1<<(ObjectClass.Bit.IsInLimbo-1)
+    jnz   .Next
+    cmp  word[edx+ObjectClass.Offset.Strength],0
+    je   .Next
+    cmp  byte[edx+TechnoClass.Offset.House],bl
+    jne  .Next
+    cmp  dword[edx+TechnoClass.Offset.TarCom],0
+    jnz  .Next
+    cmp  dword[edx+FootClass.Offset.NavCom],0
+    jnz  .Next
+    push edx
+    mov  ebx,edx
+    mov  edx,[ebx+0x11]
+    mov  eax,ebx
+    call [edx+0x10]
+    mov  ebx,[esi+0x11]
+    mov  edx,eax
+    mov  eax,esi
+    call [ebx+0xC]
+    call Coord___Distance_As_Coord
+    cmp  eax,0x700
+    pop  edx
+    jge  .Next
+    mov  byte ah,[edx+MissionClass.Offset.Mission]
+    cmp  ah,MissionType.MISSION_GUARD
+    jz   .Found
+    cmp  ah,MissionType.MISSION_GUARD_AREA
+    jnz  .Next
+.Found:
+    mov  byte al,[esi]
+    movzx eax,al
+    mov  ebx,[esi+1]
+    shl  eax,0x18
+    and  ebx,0xFFFFFF
+    or   eax,ebx
+    mov  [edx+TechnoClass.Offset.ArchiveTarget],eax
+    mov  ebx,[edx+0x11]
+    mov  eax,edx
+    mov  edx,MissionType.MISSION_ENTER
+    call [ebx+0xFC] ; Assign_Mission
+    ; Assign mission
+    dec  cl
+    jz   .Normal
+.Next:
+    inc  edi
+    cmp  edi,[InfantryClass.Count]
+    jl   .Repeat
+
+.Normal:
+    pop  eax
+    mov  edx,[eax+0x11]
+    call [edx+0x180]
+    jmp  0x0045BB9B
+@ENDHACK
+
+
+@HACK 0x004ECB36,0x004ECB3E,_InfantryClass__Per_Cell_Process_Enter_Building_AnyCell
+    mov  byte al,[edi+AbstractClass.Offset.RTTI]
+    cmp  al,RTTIType.Building
+    jne  .Normal
+    mov  eax,esi
+    call CellClass__Cell_Building
+    cmp  eax,edi
+    jne  0x004ECB98
+    jmp  0x004ECB43
+.Normal:
+    mov  eax,[edi+AbstractClass.Offset.Coord]
+    call Coord___Coord_Cell
+    jmp  0x004ECB3E
+@ENDHACK

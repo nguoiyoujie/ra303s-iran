@@ -18,6 +18,7 @@ BuildingTypes represent static structures (there is a notable exception in C&C).
  - [Superweapons](#superweapons) 
  - [Unpacking Buildings](#unpacking-buildings) 
  - [AI AutoBase Controls](#ai-autobase-controls) 
+ - [Garrisons](#Garrisons) 
 
 
 -------
@@ -662,6 +663,22 @@ Defaults to the following values, depending on the building in question:
  > 0 (disabled): All other buildings
 
 </details></td></tr></table>
+
+
+<a href="#buildingtypes"><kbd>Top</kbd></a><br>
+-------
+### Garrisons
+<br>
+
+BuildingTypes may now store infantry within them. 
+
+The available controls are as follows:
+
+> <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► Passengers : set to any value more than 0
+> <code>{Rules/Map}</code> ► [&lt;TechnoType&gt;]  ► OpenTopped : set to true if you want it to act like a defensive bunker
+> <code>{Rules/Map}</code> ► [&lt;BuildingType&gt;]  ► ExitList : recommend to use 0 to allow the building to calcualte its perimeter.
+
+Passenger logic may interact poorly with refineries! 
 
 
 <a href="#buildingtypes"><kbd>Top</kbd></a><br>

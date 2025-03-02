@@ -74,6 +74,9 @@
 
 %include "types/AbstractClass.inc"
 %include "types/HouseClass.inc"
+%include "types/FactoryClass.inc"
+%include "types/CargoClass.inc"
+%include "types/RadioClass.inc"
 %include "types/ObjectClass.inc"
 %include "types/TechnoClass.inc"
 %include "types/MissionClass.inc"

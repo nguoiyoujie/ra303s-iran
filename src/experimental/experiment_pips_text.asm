@@ -31,9 +31,20 @@ str_HPPips      db "HPPIPS.SHP",0
 
 
 @HACK 0x00568DA0,0x00568DA6,_TechnoClass__Draw_Pips__Draw_Debug_Ammo
-    ;mov  byte al,[esi+FootClass.Offset.PathAbandon]
-    ;movzx eax,al
-    ;mov  word ax,[esi+ObjectClass.Offset.Strength]
+;    mov  byte al,[esi+FootClass.Offset.PathAbandon]
+;    movzx eax,al
+;    cmp  eax,0
+;    jle  .Ammo
+;    push 8
+;    push dword[0x006857AC]
+;    mov  edx,[ebp-0x30] ; x
+;    mov  ebx,[ebp-0x50] ; y
+;    sub  ebx,2
+;    mov  byte cl,[ebp-0x10] ; window
+;    call PrintNumberOnSelectedUnit
+;
+;
+;.Ammo:
     mov  eax,[esi+TechnoClass.Offset.Ammo]
     cmp  eax,0
     jle  .Ret

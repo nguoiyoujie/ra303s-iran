@@ -22,7 +22,31 @@
 ;;;;;;;;;;;;;;; Offsets ;;;;;;;;;;;;;;;
 
 %define AbstractClass.RTTI.Get(ptr_type,reg_output)                        GetByte                ptr_type, AbstractClass.Offset.RTTI, reg_output
-
 %define AbstractClass.Index.Get(ptr_type,reg_output)                       GetInt                 ptr_type, AbstractClass.Offset.Index, reg_output
 
 %endif
+
+; args <Numerical index of type class>,<pointer to type count>,<pointer to type array>,<register to output the result to>
+; %4 must not be esi
+; return <output>: the type class pointer, or 0 / NULL if invalid
+%macro AbstractClass.FromIndex 4
+    push esi
+    push edi
+    mov  esi,[%2] 
+    mov  edi,%1
+    cmp  edi,esi
+    jae  %%invalid_type
+
+    mov  esi,[%3] 
+    shl  edi,2
+    add  esi,edi
+    pop  edi
+    mov  %4,[esi] 
+    jmp  %%done
+
+  %%invalid_type:
+    pop  edi
+    mov  %4, 0
+  %%done:
+    pop  esi
+%endmacro
