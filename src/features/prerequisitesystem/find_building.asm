@@ -41,7 +41,7 @@ cextern Houses.ASignificantScan
     and  eax,edx
     test eax,eax
     jnz  0x0056B622 ; there are buildings; skip 
-    add  eax,4
+    add  esi,4
     add  ecx,4  
     inc  edi
     cmp  edi,8
@@ -50,7 +50,7 @@ cextern Houses.ASignificantScan
 @ENDHACK
 
 
-@HACK 0x0056B64A,_TEventClass__Operator_AllDestroyed_Check
+@HACK 0x0056B64A,0x0056B650,_TEventClass__Operator_AllDestroyed_Check
     ; scan each byte of BScan (house-specific) ANDed over Houses.BSignificantScan
     ; this filters out any Insignificant=yes entities
     lea  esi,[eax+HouseClass.Offset.NewActiveBScan]
@@ -62,7 +62,7 @@ cextern Houses.ASignificantScan
     and  ebx,edx
     test ebx,ebx
     jnz  0x0056B66A ; there are buildings; skip 
-    add  ebx,4
+    add  esi,4
     add  ecx,4  
     inc  edi
     cmp  edi,8
@@ -77,7 +77,7 @@ cextern Houses.ASignificantScan
     and  ebx,edx
     test ebx,ebx
     jnz  0x0056B66A ; there are units; skip 
-    add  ebx,4
+    add  esi,4
     add  ecx,4  
     inc  edi
     cmp  edi,8
@@ -92,7 +92,7 @@ cextern Houses.ASignificantScan
     and  ebx,edx
     test ebx,ebx
     jnz  0x0056B66A ; there are infantry; skip 
-    add  ebx,4
+    add  esi,4
     add  ecx,4  
     inc  edi
     cmp  edi,8
@@ -107,7 +107,7 @@ cextern Houses.ASignificantScan
     and  ebx,edx
     test ebx,ebx
     jnz  0x0056B66A ; there are vessels; skip 
-    add  ebx,4
+    add  esi,4
     add  ecx,4  
     inc  edi
     cmp  edi,8
