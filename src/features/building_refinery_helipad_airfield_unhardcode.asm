@@ -741,7 +741,7 @@ Temp.FindDockingBayInitBuilding dd 0
 
 
 @HACK 0x0045702B,0x00457034,_BuildingClass__Take_Damage_EjectPassengers_OnDestruction
-    mov  ecx,eax
+    mov  ecx,[ebp-0x84]
     push edx
     BuildingClass.Class.Get(ecx,edx)
     BuildingTypeClass.FromIndex(edx,eax)
