@@ -244,32 +244,31 @@ cextern HouseTypeClass.NEW_COUNT
 @ENDHACK
 
 
-@HACK 0x0056787B,0x00567884,_TechnoClass__Base_Is_Attacked_Single_Player_Logic1
-    cmp  dword[InCoopMode],1
-    jz   .Ret
-    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
-    jnz  0x0056789D
-.Ret:
-    jmp  0x00567884
-@ENDHACK
+;@HACK 0x0056787B,0x00567884,_TechnoClass__Base_Is_Attacked_Single_Player_Logic1
+;    cmp  dword[InCoopMode],1
+;    jz   0x00567884
+;    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+;    jnz  0x0056789D
+;    jmp  0x00567884
+;@ENDHACK
 
 
-@HACK 0x00567BC6,0x00567BD3,_TechnoClass__Base_Is_Attacked_Single_Player_Logic2
-    cmp  dword[InCoopMode],1
-    jz   0x00567B4E
-    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
-    jz   0x00567B4E
-    jmp  0x00567BD3
-@ENDHACK
+;@HACK 0x00567BC6,0x00567BD3,_TechnoClass__Base_Is_Attacked_Single_Player_Logic2
+;    cmp  dword[InCoopMode],1
+;    jz   0x00567B4E
+;    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+;    jz   0x00567B4E
+;    jmp  0x00567BD3
+;@ENDHACK
 
 
-@HACK 0x00567E58,0x00567E65,_TechnoClass__Base_Is_Attacked_Single_Player_Logic3
-    cmp  dword[InCoopMode],1
-    jz   0x00567DDF
-    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
-    jz   0x00567DDF
-    jmp  0x00567E65
-@ENDHACK
+;@HACK 0x00567E58,0x00567E65,_TechnoClass__Base_Is_Attacked_Single_Player_Logic3
+;    cmp  dword[InCoopMode],1
+;    jz   0x00567DDF
+;    cmp  byte[Globals___Session_Type],GameType.GAME_NORMAL
+;    jz   0x00567DDF
+;    jmp  0x00567E65
+;@ENDHACK
 
 
 @HACK 0x00554980,0x00554985,_TActionClass_Operator___ACTION_LOSE_Multiplayer
